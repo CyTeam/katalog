@@ -24,3 +24,6 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 # group :test do
 #   gem 'webrat'
 # end
+
+# Dossier
+gem 'formtastic', :git => 'git://github.com/justinfrench/formtastic.git', :branch => 'rails3'
