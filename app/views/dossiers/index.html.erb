@@ -1,0 +1,29 @@
+<h1>Listing dossiers</h1>
+
+<table>
+  <tr>
+    <th>Signature</th>
+    <th>Title</th>
+    <th>Type</th>
+    <th>Location</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @dossiers.each do |dossier| %>
+  <tr>
+    <td><%= dossier.signature %></td>
+    <td><%= dossier.title %></td>
+    <td><%= dossier.type %></td>
+    <td><%= dossier.location %></td>
+    <td><%= link_to 'Show', dossier %></td>
+    <td><%= link_to 'Edit', edit_dossier_path(dossier) %></td>
+    <td><%= link_to 'Destroy', dossier, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Dossier', new_dossier_path %>
