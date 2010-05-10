@@ -3,11 +3,11 @@
 one:
   signature: MyString
   title: MyString
-  type: MyString
+  kind: MyString
   location: MyString
 
 two:
   signature: MyString
   title: MyString
-  type: MyString
+  kind: MyString
   location: MyString
