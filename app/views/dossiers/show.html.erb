@@ -1,0 +1,25 @@
+<p class="notice"><%= notice %></p>
+
+<p>
+  <b>Signature:</b>
+  <%= @dossier.signature %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @dossier.title %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @dossier.type %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @dossier.location %>
+</p>
+
+
+<%= link_to 'Edit', edit_dossier_path(@dossier) %> |
+<%= link_to 'Back', dossiers_path %>
