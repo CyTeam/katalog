@@ -38,16 +38,8 @@
           <div class="mod_navigation block" id="mainmenu">
             <a href="#skipNavigation3" class="invisible">Navigation überspringen</a>
             <ul class="level_1">
-              <li class="active first"><span class="active first">Home</span></li>
-              <li><a href="team.html" title="Über uns">Über uns</a></li>
-              <li><a href="archiv-bibliothek.html" title="Unser Angebot">Unser Angebot</a></li>
-              <li><a href="kataloge.html" title="Kataloge">Kataloge</a></li>
-              <li><a href="aktuell.html" title="News">News</a></li>
-              <li><a href="buchbesprechungen.html" title="Buchbesprechungen">Buchbesprechungen</a></li>
-              <li><a href="anschaffungsvorschlag.html" title="Anschaffungsvorschlag">Anschaffungsvorschlag</a></li>
-              <li><a href="kontakt.html" title="Kontakt">Kontakt</a></li>
-              <li><a href="links.html" title="Links">Links</a></li>
-              <li class="last"><a href="newsletter.html" title="Newsletter" class="last">Newsletter</a></li>
+              <%= navigation_item("Dossier suchen", dossiers_path) %>
+              <%= navigation_item("Dossier anlegen", new_dossier_path) %>
             </ul>
             <a name="skipNavigation3" id="skipNavigation3" class="invisible">&nbsp;</a>
           </div>
