@@ -1,4 +1,6 @@
+@media print {
 /* Style sheet print */
 #header,#footer,#left,#right,#printthis{display:none;}
 #main{width:85%;}
 body{font-family:Verdana,Arial,sans-serif;font-size:12px;color:#000000;}
+}
