@@ -2,13 +2,268 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <title>Katalog</title>
-  <%= stylesheet_link_tag :all, :recursive => true %>
+
+<style type="text/css" media="screen">
+<!--/*--><![CDATA[/*><!--*/
+#header { height:133px; }
+#left { width:233px; }
+#right { width:229px; }
+#main {  margin-left:233px; margin-right:229px; }
+#footer { height:360px; }
+/*]]>*/-->
+</style>
+  <%= stylesheet_link_tag 'doku-zug.ch/typolight', 'doku-zug.ch/basic', 'doku-zug.ch/content', 'doku-zug.ch/layout', 'doku-zug.ch/navigation', 'doku-zug.ch/welcome' %>
+
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
+<script type="text/javascript" src="http://doku-zug.ch.gutenberg.ch-meta.net/plugins/mootools/mootools-core.js"></script>
+<script type="text/javascript" src="http://doku-zug.ch.gutenberg.ch-meta.net/plugins/mootools/mootools-more.js"></script>
 </head>
-<body>
 
-<%= yield %>
+<body id="top">
+
+<div id="wrapper">
+
+<div id="header">
+<div class="inside">
+
+<div id="logo">
+<a href="" title="doku-zug.ch - Öffentliches Dokumentationszentrum"><%= image_tag "doku-zug.ch/logo.gif", :alt => "doku-zug.ch - Öffentliches Dokumentationszentrum" %></a>
+</div>
+<!-- indexer::stop -->
+<div class="mod_breadcrumb block">
+
+<a href="http://doku-zug.ch.gutenberg.ch-meta.net/" title="doku-zug.ch">doku-zug.ch</a> &#62; 
+<span class="active">Home</span>
+
+</div>
+<!-- indexer::continue -->
+ 
+</div>
+</div>
+
+<div id="container">
+
+<div id="left">
+<div class="inside">
+
+<!-- indexer::stop -->
+<div class="mod_navigation block" id="mainmenu">
+
+<a href="#skipNavigation3" class="invisible">Navigation überspringen</a>
+
+<ul class="level_1">
+<li class="active first"><span class="active first">Home</span></li>
+<li><a href="team.html" title="Über uns">Über uns</a></li>
+<li><a href="archiv-bibliothek.html" title="Unser Angebot">Unser Angebot</a></li>
+<li><a href="kataloge.html" title="Kataloge">Kataloge</a></li>
+<li><a href="aktuell.html" title="News">News</a></li>
+<li><a href="buchbesprechungen.html" title="Buchbesprechungen">Buchbesprechungen</a></li>
+<li><a href="anschaffungsvorschlag.html" title="Anschaffungsvorschlag">Anschaffungsvorschlag</a></li>
+<li><a href="kontakt.html" title="Kontakt">Kontakt</a></li>
+<li><a href="links.html" title="Links">Links</a></li>
+<li class="last"><a href="newsletter.html" title="Newsletter" class="last">Newsletter</a></li>
+</ul>
+ 
+<a name="skipNavigation3" id="skipNavigation3" class="invisible">&nbsp;</a>
+
+</div>
+<!-- indexer::continue -->
+ 
+</div>
+</div>
+
+<div id="right">
+<div class="inside">
+
+<!-- indexer::stop -->
+<div class="mod_newslist block">
+
+<h1>Kunden-Feedback</h1>
+
+<div class="layout_full block first even">
+
+
+<div class="ce_text">
+
+<p>«doku-zug.ch ist eine äusserst unterschätzte Dienstleistung. Das Archiv ist sehr umfassend, die Lage zentral und die MitarbeiterInnen zuvorkommend und freundlich. Sehr empfehlenswert!»<br />Michel Kiwic, Student der Hochschule Luzern</p>
+
+</div>
+
+</div>
+
+<div class="layout_full block last odd">
+
+
+<div class="ce_text">
+
+<p>«Für mich ist es immer wieder beeindruckend, wie schnell die Bibliothek von doku-zug.ch Bücher zu den aktuellen Aufgabestellungen der Gesellschaft beschafft und dem interessierten Publikum zur Verfügung stellt.»<br />Ralph Bodamer, Unternehmensberater</p>
+
+</div>
+
+</div>
+
+</div>
+<!-- indexer::continue -->
+ 
+</div>
+</div>
+
+<div id="main">
+<div class="inside">
+
+<div id="printthis"><a href="javascript:printPage()"><%= image_tag "doku-zug.ch/printer.png", :alt => "Seite drucken", :title => "Seite drucken" %></a>&nbsp;&nbsp;&nbsp;<a href="sitemap.html" title="Sitemap"><%= image_tag "doku-zug.ch/sitemap_color.png", :alt => "Sitemap", :title => "Sitemap" %></a></div>
+<!-- indexer::stop -->
+<div class="mod_newslist block" id="aktuell">
+<!-- Thumbnail mit fixer Groesse -->
+<div class="image_container themen">
+<img src="http://doku-zug.ch.gutenberg.ch-meta.net/system/html/news-a52e2e6f.jpg" width="139" height="119" alt="News" /> 
+</div>
+<!-- Ende Thumbnail -->
+</div>
+<!-- indexer::continue -->
+
+<!-- indexer::stop -->
+<div class="mod_newslist otheraktuell block">
+
+<h1>Aktuell</h1>
+
+<div class="layout_latest block first last even">
+<p class="teaser">erste news auf der website. was wir noch sagen wollten.</p>
+ <span class="more"><a href="index.php" title="Den Artikel lesen: erste news">Weiterlesen … <span class="invisible">erste news</span></a></span>
+</div>
+
+</div>
+<!-- indexer::continue -->
+
+<!-- indexer::stop -->
+<div class="mod_newslist block" id="thema">
+<!-- Thumbnail mit fixer Groesse -->
+<div class="image_container themen">
+<img src="http://doku-zug.ch.gutenberg.ch-meta.net/system/html/news-a52e2e6f.jpg" width="139" height="119" alt="Vatikan" /> 
+</div>
+<!-- Ende Thumbnail -->
+</div>
+<!-- indexer::continue -->
+
+<!-- indexer::stop -->
+<div class="mod_newslist otherthema block">
+
+<h1>Thema der Woche</h1>
+
+<div class="layout_latest block first last even">
+<p class="teaser">Der Vatikan macht die schlimmste Krise seit Jahrzehnten durch...</p>
+ <span class="more"><a href="index.php" title="Den Artikel lesen: Katholische Krise">Weiterlesen … <span class="invisible">Katholische Krise</span></a></span>
+</div>
+
+</div>
+<!-- indexer::continue -->
+
+<!-- indexer::stop -->
+<div class="mod_newslist block" id="buch">
+<!-- Thumbnail mit fixer Groesse -->
+<div class="image_container themen">
+<img src="http://doku-zug.ch.gutenberg.ch-meta.net/system/html/P3198350-21858866.jpg" width="139" height="119" alt="Feld.Wald.Wiese" /> 
+</div>
+<!-- Ende Thumbnail -->
+</div>
+<!-- indexer::continue -->
+
+<!-- indexer::stop -->
+<div class="mod_newslist otherbuch block">
+
+<h1>Neue Bücher</h1>
+
+<div class="layout_latest block first last even">
+<p class="teaser">computerhilfe</p>
+ <span class="more"><a href="index.php" title="Den Artikel lesen: computerhilfe">Weiterlesen … <span class="invisible">computerhilfe</span></a></span>
+</div>
+
+</div>
+<!-- indexer::continue -->
+ 
+</div>
+ 
+<div id="clear"></div>
+</div>
+
+</div>
+
+<div id="footer">
+<div class="inside">
+
+<div id="such">
+<form action="suchergebnis.html" method="get">
+    <div><input type="text" name="keywords" class="text" value="" /><input type="image" src="<%= image_path('doku-zug.ch/search2.png') %> alt="Suche" class="submit" /></div>
+</form>
+</div>
+<!-- indexer::stop -->
+<div class="mod_customnav block" id="seitenkarte">
+
+<a href="#skipNavigation20" class="invisible">Navigation überspringen</a>
+
+<ul class="level_1">
+<li class="first"><a href="team.html" title="Über uns" class="first">Über uns</a></li>
+<li><a href="team.html" title="Team">Team</a></li>
+<li><a href="leitbild.html" title="Leitbild">Leitbild</a></li>
+<li><a href="geschichte.html" title="Geschichte">Geschichte</a></li>
+<li><a href="archiv-bibliothek.html" title="Unser Angebot">Unser Angebot</a></li>
+<li><a href="archiv-bibliothek.html" title="Archiv, Bibliothek">Archiv, Bibliothek</a></li>
+<li><a href="publikationen.html" title="Publikationen">Publikationen</a></li>
+<li><a href="kataloge.html" title="Kataloge">Kataloge</a></li>
+<li><a href="aktuell.html" title="News">News</a></li>
+<li><a href="aktuell.html" title="Aktuell">Aktuell</a></li>
+<li><a href="thema-der-woche.html" title="Thema der Woche">Thema der Woche</a></li>
+<li><a href="neue-buecher.html" title="Neue Bücher">Neue Bücher</a></li>
+<li><a href="kontakt.html" title="Kontakt">Kontakt</a></li>
+<li><a href="links.html" title="Links">Links</a></li>
+<li class="last"><a href="newsletter.html" title="Newsletter" class="last">Newsletter</a></li>
+</ul>
+ 
+<a name="skipNavigation20" id="skipNavigation20" class="invisible">&nbsp;</a>
+
+</div>
+<!-- indexer::continue -->
+
+<div id="schnelllinks">
+<div class="ce_text block">
+
+<p><a class="externerlink" onclick="window.open(this.href); return false;" href="http://www.bibliothekenzug.ch">Stadt- und Kantonsbibliothek Zug</a><br /><br />
+<a class="externerlink" onclick="window.open(this.href); return false;" href="http://www.zug.ch/staatsarchiv">Staatsarchiv des Kantons Zug</a><br /><br />
+<a class="externerlink" onclick="window.open(this.href); return false;" href="http://www.afz.ethz.ch">Archiv für Zeitgeschichte Zürich</a><br /><br />
+<a class="externerlink" onclick="window.open(this.href); return false;" href="http://www.sozialarchiv.ch">Schweizerisches Sozialarchiv</a><br /><br />
+<a class="externerlink" onclick="window.open(this.href); return false;" href="http://www.ub.unibas.ch/wwz-bibliothek-swa/schweiz-wirtschaftsarchiv/allgemeines/">Schweizerisches Wirtschaftsarchiv</a><br /><br />
+<a class="externerlink" onclick="window.open(this.href); return false;" href="http://www.vsa-aas.org">Verein Schweizerischer ArchivarInnen</a><br /><br />
+<a class="externerlink" onclick="window.open(this.href); return false;" href="http://www.bis.info">Bibliothek Information Schweiz</a></p>
+
+</div>
+</div>
+<div class="clear"></div> 
+</div>
+</div>
+
+<!-- indexer::stop -->
+<img src="http://doku-zug.ch.gutenberg.ch-meta.net/cron.php" alt="" class="invisible" />
+<!-- indexer::continue -->
+
+<script type="text/javascript" src="http://doku-zug.ch.gutenberg.ch-meta.net/plugins/mediabox/js/mediabox.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+Mediabox.scanPage = function() {
+  var links = $$("a").filter(function(el) {
+    return el.rel && el.rel.test(/^lightbox/i);
+  });
+  $$(links).mediabox({/* Put custom options here */}, null, function(el) {
+    var rel0 = this.rel.replace(/[[]|]/gi," ");
+    var relsize = rel0.split(" ");
+    return (this == el) || ((this.rel.length > 8) && el.rel.match(relsize[1]));
+  });
+};
+window.addEvent("domready", Mediabox.scanPage);
+//--><!]]>
+</script>
+
+</div>
 
 </body>
 </html>

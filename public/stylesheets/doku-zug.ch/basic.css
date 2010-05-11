@@ -4,7 +4,7 @@ table{border-collapse:collapse;border-spacing:0;}
 caption,th,td{text-align:left;vertical-align:top;}
 blockquote,q{quotes:none;}
 fieldset,img{border:0;}
-li{list-style-image:url("tl_files/layout/navbullet.gif");}
+li{list-style-image:url("../../images/doku-zug.ch/navbullet.gif");}
 sup{vertical-align:text-top;}
 sub{vertical-align:text-bottom;}
 del{text-decoration:line-through;}
@@ -29,5 +29,5 @@ h1,h2,h3,h4,h5,h6,p,pre,blockquote,table,ol,ul,form{margin-bottom:12px;}
 .mtop{margin-top:1em;}
 .mbot{margin-bottom:12px;}
 .clear{clear:both;}
-.externerlink{padding-left:22px;background:url("tl_files/layout/link.gif") left top no-repeat;}
+.externerlink{padding-left:22px;background:url("../../images/doku-zug.ch/link.gif") left top no-repeat;}
 .suchknopf{}
