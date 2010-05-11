@@ -1,0 +1,27 @@
+/* Style sheet navigation */
+#mainmenu{margin-top:72px;margin-right:34px;}
+#mainmenu ul.level_1{border-top:1px dotted #003d61;}
+#mainmenu li{border-bottom:1px dotted #003d61;line-height:1.5;list-style: url(tl_files/layout/navbullet.gif) inside;}
+#mainmenu a,#mainmenu span{display:inline;padding-left:5px;font-weight:normal;text-decoration:none;font-size:14px;color:#003d61;text-transform: uppercase;}
+#mainmenu a:hover,#mainmenu span,#mainmenu a.trail{font-weight:bold;color:#9d6524;}
+#mainmenu .trail,#mainmenu .active{list-style: url(tl_files/layout/navbullet_over.gif) inside;}
+#mainmenu .level_2 li{padding-left:11px;color:#9d6524;}
+#mainmenu .level_2 li a{color:#9d6524;}
+#mainmenu .level_2 li.last{border-bottom:0px;}
+#mainmenu ul ul{margin-bottom:3px;}
+.mod_breadcrumb{top:9px;position:relative;padding-top:105px;padding-left:236px;font-size:11px;color:#fff;}
+.mod_breadcrumb:before{content:"Ihre Position: ";}
+.mod_booknav{margin-top:1em;margin-bottom:1em;padding-top:1em;border-top:1px dotted #ddd;}
+.mod_booknav li{width:45%;float:left;}
+.mod_booknav li.up{width:10%;text-align:center;}
+.mod_booknav li.next{text-align:right;}
+.mod_sitemap li{line-height:1.5;}
+.mod_sitemap ul.level_1 ul{margin-bottom:0;}
+.mod_sitemap .level_2 li{padding-left:18px;}
+.mod_sitemap a{text-decoration:none;}
+.mod_sitemap a:hover{text-decoration:underline;}
+.pagination{margin-top:1em;margin-bottom:1em;padding-top:1em;border-top:1px dotted #ddd;}
+.pagination p{width:30%;float:left;margin-bottom:0;}
+.pagination ul{width:70%;float:right;margin-bottom:0;text-align:right;}
+.pagination li{display:inline;padding-right:3px;padding-left:3px;}
+.mod_quicknav select{width:75%;}
