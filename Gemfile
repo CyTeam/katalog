@@ -27,3 +27,6 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 
 # Dossier
 gem 'formtastic', :git => 'git://github.com/justinfrench/formtastic.git', :branch => 'rails3'
+
+# Import
+gem 'fastercsv'
