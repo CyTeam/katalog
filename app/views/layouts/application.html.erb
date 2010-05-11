@@ -16,8 +16,6 @@
 
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
-<script type="text/javascript" src="http://doku-zug.ch.gutenberg.ch-meta.net/plugins/mootools/mootools-core.js"></script>
-<script type="text/javascript" src="http://doku-zug.ch.gutenberg.ch-meta.net/plugins/mootools/mootools-more.js"></script>
 </head>
 
 <body id="top">
@@ -222,23 +220,6 @@
 <div class="clear"></div> 
 </div>
 </div>
-
-<script type="text/javascript" src="http://doku-zug.ch.gutenberg.ch-meta.net/plugins/mediabox/js/mediabox.js"></script>
-<script type="text/javascript">
-<!--//--><![CDATA[//><!--
-Mediabox.scanPage = function() {
-  var links = $$("a").filter(function(el) {
-    return el.rel && el.rel.test(/^lightbox/i);
-  });
-  $$(links).mediabox({/* Put custom options here */}, null, function(el) {
-    var rel0 = this.rel.replace(/[[]|]/gi," ");
-    var relsize = rel0.split(" ");
-    return (this == el) || ((this.rel.length > 8) && el.rel.match(relsize[1]));
-  });
-};
-window.addEvent("domready", Mediabox.scanPage);
-//--><!]]>
-</script>
 
 </div>
 
