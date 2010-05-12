@@ -66,19 +66,8 @@
             <a href="javascript:printPage()"><%= image_tag "doku-zug.ch/printer.png", :alt => "Seite drucken", :title => "Seite drucken" %></a>&nbsp;&nbsp;&nbsp;<a href="sitemap.html" title="Sitemap"><%= image_tag "doku-zug.ch/sitemap_color.png", :alt => "Sitemap", :title => "Sitemap" %></a>
           </div>
 
-          <div class="mod_newslist block" id="buch">
-            <div class="image_container themen">
-              <img src="http://doku-zug.ch.gutenberg.ch-meta.net/system/html/P3198350-21858866.jpg" width="139" height="119" alt="Feld.Wald.Wiese" /> 
-            </div>
-          </div>
-
-          <div class="mod_newslist otheraktuell block">
-            <h1>Neue Bücher</h1>
-
-            <div class="layout_first block first last even">
-            <p class="teaser">computerhilfe</p>
-             <span class="more"><a href="index.php" title="Den Artikel lesen: computerhilfe">Weiterlesen … <span class="invisible">computerhilfe</span></a></span>
-            </div>
+          <div class="mod_newslist block">
+          <%= yield %>
           </div>
         </div>
          
