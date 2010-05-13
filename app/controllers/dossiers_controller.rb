@@ -2,7 +2,7 @@ class DossiersController < ApplicationController
   # GET /dossiers
   # GET /dossiers.xml
   def index
-    @dossiers = Dossier.all
+    @dossiers = Dossier.paginate :page => params[:page]
 
     respond_to do |format|
       format.html # index.html.erb
