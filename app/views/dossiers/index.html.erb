@@ -8,8 +8,6 @@
     <th><%= t('dossier.kind', :scope => [:activerecord, :attributes]) %></th>
     <th><%= t('dossier.location', :scope => [:activerecord, :attributes]) %></th>
     <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @dossiers.each do |dossier| %>
@@ -18,9 +16,11 @@
     <td><%= dossier.title %></td>
     <td><%= dossier.kind %></td>
     <td><%= dossier.location %></td>
-    <td><%= link_to image_tag('icons/show.png', :title => 'Show'), dossier %></td>
-    <td><%= link_to image_tag('icons/edit.png', :title => 'Edit'), edit_dossier_path(dossier) %></td>
-    <td><%= link_to image_tag('icons/delete.png', :title => 'Destroy'), dossier, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td>
+      <%= link_to image_tag('icons/show.png', :title => 'Show'), dossier %>
+      <%= link_to image_tag('icons/edit.png', :title => 'Edit'), edit_dossier_path(dossier) %>
+      <%= link_to image_tag('icons/delete.png', :title => 'Destroy'), dossier, :confirm => 'Are you sure?', :method => :delete %>
+    </td>
   </tr>
 <% end %>
 </table>
