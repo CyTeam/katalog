@@ -1,4 +1,6 @@
 Katalog::Application.routes.draw do |map|
+  resources :locations
+
   resources :dossiers
 
   # The priority is based upon order of creation:
