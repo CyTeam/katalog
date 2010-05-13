@@ -3,6 +3,15 @@ class Dossier < ActiveRecord::Base
   
   belongs_to :location
   
+  # Attributes
+  def location=(value)
+    if value.is_a?(String)
+      write_attribute(:location, Location.find_by_code(value))
+    else
+      write_attribute(:location, value)
+    end
+  end
+  
   # Importer
   def self.import_from_csv(path)
     # Load file at path using ; as delimiter
