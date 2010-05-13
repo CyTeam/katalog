@@ -1,4 +1,6 @@
 class Dossier < ActiveRecord::Base
+  default_scope :order => 'signature'
+  
   # Importer
   def self.import_from_csv(path)
     # Load file at path using ; as delimiter
