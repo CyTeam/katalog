@@ -18,9 +18,9 @@
     <td><%= dossier.title %></td>
     <td><%= dossier.kind %></td>
     <td><%= dossier.location %></td>
-    <td><%= link_to 'Show', dossier %></td>
-    <td><%= link_to 'Edit', edit_dossier_path(dossier) %></td>
-    <td><%= link_to 'Destroy', dossier, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to image_tag('icons/show.png', :title => 'Show'), dossier %></td>
+    <td><%= link_to image_tag('icons/edit.png', :title => 'Edit'), edit_dossier_path(dossier) %></td>
+    <td><%= link_to image_tag('icons/delete.png', :title => 'Destroy'), dossier, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
