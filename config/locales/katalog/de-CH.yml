@@ -1,0 +1,9 @@
+de-CH:
+  activerecord:
+    attributes:
+      dossier:
+        signature: "Signatur"
+        title:     "Titel"
+        kind:      "Typ"
+        location:  "Ablageort"
+
