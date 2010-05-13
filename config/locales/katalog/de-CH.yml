@@ -11,5 +11,7 @@ de-CH:
         kind:      "Art"
         location:  "Standort"
       location:
-        title:   "Titel"
-        address: "Adresse"
+        title:        "Titel"
+        code:         "Kürzel"
+        address:      "Adresse"
+        availability: "Verfügbarkeit"
