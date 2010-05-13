@@ -1,5 +1,6 @@
 <h1>Listing dossiers</h1>
 
+<div class="ce_table block">
 <table>
   <tr>
     <th>Signature</th>
@@ -12,7 +13,7 @@
   </tr>
 
 <% @dossiers.each do |dossier| %>
-  <tr>
+  <tr class="<%= cycle('odd', 'even') %>">
     <td><%= dossier.signature %></td>
     <td><%= dossier.title %></td>
     <td><%= dossier.kind %></td>
@@ -23,6 +24,7 @@
   </tr>
 <% end %>
 </table>
+</div>
 
 <br />
 
