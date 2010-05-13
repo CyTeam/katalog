@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100513111643) do
+ActiveRecord::Schema.define(:version => 20100513194655) do
 
   create_table "dossiers", :force => true do |t|
     t.string   "signature"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(:version => 20100513111643) do
     t.string   "address"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "code"
+    t.string   "availability"
   end
 
 end

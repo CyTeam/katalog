@@ -4,7 +4,9 @@
 <table>
   <tr>
     <th><%= t('location.title', :scope => [:activerecord, :attributes]) %></th>
+    <th><%= t('location.code', :scope => [:activerecord, :attributes]) %></th>
     <th><%= t('location.address', :scope => [:activerecord, :attributes]) %></th>
+    <th><%= t('location.availability', :scope => [:activerecord, :attributes]) %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,7 +15,9 @@
 <% @locations.each do |location| %>
   <tr>
     <td><%= location.title %></td>
+    <td><%= location.code %></td>
     <td><%= location.address %></td>
+    <td><%= location.availability %></td>
     <td><%= link_to 'Show', location %></td>
     <td><%= link_to 'Edit', edit_location_path(location) %></td>
     <td><%= link_to 'Destroy', location, :confirm => 'Are you sure?', :method => :delete %></td>
