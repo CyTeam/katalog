@@ -1,9 +1,15 @@
 de-CH:
   activerecord:
+    models:
+      dossier:  "Dossier"
+      location: "Standort"
+
     attributes:
       dossier:
         signature: "Signatur"
         title:     "Titel"
-        kind:      "Typ"
-        location:  "Ablageort"
-
+        kind:      "Art"
+        location:  "Standort"
+      location:
+        title:   "Titel"
+        address: "Adresse"
