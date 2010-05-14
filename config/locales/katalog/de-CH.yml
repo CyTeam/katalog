@@ -1,4 +1,7 @@
 de-CH:
+  katalog:
+    search: "Suchen"
+
   activerecord:
     models:
       dossier:  "Dossier"

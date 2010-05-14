@@ -31,7 +31,8 @@
           <div class="mod_navigation block" id="mainmenu">
             <a href="#skipNavigation3" class="invisible">Navigation überspringen</a>
             <ul class="level_1">
-              <%= navigation_item("Dossier suchen", dossiers_path) %>
+              <%= navigation_item("Dossier auflisten", dossiers_path) %>
+              <%= navigation_item("Dossier suchen", search_dossiers_path) %>
               <%= navigation_item("Dossier anlegen", new_dossier_path) %>
             </ul>
             <a name="skipNavigation3" id="skipNavigation3" class="invisible">&nbsp;</a>

@@ -1,12 +1,14 @@
+require 'ostruct'
+
 class DossiersController < ApplicationController
-  has_scope :by_signature
-  has_scope :by_location
-  has_scope :by_kind
+  has_scope :by_signature, :as => :signature
+  has_scope :by_location, :as => :location
+  has_scope :by_kind, :as => :kind
   
   # GET /dossiers
   # GET /dossiers.xml
   def index
-    @dossiers = apply_scopes(Dossier).paginate :page => params[:page]
+    @dossiers = apply_scopes(Dossier, params[:dossier] || {}).paginate :page => params[:page]
 
     respond_to do |format|
       format.html # index.html.erb
