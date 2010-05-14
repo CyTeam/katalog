@@ -2,7 +2,7 @@ require 'test_helper'
 
 class DossiersControllerTest < ActionController::TestCase
   setup do
-    @dossier = dossiers(:one)
+    @dossier = dossiers(:nationalsozialismus1933_2000)
   end
 
   test "should get index" do
@@ -45,5 +45,16 @@ class DossiersControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to dossiers_path
+  end
+
+  test "should show search form" do
+    get :search
+    assert_response :success
+  end
+  
+  test "should find all RI" do
+    get :index, :dossier => {:location => "RI"}
+    assert_tag(:td, :content => Location.find_by_code('RI').to_s)
+    assert_no_tag(:td, :content => Location.find_by_code('EG').to_s)
   end
 end
