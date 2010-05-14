@@ -1,0 +1,12 @@
+<h1>Dossier suchen</h1>
+
+<%= search_form_for('dossier', :url => dossiers_path) do |f| %>
+  <%= f.inputs :name => "Basic" do %>
+    <%= f.input :signature, :label => t('dossier.signature', :scope => [:activerecord, :attributes]) %>
+    <%= f.input :kind, :label => t('dossier.kind', :scope => [:activerecord, :attributes]) %>
+    <%= f.input :location, :label => t('dossier.location', :scope => [:activerecord, :attributes]), :as => :select, :collection => Location.all.map{|l| [l.title, l.code]} %>
+  <% end %>
+  <%= f.buttons do %>
+    <%= f.commit_button t(:search, :scope => :katalog) %>
+  <% end %>
+<% end %>
