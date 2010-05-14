@@ -1,13 +1,14 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  signature: MyString
-  title: MyString
-  kind: MyString
-  location: MyString
+nationalsozialismus1933_2000:
+  signature: 11.0.100
+  title: Nationalsozialismus. Faschismus grundsätzlich 1933 - 2000
+  kind: DA
+  location: RI
 
-two:
-  signature: MyString
-  title: MyString
-  kind: MyString
-  location: MyString
+nationalsozialismus2001_2009:
+  signature: 11.0.100
+  title: Nationalsozialismus. Faschismus grundsätzlich 2001 - 2009
+  kind: DA
+  location: EG
+
