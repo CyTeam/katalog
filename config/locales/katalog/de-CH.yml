@@ -9,10 +9,11 @@ de-CH:
 
     attributes:
       dossier:
-        signature: "Signatur"
-        title:     "Titel"
-        kind:      "Art"
-        location:  "Standort"
+        signature:    "Signatur"
+        title:        "Titel"
+        kind:         "Art"
+        location:     "Standort"
+        total_amount: "Anzahl Dokumente"
       location:
         title:        "Titel"
         code:         "Kürzel"
