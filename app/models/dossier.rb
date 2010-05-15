@@ -28,12 +28,33 @@ class Dossier < ActiveRecord::Base
 
     transaction do
       for row in dossier_rows
-        dossier = self.new(
+        dossier = self.create(
           :signature => row[0],
           :title     => row[1],
           :kind      => row[9],
           :location  => row[10]
         )
+        # before 1990
+        dossier.numbers.create(
+          :to     => '1989-12-31',
+          :amount => row[16]
+        )
+        # 1990-1993
+        dossier.numbers.create(
+          :from   => '1990-01-01',
+          :to     => '1993-12-31',
+          :amount => row[17]
+        )
+        # 1994-
+        year = 1994
+        for amount in row[18..30]
+          dossier.numbers.create(
+            :from   => Date.new(year, 1, 1),
+            :to     => Date.new(year, 12, 31),
+            :amount => amount
+          )
+          year += 1
+        end
         
         dossier.save!
       end
