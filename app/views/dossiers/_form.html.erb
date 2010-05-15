@@ -16,6 +16,22 @@
     <%= f.input :kind %>
     <%= f.input :location %>
   <% end %>
+
+  <div class="ce_table">
+  <table>
+    <tr>
+      <% for year in @dossier.numbers.map{|number| number.from.try(:year)} %>
+        <th><%= year %></th>
+      <% end %>
+    </tr>
+    <tr>
+      <% f.semantic_fields_for :numbers do |number| %>
+        <td><%= number.text_field :amount, :size => 2 %></td>
+      <% end %>
+    </tr>
+  </table>
+  </div>
+
   <%= f.buttons do %>
     <%= f.commit_button %>
   <% end %>
