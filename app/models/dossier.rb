@@ -8,7 +8,8 @@ class Dossier < ActiveRecord::Base
   # Associations
   belongs_to :location
   has_many :numbers, :class_name => 'DossierNumber'
-  
+  accepts_nested_attributes_for :numbers
+    
   # Attributes
   def location=(value)
     if value.is_a?(String)
