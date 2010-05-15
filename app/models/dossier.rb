@@ -10,6 +10,9 @@ class Dossier < ActiveRecord::Base
   has_many :numbers, :class_name => 'DossierNumber'
   accepts_nested_attributes_for :numbers
     
+  # Tags
+  acts_as_taggable
+  
   # Attributes
   def location=(value)
     if value.is_a?(String)

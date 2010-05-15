@@ -1,9 +1,13 @@
 require 'ostruct'
 
 class DossiersController < ApplicationController
+  # Search
   has_scope :by_signature, :as => :signature
   has_scope :by_location, :as => :location
   has_scope :by_kind, :as => :kind
+  
+  # Tags
+  has_scope :tagged_with, :as => :tag
   
   # GET /dossiers
   # GET /dossiers.xml

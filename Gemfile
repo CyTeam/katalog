@@ -29,6 +29,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'formtastic', :git => 'git://github.com/justinfrench/formtastic.git', :branch => 'rails3'
 gem 'will_paginate', :git => 'http://github.com/mislav/will_paginate.git', :branch => 'rails3'
 gem 'has_scope'
+gem 'acts-as-taggable-on'
 
 # Import
 gem 'fastercsv'
