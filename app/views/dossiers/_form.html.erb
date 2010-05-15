@@ -26,7 +26,7 @@
     </tr>
     <tr>
       <% f.semantic_fields_for :numbers do |number| %>
-        <td><%= number.text_field :amount, :size => 2 %></td>
+        <td style="padding: 0"><%= number.text_field :amount, :style => 'width: 80%; margin: 0' %></td>
       <% end %>
     </tr>
   </table>
