@@ -7,6 +7,7 @@ class Dossier < ActiveRecord::Base
 
   # Associations
   belongs_to :location
+  has_many :numbers, :class_name => 'DossierNumber'
   
   # Attributes
   def location=(value)
