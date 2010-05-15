@@ -20,7 +20,7 @@
   <div class="ce_table">
   <table>
     <tr>
-      <% for year in @dossier.numbers.map{|number| number.from.try(:year)} %>
+      <% for year in @dossier.numbers.map{|number| number.period} %>
         <th><%= year %></th>
       <% end %>
     </tr>
