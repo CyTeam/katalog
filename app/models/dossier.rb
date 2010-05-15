@@ -18,6 +18,11 @@ class Dossier < ActiveRecord::Base
     end
   end
   
+  # Calculations
+  def total_amount
+    numbers.sum(:amount)
+  end
+  
   # Importer
   def self.import_from_csv(path)
     # Load file at path using ; as delimiter
