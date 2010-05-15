@@ -3,7 +3,9 @@ class DossierNumber < ActiveRecord::Base
 
   # Attributes
   def from_year
-    from.year
+    return nil unless from
+    
+    from.try(:year).to_s
   end
   
   def from_year=(value)
@@ -11,7 +13,9 @@ class DossierNumber < ActiveRecord::Base
   end
   
   def to_year
-    to.year
+    return nil unless to
+
+    to.try(:year).to_s
   end
   
   def to_year=(value)
@@ -19,6 +23,10 @@ class DossierNumber < ActiveRecord::Base
   end
   
   def period
+    return nil unless (from_year or to_year)
+    
+    return from_year if from_year == to_year
+    
     [from_year, to_year].compact.join(' - ')
   end
   
