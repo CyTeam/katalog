@@ -59,7 +59,7 @@ class Dossier < ActiveRecord::Base
         )
         # 1994-
         year = 1994
-        for amount in row[18..30]
+        for amount in row[18..36]
           dossier.numbers.create(
             :from   => Date.new(year, 1, 1),
             :to     => Date.new(year, 12, 31),
