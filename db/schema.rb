@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100515215518) do
+ActiveRecord::Schema.define(:version => 20100515234855) do
 
   create_table "dossier_numbers", :force => true do |t|
     t.integer  "dossier_id"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(:version => 20100515215518) do
     t.datetime "updated_at"
   end
 
+  add_index "dossier_numbers", ["dossier_id"], :name => "index_dossier_numbers_on_dossier_id"
+
   create_table "dossiers", :force => true do |t|
     t.string   "signature"
     t.string   "title"
@@ -28,6 +30,8 @@ ActiveRecord::Schema.define(:version => 20100515215518) do
     t.datetime "updated_at"
     t.integer  "location_id"
   end
+
+  add_index "dossiers", ["signature"], :name => "index_dossiers_on_signature"
 
   create_table "locations", :force => true do |t|
     t.string   "title"
@@ -54,5 +58,7 @@ ActiveRecord::Schema.define(:version => 20100515215518) do
   create_table "tags", :force => true do |t|
     t.string "name"
   end
+
+  add_index "tags", ["name"], :name => "index_tags_on_name"
 
 end
