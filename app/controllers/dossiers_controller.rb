@@ -12,7 +12,8 @@ class DossiersController < ApplicationController
   # GET /dossiers
   # GET /dossiers.xml
   def index
-    @dossiers = apply_scopes(Dossier, params[:dossier]).paginate :page => params[:page] if params[:dossier]
+    params[:dossier] ||= {}
+    @dossiers = apply_scopes(Dossier, params[:dossier]).paginate :page => params[:page]
 
     respond_to do |format|
       format.html # index.html.erb
@@ -23,7 +24,8 @@ class DossiersController < ApplicationController
   # GET /dossiers/search
   # GET /dossiers/search.xml
   def search
-    @dossiers = apply_scopes(Dossier, params[:dossier]).paginate :page => params[:page] if params[:dossier]
+    params[:dossier] ||= {}
+    @dossiers = apply_scopes(Dossier, params[:dossier]).paginate :page => params[:page]
 
     respond_to do |format|
       format.html # search.html.erb
