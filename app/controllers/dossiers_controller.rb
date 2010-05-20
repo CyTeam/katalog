@@ -12,7 +12,7 @@ class DossiersController < ApplicationController
   # GET /dossiers
   # GET /dossiers.xml
   def index
-    @dossiers = Dossier.paginate :page => params[:page]
+    @dossiers = apply_scopes(Dossier, params[:dossier]).paginate :page => params[:page] if params[:dossier]
 
     respond_to do |format|
       format.html # index.html.erb
