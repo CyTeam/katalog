@@ -44,7 +44,10 @@ class Dossier < ActiveRecord::Base
           :location  => row[10]
         )
         # tags
-        dossier.tag_list << row[13..15].select{|tag| tag.present?}
+        tags = row[13..15].compact.map{|sentence| sentence.split(/[ .();,:-]/)}.flatten.uniq.select{|t| t.present?}
+        tags += row[1].split(/[ .();,:-]/).uniq.select{|t| t.present?}
+        puts tags
+        dossier.tag_list << tags.uniq.compact
         
         # before 1990
         dossier.numbers.create(
