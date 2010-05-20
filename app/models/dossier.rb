@@ -43,6 +43,9 @@ class Dossier < ActiveRecord::Base
           :kind      => row[9],
           :location  => row[10]
         )
+        # tags
+        dossier.tag_list << row[13..15].select{|tag| tag.present?}
+        
         # before 1990
         dossier.numbers.create(
           :to     => '1989-12-31',

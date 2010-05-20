@@ -49,10 +49,10 @@
             <div class="layout_full block last odd">
               <div class="ce_text">
                 <p class="tag_cloud">
-                <% @tags = Dossier.tag_counts_on(:tags) %>
-                <% tag_cloud(@tags, %w(small smaller larger large)) do |tag, css_class| %>
-                    <%= link_to tag.name, { :action => :search, :dossier => {:tag => tag.name }}, :class => css_class %>
-                  <% end %>
+                <%# @tags = Dossier.tag_counts_on(:tags, :limit => 10, :at_least => 50) %>
+                <%# tag_cloud(@tags, %w(nube1 nube2 nube3 nube4 nube5 nube6)) do |tag, css_class| %>
+                    <%#= link_to tag.name, { :action => :search, :dossier => {:tag => tag.name }}, :class => css_class %>
+                  <%# end %>
                 </p>
               </div>
             </div>
