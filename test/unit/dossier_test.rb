@@ -7,11 +7,13 @@ class DossierTest < ActiveSupport::TestCase
   end
 
   test "imports dossiers" do
-    assert_equal 29, Dossier.count
+    assert_equal 30, Dossier.count
   end
 
   test "imports topics" do
     assert_equal 2, TopicGroup.count
-    assert_equal 5, Topic.count
+    assert_equal 18, Topic.count
+    assert_equal 1, TopicGeo.count
+    assert_equal 12, TopicDossier.count
   end
 end

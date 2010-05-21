@@ -34,7 +34,7 @@ class Dossier < ActiveRecord::Base
   end
   
   def find_parent
-    Topic.where(:signature => signature.split('.')[0]).first
+    TopicDossier.where(:signature => signature).first
   end
   
   def assign_parent
@@ -42,6 +42,10 @@ class Dossier < ActiveRecord::Base
   end
   
   # Importer
+  def self.import_filter
+    /^[0-9]{2}\.[0-9]\.[0-9]{3}$/
+  end
+  
   def self.import_from_csv(path)
     # Load file at path using ; as delimiter
     rows = FasterCSV.read(path, :col_sep => ';')
@@ -53,8 +57,14 @@ class Dossier < ActiveRecord::Base
     topic_rows = rows.select{|row| Topic.import_filter.match(row[0])}
     topic_rows.map{|row| Topic.import(row).save}
 
+    topic_rows = rows.select{|row| TopicGeo.import_filter.match(row[0])}
+    topic_rows.map{|row| TopicGeo.import(row).save}
+
+    topic_rows = rows.select{|row| TopicDossier.import_filter.match(row[0]) && row[9].blank?}
+    topic_rows.map{|row| TopicDossier.import(row).save}
+
     # Select rows containing main dossier records by simply testing on two columns in first row
-    dossier_rows = rows.select{|row| row[0] && row[0].split('.').count == 3}
+    dossier_rows = rows.select{|row| TopicDossier.import_filter.match(row[0]) && row[9].present?}
 
     transaction do
       for row in dossier_rows
