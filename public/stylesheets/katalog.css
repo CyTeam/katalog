@@ -1,6 +1,10 @@
 /** Layout fixes **/
 #header .inside,#container,#footer .inside{width:92%;margin-right:auto;margin-left:auto;}
 
+/** Lists **/
+tr.topic_group td { background-color: #96B1CD; }
+tr.topic td { background-color: #CBD7E6; }
+
 /** Tag Cloud **/
 .tag_cloud {font-size: 80%; text-decoration: none;}
 .tag_cloud a {text-decoration: none;}

@@ -6,6 +6,7 @@ class Dossier < ActiveRecord::Base
   scope :by_kind, lambda {|value| where(:kind => value)}
 
   # Associations
+  belongs_to :parent, :class_name => 'Dossier'
   belongs_to :location
   has_many :numbers, :class_name => 'DossierNumber'
   accepts_nested_attributes_for :numbers
@@ -22,9 +23,22 @@ class Dossier < ActiveRecord::Base
     end
   end
   
+  def signature=(value)
+    write_attribute(:signature, value)
+    assign_parent
+  end
+  
   # Calculations
   def total_amount
     numbers.sum(:amount)
+  end
+  
+  def find_parent
+    Topic.where(:signature => signature.split('.')[0]).first
+  end
+  
+  def assign_parent
+    self.parent = find_parent
   end
   
   # Importer
@@ -32,6 +46,13 @@ class Dossier < ActiveRecord::Base
     # Load file at path using ; as delimiter
     rows = FasterCSV.read(path, :col_sep => ';')
     
+    # Select rows containing topics
+    topic_group_rows = rows.select{|row| TopicGroup.import_filter.match(row[0])}
+    topic_group_rows.map{|row| TopicGroup.import(row).save}
+    
+    topic_rows = rows.select{|row| Topic.import_filter.match(row[0])}
+    topic_rows.map{|row| Topic.import(row).save}
+
     # Select rows containing main dossier records by simply testing on two columns in first row
     dossier_rows = rows.select{|row| row[0] && row[0].split('.').count == 3}
 
@@ -43,10 +64,10 @@ class Dossier < ActiveRecord::Base
           :kind      => row[9],
           :location  => row[10]
         )
+
         # tags
         tags = row[13..15].compact.map{|sentence| sentence.split(/[ .();,:-]/)}.flatten.uniq.select{|t| t.present?}
         tags += row[1].split(/[ .();,:-]/).uniq.select{|t| t.present?}
-        puts tags
         dossier.tag_list << tags.uniq.compact
         
         # before 1990
