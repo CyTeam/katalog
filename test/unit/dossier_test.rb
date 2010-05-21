@@ -2,8 +2,16 @@ require 'test_helper'
 
 class DossierTest < ActiveSupport::TestCase
   # Import
-  test "small import" do
+  setup do
     rows = Dossier.import_from_csv('test/fixtures/import/small.csv')
-    assert_equal 48, Dossier.count
+  end
+
+  test "imports dossiers" do
+    assert_equal 29, Dossier.count
+  end
+
+  test "imports topics" do
+    assert_equal 2, TopicGroup.count
+    assert_equal 5, Topic.count
   end
 end
