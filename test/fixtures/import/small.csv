@@ -37,19 +37,6 @@ Dokus"
 "02.3.210";"Naturschutzrecht. Umweltrecht";0;;0;0;0;0;0;;;"Gesetz";;;;;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
 "02.3.210";"URP Umweltrecht in der Praxis 1987 - ";0;;0;0;0;0;0;"Z";"LE";"Gesetz";;"Vereinigung für Umweltrecht Zürich (Hrsg.)";;;;;;;;;;;;;;;;;;;;;;;;0
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-"02.3.220";"Berichte aus Ämtern und Gremien";0;;0;0;0;0;0;;;"Gesetz";;;;;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
-"02.3.220";"Bundesblatt 25/1995 - 2006";0;;0;0;0;0;0;"Z";"RI";"Gesetz";;;;;;;;;;;;;;;;;;;;;;;;;;0
-"02.3.220";"Bundesblatt 2007 -";;;;;;;;"Z";"LE";"Gesetz";;"Autor: Bundeskanzlei";;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-"02.3.220";"politfokus : agrarpolitik 2006 - 2009";;;;;;;;"Z";"RI";"Gesetz";;;;;;;;;;;;;;;;;;;;;;;;;;
-"02.3.220";"politfokus : aussenpolitik 2006 - 2008";;;;;;;;"Z";"RI";"Gesetz";;;;;;;;;;;;;;;;;;;;;;;;;;
-"02.3.220";"politfokus : bildungspolitik 2006 - 2009";;;;;;;;"Z";"RI";"Gesetz";;;;;;;;;;;;;;;;;;;;;;;;;;
-"02.3.220";"politfokus : gesundheitspolitik 2006 - 2009";;;;;;;;"Z";"RI";"Gesetz";;;;;;;;;;;;;;;;;;;;;;;;;;
-"02.3.220";"politfokus : sozialpolitik 2006 - 2009";;;;;;;;"Z";"RI";"Gesetz";;;;;;;;;;;;;;;;;;;;;;;;;;
-"02.3.220";"politfokus : tierschutzpolitik 2006 - 2008";;;;;;;;"Z";"RI";"Gesetz";;;;;;;;;;;;;;;;;;;;;;;;;;
-"02.3.220";"politfokus : umweltpolitik 2006 - 2009";;;;;;;;"Z";"RI";"Gesetz";;;;;;;;;;;;;;;;;;;;;;;;;;
-"02.3.220";"politfokus : wirtschaftspolitik 2006 - 2009";;;;;;;;"Z";"RI";"Gesetz";;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 "1";"Politisches System, Verwaltung, Justiz, Militär";383'213;;17'555;19'977;72'310;147'463;125'908;;;;;;;;17'555;14'257;5'720;7'748;9'357;12'082;19'015;24'108;31'722;32'487;29'002;27'843;26'409;26'071;23'735;24'858;24'971;26'273;0;0;0;383'213
 "11";"Politisches System. Parteien. Geschichte. UNO";150'430;;9'170;9'530;29'480;58'007;44'243;;;;;;;;9'170;6'917;2'613;3'078;3'398;4'905;7'823;10'276;12'114;13'481;12'666;10'716;9'030;8'711;8'616;9'664;8'281;8'971;0;0;0;150'430
 "11.0";"Politisches System. Geschichte allgemein.";4'137;;363;175;764;1'520;1'315;;;"Politik";;;;;363;147;28;49;113;159;183;260;363;374;303;242;238;295;240;224;257;299;0;0;0;4'137
@@ -61,40 +48,9 @@ Dokus"
 ;;0;;0;0;0;0;0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 "11.0.100";"Antisemitismus grundsätzlich";103;1942;4;2;33;33;31;"DH";"EG";"Politik";"Antisemitismus CH, Europa und international";"Linker Antisemitismus";"Judenfeindschaft allgemein";;4;1;1;3;5;8;10;7;6;11;11;3;2;10;2;7;7;5;;;;103
 ;;0;;0;0;0;0;0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-"11.0.100";"Demokratie. Diktatur. Föderalismus grundsätzlich";222;1986;2;2;34;85;99;"DH";"EG";"Politik";"Demokratie. Föderalismus CH, Eurpa und international";"Demokratietheorien grundsätzlich";"Republikanismus";"Subsidiaritätsprinzip allgemein";2;2;;1;6;6;11;10;11;13;19;20;22;21;26;22;12;18;;;;222
-;"Demokratie. Diktatur. Föderalismus grundsätzlich";0;;0;0;0;0;0;;;;;"Demokratie, direkte. Dokumentationszentrum Genf";"Autokratie grundsätzlich";"Zivilgesellschaft";;;;;;;;;;;;;;;;;;;;;;
-;;0;;0;0;0;0;0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-"11.0.100";"Fundamentalismus grundsätzlich 1981 - 2009";0;;0;0;0;0;0;"DA";"CO";"Politik";;;;;;;;;;;;;;;;;;;;;;;;;;
-"11.0.100";"Fundamentalismus grundsätzlich 2010 -";254;1981;29;11;76;80;58;"DH";"EG";"Politik";"Terrorismus; 74: Religion";"Politischer Fundamentalismus";"Islamischer Fundamentalismus";"Christlicher Fundamentalismus";29;2;9;9;19;20;19;9;14;22;11;10;23;28;13;11;4;2;;;;254
-;"Fundamentalismus grundsätzlich 2010 -";0;;0;0;0;0;0;;;;;"Religiöser Fundamentalismus";;;;;;;;;;;;;;;;;;;;;;;;
-;;0;;0;0;0;0;0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-"11.0.100";"Gewalt als Ordnungskraft";104;1982;1;1;14;24;64;"DH";"EG";"Politik";"63: Gewalt und Störungen im öffentlichen Raum; Jugendgewalt. Jugendkriminalität ";"staatliches Gewaltmonopol";;;1;1;;1;5;3;;5;5;5;5;5;4;6;9;11;11;27;;;;104
-;;0;;0;0;0;0;0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 "11.0.100";"Kapitalismus grundsätzlich 1971 - 2001";0;;0;0;0;0;0;"DA";"CO";"Politik";;;;;;;;;;;;;;;;;;;;;;;;;;
 "11.0.100";"Kapitalismus grundsätzlich 2002 - 2005";0;;0;0;0;0;0;"DA";"CO";"Politik";;;;;;;;;;;;;;;;;;;;;;;;;;
 "11.0.100";"Kapitalismus grundsätzlich 2006 -";440;1984;7;2;84;177;170;"DH";"EG";"Politik";" 63: Sozialpolitik CH";"Gesellschaftlicher Umbau";"Globalisierungskritik grundsätzlich";"Rifkin, Jeremy";7;2;;2;11;14;23;34;44;40;35;35;23;47;15;7;46;55;;;;440
-;"Kapitalismus grundsätzlich 2006 -";0;;0;0;0;0;0;;;;;"Kapitalismuskritik";"Krisis (Gruppe für radikal-gesellschaftliche Auseinandersetzungen)";;;;;;;;;;;;;;;;;;;;;;;
-;;0;;0;0;0;0;0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-"11.0.100";"Kommunitarismus. Individualismus grundsätzlich ";92;1989;1;1;47;31;12;"DH";"EG";"Politik";;"Etzioni, Amitai (1929 -)";"Entsolidarisierung";"Vereinzelung";1;;1;6;14;10;2;15;18;3;3;1;6;3;3;2;2;2;;;;92
-;"Kommunitarismus. Individualismus grundsätzlich ";0;;0;0;0;0;0;;;;;"Solidarität";"Egoismus";"Altruismus";;;;;;;;;;;;;;;;;;;;;;
-;;0;;0;0;0;0;0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 "11.0.100";"Lettre international : Europas Kulturzeitung Dez. 2003 - Juni 2006";0;;0;0;0;0;0;"Z";"RI";"Politik";;;;;;;;;;;;;;;;;;;;;;;;;;
 "11.0.100";"Lettre international : Europas Kulturzeitung Sept. 2006 - 2008";0;;0;0;0;0;0;"Z";"RI";"Politik";;;;;;;;;;;;;;;;;;;;;;;;;;
 "11.0.100";"Lettre international : Europas Kulturzeitung 2009 - ";0;;0;0;0;0;0;"Z";"EG";"Politik";;"LI";;;;;;;;;;;;;;;;;;;;;;;;
-;;0;;0;0;0;0;0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-"11.0.100";"Liberalismus. Neoliberalismus grundsätzlich 1982 - 2008";0;;0;0;0;0;0;"DA";"CO";"Politik";;;;;;;;;;;;;;;;;;;;;;;;;;
-"11.0.100";"Liberalismus. Neoliberalismus grundsätzlich 2009 - ";258;1982;9;7;60;82;100;"DH";"EG";"Politik";"53: Ökonomie. Wirtschaftstheorien";"Société du Mont Pèlerin. Mont Pèlerin Society";;;9;4;3;3;8;12;15;22;21;15;18;11;17;30;16;21;11;22;;;;258
-;;0;;0;0;0;0;0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-"11.0.100";"Marxismus. Kommunismus grundsätzlich 1924 - 1997";0;;0;0;0;0;0;"DA";"CO";"Politik";;;;;;;;;;;;;;;;;;;;;;;;;;
-"11.0.100";"Marxismus. Kommunismus grundsätzlich 1998 - 2005";0;;0;0;0;0;0;"DA";"CO";"Politik";;;;;;;;;;;;;;;;;;;;;;;;;;
-"11.0.100";"Marxismus. Kommunismus grundsätzlich 2006 -";463;1924;97;39;113;140;74;"DH";"EG";"Politik";"Arbeiterbewegung Europa; Kommunistisches Manifest (B); Kommunistische Parteien Europa; IV-Internationale";"Laclau, Ernesto";"Gramsci, Antonio (1891 -1937)";"Hobsbawm, Eric J.";97;38;1;4;9;20;44;36;38;37;20;27;18;16;17;10;19;12;;;;463
-;"Marxismus. Kommunismus grundsätzlich 2006 -";0;;0;0;0;0;0;;;;;"Antikommunismus grundsätzlich";"Brecht, Bertolt (1898 - 1956)";"McCarthy-Ära (Antikommunistische Hatz in den USA)";;;;;;;;;;;;;;;;;;;;;;
-;"Marxismus. Kommunismus grundsätzlich 2006 -";0;;0;0;0;0;0;;;;;"WACL World Anticommunist League";"Marx, Karl (1818 - 1883)";"Engels, Friedrich (1820 - 1895)";;;;;;;;;;;;;;;;;;;;;;
-;"Marxismus. Kommunismus grundsätzlich 2006 -";0;;0;0;0;0;0;;;;;"Lenin, Wladimir Iljitsch (1870 - 1924)";"Münzenberg, Willi (1889 - 1940)";"Heartfield, John (Künstler, Fotomontagen) (1881 - 1968)";;;;;;;;;;;;;;;;;;;;;;
-;"Marxismus. Kommunismus grundsätzlich 2006 -";0;;0;0;0;0;0;;;;;"Babel, Isaak (1894 - 1940)";"Thälmann, Ernst (1886 - 1944)";"Bucharin, Nikolai (1888 - 1938); Bucharin, Anna (1904 -)";;;;;;;;;;;;;;;;;;;;;;
-;"Marxismus. Kommunismus grundsätzlich 2006 -";0;;0;0;0;0;0;;;;;"Grutas-Park für Plastiken der Sowjetzeit (Stalin Park, Lenin World)";;;;;;;;;;;;;;;;;;;;;;;;
-;;0;;0;0;0;0;0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-"11.0.100";"Nationalsozialismus. Faschismus grundsätzlich 1933 - 2000";0;;0;0;0;0;0;"DA";"CO";"Politik";;;;;;;;;;;;;;;;;;;;;;;;;;
-"11.0.100";"Nationalsozialismus. Faschismus grundsätzlich 2001 - 2009";0;;0;0;0;0;0;"DA";"CO";"Politik";;;;;;;;;;;;;;;;;;;;;;;;;;
-"11.0.100";"Nationalsozialismus. Faschismus grundsätzlich 2010 -";600;1933;72;34;89;192;213;"DH";"EG";"Politik";"Rechte Europa; Geschichte Europa und international im Zweiten Weltkrieg; 14: Friedensnobelpreis; 75: Esoterik";"Neofaschismus grundsätzlich";"Kollaboration mit dem Nazi-Regime";"Ustascha-Regime";72;25;9;8;11;6;19;45;59;38;43;28;24;56;30;42;46;39;;;;600
-;"Nationalsozialismus. Faschismus grundsätzlich 2010 -";0;;0;0;0;0;0;;;;;"Widerstand gegen Nationalsozialismus und Faschismus";"Riefenstahl, Leni (1902 - 2003)";"Mein Kampf";;;;;;;;;;;;;;;;;;;;;;
