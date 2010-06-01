@@ -8,7 +8,11 @@ class Topic < Dossier
   
   # Calculations
   def total_amount
-    dossiers.to_a.sum(&:total_amount)
+    document_count
+  end
+  
+  def update_document_count!
+    update_attribute(:document_count, dossiers.sum(:document_count))
   end
   
   def find_parent
