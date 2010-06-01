@@ -107,6 +107,7 @@ class Dossier < ActiveRecord::Base
         end
         
         dossier.save!
+        dossier.update_document_count!
       end
     end
   end
