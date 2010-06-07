@@ -33,8 +33,12 @@ class Dossier < ActiveRecord::Base
     document_count
   end
 
+  def document_count
+    numbers.sum(:amount)
+  end
+  
   def update_document_count!
-    update_attribute(:document_count, numbers.sum(:amount))
+    update_attribute(:document_count, document_count)
   end
   
   def find_parent
