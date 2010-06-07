@@ -6,7 +6,7 @@ class Dossier < ActiveRecord::Base
   scope :by_kind, lambda {|value| where(:kind => value)}
 
   # Associations
-  belongs_to :parent, :class_name => 'Dossier'
+  belongs_to :parent, :class_name => 'Dossier', :touch => true
   belongs_to :location
   has_many :numbers, :class_name => 'DossierNumber'
   accepts_nested_attributes_for :numbers
