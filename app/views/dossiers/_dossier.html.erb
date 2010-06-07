@@ -1,5 +1,5 @@
 <% cache dossier do %>
-<tr class="<%= cycle('odd', 'even') %>">
+<tr id="dossier-<%= dossier.id %>" class="<%= cycle('odd', 'even') %>">
   <td><%= dossier.signature %></td>
   <td><%= dossier.title %></td>
   <td><%= dossier.kind %></td>
@@ -8,7 +8,7 @@
   <td style="width: 70px">
     <%= link_to image_tag('icons/show.png', :title => 'Show'), dossier %>
     <%= link_to image_tag('icons/edit.png', :title => 'Edit'), edit_dossier_path(dossier) %>
-    <%= link_to image_tag('icons/delete.png', :title => 'Destroy'), dossier, :confirm => 'Are you sure?', :method => :delete %>
+    <%= link_to image_tag('icons/delete.png', :title => 'Destroy'), dossier, :confirm => 'Are you sure?', :remote => true, :method => :delete %>
   </td>
 </tr>
 <% end %>
