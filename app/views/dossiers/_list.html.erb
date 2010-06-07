@@ -1,5 +1,6 @@
 <div class="ce_table block">
 <table>
+<% cache :dossier_list_header do %>
   <tr>
     <th><%= t('dossier.signature', :scope => [:activerecord, :attributes]) %></th>
     <th><%= t('dossier.title', :scope => [:activerecord, :attributes]) %></th>
@@ -8,6 +9,7 @@
     <th><%= t('dossier.total_amount', :scope => [:activerecord, :attributes]) %></th>
     <th></th>
   </tr>
+<% end %>
 
 <%= render @dossiers %>
 </table>
