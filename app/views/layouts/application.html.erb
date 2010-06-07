@@ -47,14 +47,7 @@
             <h1>Stöbern</h1>
 
             <div class="layout_full block last odd">
-              <div class="ce_text">
-                <p class="tag_cloud">
-                <% @tags = Dossier.tag_counts_on(:tags, :limit => 25, :at_least => 2) %>
-                <% tag_cloud(@tags, %w(nube1 nube2 nube3 nube4 nube5 nube6)) do |tag, css_class| %>
-                    <%= link_to tag.name, dossiers_path(:dossier => {:tag => tag.name }), :class => css_class %>
-                  <% end %>
-                </p>
-              </div>
+              <%= render 'layouts/tag_cloud' %>
             </div>
           </div>
         </div>
