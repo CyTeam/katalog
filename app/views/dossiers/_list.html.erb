@@ -1,3 +1,4 @@
+<% cache @dossiers do %>
 <div class="ce_table block">
 <table>
 <% cache :dossier_list_header do %>
@@ -16,3 +17,4 @@
 </div>
 
 <%= will_paginate @dossiers %>
+<% end %>
