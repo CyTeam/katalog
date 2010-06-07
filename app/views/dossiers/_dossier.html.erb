@@ -1,3 +1,4 @@
+<% cache dossier do %>
 <tr class="<%= cycle('odd', 'even') %>">
   <td><%= dossier.signature %></td>
   <td><%= dossier.title %></td>
@@ -10,3 +11,4 @@
     <%= link_to image_tag('icons/delete.png', :title => 'Destroy'), dossier, :confirm => 'Are you sure?', :method => :delete %>
   </td>
 </tr>
+<% end %>
