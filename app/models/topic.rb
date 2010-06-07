@@ -11,8 +11,12 @@ class Topic < Dossier
     document_count
   end
   
+  def document_count
+    dossiers.to_a.sum(&:document_count)
+  end
+  
   def update_document_count!
-    update_attribute(:document_count, dossiers.sum(:document_count))
+    update_attribute(:document_count, document_count)
   end
   
   def find_parent
