@@ -18,11 +18,8 @@ class DossiersController < InheritedResources::Base
   def index
     params[:dossier] ||= {}
     @dossiers = apply_scopes(Dossier, params[:dossier]).paginate :page => params[:page]
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @dossiers }
-    end
+    
+    index!
   end
 
   # GET /dossiers/search
@@ -30,10 +27,7 @@ class DossiersController < InheritedResources::Base
   def search
     params[:dossier] ||= {}
     @dossiers = apply_scopes(Dossier, params[:dossier]).paginate :page => params[:page]
-
-    respond_to do |format|
-      format.html # search.html.erb
-      format.xml  { render :xml => @dossiers }
-    end
+    
+    index!
   end
 end
