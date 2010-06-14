@@ -13,10 +13,19 @@ class DossiersController < InheritedResources::Base
   # Tags
   has_scope :tagged_with, :as => :tag
   
+  # Ordering
+  has_scope :order_by, :default => 'signature'
+  
   # GET /dossiers
   # GET /dossiers.xml
   def index
     params[:dossier] ||= {}
+
+    # Support new_signature
+    if @new_signature = params[:dossier][:order_by] == "new_signature"
+      params[:dossier][:order_by] ||= 'new_signature'
+    end
+    
     @dossiers = apply_scopes(Dossier, params[:dossier]).paginate :page => params[:page]
     
     index!

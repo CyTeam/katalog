@@ -1,10 +1,10 @@
 <% cache topic_group do %>
 <tr class="topic_group">
-  <td><%= topic_group.signature %></td>
+  <td><%= @new_signature ? topic_group.new_signature : topic_group.signature %></td>
   <td><%= topic_group.title %></td>
   <td><%= topic_group.kind %></td>
   <td><%= topic_group.location %></td>
-  <td><%= topic_group.total_amount %></td>
+  <td><%= @new_signature ? topic_group.new_document_count : topic_group.document_count %></td>
   <td>
   </td>
 </tr>

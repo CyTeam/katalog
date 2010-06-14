@@ -1,10 +1,10 @@
-<% cache topic_dossier do %>
+<% cache topic_dossier.cache_key + @new_signature.to_s do %>
 <tr class="topic_dossier">
-  <td><%= topic_dossier.signature %></td>
+  <td><%= @new_signature ? topic_dossier.new_signature : topic_dossier.signature %></td>
   <td><%= topic_dossier.title %></td>
   <td><%= topic_dossier.kind %></td>
   <td><%= topic_dossier.location %></td>
-  <td><%= topic_dossier.total_amount %></td>
+  <td><%= @new_signature ? topic_dossier.new_document_count : topic_dossier.document_count %></td>
   <td>
   </td>
 </tr>

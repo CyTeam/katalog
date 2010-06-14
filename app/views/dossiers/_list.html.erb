@@ -1,4 +1,4 @@
-<% cache @dossiers do %>
+<% cache @dossiers + [@new_signature.to_s] do %>
 <div class="ce_table block">
 <table>
 <% cache :dossier_list_header do %>

@@ -1,11 +1,13 @@
+<% unless @new_signature %>
 <% cache topic_geo do %>
 <tr class="topic_geo">
-  <td><%= topic_geo.signature %></td>
+  <td><%= @new_signature ? topic_geo.new_signature : topic_geo.signature %></td>
   <td><%= topic_geo.title %></td>
   <td><%= topic_geo.kind %></td>
   <td><%= topic_geo.location %></td>
-  <td><%= topic_geo.total_amount %></td>
+  <td><%= @new_signature ? topic_geo.new_document_count : topic_geo.document_count %></td>
   <td>
   </td>
 </tr>
+<% end %>
 <% end %>

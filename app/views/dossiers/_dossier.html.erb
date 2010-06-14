@@ -1,6 +1,6 @@
-<% cache dossier do %>
+<% cache dossier.cache_key + @new_signature.to_s do %>
 <tr id="dossier-<%= dossier.id %>" class="<%= cycle('odd', 'even') %>">
-  <td><%= dossier.signature %></td>
+  <td><%= @new_signature ? dossier.new_signature : dossier.signature %></td>
   <td><%= dossier.title %></td>
   <td><%= dossier.kind %></td>
   <td><%= dossier.location %></td>
