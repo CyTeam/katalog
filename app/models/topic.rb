@@ -12,13 +12,9 @@ class Topic < Dossier
   end
   
   def document_count
-    dossiers.to_a.sum(&:document_count)
+    Dossier.where("signature LIKE CONCAT(?, '%')", signature).includes(:numbers).sum(:amount)
   end
-  
-  def update_document_count!
-    update_attribute(:document_count, document_count)
-  end
-  
+
   def find_parent
     TopicGroup.where(:signature => signature.first).first
   end

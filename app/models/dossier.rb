@@ -37,10 +37,6 @@ class Dossier < ActiveRecord::Base
     numbers.sum(:amount)
   end
   
-  def update_document_count!
-    update_attribute(:document_count, document_count)
-  end
-  
   def find_parent
     TopicDossier.where(:signature => signature).first
   end
@@ -111,7 +107,6 @@ class Dossier < ActiveRecord::Base
         end
         
         dossier.save!
-        dossier.update_document_count!
       end
     end
   end
