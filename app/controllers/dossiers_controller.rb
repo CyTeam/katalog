@@ -6,6 +6,7 @@ class DossiersController < InheritedResources::Base
   
   # Search
   has_scope :by_signature, :as => :signature
+  has_scope :by_title, :as => :title
   has_scope :by_location, :as => :location
   has_scope :by_kind, :as => :kind
   
