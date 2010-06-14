@@ -26,6 +26,12 @@ class Dossier < ActiveRecord::Base
   
   def signature=(value)
     write_attribute(:signature, value)
+    
+    group = value[0,1]
+    topic, geo, dossier = value.split('.')
+    new_signature = [topic, dossier, geo].compact.join('.')
+    write_attribute(:new_signature, new_signature)
+    
     assign_parent
   end
   
