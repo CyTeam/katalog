@@ -2,6 +2,7 @@ class Dossier < ActiveRecord::Base
   # Scopes
   default_scope :order => 'signature'
   scope :by_signature, lambda {|value| where(:signature => value)}
+  scope :by_title, lambda {|value| where("title LIKE CONCAT('%', ?, '%')", value)}
   scope :by_location, lambda {|value| where(:location_id => Location.find_by_code(value))}
   scope :by_kind, lambda {|value| where(:kind => value)}
 
