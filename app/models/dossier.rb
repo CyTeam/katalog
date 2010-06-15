@@ -116,6 +116,7 @@ class Dossier < ActiveRecord::Base
           year += 1
         end
         
+        puts dossier.signature
         dossier.save!
       end
     end
