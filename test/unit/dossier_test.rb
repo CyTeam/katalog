@@ -3,7 +3,7 @@ require 'test_helper'
 class DossierTest < ActiveSupport::TestCase
   # Import
   setup do
-    rows = Dossier.import_from_csv('test/fixtures/import/small.csv')
+    rows = Dossier.import_from_csv(Rails.root.join('test/import/small.csv'))
   end
 
   test "imports dossiers" do
