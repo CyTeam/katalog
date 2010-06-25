@@ -83,10 +83,11 @@ class Dossier < ActiveRecord::Base
     transaction do
       for row in dossier_rows
         dossier = self.create(
-          :signature => row[0],
-          :title     => row[1],
-          :kind      => row[9],
-          :location  => row[10]
+          :signature         => row[0],
+          :title             => row[1],
+          :first_document_on => row[3],
+          :kind              => row[9],
+          :location          => row[10]
         )
 
         # tags
