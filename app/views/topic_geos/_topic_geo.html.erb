@@ -1,5 +1,4 @@
 <% unless @new_signature %>
-<% cache topic_geo do %>
 <tr class="topic_geo">
   <td><%= @new_signature ? topic_geo.new_signature : topic_geo.signature %></td>
   <td><%= topic_geo.title %></td>
@@ -9,5 +8,4 @@
   <td>
   </td>
 </tr>
-<% end %>
 <% end %>

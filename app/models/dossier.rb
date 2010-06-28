@@ -15,6 +15,11 @@ class Dossier < ActiveRecord::Base
   has_many :numbers, :class_name => 'DossierNumber'
   accepts_nested_attributes_for :numbers
     
+  # Callbacks
+  def after_save
+    find_parent.touch if find_parent    
+  end
+  
   # Tags
   acts_as_taggable
   

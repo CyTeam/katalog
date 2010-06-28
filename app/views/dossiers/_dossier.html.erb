@@ -1,4 +1,3 @@
-<% cache dossier.cache_key + @new_signature.to_s do %>
 <tr id="dossier-<%= dossier.id %>" class="<%= cycle('odd', 'even') %>" data-href="<%= url_for dossier %>">
   <td><%= @new_signature ? dossier.new_signature : dossier.signature %></td>
   <td><%= dossier.title %></td>
@@ -10,4 +9,3 @@
     <%= link_to image_tag('icons/delete.png', :title => 'Destroy'), dossier, :confirm => 'Are you sure?', :remote => true, :method => :delete %>
   </td>
 </tr>
-<% end %>
