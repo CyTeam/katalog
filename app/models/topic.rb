@@ -2,12 +2,12 @@ class Topic < Dossier
   # Associations
   has_many :dossiers, :foreign_key => :parent_id
 
-  def children
-    Dossier.where("signature LIKE CONCAT(?, '%')", signature)
-  end
-  
-  def new_children
-    Dossier.where("new_signature LIKE CONCAT(?, '%')", new_signature)
+  def children(use_new_signature = false)
+    if use_new_signature
+      Dossier.where("new_signature LIKE CONCAT(?, '%')", new_signature)
+    else
+      Dossier.where("signature LIKE CONCAT(?, '%')", signature)
+    end
   end
   
   def to_s
@@ -15,12 +15,8 @@ class Topic < Dossier
   end
   
   # Calculations
-  def document_count
-    children.includes(:numbers).sum(:amount)
-  end
-
-  def new_document_count
-    new_children.includes(:numbers).sum(:amount)
+  def document_count(use_new_signature = false)
+    children(use_new_signature).includes(:numbers).sum(:amount)
   end
 
   def find_parent

@@ -3,7 +3,7 @@
   <td><%= topic_dossier.title %></td>
   <td><%= topic_dossier.kind %></td>
   <td><%= topic_dossier.location %></td>
-  <td><%= @new_signature ? topic_dossier.new_document_count : topic_dossier.document_count %></td>
+  <td><%= topic_dossier.document_count(@new_signature) %></td>
   <td>
   </td>
 </tr>

@@ -4,7 +4,7 @@
   <td><%= topic_geo.title %></td>
   <td><%= topic_geo.kind %></td>
   <td><%= topic_geo.location %></td>
-  <td><%= @new_signature ? topic_geo.new_document_count : topic_geo.document_count %></td>
+  <td><%= topic_geo.document_count(@new_signature) %></td>
   <td>
   </td>
 </tr>
