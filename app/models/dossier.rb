@@ -1,4 +1,7 @@
 class Dossier < ActiveRecord::Base
+  # Validations
+  validates_presence_of :signature, :title, :kind
+  
   # Scopes
   scope :by_signature, lambda {|value| where("signature LIKE CONCAT(?, '%')", value)}
   scope :by_title, lambda {|value| where("title LIKE CONCAT('%', ?, '%')", value)}
