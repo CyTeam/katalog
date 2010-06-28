@@ -10,16 +10,10 @@ class Dossier < ActiveRecord::Base
   scope :order_by, lambda {|value| order("CONCAT(#{value}, IF(type IS NULL, '.a', ''))")}
   
   # Associations
-  belongs_to :parent, :class_name => 'Dossier', :touch => true
   belongs_to :location
   has_many :numbers, :class_name => 'DossierNumber'
   accepts_nested_attributes_for :numbers
     
-  # Callbacks
-  def after_save
-    find_parent.touch if find_parent    
-  end
-  
   # Tags
   acts_as_taggable
   
@@ -39,8 +33,6 @@ class Dossier < ActiveRecord::Base
     topic, geo, dossier = value.split('.')
     new_signature = [topic, dossier, geo].compact.join('.')
     write_attribute(:new_signature, new_signature)
-    
-    assign_parent
   end
   
   # Calculations
@@ -54,10 +46,6 @@ class Dossier < ActiveRecord::Base
   
   def find_parent
     TopicDossier.where(:signature => signature).first
-  end
-  
-  def assign_parent
-    self.parent = find_parent
   end
   
   # Importer

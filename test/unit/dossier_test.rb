@@ -26,16 +26,4 @@ class DossierTest < ActiveSupport::TestCase
     
     assert dossier.updated_at > updated_at
   end
-  
-  test "updates parent timestamp" do
-    dossier = dossiers(:first_important_zug)
-    parent = dossier.find_parent
-    
-    updated_at = parent.updated_at
-    sleep 0.5
-    dossier.title = "Neuer Titel"
-    dossier.save
-    
-    assert parent.updated_at > updated_at
-  end
 end
