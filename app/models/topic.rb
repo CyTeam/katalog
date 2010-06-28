@@ -7,7 +7,7 @@ class Topic < Dossier
   end
   
   def new_children
-    Dossier.where("new_signature LIKE CONCAT(?, '%')", signature)
+    Dossier.where("new_signature LIKE CONCAT(?, '%')", new_signature)
   end
   
   def to_s
