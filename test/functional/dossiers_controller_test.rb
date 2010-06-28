@@ -1,7 +1,10 @@
 require 'test_helper'
 
 class DossiersControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+  
   setup do
+    sign_in users(:editor)
     @dossier = dossiers(:nationalsozialismus1933_2000)
   end
 

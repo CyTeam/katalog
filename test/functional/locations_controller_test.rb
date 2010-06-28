@@ -1,7 +1,10 @@
 require 'test_helper'
 
 class LocationsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+  
   setup do
+    sign_in users(:editor)
     @location = locations(:EG)
   end
 
