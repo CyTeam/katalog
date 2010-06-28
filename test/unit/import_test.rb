@@ -14,13 +14,6 @@ class ImportTest < ActiveSupport::TestCase
   setup do
   end
 
-  test "imports topic groups" do
-    Dossier.destroy_all
-    Dossier.import_from_csv(Rails.root.join('test/import/topic_groups.csv'))
-    
-    assert_equal 2, TopicGroup.count
-  end
-
   test "imports topics" do
     # Load fixtures as we destroy them, soon
     group_empty = dossiers('group_empty')
