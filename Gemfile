@@ -27,11 +27,15 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 
 # CyT
 # ===
+# Default Helpers
 gem 'validation_reflection'
 gem 'formtastic', :git => 'git://github.com/justinfrench/formtastic.git', :branch => 'rails3'
 gem 'will_paginate', :git => 'http://github.com/mislav/will_paginate.git', :branch => 'rails3'
 gem 'has_scope'
 gem 'inherited_resources'
+
+# Authentication
+gem 'devise', '>= 1.1.rc2'
 
 # Dossier
 # =======
