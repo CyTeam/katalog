@@ -1,6 +1,6 @@
 class Dossier < ActiveRecord::Base
   # Validations
-  validates_presence_of :signature, :title, :kind
+  validates_presence_of :signature, :title
   
   # Scopes
   scope :by_signature, lambda {|value| where("signature LIKE CONCAT(?, '%')", value)}
@@ -58,22 +58,23 @@ class Dossier < ActiveRecord::Base
     
     # Select rows containing topics
     topic_group_rows = rows.select{|row| TopicGroup.import_filter.match(row[0])}
-    topic_group_rows.map{|row| TopicGroup.import(row).save}
+    topic_group_rows.map{|row| TopicGroup.import(row).save!}
     
     topic_rows = rows.select{|row| Topic.import_filter.match(row[0])}
-    topic_rows.map{|row| Topic.import(row).save}
+    topic_rows.map{|row| Topic.import(row).save!}
 
     topic_rows = rows.select{|row| TopicGeo.import_filter.match(row[0])}
-    topic_rows.map{|row| TopicGeo.import(row).save}
+    topic_rows.map{|row| TopicGeo.import(row).save!}
 
     topic_rows = rows.select{|row| TopicDossier.import_filter.match(row[0]) && row[9].blank?}
-    topic_rows.map{|row| TopicDossier.import(row).save}
+    topic_rows.map{|row| TopicDossier.import(row).save!}
 
     # Select rows containing main dossier records by simply testing on two columns in first row
     dossier_rows = rows.select{|row| TopicDossier.import_filter.match(row[0]) && row[9].present?}
 
     transaction do
       for row in dossier_rows
+      begin
         dossier = self.create(
           :signature         => row[0],
           :title             => row[1],
@@ -90,13 +91,13 @@ class Dossier < ActiveRecord::Base
         # before 1990
         dossier.numbers.create(
           :to     => '1989-12-31',
-          :amount => row[16]
+          :amount => row[16].nil? ? nil : row[16].delete("'").to_i
         )
         # 1990-1993
         dossier.numbers.create(
           :from   => '1990-01-01',
           :to     => '1993-12-31',
-          :amount => row[17]
+          :amount => row[17].nil? ? nil : row[17].delete("'").to_i
         )
         # 1994-
         year = 1994
@@ -104,13 +105,15 @@ class Dossier < ActiveRecord::Base
           dossier.numbers.create(
             :from   => Date.new(year, 1, 1),
             :to     => Date.new(year, 12, 31),
-            :amount => amount
+            :amount => amount.nil? ? nil : amount.delete("'").to_i
           )
           year += 1
         end
         
-        puts dossier.signature
         dossier.save!
+      rescue Exception => e
+        puts e.message
+      end
       end
     end
   end
