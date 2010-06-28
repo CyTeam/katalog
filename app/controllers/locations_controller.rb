@@ -1,4 +1,7 @@
 class LocationsController < ApplicationController
+  # Authentication
+  before_filter :authenticate_user!
+
   # GET /locations
   # GET /locations.xml
   def index

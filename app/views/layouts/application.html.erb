@@ -36,6 +36,11 @@
               <%= navigation_item("Dossier (neue Signatur) auflisten", dossiers_path(:dossier => {:order_by => :new_signature})) %>
               <%= navigation_item("Dossier suchen", search_dossiers_path) %>
               <%= navigation_item("Dossier anlegen", new_dossier_path) %>
+              <% if user_signed_in? %>
+                <%= navigation_item("Abmelden", destroy_user_session_path) %>
+              <% else %>
+                <%= navigation_item("Anmelden", new_user_session_path) %>
+              <% end %>
             </ul>
             <a name="skipNavigation3" id="skipNavigation3" class="invisible">&nbsp;</a>
           </div>

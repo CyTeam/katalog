@@ -5,7 +5,9 @@
   <td><%= dossier.location %></td>
   <td style="text-align: right"><%= dossier.document_count %></td>
   <td style="width: 70px">
-    <%= link_to image_tag('icons/edit.png', :title => 'Edit'), edit_dossier_path(dossier) %>
-    <%= link_to image_tag('icons/delete.png', :title => 'Destroy'), dossier, :confirm => 'Are you sure?', :remote => true, :method => :delete %>
+    <% if user_signed_in? %>
+      <%= link_to image_tag('icons/edit.png', :title => 'Edit'), edit_dossier_path(dossier) %>
+      <%= link_to image_tag('icons/delete.png', :title => 'Destroy'), dossier, :confirm => 'Are you sure?', :remote => true, :method => :delete %>
+    <% end %>
   </td>
 </tr>
