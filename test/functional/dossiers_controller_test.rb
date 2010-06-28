@@ -9,6 +9,8 @@ class DossiersControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
+    sign_out users(:editor)
+    
     get :index
     assert_response :success
     assert_not_nil assigns(:dossiers)
