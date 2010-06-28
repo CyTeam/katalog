@@ -14,6 +14,7 @@ de-CH:
         kind:         "Art"
         location:     "Standort"
         total_amount: "Anzahl Dokumente"
+        tag:          "Schlagwort"
       location:
         title:        "Titel"
         code:         "Kürzel"
