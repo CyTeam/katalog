@@ -1,4 +1,6 @@
 Katalog::Application.routes.draw do |map|
+  devise_for :users
+
   resources :locations
 
   resources :dossiers, :topics, :topic_groups do
