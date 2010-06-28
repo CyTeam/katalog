@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100625083057) do
+ActiveRecord::Schema.define(:version => 20100625180010) do
 
   create_table "dossier_numbers", :force => true do |t|
     t.integer  "dossier_id"
@@ -69,12 +69,5 @@ ActiveRecord::Schema.define(:version => 20100625083057) do
   end
 
   add_index "tags", ["name"], :name => "index_tags_on_name"
-
-  create_table "topics", :force => true do |t|
-    t.string   "signature"
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
 end
