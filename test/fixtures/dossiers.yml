@@ -1,5 +1,85 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
+# Topic Groups
+# ============
+group_empty:
+  type: TopicGroup
+  signature: 8
+  title: Test Group empty
+
+group_7:
+  type: TopicGroup
+  signature: 7
+  title: Test Group 7
+
+# Topics
+# ======
+first_topic:
+  type: Topic
+  signature: 77
+  title: Test 77 Topic
+
+empty_topic:
+  type: Topic
+  signature: 78
+  title: Empty Topic
+
+# Geo Topics
+# ==========
+topic_local:
+  type: TopicGeo
+  signature: 77.0
+  title: All about our City
+
+topic_nowhere:
+  type: TopicGeo
+  signature: 77.9
+  title: Nothing to say 'bout nowhere
+
+# Dossier Topics
+# ==============
+important_zug_topic:
+  type: TopicDossier
+  signature: 77.0.100
+  title: Many, many dossiers about this in our City
+
+simple_zug_topic:
+  type: TopicDossier
+  signature: 77.0.200
+  title: Some simple dossiers about this in our City
+
+empty_zug_topic:
+  type: TopicDossier
+  signature: 77.0.999
+  title: Boooooring City
+
+# Dossiers
+# ========
+first_important_zug:
+  signature: 77.0.100
+  title: Some first Topic
+  kind: DH
+  location: EG
+
+second_important_zug_2000_2010:
+  signature: 77.0.100
+  title: Some second Topic
+  kind: DH
+  location: EG
+
+second_important_zug_before_2000:
+  signature: 77.0.100
+  title: Some second Topic
+  kind: DA
+  location: RI
+
+only_simple_zug:
+  signature: 77.0.200
+  title: At least something to say
+  kind: DH
+  location: EG
+
+# Old ones
 nationalsozialismus1933_2000:
   signature: 11.0.100
   title: Nationalsozialismus. Faschismus grundsätzlich 1933 - 2000
