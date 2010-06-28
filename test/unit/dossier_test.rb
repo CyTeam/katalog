@@ -3,21 +3,20 @@ require 'test_helper'
 class DossierTest < ActiveSupport::TestCase
   # Import
   setup do
-    rows = Dossier.import_from_csv(Rails.root.join('test/import/small.csv'))
   end
 
   test "imports dossiers" do
-    assert_equal 30, Dossier.count
-  end
+    Dossier.delete_all
+    
+    rows = Dossier.import_from_csv(Rails.root.join('test/import/small.csv'))
 
-  test "imports topics" do
+    assert_equal 28, Dossier.count
+
     assert_equal 2, TopicGroup.count
     assert_equal 18, Topic.count
     assert_equal 1, TopicGeo.count
     assert_equal 12, TopicDossier.count
-  end
-  
-  test "updates timestamp" do
+
     dossier = Dossier.first
     
     updated_at = dossier.updated_at
@@ -29,8 +28,8 @@ class DossierTest < ActiveSupport::TestCase
   end
   
   test "updates parent timestamp" do
-    dossier = Dossier.where("parent_id IS NOT NULL").first
-    parent = dossier.parent
+    dossier = dossiers(:first_important_zug)
+    parent = dossier.find_parent
     
     updated_at = parent.updated_at
     sleep 0.5
