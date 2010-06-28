@@ -15,10 +15,6 @@ class Topic < Dossier
   end
   
   # Calculations
-  def total_amount
-    document_count
-  end
-  
   def document_count
     children.includes(:numbers).sum(:amount)
   end

@@ -9,12 +9,12 @@ de-CH:
 
     attributes:
       dossier:
-        signature:    "Signatur"
-        title:        "Titel"
-        kind:         "Art"
-        location:     "Standort"
-        total_amount: "Anzahl Dokumente"
-        tag:          "Schlagwort"
+        signature:      "Signatur"
+        title:          "Titel"
+        kind:           "Art"
+        location:       "Standort"
+        document_count: "Anzahl Dokumente"
+        tag:            "Schlagwort"
       location:
         title:        "Titel"
         code:         "Kürzel"

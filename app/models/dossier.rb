@@ -39,10 +39,6 @@ class Dossier < ActiveRecord::Base
   end
   
   # Calculations
-  def total_amount
-    document_count
-  end
-
   def document_count
     numbers.sum(:amount)
   end
