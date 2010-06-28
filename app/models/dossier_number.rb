@@ -1,5 +1,5 @@
 class DossierNumber < ActiveRecord::Base
-  belongs_to :dossier, :touch => true
+  belongs_to :dossier
 
   # Attributes
   def from_year
