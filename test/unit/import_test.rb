@@ -12,6 +12,15 @@ class ImportTest < ActiveSupport::TestCase
     assert_equal 2, TopicGroup.count
   end
 
+  test "imports topics" do
+    Dossier.import_from_csv(Rails.root.join('test/import/topics.csv'))
+    
+    assert_equal 2, TopicGroup.count
+    assert_equal 9, Topic.count
+    assert_equal 2, TopicGeo.count
+    assert_equal 3, TopicDossier.count
+  end
+
   test "imports dossiers" do
     rows = Dossier.import_from_csv(Rails.root.join('test/import/small.csv'))
 
