@@ -78,7 +78,7 @@ class Dossier < ActiveRecord::Base
         dossier = self.create(
           :signature         => row[0],
           :title             => row[1],
-          :first_document_on => row[3],
+          :first_document_on => row[3].nil? ? nil : Date.new(row[3].to_i),
           :kind              => row[9],
           :location          => row[10]
         )

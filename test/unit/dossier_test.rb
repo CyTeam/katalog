@@ -17,13 +17,11 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal 1, TopicGeo.count
     assert_equal 12, TopicDossier.count
 
-    dossier = Dossier.first
-    
-    updated_at = dossier.updated_at
-    sleep 0.5
-    dossier.title = "Neuer Titel"
-    dossier.save
-    
-    assert dossier.updated_at > updated_at
+    # Fields
+    dossier = Dossier.find_by_title("Kapitalismus grundsätzlich 2006 -")
+    assert_equal "11.0.100", dossier.signature
+    assert_equal "Kapitalismus grundsätzlich 2006 -", dossier.title
+    assert_equal 1984, dossier.first_document_on.year
+    assert_equal "DH", dossier.kind
   end
 end
