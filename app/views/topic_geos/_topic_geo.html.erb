@@ -4,7 +4,7 @@
   <td><%= topic_geo.title %></td>
   <td><%= topic_geo.kind %></td>
   <td><%= topic_geo.location %></td>
-  <td><%= topic_geo.document_count(@new_signature) %></td>
+  <td style="text-align: right"><%= number_with_delimiter(topic_geo.document_count(@new_signature)) %></td>
   <td>
   </td>
 </tr>

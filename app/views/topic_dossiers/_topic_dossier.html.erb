@@ -3,7 +3,7 @@
   <td><%= topic_dossier.title %></td>
   <td><%= topic_dossier.kind %></td>
   <td><%= topic_dossier.location %></td>
-  <td><%= topic_dossier.document_count(@new_signature) %></td>
+  <td style="text-align: right"><%= number_with_delimiter(topic_dossier.document_count(@new_signature)) %></td>
   <td>
   </td>
 </tr>
