@@ -64,40 +64,47 @@ empty_zug_topic:
 
 # Dossiers
 # ========
-first_important_zug:
+city_counsil:
   signature: 77.0.100
-  title: Some first Topic
+  new_signature: 77.100.0
+  title: City counsil
   kind: DH
   location: EG
 
-second_important_zug_2000_2010:
+city_parties:
   signature: 77.0.100
-  title: Some second Topic
+  new_signature: 77.100.0
+  title: City parties
   kind: DH
   location: EG
 
-second_important_zug_before_2000:
+city_history_1900_1999:
   signature: 77.0.100
-  title: Some second Topic
-  kind: DA
-  location: RI
+  new_signature: 77.100.0
+  title: City history 1900-1999
+  kind: DH
+  location: EG
+  first_document_on: 1910-01-01
 
-only_simple_zug:
+city_history_2000_2001:
+  signature: 77.0.100
+  new_signature: 77.100.0
+  title: City history 2000-2001
+  kind: DH
+  location: EG
+  first_document_on: 2000-01-01
+
+city_history_2002:
+  signature: 77.0.100
+  new_signature: 77.100.0
+  title: City history 2002-
+  kind: DH
+  location: EG
+  first_document_on: 2002-01-01
+
+city_lonely_dossier:
   signature: 77.0.200
-  title: At least something to say
+  new_signature: 77.200.0
+  title: Lonely dossier
   kind: DH
   location: EG
-
-# Old ones
-nationalsozialismus1933_2000:
-  signature: 11.0.100
-  title: Nationalsozialismus. Faschismus grundsätzlich 1933 - 2000
-  kind: DA
-  location: RI
-
-nationalsozialismus2001_2009:
-  signature: 11.0.100
-  title: Nationalsozialismus. Faschismus grundsätzlich 2001 - 2009
-  kind: DA
-  location: EG
-

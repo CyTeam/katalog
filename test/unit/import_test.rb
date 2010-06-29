@@ -11,9 +11,6 @@ class ImportTest < ActiveSupport::TestCase
     }
   end
 
-  setup do
-  end
-
   test "imports topics" do
     # Load fixtures as we destroy them, soon
     group_empty = dossiers('group_empty')
@@ -29,10 +26,11 @@ class ImportTest < ActiveSupport::TestCase
     simple_zug_topic    = dossiers('simple_zug_topic')
     empty_zug_topic     = dossiers('empty_zug_topic')
     
-    # Cleanup database
+    # Cleanup database and import
     Dossier.destroy_all
     Dossier.import_from_csv(Rails.root.join('test/import/topics.csv'))
     
+    # Test data
     assert_equal 2, TopicGroup.count
     assert_similar group_empty, TopicGroup.find_by_signature(8)
     assert_similar group_7, TopicGroup.find_by_signature(7)
@@ -52,9 +50,41 @@ class ImportTest < ActiveSupport::TestCase
   end
 
   test "imports dossiers" do
+    # Load fixtures as we destroy them, soon
+    group_7             = dossiers('group_7')
+    first_topic         = dossiers('first_topic')
+    topic_local         = dossiers('topic_local')
+    important_zug_topic = dossiers('important_zug_topic')
+    simple_zug_topic    = dossiers('simple_zug_topic')
+    empty_zug_topic     = dossiers('empty_zug_topic')
+
+    city_counsil           = dossiers('city_counsil')
+    city_parties           = dossiers('city_parties')
+    city_history_1900_1999 = dossiers('city_history_1900_1999')
+    city_history_2000_2001 = dossiers('city_history_2000_2001')
+    city_history_2002      = dossiers('city_history_2002')
+    
+    # Cleanup database and import
+    Dossier.destroy_all
+    rows = Dossier.import_from_csv(Rails.root.join('test/import/dossiers.csv'))
+
+    # Test data
+    assert_equal 11, Dossier.count
+
+    # Fields
+    assert_similar city_counsil, Dossier.find_by_title('City counsil')
+    assert_similar city_parties, Dossier.find_by_title('City parties')
+    assert_similar city_history_1900_1999, Dossier.find_by_title('City history 1900-1999')
+    assert_similar city_history_2000_2001, Dossier.find_by_title('City history 2000-2001')
+    assert_similar city_history_2002, Dossier.find_by_title('City history 2002-')
+  end
+
+  test "real data" do
+    # Cleanup database and import
     Dossier.destroy_all
     rows = Dossier.import_from_csv(Rails.root.join('test/import/small.csv'))
 
+    # Test data
     assert_equal 28, Dossier.count
 
     assert_equal 2, TopicGroup.count
