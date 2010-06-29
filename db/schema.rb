@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100628084942) do
+ActiveRecord::Schema.define(:version => 20100629063527) do
 
   create_table "dossier_numbers", :force => true do |t|
     t.integer  "dossier_id"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20100628084942) do
     t.integer  "document_count"
     t.string   "new_signature"
     t.date     "first_document_on"
+    t.text     "keywords"
   end
 
   add_index "dossiers", ["kind"], :name => "index_dossiers_on_kind"
