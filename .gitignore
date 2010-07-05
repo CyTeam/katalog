@@ -11,5 +11,8 @@ vendor/cache
 DEADJOE
 .#*
 
+# Local
+config/database.yml
+
 # katalog
 data
