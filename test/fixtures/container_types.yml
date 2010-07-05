@@ -1,7 +1,9 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+DH:
+  code:        DH
+  title:       Dossier in Hängemappe
+  description: Die Sammlung der aktuellsten Artikel zu diesem Thema finden Sie in einem Hängemäppchen.
 
-one:
-  code: MyString
-
-two:
-  code: MyString
+DA:
+  code:        DA
+  title:       Dossier in Archivbox
+  description: Die Sammlung der älteren Artikel zum Thema finden sie in Archivschachteln.

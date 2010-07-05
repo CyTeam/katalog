@@ -1,11 +1,31 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+# Containers
+# ==========
+city_counsil:
+  dossier: city_counsil
+  container_type: DH
+  location: EG
 
-one:
-  dossier_id: 1
-  container_type_id: 1
-  location_id: 1
+city_parties:
+  dossier: city_parties
+  container_type: DH
+  location: EG
 
-two:
-  dossier_id: 1
-  container_type_id: 1
-  location_id: 1
+city_history_1900_1999:
+  dossier: city_history
+  container_type: DA
+  location: RI
+
+city_history_2000_2001:
+  dossier: city_history
+  container_type: DH
+  location: EG
+
+city_history_2002:
+  dossier: city_history
+  container_type: DH
+  location: EG
+
+city_lonely_dossier:
+  dossier: city_lonely_dossier
+  container_type: DH
+  location: EG

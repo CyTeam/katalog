@@ -1,8 +1,7 @@
 require 'test_helper'
 
 class ContainerTypeTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  test "to_s" do
+    assert "Dossier in Hängemappe (DH)", container_types(:DH).to_s
   end
 end

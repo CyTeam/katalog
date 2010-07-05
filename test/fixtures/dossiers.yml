@@ -68,22 +68,16 @@ city_counsil:
   signature: 77.0.100
   new_signature: 77.100.0
   title: City counsil
-  kind: DH
-  location: EG
 
 city_parties:
   signature: 77.0.100
   new_signature: 77.100.0
   title: City parties
-  kind: DH
-  location: EG
 
 city_history_1900_1999:
   signature: 77.0.100
   new_signature: 77.100.0
   title: City history 1900-1999
-  kind: DH
-  location: EG
   first_document_on: 1910-01-01
   keywords: War, Peace, Ying and Yang, Upper Class, Lower Class
 
@@ -91,8 +85,6 @@ city_history_2000_2001:
   signature: 77.0.100
   new_signature: 77.100.0
   title: City history 2000-2001
-  kind: DH
-  location: EG
   first_document_on: 2000-01-01
   keywords: War, Peace, Ying and Yang, Upper Class, Lower Class
 
@@ -100,8 +92,6 @@ city_history_2002:
   signature: 77.0.100
   new_signature: 77.100.0
   title: City history 2002-
-  kind: DH
-  location: EG
   first_document_on: 2002-01-01
   keywords: War, Peace, Ying and Yang, Upper Class, Lower Class
 
@@ -109,5 +99,3 @@ city_lonely_dossier:
   signature: 77.0.200
   new_signature: 77.200.0
   title: Lonely dossier
-  kind: DH
-  location: EG
