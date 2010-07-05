@@ -1,4 +1,6 @@
 Katalog::Application.routes.draw do |map|
+  resources :container_types
+
   devise_for :users
 
   resources :locations
