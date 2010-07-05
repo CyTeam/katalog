@@ -4,8 +4,9 @@ de-CH:
 
   activerecord:
     models:
-      dossier:  "Dossier"
-      location: "Standort"
+      dossier:        "Dossier"
+      location:       "Standort"
+      container_type: "Dossier Art"
 
     attributes:
       dossier:
@@ -20,3 +21,8 @@ de-CH:
         code:         "Kürzel"
         address:      "Adresse"
         availability: "Verfügbarkeit"
+      container_type:
+        code: "Kürzel"
+
+  messages:
+    confirm_delete: "{{record}} löschen?"
