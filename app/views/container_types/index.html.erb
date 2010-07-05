@@ -5,6 +5,7 @@
   <tr>
     <th><%= t_attr('title') %></th>
     <th><%= t_attr('code') %></th>
+    <th><%= t_attr('description') %></th>
     <th></th>
   </tr>
 
@@ -12,10 +13,11 @@
   <tr class="<%= cycle('odd', 'even') %>">
     <td><%= container_type.title %></td>
     <td><%= container_type.code %></td>
+    <td><%= container_type.description %></td>
     <td>
       <%= link_to image_tag('icons/show.png', :title => 'Show'), container_type %>
       <%= link_to image_tag('icons/edit.png', :title => 'Edit'), edit_container_type_path(container_type) %>
-      <%= link_to image_tag('icons/delete.png', :title => 'Destroy'), container_type, :confirm => t_confirm_delete(container_type)', :method => :delete %>
+      <%= link_to image_tag('icons/delete.png', :title => 'Destroy'), container_type, :confirm => t_confirm_delete(container_type), :method => :delete %>
     </td>
   </tr>
 <% end %>
