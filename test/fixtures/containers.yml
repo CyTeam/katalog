@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  dossier_id: 1
+  container_type_id: 1
+  location_id: 1
+
+two:
+  dossier_id: 1
+  container_type_id: 1
+  location_id: 1
