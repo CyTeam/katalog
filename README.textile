@@ -1,0 +1,31 @@
+h1. doku-zug.ch Katalog
+
+Katalog ist eine Katalogsoftware für ein Dokumentenarchiv.
+
+* Webbasierter Kundenkatalog
+* Webbasierte Katalogadministration
+
+Katalog basiert auf "Ruby On Rails":http://www.rubyonrails.org und ist als "Open Source":http://www.opensource.org veröffentlicht.
+
+h2. Lizenz
+
+Eine vereinfachte Übersicht in allgemeinverständlicher Sprache über den zugrundeliegenden Rechte
+finden sie "hier":http://creativecommons.org/licenses/GPL/2.0/deed.de.
+
+Copyright 2010 doku-zug.ch <http://www.doku-zug.ch>
+Copyright 2010 Simon Hürlimann <simon.huerlimann@cyt.ch>
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+USA.
