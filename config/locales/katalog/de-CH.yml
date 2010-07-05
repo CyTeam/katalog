@@ -22,7 +22,8 @@ de-CH:
         address:      "Adresse"
         availability: "Verfügbarkeit"
       container_type:
-        code: "Kürzel"
+        title: "Titel"
+        code:  "Kürzel"
 
   messages:
     confirm_delete: "{{record}} löschen?"

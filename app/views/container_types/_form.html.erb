@@ -1,0 +1,20 @@
+<%= semantic_form_for(@container_type) do |f| %>
+  <% if @container_type.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@container_type.errors.count, "error") %> prohibited this container_type from being saved:</h2>
+    <ul>
+    <% @container_type.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <%= f.inputs :name => "Basic" do %>
+    <%= f.input :title %>
+    <%= f.input :code %>
+  <% end %>
+  <%= f.buttons do %>
+    <%= f.commit_button %>
+  <% end %>
+<% end %>

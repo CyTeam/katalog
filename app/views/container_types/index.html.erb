@@ -1,0 +1,29 @@
+<h1><%= t_model %></h1>
+
+<div class="ce_table block">
+<table>
+  <tr>
+    <th><%= t_attr('title') %></th>
+    <th><%= t_attr('code') %></th>
+    <th></th>
+  </tr>
+
+<% @container_types.each do |container_type| %>
+  <tr class="<%= cycle('odd', 'even') %>">
+    <td><%= container_type.title %></td>
+    <td><%= container_type.code %></td>
+    <td>
+      <%= link_to image_tag('icons/show.png', :title => 'Show'), container_type %>
+      <%= link_to image_tag('icons/edit.png', :title => 'Edit'), edit_container_type_path(container_type) %>
+      <%= link_to image_tag('icons/delete.png', :title => 'Destroy'), container_type, :confirm => t_confirm_delete(container_type)', :method => :delete %>
+    </td>
+  </tr>
+<% end %>
+</table>
+</div>
+
+<%= will_paginate @container_types %>
+
+<br />
+
+<%= link_to 'New Location', new_container_type_path %>
