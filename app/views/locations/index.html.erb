@@ -3,10 +3,10 @@
 <div class="ce_table block">
 <table>
   <tr>
-    <th><%= t('location.title', :scope => [:activerecord, :attributes]) %></th>
-    <th><%= t('location.code', :scope => [:activerecord, :attributes]) %></th>
-    <th><%= t('location.address', :scope => [:activerecord, :attributes]) %></th>
-    <th><%= t('location.availability', :scope => [:activerecord, :attributes]) %></th>
+    <th><%= t_attr('title') %></th>
+    <th><%= t_attr('code') %></th>
+    <th><%= t_attr('address') %></th>
+    <th><%= t_attr('availability') %></th>
     <th></th>
   </tr>
 
@@ -19,7 +19,7 @@
     <td>
       <%= link_to image_tag('icons/show.png', :title => 'Show'), location %>
       <%= link_to image_tag('icons/edit.png', :title => 'Edit'), edit_location_path(location) %>
-      <%= link_to image_tag('icons/delete.png', :title => 'Destroy'), location, :confirm => 'Are you sure?', :method => :delete %>
+      <%= link_to image_tag('icons/delete.png', :title => 'Destroy'), location, :confirm => t_confirm_delete(location), :method => :delete %>
     </td>
   </tr>
 <% end %>
