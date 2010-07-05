@@ -13,9 +13,7 @@ class Dossier < ActiveRecord::Base
   scope :order_by, lambda {|value| order("CONCAT(#{value}, IF(type IS NULL, '.a', ''))")}
   
   # Associations
-  belongs_to :location
-  has_many :numbers, :class_name => 'DossierNumber'
-  accepts_nested_attributes_for :numbers
+  has_many :containers
     
   # Tags
   acts_as_taggable
