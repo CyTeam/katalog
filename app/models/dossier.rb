@@ -48,6 +48,15 @@ class Dossier < ActiveRecord::Base
   end
   
   # Importer
+  def self.truncate_title(value)
+    months = "(Jan.|Feb.|März|Apr.|Mai|Jun.|Jul.|Aug.|Sep.|Okt.|Nov.|Dez.)"
+    year = "[0-9]{4}"
+    date = "([0-9]{1,2}.)?[ ]*((#{months}|#{year})[ ]*){1,2}"
+    date_range = "#{date}([ ]*-[ ]*(#{date})?)?"
+    
+    value.gsub(/[ ]*#{date_range}[ ]*$/, '')
+  end
+  
   def self.import_filter
     /^[0-9]{2}\.[0-9]\.[0-9]{3}$/
   end
@@ -78,11 +87,12 @@ class Dossier < ActiveRecord::Base
         dossier = self.create(
           :signature         => row[0],
           :title             => row[1],
-          :first_document_on => row[3].nil? ? nil : Date.new(row[3].to_i),
-          :kind              => row[9],
-          :location          => row[10]
+          :first_document_on => row[3].nil? ? nil : Date.new(row[3].to_i)
         )
 
+        # containers
+        dossier.containers << Container.import(row, dossier)
+        
         # tags and keywords
         dossier.keywords = row[13..15].compact.join(', ').presence
         
