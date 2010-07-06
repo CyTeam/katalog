@@ -42,4 +42,15 @@ class ContainerTest < ActiveSupport::TestCase
     container.container_type = container_types(:DA)
     assert_equal container_types(:DA), container.container_type
   end
+
+  test "import" do
+    dossier = dossiers(:city_counsil)
+    container_row = ['77.0.100', 'City counsil', 0, nil, 0, 0, 0, 0, 0, 'DH', 'EG']
+
+    container = Container.import(container_row, dossier)
+    
+    assert_equal dossier, container.dossier
+    assert_equal container_types(:DH), container.container_type
+    assert_equal locations(:EG), container.location
+  end
 end

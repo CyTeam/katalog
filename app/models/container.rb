@@ -28,10 +28,11 @@ class Container < ActiveRecord::Base
   end
   
   # Import
-  def import(row)
+  def self.import(row, dossier)
     container = self.create(
-      :document_type => row[9],
-      :location      => row[10]
+      :dossier        => dossier,
+      :container_type => row[9],
+      :location       => row[10]
     )
   end
 end
