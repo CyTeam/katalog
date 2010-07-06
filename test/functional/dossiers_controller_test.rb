@@ -5,7 +5,7 @@ class DossiersControllerTest < ActionController::TestCase
   
   setup do
     sign_in users(:editor)
-    @dossier = dossiers(:city_history_1900_1999)
+    @dossier = dossiers(:city_history)
   end
 
   test "should get index" do
