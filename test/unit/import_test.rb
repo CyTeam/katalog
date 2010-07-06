@@ -60,23 +60,23 @@ class ImportTest < ActiveSupport::TestCase
 
     city_counsil           = dossiers('city_counsil')
     city_parties           = dossiers('city_parties')
-    city_history_1900_1999 = dossiers('city_history_1900_1999')
-    city_history_2000_2001 = dossiers('city_history_2000_2001')
-    city_history_2002      = dossiers('city_history_2002')
+    city_history           = dossiers('city_history')
+
+    city_history_1900_1999 = containers('city_history_1900_1999')
+    city_history_2000_2001 = containers('city_history_2000_2001')
+    city_history_2002      = containers('city_history_2002')
     
     # Cleanup database and import
     Dossier.destroy_all
     rows = Dossier.import_from_csv(Rails.root.join('test/import/dossiers.csv'))
 
     # Test data
-    assert_equal 11, Dossier.count
+    assert_equal 18, Dossier.count
 
     # Fields
     assert_similar city_counsil, Dossier.find_by_title('City counsil')
     assert_similar city_parties, Dossier.find_by_title('City parties')
-    assert_similar city_history_1900_1999, Dossier.find_by_title('City history 1900-1999')
-    assert_similar city_history_2000_2001, Dossier.find_by_title('City history 2000-2001')
-    assert_similar city_history_2002, Dossier.find_by_title('City history 2002-')
+#    assert_similar city_history, Dossier.find_by_title('City history')
   end
 
   test "real data" do
@@ -97,6 +97,5 @@ class ImportTest < ActiveSupport::TestCase
     assert_equal "11.0.100", dossier.signature
     assert_equal "Kapitalismus grundsätzlich 2006 -", dossier.title
     assert_equal 1984, dossier.first_document_on.year
-    assert_equal "DH", dossier.kind
   end
 end
