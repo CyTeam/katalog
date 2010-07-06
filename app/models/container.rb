@@ -30,9 +30,10 @@ class Container < ActiveRecord::Base
   # Import
   def self.import(row, dossier)
     container = self.create(
-      :dossier        => dossier,
-      :container_type => row[9],
-      :location       => row[10]
+      :dossier           => dossier,
+      :first_document_on => row[3].nil? ? nil : Date.new(row[3].to_i),
+      :container_type    => row[9],
+      :location          => row[10]
     )
   end
 end

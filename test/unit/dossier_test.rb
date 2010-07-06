@@ -17,4 +17,8 @@ class DossierTest < ActiveSupport::TestCase
       assert_equal "Olympic Games 2001 Preparations", Dossier.truncate_title(title)
     end
   end
+
+  test "first document calculation" do
+    assert_equal containers(:city_history_1900_1999).first_document_on, dossiers(:city_history).first_document_on
+  end
 end

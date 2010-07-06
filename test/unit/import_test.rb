@@ -71,12 +71,12 @@ class ImportTest < ActiveSupport::TestCase
     rows = Dossier.import_from_csv(Rails.root.join('test/import/dossiers.csv'))
 
     # Test data
-    assert_equal 18, Dossier.count
+    assert_equal 19, Dossier.count
 
     # Fields
     assert_similar city_counsil, Dossier.find_by_title('City counsil')
     assert_similar city_parties, Dossier.find_by_title('City parties')
-#    assert_similar city_history, Dossier.find_by_title('City history')
+    assert_similar city_history, Dossier.find_by_title('City history')
   end
 
   test "real data" do
@@ -93,9 +93,9 @@ class ImportTest < ActiveSupport::TestCase
     assert_equal 12, TopicDossier.count
 
     # Fields
-    dossier = Dossier.find_by_title("Kapitalismus grundsätzlich 2006 -")
+    dossier = Dossier.find_by_title("Kapitalismus grundsätzlich")
     assert_equal "11.0.100", dossier.signature
-    assert_equal "Kapitalismus grundsätzlich 2006 -", dossier.title
+    assert_equal "Kapitalismus grundsätzlich", dossier.title
     assert_equal 1984, dossier.first_document_on.year
   end
 end

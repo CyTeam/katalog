@@ -39,6 +39,10 @@ class Dossier < ActiveRecord::Base
   end
   
   # Calculations
+  def first_document_on
+    containers.minimum(:first_document_on)
+  end
+  
   def document_count
     numbers.sum(:amount)
   end
@@ -86,8 +90,7 @@ class Dossier < ActiveRecord::Base
       begin
         dossier = self.create(
           :signature         => row[0],
-          :title             => row[1],
-          :first_document_on => row[3].nil? ? nil : Date.new(row[3].to_i)
+          :title             => self.truncate_title(row[1])
         )
 
         # containers
