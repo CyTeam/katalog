@@ -57,7 +57,7 @@ class DossiersControllerTest < ActionController::TestCase
     assert_response :success
   end
   
-  test "should find by signature" do
+  test "should list by signature" do
     get :index, :dossier => {:signature => '77.0.100'}
     dossiers = Dossier.by_signature('77.0.100')
 
@@ -71,9 +71,9 @@ class DossiersControllerTest < ActionController::TestCase
     assert_select 'tr.dossier', dossiers.where(:type => nil).count
   end
   
-  test "should find all EG" do
+  test "should list by location" do
     get :index, :dossier => {:location => 'EG'}
-    dossiers = Dossier.by_signature('EG')
+    dossiers = Dossier.by_location('EG')
 
     # TODO: hack to get only Dossier, not Topic records
     assert_select 'tr.dossier', dossiers.where(:type => nil).count

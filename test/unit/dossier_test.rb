@@ -38,7 +38,7 @@ class DossierTest < ActiveSupport::TestCase
   end
 
   test "find by location" do
-    assert_equal 3, Dossier.by_location('EG').count
+    assert_equal 4, Dossier.by_location('EG').count
     assert_equal 1, Dossier.by_location('RI').count
 
     assert_equal 0, Dossier.by_location('Dummy').count
