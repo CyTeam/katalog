@@ -45,12 +45,13 @@ class ContainerTest < ActiveSupport::TestCase
   end
 
   test "import" do
-    dossier = dossiers(:city_counsil)
-    container_row = ['77.0.100', 'City counsil', 0, '2001', 0, 0, 0, 0, 0, 'DH', 'EG']
+    dossier = dossiers(:city_history)
+    container_row = ['77.0.100', 'City history 2000 -', 0, '2001', 0, 0, 0, 0, 0, 'DH', 'EG']
 
     container = Container.import(container_row, dossier)
     
     assert_equal dossier, container.dossier
+    assert_equal "City history 2000 -", container.title
     assert_equal Date.parse('2001-01-01'), container.first_document_on
     assert_equal container_types(:DH), container.container_type
     assert_equal locations(:EG), container.location
