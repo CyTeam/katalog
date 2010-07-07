@@ -20,6 +20,11 @@ class Dossier < ActiveRecord::Base
   # Tags
   acts_as_taggable
   
+  # Helpers
+  def to_s
+    "#{signature}: #{title}"
+  end
+  
   # Attributes
   def location=(value)
     if value.is_a?(String)

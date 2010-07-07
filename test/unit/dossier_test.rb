@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class DossierTest < ActiveSupport::TestCase
+  test "to_s" do
+    assert_equal "77.0.100: City counsil", dossiers(:city_counsil).to_s
+    assert_equal "77.0.100: City history", dossiers(:city_history).to_s
+  end
+
   test "container association" do
     assert dossiers(:city_counsil).containers.include?(containers(:city_counsil))
 

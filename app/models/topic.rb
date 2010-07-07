@@ -10,10 +10,6 @@ class Topic < Dossier
     end
   end
   
-  def to_s
-    "#{signature}: #{title}"
-  end
-  
   # Calculations
   def document_count(use_new_signature = false)
     children(use_new_signature).includes(:numbers).sum(:amount)
