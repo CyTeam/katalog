@@ -1,7 +1,7 @@
 <tr id="dossier-<%= dossier.id %>" class="dossier <%= cycle('odd', 'even') %>" data-href="<%= url_for dossier %>">
   <td><%= @new_signature ? dossier.new_signature : dossier.signature %></td>
   <td><%= dossier.title %></td>
-  <td><%= dossier.kind %></td>
+  <td></td>
   <td><%= dossier.locations.map{|location| location.code}.join(', ') %></td>
   <td style="text-align: right"><%= dossier.document_count %></td>
   <td style="width: 70px">
