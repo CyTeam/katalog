@@ -28,3 +28,7 @@ de-CH:
 
   messages:
     confirm_delete: "{{record}} löschen?"
+
+  crud:
+    edit: "{{model}} bearbeiten"
+    
