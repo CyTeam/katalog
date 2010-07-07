@@ -82,3 +82,8 @@ city_lonely_dossier:
   signature: 77.0.200
   new_signature: 77.200.0
   title: Lonely dossier
+
+city_counsil_notes:
+  signature: 77.0.101
+  new_signature: 77.101.0
+  title: City counsil notes

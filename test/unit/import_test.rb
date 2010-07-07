@@ -49,6 +49,22 @@ class ImportTest < ActiveSupport::TestCase
     assert_similar empty_zug_topic, TopicDossier.find_by_signature('77.0.999')
   end
 
+  test "creates one dossier for multiple containers" do
+    # Load fixtures as we destroy them, soon
+    city_history       = dossiers('city_history')
+    city_counsil_notes = dossiers('city_counsil_notes')
+
+    # Cleanup database and import
+    Dossier.destroy_all
+    rows = Dossier.import_from_csv(Rails.root.join('test/import/dossiers.csv'))
+    
+    assert_similar city_history, Dossier.find_by_title("City history")
+    assert_equal 3, Dossier.find_by_title("City history").containers.count
+
+    assert_similar city_counsil_notes, Dossier.find_by_title("City counsil notes")
+    assert_equal 6, Dossier.find_by_title("City counsil notes").containers.count
+  end
+  
   test "imports dossiers" do
     # Load fixtures as we destroy them, soon
     group_7             = dossiers('group_7')

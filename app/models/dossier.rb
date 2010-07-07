@@ -85,14 +85,24 @@ class Dossier < ActiveRecord::Base
     # Select rows containing main dossier records by simply testing on two columns in first row
     dossier_rows = rows.select{|row| TopicDossier.import_filter.match(row[0]) && row[9].present?}
 
+    new_dossier = true
+    title = nil
+    dosser = nil
     transaction do
       for row in dossier_rows
       begin
-        dossier = self.create(
-          :signature         => row[0],
-          :title             => self.truncate_title(row[1])
-        )
-
+        # Start new dossier if title changed
+        old_title = title
+        title = Dossier.truncate_title(row[1])
+        new_dossier = (old_title != title)
+        
+        if new_dossier
+          dossier = self.create(
+            :signature         => row[0],
+            :title             => title
+          )
+        end
+        
         # containers
         dossier.containers << Container.import(row, dossier)
         
