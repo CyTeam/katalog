@@ -1,19 +1,26 @@
+<h1><%= @dossier %></h1>
 <p class="notice"><%= notice %></p>
 
-<p>
-  <b>Signature:</b>
-  <%= @dossier.signature %>
-</p>
+<table>
+  <tr>
+    <th><%= t_attr(:signature) %></th>
+    <td><%= @dossier.signature %></td>
+  </tr>
+  <tr>
+    <th><%= t_attr(:title) %></th>
+    <td><%= @dossier.title %></td>
+  </tr>
+  <tr>
+    <th><%= t_attr(:first_document_on) %></th>
+    <td><%= @dossier.first_document_on.try(:year) %></td>
+  </tr>
+</table>
 
-<p>
-  <b>Title:</b>
-  <%= @dossier.title %>
-</p>
-
-<p>
-  <b>First document from:</b>
-  <%= @dossier.first_document_on %>
-</p>
+<div class="ce_table block">
+<table>
+  <%= render @dossier.containers %>
+</table>
+</div>
 
 <%= link_to t_crud('edit'), edit_dossier_path(@dossier) %> |
 <%= link_to t_crud('back'), dossiers_path %>
