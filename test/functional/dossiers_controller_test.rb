@@ -72,8 +72,10 @@ class DossiersControllerTest < ActionController::TestCase
   end
   
   test "should find all EG" do
-    get :index, :dossier => {:location => "EG"}
-    assert_tag(:td, :content => Location.find_by_code('EG').to_s)
-    assert_no_tag(:td, :content => Location.find_by_code('RI').to_s)
+    get :index, :dossier => {:location => 'EG'}
+    dossiers = Dossier.by_signature('EG')
+
+    # TODO: hack to get only Dossier, not Topic records
+    assert_select 'tr.dossier', dossiers.where(:type => nil).count
   end
 end
