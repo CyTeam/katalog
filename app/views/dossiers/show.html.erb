@@ -20,5 +20,5 @@
   <%= @dossier.first_document_on %>
 </p>
 
-<%= link_to 'Edit', edit_dossier_path(@dossier) %> |
-<%= link_to 'Back', dossiers_path %>
+<%= link_to t_crud('edit'), edit_dossier_path(@dossier) %> |
+<%= link_to t_crud('back'), dossiers_path %>
