@@ -53,6 +53,10 @@ class Dossier < ActiveRecord::Base
     containers.collect{|c| c.location}.uniq
   end
   
+  def container_types
+    containers.collect{|c| c.container_type}.uniq
+  end
+  
   def document_count
     numbers.sum(:amount)
   end
