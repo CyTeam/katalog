@@ -2,10 +2,9 @@
 <tr class="topic_geo">
   <td><%= @new_signature ? topic_geo.new_signature : topic_geo.signature %></td>
   <td><%= topic_geo.title %></td>
-  <td><%= topic_geo.kind %></td>
-  <td><%= topic_geo.location %></td>
+  <td></td>
+  <td></td>
   <td style="text-align: right"><%= number_with_delimiter(topic_geo.document_count(@new_signature)) %></td>
-  <td>
-  </td>
+  <td></td>
 </tr>
 <% end %>

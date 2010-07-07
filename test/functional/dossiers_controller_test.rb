@@ -57,6 +57,14 @@ class DossiersControllerTest < ActionController::TestCase
     assert_response :success
   end
   
+  test "should find by signature" do
+    get :index, :dossier => {:signature => '77.0.100'}
+    dossiers = Dossier.by_signature('77.0.100')
+
+    # TODO: hack to get only Dossier, not Topic records
+    assert_select 'tr.dossier', dossiers.where(:type => nil).count
+  end
+  
   test "should find all EG" do
     get :index, :dossier => {:location => "EG"}
     assert_tag(:td, :content => Location.find_by_code('EG').to_s)
