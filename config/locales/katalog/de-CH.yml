@@ -12,10 +12,15 @@ de-CH:
       dossier:
         signature:      "Signatur"
         title:          "Titel"
-        kind:           "Art"
         location:       "Standort"
         document_count: "Anzahl Dokumente"
         tag:            "Schlagwort"
+        first_document_on: "Erstes Dokument von"
+      container:
+        title:          "Titel"
+        container_type: "Art"
+        location:       "Standort"
+        document_count: "Anzahl Dokumente"
         first_document_on: "Erstes Dokument von"
       location:
         title:        "Titel"

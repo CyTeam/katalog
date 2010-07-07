@@ -18,7 +18,7 @@
 
 <div class="ce_table block">
 <table>
-  <%= render @dossier.containers %>
+  <%= @containers = @dossier.containers; render 'containers/list' %>
 </table>
 </div>
 
