@@ -5,8 +5,9 @@ class Dossier < ActiveRecord::Base
   # Scopes
   scope :by_signature, lambda {|value| where("signature LIKE CONCAT(?, '%')", value)}
   scope :by_title, lambda {|value| where("title LIKE CONCAT('%', ?, '%')", value)}
-  scope :by_location, lambda {|value| where(:location_id => Location.find_by_code(value))}
-  scope :by_kind, lambda {|value| where(:kind => value)}
+  # TODO: check if arel provides nicer code:
+  scope :by_location, lambda {|value| where(:id => Container.where('location_id = ?', Location.find_by_code(value)).map{|c| c.dossier_id}.uniq)}
+  scope :by_kind, lambda {|value| where(:id => Container.where('container_type_id = ?', ContainerType.find_by_code(value)).map{|c| c.dossier_id}.uniq)}
 
   # Ordering
   # BUG: Beware of SQL Injection

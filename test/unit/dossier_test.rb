@@ -31,4 +31,16 @@ class DossierTest < ActiveSupport::TestCase
     # TODO: using .reverse is not stable
     assert_equal Location.where(:code => ["RI", "EG"]).reverse, dossiers(:city_history).locations
   end
+
+  test "find by signature" do
+    # 3 actual dossiers, 1 topic
+    assert_equal 3 + 1, Dossier.by_signature('77.0.100').count
+  end
+
+  test "find by location" do
+    assert_equal 3, Dossier.by_location('EG').count
+    assert_equal 1, Dossier.by_location('RI').count
+
+    assert_equal 0, Dossier.by_location('Dummy').count
+  end
 end
