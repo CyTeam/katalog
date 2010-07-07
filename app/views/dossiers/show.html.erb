@@ -16,6 +16,14 @@
   </tr>
 </table>
 
+<div id="tags">
+  <ul>
+    <% for tag in @dossier.tags %>
+      <li><%= link_to tag.name, dossiers_path(:dossier => {:tag => tag.name }) %></li>
+    <% end %>
+  </ul>
+</div>
+
 <div class="ce_table block">
 <table>
   <%= @containers = @dossier.containers; render 'containers/list' %>
