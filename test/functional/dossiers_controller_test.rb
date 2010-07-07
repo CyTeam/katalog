@@ -63,6 +63,12 @@ class DossiersControllerTest < ActionController::TestCase
 
     # TODO: hack to get only Dossier, not Topic records
     assert_select 'tr.dossier', dossiers.where(:type => nil).count
+
+    get :index, :dossier => {:signature => '77.0'}
+    dossiers = Dossier.by_signature('77.0')
+
+    # TODO: hack to get only Dossier, not Topic records
+    assert_select 'tr.dossier', dossiers.where(:type => nil).count
   end
   
   test "should find all EG" do
