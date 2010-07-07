@@ -6,7 +6,8 @@ class ContainerTest < ActiveSupport::TestCase
   end
   
   test "title" do
-    assert_equal containers(:city_counsil).dossier.title, containers(:city_counsil).title
+    assert_equal containers(:city_counsil).dossier.title, Dossier.truncate_title(containers(:city_counsil).title)
+    assert_equal containers(:city_history_1900_1999).dossier.title, Dossier.truncate_title(containers(:city_history_1900_1999).title)
   end
   
   test "to_s" do

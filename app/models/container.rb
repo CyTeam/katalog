@@ -11,10 +11,6 @@ class Container < ActiveRecord::Base
     "#{title} (#{container_type.code}@#{location.code})"
   end
 
-  def title
-    dossier.title
-  end
-
   def container_type=(value)
     value = ContainerType.find_by_code(value) if value.is_a?(String)
     self[:container_type_id] = value.id
@@ -31,6 +27,7 @@ class Container < ActiveRecord::Base
   def self.import(row, dossier)
     container = self.create(
       :dossier           => dossier,
+      :title             => row[1],
       :first_document_on => row[3].nil? ? nil : Date.new(row[3].to_i),
       :container_type    => row[9],
       :location          => row[10]
