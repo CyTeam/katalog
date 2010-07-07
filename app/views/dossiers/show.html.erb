@@ -16,13 +16,17 @@
   </tr>
 </table>
 
-<div id="tags">
-  <ul>
-    <% for tag in @dossier.tags %>
-      <li><%= link_to tag.name, dossiers_path(:dossier => {:tag => tag.name }) %></li>
-    <% end %>
-  </ul>
-</div>
+<ul class="keywords">
+  <% for keyword in @dossier.keywords.split(',') %>
+    <li><%= link_to keyword, dossiers_path(:dossier => {:keyword => keyword }) %></li>
+  <% end %>
+</ul>
+
+<ul class="tags">
+  <% for tag in @dossier.tags %>
+    <li><%= link_to tag.name, dossiers_path(:dossier => {:tag => tag.name }) %></li>
+  <% end %>
+</ul>
 
 <div class="ce_table block">
 <table>
