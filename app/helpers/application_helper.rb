@@ -26,7 +26,7 @@ module ApplicationHelper
     end
     
     action ||= action_name
-    t(action, :scope => :crud, :model => model_name)
+    t(action, :scope => :crud, :model => model_name.capitalize)
   end
   
   def t_confirm_delete(record)
