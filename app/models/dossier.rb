@@ -48,6 +48,10 @@ class Dossier < ActiveRecord::Base
     containers.minimum(:first_document_on)
   end
   
+  def locations
+    containers.collect{|c| c.location}.uniq
+  end
+  
   def document_count
     numbers.sum(:amount)
   end

@@ -26,4 +26,9 @@ class DossierTest < ActiveSupport::TestCase
   test "first document calculation" do
     assert_equal containers(:city_history_1900_1999).first_document_on, dossiers(:city_history).first_document_on
   end
+  
+  test "dossier collects all container locations" do
+    # TODO: using .reverse is not stable
+    assert_equal Location.where(:code => ["RI", "EG"]).reverse, dossiers(:city_history).locations
+  end
 end
