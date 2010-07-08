@@ -20,6 +20,7 @@ class Dossier < ActiveRecord::Base
     
   # Tags
   acts_as_taggable
+  acts_as_taggable_on :keywords
   
   # Helpers
   def to_s

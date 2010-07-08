@@ -17,8 +17,8 @@
 </table>
 
 <ul class="keywords">
-  <% for keyword in @dossier.keywords.split(',') %>
-    <li><%= link_to keyword, dossiers_path(:dossier => {:keyword => keyword }) %></li>
+  <% for keyword in @dossier.keyword_list %>
+    <li><%= link_to keyword, dossiers_path(:dossier => {:tag => keyword }) %></li>
   <% end %>
 </ul>
 
