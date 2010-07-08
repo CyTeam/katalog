@@ -94,6 +94,11 @@ class ImportTest < ActiveSupport::TestCase
     assert_similar city_counsil, Dossier.find_by_title('City counsil')
     assert_similar city_parties, Dossier.find_by_title('City parties')
     assert_similar city_history, Dossier.find_by_title('City history')
+    
+    # Keywords
+    keyword_list = Dossier.find_by_title('City history').keyword_list
+    assert_equal 6, keyword_list.count
+    assert keyword_list.include?('Mandela, Nelson')
   end
 
   test "real data" do

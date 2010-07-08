@@ -122,7 +122,7 @@ class Dossier < ActiveRecord::Base
         dossier.containers << Container.import(row, dossier)
         
         # tags and keywords
-        dossier.keywords = row[13..15].compact.join(', ').presence
+        dossier.keyword_list = row[13..15].compact.join('. ').presence
         
         tags = row[13..15].compact.map{|sentence| sentence.split(/[ .();,:-]/)}.flatten.uniq.select{|t| t.present?}
         tags += row[1].split(/[ .();,:-]/).uniq.select{|t| t.present?}
