@@ -3,7 +3,7 @@
     <%= f.input :signature, :label => t('dossier.signature', :scope => [:activerecord, :attributes]) %>
     <%= f.input :title, :label => t('dossier.title', :scope => [:activerecord, :attributes]) %>
     <%= f.input :tag, :label => t('dossier.tag', :scope => [:activerecord, :attributes]) %>
-    <%= f.input :kind, :label => t('container.kind', :scope => [:activerecord, :attributes]) %>
+    <%= f.input :kind, :label => t('container.container_type', :scope => [:activerecord, :attributes]) %>
     <%= f.input :location, :label => t('container.location', :scope => [:activerecord, :attributes]), :as => :select, :collection => Location.all.map{|l| [l.title, l.code]} %>
   <% end %>
   <%= f.buttons do %>
