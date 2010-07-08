@@ -43,4 +43,16 @@ class DossierTest < ActiveSupport::TestCase
 
     assert_equal 0, Dossier.by_location('Dummy').count
   end
+
+  test "destroying dossier destroys it's containers" do
+    assert_difference('Container.count', -3) do
+      dossiers(:city_history).destroy
+    end
+  end
+
+  test "destroying dossier destroys it's document numbers" do
+    assert_difference('DossierNumber.count', -2) do
+      dossiers(:city_history).destroy
+    end
+  end
 end
