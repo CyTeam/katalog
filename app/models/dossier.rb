@@ -67,6 +67,10 @@ class Dossier < ActiveRecord::Base
   end
   
   # Importer
+  def self.extract_tags(values)
+    values.compact.map{|sentence| sentence.split(/[ .();,:-]/)}.flatten.uniq.select{|t| t.present?}
+  end
+  
   def self.truncate_title(value)
     months = "(Jan.|Feb.|März|Apr.|Mai|Jun.|Jul.|Aug.|Sep.|Okt.|Nov.|Dez.)"
     year = "[0-9]{4}"
@@ -124,7 +128,7 @@ class Dossier < ActiveRecord::Base
         # tags and keywords
         dossier.keyword_list = row[13..15].compact.join('. ').presence
         
-        tags = row[13..15].compact.map{|sentence| sentence.split(/[ .();,:-]/)}.flatten.uniq.select{|t| t.present?}
+        tags = extract_tags(row[13..15])
         tags += row[1].split(/[ .();,:-]/).uniq.select{|t| t.present?}
         dossier.tag_list << tags.uniq.compact
         
