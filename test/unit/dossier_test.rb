@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class DossierTest < ActiveSupport::TestCase
+  setup do
+    @dossier = Dossier.new
+  end
+  
   test "to_s" do
     assert_equal "77.0.100: City counsil", dossiers(:city_counsil).to_s
     assert_equal "77.0.100: City history", dossiers(:city_history).to_s
@@ -54,5 +58,12 @@ class DossierTest < ActiveSupport::TestCase
     assert_difference('DossierNumber.count', -2) do
       dossiers(:city_history).destroy
     end
+  end
+
+  test "keyword delimited by dot (.)" do
+    @dossier.keyword_list = "War. Peace. Ying and Yang. Mandela, Nelson. Love"
+    
+    assert_equal 5, @dossier.keyword_list.count
+    assert @dossier.keyword_list.include?("Mandela, Nelson")
   end
 end
