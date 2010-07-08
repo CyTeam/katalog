@@ -1,2 +1,13 @@
-one: {}
-two: {}
+# Dossier Numbers
+# ===============
+city_history_1999:
+  dossier: city_history
+  to:      1999
+  from:    1999
+  amount:  50
+
+city_history_2000_2004:
+  dossier: city_history
+  to:      2000
+  from:    2004
+  amount:  5
