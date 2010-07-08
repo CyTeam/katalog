@@ -34,10 +34,10 @@ de-CH:
         description: "Beschreibung"
 
   messages:
-    confirm_delete: "{{record}} löschen?"
+    confirm_delete: "%{record} löschen?"
 
   crud:
-    edit: "{{model}} bearbeiten"
-    show: "{{model}} anzeigen"
-    new:  "{{model}} anlegen"
+    edit: "%{model} bearbeiten"
+    show: "%{model} anzeigen"
+    new:  "%{model} anlegen"
     back: "zurück"
