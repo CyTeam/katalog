@@ -107,7 +107,7 @@ class ImportTest < ActiveSupport::TestCase
     rows = Dossier.import_from_csv(Rails.root.join('test/import/small.csv'))
 
     # Test data
-    assert_equal 26, Dossier.count
+    assert_equal 24, Dossier.count
 
     assert_equal 2, TopicGroup.count
     assert_equal 18, Topic.count
