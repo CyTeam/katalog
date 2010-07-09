@@ -71,6 +71,7 @@ city_parties:
   signature: 77.0.100
   new_signature: 77.100.0
   title: City parties
+  related_to: City counsil
 
 city_history:
   signature: 77.0.100

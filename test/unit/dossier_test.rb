@@ -66,4 +66,8 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal 5, @dossier.keyword_list.count
     assert @dossier.keyword_list.include?("Mandela, Nelson")
   end
+
+  test "related_to is text" do
+    assert_equal "City counsil", dossiers(:city_parties).related_to
+  end
 end
