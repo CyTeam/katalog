@@ -72,7 +72,7 @@ class Dossier < ActiveRecord::Base
   end
   
   def self.extract_tags(values)
-    filter_tags(values.compact.map{|sentence| sentence.split(/[ .();,:-]/)}.flatten.uniq.select{|t| t.present?})
+    filter_tags(values.compact.map{|sentence| sentence.split(/[ .();,:-]/)}.flatten.uniq.select{|t| t.present?}).compact
   end
   
   def self.truncate_title(value)
@@ -112,14 +112,43 @@ class Dossier < ActiveRecord::Base
     end
   end
   
-  def self.import(rows)
+  def import_keywords(row)
+    keys = row[13..15].compact.join('. ')
+    keys = keys.split('.').map{|k| k.strip.presence}.compact
+    self.keyword_list = keys
+    
+    ts = self.class.extract_tags([row[13..15]])
+    ts += tag_list unless tag_list.nil?
+    tag_list = ts
+  end
+  
+  def import(row)
+    # containers
+    containers << Container.import(row, self)
+    
+    self.related_to = row[12]
+
+    # tags and keywords
+    ts = self.class.extract_tags([row[1]])
+    self.tag_list = ts
+    import_keywords(row)
+    
+    import_numbers(row)
+  end
+  
+  def self.import_all(rows)
     new_dossier = true
     title = nil
     dosser = nil
     transaction do
       for row in rows
       begin
-        # Start new dossier if title changed
+        # Only import keywords if row has no reference
+        if row[0].empty?
+          dossier.import_keywords
+          next
+        end
+        
         old_title = title
         title = Dossier.truncate_title(row[1])
         new_dossier = (old_title != title)
@@ -131,19 +160,7 @@ class Dossier < ActiveRecord::Base
           )
         end
         
-        # containers
-        dossier.containers << Container.import(row, dossier)
-        
-        # tags and keywords
-        dossier.keyword_list = row[13..15].compact.join('. ').presence
-        
-        tags = extract_tags(row[13..15])
-        tags += extract_tags([row[1]])
-        dossier.tag_list << tags.uniq.compact
-        
-        dossier.related_to = row[12]
-        
-        dossier.import_numbers(row)
+        dossier.import(row)
         
         dossier.save!
       rescue Exception => e
@@ -172,6 +189,6 @@ class Dossier < ActiveRecord::Base
 
     # Select rows containing main dossier records by simply testing on two columns in first row
     dossier_rows = rows.select{|row| row[9].present?}
-    import(dossier_rows)
+    import_all(dossier_rows)
   end
 end
