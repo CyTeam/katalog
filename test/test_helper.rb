@@ -10,4 +10,7 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def assert_superset(superset, subset)
+    assert superset.to_set.superset?(subset.to_set), "%s is no superset of %s" % [superset.inspect, subset.inspect]
+  end
 end
