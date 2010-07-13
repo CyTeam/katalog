@@ -68,7 +68,7 @@ class Dossier < ActiveRecord::Base
   
   # Importer
   def self.filter_tags(values)
-    values.reject{|value| value.match /^[0-9']*$/}
+    values.reject{|value| value.match /^[0-9.']*$/}
   end
   
   def self.extract_tags(values)
@@ -115,10 +115,11 @@ class Dossier < ActiveRecord::Base
   def import_keywords(row)
     keys = row[13..15].compact.join('. ')
     keys = keys.split('.').map{|k| k.strip.presence}.compact
+    keys += self.keyword_list unless self.keyword_list.nil?
     self.keyword_list = keys
     
     ts = self.class.extract_tags([row[13..15]])
-    ts += tag_list unless tag_list.nil?
+    ts += self.tag_list unless self.tag_list.nil?
     tag_list = ts
   end
   
@@ -139,13 +140,17 @@ class Dossier < ActiveRecord::Base
   def self.import_all(rows)
     new_dossier = true
     title = nil
-    dosser = nil
+    dossier = nil
     transaction do
       for row in rows
       begin
+        # Skip empty rows
+        next if row.select{|column| column.present?}.empty?
+        
         # Only import keywords if row has no reference
-        if row[0].empty?
-          dossier.import_keywords
+        if row[0].blank? && (row[13].present? || row[14].present? || row[15].present?)
+          dossier.import_keywords(row)
+          dossier.save!
           next
         end
         
@@ -165,6 +170,7 @@ class Dossier < ActiveRecord::Base
         dossier.save!
       rescue Exception => e
         puts e.message
+#        puts e.backtrace
       end
       end
     end
@@ -188,7 +194,7 @@ class Dossier < ActiveRecord::Base
     topic_rows.map{|row| TopicDossier.import(row).save!}
 
     # Select rows containing main dossier records by simply testing on two columns in first row
-    dossier_rows = rows.select{|row| row[9].present?}
+    dossier_rows = rows.select{|row| row[9].present? || row[13].present? || row[14].present? || row[15].present?}
     import_all(dossier_rows)
   end
 end

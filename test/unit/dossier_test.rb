@@ -78,7 +78,14 @@ class DossierTest < ActiveSupport::TestCase
   end
   
   test "tag filter drops numbers" do
-    tags = ["1. World War (1914-1918)", "1'000'000 pieces"]
-    assert_equal 3, Dossier.extract_tags(tags).count
+    tags = ["1. World War (1914-1918)", "1'000'000 pieces", "3.5 pounds"]
+    assert_equal 4, Dossier.extract_tags(tags).count
+  end
+
+  test "import keywords adds to keyword and tag list" do
+    keyword_row = []; keyword_row[13] = "Counsil"; keyword_row[14] = "Corruption"; keyword_row[15] = "Conflict";
+
+    @dossier.import_keywords(keyword_row)
+    assert_superset @dossier.keyword_list, ["Counsil", "Corruption", "Conflict"]
   end
 end
