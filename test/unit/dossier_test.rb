@@ -69,5 +69,11 @@ class DossierTest < ActiveSupport::TestCase
 
   test "related_to is text" do
     assert_equal "City counsil", dossiers(:city_parties).related_to
+    assert_equal "Worker Movement general; 77: City history", dossiers(:worker_movement_history).related_to
+  end
+
+  test "tag extraction splits at most special characters" do
+    tags = ["War. Peace", "Ying and Yang", "Mandela, Nelson", "All (really) all; to say: every-thing."]
+    assert_equal 14, Dossier.extract_tags(tags).count
   end
 end

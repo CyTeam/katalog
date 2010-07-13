@@ -89,3 +89,14 @@ city_counsil_notes:
   new_signature: 77.101.0
   title: City counsil notes
 
+worker_movement_general:
+  signature: 11.0.100
+  new_signature: 11.100.0
+  title: Worker movement general
+  related_to: Worker Movement History
+
+worker_movement_history:
+  signature: 11.0.500
+  new_signature: 11.500.0
+  title: Worker Movement history
+  related_to: "Worker Movement general; 77: City history"

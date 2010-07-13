@@ -132,6 +132,8 @@ class Dossier < ActiveRecord::Base
         tags += row[1].split(/[ .();,:-]/).uniq.select{|t| t.present?}
         dossier.tag_list << tags.uniq.compact
         
+        dossier.related_to = row[12]
+        
         # before 1990
         dossier.numbers.create(
           :to     => '1989-12-31',
