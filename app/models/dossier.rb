@@ -133,7 +133,7 @@ class Dossier < ActiveRecord::Base
         dossier.keyword_list = row[13..15].compact.join('. ').presence
         
         tags = extract_tags(row[13..15])
-        tags += row[1].split(/[ .();,:-]/).uniq.select{|t| t.present?}
+        tags += extract_tags([row[1]])
         dossier.tag_list << tags.uniq.compact
         
         dossier.related_to = row[12]
