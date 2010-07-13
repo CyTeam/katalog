@@ -81,7 +81,7 @@ class Dossier < ActiveRecord::Base
     date = "([0-9]{1,2}\\.)?[ ]*((#{months}|#{year})[ ]*){1,2}"
     date_range = "#{date}([ ]*-[ ]*(#{date})?)?"
     
-    value.gsub(/[ ]*#{date_range}[ ]*$/, '')
+    value.gsub(/ [ ]*#{date_range}[ ]*$/, '')
   end
   
   def self.import_filter

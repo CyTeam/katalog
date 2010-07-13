@@ -29,6 +29,11 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal "Deiss, Josef (BR CVP 1999 - 2006)", Dossier.truncate_title("Deiss, Josef (BR CVP 1999 - 2006) 1989 - 2006")
     assert_equal "Hess, Peter (NR CVP 1983 - 2003)", Dossier.truncate_title("Hess, Peter (NR CVP 1983 - 2003) 2001")
     assert_equal "Hess, Peter (NR CVP 1983 - 2003)", Dossier.truncate_title("Hess, Peter (NR CVP 1983 - 2003) 2002 - ")
+    
+    assert_equal "Referenden gegen Teilrevision des Militärgesetzes (Abstimmung 2001)", Dossier.truncate_title("Referenden gegen Teilrevision des Militärgesetzes (Abstimmung 2001) 2000 - 2001")
+
+    assert_equal "Terroranschlag, USA: 11. September 2001.", Dossier.truncate_title("Terroranschlag, USA: 11. September 2001. Okt. 2001")
+    assert_equal "Terroranschlag, USA: 11. September 2001.", Dossier.truncate_title("Terroranschlag, USA: 11. September 2001. Nov. - Dez. 2001")
   end
 
   test "first document calculation" do
