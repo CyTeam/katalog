@@ -1,2 +1,11 @@
-<h1>Index#keyword</h1>
-<p>Find me in app/views/index/keyword.html.erb</p>
+<h1><%= t('controllers.index.keyword') %></h1>
+
+<div class="ce_table block">
+<table>
+  <tr>
+    <th><%= t_attr('keyword', Dossier) %></th>
+    <th style="text-align: right"><%= t('katalog.count') %></th>
+  </tr>
+  <%= render :partial => 'keyword', :collection => @keyword_counts.all %>
+</table>
+</div>

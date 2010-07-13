@@ -6,11 +6,14 @@ class IndexControllerTest < ActionController::TestCase
   test "should get keyword" do
     get :keyword
     assert_response :success
+
+    assert_not_nil assigns(:keyword_counts)
   end
 
   test "should get title" do
     get :title
     assert_response :success
-  end
 
+    assert_not_nil assigns(:titles)
+  end
 end

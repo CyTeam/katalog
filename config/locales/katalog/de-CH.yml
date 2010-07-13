@@ -1,6 +1,12 @@
 de-CH:
   katalog:
     search: "Suchen"
+    count:  "Anzahl"
+    
+  controllers:
+    index:
+      keyword: "Schlagwortindex"
+      title:   "Titelindex"
 
   activerecord:
     models:
@@ -16,6 +22,7 @@ de-CH:
         location:       "Standort"
         document_count: "Anzahl Dokumente"
         tag:            "Schlagwort"
+        keyword:        "Schlagwort"
         first_document_on: "Erstes Dokument von"
       container:
         title:          "Titel"
