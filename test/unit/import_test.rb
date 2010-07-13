@@ -99,6 +99,10 @@ class ImportTest < ActiveSupport::TestCase
     keyword_list = Dossier.find_by_title('City history').keyword_list
     assert_equal 6, keyword_list.count
     assert keyword_list.include?('Mandela, Nelson')
+
+    keyword_list = Dossier.find_by_title('City counsil').keyword_list
+    assert_equal 4, keyword_list.count
+    assert_superset keyword_list, ["Politics", "City", "counsil", "Corruption"]
   end
 
   test "real data" do
