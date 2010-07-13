@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class IndexControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+  
   test "should get keyword" do
     get :keyword
     assert_response :success
