@@ -22,6 +22,12 @@
   <% end %>
 </ul>
 
+<% if @dossier.related_to.present? %>
+<p>
+  Siehe auch: <%= @dossier.related_to %>
+</p>
+<% end %>
+
 <div class="ce_table block">
 <table>
   <%= @containers = @dossier.containers; render 'containers/list' %>
