@@ -194,7 +194,7 @@ class Dossier < ActiveRecord::Base
     topic_rows.map{|row| TopicDossier.import(row).save!}
 
     # Select rows containing main dossier records by simply testing on two columns in first row
-    dossier_rows = rows.select{|row| row[9].present? || row[13].present? || row[14].present? || row[15].present?}
+    dossier_rows = rows.select{|row| (Dossier.import_filter.match(row[0]) && row[9].present?) || (row[0].blank? && (row[13].present? || row[14].present? || row[15].present?))}
     import_all(dossier_rows)
   end
 end
