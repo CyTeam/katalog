@@ -88,6 +88,30 @@ class Dossier < ActiveRecord::Base
     /^[0-9]{2}\.[0-9]\.[0-9]{3}$/
   end
   
+  def import_numbers(row)
+    # before 1990
+    numbers.create(
+      :to     => '1989-12-31',
+      :amount => row[16].nil? ? nil : row[16].delete("'").to_i
+    )
+    # 1990-1993
+    numbers.create(
+      :from   => '1990-01-01',
+      :to     => '1993-12-31',
+      :amount => row[17].nil? ? nil : row[17].delete("'").to_i
+    )
+    # 1994-
+    year = 1994
+    for amount in row[18..36]
+      numbers.create(
+        :from   => Date.new(year, 1, 1),
+        :to     => Date.new(year, 12, 31),
+        :amount => amount.nil? ? nil : amount.delete("'").to_i
+      )
+      year += 1
+    end
+  end
+  
   def self.import(rows)
     new_dossier = true
     title = nil
@@ -119,27 +143,7 @@ class Dossier < ActiveRecord::Base
         
         dossier.related_to = row[12]
         
-        # before 1990
-        dossier.numbers.create(
-          :to     => '1989-12-31',
-          :amount => row[16].nil? ? nil : row[16].delete("'").to_i
-        )
-        # 1990-1993
-        dossier.numbers.create(
-          :from   => '1990-01-01',
-          :to     => '1993-12-31',
-          :amount => row[17].nil? ? nil : row[17].delete("'").to_i
-        )
-        # 1994-
-        year = 1994
-        for amount in row[18..36]
-          dossier.numbers.create(
-            :from   => Date.new(year, 1, 1),
-            :to     => Date.new(year, 12, 31),
-            :amount => amount.nil? ? nil : amount.delete("'").to_i
-          )
-          year += 1
-        end
+        dossier.import_numbers(row)
         
         dossier.save!
       rescue Exception => e
@@ -167,7 +171,7 @@ class Dossier < ActiveRecord::Base
     topic_rows.map{|row| TopicDossier.import(row).save!}
 
     # Select rows containing main dossier records by simply testing on two columns in first row
-    dossier_rows = rows.select{|row| TopicDossier.import_filter.match(row[0]) && row[9].present?}
+    dossier_rows = rows.select{|row| row[9].present?}
     import(dossier_rows)
   end
 end
