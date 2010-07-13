@@ -67,8 +67,12 @@ class Dossier < ActiveRecord::Base
   end
   
   # Importer
+  def self.filter_tags(values)
+    values.reject{|value| value.match /^[0-9']*$/}
+  end
+  
   def self.extract_tags(values)
-    values.compact.map{|sentence| sentence.split(/[ .();,:-]/)}.flatten.uniq.select{|t| t.present?}
+    filter_tags(values.compact.map{|sentence| sentence.split(/[ .();,:-]/)}.flatten.uniq.select{|t| t.present?})
   end
   
   def self.truncate_title(value)

@@ -76,4 +76,9 @@ class DossierTest < ActiveSupport::TestCase
     tags = ["War. Peace", "Ying and Yang", "Mandela, Nelson", "All (really) all; to say: every-thing."]
     assert_equal 14, Dossier.extract_tags(tags).count
   end
+  
+  test "tag filter drops numbers" do
+    tags = ["1. World War (1914-1918)", "1'000'000 pieces"]
+    assert_equal 3, Dossier.extract_tags(tags).count
+  end
 end
