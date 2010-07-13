@@ -1,4 +1,8 @@
 Katalog::Application.routes.draw do |map|
+  get "index/keyword"
+
+  get "index/title"
+
   resources :container_types
 
   devise_for :users
