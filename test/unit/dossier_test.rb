@@ -118,10 +118,10 @@ class DossierTest < ActiveSupport::TestCase
   end
   
   test "keyword extraction respects dates" do
-    keyword_list = ["9. 9. 1997"]
+    keyword_list = ["(Aug. 2000 - 2010)", "9. 9. 1997"]
     
     for keyword in keyword_list
-      assert Dossier.extract_keywords(keyword_list).include?(keyword)
+      assert Dossier.extract_keywords(keyword_list).include?(keyword), "Expected %s to include %s" % [Dossier.extract_keywords(keyword_list).inspect, keyword]
     end
   end
   
