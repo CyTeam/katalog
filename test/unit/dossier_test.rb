@@ -36,6 +36,10 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal "Terroranschlag, USA: 11. September 2001.", Dossier.truncate_title("Terroranschlag, USA: 11. September 2001. Nov. - Dez. 2001")
   end
 
+  test "title truncation detects ordinal month names with spaces" do
+    assert_equal "Terroranschlag, USA: 11. September 2001.", Dossier.truncate_title("Terroranschlag, USA: 11. September 2001. 12. 9. - 16. 9. 2001")
+  end
+  
   test "first document calculation" do
     assert_equal containers(:city_history_1900_1999).first_document_on, dossiers(:city_history).first_document_on
   end
@@ -106,6 +110,7 @@ class DossierTest < ActiveSupport::TestCase
   end
   
   test "keyword extraction respects common abbreviations" do
+    keyword_list = ["betr. x", "9. 9. 1997"]
 #    Dossier::Abbr
   end
   
