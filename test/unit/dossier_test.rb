@@ -91,6 +91,11 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal 4, Dossier.extract_tags(tags).count
   end
 
+  test "tag filter drops month names" do
+    tags = ["Jannick", "Feb", "Mai"]
+    assert_equal ["Jannick"], Dossier.filter_tags(tags)
+  end
+  
   test "import keywords adds to keyword and tag list" do
     keyword_row = []; keyword_row[13] = "Counsil"; keyword_row[14] = "Corruption"; keyword_row[15] = "Conflict";
 
