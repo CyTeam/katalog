@@ -181,8 +181,8 @@ class Dossier < ActiveRecord::Base
     new_dossier = true
     title = nil
     dossier = nil
-    transaction do
-      for row in rows
+    for row in rows
+      transaction do
       begin
         # Skip empty rows
         next if row.select{|column| column.present?}.empty?
