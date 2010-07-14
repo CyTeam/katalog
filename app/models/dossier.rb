@@ -79,10 +79,14 @@ class Dossier < ActiveRecord::Base
   end
   
   def self.extract_keywords(values)
-    values = values.compact.join('. ')
-    values = values.split('.').map{|value| value.strip.presence}
+    values = values.join('. ')
+    values = values.split('.')
     
-    return values.compact
+    # Cleanup
+    values.map!{|value| value.strip.presence}
+    values.compact!
+
+    return values
   end
 
   def self.truncate_title(value)
