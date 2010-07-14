@@ -78,6 +78,13 @@ class Dossier < ActiveRecord::Base
     filter_tags(values.compact.map{|sentence| sentence.split(/[ .();,:-]/)}.flatten.uniq.select{|t| t.present?}).compact
   end
   
+  def self.extract_keywords(values)
+    values = values.compact.join('. ')
+    values = values.split('.').map{|value| value.strip.presence}
+    
+    return values.compact
+  end
+
   def self.truncate_title(value)
     months = '(Jan\.|Feb\.|März|Apr\.|Mai|Juni|Juli|Aug\.|Sep\.|Sept\.|Okt\.|Nov\.|Dez\.)'
     year = '[0-9]{4}'
@@ -116,8 +123,7 @@ class Dossier < ActiveRecord::Base
   end
   
   def import_keywords(row)
-    keys = row[13..15].compact.join('. ')
-    keys = keys.split('.').map{|k| k.strip.presence}.compact
+    keys = self.class.extract_keywords(row[13..15])
     keys += self.keyword_list unless self.keyword_list.nil?
     self.keyword_list = keys
     
