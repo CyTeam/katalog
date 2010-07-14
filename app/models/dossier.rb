@@ -79,14 +79,25 @@ class Dossier < ActiveRecord::Base
   end
   
   def self.extract_keywords(values)
-    values = values.join('. ')
-    values = values.split('.')
+    value_list = values.join('. ')
+
+    abbrs = ["betr.", "Kt."]
+    
+    quoted_abbrs = {}
+    for abbr in abbrs
+      quoted_abbrs[abbr] = abbr.gsub('.', '|')
+    end
+    
+    quoted_abbrs.each{|abbr, quoted_abbr| value_list.gsub!(abbr, quoted_abbr)}
+    
+    keywords = value_list.split('.')
+    keywords.map!{|keyword| keyword.gsub('|', '.')}
     
     # Cleanup
-    values.map!{|value| value.strip.presence}
-    values.compact!
+    keywords.compact!
+    keywords.map!{|value| value.strip.presence}
 
-    return values
+    return keywords
   end
 
   def self.date_range

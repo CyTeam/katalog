@@ -110,8 +110,11 @@ class DossierTest < ActiveSupport::TestCase
   end
   
   test "keyword extraction respects common abbreviations" do
-    keyword_list = ["betr. x", "9. 9. 1997"]
-#    Dossier::Abbr
+    keyword_list = ["betr. x"]
+    
+    for keyword in keyword_list
+      assert Dossier.extract_keywords(keyword_list).include?(keyword)
+    end
   end
   
   test "import keywords adds to keyword and tag list" do
