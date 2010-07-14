@@ -32,6 +32,7 @@ class Topic < Dossier
     self.signature = row[0]
     self.title     = row[1]
     
+    puts self unless Rails.env.test?
     return self
   end
 end

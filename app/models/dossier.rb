@@ -172,6 +172,7 @@ class Dossier < ActiveRecord::Base
         puts e.message
 #        puts e.backtrace
       end
+      puts dossier unless Rails.env.test?
       end
     end
   end
