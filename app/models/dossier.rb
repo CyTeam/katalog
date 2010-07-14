@@ -76,7 +76,7 @@ class Dossier < ActiveRecord::Base
   end
   
   def self.truncate_title(value)
-    months = '(Jan\.|Feb\.|März|Apr\.|Mai|Jun\.|Jul\.|Aug\.|Sep\.|Sept\.|Okt\.|Nov\.|Dez\.)'
+    months = '(Jan\.|Feb\.|März|Apr\.|Mai|Juni|Juli|Aug\.|Sep\.|Sept\.|Okt\.|Nov\.|Dez\.)'
     year = '[0-9]{4}'
     date = "([0-9]{1,2}\\.)?[ ]*((#{months}|#{year})[ ]*){1,2}"
     date_range = "#{date}([ ]*-[ ]*(#{date})?)?"
