@@ -96,6 +96,19 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal ["Jannick"], Dossier.filter_tags(tags)
   end
   
+  test "keywords are split only on dot" do
+    keyword_list = ["Chomsky, Noam USA (1928 -)", "One. after. the other."]
+    keywords = Dossier.extract_keywords(keyword_list)
+    
+    assert_equal 4, keywords.count
+    assert keywords.include?("Chomsky, Noam USA (1928 -)")
+    assert keywords.include?("the other")
+  end
+  
+  test "keyword extraction respects common abbreviations" do
+#    Dossier::Abbr
+  end
+  
   test "import keywords adds to keyword and tag list" do
     keyword_row = []; keyword_row[13] = "Counsil"; keyword_row[14] = "Corruption"; keyword_row[15] = "Conflict";
 

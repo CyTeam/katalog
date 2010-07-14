@@ -124,8 +124,7 @@ class Dossier < ActiveRecord::Base
   
   def import_keywords(row)
     keys = self.class.extract_keywords(row[13..15])
-    keys += self.keyword_list unless self.keyword_list.nil?
-    self.keyword_list = keys
+    self.keyword_list.add(keys)
     
     ts = self.class.extract_tags([row[13..15]])
     ts += self.tag_list unless self.tag_list.nil?
