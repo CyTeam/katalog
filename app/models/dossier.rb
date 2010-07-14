@@ -81,15 +81,25 @@ class Dossier < ActiveRecord::Base
   def self.extract_keywords(values)
     value_list = values.join('. ')
 
+    # Build quotation substitutes
     abbrs = ["betr.", "Kt."]
-    
     quoted_abbrs = {}
     for abbr in abbrs
       quoted_abbrs[abbr] = abbr.gsub('.', '|')
     end
     
+    # Quote abbreviations
     quoted_abbrs.each{|abbr, quoted_abbr| value_list.gsub!(abbr, quoted_abbr)}
     
+    # Quote dates
+    match = /#{date_range}/.match(value_list)
+    if match
+      date = value_list.slice(match.begin(0)..match.end(0)-1)
+      quoted_date = date.gsub('.', '|')
+      value_list.gsub!(date, quoted_date)
+    end
+    
+    # Split and unquote
     keywords = value_list.split('.')
     keywords.map!{|keyword| keyword.gsub('|', '.')}
     
@@ -102,18 +112,18 @@ class Dossier < ActiveRecord::Base
 
   def self.date_range
     month_abbrs = '(Jan\.|Feb\.|März|Apr\.|Mai|Juni|Juli|Aug\.|Sep\.|Sept\.|Okt\.|Nov\.|Dez\.)'
-    month_ordinals = '([0-9]\.|1[0-2]\.)'
+    month_ordinals = '([1-9]\.|1[0-2]\.)'
     
     year = '[0-9]{4}'
     date = "([0-9]{1,2}\\.)?[ ]*((#{month_abbrs}|#{month_ordinals}|#{year})[ ]*){1,2}"
     date_range = "#{date}([ ]*-[ ]*(#{date})?)?"
     
-    return date_range
+    return "[ ]*#{date_range}[ ]*"
   end
   
   def self.truncate_title(value)
     
-    value.gsub(/ [ ]*#{date_range}[ ]*$/, '')
+    value.gsub(/ #{date_range}$/, '')
   end
   
   def self.import_filter
