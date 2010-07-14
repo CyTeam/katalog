@@ -92,6 +92,7 @@ class Dossier < ActiveRecord::Base
     quoted_abbrs.each{|abbr, quoted_abbr| value_list.gsub!(abbr, quoted_abbr)}
     
     # Quote dates
+    # TODO: Check if this could be done much simpler using gsub and block
     list = value_list
     quoted = ""
     while match = /#{date_range}/.match(list)
@@ -103,6 +104,9 @@ class Dossier < ActiveRecord::Base
       list = match.post_match
     end
     value_list = quoted + list
+    
+    # Quote initials
+    value_list.gsub!(/([A-Z])\./, '\1|')
     
     # Split and unquote
     keywords = value_list.split('.')

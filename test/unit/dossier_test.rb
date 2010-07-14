@@ -125,6 +125,14 @@ class DossierTest < ActiveSupport::TestCase
     end
   end
   
+  test "keyword extraction respects (middle) name initials" do
+    keyword_list = ["Jan H. Rosenbaum", "K. Huber (1941-2000)"]
+    
+    for keyword in keyword_list
+      assert Dossier.extract_keywords(keyword_list).include?(keyword), "Expected %s to include %s" % [Dossier.extract_keywords(keyword_list).inspect, keyword]
+    end
+  end
+  
   test "import keywords adds to keyword and tag list" do
     keyword_row = []; keyword_row[13] = "Counsil"; keyword_row[14] = "Corruption"; keyword_row[15] = "Conflict";
 
