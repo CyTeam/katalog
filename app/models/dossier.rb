@@ -89,7 +89,7 @@ class Dossier < ActiveRecord::Base
     return values
   end
 
-  def self.truncate_title(value)
+  def self.date_range_re
     month_abbrs = '(Jan\.|Feb\.|März|Apr\.|Mai|Juni|Juli|Aug\.|Sep\.|Sept\.|Okt\.|Nov\.|Dez\.)'
     month_ordinals = '([0-9]\.|1[0-2]\.)'
     
@@ -97,7 +97,12 @@ class Dossier < ActiveRecord::Base
     date = "([0-9]{1,2}\\.)?[ ]*((#{month_abbrs}|#{month_ordinals}|#{year})[ ]*){1,2}"
     date_range = "#{date}([ ]*-[ ]*(#{date})?)?"
     
-    value.gsub(/ [ ]*#{date_range}[ ]*$/, '')
+    return / [ ]*#{date_range}[ ]*$/
+  end
+  
+  def self.truncate_title(value)
+    
+    value.gsub(date_range_re, '')
   end
   
   def self.import_filter
