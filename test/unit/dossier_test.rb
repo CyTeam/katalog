@@ -109,8 +109,16 @@ class DossierTest < ActiveSupport::TestCase
     assert keywords.include?("the other")
   end
   
-  test "keyword extraction respects common abbreviations and dates" do
-    keyword_list = ["betr. x", "9. 9. 1997"]
+  test "keyword extraction respects common abbreviations" do
+    keyword_list = ["betr. x", "x Kt. y", "Präs. (1900)"]
+    
+    for keyword in keyword_list
+      assert Dossier.extract_keywords(keyword_list).include?(keyword)
+    end
+  end
+  
+  test "keyword extraction respects dates" do
+    keyword_list = ["9. 9. 1997"]
     
     for keyword in keyword_list
       assert Dossier.extract_keywords(keyword_list).include?(keyword)

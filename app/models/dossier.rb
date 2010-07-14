@@ -82,7 +82,7 @@ class Dossier < ActiveRecord::Base
     value_list = values.join('. ')
 
     # Build quotation substitutes
-    abbrs = ["betr.", "Kt."]
+    abbrs = ["betr.", "Kt.", "Präs.", "St.", "EXPO.02"]
     quoted_abbrs = {}
     for abbr in abbrs
       quoted_abbrs[abbr] = abbr.gsub('.', '|')
