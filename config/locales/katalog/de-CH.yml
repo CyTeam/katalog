@@ -1,7 +1,7 @@
 de-CH:
   katalog:
-    search: "Suchen"
-    count:  "Anzahl"
+    search:   "Suchen"
+    count:    "Anzahl"
     
   controllers:
     index:
@@ -48,3 +48,5 @@ de-CH:
     show: "%{model} anzeigen"
     new:  "%{model} anlegen"
     back: "zurück"
+    previous: "vorherige"
+    next:     "nächste"
