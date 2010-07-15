@@ -37,6 +37,7 @@ class Dossier < ActiveRecord::Base
   end
   
   def signature=(value)
+    value.strip!
     write_attribute(:signature, value)
     
     group = value[0,1]

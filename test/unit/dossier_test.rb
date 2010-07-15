@@ -10,6 +10,15 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal "77.0.100: City history", dossiers(:city_history).to_s
   end
 
+  test "signature gets stripped" do
+    @dossier.signature = "99.7.888"
+    assert_equal "99.7.888", @dossier.signature
+    
+    @dossier.signature = "66.7.888 "
+    assert_equal "66.7.888", @dossier.signature
+    
+  end
+  
   test "container association" do
     assert dossiers(:city_counsil).containers.include?(containers(:city_counsil))
 
