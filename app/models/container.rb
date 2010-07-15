@@ -19,8 +19,12 @@ class Container < ActiveRecord::Base
   
   def location=(value)
     value = Location.find_by_code(value) if value.is_a?(String)
-    self[:location_id] = value.id
-    self.location.reload
+    if value.nil?
+      self[:location_id] = nil
+    else
+      self[:location_id] = value.id
+    end
+    self.location.reload unless self.location.nil?
   end
   
   # Import

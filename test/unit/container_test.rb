@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class ContainerTest < ActiveSupport::TestCase
+  setup do
+    @container = Container.new
+  end
+  
   test "dossier association" do
     assert_equal dossiers(:city_counsil), containers(:city_counsil).dossier
   end
@@ -29,6 +33,17 @@ class ContainerTest < ActiveSupport::TestCase
     assert_equal locations(:RI), container.location
   end
 
+  test "gracefully handle bad location assignment" do
+    @container.location = "Nowhere"
+    assert_equal nil, @container.location
+
+    @container.location = "RI"
+    assert_equal locations(:RI), @container.location
+    
+    @container.location = "Nowhere"
+    assert_equal nil, @container.location
+  end
+  
   test "container type assignment" do
     container = Container.new
     
