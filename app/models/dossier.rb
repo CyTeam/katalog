@@ -250,7 +250,6 @@ class Dossier < ActiveRecord::Base
     topic_rows = rows.select{|row| TopicDossier.import_filter.match(row[0]) && row[9].blank?}
     topic_rows.map{|row| TopicDossier.import(row).save!}
 
-    # Select rows containing main dossier records by simply testing on two columns in first row
     import_all(import_filter(rows))
   end
 end
