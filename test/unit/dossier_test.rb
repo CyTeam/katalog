@@ -142,6 +142,15 @@ class DossierTest < ActiveSupport::TestCase
     end
   end
   
+  test "keyword extraction only allows dot after single capital letter" do
+    keyword_list = ["Fahnenbranche CH. Europa"]
+    
+    keywords = Dossier.extract_keywords(keyword_list)
+    assert_equal 2, keywords.count
+    assert keywords.include?('Fahnenbranche CH')
+    assert keywords.include?('Europa')
+  end
+  
   test "import keywords adds to keyword and tag list" do
     keyword_row = []; keyword_row[13] = "Counsil"; keyword_row[14] = "Corruption"; keyword_row[15] = "Conflict";
 

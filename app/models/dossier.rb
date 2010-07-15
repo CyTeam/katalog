@@ -107,7 +107,7 @@ class Dossier < ActiveRecord::Base
     value_list = quoted + list
     
     # Quote initials
-    value_list.gsub!(/([A-Z])\./, '\1|')
+    value_list.gsub!(/((^|[ ])[A-Z])\./, '\1|')
     
     # Split and unquote
     keywords = value_list.split('.')
