@@ -2,6 +2,9 @@ de-CH:
   katalog:
     search:   "Suchen"
     count:    "Anzahl"
+    edit:     "Ändern"
+    show:     "Anzeigen"
+    delete:   "Löschen"
     
   controllers:
     index:
@@ -50,15 +53,14 @@ de-CH:
     confirm_delete: "%{record} löschen?"
 
   crud:
-    edit: "%{model} bearbeiten"
-    show: "%{model} anzeigen"
-    new:  "%{model} anlegen"
+    edit:  "%{model} bearbeiten"
+    show:  "%{model} anzeigen"
+    new:   "%{model} anlegen"
+    delete: "%{model} löschen"
     back: "zurück"
     previous: "vorherige"
     next:     "nächste"
 
-# Devise
-  
   devise:
     sign_in: "Anmelden"
     sign_up: "Registrieren"
