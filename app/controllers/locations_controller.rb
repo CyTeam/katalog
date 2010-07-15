@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
   # Authentication
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:index, :show]
 
   # GET /locations
   # GET /locations.xml
