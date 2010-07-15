@@ -1,18 +1,17 @@
-<h2>Sign up</h2>
+<h2><%= t('devise.sign_up') %></h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+<%= semantic_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <p><%= f.label :email %><br />
-  <%= f.text_field :email %></p>
+  <%= f.inputs do %>
+    <%= f.input :email %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
+  <% end %>
 
-  <p><%= f.label :password %><br />
-  <%= f.password_field :password %></p>
-
-  <p><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></p>
-
-  <p><%= f.submit "Sign up" %></p>
+  <%= f.buttons do %>
+    <%= f.commit_button t('devise.sign_up') %>
+  <% end %>
 <% end %>
 
 <%= render :partial => "devise/shared/links" %>

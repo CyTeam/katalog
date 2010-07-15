@@ -13,6 +13,8 @@ de-CH:
       dossier:        "Dossier"
       location:       "Standort"
       container_type: "Dossier Art"
+      session: "Sitzung"
+      user:    "Nutzer"
 
     attributes:
       dossier:
@@ -39,6 +41,10 @@ de-CH:
         title:       "Titel"
         code:        "Kürzel"
         description: "Beschreibung"
+      user:
+        email:       "E-Mail"
+        password:    "Passwort"
+        remember_me: "Angemeldet bleiben"
 
   messages:
     confirm_delete: "%{record} löschen?"
@@ -50,3 +56,11 @@ de-CH:
     back: "zurück"
     previous: "vorherige"
     next:     "nächste"
+
+# Devise
+  
+  devise:
+    sign_in: "Anmelden"
+    sign_up: "Registrieren"
+    new_password: "Passwort vergessen?"
+    
