@@ -227,6 +227,12 @@ class Dossier < ActiveRecord::Base
     end
   end
   
+  def self.import_filter(rows)
+    signature_filter = /^[ ]*[0-9]{2}\.[0-9]\.[0-9]{3}[ ]*$/
+
+    rows.select{|row| (signature_filter.match(row[0]) && row[9].present?) || (row[0].blank? && (row[13].present? || row[14].present? || row[15].present?))}
+  end
+  
   def self.import_from_csv(path)
     # Load file at path using ; as delimiter
     rows = FasterCSV.read(path, :col_sep => ';')
@@ -245,7 +251,6 @@ class Dossier < ActiveRecord::Base
     topic_rows.map{|row| TopicDossier.import(row).save!}
 
     # Select rows containing main dossier records by simply testing on two columns in first row
-    dossier_rows = rows.select{|row| (Dossier.import_filter.match(row[0]) && row[9].present?) || (row[0].blank? && (row[13].present? || row[14].present? || row[15].present?))}
-    import_all(dossier_rows)
+    import_all(import_filter(rows))
   end
 end

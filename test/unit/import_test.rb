@@ -11,6 +11,20 @@ class ImportTest < ActiveSupport::TestCase
     }
   end
 
+  setup do
+    @container_row = ["77.0.100","City history 1900-1999",100,1910,0,0,0,0,0,"DH","EG","Test",nil,"War. Peace. Ying and Yang. Mandela, Nelson","Upper Class","Lower Class",1,2,3,4,5,6,7,8,9,10]
+    @keyword_row = []; @keyword_row[13] = "Counsil"; @keyword_row[14] = "Corruption"; @keyword_row[15] = "Conflict";
+  end
+  
+  test "import filter matches container and keyword rows" do
+    assert_equal [@container_row], Dossier.import_filter([@container_row])
+  end
+  
+  test "import filter accepts spaces around signature" do
+    @container_row[0] = " 77.0.100 "
+    assert_equal [@container_row], Dossier.import_filter([@container_row])
+  end
+  
   test "imports topics" do
     # Load fixtures as we destroy them, soon
     group_empty = dossiers('group_empty')
