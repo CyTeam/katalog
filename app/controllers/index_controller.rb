@@ -1,6 +1,6 @@
 class IndexController < ApplicationController
   def keyword
-    @keyword_counts = Dossier.keyword_counts
+    @keyword_counts = Dossier.keyword_counts.order(:name)
   end
 
   def title
