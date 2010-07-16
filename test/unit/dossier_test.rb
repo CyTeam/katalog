@@ -2,7 +2,7 @@ require 'test_helper'
 
 class DossierTest < ActiveSupport::TestCase
   setup do
-    @dossier = Dossier.new
+    @dossier = Dossier.new(:signature => "99.9.999", :title => 'Testing everything')
   end
   
   test "to_s" do
@@ -156,5 +156,24 @@ class DossierTest < ActiveSupport::TestCase
 
     @dossier.import_keywords(keyword_row)
     assert_superset @dossier.keyword_list, ["Counsil", "Corruption", "Conflict"]
+  end
+
+  test "assigning keyword_list adds to global tag list" do
+    assert_difference('ActsAsTaggableOn::Tag.count', 2) do
+      @dossier.keyword_list.add(['Word 1', 'Word 2', 'Word 2'])
+      @dossier.save!
+    end
+    
+    assert_equal [@dossier], Dossier.tagged_with('Word 1')
+  end
+  
+  test "keyword supports dotted keyword" do
+    assert_difference('ActsAsTaggableOn::Tag.count', 1) do
+      @dossier.keyword_list.add(['Test. Dot'])
+      @dossier.save!
+    end
+    
+    assert_equal 1, ActsAsTaggableOn::Tag.find_all_by_name('Test. Dot').count
+    assert_equal [@dossier], Dossier.tagged_with(['Test. Dot'])
   end
 end
