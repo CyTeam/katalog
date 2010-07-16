@@ -1,2 +1,2 @@
 # Use dot (.) as delimiter
-ActsAsTaggableOn::TagList.delimiter = '.'
+ActsAsTaggableOn::TagList.delimiter = '¬'

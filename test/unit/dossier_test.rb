@@ -102,13 +102,6 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal ["Jannick"], Dossier.filter_tags(tags)
   end
   
-  test "keyword delimited by dot (.)" do
-    @dossier.keyword_list = "War. Peace. Ying and Yang. Mandela, Nelson. Love"
-    
-    assert_equal 5, @dossier.keyword_list.count
-    assert @dossier.keyword_list.include?("Mandela, Nelson")
-  end
-
   test "keywords are split only on dot" do
     keyword_list = ["Chomsky, Noam USA (1928 -)", "One. after. the other."]
     keywords = Dossier.extract_keywords(keyword_list)
