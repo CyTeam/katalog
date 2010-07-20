@@ -6,6 +6,8 @@
     <th><%= t_attr('keyword', Dossier) %></th>
     <th style="text-align: right"><%= t('katalog.count') %></th>
   </tr>
-  <%= render :partial => 'keyword', :collection => @keyword_counts.all %>
+  <%= render :partial => 'keyword', :collection => @index %>
 </table>
 </div>
+
+<%= t_paginate %>

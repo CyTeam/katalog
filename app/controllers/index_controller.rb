@@ -1,6 +1,6 @@
 class IndexController < ApplicationController
   def keyword
-    @keyword_counts = Dossier.keyword_counts.order(:name)
+    @index = Dossier.keyword_counts.order(:name).paginate(:per_page => 50, :page => params[:page])
   end
 
   def title
