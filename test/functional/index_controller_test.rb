@@ -7,7 +7,7 @@ class IndexControllerTest < ActionController::TestCase
     get :keyword
     assert_response :success
 
-    assert_not_nil assigns(:keyword_counts)
+    assert_not_nil assigns(:index)
   end
 
   test "should get title" do
