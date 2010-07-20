@@ -112,6 +112,11 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal ["Jannick"], Dossier.filter_tags(tags)
   end
   
+  test "tag filter drops %" do
+    tags = ["20% Gewinn"]
+    assert_equal ["Gewinn"], Dossier.extract_tags(tags)
+  end
+  
   test "keywords are split only on dot" do
     keyword_list = ["Chomsky, Noam USA (1928 -)", "One. after. the other."]
     keywords = Dossier.extract_keywords(keyword_list)

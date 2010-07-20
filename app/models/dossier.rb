@@ -72,12 +72,11 @@ class Dossier < ActiveRecord::Base
   def self.filter_tags(values)
     values.reject!{|value| value.match /^[0-9.']*$/}
     values.reject!{|value| value.match /^(Jan|Feb|März|Apr|Mai|Juni|Juli|Aug|Sep|Sept|Okt|Nov|Dez)$/}
-
     return values
   end
   
   def self.extract_tags(values)
-    filter_tags(values.compact.map{|sentence| sentence.split(/[ .();,:-]/)}.flatten.uniq.select{|t| t.present?}).compact
+    filter_tags(values.compact.map{|sentence| sentence.split(/[ %.();,:-]/)}.flatten.uniq.select{|t| t.present?}).compact
   end
   
   def self.extract_keywords(values)
@@ -133,7 +132,6 @@ class Dossier < ActiveRecord::Base
   end
   
   def self.truncate_title(value)
-    
     value.gsub(/ #{date_range}$/, '')
   end
   
