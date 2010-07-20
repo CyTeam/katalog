@@ -8,6 +8,7 @@ class DossiersController < InheritedResources::Base
   respond_to :html, :js
   
   # Search
+  has_scope :by_text, :as => :text
   has_scope :by_signature, :as => :signature
   has_scope :by_title, :as => :title
   has_scope :by_location, :as => :location

@@ -63,6 +63,16 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal 3 + 1, Dossier.by_signature('77.0.100').count
   end
 
+  test "find by text" do
+    keyword_list = ["City"]
+    
+    @dossier.keyword_list.add(Dossier.extract_keywords(keyword_list))
+    @dossier.save
+    
+    assert_equal 8, Dossier.by_text('City').count
+    assert_equal 8, Dossier.by_text('city').count
+  end
+  
   test "find by location" do
     assert_equal 4, Dossier.by_location('EG').count
     assert_equal 1, Dossier.by_location('RI').count

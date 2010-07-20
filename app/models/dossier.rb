@@ -3,6 +3,7 @@ class Dossier < ActiveRecord::Base
   validates_presence_of :signature, :title
   
   # Scopes
+  scope :by_text, lambda {|value| where("signature LIKE CONCAT(?, '%') OR title LIKE CONCAT('%', ?, '%')", value, value)}
   scope :by_signature, lambda {|value| where("signature LIKE CONCAT(?, '%')", value)}
   scope :by_title, lambda {|value| where("title LIKE CONCAT('%', ?, '%')", value)}
   # TODO: check if arel provides nicer code:
