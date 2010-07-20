@@ -70,8 +70,12 @@ class Dossier < ActiveRecord::Base
   
   # Importer
   def self.filter_tags(values)
+    boring = ["in", "und", "für"]
+    values -= boring
+    
     values.reject!{|value| value.match /^[0-9.']*$/}
     values.reject!{|value| value.match /^(Jan|Feb|März|Apr|Mai|Juni|Juli|Aug|Sep|Sept|Okt|Nov|Dez)$/}
+
     return values
   end
   
