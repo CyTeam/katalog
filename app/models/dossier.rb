@@ -1,8 +1,20 @@
 class Dossier < ActiveRecord::Base
+  # Search
+  define_index do
+    # fields
+    indexes title, :sortable => true
+    indexes signature, :sortable => true
+    
+    # attributes
+    has created_at, updated_at
+  end
+
   # Validations
   validates_presence_of :signature, :title
   
   # Scopes
+  sphinx_scope(:by_text) { |value| {:conditions => {:title => value}} }
+
   scope :by_text, lambda {|value|
     signatures, words = split_search_words(value)
 
