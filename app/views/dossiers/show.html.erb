@@ -1,6 +1,12 @@
 <h1><%= @dossier %></h1>
 <p class="notice"><%= notice %></p>
 
+<ul class="dossier_topic_breadcrum">
+  <% for parent in @dossier.parent_tree %>
+    <li><%= link_to parent, dossiers_path(:dossier => {:signature => parent.signature }) %></li>
+  <% end %>
+</ul>
+
 <h3>Schlagworte</h3>
 <ul class="keywords">
   <% for keyword in @dossier.keyword_list %>

@@ -68,6 +68,11 @@ class Dossier < ActiveRecord::Base
     TopicDossier.where(:signature => signature).first
   end
   
+  def parent_tree
+    return [] unless parent = find_parent
+    return parent.parent_tree << parent
+  end
+  
   # Importer
   def self.filter_tags(values)
     boring = ["in", "und", "für"]
