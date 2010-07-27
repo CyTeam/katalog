@@ -4,6 +4,7 @@ class Dossier < ActiveRecord::Base
     # fields
     indexes title, :sortable => true
     indexes signature, :sortable => true
+#    indexes keywords.name, :as => :keywords, :sortable => true
     
     # attributes
     has created_at, updated_at
