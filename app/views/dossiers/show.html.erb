@@ -1,21 +1,7 @@
 <h1><%= @dossier %></h1>
 <p class="notice"><%= notice %></p>
 
-<table>
-  <tr>
-    <th><%= t_attr(:signature) %></th>
-    <td><%= @dossier.signature %></td>
-  </tr>
-  <tr>
-    <th><%= t_attr(:title) %></th>
-    <td><%= @dossier.title %></td>
-  </tr>
-  <tr>
-    <th><%= t_attr(:first_document_on) %></th>
-    <td><%= @dossier.first_document_on.try(:year) %></td>
-  </tr>
-</table>
-
+<h3>Schlagworte</h3>
 <ul class="keywords">
   <% for keyword in @dossier.keyword_list %>
     <li><%= keyword %></li>
@@ -23,15 +9,17 @@
 </ul>
 
 <% if @dossier.related_to.present? %>
+<h3>Querverweise</h3>
 <p>
-  Siehe auch: <%= @dossier.related_to %>
+  <%= @dossier.related_to %>
 </p>
 <% end %>
 
-<div class="ce_table block">
-<table>
-  <%= @containers = @dossier.containers; render 'containers/list' %>
-</table>
+<h3>Dossiers</h3>
+<div class="ce_table">
+  <table>
+    <%= @containers = @dossier.containers; render 'containers/list' %>
+  </table>
 </div>
 
 <%= link_to t_crud('edit'), edit_dossier_path(@dossier) %> |
