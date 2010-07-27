@@ -184,4 +184,8 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal 1, ActsAsTaggableOn::Tag.find_all_by_name('Test. Dot').count
     assert_equal [@dossier], Dossier.tagged_with(['Test. Dot'])
   end
+
+  test "parent tree includes all parents" do
+    assert_equal [dossiers(:group_7, :first_topic, :topic_local)], dossiers(:important_zug_topic).parent_tree
+  end
 end
