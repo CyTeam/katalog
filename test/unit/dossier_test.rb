@@ -186,6 +186,6 @@ class DossierTest < ActiveSupport::TestCase
   end
 
   test "parent tree includes all parents" do
-    assert_equal [dossiers(:group_7, :first_topic, :topic_local)], dossiers(:important_zug_topic).parent_tree
+    assert_equal dossiers(:group_7, :first_topic, :topic_local), dossiers(:important_zug_topic).parent_tree
   end
 end
