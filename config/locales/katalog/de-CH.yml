@@ -46,9 +46,10 @@ de-CH:
         code:        "Kürzel"
         description: "Beschreibung"
       user:
-        email:       "E-Mail"
-        password:    "Passwort"
-        remember_me: "Angemeldet bleiben"
+        email:                 "E-Mail"
+        password:              "Passwort"
+        password_confirmation: "Passwort Bestätigung"
+        remember_me:           "Angemeldet bleiben"
 
   messages:
     confirm_delete: "%{record} löschen?"
