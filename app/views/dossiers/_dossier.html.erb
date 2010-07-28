@@ -1,9 +1,9 @@
 <tr id="dossier-<%= dossier.id %>" class="dossier <%= cycle('odd', 'even') %>" data-href="<%= url_for dossier %>">
   <td><%= @new_signature ? dossier.new_signature : dossier.signature %></td>
   <td>
-    <b><%= dossier.title %></b>
+    <span class="title"><%= dossier.title %></span>
     <br/>
-    <i style="font-size: 80%">Schlagworte: <%= dossier.keywords.join(', ') %></i>
+    <span class="keywords">Schlagworte: <%= dossier.keywords.join(', ') %></span>
   </td>
   <td><%= dossier.container_types.map{|container_type| container_type.code}.join(', ') %></td>
   <td><%= dossier.locations.map{|location| location.code}.join(', ') %></td>

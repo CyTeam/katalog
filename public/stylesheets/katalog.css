@@ -2,6 +2,10 @@
 #header .inside,#container,#footer .inside{width:92%;margin-right:auto;margin-left:auto;}
 
 /** Lists **/
+.topic .title {font-weight: bold;}
+.dossier .title {font-weight: bold;}
+.dossier .keywords {font-style: italic; font-size: 80%;}
+
 tr.topic_group td { background-color: #96B1CD; }
 tr.topic td { background-color: #CBD7E6; }
 tr.topic_geo td { background-color: #C8B7B7; }

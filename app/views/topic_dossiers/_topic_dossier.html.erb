@@ -1,6 +1,6 @@
-<tr class="topic_dossier">
+<tr class="topic topic_dossier">
   <td><%= @new_signature ? topic_dossier.new_signature : topic_dossier.signature %></td>
-  <td><%= topic_dossier.title %></td>
+  <td class="title"><%= topic_dossier.title %></td>
   <td></td>
   <td></td>
   <td style="text-align: right"><%= number_with_delimiter(topic_dossier.document_count(@new_signature)) %></td>

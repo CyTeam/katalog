@@ -1,7 +1,7 @@
 <% unless @new_signature %>
-<tr class="topic_geo">
+<tr class="topic topic_geo">
   <td><%= @new_signature ? topic_geo.new_signature : topic_geo.signature %></td>
-  <td><%= topic_geo.title %></td>
+  <td class="title"><%= topic_geo.title %></td>
   <td></td>
   <td></td>
   <td style="text-align: right"><%= number_with_delimiter(topic_geo.document_count(@new_signature)) %></td>
