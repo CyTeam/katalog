@@ -78,4 +78,12 @@ class DossiersControllerTest < ActionController::TestCase
     # TODO: hack to get only Dossier, not Topic records
     assert_select 'tr.dossier', dossiers.where(:type => nil).count
   end
+
+  test "dossier view should contain links to topics" do
+    get :show, :id => @dossier.to_param
+    
+    assert_select '.dossier_topic_breadcrumb' do
+      assert_select 'li a', 4
+    end
+  end
 end
