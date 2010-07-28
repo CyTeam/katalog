@@ -3,7 +3,7 @@
   <td>
     <span class="title"><%= dossier.title %></span>
     <br/>
-    <span class="keywords">Schlagworte: <%= dossier.keywords.join(', ') %></span>
+    <span class="keywords"><%= dossier.keywords.join(', ') %></span>
   </td>
   <td><%= dossier.container_types.map{|container_type| container_type.code}.join(', ') %></td>
   <td><%= dossier.locations.map{|location| location.code}.join(', ') %></td>
