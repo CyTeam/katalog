@@ -3,7 +3,7 @@
 
 <ul class="dossier_topic_breadcrumb">
   <% for parent in @dossier.parent_tree %>
-    <li><%= link_to parent, dossiers_path(:dossier => {:signature => parent.signature }) %></li>
+    <li><%= link_to_topic(parent) %></li>
   <% end %>
 </ul>
 

@@ -1,5 +1,5 @@
 <% unless @new_signature %>
-<tr class="topic topic_geo">
+<tr class="topic topic_geo" data-href="<%= url_for_topic topic_geo %>">
   <td><%= @new_signature ? topic_geo.new_signature : topic_geo.signature %></td>
   <td class="title"><%= topic_geo.title %></td>
   <td></td>
