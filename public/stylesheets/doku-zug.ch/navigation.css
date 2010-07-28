@@ -9,7 +9,8 @@
 #mainmenu .level_2 li a{color:#9d6524;}
 #mainmenu .level_2 li.last{border-bottom:0px;}
 #mainmenu ul ul{margin-bottom:3px;}
-.mod_breadcrumb{top:9px;position:relative;padding-top:105px;padding-left:236px;font-size:11px;color:#fff;}
+.mod_breadcrumb{top:9px;position:relative;padding-top:133px;padding-left:236px;font-size:11px;color:#003D61;}
+.mod_breadcrumb a{text-decoration:underline;color:#003D61;}
 .mod_breadcrumb:before{content:"Ihre Position: ";}
 .mod_booknav{margin-top:1em;margin-bottom:1em;padding-top:1em;border-top:1px dotted #ddd;}
 .mod_booknav li{width:45%;float:left;}

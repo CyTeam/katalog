@@ -20,8 +20,12 @@
 .ce_table th{padding:6px;background-color:#e1e6ec;border:1px solid #346599;}
 .ce_table td{padding:6px;border:1px solid #c8cbd0;}
 .ce_table tr.odd td{background-color:#f6f7f9;}
-.ce_table.jahresbericht tr.odd td{background-color:#f2f3f3;}
-.ce_table.jahresbericht tr.even td{background-color:#e5e7e8;}
+#jahresbericht td.row_dateiname,#themenuebersicht td.row_dateiname{width:280px;}
+#neuebuecher tr td{background-color:#ebd3cd;}
+#themenuebersicht tr td{background-color:#ebdbcb;}
+#jahresbericht tr td{background-color:#f2f3f3;}
+#jahresbericht tr.odd td{background-color:#f2f3f3;}
+#jahresbericht tr.even td{background-color:#e5e7e8;}
 .ce_download img,.ce_downloads img{vertical-align:top;}
 .ce_downloads p{margin-bottom:3px;}
 .ce_comments .comment_default{margin-bottom:6px;padding:9px 9px 9px 7px;background-color:#f6f7f9;border-left:2px solid #346599;}

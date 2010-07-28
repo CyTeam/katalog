@@ -1,6 +1,10 @@
 /* Style sheet welcome */
-#aktuell.mod_newslist,#thema.mod_newslist,#buch.mod_newslist{width:465px;height:123px;float:left;margin-bottom:17px;padding-top:2px;padding-bottom:0;padding-left:12px;}
-#aktuell.mod_newslist h1,#thema.mod_newslist h1,#buch.mod_newslist h1{margin-top:7px;margin-bottom:5px;}
+#printthis{width:463px;margin-bottom:11px;text-align:right;}
+#main{margin-bottom:0;}
+#aktuell.mod_newslist,#thema.mod_newslist,#buch.mod_newslist{width:465px;height:123px;float:left;margin-bottom:17px;padding-top:2px;padding-bottom:0;padding-left:1px;}
+.layout_latest{width:295px;}
+.otheraktuell,.otherthema,.otherbuch{margin-top:11px;}
+#aktuell.mod_newslist h1,#thema.mod_newslist h1,#buch.mod_newslist h1{margin-top:7px;margin-bottom:0;line-height:1;}
 #aktuell.mod_newslist{background:url("../../images/doku-zug.ch/box-gruen.jpg") left top no-repeat;}
 #thema.mod_newslist{background:url("../../images/doku-zug.ch/box-rot.jpg") left top no-repeat;}
 #buch.mod_newslist{background:url("../../images/doku-zug.ch/box-braun.jpg") left top no-repeat;}
