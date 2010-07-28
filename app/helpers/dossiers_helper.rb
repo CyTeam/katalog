@@ -8,6 +8,6 @@ module DossiersHelper
   end
   
   def link_to_topic(topic)
-    link_to(topic, dossiers_url(topic))
+    link_to(topic, url_for_topic(topic))
   end
 end
