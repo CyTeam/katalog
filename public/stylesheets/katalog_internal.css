@@ -1,0 +1,45 @@
+/** Layout for logged in users **/
+
+/* Smaller logo */
+#header {
+  height:70px;
+  background: #e5e8e9;
+  border-bottom: solid 10px #00669c;
+}
+
+/* Reduce vertical space waste */
+#main {
+  magin-top: 0px;
+}
+
+#main .inside {
+  margin-top: 0px;
+}
+
+#right, #left {
+  margin-top: 10px;
+}
+
+#mainmenu {
+  margin-top: 20px;
+}
+
+/* Reduce horizontal space waste */
+#container {
+  width: 98%;
+}
+
+#main .inside {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+#mainmenu {
+  margin-right: 0px;
+}
+
+#footer {
+  height:     20px;
+  background: #f2f3f3;
+  border-top: 3px solid #e5e8e9; 
+}

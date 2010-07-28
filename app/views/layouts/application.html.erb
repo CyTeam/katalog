@@ -6,6 +6,7 @@
   <%= stylesheet_link_tag 'doku-zug.ch/typolight', 'doku-zug.ch/basic', 'doku-zug.ch/content', 'doku-zug.ch/layout', 'doku-zug.ch/navigation', 'doku-zug.ch/welcome', 'doku-zug.ch/application' %>
   <%= stylesheet_link_tag 'doku-zug.ch/print', :media => 'print' %>
   <%= stylesheet_link_tag 'katalog' %>
+  <%= stylesheet_link_tag 'katalog_internal' if user_signed_in? %>
   <%= stylesheet_link_tag 'scaffold' %>
   <%= stylesheet_link_tag 'formtastic', 'formtastic_changes' %>
 
@@ -17,13 +18,7 @@
   <div id="wrapper">
     <div id="header">
       <div class="inside">
-        <div id="logo">
-          <a href="http://www.doku-zug.ch" title="doku-zug.ch - Öffentliches Dokumentationszentrum"><%= image_tag "doku-zug.ch/logo.gif", :alt => "doku-zug.ch - Öffentliches Dokumentationszentrum" %></a>
-        </div>
-        <div class="mod_breadcrumb block">
-          <a href="http://doku-zug.ch.gutenberg.ch-meta.net/" title="doku-zug.ch">doku-zug.ch</a> &#62; 
-          <span class="active">Katalog</span>
-        </div>
+        <%= render user_signed_in? ? 'layouts/internal_header' : 'layouts/public_header' %>
       </div>
     </div>
 
