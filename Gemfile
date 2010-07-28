@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0.beta4'
+gem 'rails', '3.0.0.rc'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -35,7 +35,7 @@ gem 'has_scope'
 gem 'inherited_resources'
 
 # Authentication
-gem 'devise', '>= 1.1.rc2'
+gem 'devise', '>= 1.1'
 
 # Dossier
 # =======
