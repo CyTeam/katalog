@@ -17,7 +17,7 @@
     <div id="header">
       <div class="inside">
         <div id="logo">
-          <a href="" title="doku-zug.ch - Öffentliches Dokumentationszentrum"><%= image_tag "doku-zug.ch/logo.gif", :alt => "doku-zug.ch - Öffentliches Dokumentationszentrum" %></a>
+          <a href="http://www.doku-zug.ch" title="doku-zug.ch - Öffentliches Dokumentationszentrum"><%= image_tag "doku-zug.ch/logo.gif", :alt => "doku-zug.ch - Öffentliches Dokumentationszentrum" %></a>
         </div>
       </div>
     </div>
@@ -69,46 +69,9 @@
 
     <div id="footer">
       <div class="inside">
-        <div id="such">
-          <form action="suchergebnis.html" method="get">
-            <div><input type="text" name="keywords" class="text" value="" /><input type="image" src="<%= image_path('doku-zug.ch/search2.png') %>" alt="Suche" class="submit" /></div>
-          </form>
-        </div>
-        <div class="mod_customnav block" id="seitenkarte">
-          <a href="#skipNavigation20" class="invisible">Navigation überspringen</a>
-          <ul class="level_1">
-            <li class="first"><a href="team.html" title="Über uns" class="first">Über uns</a></li>
-            <li><a href="team.html" title="Team">Team</a></li>
-            <li><a href="leitbild.html" title="Leitbild">Leitbild</a></li>
-            <li><a href="geschichte.html" title="Geschichte">Geschichte</a></li>
-            <li><a href="archiv-bibliothek.html" title="Unser Angebot">Unser Angebot</a></li>
-            <li><a href="archiv-bibliothek.html" title="Archiv, Bibliothek">Archiv, Bibliothek</a></li>
-            <li><a href="publikationen.html" title="Publikationen">Publikationen</a></li>
-            <li><a href="kataloge.html" title="Kataloge">Kataloge</a></li>
-            <li><a href="aktuell.html" title="News">News</a></li>
-            <li><a href="aktuell.html" title="Aktuell">Aktuell</a></li>
-            <li><a href="thema-der-woche.html" title="Thema der Woche">Thema der Woche</a></li>
-            <li><a href="neue-buecher.html" title="Neue Bücher">Neue Bücher</a></li>
-            <li><a href="kontakt.html" title="Kontakt">Kontakt</a></li>
-            <li><a href="links.html" title="Links">Links</a></li>
-            <li class="last"><a href="newsletter.html" title="Newsletter" class="last">Newsletter</a></li>
-          </ul>
-          <a name="skipNavigation20" id="skipNavigation20" class="invisible">&nbsp;</a>
-        </div>
 
-        <div id="schnelllinks">
-          <div class="ce_text block">
-            <p>
-              <a class="externerlink" onclick="window.open(this.href); return false;" href="http://www.bibliothekenzug.ch">Stadt- und Kantonsbibliothek Zug</a><br /><br />
-              <a class="externerlink" onclick="window.open(this.href); return false;" href="http://www.zug.ch/staatsarchiv">Staatsarchiv des Kantons Zug</a><br /><br />
-              <a class="externerlink" onclick="window.open(this.href); return false;" href="http://www.afz.ethz.ch">Archiv für Zeitgeschichte Zürich</a><br /><br />
-              <a class="externerlink" onclick="window.open(this.href); return false;" href="http://www.sozialarchiv.ch">Schweizerisches Sozialarchiv</a><br /><br />
-              <a class="externerlink" onclick="window.open(this.href); return false;" href="http://www.ub.unibas.ch/wwz-bibliothek-swa/schweiz-wirtschaftsarchiv/allgemeines/">Schweizerisches Wirtschaftsarchiv</a><br /><br />
-              <a class="externerlink" onclick="window.open(this.href); return false;" href="http://www.vsa-aas.org">Verein Schweizerischer ArchivarInnen</a><br /><br />
-              <a class="externerlink" onclick="window.open(this.href); return false;" href="http://www.bis.info">Bibliothek Information Schweiz</a>
-            </p>
-          </div>
-        </div>
+        <%= render 'layouts/public_footer' unless user_signed_in? %>
+
         <div class="clear"></div> 
       </div>
     </div>
