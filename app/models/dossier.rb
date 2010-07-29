@@ -12,7 +12,7 @@ class Dossier < ActiveRecord::Base
 
   # Ordering
   # BUG: Beware of SQL Injection
-  scope :order_by, lambda {|value| order("CONCAT(#{value}, IF(type IS NULL, '.a', ''))")}
+  scope :order_by, lambda {|value| order("CONCAT(#{value}, IF(type IS NULL, '.a', '')), title")}
   
   # Associations
   has_many :numbers, :class_name => 'DossierNumber', :dependent => :destroy
