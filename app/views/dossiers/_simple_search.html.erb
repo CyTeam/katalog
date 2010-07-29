@@ -1,4 +1,4 @@
 <%= form_tag(search_dossiers_path, :method => :get) do %>
-  <%= text_field :dossier, :text, :style => 'width: 85%' %>
+  <%= text_field :search, :text, :style => 'width: 85%' %>
   <%= image_submit_tag('doku-zug.ch/search2.png', :alt => t('katalog.search')) %>
 <% end %>

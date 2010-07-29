@@ -1,4 +1,4 @@
-<%= search_form_for('dossier', :url => search_dossiers_path) do |f| %>
+<%= search_form_for('search', :url => search_dossiers_path) do |f| %>
   <%= f.inputs do %>
     <%= f.input :signature, :label => t('dossier.signature', :scope => [:activerecord, :attributes]) %>
     <%= f.input :text, :label => t('dossier.text', :scope => [:activerecord, :attributes]) %>
