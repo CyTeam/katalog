@@ -26,3 +26,12 @@ tr.topic_dossier td { background-color: #E9DDAF; }
 td .keywords li, .tags li{
   display: inline;
 }
+
+/** Document Counts **/
+table.document_counts th {
+  text-align: right;
+}
+
+table.document_counts td {
+  text-align: right;
+}

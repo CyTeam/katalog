@@ -1,6 +1,14 @@
 class DossierNumber < ActiveRecord::Base
+  # Associations
   belongs_to :dossier
 
+  # Scopes
+  scope :present, where("amount > 0")
+  
+  def to_s
+    "#{period}: #{amount}"
+  end
+  
   # Attributes
   def from_year
     return nil unless from

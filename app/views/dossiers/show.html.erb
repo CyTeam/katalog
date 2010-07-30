@@ -21,6 +21,16 @@
 </p>
 <% end %>
 
+<h3>Dokumente</h3>
+<table class="document_counts ce_table">
+  <tr>
+    <%= render :partial => 'dossier_numbers/head', :collection => @dossier.numbers.present %>
+  </tr>
+  <tr>
+    <%= render :partial => 'dossier_numbers/amount', :collection => @dossier.numbers.present %>
+  </tr>
+</table>
+
 <h3>Dossiers</h3>
 <div class="ce_table">
   <table>
