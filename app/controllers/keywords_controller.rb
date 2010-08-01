@@ -10,4 +10,11 @@ class KeywordsController < InheritedResources::Base
 
   # In Place Edit Actions
   in_place_edit_for 'ActsAsTaggableOn::Tag', :name
+
+  # Actions
+  def create
+    @dossier = Dossier.find(params[:dossier_id])
+    @keywords = @dossier.keyword_list.add(params[:keyword][:name])
+    @dossier.save
+  end
 end

@@ -1,0 +1,2 @@
+page.remove 'new-keyword'
+page.replace 'keyword-list', :partial => 'list'

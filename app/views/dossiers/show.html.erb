@@ -7,15 +7,8 @@
   <% end %>
 </ul>
 
-<h3>Schlagworte</h3>
-<ul class="keywords">
-  <% for keyword in @dossier.keywords %>
-    <li id="keyword-<%= keyword.id %>">
-      <%= @keyword = keyword; in_place_editor_field :keyword, :name, {}, :url => set_name_dossier_keyword_path(@dossier, @keyword) %>
-      <%= link_to image_tag('icons/delete.png', :title => ('delete')), dossier_keyword_path(@dossier, keyword), :confirm => t_confirm_delete(keyword), :remote => true, :method => :delete %>
-    </li>
-  <% end %>
-</ul>
+<h3>Schlagworte <%= link_to image_tag('icons/add.png', :title => 'add'), new_dossier_keyword_path(@dossier), :remote => true %></h3>
+<%= render 'keywords/list' %>
 
 <% if @dossier.related_to.present? %>
 <h3>Querverweise</h3>

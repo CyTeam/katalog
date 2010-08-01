@@ -1,0 +1,3 @@
+<ul id="keyword-list" class="keywords">
+  <%= render @dossier.keywords.map{|keyword| keyword.becomes(Keyword)} %>
+</ul>
