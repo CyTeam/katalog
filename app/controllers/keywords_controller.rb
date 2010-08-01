@@ -7,4 +7,7 @@ class KeywordsController < InheritedResources::Base
   
   # Responders
   respond_to :html, :js
+
+  # In Place Edit Actions
+  in_place_edit_for 'ActsAsTaggableOn::Tag', :name
 end

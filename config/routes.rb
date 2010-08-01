@@ -14,7 +14,12 @@ Katalog::Application.routes.draw do |map|
       get :search
     end
 
-    resources :keywords
+    resources :keywords do
+    
+      member do
+        post :set_name
+      end
+    end
   end
 
   post "dossier_numbers/set_amount"
