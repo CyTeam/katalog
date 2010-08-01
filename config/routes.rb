@@ -15,5 +15,7 @@ Katalog::Application.routes.draw do |map|
     end
   end
 
+  post "dossier_numbers/set_amount"
+  
   root :to => "dossiers#index"
 end
