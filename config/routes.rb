@@ -15,7 +15,6 @@ Katalog::Application.routes.draw do |map|
     end
 
     resources :keywords do
-    
       member do
         post :set_name
       end
