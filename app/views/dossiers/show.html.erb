@@ -9,8 +9,8 @@
 
 <h3>Schlagworte</h3>
 <ul class="keywords">
-  <% for keyword in @dossier.keyword_list %>
-    <li><%= keyword %></li>
+  <% for keyword in @dossier.keywords %>
+    <li id="keyword-<%= keyword.id %>"><%= keyword.name %> <%= link_to image_tag('icons/delete.png', :title => ('delete')), dossier_keyword_path(@dossier, keyword), :confirm => t_confirm_delete(keyword), :remote => true, :method => :delete %></li>
   <% end %>
 </ul>
 
