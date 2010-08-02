@@ -5,6 +5,11 @@ class DossierNumberTest < ActiveSupport::TestCase
     @new = DossierNumber.new
   end
   
+  test "period from fixture" do
+    assert_equal "1999", dossier_numbers(:city_history_1999).period
+    assert_equal "2000 - 2004", dossier_numbers(:city_history_2000_2004).period
+  end
+
   test "*_year and period should work with nil's" do
     assert_equal nil, @new.from_year
     assert_equal nil, @new.to_year
