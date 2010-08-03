@@ -22,6 +22,11 @@ tr.topic_dossier td { background-color: #E9DDAF; }
 .nube5 {font-size: 2.4em;}
 .nube6 {font-size: 2.6em;}
 
+/** Dossier View **/
+.section {
+  margin-left: 1.5em;
+}
+
 /** Keywords **/
 td .keywords li, .tags li{
   display: inline;

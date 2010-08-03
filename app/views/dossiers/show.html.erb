@@ -1,21 +1,23 @@
 <h1><%= @dossier %></h1>
 <p class="notice"><%= notice %></p>
 
-<ul class="dossier_topic_breadcrumb">
-  <% for parent in @dossier.parent_tree %>
-    <li><%= link_to_topic(parent) %></li>
-  <% end %>
-</ul>
+<div class="section">
+  <ul class="dossier_topic_breadcrumb">
+    <% for parent in @dossier.parent_tree %>
+      <li><%= link_to_topic(parent) %></li>
+    <% end %>
+  </ul>
+</div>
 
 <h3>Schlagworte <%= link_to image_tag('icons/add.png', :title => 'add'), new_dossier_keyword_path(@dossier), :remote => true %></h3>
-<%= render 'keywords/list' %>
+<div class="section">
+  <%= render 'keywords/list' %>
+</div>
 
-<% if @dossier.related_to.present? %>
 <h3>Querverweise</h3>
-<p>
-  <%= @dossier.related_to %>
-</p>
-<% end %>
+<div class="section">
+  <%= render 'relations/list' if @dossier.related_to.present? %>
+</div>
 
 <h3>Dokumente</h3>
 <table class="document_counts ce_table">
