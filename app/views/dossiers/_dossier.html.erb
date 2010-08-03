@@ -1,9 +1,9 @@
 <tr id="dossier-<%= dossier.id %>" class="dossier <%= cycle('odd', 'even') %>" data-href="<%= url_for dossier %>">
   <td><%= @new_signature ? dossier.new_signature : dossier.signature %></td>
   <td>
-    <span class="title"><%= dossier.title %></span>
+    <span class="title"><%= highlight(dossier.title, params[:search][:text], :highlighter => '<span class="match">\1</span>') %></span>
     <br/>
-    <span class="keywords"><%= dossier.keywords.join(', ') %></span>
+    <span class="keywords"><%= highlight(dossier.keywords.join(', '), params[:search][:text], :highlighter => '<span class="match">\1</span>') %></span>
   </td>
   <td><%= dossier.container_types.map{|container_type| container_type.code}.join(', ') %></td>
   <td><%= dossier.locations.map{|location| location.code}.join(', ') %></td>
