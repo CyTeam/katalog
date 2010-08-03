@@ -41,3 +41,8 @@ table.document_counts td {
   font-weight: bold;
   color: #68b068;
 }
+
+/** Forms **/
+.inline-hints {
+  font-style: italic;
+}
