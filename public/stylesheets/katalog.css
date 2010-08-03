@@ -35,3 +35,9 @@ table.document_counts th {
 table.document_counts td {
   text-align: right;
 }
+
+/** Search **/
+.match {
+  font-weight: bold;
+  color: #68b068;
+}

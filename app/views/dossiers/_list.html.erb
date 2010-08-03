@@ -1,4 +1,4 @@
-<div class="ce_table block">
+<div id="dossiers" class="ce_table block">
 <table>
 <% cache :dossier_list_header do %>
   <tr>
@@ -12,7 +12,9 @@
 <% end %>
 
 <%= render @dossiers %>
+
 </table>
 </div>
+<%= javascript_tag "Element.highlight($('dossiers'), '#{escape_javascript(params[:search][:text])}', 'match');" if (params[:search] and params[:search][:text]) %>
 
 <%= t_paginate %>
