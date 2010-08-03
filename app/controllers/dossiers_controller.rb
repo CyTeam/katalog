@@ -39,6 +39,7 @@ class DossiersController < InheritedResources::Base
   # GET /dossiers/search.xml
   def search
     params[:search] ||= {}
+    params[:search][:text] ||= params[:search][:query]
     @dossiers = apply_scopes(Dossier, params[:search]).paginate :page => params[:page]
     
     index!
