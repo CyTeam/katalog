@@ -3,6 +3,9 @@ require 'test_helper'
 class DossierTest < ActiveSupport::TestCase
   setup do
     @dossier = Dossier.new(:signature => "99.9.999", :title => 'Testing everything')
+    @dossier.save
+    
+    Dossier.all.map{|dossier| dossier.update_tags; dossier.save}
   end
   
   test "to_s" do
@@ -69,6 +72,10 @@ class DossierTest < ActiveSupport::TestCase
     @dossier.keyword_list.add(Dossier.extract_keywords(keyword_list))
     @dossier.save
     
+    assert_equal [dossiers(:simple_zug_topic), dossiers(:important_zug_topic), dossiers(:city_history), dossiers(:empty_zug_topic), dossiers(:city_counsil_notes), dossiers(:city_counsil), dossiers(:topic_local), dossiers(:city_parties), @dossier], Dossier.by_text('City')
+  end
+  
+  test "find by text counts only distinct records" do
     assert_equal 8, Dossier.by_text('City').count
     assert_equal 8, Dossier.by_text('city').count
   end
@@ -167,7 +174,8 @@ class DossierTest < ActiveSupport::TestCase
   end
 
   test "assigning keyword_list adds to global tag list" do
-    assert_difference('ActsAsTaggableOn::Tag.count', 2) do
+    # Add 2 keywords and 1 tag
+    assert_difference('ActsAsTaggableOn::Tag.count', 2 + 1) do
       @dossier.keyword_list.add(['Word 1', 'Word 2', 'Word 2'])
       @dossier.save!
     end
@@ -176,10 +184,8 @@ class DossierTest < ActiveSupport::TestCase
   end
   
   test "keyword supports dotted keyword" do
-    assert_difference('ActsAsTaggableOn::Tag.count', 1) do
-      @dossier.keyword_list.add(['Test. Dot'])
-      @dossier.save!
-    end
+    @dossier.keyword_list.add(['Test. Dot'])
+    @dossier.save!
     
     assert_equal 1, ActsAsTaggableOn::Tag.find_all_by_name('Test. Dot').count
     assert_equal [@dossier], Dossier.tagged_with(['Test. Dot'])

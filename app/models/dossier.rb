@@ -3,7 +3,12 @@ class Dossier < ActiveRecord::Base
   validates_presence_of :signature, :title
   
   # Scopes
-  scope :by_text, lambda {|value| select("DISTINCT dossiers.*").joins("INNER JOIN `taggings` ON `dossiers`.`id` = `taggings`.`taggable_id` AND `taggings`.`taggable_type` = 'Dossier' INNER JOIN `tags` ON taggings.tag_id = tags.id").where("signature LIKE CONCAT(?, '%') OR name LIKE CONCAT('%', ?, '%')", value, value)}
+  scope :by_text, lambda {|value| select("DISTINCT dossiers.*").joins("INNER JOIN `taggings` ON `dossiers`.`id` = `taggings`.`taggable_id` AND `taggings`.`taggable_type` = 'Dossier' INNER JOIN `tags` ON taggings.tag_id = tags.id").where("signature LIKE CONCAT(?, '%') OR name LIKE CONCAT('%', ?, '%')", value, value)} do
+    def count
+      # Materialize records and count, as direct .count forgets about DISTINCT
+      all.count
+    end
+  end
   scope :by_signature, lambda {|value| where("signature LIKE CONCAT(?, '%')", value)}
   scope :by_title, lambda {|value| where("title LIKE CONCAT('%', ?, '%')", value)}
   # TODO: check if arel provides nicer code:
@@ -85,7 +90,8 @@ class Dossier < ActiveRecord::Base
   end
   
   def self.extract_tags(values)
-    filter_tags(values.compact.map{|sentence| sentence.split(/[ %.();,:-]/)}.flatten.uniq.select{|t| t.present?}).compact
+    values = values.join(',') if values.is_a? Array
+    filter_tags(values.split(/[ %.();,:-]/).uniq.select{|t| t.present?}).compact
   end
   
   def self.extract_keywords(values)
@@ -172,13 +178,15 @@ class Dossier < ActiveRecord::Base
     end
   end
   
+  before_save :update_tags
+  def update_tags
+    tag_string = self.keyword_list.join(',') + "," + self.title
+    self.tag_list = self.class.extract_tags(tag_string)
+  end
+  
   def import_keywords(row)
     keys = self.class.extract_keywords(row[13..15])
     self.keyword_list.add(keys)
-    
-    ts = self.class.extract_tags([row[13..15]])
-    ts += self.tag_list unless self.tag_list.nil?
-    tag_list = ts
   end
   
   def import(row)
@@ -188,10 +196,8 @@ class Dossier < ActiveRecord::Base
     self.related_to = row[12]
 
     # tags and keywords
-    ts = self.class.extract_tags([row[1]])
-    self.tag_list = ts
     import_keywords(row)
-    
+    update_tags
     import_numbers(row)
   end
   
