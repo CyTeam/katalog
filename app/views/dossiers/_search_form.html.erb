@@ -1,6 +1,6 @@
 <%= search_form_for('search', :url => search_dossiers_path) do |f| %>
   <%= f.inputs do %>
-    <%= f.input :text, :label => t('dossier.text', :scope => [:activerecord, :attributes]) %>
+    <%= f.input :text, :label => t('dossier.text', :scope => [:activerecord, :attributes]), :hint => t('formtastic.hints.dossier.text') %>
     <%= f.input :kind, :label => t('container.container_type', :scope => [:activerecord, :attributes]) %>
     <%= f.input :location, :label => t('container.location', :scope => [:activerecord, :attributes]), :as => :select, :collection => Location.all.map{|l| [l.title, l.code]} %>
   <% end %>

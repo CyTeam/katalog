@@ -51,6 +51,10 @@ de-CH:
         password_confirmation: "Passwort Bestätigung"
         remember_me:           "Angemeldet bleiben"
 
+  formtastic:
+    hints:
+      dossier:
+        text: "Titel, Schlagworte, Signatur"
   messages:
     confirm_delete: "%{record} löschen?"
 
