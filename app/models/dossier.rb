@@ -3,7 +3,21 @@ class Dossier < ActiveRecord::Base
   validates_presence_of :signature, :title
   
   # Scopes
-  scope :by_text, lambda {|value| select("DISTINCT dossiers.*").joins("INNER JOIN `taggings` ON `dossiers`.`id` = `taggings`.`taggable_id` AND `taggings`.`taggable_type` = 'Dossier' INNER JOIN `tags` ON taggings.tag_id = tags.id").where("signature LIKE CONCAT(?, '%') OR name LIKE CONCAT('%', ?, '%')", value, value)}
+  scope :by_text, lambda {|value|
+    result = joins("INNER JOIN `taggings` ON `dossiers`.`id` = `taggings`.`taggable_id` AND `taggings`.`taggable_type` = 'Dossier' INNER JOIN `tags` ON taggings.tag_id = tags.id")
+    result = result.group("dossiers.id")
+
+    words = split_search_words(value)
+    for word in words
+      result = result.having("(signature LIKE CONCAT(?, '%') OR GROUP_CONCAT(tags.name) LIKE CONCAT('%', ?, '%'))", word, word)
+    end
+    return result
+  } do
+    def count
+      # Materialize records and count, as direct .count forgets about DISTINCT
+      all.count
+    end
+  end
   scope :by_signature, lambda {|value| where("signature LIKE CONCAT(?, '%')", value)}
   scope :by_title, lambda {|value| where("title LIKE CONCAT('%', ?, '%')", value)}
   # TODO: check if arel provides nicer code:
@@ -84,9 +98,17 @@ class Dossier < ActiveRecord::Base
     return values
   end
   
+  def self.split_words(value)
+    value.split(/[ %.();,:-]/).uniq.select{|t| t.present?}
+  end
+  
+  def self.split_search_words(value)
+    value.split(/[ %();,:-]/).uniq.select{|t| t.present?}
+  end
+  
   def self.extract_tags(values)
     values = values.join(',') if values.is_a? Array
-    filter_tags(values.split(/[ %.();,:-]/).uniq.select{|t| t.present?}).compact
+    filter_tags(split_words(values)).compact
   end
   
   def self.extract_keywords(values)

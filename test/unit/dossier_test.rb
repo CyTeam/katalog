@@ -75,6 +75,15 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal [dossiers(:simple_zug_topic), dossiers(:important_zug_topic), dossiers(:city_history), dossiers(:empty_zug_topic), dossiers(:city_counsil_notes), dossiers(:city_counsil), dossiers(:topic_local), dossiers(:city_parties), @dossier], Dossier.by_text('City')
   end
   
+  test "find by text supports ANDs multiple words" do
+    assert_equal [dossiers(:city_counsil_notes)], Dossier.by_text('counsil notes')
+    assert_equal [dossiers(:city_counsil_notes)], Dossier.by_text('notes counsil')
+  end
+  
+  test "find by text ANDs signature, keyword and title words" do
+    assert_equal [dossiers(:city_counsil_notes)], Dossier.by_text('77 counsil notes')
+  end
+  
   test "find by text counts only distinct records" do
     assert_equal 8, Dossier.by_text('City').count
     assert_equal 8, Dossier.by_text('city').count
