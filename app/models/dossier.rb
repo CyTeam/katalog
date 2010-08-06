@@ -3,12 +3,12 @@ class Dossier < ActiveRecord::Base
   validates_presence_of :signature, :title
   
   # Scopes
-  scope :by_text, lambda {|value|
+  scope :by_text2, lambda {|value|
     result = joins("INNER JOIN `taggings` ON `dossiers`.`id` = `taggings`.`taggable_id` AND `taggings`.`taggable_type` = 'Dossier' INNER JOIN `tags` ON taggings.tag_id = tags.id")
     result = result.group("dossiers.id")
 
-    words = split_search_words(value)
-    for word in words
+    signatures, words = split_search_words(value)
+    for word in words + signatures
       result = result.having("(signature LIKE CONCAT(?, '%') OR GROUP_CONCAT(tags.name) LIKE CONCAT('%', ?, '%'))", word, word)
     end
     return result
@@ -18,6 +18,17 @@ class Dossier < ActiveRecord::Base
       all.count
     end
   end
+  scope :by_text, lambda {|value|
+    signatures, words = split_search_words(value)
+
+    signature_condition = (["(signature LIKE CONCAT(?, '%'))"] * signatures.count).join(' OR ')
+    word_condition = (["(id IN (SELECT taggable_id FROM tags INNER JOIN taggings ON taggings.tag_id = tags.id WHERE name LIKE CONCAT('%', ?, '%')))"] * words.count).join(' AND ')
+
+    condition = [signature_condition.presence, word_condition.presence].compact.join(' AND ')
+    params = signatures + words
+    
+    Dossier.where(condition, *params)
+  }
   scope :by_signature, lambda {|value| where("signature LIKE CONCAT(?, '%')", value)}
   scope :by_title, lambda {|value| where("title LIKE CONCAT('%', ?, '%')", value)}
   # TODO: check if arel provides nicer code:
@@ -103,7 +114,18 @@ class Dossier < ActiveRecord::Base
   end
   
   def self.split_search_words(value)
-    value.split(/[ %();,:-]/).uniq.select{|t| t.present?}
+    strings = value.split(/[ %();,:-]/).uniq.select{|t| t.present?}
+    words = []
+    signatures = []
+    for string in strings
+      if /^[0-9.]{1,8}$/.match(string)
+        signatures << string
+      else
+        words << string.split('.')
+      end
+    end
+    
+    return signatures, words.flatten
   end
   
   def self.extract_tags(values)
