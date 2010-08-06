@@ -13,7 +13,7 @@ class Dossier < ActiveRecord::Base
     end
     return result
   } do
-    def count
+    def count(*value)
       # Materialize records and count, as direct .count forgets about DISTINCT
       all.count
     end
