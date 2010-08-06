@@ -122,6 +122,13 @@ class ImportTest < ActiveSupport::TestCase
     assert_superset keyword_list, ["Politics", "City", "counsil", "Corruption"]
   end
 
+  test "document count" do
+    # Cleanup database and import
+    reset_and_import('dossiers')
+    
+    assert_equal 8930, Dossier.find_by_title('City history').document_count
+  end
+  
   test "real data" do
     # Cleanup database and import
     reset_and_import('small')

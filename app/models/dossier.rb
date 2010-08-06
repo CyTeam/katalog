@@ -153,13 +153,13 @@ class Dossier < ActiveRecord::Base
     # before 1990
     numbers.create(
       :to     => '1989-12-31',
-      :amount => row[16].nil? ? nil : row[16].delete("'").to_i
+      :amount => row[16].nil? ? nil : row[16].delete("',").to_i
     )
     # 1990-1993
     numbers.create(
       :from   => '1990-01-01',
       :to     => '1993-12-31',
-      :amount => row[17].nil? ? nil : row[17].delete("'").to_i
+      :amount => row[17].nil? ? nil : row[17].delete("',").to_i
     )
     # 1994-
     year = 1994
@@ -167,7 +167,7 @@ class Dossier < ActiveRecord::Base
       numbers.create(
         :from   => Date.new(year, 1, 1),
         :to     => Date.new(year, 12, 31),
-        :amount => amount.nil? ? nil : amount.delete("'").to_i
+        :amount => amount.nil? ? nil : amount.delete("',").to_i
       )
       year += 1
     end
