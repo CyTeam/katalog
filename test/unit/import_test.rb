@@ -11,6 +11,12 @@ class ImportTest < ActiveSupport::TestCase
     }
   end
 
+  def reset_and_import(filename)
+    # Cleanup database and import
+    Dossier.destroy_all
+    rows = Dossier.import_from_csv(Rails.root.join("test/import/#{filename}.csv"))
+  end
+  
   setup do
     @container_row = ["77.0.100","City history 1900-1999",100,1910,0,0,0,0,0,"DH","EG","Test",nil,"War. Peace. Ying and Yang. Mandela, Nelson","Upper Class","Lower Class",1,2,3,4,5,6,7,8,9,10]
     @keyword_row = []; @keyword_row[13] = "Counsil"; @keyword_row[14] = "Corruption"; @keyword_row[15] = "Conflict";
@@ -41,8 +47,7 @@ class ImportTest < ActiveSupport::TestCase
     empty_zug_topic     = dossiers('empty_zug_topic')
     
     # Cleanup database and import
-    Dossier.destroy_all
-    Dossier.import_from_csv(Rails.root.join('test/import/topics.csv'))
+    reset_and_import('topics')
     
     # Test data
     assert_equal 2, TopicGroup.count
@@ -69,8 +74,7 @@ class ImportTest < ActiveSupport::TestCase
     city_counsil_notes = dossiers('city_counsil_notes')
 
     # Cleanup database and import
-    Dossier.destroy_all
-    rows = Dossier.import_from_csv(Rails.root.join('test/import/dossiers.csv'))
+    reset_and_import('dossiers')
     
     assert_similar city_history, Dossier.find_by_title("City history")
     assert_equal 3, Dossier.find_by_title("City history").containers.count
@@ -98,8 +102,7 @@ class ImportTest < ActiveSupport::TestCase
     city_history_2002      = containers('city_history_2002')
     
     # Cleanup database and import
-    Dossier.destroy_all
-    rows = Dossier.import_from_csv(Rails.root.join('test/import/dossiers.csv'))
+    reset_and_import('dossiers')
 
     # Test data
     assert_equal 13, Dossier.count
@@ -121,8 +124,7 @@ class ImportTest < ActiveSupport::TestCase
 
   test "real data" do
     # Cleanup database and import
-    Dossier.destroy_all
-    rows = Dossier.import_from_csv(Rails.root.join('test/import/small.csv'))
+    reset_and_import('small')
 
     # Test data
     assert_equal 24, Dossier.count
