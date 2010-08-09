@@ -15,15 +15,6 @@
 
 </table>
 </div>
-<%
-  if params[:search] and params[:search][:text].present?
-    signatures, words = Dossier.split_search_words(params[:search][:text])
-    for word in words
-%>
-<%= javascript_tag "Element.highlight($('dossiers'), '#{escape_javascript(word)}', 'match');" %>
-<%
-    end
-  end
-%>
+<%= highlight_words(@query) %>
 
 <%= t_paginate %>
