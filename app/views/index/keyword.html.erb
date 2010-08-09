@@ -1,5 +1,6 @@
 <h1><%= t('controllers.index.keyword') %></h1>
 
+<%= paginated_section do %>
 <div class="ce_table block">
 <table>
   <tr>
@@ -9,5 +10,4 @@
   <%= render :partial => 'keyword', :collection => @index %>
 </table>
 </div>
-
-<%= t_paginate %>
+<% end %>
