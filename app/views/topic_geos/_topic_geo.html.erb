@@ -1,4 +1,5 @@
 <% unless @new_signature %>
+<% cache topic_geo do %>
 <tr class="topic topic_geo" data-href="<%= url_for_topic topic_geo %>">
   <td><%= @new_signature ? topic_geo.new_signature : topic_geo.signature %></td>
   <td class="title"><%= topic_geo.title %></td>
@@ -7,4 +8,5 @@
   <td style="text-align: right"><%= number_with_delimiter(topic_geo.document_count(@new_signature)) %></td>
   <td></td>
 </tr>
+<% end %>
 <% end %>
