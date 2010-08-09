@@ -15,6 +15,16 @@ class ActiveSupport::TestCase
   end
 
   def assert_same_set(expected, actual)
-    assert_equal expected.to_set, actual.to_set, "%s is not the same set as %s" % [expected.inspect, actual.inspect]
+    assert expected.to_set == actual.to_set, "%s is not the same set as %s" % [expected.inspect, actual.inspect]
+  end
+
+  def assert_similar(expected, actual)
+    klass = expected.class
+    assert_kind_of klass, actual
+    
+    field_names = klass.content_columns.collect{|c| c.name}.reject{|name| ["created_at", "updated_at"].include?(name)}
+    field_names.each {|field_name|
+      assert_equal expected[field_name], actual[field_name], "Attribute '%s' of %s" % [field_name, actual.inspect]
+    }
   end
 end

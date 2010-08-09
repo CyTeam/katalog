@@ -97,6 +97,15 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal [dossiers(:city_counsil_notes)], Dossier.by_text('77 counsil notes')
   end
   
+  test "find by text ORs signatures" do
+    assert_same_set dossiers(:worker_movement_general, :worker_movement_history), Dossier.by_text('worker 11.0.100 11.0.500')
+    assert_same_set dossiers(:worker_movement_general, :worker_movement_history), Dossier.by_text('11.0.5 worker 11.0.1')
+  end
+  
+  test "find by text strips whitespace" do
+    assert_equal [dossiers(:city_counsil_notes)], Dossier.by_text(' notes ')
+  end
+  
   test "find by text counts only distinct records" do
     assert_equal 8, Dossier.by_text('City').count
     assert_equal 8, Dossier.by_text('city').count
