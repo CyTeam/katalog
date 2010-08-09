@@ -30,7 +30,8 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 # Default Helpers
 gem 'validation_reflection'
 gem 'formtastic', :git => 'git://github.com/justinfrench/formtastic.git', :branch => 'rails3'
-gem 'will_paginate', :git => 'http://github.com/mislav/will_paginate.git', :branch => 'rails3'
+#gem 'will_paginate', :git => 'http://github.com/mislav/will_paginate.git', :branch => 'rails3'
+gem 'will_paginate', :git => 'http://github.com/huerlisi/will_paginate.git', :branch => 'rails3'
 gem 'has_scope'
 gem 'inherited_resources'
 
