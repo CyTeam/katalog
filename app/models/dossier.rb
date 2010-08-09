@@ -54,7 +54,11 @@ class Dossier < ActiveRecord::Base
   end
   
   def relation_titles
-    return related_to.split(';').map{|relation| relation.strip.presence}.compact
+    stripped_relations = related_to.split(';').map{|relation| relation.strip.presence}.compact
+    
+    titles = stripped_relations.map{|relation| relation.gsub(/^[0-9.]{1,8}:[ ]*/, '')}
+
+    return titles
   end
   
   # Attributes

@@ -93,7 +93,7 @@ worker_movement_general:
   signature: 11.0.100
   new_signature: 11.100.0
   title: Worker movement general
-  related_to: Worker Movement History
+  related_to: " Worker Movement History;  Movements general "
 
 worker_movement_history:
   signature: 11.0.500
