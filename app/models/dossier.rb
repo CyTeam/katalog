@@ -38,6 +38,21 @@ class Dossier < ActiveRecord::Base
     "#{signature}: #{title}"
   end
   
+  def self.split_search_words(value)
+    strings = value.split(/[ %();,:-]/).uniq.select{|t| t.present?}
+    words = []
+    signatures = []
+    for string in strings
+      if /^[0-9.]{1,8}$/.match(string)
+        signatures << string
+      else
+        words << string.split('.')
+      end
+    end
+    
+    return signatures, words.flatten
+  end
+  
   # Attributes
   def location=(value)
     if value.is_a?(String)
@@ -96,21 +111,6 @@ class Dossier < ActiveRecord::Base
   
   def self.split_words(value)
     value.split(/[ %.();,:-]/).uniq.select{|t| t.present?}
-  end
-  
-  def self.split_search_words(value)
-    strings = value.split(/[ %();,:-]/).uniq.select{|t| t.present?}
-    words = []
-    signatures = []
-    for string in strings
-      if /^[0-9.]{1,8}$/.match(string)
-        signatures << string
-      else
-        words << string.split('.')
-      end
-    end
-    
-    return signatures, words.flatten
   end
   
   def self.extract_tags(values)
