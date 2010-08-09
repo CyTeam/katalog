@@ -1,9 +1,5 @@
-<%
-  relations = @dossier.related_to.split(';').compact
-  relations.map!{|relation| relation.strip}
-%>
 <ul>
-  <% for relation in relations %>
+  <% for relation in @dossier.relation_titles %>
     <li><%= link_to relation, search_dossiers_url(:search => {:text => relation}) %></li>
   <% end %>
 </ul>

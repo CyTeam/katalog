@@ -53,6 +53,10 @@ class Dossier < ActiveRecord::Base
     return signatures, words.flatten
   end
   
+  def relation_titles
+    return related_to.split(';').map{|relation| relation.strip.presence}.compact
+  end
+  
   # Attributes
   def location=(value)
     if value.is_a?(String)
