@@ -15,6 +15,15 @@
 
 </table>
 </div>
-<%= javascript_tag "Element.highlight($('dossiers'), '#{escape_javascript(params[:search][:text])}', 'match');" if (params[:search] and params[:search][:text]) %>
+<%
+  if params[:search] and params[:search][:text].present?
+    signatures, words = Dossier.split_search_words(params[:search][:text])
+    for word in words
+%>
+<%= javascript_tag "Element.highlight($('dossiers'), '#{escape_javascript(word)}', 'match');" %>
+<%
+    end
+  end
+%>
 
 <%= t_paginate %>
