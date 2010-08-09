@@ -3,21 +3,6 @@ class Dossier < ActiveRecord::Base
   validates_presence_of :signature, :title
   
   # Scopes
-  scope :by_text2, lambda {|value|
-    result = joins("INNER JOIN `taggings` ON `dossiers`.`id` = `taggings`.`taggable_id` AND `taggings`.`taggable_type` = 'Dossier' INNER JOIN `tags` ON taggings.tag_id = tags.id")
-    result = result.group("dossiers.id")
-
-    signatures, words = split_search_words(value)
-    for word in words + signatures
-      result = result.having("(signature LIKE CONCAT(?, '%') OR GROUP_CONCAT(tags.name) LIKE CONCAT('%', ?, '%'))", word, word)
-    end
-    return result
-  } do
-    def count(*value)
-      # Materialize records and count, as direct .count forgets about DISTINCT
-      all.count
-    end
-  end
   scope :by_text, lambda {|value|
     signatures, words = split_search_words(value)
 
