@@ -13,4 +13,8 @@ class ActiveSupport::TestCase
   def assert_superset(superset, subset)
     assert superset.to_set.superset?(subset.to_set), "%s is no superset of %s" % [superset.inspect, subset.inspect]
   end
+
+  def assert_same_set(expected, actual)
+    assert_equal expected.to_set, actual.to_set, "%s is not the same set as %s" % [expected.inspect, actual.inspect]
+  end
 end
