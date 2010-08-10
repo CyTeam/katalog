@@ -9,6 +9,7 @@
     <%= f.commit_button t(:search, :scope => :katalog) %>
   <% end %>
 <% end %>
-
-<%= javascript_tag "$('search_text').activate();" %>
 <% end %>
+
+<%= javascript_tag "Form.Element.setValue('search_text', '#{escape_javascript(@query)}');" %>
+<%= javascript_tag "$('search_text').activate();" %>
