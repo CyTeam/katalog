@@ -27,6 +27,9 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 
 # CyT
 # ===
+# Database
+gem 'mysql2'
+
 # Default Helpers
 gem 'validation_reflection'
 gem 'formtastic', :git => 'git://github.com/justinfrench/formtastic.git', :branch => 'rails3'
