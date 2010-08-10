@@ -1,3 +1,4 @@
+<% cache :search_form do %>
 <%= search_form_for('search', :url => search_dossiers_path) do |f| %>
   <%= f.inputs do %>
     <%= f.input :text, :label => t('dossier.text', :scope => [:activerecord, :attributes]), :hint => t('formtastic.hints.dossier.text') %>
@@ -10,3 +11,4 @@
 <% end %>
 
 <%= javascript_tag "$('search_text').activate();" %>
+<% end %>
