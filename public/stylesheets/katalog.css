@@ -11,6 +11,16 @@ tr.topic td { background-color: #E1E6EC; }
 tr.topic.topic_geo td { background-color: #C8B7B7; }
 tr.topic.topic_dossier td { background-color: #E9DDAF; }
 
+/** Index **/
+.index tr.topic td {
+  border: 0;
+  font-size: 80%;
+}
+.index tr.topic.topic_group td {
+  border: 0;
+  font-size: 100%;
+}
+
 /** Tag Cloud **/
 .tag_cloud {font-size: 80%; text-decoration: none;}
 .tag_cloud a {text-decoration: none;}
