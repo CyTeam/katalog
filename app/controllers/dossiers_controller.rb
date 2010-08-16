@@ -30,7 +30,7 @@ class DossiersController < InheritedResources::Base
       params[:dossier][:order_by] ||= 'new_signature'
     end
     
-    @dossiers = apply_scopes(Dossier, params[:dossier]).paginate :page => params[:page]
+    @dossiers = apply_scopes(Dossier, params[:dossier]).where("type IN ('TopicGroup', 'Topic')").paginate :page => params[:page]
     
     index!
   end
