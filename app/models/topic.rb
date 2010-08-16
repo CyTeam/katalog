@@ -4,9 +4,9 @@ class Topic < Dossier
 
   def children(use_new_signature = false)
     if use_new_signature
-      Dossier.where("new_signature LIKE CONCAT(?, '%')", new_signature).where("id != ?", id)
+      Dossier.where("new_signature LIKE CONCAT(?, '%')", new_signature).where("dossiers.id != ?", id)
     else
-      Dossier.where("signature LIKE CONCAT(?, '%')", signature).where("id != ?", id)
+      Dossier.where("signature LIKE CONCAT(?, '%')", signature).where("dossiers.id != ?", id)
     end
   end
   
