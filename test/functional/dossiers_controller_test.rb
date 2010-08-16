@@ -57,14 +57,27 @@ class DossiersControllerTest < ActionController::TestCase
     assert_response :success
   end
   
+  test "index should list only topic groups and topics" do
+    get :index
+
+    # TODO: hack to get only Dossier, not Topic records
+    assert_select 'tr.dossier', 0
+
+    # TODO: hack to get only Dossier, not Topic records
+    assert_select 'tr.topic', 3
+
+    # TODO: hack to get only Dossier, not Topic records
+    assert_select 'tr.topic_group', 2
+  end
+  
   test "should list by signature" do
-    get :index, :dossier => {:signature => '77.0.100'}
+    get :search, :search => {:signature => '77.0.100'}
     dossiers = Dossier.by_signature('77.0.100')
 
     # TODO: hack to get only Dossier, not Topic records
     assert_select 'tr.dossier', dossiers.where(:type => nil).count
 
-    get :index, :dossier => {:signature => '77.0'}
+    get :search, :search => {:signature => '77.0'}
     dossiers = Dossier.by_signature('77.0')
 
     # TODO: hack to get only Dossier, not Topic records
@@ -72,7 +85,7 @@ class DossiersControllerTest < ActionController::TestCase
   end
   
   test "should list by location" do
-    get :index, :dossier => {:location => 'EG'}
+    get :search, :search => {:location => 'EG'}
     dossiers = Dossier.by_location('EG')
 
     # TODO: hack to get only Dossier, not Topic records

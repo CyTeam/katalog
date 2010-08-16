@@ -2,4 +2,7 @@
 
 <%= render 'search_form' %>
 
-<%= render 'list' if @dossiers %>
+<%= paginated_section do %>
+  <%= render 'list' if @dossiers %>
+<% end %>
+<%= highlight_words(@query) %>

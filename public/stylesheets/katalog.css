@@ -6,10 +6,10 @@
 .dossier .title {font-weight: bold;}
 .dossier .keywords {font-style: italic; font-size: 80%;}
 
-tr.topic_group td { background-color: #96B1CD; }
-tr.topic td { background-color: #CBD7E6; }
-tr.topic_geo td { background-color: #C8B7B7; }
-tr.topic_dossier td { background-color: #E9DDAF; }
+tr.topic.topic_group td { background-color: #96B1CD; }
+tr.topic td { background-color: #E1E6EC; }
+tr.topic.topic_geo td { background-color: #C8B7B7; }
+tr.topic.topic_dossier td { background-color: #E9DDAF; }
 
 /** Tag Cloud **/
 .tag_cloud {font-size: 80%; text-decoration: none;}
