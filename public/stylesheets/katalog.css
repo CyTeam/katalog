@@ -12,11 +12,20 @@ tr.topic.topic_geo td { background-color: #C8B7B7; }
 tr.topic.topic_dossier td { background-color: #E9DDAF; }
 
 /** Index **/
+
+.index tr.header {
+  display: none;
+}
+
 .index tr.topic td {
+  padding-top: 2px;
+  padding-bottom: 2px;
   border: 0;
-  font-size: 80%;
+  font-size: 85%;
 }
 .index tr.topic.topic_group td {
+  padding-top: 8px;
+  padding-bottom: 8px;
   border: 0;
   font-size: 100%;
 }

@@ -5,6 +5,7 @@ de-CH:
     edit:     "Ändern"
     show:     "Anzeigen"
     delete:   "Löschen"
+    overview: "Themenübersicht"
     
   controllers:
     index:
