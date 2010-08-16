@@ -1,14 +1,14 @@
 module DossiersHelper
-  def link_to_keyword(keyword)
-    link_to keyword, dossiers_path(:dossier => {:tag => keyword })
+  def link_to_keyword(keyword, options = {})
+    link_to(keyword, search_dossiers_path(:search => {:tag => keyword }), options)
   end
 
   def url_for_topic(topic)
-    dossiers_url(:dossier => {:signature => topic.signature})
+    search_dossiers_url(:search => {:signature => topic.signature})
   end
   
-  def link_to_topic(topic)
-    link_to(topic, url_for_topic(topic))
+  def link_to_topic(topic, options = {})
+    link_to(topic, url_for_topic(topic), options)
   end
 
   def highlight_words(words)
