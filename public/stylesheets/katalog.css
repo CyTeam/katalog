@@ -41,7 +41,9 @@ li.topic_group .signature {
 }
 
 li.topic_group a {
-  margin-left: 1.5em; display: block;
+  margin-left: 1.5em;
+  display: block;
+  text-decoration: none;
 }
 
 li.topic .signature {
@@ -52,6 +54,7 @@ li.topic .signature {
 
 li.topic a {
   margin-left: 3em; display: block;
+  text-decoration: none;
 }
 
 /** Tag Cloud **/
