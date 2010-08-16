@@ -64,7 +64,7 @@ class DossiersControllerTest < ActionController::TestCase
     assert_select 'tr.dossier', 0
 
     # TODO: hack to get only Dossier, not Topic records
-    assert_select 'tr.topic', 3
+    assert_select 'tr.topic', 4
 
     # TODO: hack to get only Dossier, not Topic records
     assert_select 'tr.topic_group', 2

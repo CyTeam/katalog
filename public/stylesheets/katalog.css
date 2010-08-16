@@ -30,6 +30,12 @@ tr.topic.topic_dossier td { background-color: #E9DDAF; }
   font-size: 100%;
 }
 
+/** Sidebar Topic Index **/
+li.topic_group {
+  font-weight: bold;
+}
+
+
 /** Tag Cloud **/
 .tag_cloud {font-size: 80%; text-decoration: none;}
 .tag_cloud a {text-decoration: none;}
