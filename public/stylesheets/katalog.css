@@ -35,6 +35,14 @@ li.topic_group {
   font-weight: bold;
 }
 
+li.topic_group .signature {
+  float: left;
+  width: 1.2em;
+}
+
+li.topic_group a {
+  margin-left: 1.5em; display: block;
+}
 
 /** Tag Cloud **/
 .tag_cloud {font-size: 80%; text-decoration: none;}

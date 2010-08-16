@@ -3,10 +3,8 @@
     <ul>
       <% for topic in TopicGroup.all %>
         <li class="topic_group">
-          <span style="float: left; width: 1.2em"><%= topic.signature %></span>
-          <%= link_to(url_for_topic(topic), :style => "margin-left: 1.5em; display: block") do %>
-            <%= topic.title %>
-          <% end %>
+          <span class="signature"><%= topic.signature %></span>
+          <%= link_to(topic.title, url_for_topic(topic)) %>
         </li>
       <% end %>
     </ul>
