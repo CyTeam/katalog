@@ -44,6 +44,16 @@ li.topic_group a {
   margin-left: 1.5em; display: block;
 }
 
+li.topic .signature {
+  margin-left: 1.5em;
+  float: left;
+  width: 1.2em;
+}
+
+li.topic a {
+  margin-left: 3em; display: block;
+}
+
 /** Tag Cloud **/
 .tag_cloud {font-size: 80%; text-decoration: none;}
 .tag_cloud a {text-decoration: none;}
