@@ -4,8 +4,13 @@ class Dossier < ActiveRecord::Base
     # fields
     indexes title, :sortable => true
     indexes signature, :sortable => true
-#    indexes keywords.name, :as => :keywords, :sortable => true
+    indexes keywords.name, :as => :keywords, :sortable => true
     
+    set_property :field_weights => {
+      :title    => 10,
+      :keywords => 2
+    }
+      
     # attributes
     has created_at, updated_at
   end
@@ -14,9 +19,9 @@ class Dossier < ActiveRecord::Base
   validates_presence_of :signature, :title
   
   # Scopes
-  sphinx_scope(:by_text) { |value| {:conditions => {:title => value}} }
+  sphinx_scope(:by_text) { |value| value }
 
-  scope :by_text, lambda {|value|
+  scope :by_text2, lambda {|value|
     signatures, words = split_search_words(value)
 
     signature_condition = (["(signature LIKE CONCAT(?, '%'))"] * signatures.count).join(' OR ')
