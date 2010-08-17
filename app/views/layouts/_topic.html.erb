@@ -2,5 +2,5 @@
   <span class="signature"><%= topic.signature %></span>
   <%= link_to(topic.title, url_for_topic(topic)) %>
 
-  <%= render :partial => 'layouts/topic', :collection => topic.children.where(:type => 'Topic') if params[:search][:signature] == topic.signature %>
+  <%= render :partial => 'layouts/topic', :collection => topic.children.where(:type => 'Topic') if params[:search] and params[:search][:signature] == topic.signature %>
 </li>
