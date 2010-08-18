@@ -79,6 +79,11 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal [['77.0'], ['test', 'new']], Dossier.split_search_words('test. 77.0, new')
   end
   
+  test "search word splitting drops double quote from words" do
+    assert_equal ['one'], Dossier.split_search_words('"one"')
+    assert_equal ['one', 'two'], Dossier.split_search_words('"one two"')
+  end
+  
   test "find by text" do
     keyword_list = ["City"]
     
