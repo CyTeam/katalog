@@ -62,7 +62,7 @@ class Dossier < ActiveRecord::Base
   end
   
   def self.split_search_words(value)
-    strings = value.split(/[ %();,:-]/).uniq.select{|t| t.present?}
+    strings = value.split(/[" %();,:-]/).uniq.select{|t| t.present?}
     words = []
     signatures = []
     for string in strings
