@@ -53,7 +53,9 @@ class Dossier < ActiveRecord::Base
   def self.by_text(value, options = {})
     params = {:match_mode => :extended, :star => true}
     params.merge!(options)
-    search(value, params)
+    
+    query = build_query(value)
+    search(query, params)
   end
 
   # Helpers
@@ -62,7 +64,7 @@ class Dossier < ActiveRecord::Base
   end
   
   def self.split_search_words(value)
-    strings = value.split(/[" %();,:-]/).uniq.select{|t| t.present?}
+    strings = value.split(/[ %();,:-]/).uniq.select{|t| t.present?}
     words = []
     signatures = []
     for string in strings
@@ -74,6 +76,19 @@ class Dossier < ActiveRecord::Base
     end
     
     return signatures, words.flatten
+  end
+  
+  def self.build_query(value)
+    signatures, words = split_search_words(value)
+
+    query = ""
+    if signatures.present?
+      quoted_signatures = signatures.map{|signature| '"' + signature + '"'}
+      query += "@signature (#{quoted_signatures.join('|')})"
+    end
+    
+    query += " @* #{words.join(' ')}"
+    return query
   end
   
   def relation_titles
