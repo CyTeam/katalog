@@ -49,7 +49,12 @@ class Dossier < ActiveRecord::Base
     has created_at, updated_at
   end
 
-  sphinx_scope(:by_text) { |value| {:conditions => value} }
+#  sphinx_scope(:by_text) { |value| {:conditions => value} }
+  def self.by_text(value, options = {})
+    params = {:match_mode => :extended, :star => true}
+    params.merge!(options)
+    search(value, params)
+  end
 
   # Helpers
   def to_s
