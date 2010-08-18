@@ -1,26 +1,8 @@
 class Dossier < ActiveRecord::Base
-  # Search
-  define_index do
-    # fields
-    indexes title, :sortable => true
-    indexes signature, :sortable => true
-    indexes keywords.name, :as => :keywords, :sortable => true
-    
-    set_property :field_weights => {
-      :title    => 10,
-      :keywords => 2
-    }
-      
-    # attributes
-    has created_at, updated_at
-  end
-
   # Validations
   validates_presence_of :signature, :title
   
   # Scopes
-  sphinx_scope(:by_text) { |value| value }
-
   scope :by_text2, lambda {|value|
     signatures, words = split_search_words(value)
 
@@ -51,6 +33,24 @@ class Dossier < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :keywords
   
+  # Search
+  define_index do
+    # fields
+    indexes title, :sortable => true
+    indexes signature, :sortable => true
+    indexes keywords.name, :as => :keywords, :sortable => true
+    
+    set_property :field_weights => {
+      :title    => 10,
+      :keywords => 2
+    }
+      
+    # attributes
+    has created_at, updated_at
+  end
+
+  sphinx_scope(:by_text) { |value| {:conditions => value} }
+
   # Helpers
   def to_s
     "#{signature}: #{title}"
