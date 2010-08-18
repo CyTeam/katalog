@@ -49,4 +49,5 @@ gem 'acts-as-taggable-on', '>= 2.0.6'
 gem 'fastercsv'
 
 # Search
-gem 'thinking-sphinx', '2.0.0.rc1', :require => 'thinking_sphinx'
+#gem 'thinking-sphinx', '2.0.0.rc1', :require => 'thinking_sphinx'
+gem 'thinking-sphinx', :git => 'git://github.com/freelancing-god/thinking-sphinx.git', :branch => 'rails3', :require => 'thinking_sphinx'

@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/freelancing-god/thinking-sphinx.git
+  revision: 5fe4a03
+  branch: rails3
+  specs:
+    thinking-sphinx (2.0.0.rc1)
+      activerecord (>= 3.0.0.beta3)
+      riddle (>= 1.0.10)
+
+GIT
   remote: git://github.com/justinfrench/formtastic.git
   revision: 3dbe0fd
   branch: rails3
@@ -90,9 +99,6 @@ GEM
     responders (0.6.2)
     riddle (1.0.12)
     sqlite3-ruby (1.3.1)
-    thinking-sphinx (2.0.0.rc1)
-      activerecord (>= 3.0.0.beta3)
-      riddle (>= 1.0.10)
     thor (0.14.0)
     treetop (1.4.8)
       polyglot (>= 0.3.1)
@@ -114,6 +120,6 @@ DEPENDENCIES
   mysql2
   rails (= 3.0.0.rc)
   sqlite3-ruby
-  thinking-sphinx (= 2.0.0.rc1)
+  thinking-sphinx!
   validation_reflection
   will_paginate!
