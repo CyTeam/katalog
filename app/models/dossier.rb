@@ -63,12 +63,12 @@ class Dossier < ActiveRecord::Base
     "#{signature}: #{title}"
   end
   
-  def self.split_search_words(value)
+  def self.split_search_words(query)
     sentences = []
 
     # Need a clone or slice! will do some harm
-    query = value.clone
-    while sentence = query.slice!(/\".[^\"]*\"/)
+    value = query.clone
+    while sentence = value.slice!(/\".[^\"]*\"/)
       sentences << sentence.delete('"');
     end
 
