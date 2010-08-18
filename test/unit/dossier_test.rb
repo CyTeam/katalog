@@ -79,9 +79,13 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal [['77.0'], ['test', 'new']], Dossier.split_search_words('test. 77.0, new')
   end
   
-  test "search word splitting drops double quote from words" do
-    assert_equal ['one'], Dossier.split_search_words('"one"')
-    assert_equal ['one', 'two'], Dossier.split_search_words('"one two"')
+  test "search word extraction detects double quote sentences" do
+    assert_equal [[], [], ['"one"']], Dossier.split_search_words('"one"')
+    assert_equal [[], [], ['"one two"']], Dossier.split_search_words('"one two"')
+    assert_equal [[], ['before', 'between', 'last'], ['"one two"', '"next, two"']], Dossier.split_search_words('before, "one two" between "next, two" last')
+  end
+  
+  test "search query building searches for words in all columns" do
   end
   
 =begin

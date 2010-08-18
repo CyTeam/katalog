@@ -64,6 +64,11 @@ class Dossier < ActiveRecord::Base
   end
   
   def self.split_search_words(value)
+    sentences = []
+    while sentence = value.slice!(/\".[^\"]*\"/)
+      sentences << sentence; 
+    end
+
     strings = value.split(/[ %();,:-]/).uniq.select{|t| t.present?}
     words = []
     signatures = []
@@ -75,11 +80,11 @@ class Dossier < ActiveRecord::Base
       end
     end
     
-    return signatures, words.flatten
+    return signatures, words.flatten, sentences
   end
   
   def self.build_query(value)
-    signatures, words = split_search_words(value)
+    signatures, words, sentences = split_search_words(value)
 
     query = ""
     if signatures.present?
@@ -87,7 +92,7 @@ class Dossier < ActiveRecord::Base
       query += "@signature (#{quoted_signatures.join('|')})"
     end
     
-    query += " @* #{words.join(' ')}"
+    query += " @* #{words.join(' ')} #{sentences.join(' ')}"
     return query
   end
   
