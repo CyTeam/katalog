@@ -2,7 +2,7 @@
 
 <%= render 'search_form' %>
 
-<%= paginated_section do %>
+<%= paginated_section :renderer => PaginationListLinkRenderer do %>
   <%= render 'list' if @dossiers %>
 <% end %>
 <%= highlight_words(@query) %>

@@ -43,9 +43,9 @@ class DossiersController < InheritedResources::Base
     @query = params[:search][:text]
     
     if @query.present?
-      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page])
+      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page])
     else
-      @dossiers = apply_scopes(Dossier, params[:search]).paginate :page => params[:page]
+      @dossiers = apply_scopes(Dossier, params[:search]).paginate :page => params[:page], :per_page => params[:per_page]
     end
     
     index!
