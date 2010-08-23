@@ -38,6 +38,8 @@ class DossiersController < InheritedResources::Base
   # GET /dossiers/search
   # GET /dossiers/search.xml
   def search
+    params[:per_page] ||= 25
+    
     params[:search] ||= {}
     params[:search][:text] ||= params[:search][:query]
     @query = params[:search][:text]
