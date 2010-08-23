@@ -6,20 +6,13 @@ class PaginationListLinkRenderer < WillPaginate::ViewHelpers::LinkRenderer
   end
 
   def per_page_link(count)
-    "<a href='%s'>%s</a>" % [per_page_href(count), count]
+    "<a class='per_page' href='%s'>%s</a>" % [per_page_href(count), count]
   end
 
   def per_page_href(count)
-    @base_url_params ||= begin
-      url_params = base_url_params
-      merge_optional_params(url_params)
-      url_params
-    end
+    params = @template.params.merge({:per_page => count})
     
-    url_params = @base_url_params.dup
-    symbolized_update(url_params, {:per_page => count})
-    
-    @template.url_for(url_params)
+    @template.url_for(params)
   end
 
 end
