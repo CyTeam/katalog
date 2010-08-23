@@ -1,15 +1,12 @@
-<% cache :search_form do %>
-<%= search_form_for('search', :url => search_dossiers_path) do |f| %>
-  <%= f.inputs do %>
-    <%= f.input :text, :label => t('dossier.text', :scope => [:activerecord, :attributes]), :hint => t('formtastic.hints.dossier.text') %>
-    <%= f.input :kind, :label => t('container.container_type', :scope => [:activerecord, :attributes]) %>
-    <%= f.input :location, :label => t('container.location', :scope => [:activerecord, :attributes]), :as => :select, :collection => Location.all.map{|l| [l.title, l.code]} %>
-  <% end %>
-  <%= f.buttons do %>
-    <%= f.commit_button t(:search, :scope => :katalog) %>
-  <% end %>
+<%= form_tag(search_dossiers_path, :method => :get) do %>
+  <%= label 'search', 'text', t('katalog.search') %>
+  <%= text_field :search, :text, :style => 'width: 85%' %>
+  <%= image_submit_tag('doku-zug.ch/search2.png', :alt => t('katalog.search')) %>
 <% end %>
-<% end %>
+
+<p>
+Beispiele: "Geschichte CH", medizin zug 61.3
+</p>
 
 <%= javascript_tag "Form.Element.setValue('search_text', '#{escape_javascript(@query)}');" %>
 <%= javascript_tag "$('search_text').activate();" %>
