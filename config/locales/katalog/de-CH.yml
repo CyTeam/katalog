@@ -56,7 +56,7 @@ de-CH:
   formtastic:
     hints:
       dossier:
-        text: "Titel, Schlagworte, Signatur"
+        text: "\"Geschichte CH\", medizin zug 61.3"
   messages:
     confirm_delete: "%{record} löschen?"
 
