@@ -1,4 +1,6 @@
+<% cache :simple_search do %>
 <%= form_tag(search_dossiers_path, :method => :get) do %>
   <%= text_field :search, :query, :style => 'width: 85%' %>
   <%= image_submit_tag('doku-zug.ch/search2.png', :alt => t('katalog.search')) %>
+<% end %>
 <% end %>
