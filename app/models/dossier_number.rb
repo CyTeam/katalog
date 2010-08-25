@@ -33,6 +33,8 @@ class DossierNumber < ActiveRecord::Base
   def period
     return nil unless (from_year or to_year)
     
+    return "vor %s" % to_year if from_year.nil? and to_year
+    
     return from_year if from_year == to_year
     
     [from_year, to_year].compact.join(' - ')

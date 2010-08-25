@@ -5,6 +5,14 @@ class DossierNumberTest < ActiveSupport::TestCase
     @new = DossierNumber.new
   end
   
+  test "period for numbers with no from date" do
+    @new.from = nil
+    @new.to   = '1989-12-31'
+    @new.number = 9999
+
+    assert_equal "vor 1989: 9999", @new.to_s
+  end
+
   test "period from fixture" do
     assert_equal "1999", dossier_numbers(:city_history_1999).period
     assert_equal "2000 - 2004", dossier_numbers(:city_history_2000_2004).period
@@ -18,7 +26,7 @@ class DossierNumberTest < ActiveSupport::TestCase
     @new.to_year = "1990"
     assert_equal nil, @new.from_year
     assert_equal "1990", @new.to_year
-    assert_equal "1990", @new.period
+    assert_equal "vor 1990", @new.period
   end
     
   test "from_year handles integer and strings" do
@@ -46,6 +54,13 @@ class DossierNumberTest < ActiveSupport::TestCase
     assert_equal "1990", @new.period
   end
   
+  test "period indicates when no from date" do
+    @new.from = nil
+    @new.to   = '1989-12-31'
+
+    assert_equal "vor 1989", @new.to_s
+  end
+
   test "period handles integer and strings" do
     @new.period = 1990
     assert_equal "1990", @new.from_year
