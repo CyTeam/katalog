@@ -51,7 +51,7 @@ class Dossier < ActiveRecord::Base
 
 #  sphinx_scope(:by_text) { |value| {:conditions => value} }
   def self.by_text(value, options = {})
-    params = {:match_mode => :extended, :star => true}
+    params = {:match_mode => :extended}
     params.merge!(options)
     
     query = build_query(value)
@@ -91,15 +91,18 @@ class Dossier < ActiveRecord::Base
 
     if signatures.present?
       quoted_signatures = signatures.map{|signature| '"' + signature + '*"'}
-      signature_query= "@signature (#{quoted_signatures.join('|')})"
+      signature_query = "@signature (#{quoted_signatures.join('|')})"
     end
     
     if sentences.present?
       quoted_sentences = sentences.map{|sentence| '"' + sentence + '"'}
-      sentence_query= "@* (#{quoted_sentences.join('|')})"
+      sentence_query = "@* (#{quoted_sentences.join('|')})"
     end
 
-    word_query = "@* #{words.join(' ')}" if words.present?
+    if words.present?
+      quoted_words = words.map{|word| "*" + word + "*"}
+      word_query = "@* #{quoted_words.join(' ')}"
+    end
     
     query = [signature_query, sentence_query, word_query].join(' ')
     return query
