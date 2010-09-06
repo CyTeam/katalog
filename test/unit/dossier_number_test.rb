@@ -8,7 +8,7 @@ class DossierNumberTest < ActiveSupport::TestCase
   test "period for numbers with no from date" do
     @new.from = nil
     @new.to   = '1989-12-31'
-    @new.number = 9999
+    @new.amount = 9999
 
     assert_equal "vor 1989: 9999", @new.to_s
   end
@@ -54,13 +54,6 @@ class DossierNumberTest < ActiveSupport::TestCase
     assert_equal "1990", @new.period
   end
   
-  test "period indicates when no from date" do
-    @new.from = nil
-    @new.to   = '1989-12-31'
-
-    assert_equal "vor 1989", @new.to_s
-  end
-
   test "period handles integer and strings" do
     @new.period = 1990
     assert_equal "1990", @new.from_year
