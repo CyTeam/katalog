@@ -69,7 +69,7 @@ class DossierTest < ActiveSupport::TestCase
   test "search extraction detects signatures and words" do
     assert_equal [[], [], []], Dossier.split_search_words('')
     assert_equal [['77.0'], [], []], Dossier.split_search_words('77.0')
-    assert_equal [['77.0', '77.0.100', '7', '77.0.1'], [], []], Dossier.split_search_words('77.0 77.0.100 7 77.0.1')
+    assert_equal [['77.0', '77.0.100', '77.0.10', '7', '77.0.1'], [], []], Dossier.split_search_words('77.0 77.0.100 77.0.10 7 77.0.1')
 
     assert_equal [[], ['test'], []], Dossier.split_search_words('test')
     assert_equal [[], ['test', 'new'], []], Dossier.split_search_words('test new')
@@ -85,7 +85,9 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal [[], ['before', 'between', 'last'], ['one two', 'next, two']], Dossier.split_search_words('before, "one two" between "next, two" last')
   end
   
-  test "search query building searches for words in all columns" do
+  test ".build_query adds * to signature searches" do
+    assert_equal '@signature ("7*")', Dossier.build_query("7").strip
+    assert_equal '@signature ("77.0.10*")', Dossier.build_query("77.0.10").strip
   end
   
 =begin
