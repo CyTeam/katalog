@@ -41,7 +41,7 @@ class Dossier < ActiveRecord::Base
     indexes keywords.name, :as => :keywords, :sortable => true
     
     set_property :field_weights => {
-      :title    => 10,
+      :title    => 500,
       :keywords => 2
     }
       
@@ -51,7 +51,7 @@ class Dossier < ActiveRecord::Base
 
 #  sphinx_scope(:by_text) { |value| {:conditions => value} }
   def self.by_text(value, options = {})
-    params = {:match_mode => :extended, :star => true}
+    params = {:match_mode => :extended, :rank_mode => :match_any}
     params.merge!(options)
     
     query = build_query(value)
@@ -76,7 +76,13 @@ class Dossier < ActiveRecord::Base
     words = []
     signatures = []
     for string in strings
-      if /^[0-9.]{1,8}$/.match(string)
+      if /^[0-9]*\.$/.match(string)
+        # is an ordinal
+        words << string
+      elsif /^[0-9]{2}(\.[0-9])?$/.match(string)
+        # signature is as ordinal by index
+        signatures << string + "."
+      elsif /^[0-9.]{1,8}$/.match(string)
         signatures << string
       else
         words << string.split('.')
@@ -91,15 +97,19 @@ class Dossier < ActiveRecord::Base
 
     if signatures.present?
       quoted_signatures = signatures.map{|signature| '"' + signature + '*"'}
-      signature_query= "@signature (#{quoted_signatures.join('|')})"
+      signature_query = "@signature (#{quoted_signatures.join('|')})"
     end
     
     if sentences.present?
       quoted_sentences = sentences.map{|sentence| '"' + sentence + '"'}
-      sentence_query= "@* (#{quoted_sentences.join('|')})"
+      sentence_query = "@* (#{quoted_sentences.join('|')})"
     end
 
-    word_query = "@* #{words.join(' ')}" if words.present?
+    if words.present?
+      quoted_words = words.select{|word| word.length >= 3}.map{|word| "*" + word + "*"}
+      short_words = words.select{|word| word.length < 3}
+      word_query = "@* (\"#{words.join(' ')}\" | (#{(quoted_words + short_words).join(' ')}))"
+    end
     
     query = [signature_query, sentence_query, word_query].join(' ')
     return query

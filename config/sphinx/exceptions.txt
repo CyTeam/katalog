@@ -1,0 +1,10 @@
+1. => erster
+2. => zweiter
+3. => dritter
+4. => vierter
+5. => fünfter
+6. => sechster
+7. => siebter
+8. => achter
+9. => neunter
+10. => zehnter
