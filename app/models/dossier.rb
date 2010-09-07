@@ -106,8 +106,9 @@ class Dossier < ActiveRecord::Base
     end
 
     if words.present?
-      quoted_words = words.map{|word| "*" + word + "*"}
-      word_query = "@* (\"#{words.join(' ')}\" | (#{quoted_words.join(' ')}))"
+      quoted_words = words.select{|word| word.length >= 3}.map{|word| "*" + word + "*"}
+      short_words = words.select{|word| word.length < 3}
+      word_query = "@* (\"#{words.join(' ')}\" | (#{(quoted_words + short_words).join(' ')}))"
     end
     
     query = [signature_query, sentence_query, word_query].join(' ')
