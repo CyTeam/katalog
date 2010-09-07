@@ -76,7 +76,13 @@ class Dossier < ActiveRecord::Base
     words = []
     signatures = []
     for string in strings
-      if /^[0-9.]{1,8}$/.match(string)
+      if /^[0-9]*\.$/.match(string)
+        # is an ordinal
+        words << string
+      elsif /^[0-9]{2}(\.[0-9])?$/.match(string)
+        # signature is as ordinal by index
+        signatures << string + "."
+      elsif /^[0-9.]{1,8}$/.match(string)
         signatures << string
       else
         words << string.split('.')
