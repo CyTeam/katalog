@@ -41,7 +41,7 @@ class Dossier < ActiveRecord::Base
     indexes keywords.name, :as => :keywords, :sortable => true
     
     set_property :field_weights => {
-      :title    => 10,
+      :title    => 500,
       :keywords => 2
     }
       
