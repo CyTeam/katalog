@@ -51,7 +51,7 @@ class Dossier < ActiveRecord::Base
 
 #  sphinx_scope(:by_text) { |value| {:conditions => value} }
   def self.by_text(value, options = {})
-    params = {:match_mode => :extended}
+    params = {:match_mode => :extended, :rank_mode => :match_any}
     params.merge!(options)
     
     query = build_query(value)
