@@ -30,7 +30,6 @@
             <a href="#skipNavigation3" class="invisible">Navigation überspringen</a>
             <ul class="level_1">
               <%= navigation_item("Dossier auflisten", dossiers_path) %>
-              <%= navigation_item("Dossier (neue Signatur) auflisten", dossiers_path(:dossier => {:order_by => :new_signature})) %>
               <%= navigation_item("Dossier suchen", search_dossiers_path) %>
               <%= navigation_item("Dossier anlegen", new_dossier_path) %>
               <%= navigation_item(t('controllers.index.keyword'), index_keyword_path) %>
