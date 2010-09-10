@@ -1,10 +1,7 @@
-<%= search_form_for('search', :url => search_dossiers_path) do |f| %>
-  <%= f.inputs do %>
-    <%= f.input :text, :label => t_attr('text'), :hint => t('formtastic.hints.dossier.text') %>
-  <% end %>
-  <%= f.buttons do %>
-    <%= f.commit_button t(:search, :scope => :katalog) %>
-  <% end %>
+<%= form_tag(search_dossiers_path, :method => :get) do %>
+  <label for="search_text">Suche:</label>
+  <%= text_field :search, :text, :style => 'width: 30em' %>
+  <%= image_submit_tag('doku-zug.ch/search2.png', :alt => t('katalog.search')) %>
 <% end %>
 
 <%= javascript_tag "Form.Element.setValue('search_text', '#{escape_javascript(@query)}');" %>
