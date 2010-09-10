@@ -36,9 +36,9 @@ class Dossier < ActiveRecord::Base
   # Search
   define_index do
     # fields
-    indexes title, :sortable => true
-    indexes signature, :sortable => true
-    indexes keywords.name, :as => :keywords, :sortable => true
+    indexes title
+    indexes signature
+    indexes keywords.name, :as => :keywords
     
     set_property :field_weights => {
       :title    => 500,
