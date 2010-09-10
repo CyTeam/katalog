@@ -6,3 +6,12 @@ ar > appenzell ausserrhoden
 zg > zug
 
 nr > nationalrat
+ggr > grosser gemeinderat
+gr > gemeinderat
+sr > stadtrat
+kr > kantonsrat
+rr > regierungsrat
+br > bundesrat
+str > ständerat
+nr > nationalrat
+bbp > bebauungsplan
