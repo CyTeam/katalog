@@ -1,0 +1,28 @@
+#search_form {
+  display: none;
+}
+
+table {
+  border-collapse:collapse;
+  border-spacing:0;
+}
+
+body {
+  width: 98%;
+}
+
+#wrapper, #container, #main, #inside, #dossiers {
+  width: 100%;
+}
+
+#dossiers table {
+  width: 100%;
+}
+
+td {
+  padding:6px;
+}
+
+#main {
+  margin: 0px;
+}

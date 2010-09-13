@@ -5,7 +5,8 @@
 
   <%= stylesheet_link_tag 'doku-zug.ch/typolight', 'doku-zug.ch/basic', 'doku-zug.ch/content', 'doku-zug.ch/layout', 'doku-zug.ch/navigation', 'doku-zug.ch/welcome', 'doku-zug.ch/application' %>
   <%= stylesheet_link_tag 'doku-zug.ch/print', :media => 'print' %>
-  <%= stylesheet_link_tag 'katalog' %>
+  <%= stylesheet_link_tag 'katalog', :media => 'all' %>
+  <%= stylesheet_link_tag 'katalog_print', :media => 'print' %>
   <%= stylesheet_link_tag 'katalog_internal' if user_signed_in? %>
   <%= stylesheet_link_tag 'scaffold' %>
   <%= stylesheet_link_tag 'formtastic', 'formtastic_changes' %>
