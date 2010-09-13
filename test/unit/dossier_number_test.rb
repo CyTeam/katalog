@@ -49,6 +49,11 @@ class DossierNumberTest < ActiveSupport::TestCase
     assert_equal "2000", @new.to_year
   end
 
+  test "to_year sets nil if assigned nil" do
+    @new.to_year = nil
+    assert_equal nil, @new.to_year
+  end
+  
   test "period simplifies single year" do
     @new.period = "1990 - 1990"
     assert_equal "1990", @new.period
@@ -66,5 +71,32 @@ class DossierNumberTest < ActiveSupport::TestCase
     @new.period = "1991-2001"
     assert_equal "1991", @new.from_year
     assert_equal "2001", @new.to_year
+  end
+
+  test "#to_s returns '- YYYY' if format is :simple " do
+    @new.from_year = nil
+    @new.to_year = "2009"
+    
+    assert_equal " - 2009: ", @new.to_s(:simple)
+  end
+  
+  test "#from_s handles single year string" do
+    assert_equal [2009, 2009], DossierNumber.from_s("2009")
+  end
+
+  test "#from_s handles single year integer" do
+    assert_equal [2009, 2009], DossierNumber.from_s(2009)
+  end
+
+  test "#from_s handles XXXX - YYYY" do
+    assert_equal [2009, 2010], DossierNumber.from_s("2009 - 2010")
+  end
+
+  test "#from_s handles - YYYY" do
+    assert_equal [ nil, 2010], DossierNumber.from_s(" - 2010")
+  end
+
+  test "#from_s handles -YYYY" do
+    assert_equal [ nil, 2010], DossierNumber.from_s("-2010")
   end
 end

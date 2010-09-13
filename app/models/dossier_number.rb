@@ -5,8 +5,20 @@ class DossierNumber < ActiveRecord::Base
   # Scopes
   scope :present, where("amount > 0")
   
-  def to_s
-    "#{period}: #{amount}"
+  def to_s(format = :default)
+    "#{period(format)}: #{amount}"
+  end
+  
+  def self.from_s(value)
+    # Convert integers to string
+    value = value.to_s
+    
+    if value =~ /-/
+      return value.split('-').map{|year| year.present? ? year.to_i : nil}
+    else
+      year = value.to_i
+      return [year, year]
+    end
   end
   
   # Attributes
@@ -17,6 +29,8 @@ class DossierNumber < ActiveRecord::Base
   end
   
   def from_year=(value)
+    return self.from = nil if value.nil?
+    
     self.from = Date.new(value.to_i, 1, 1)
   end
   
@@ -27,27 +41,22 @@ class DossierNumber < ActiveRecord::Base
   end
   
   def to_year=(value)
+    return self.to = nil if value.nil?
+    
     self.to = Date.new(value.to_i, 12, 31)
   end
   
-  def period
+  def period(format = :default)
     return nil unless (from_year or to_year)
     
-    return "vor %s" % to_year if from_year.nil? and to_year
+    return "vor %s" % to_year if format == :default && from_year.nil? && to_year
     
     return from_year if from_year == to_year
     
-    [from_year, to_year].compact.join(' - ')
+    [from_year || '', to_year || ''].compact.join(' - ')
   end
   
   def period=(value)
-    # Convert integers to string
-    value = value.to_s
-    
-    if value =~ /-/
-      self.from_year, self.to_year = value.split('-').map{|year| year.strip }
-    else
-      self.from_year = self.to_year = value.strip
-    end
+    self.from_year, self.to_year = self.class.from_s(value)
   end
 end
