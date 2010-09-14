@@ -2,7 +2,7 @@ require 'test_helper'
 
 class DossierNumberTest < ActiveSupport::TestCase
   def setup
-    @new = DossierNumber.new
+    @new = Factory :dossier_number
   end
   
   test "period for numbers with no from date" do
@@ -81,22 +81,49 @@ class DossierNumberTest < ActiveSupport::TestCase
   end
   
   test "#from_s handles single year string" do
-    assert_equal [2009, 2009], DossierNumber.from_s("2009")
+    assert_equal [Date.new(2009, 1, 1), Date.new(2009, 12, 31), 0], DossierNumber.from_s("2009")
   end
 
   test "#from_s handles single year integer" do
-    assert_equal [2009, 2009], DossierNumber.from_s(2009)
+    assert_equal [Date.new(2009, 1, 1), Date.new(2009, 12, 31), 0], DossierNumber.from_s(2009)
   end
 
   test "#from_s handles XXXX - YYYY" do
-    assert_equal [2009, 2010], DossierNumber.from_s("2009 - 2010")
+    assert_equal [Date.new(2009, 1, 1), Date.new(2010, 12, 31), 0], DossierNumber.from_s("2009 - 2010")
   end
 
   test "#from_s handles - YYYY" do
-    assert_equal [ nil, 2010], DossierNumber.from_s(" - 2010")
+    assert_equal [nil, Date.new(2010, 12, 31), 0], DossierNumber.from_s(" - 2010")
   end
 
   test "#from_s handles -YYYY" do
-    assert_equal [ nil, 2010], DossierNumber.from_s("-2010")
+    assert_equal [nil, Date.new(2010, 12, 31), 0], DossierNumber.from_s("-2010")
+  end
+
+  test "#from_s handles XXXX -" do
+    assert_equal [Date.new(2010, 1, 1), nil, 0], DossierNumber.from_s("2010 - ")
+  end
+
+  test "#from_s handles XXXX-" do
+    assert_equal [Date.new(2010, 1, 1), nil, 0], DossierNumber.from_s("2010-")
+  end
+
+  test "#from_s handles XXXX: 77" do
+    assert_equal [Date.new(2010, 1, 1), Date.new(2010, 12, 31), 77], DossierNumber.from_s("2010: 77")
+  end
+
+  test "#from_s handles XXXX-YYYY: 77" do
+    assert_equal [Date.new(2009, 1, 1), Date.new(2010, 12, 31), 77], DossierNumber.from_s("2009-2010: 77")
+  end
+
+  test ".by_period doesn't return every dossier_number" do
+    5.times {Factory :dossier_number_with_amount}
+    assert_equal [], DossierNumber.by_period('2009')
+  end
+  
+  test ".by_period does return matching dossier_numbers" do
+    4.times {Factory :dossier_number_with_amount, :period => '2010'}
+    5.times {Factory :dossier_number_with_amount, :period => '2009'}
+    assert_equal 5, DossierNumber.by_period('2009').count
   end
 end

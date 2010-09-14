@@ -142,6 +142,22 @@ class Dossier < ActiveRecord::Base
     write_attribute(:new_signature, new_signature)
   end
   
+  def dossier_number_list
+    numbers.map{|number| number.to_s}.join("\n")
+  end
+  
+  def dossier_number_list=(value)
+    # Clean list
+    numbers.delete_all
+    
+    # Parse list
+    dossier_number_strings = value.split("\n")
+    for dossier_number_string in dossier_number_strings
+      from, to, amount = DossierNumber.from_s(dossier_number_string)
+      numbers.create(:from => from, :to => to, :amount => amount)
+    end
+  end
+
   # Calculations
   def first_document_on
     containers.minimum(:first_document_on)

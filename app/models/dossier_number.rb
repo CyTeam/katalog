@@ -4,6 +4,11 @@ class DossierNumber < ActiveRecord::Base
 
   # Scopes
   scope :present, where("amount > 0")
+  scope :by_period, lambda {|value|
+    from, to = from_s(value)
+    
+    where(:from => from, :to => to)
+  }
   
   def to_s(format = :default)
     "#{period(format)}: #{amount}"
@@ -13,12 +18,24 @@ class DossierNumber < ActiveRecord::Base
     # Convert integers to string
     value = value.to_s
     
-    if value =~ /-/
-      return value.split('-').map{|year| year.present? ? year.to_i : nil}
+    period, amount_s = value.split(':')
+    if period =~ /-/
+      from, to = value.split('-').map{|year| year.present? ? year.to_i : nil}
     else
-      year = value.to_i
-      return [year, year]
+      from = to = value.to_i
     end
+
+    # from and to should be begin/end of year if not nil
+    from &&= Date.new(from, 1, 1)
+    to &&= Date.new(to, 12, 31)
+    return [from, to, amount_s.to_i]
+  end
+  
+  def self.update_or_create_amount_by_period(period, amount)
+    record = find_or_build(period, scope)
+    
+    record.amount = amount
+    record.save
   end
   
   # Attributes
@@ -57,6 +74,6 @@ class DossierNumber < ActiveRecord::Base
   end
   
   def period=(value)
-    self.from_year, self.to_year = self.class.from_s(value)
+    self.from, self.to = self.class.from_s(value)
   end
 end
