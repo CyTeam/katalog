@@ -28,14 +28,14 @@ class DossierNumber < ActiveRecord::Base
     
     period, amount_s = value.split(':')
     if period =~ /-/
-      from, to = value.split('-').map{|year| year.present? ? year.to_i : nil}
+      from, to = period.split('-').map{|year| year.present? ? year.to_i : nil}
     else
-      from = to = value.to_i
+      from = to = (period.present? ? value.to_i : nil)
     end
 
     # from and to should be begin/end of year if not nil
-    from &&= Date.new(from, 1, 1)
-    to &&= Date.new(to, 12, 31)
+    from = Date.new(from, 1, 1) if from
+    to = Date.new(to, 12, 31) if to
     return [from, to, amount_s.to_i]
   end
   
