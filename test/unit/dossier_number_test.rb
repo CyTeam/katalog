@@ -19,10 +19,13 @@ class DossierNumberTest < ActiveSupport::TestCase
   end
 
   test "*_year and period should work with nil's" do
+    @new.from_year = nil
+    @new.to_year = nil
     assert_equal nil, @new.from_year
     assert_equal nil, @new.to_year
     assert_equal nil, @new.period
     
+    @new.from_year = nil
     @new.to_year = "1990"
     assert_equal nil, @new.from_year
     assert_equal "1990", @new.to_year
@@ -116,6 +119,10 @@ class DossierNumberTest < ActiveSupport::TestCase
     assert_equal [Date.new(2009, 1, 1), Date.new(2010, 12, 31), 77], DossierNumber.from_s("2009-2010: 77")
   end
 
+  test "#from_s returns nil as from and to for : 77" do
+    assert_equal [nil, nil, 77], DossierNumber.from_s(": 77")
+  end
+  
   test ".by_period doesn't return every dossier_number" do
     5.times {Factory :dossier_number_with_amount}
     assert_equal [], DossierNumber.by_period('2009')
@@ -123,7 +130,7 @@ class DossierNumberTest < ActiveSupport::TestCase
   
   test ".by_period does return matching dossier_numbers" do
     4.times {Factory :dossier_number_with_amount, :period => '2010'}
-    5.times {Factory :dossier_number_with_amount, :period => '2009'}
+    5.times {Factory :dossier_number_with_amount, :from => Date.new(2009, 1, 1), :to => Date.new(2009, 12, 31)}
     assert_equal 5, DossierNumber.by_period('2009').count
   end
 end
