@@ -25,7 +25,7 @@ class Dossier < ActiveRecord::Base
   scope :order_by, lambda {|value| order("CONCAT(#{value}, IF(type IS NULL, '.a', '')), title")}
   
   # Associations
-  has_many :numbers, :class_name => 'DossierNumber', :dependent => :destroy
+  has_many :numbers, :class_name => 'DossierNumber', :dependent => :destroy, :validate => true, :autosave => true
   accepts_nested_attributes_for :numbers
   has_many :containers, :dependent => :destroy
     
@@ -154,7 +154,7 @@ class Dossier < ActiveRecord::Base
     dossier_number_strings = value.split("\n")
     for dossier_number_string in dossier_number_strings
       from, to, amount = DossierNumber.from_s(dossier_number_string)
-      numbers.create(:from => from, :to => to, :amount => amount)
+      numbers.build(:from => from, :to => to, :amount => amount)
     end
   end
 
