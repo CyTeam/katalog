@@ -2,6 +2,14 @@ class DossierNumber < ActiveRecord::Base
   # Associations
   belongs_to :dossier
 
+  # Validation
+  validate :presence_of_from_or_to
+  private
+    def presence_of_from_or_to
+      errors.add_to_base("From, To or both need to be present") unless (from || to)
+    end
+  public
+  
   # Scopes
   scope :present, where("amount > 0")
   scope :by_period, lambda {|value|
