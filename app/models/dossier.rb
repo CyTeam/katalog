@@ -234,6 +234,16 @@ class Dossier < ActiveRecord::Base
     # Quote initials
     value_list.gsub!(/((^|[ ])[A-Z])\./, '\1|')
     
+    # Quote bracketed terms
+    # Need a clone or slice! will do some harm
+#    value_term = value_list.clone
+#    value_brackets = value_term.slice!(/^[^(]*/)
+#    while bracket_term = value_term.slice!(/\([^(]*\)/)
+#      value_brackets << bracket_term.gsub('.', '|');
+#    end
+#    value_brackets << value_term
+#    value_list = value_brackets
+    
     # Split and unquote
     keywords = value_list.split('.')
     keywords.map!{|keyword| keyword.gsub('|', '.')}
