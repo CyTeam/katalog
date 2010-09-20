@@ -39,6 +39,7 @@ class Dossier < ActiveRecord::Base
     indexes title
     indexes signature
     indexes keywords.name, :as => :keywords
+    has type
     
     set_property :field_weights => {
       :title    => 500,
@@ -51,7 +52,7 @@ class Dossier < ActiveRecord::Base
 
 #  sphinx_scope(:by_text) { |value| {:conditions => value} }
   def self.by_text(value, options = {})
-    params = {:match_mode => :extended, :rank_mode => :match_any}
+    params = {:match_mode => :extended, :rank_mode => :match_any, :with => {:type => 'Dossier'}}
     params.merge!(options)
     
     query = build_query(value)
