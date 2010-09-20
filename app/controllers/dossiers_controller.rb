@@ -50,6 +50,9 @@ class DossiersController < InheritedResources::Base
       @dossiers = apply_scopes(Dossier, params[:search]).paginate :page => params[:page], :per_page => params[:per_page]
     end
     
+    # Drop nil results by stray full text search matches
+    @dossiers.compact!
+    
     index!
   end
 end
