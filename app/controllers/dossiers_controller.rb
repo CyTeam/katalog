@@ -41,7 +41,7 @@ class DossiersController < InheritedResources::Base
     params[:per_page] ||= 25
     
     params[:search] ||= {}
-    params[:search][:text] ||= params[:search][:query]
+    params[:search][:text] ||= (params[:search][:query] || params[:search][:signature])
     @query = params[:search][:text]
     
     if @query.present?
