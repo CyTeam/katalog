@@ -41,12 +41,13 @@ class DossiersController < InheritedResources::Base
     params[:per_page] ||= 25
     
     params[:search] ||= {}
-    params[:search][:text] ||= (params[:search][:query] || params[:search][:signature])
-    @query = params[:search][:text]
+    params[:search][:text] ||= params[:search][:query]
     
-    if @query.present?
+    if params[:search][:text]
+      @query = params[:search][:text]
       @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page])
     else
+      @query = params[:search][:signature]
       @dossiers = apply_scopes(Dossier, params[:search]).paginate :page => params[:page], :per_page => params[:per_page]
     end
     
