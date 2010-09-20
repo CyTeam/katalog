@@ -41,7 +41,7 @@ class DossiersController < InheritedResources::Base
     params[:per_page] ||= 25
     
     params[:search] ||= {}
-    params[:search][:text] ||= params[:search][:query]
+    params[:search][:text] ||= (params[:search][:query] || params[:search][:signature])
     @query = params[:search][:text]
     
     if @query.present?
@@ -49,6 +49,9 @@ class DossiersController < InheritedResources::Base
     else
       @dossiers = apply_scopes(Dossier, params[:search]).paginate :page => params[:page], :per_page => params[:per_page]
     end
+    
+    # Drop nil results by stray full text search matches
+    @dossiers.compact!
     
     index!
   end
