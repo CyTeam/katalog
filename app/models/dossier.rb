@@ -25,7 +25,7 @@ class Dossier < ActiveRecord::Base
   scope :order_by, lambda {|value| order("CONCAT(#{value}, IF(type IS NULL, '.a', '')), title")}
   
   # Associations
-  has_many :numbers, :class_name => 'DossierNumber', :dependent => :destroy
+  has_many :numbers, :class_name => 'DossierNumber', :dependent => :destroy, :validate => true, :autosave => true
   accepts_nested_attributes_for :numbers
   has_many :containers, :dependent => :destroy
     
@@ -142,6 +142,22 @@ class Dossier < ActiveRecord::Base
     write_attribute(:new_signature, new_signature)
   end
   
+  def dossier_number_list
+    numbers.map{|number| number.to_s}.join("\n")
+  end
+  
+  def dossier_number_list=(value)
+    # Clean list
+    numbers.delete_all
+    
+    # Parse list
+    dossier_number_strings = value.split("\n")
+    for dossier_number_string in dossier_number_strings
+      from, to, amount = DossierNumber.from_s(dossier_number_string)
+      numbers.build(:from => from, :to => to, :amount => amount)
+    end
+  end
+
   # Calculations
   def first_document_on
     containers.minimum(:first_document_on)
@@ -217,6 +233,16 @@ class Dossier < ActiveRecord::Base
     
     # Quote initials
     value_list.gsub!(/((^|[ ])[A-Z])\./, '\1|')
+    
+    # Quote bracketed terms
+    # Need a clone or slice! will do some harm
+#    value_term = value_list.clone
+#    value_brackets = value_term.slice!(/^[^(]*/)
+#    while bracket_term = value_term.slice!(/\([^(]*\)/)
+#      value_brackets << bracket_term.gsub('.', '|');
+#    end
+#    value_brackets << value_term
+#    value_list = value_brackets
     
     # Split and unquote
     keywords = value_list.split('.')

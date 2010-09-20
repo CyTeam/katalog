@@ -68,15 +68,15 @@ class DossierTest < ActiveSupport::TestCase
 
   test "search extraction detects signatures and words" do
     assert_equal [[], [], []], Dossier.split_search_words('')
-    assert_equal [['77.0'], [], []], Dossier.split_search_words('77.0')
-    assert_equal [['77.0', '77.0.100', '77.0.10', '7', '77.0.1'], [], []], Dossier.split_search_words('77.0 77.0.100 77.0.10 7 77.0.1')
+    assert_equal [['77.0.'], [], []], Dossier.split_search_words('77.0')
+    assert_equal [['77.0.', '77.0.100', '77.0.10', '7', '77.0.1'], [], []], Dossier.split_search_words('77.0 77.0.100 77.0.10 7 77.0.1')
 
     assert_equal [[], ['test'], []], Dossier.split_search_words('test')
     assert_equal [[], ['test', 'new'], []], Dossier.split_search_words('test new')
     assert_equal [[], ['test', 'new'], []], Dossier.split_search_words('test, new')
     assert_equal [[], ['test', 'new'], []], Dossier.split_search_words('test. new')
 
-    assert_equal [['77.0'], ['test', 'new'], []], Dossier.split_search_words('test. 77.0, new')
+    assert_equal [['77.0.'], ['test', 'new'], []], Dossier.split_search_words('test. 77.0, new')
   end
   
   test "search word extraction detects double quote sentences" do
@@ -191,6 +191,14 @@ class DossierTest < ActiveSupport::TestCase
   test "keyword extraction respects (middle) name initials" do
     keyword_list = ["Jan H. Rosenbaum", "K. Huber (1941-2000)"]
     
+    for keyword in keyword_list
+      assert Dossier.extract_keywords(keyword_list).include?(keyword), "Expected %s to include %s" % [Dossier.extract_keywords(keyword_list).inspect, keyword]
+    end
+  end
+  
+  test "keyword extraction respects brackets" do
+    keyword_list = ["One (et. al. and so on!) keyword", "(One. Two), (3. 4.5)", "And (Then. (We get bigger. Yes) Really.)"]
+
     for keyword in keyword_list
       assert Dossier.extract_keywords(keyword_list).include?(keyword), "Expected %s to include %s" % [Dossier.extract_keywords(keyword_list).inspect, keyword]
     end

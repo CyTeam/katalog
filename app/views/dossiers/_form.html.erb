@@ -13,22 +13,10 @@
   <%= f.inputs do %>
     <%= f.input :signature %>
     <%= f.input :title %>
+    <%= f.input :keyword_list, :as => :text %>
+    <%= f.input :related_to %>
+    <%= f.input :dossier_number_list, :as => :text %>
   <% end %>
-
-  <div class="ce_table">
-  <table>
-    <tr>
-      <% for year in @dossier.numbers.map{|number| number.period} %>
-        <th><%= year %></th>
-      <% end %>
-    </tr>
-    <tr>
-      <%= f.semantic_fields_for :numbers do |number| %>
-        <td style="padding: 0"><%= number.text_field :amount, :style => 'width: 80%; margin: 0' %></td>
-      <% end %>
-    </tr>
-  </table>
-  </div>
 
   <%= f.buttons do %>
     <%= f.commit_button %>
