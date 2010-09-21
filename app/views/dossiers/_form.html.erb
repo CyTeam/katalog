@@ -18,6 +18,16 @@
     <%= f.input :dossier_number_list, :as => :text, :input_html => {:rows => @dossier.numbers.count} %>
   <% end %>
 
+  <h3>Dossiers <%= link_to image_tag('icons/add.png', :title => 'add'), new_dossier_container_path(@dossier), :remote => true %></h3>
+  <div class="ce_table">
+    <table class="ce_table" id="container-list" style="width: 100%">
+      <%= render 'containers/list_header' %>
+      <%= f.fields_for :containers do |container| %>
+        <%= render 'containers/form', :container => container %>
+      <% end %>
+    </table>
+  </div>
+
   <%= f.buttons do %>
     <%= f.commit_button %>
   <% end %>

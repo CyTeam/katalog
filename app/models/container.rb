@@ -17,6 +17,11 @@ class Container < ActiveRecord::Base
     self.container_type.reload
   end
   
+  def container_type_code
+    container_type.code
+  end
+  alias container_type_code= container_type=
+  
   def location=(value)
     value = Location.find_by_code(value) if value.is_a?(String)
     if value.nil?
@@ -25,6 +30,19 @@ class Container < ActiveRecord::Base
       self[:location_id] = value.id
     end
     self.location.reload unless self.location.nil?
+  end
+  
+  def location_code
+    location.code
+  end
+  alias location_code= location=
+  
+  def first_document_year
+    first_document_on.try(:year)
+  end
+  
+  def first_document_year=(value)
+    self.first_document_on = Date.new(value.to_i, 1, 1)
   end
   
   # Import

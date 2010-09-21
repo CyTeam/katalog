@@ -14,6 +14,8 @@ Katalog::Application.routes.draw do
       get :search
     end
 
+    resources :containers
+    
     resources :keywords do
       member do
         post :set_name
