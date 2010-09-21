@@ -13,9 +13,9 @@
   <%= f.inputs do %>
     <%= f.input :signature %>
     <%= f.input :title %>
-    <%= f.input :keyword_list, :as => :text %>
+    <%= f.input :keyword_list, :as => :text, :input_html => {:rows => @dossier.keyword_list.count + 1} %>
     <%= f.input :related_to %>
-    <%= f.input :dossier_number_list, :as => :text %>
+    <%= f.input :dossier_number_list, :as => :text, :input_html => {:rows => @dossier.numbers.count} %>
   <% end %>
 
   <%= f.buttons do %>
