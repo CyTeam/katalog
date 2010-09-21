@@ -43,5 +43,8 @@ module Katalog
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    # PDF generation
+    config.middleware.use PDFKit::Middleware
   end
 end
