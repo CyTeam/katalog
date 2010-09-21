@@ -45,6 +45,7 @@ class Dossier < ActiveRecord::Base
       :title    => 500,
       :keywords => 2
     }
+    set_property :delta => true
       
     # attributes
     has created_at, updated_at

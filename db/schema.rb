@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100914060038) do
+ActiveRecord::Schema.define(:version => 20100920214242) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20100914060038) do
     t.string   "new_signature"
     t.date     "first_document_on"
     t.string   "related_to"
+    t.boolean  "delta",             :default => true, :null => false
   end
 
   add_index "dossiers", ["signature"], :name => "index_dossiers_on_signature"
