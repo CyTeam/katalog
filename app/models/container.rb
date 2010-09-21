@@ -18,7 +18,7 @@ class Container < ActiveRecord::Base
   end
   
   def container_type_code
-    container_type.code
+    container_type.try(:code)
   end
   alias container_type_code= container_type=
   
@@ -33,7 +33,7 @@ class Container < ActiveRecord::Base
   end
   
   def location_code
-    location.code
+    location.try(:code)
   end
   alias location_code= location=
   
