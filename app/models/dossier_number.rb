@@ -6,7 +6,7 @@ class DossierNumber < ActiveRecord::Base
   validate :presence_of_from_or_to
   private
     def presence_of_from_or_to
-      errors.add_to_base("From, To or both need to be present") unless (from || to)
+      errors.add(:base, "From, To or both need to be present") unless (from || to)
     end
   public
   
