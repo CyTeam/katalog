@@ -1,6 +1,6 @@
 <tr id="container-<%= container.id %>" class="<%= cycle('odd', 'even') %>">
   <td><%= container.title %></td>
   <td><%= container.first_document_on.try(:year) %></td>
-  <td><%= container.container_type.code %></td>
-  <td><%= container.location.code %></td>
+  <td><%= container.container_type.try(:code) %></td>
+  <td><%= container.location.try(:code) %></td>
 </tr>
