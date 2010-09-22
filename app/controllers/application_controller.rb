@@ -33,6 +33,8 @@ class ActsAsTaggableOn::Tagging
   
   private
   def set_dossier_delta_flag
+    return if taggable.changed?
+    
     if taggable.is_a? Dossier
       taggable.delta = true
       taggable.save
