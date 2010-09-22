@@ -146,7 +146,7 @@ class Dossier < ActiveRecord::Base
   end
   
   def dossier_number_list
-    numbers.map{|number| number.to_s}.join("\n")
+    numbers.map{|number| number.to_s(:short)}.join("\n")
   end
   
   def dossier_number_list=(value)
