@@ -28,7 +28,7 @@ class Dossier < ActiveRecord::Base
   has_many :numbers, :class_name => 'DossierNumber', :dependent => :destroy, :validate => true, :autosave => true
   accepts_nested_attributes_for :numbers
   has_many :containers, :dependent => :destroy
-  accepts_nested_attributes_for :containers
+  accepts_nested_attributes_for :containers, :allow_destroy => true, :reject_if => :all_blank
     
   # Tags
   acts_as_taggable
