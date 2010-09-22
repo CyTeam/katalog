@@ -49,6 +49,16 @@ module ApplicationHelper
     end
   end
 
+  def add_record_link(form, klass)
+    link_to_function t_crud(:new, klass) do |page|
+      record = render('containers/new_form', :form => form)
+      page << %{
+var new_record_id = "new_" + new Date().getTime();
+$('container-list').insert({ bottom: "#{ escape_javascript record }".replace(/new_\\d+/g, new_record_id) });
+}
+    end
+  end
+
   # Navigation
   def navigation_item(title, *args)
     if current_page?(*args)

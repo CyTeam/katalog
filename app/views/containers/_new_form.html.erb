@@ -1,0 +1,3 @@
+<%= form.fields_for(:containers, Container.new) do |container| %>
+  <%= render 'containers/form', :container => container %>
+<% end %>

@@ -3,4 +3,7 @@
   <th style="width: 6em"><%= t_attr(:first_document_on, Container) %></th>
   <th style="width: 2em"><%= t_attr(:container_type, Container) %></th>
   <th style="width: 2em"><%= t_attr(:location, Container) %></th>
+  <% if defined?(form_helper) %>
+    <th class="action-links"><%= add_record_link(form_helper, Container) %></th>
+  <% end %>
 </tr>
