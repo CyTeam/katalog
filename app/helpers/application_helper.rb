@@ -39,6 +39,16 @@ module ApplicationHelper
     t('messages.confirm_delete', :record => "#{t_model(record.class)} #{record.to_s}")
   end
 
+  # Nested Form
+  def remove_link_unless_new_record(fields)
+    unless fields.object.new_record?
+      out = ''
+      out << fields.hidden_field(:_destroy)
+      out << link_to_function("remove", "$(this).up('.#{fields.object.class.name.underscore}').hide(); $(this).previous().value = '1'")
+      out.html_safe
+    end
+  end
+
   # Navigation
   def navigation_item(title, *args)
     if current_page?(*args)
