@@ -31,7 +31,10 @@ de-CH:
         document_count: "Anzahl Dokumente"
         tag:            "Schlagwort"
         keyword:        "Schlagwort"
+        keyword_list:   "Schlagworte"
         first_document_on: "Erstes Dokument von"
+        related_to:     "Querverweise"
+        dossier_number_list: "Anzahl Dokumente"
       container:
         title:          "Titel"
         container_type: "Art"
