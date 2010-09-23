@@ -6,6 +6,9 @@ class Container < ActiveRecord::Base
   has_many :numbers, :class_name => 'DossierNumber'
   accepts_nested_attributes_for :numbers
 
+  # Validations
+  validates_presence_of :dossier, :location, :container_type
+  
   # Helpers
   def to_s
     "#{title} (#{container_type.code}@#{location.code})"
