@@ -145,6 +145,7 @@ class Dossier < ActiveRecord::Base
     write_attribute(:new_signature, new_signature)
   end
   
+  # Association attributes
   def dossier_number_list
     numbers.map{|number| number.to_s(:short)}.join("\n")
   end
@@ -161,6 +162,11 @@ class Dossier < ActiveRecord::Base
     end
   end
 
+  def keyword_text
+    keyword_list.join("\n")
+  end
+  alias keyword_text= keyword_list=
+  
   # Calculations
   def first_document_on
     containers.minimum(:first_document_on)

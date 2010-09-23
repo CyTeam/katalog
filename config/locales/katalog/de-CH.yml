@@ -31,7 +31,7 @@ de-CH:
         document_count: "Anzahl Dokumente"
         tag:            "Schlagwort"
         keyword:        "Schlagwort"
-        keyword_list:   "Schlagworte"
+        keyword_text:   "Schlagworte"
         first_document_on: "Erstes Dokument von"
         related_to:     "Querverweise"
         dossier_number_list: "Anzahl Dokumente"
