@@ -1,16 +1,7 @@
 <%= semantic_form_for(@dossier) do |f| %>
-  <% if @dossier.errors.any? %>
-  <div id="errorExplanation">
-    <h2><%= pluralize(@dossier.errors.count, "error") %> prohibited this dossier from being saved:</h2>
-    <ul>
-    <% @dossier.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-  <% end %>
 
   <%= f.inputs do %>
+    <%= f.semantic_errors :containers%>
     <%= f.input :signature %>
     <%= f.input :title %>
     <%= f.input :keyword_text, :as => :text, :input_html => {:rows => @dossier.keyword_list.count + 1} %>
@@ -22,7 +13,7 @@
   <div class="ce_table">
     <table class="ce_table" id="container-list" style="width: 100%">
       <%= render 'containers/list_header', :form_helper => f %>
-      <%= f.fields_for :containers do |container| %>
+      <%= f.semantic_fields_for :containers do |container| %>
         <%= render 'containers/form', :container => container %>
       <% end %>
     </table>
