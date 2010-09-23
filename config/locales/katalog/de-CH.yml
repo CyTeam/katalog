@@ -16,6 +16,7 @@ de-CH:
     models:
       dossier:        "Dossier"
       location:       "Standort"
+      container:      "Dossier"
       container_type: "Dossier Art"
       session: "Sitzung"
       user:    "Nutzer"
