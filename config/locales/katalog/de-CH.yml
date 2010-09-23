@@ -65,8 +65,10 @@ de-CH:
 
   crud:
     edit:  "%{model} bearbeiten"
+    update: "%{model} bearbeiten"
     show:  "%{model} anzeigen"
     new:   "%{model} anlegen"
+    create: "%{model} anlegen"
     delete: "%{model} löschen"
     back: "zurück"
     previous: "vorherige"
