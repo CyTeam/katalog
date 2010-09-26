@@ -2,6 +2,10 @@
   display: none;
 }
 
+#page_actions {
+  display: none;
+}
+
 table {
   border-collapse:collapse;
   border-spacing:0;
