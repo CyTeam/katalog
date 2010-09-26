@@ -13,6 +13,7 @@ class DossiersController < InheritedResources::Base
   has_scope :by_title, :as => :title
   has_scope :by_location, :as => :location
   has_scope :by_kind, :as => :kind
+  has_scope :by_character
   
   # Tags
   has_scope :tagged_with, :as => :tag

@@ -19,7 +19,8 @@ class Dossier < ActiveRecord::Base
   # TODO: check if arel provides nicer code:
   scope :by_location, lambda {|value| where(:id => Container.where('location_id = ?', Location.find_by_code(value)).map{|c| c.dossier_id}.uniq)}
   scope :by_kind, lambda {|value| where(:id => Container.where('container_type_id = ?', ContainerType.find_by_code(value)).map{|c| c.dossier_id}.uniq)}
-
+  scope :by_character, lambda {|value| where("title LIKE CONCAT(?, '%')", value)}
+  
   # Ordering
   # BUG: Beware of SQL Injection
   scope :order_by, lambda {|value| order("CONCAT(#{value}, IF(type IS NULL, '.a', '')), title")}
