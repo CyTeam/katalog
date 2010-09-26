@@ -1,15 +1,22 @@
+# Boring files
+# ============
+*~
+.#*
+DEADJOE
+
+# Rails
+# =====
 .bundle
 db/*.sqlite3
 log/
 tmp/**/*
 
-# Rails
+# Vendor
 vendor/cache
+vendor/bundle
 
-# Backup
-*~
-DEADJOE
-.#*
+# Volatile
+doc/api
 
 # Local
 config/database.yml
