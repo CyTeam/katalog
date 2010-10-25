@@ -43,7 +43,7 @@ class DossiersController < InheritedResources::Base
     params[:search] ||= {}
     params[:search][:text] ||= params[:search][:query]
     
-    if params[:search][:text]
+    if params[:search][:text].present?
       @query = params[:search][:text]
       @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page])
     else
