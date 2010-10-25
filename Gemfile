@@ -12,7 +12,7 @@ end
 # Standard helpers
 # ================
 gem 'validation_reflection'
-gem 'formtastic', :git => 'git://github.com/justinfrench/formtastic.git', :branch => 'rails3'
+gem 'formtastic', '~> 1.1'
 gem 'will_paginate', :git => 'http://github.com/huerlisi/will_paginate.git', :branch => 'rails3'
 gem 'has_scope'
 gem 'inherited_resources'
@@ -23,7 +23,7 @@ gem 'mysql2'
 # Katalog
 # =======
 # Authentication
-gem 'devise', '>= 1.1'
+gem 'devise', '~> 1.1'
 
 # Tagging
 gem 'acts-as-taggable-on', '>= 2.0.6'
