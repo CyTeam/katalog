@@ -24,7 +24,7 @@ sudo apt-get install rubygems
 
 h2. Install Ruby'n'Rails
 
-bookyt is developed and tested using Rails 3.0.0 and Ruby 1.8.
+katalog is developed and tested using Rails 3.0.0 and Ruby 1.8.
 
 Install packages to support installing rails:
 
@@ -38,13 +38,13 @@ Install rails using gem:
 sudo gem install rails rake bundler
 </pre>
 
-h2. Install bookyt
+h2. Install katalog
 
-Install current bookyt from git repository. We'll use this checkout as working directory from now on:
+Install current katalog from git repository. We'll use this checkout as working directory from now on:
 
 <pre>
-git clone http://github.com/huerlisi/bookyt.git
-cd bookyt
+git clone http://github.com/huerlisi/katalog.git
+cd katalog
 mkdir -p tmp log
 </pre>
 
