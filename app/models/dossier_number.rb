@@ -74,7 +74,7 @@ class DossierNumber < ActiveRecord::Base
   def period(format = :default)
     return nil unless (from_year or to_year)
     
-    return "vor %s" % to_year if format == :default && from_year.nil? && to_year
+    return "vor %i" % (to_year.to_i + 1) if format == :default && from_year.nil? && to_year
     
     return from_year if from_year == to_year
     
