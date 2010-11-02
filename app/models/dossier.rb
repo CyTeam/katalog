@@ -283,26 +283,43 @@ class Dossier < ActiveRecord::Base
     /^[0-9]{2}\.[0-9]\.[0-9]{3}$/
   end
   
+  def update_or_create_number(amount, range)
+    if numbers.where(range).empty?
+      number = numbers.build(range)
+    else
+      number = numbers.where(range).first
+      amount += number.amount
+    end
+
+    number.amount = amount
+  end
+  
   def import_numbers(row)
     # before 1990
-    numbers.create(
-      :to     => '1989-12-31',
-      :amount => row[16].nil? ? nil : row[16].delete("',").to_i
-    )
+    amount = row[16].nil? ? nil : row[16].delete("',").to_i
+    range = {
+      :from => nil,
+      :to   => '1989-12-31'
+    }
+    update_or_create_number(amount, range)
+    
     # 1990-1993
-    numbers.create(
-      :from   => '1990-01-01',
-      :to     => '1993-12-31',
-      :amount => row[17].nil? ? nil : row[17].delete("',").to_i
-    )
+    amount = row[17].nil? ? nil : row[17].delete("',").to_i
+    range = {
+      :from => '1990-01-01',
+      :to   => '1993-12-31'
+    }
+    update_or_create_number(amount, range)
+
     # 1994-
     year = 1994
     for amount in row[18..36]
-      numbers.create(
+      amount = amount.nil? ? nil : amount.delete("',").to_i
+      range = {
         :from   => Date.new(year, 1, 1),
-        :to     => Date.new(year, 12, 31),
-        :amount => amount.nil? ? nil : amount.delete("',").to_i
-      )
+        :to     => Date.new(year, 12, 31)
+      }
+      update_or_create_number(amount, range)
       year += 1
     end
   end
@@ -363,7 +380,7 @@ class Dossier < ActiveRecord::Base
         dossier.save!
       rescue Exception => e
         puts e.message
-#        puts e.backtrace
+        puts e.backtrace
       end
       puts dossier unless Rails.env.test?
       end
