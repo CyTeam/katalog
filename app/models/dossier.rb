@@ -118,8 +118,26 @@ class Dossier < ActiveRecord::Base
     return query
   end
   
+  def relations
+    return [] if related_to.blank?
+    
+    related_to.split(';').map{|relation| relation.strip.presence}.compact
+  end
+  
+  def relations=(value)
+    self.related_to = value.join('; ')
+  end
+  
+  def relation_list
+    relations.join("\n")
+  end
+  
+  def relation_list=(value)
+    self.relations = value.split("\n")
+  end
+  
   def relation_titles
-    stripped_relations = related_to.split(';').map{|relation| relation.strip.presence}.compact
+    stripped_relations = relations.map{|relation| relation.strip.presence}.compact
     
     titles = stripped_relations.map{|relation| relation.gsub(/^[0-9.]{1,8}:[ ]*/, '')}
 
