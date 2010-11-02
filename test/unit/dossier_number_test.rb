@@ -10,7 +10,7 @@ class DossierNumberTest < ActiveSupport::TestCase
     @new.to   = '1989-12-31'
     @new.amount = 9999
 
-    assert_equal "vor 1989: 9999", @new.to_s
+    assert_equal "vor 1990: 9999", @new.to_s
   end
 
   test "period from fixture" do
@@ -29,7 +29,7 @@ class DossierNumberTest < ActiveSupport::TestCase
     @new.to_year = "1990"
     assert_equal nil, @new.from_year
     assert_equal "1990", @new.to_year
-    assert_equal "vor 1990", @new.period
+    assert_equal "vor 1991", @new.period
   end
     
   test "from_year handles integer and strings" do
