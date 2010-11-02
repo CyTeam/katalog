@@ -94,4 +94,5 @@ Initialize the search index:
 
 <pre>
 rake ts:reindex
+rake ts:start
 </pre>
