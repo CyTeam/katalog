@@ -284,11 +284,12 @@ class Dossier < ActiveRecord::Base
   end
   
   def update_or_create_number(amount, range)
-    if numbers.where(range).empty?
-      number = numbers.build(range)
-    else
-      number = numbers.where(range).first
+    # We can't use .count or .where as the Dossier is guarateed to be saved
+    number = numbers.select{|n| n.from.to_s == range[:from] and n.to.to_s == range[:to]}.first
+    if number
       amount += number.amount
+    else
+      number = numbers.build(range)
     end
 
     number.amount = amount
