@@ -1,7 +1,14 @@
+# Settings
+# ========
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0'
+# Rails
+# =====
+gem 'rails', '~> 3.0.0'
+
+# Database
 gem 'sqlite3-ruby', :require => 'sqlite3'
+gem 'mysql2'
 
 # Test
 # ===
@@ -11,14 +18,11 @@ end
 
 # Standard helpers
 # ================
-gem 'validation_reflection'
-gem 'formtastic', '~> 1.1'
+gem 'formtastic', '~> 1.1.0'
 gem 'will_paginate', :git => 'http://github.com/huerlisi/will_paginate.git', :branch => 'rails3'
-gem 'has_scope'
 gem 'inherited_resources'
-
-# Database
-gem 'mysql2'
+gem 'has_scope'
+gem 'i18n_rails_helpers', '~> 0.8.0'
 
 # Katalog
 # =======
@@ -26,7 +30,7 @@ gem 'mysql2'
 gem 'devise', '~> 1.1'
 
 # Tagging
-gem 'acts-as-taggable-on', '>= 2.0.6'
+gem 'acts-as-taggable-on', '~> 2.0.6'
 
 # Import
 gem 'fastercsv'
