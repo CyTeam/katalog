@@ -1,6 +1,6 @@
+<div id="page_actions" style="float: right; margin: 1em">
+  <%= link_to image_tag('icons/show.png', :title =>t_crud('show')) + t_crud('show'), dossier_path(@dossier) %>
+</div>
 <h1><%= t_crud %></h1>
 
 <%= render 'form' %>
-
-<%= link_to t_crud('show'), @dossier %> |
-<%= link_to t_crud('back'), dossiers_path %>
