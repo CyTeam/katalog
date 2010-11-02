@@ -248,8 +248,8 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal "Worker Movement general; 77: City history", dossiers(:worker_movement_history).related_to
   end
 
-  test "relation_titles splits at ; and strips whitespaces" do
-    assert_equal ["Worker Movement History", "Movements general"], dossiers(:worker_movement_general).relation_titles
+  test "relations splits at ; and strips whitespaces" do
+    assert_equal ["Worker Movement History", "Movements general"], dossiers(:worker_movement_general).relations
   end
   
   test "relation_titles drops leading topic indicator" do
