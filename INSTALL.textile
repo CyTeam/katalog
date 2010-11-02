@@ -24,7 +24,7 @@ sudo apt-get install rubygems
 
 h2. Install Ruby'n'Rails
 
-katalog is developed and tested using Rails 3.0.0 and Ruby 1.8.
+katalog is developed and tested using Rails 3.0.1 and Ruby 1.8.
 
 Install packages to support installing rails:
 
@@ -63,7 +63,10 @@ git submodule update --init
 
 Setup database:
 
-Copy database.yml.example to database.yml and edit as needed. The stock version uses sqlite3 to get everything running without additional setup.
+Copy database.yml.example to database.yml and edit as needed. The katalog
+only works with MySQL (and could possibly be made working with PostgreSQL).
+SQLite is no alternative because Thinking Sphinx, the freetext search engine
+doesn't work with it.
 
 <pre>
 cp config/database.yml.example config/database.yml
