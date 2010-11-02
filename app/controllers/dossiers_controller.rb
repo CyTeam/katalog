@@ -54,6 +54,10 @@ class DossiersController < InheritedResources::Base
     # Drop nil results by stray full text search matches
     @dossiers.compact!
     
-    index!
+    if @dossiers.count == 1
+      redirect_to @dossiers.first
+    else
+      index!
+    end
   end
 end
