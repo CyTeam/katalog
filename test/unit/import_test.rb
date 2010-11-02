@@ -120,27 +120,31 @@ class ImportTest < ActiveSupport::TestCase
   end
   
   test "update_or_create_number creates new number when not existing, yet" do
-    dossier = Dossier.new
+    dossier = Factory(:dossier)
     dossier.update_or_create_number(17, {:from => '1990-01-01', :to => '1990-12-31'})
 
+    dossier.save
+    
     assert_equal 1, dossier.numbers.count
-    assert_equal 17, dossier.number
+    assert_equal 17, dossier.document_count
   end
   
   test "update_or_create_number adds amount when date range has number already" do
-    dossier = Dossier.new
+    dossier = Factory(:dossier)
     dossier.update_or_create_number(17, {:from => '1990-01-01', :to => '1990-12-31'})
     dossier.update_or_create_number(3, {:from => '1990-01-01', :to => '1990-12-31'})
 
+    dossier.save
+    
     assert_equal 1, dossier.numbers.count
-    assert_equal 20, dossier.number
+    assert_equal 20, dossier.document_count
   end
   
   test "document counts are aggregated for all containers" do
     # Cleanup database and import
     reset_and_import('dossiers')
     
-    assert_equal 21, Dossier.find_by_title('City history').numbers.count
+    assert_equal 21, Dossier.find_by_title('City history').numbers.size
   end
   
   test "real data" do
