@@ -1,5 +1,5 @@
 development:
-  adapter: mysql
+  adapter: mysql2
   encoding: utf8
   database: katalog_development
   username: katalog
@@ -8,7 +8,7 @@ development:
 
 test:
   encoding: utf8
-  adapter: mysql
+  adapter: mysql2
   database: katalog_test
   username: katalog
   password:
@@ -16,7 +16,7 @@ test:
 
 production:
   encoding: utf8
-  adapter: mysql
+  adapter: mysql2
   database: katalog_production
   username: katalog
   password:
