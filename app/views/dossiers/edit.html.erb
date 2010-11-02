@@ -1,5 +1,5 @@
 <div id="page_actions" style="float: right; margin: 1em">
-  <%= link_to image_tag('icons/show.png', :title =>t_crud('show')) + t_crud('show'), dossier_path(@dossier) %>
+  <%= contextual_link('show', dossier_path(@dossier)) %>
 </div>
 <h1><%= t_crud %></h1>
 
