@@ -63,10 +63,10 @@ git submodule update --init
 
 Setup database:
 
-Copy database.yml.example to database.yml and edit as needed. The katalog
-only works with MySQL (and could possibly be made working with PostgreSQL).
-SQLite is no alternative because Thinking Sphinx, the freetext search engine
-doesn't work with it.
+Copy database.yml.example to database.yml in config/ and edit as needed. The
+katalog only works with MySQL (and could possibly be made working with
+PostgreSQL). SQLite is no alternative because Sphinx, the freetext search
+engine doesn't work with it.
 
 <pre>
 cp config/database.yml.example config/database.yml
@@ -76,4 +76,29 @@ Initialize the database:
 
 <pre>
 rake db:setup
+</pre>
+
+Setup freetext search
+
+We're using Sphinx as our freetext search engine. We depend on a version
+> 0.9.9, but Ubuntu Lucid only comes with 0.9.8, but Maverick has the required
+package. Simplest way to get it installed on Lucid is to manually download
+the .deb and install:
+
+<pre>
+wget http://de.archive.ubuntu.com/ubuntu/pool/universe/s/sphinxsearch/sphinxsearch_0.9.9-6_i386.deb
+sudo dpkg -i sphinxsearch_0.9.9-6_i386.deb
+</pre>
+
+Copy development.sphinx.conf.example to development.sphinx.conf in config/ and
+update the database credentials as needed.
+
+<pre>
+cp config/development.sphinx.conf.example config/development.sphinx.conf
+</pre>
+
+Initialize the search index:
+
+<pre>
+rake ts:reindex
 </pre>
