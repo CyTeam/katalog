@@ -9,7 +9,7 @@
   <td><%= dossier.container_types.compact.map{|container_type| container_type.code}.join(', ') %></td>
   <td><%= dossier.locations.compact.map{|location| location.code}.join(', ') %></td>
   <td style="text-align: right"><%= number_with_delimiter(dossier.document_count) %></td>
-  <td style="width: 70px">
+  <td style="width: 70px" class="action-links">
     <% if user_signed_in? %>
       <%= link_to image_tag('icons/edit.png', :title => t('crud.edit', :model => '')), edit_dossier_path(dossier) %>
       <%= link_to image_tag('icons/delete.png', :title => t('crud.delete', :model => '')), dossier, :confirm => t_confirm_delete(dossier), :remote => true, :method => :delete %>
