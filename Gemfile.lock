@@ -97,6 +97,10 @@ GEM
       activesupport (= 3.0.1)
       bundler (~> 1.0.0)
       railties (= 3.0.1)
+    rails-erd (0.4.1)
+      activerecord (~> 3.0)
+      activesupport (~> 3.0)
+      ruby-graphviz (~> 0.9.18)
     railties (3.0.1)
       actionpack (= 3.0.1)
       activesupport (= 3.0.1)
@@ -105,6 +109,7 @@ GEM
     rake (0.8.7)
     responders (0.6.2)
     riddle (1.1.0)
+    ruby-graphviz (0.9.19)
     thor (0.14.3)
     treetop (1.4.8)
       polyglot (>= 0.3.1)
@@ -129,5 +134,6 @@ DEPENDENCIES
   mysql2
   pdfkit
   rails (~> 3.0.0)
+  rails-erd
   thinking-sphinx!
   will_paginate!
