@@ -2,6 +2,8 @@
 
 <div id="page_actions" style="float: right; margin: 1em">
   <%= contextual_link('edit', edit_dossier_path(@dossier)) %>
+  <%= contextual_function('print', 'window.print();') %>
+  <%= contextual_link('pdf', url_for(:format => :pdf)) %>
 </div>
 <h1><%= @dossier %></h1>
 <p class="notice"><%= notice %></p>
