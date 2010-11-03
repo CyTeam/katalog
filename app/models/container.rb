@@ -3,8 +3,6 @@ class Container < ActiveRecord::Base
   belongs_to :dossier
   belongs_to :location
   belongs_to :container_type
-  has_many :numbers, :class_name => 'DossierNumber'
-  accepts_nested_attributes_for :numbers
 
   # Validations
   validates_presence_of :dossier, :location, :container_type
