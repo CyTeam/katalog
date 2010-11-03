@@ -79,6 +79,13 @@ $('container-list').insert({ bottom: "#{ escape_javascript record }".replace(/ne
     output = ActiveSupport::SafeBuffer.new
     options.merge!(:class => "icon icon-{#action}")
     
-    output << link_to(image_tag("icons/#{action}.png", :title => t_action(action)) + t_crud('edit'), url, options)
+    output << link_to(image_tag("icons/#{action}.png", :title => t_action(action)) + t_action(action), url, options)
+  end
+
+  def contextual_function(action, function, options = {})
+    output = ActiveSupport::SafeBuffer.new
+    options.merge!(:class => "icon icon-{#action}")
+    
+    output << link_to_function(image_tag("icons/#{action}.png", :title => t_action(action)) + t_action(action), function, options)
   end
 end

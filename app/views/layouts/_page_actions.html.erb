@@ -1,4 +1,4 @@
 <div id="page_actions" style="float: right; margin: 1em">
-  <%= link_to_function image_tag('icons/print.png', :title => 'Seite drucken'), 'window.print();' %>
-  <%= link_to image_tag('icons/pdf.png'), url_for(:format => :pdf) %>
+  <%= contextual_function('print', 'window.print();') %>
+  <%= contextual_link('pdf', url_for(:format => :pdf)) %>
 </div>
