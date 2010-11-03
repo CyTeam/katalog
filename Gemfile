@@ -17,6 +17,12 @@ group :test do
   gem 'autotest-rails'
 end
 
+# Development
+# ===========
+group :development do
+  gem "rails-erd"
+end
+
 # Standard helpers
 # ================
 gem 'formtastic', '~> 1.1.0'
