@@ -1,4 +1,4 @@
 <div id="page_actions" style="float: right; margin: 1em">
   <%= contextual_function('print', 'window.print();') %>
-  <%= contextual_link('pdf', url_for(:format => :pdf)) %>
+  <%= contextual_link('pdf', url_for(params.merge({:format => :pdf}))) %>
 </div>
