@@ -74,6 +74,10 @@ de-CH:
     back: "zurück"
     previous: "vorherige"
     next:     "nächste"
+    
+    action:
+      pdf:    "PDF anzeigen"
+      print: "Seite drucken"
 
   devise:
     sign_in: "Anmelden"
