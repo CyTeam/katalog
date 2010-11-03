@@ -6,6 +6,14 @@
   display: none;
 }
 
+.action-links {
+  display: none;
+}
+
+.digg-pagination {
+  display: none;
+}
+
 table {
   border-collapse:collapse;
   border-spacing:0;
