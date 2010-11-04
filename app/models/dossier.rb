@@ -190,6 +190,10 @@ class Dossier < ActiveRecord::Base
     containers.minimum(:first_document_on)
   end
   
+  def availability
+    containers.collect{|c| c.location.availability}.uniq
+  end
+  
   def locations
     containers.collect{|c| c.location}.uniq
   end
