@@ -5,9 +5,10 @@
   <%= contextual_function('print', 'window.print();') %>
   <%= contextual_link('pdf', url_for(:format => :pdf)) %>
 </div>
-<h1><%= @dossier %></h1>
+<h1><%= @dossier.title %></h1>
 <p class="notice"><%= notice %></p>
 
+<h3>Kategorisierung</h3>
 <div class="section">
   <ul class="dossier_topic_breadcrumb">
     <% for parent in @dossier.parent_tree %>
