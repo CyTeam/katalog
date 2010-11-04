@@ -33,7 +33,7 @@ de-CH:
         tag:            "Schlagwort"
         keyword:        "Schlagwort"
         keyword_text:   "Schlagworte"
-        first_document_on: "Erstes Dokument von"
+        first_document_on: "Dokumente seit"
         related_to:     "Querverweise"
         dossier_number_list: "Anzahl Dokumente"
       container:
@@ -41,7 +41,7 @@ de-CH:
         container_type: "Art"
         location:       "Standort"
         document_count: "Anzahl Dokumente"
-        first_document_on: "Erstes Dokument von"
+        first_document_on: "Dokumente seit"
       location:
         title:        "Titel"
         code:         "Kürzel"
