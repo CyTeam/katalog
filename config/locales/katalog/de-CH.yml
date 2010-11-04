@@ -1,11 +1,12 @@
 de-CH:
   katalog:
-    search:   "Suchen"
-    count:    "Anzahl"
-    edit:     "Ändern"
-    show:     "Anzeigen"
-    delete:   "Löschen"
-    overview: "Themenübersicht"
+    search:     "Suchen"
+    search_for: "Suche nach %{query}"
+    count:      "Anzahl"
+    edit:       "Ändern"
+    show:       "Anzeigen"
+    delete:     "Löschen"
+    overview:   "Themenübersicht"
     
   controllers:
     index:
