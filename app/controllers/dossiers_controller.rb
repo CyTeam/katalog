@@ -59,7 +59,7 @@ class DossiersController < InheritedResources::Base
     @dossiers.compact!
     
     if @dossiers.count == 1
-      redirect_to @dossiers.first
+      redirect_to dossier_path(@dossiers.first, :query => @query)
     else
       index!
     end
