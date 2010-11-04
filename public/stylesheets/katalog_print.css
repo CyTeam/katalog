@@ -1,3 +1,4 @@
+/* Hide forms, actions, and navigation */
 #search_form {
   display: none;
 }
@@ -14,15 +15,7 @@
   display: none;
 }
 
-table {
-  border-collapse:collapse;
-  border-spacing:0;
-}
-
-.ce_table td, .ce_table th {
-  border: 0;
-}
-
+/* Layout */
 body {
   width: 98%;
 }
@@ -32,8 +25,13 @@ body {
   width: 100%;
 }
 
-#dossiers table {
-  width: 100%;
+/* Media adaption */
+table {
+  border-collapse:collapse;
+  border-spacing:0;
+}
+
+.ce_table td, .ce_table th {
   border: 0;
 }
 
@@ -41,6 +39,9 @@ td {
   padding:6px;
 }
 
-#main {
-  margin: 0px;
+/* Katalog specific */
+#dossiers table {
+  width: 100%;
+  border: 0;
 }
+
