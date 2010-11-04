@@ -1,4 +1,4 @@
-<ul>
+<ul id="relation-list" class="relations">
   <% for relation in @dossier.relation_titles %>
     <li><%= link_to relation, search_dossiers_url(:search => {:text => relation}) %></li>
   <% end %>

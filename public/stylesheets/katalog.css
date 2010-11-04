@@ -77,6 +77,14 @@ li.topic a {
   width: 100%;
 }
 
+.dossier_topic_breadcrumb li {
+  list-style: none;
+}
+
+#keyword-list, #relation-list {
+  margin-left: 1.4em;
+}
+
 /** Keywords **/
 td .keywords li, .tags li{
   display: inline;
