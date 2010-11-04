@@ -36,6 +36,10 @@ a {
   text-decoration: none;
 }
 
+.match {
+  color: #000000;
+}
+
 table {
   border-collapse:collapse;
   border-spacing:0;
