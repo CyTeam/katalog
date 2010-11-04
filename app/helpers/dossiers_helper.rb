@@ -3,6 +3,10 @@ module DossiersHelper
     link_to(keyword, search_dossiers_path(:search => {:tag => keyword }), options)
   end
 
+  def availability_text(dossier)
+    dossier.availability.compact.join(', ')
+  end
+  
   def url_for_topic(topic)
     search_dossiers_url(:search => {:signature => topic.signature})
   end

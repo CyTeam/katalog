@@ -6,8 +6,7 @@
     <br/>
     <span class="keywords"><%= dossier.keywords.join(', ') %></span>
   </td>
-  <td><%= dossier.container_types.compact.map{|container_type| container_type.code}.join(', ') %></td>
-  <td><%= dossier.locations.compact.map{|location| location.code}.join(', ') %></td>
+  <td><%= availability_text(dossier) %></td>
   <td style="text-align: right"><%= number_with_delimiter(dossier.document_count) %></td>
   <td style="width: 70px" class="action-links">
     <% if user_signed_in? %>
