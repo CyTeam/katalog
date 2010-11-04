@@ -17,12 +17,16 @@
 
 /* Layout */
 body {
-  width: 98%;
+  width: 100%;
 }
 
 #wrapper, #container, #main, #inside, #dossiers {
   margin: 0;
   width: 100%;
+}
+
+#main .inside {
+  padding-right: 0;
 }
 
 /* Media adaption */
