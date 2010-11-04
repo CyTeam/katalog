@@ -25,6 +25,9 @@ end
 
 # Standard helpers
 # ================
+gem 'haml'
+gem 'compass', '~> 0.10.4'
+
 gem 'formtastic', '~> 1.1.0'
 gem 'will_paginate', :git => 'http://github.com/huerlisi/will_paginate.git', :branch => 'rails3'
 gem 'inherited_resources'

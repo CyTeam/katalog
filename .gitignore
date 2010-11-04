@@ -21,10 +21,23 @@ doc/api
 # Local
 config/database.yml
 
-# katalog
+# Development
+# ===========
+# RVM
+.rvmrc
+
+# Rubymine
+.idea
+
+# Plugins
+# =======
+# compass
+public/stylesheets/compiled
+
+# Application
+# ===========
 data
 
+# Sphinx Freetext Search
 db/sphinx
 config/*.sphinx.conf
-.idea/*
-.rvmrc
