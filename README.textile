@@ -7,6 +7,19 @@ Katalog ist eine Katalogsoftware für ein Dokumentenarchiv.
 
 Katalog basiert auf "Ruby On Rails":http://www.rubyonrails.org und ist als "Open Source":http://www.opensource.org veröffentlicht.
 
+h2. Credits
+
+We build on lots of work by others.
+
+h3. Icons
+
+Wir nutzen die schönen Icons von SilkIcons:
+
+Lizenz:
+* "Homepage":http://www.famfamfam.com/lab/icons/silk
+* "Creative Commons Attribution 2.5 License":http://creativecommons.org/licenses/by/2.5
+* Copyright Mark James <mjames@gmail.com>
+
 h2. Lizenz
 
 Eine vereinfachte Übersicht in allgemeinverständlicher Sprache über den zugrundeliegenden Rechte
