@@ -18,6 +18,8 @@
 /* Layout */
 body {
   width: 100%;
+  padding-left: 1.4cm;
+  padding-right: 1.4cm;
 }
 
 #wrapper, #container, #main, #inside, #dossiers {
@@ -30,6 +32,10 @@ body {
 }
 
 /* Media adaption */
+a {
+  text-decoration: none;
+}
+
 table {
   border-collapse:collapse;
   border-spacing:0;
