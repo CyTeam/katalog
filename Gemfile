@@ -47,3 +47,8 @@ gem 'thinking-sphinx', :git => 'git://github.com/freelancing-god/thinking-sphinx
 
 # Reports
 gem 'pdfkit'
+
+# Full text search engine
+gem 'sphinx'
+gem 'SystemTimer'
+
