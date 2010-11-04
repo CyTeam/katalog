@@ -73,6 +73,10 @@ li.topic a {
   margin-left: 1.5em;
 }
 
+.document_counts {
+  width: 100%;
+}
+
 /** Keywords **/
 td .keywords li, .tags li{
   display: inline;
