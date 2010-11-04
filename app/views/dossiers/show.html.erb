@@ -27,14 +27,16 @@
 </div>
 
 <h3>Dokumente</h3>
-<table class="document_counts ce_table">
-  <tr>
-    <%= render :partial => 'dossier_numbers/head', :collection => @dossier.numbers.present %>
-  </tr>
-  <tr>
-    <%= render :partial => 'dossier_numbers/amount', :collection => @dossier.numbers.present %>
-  </tr>
-</table>
+<div class="ce_table">
+  <table class="document_counts">
+    <tr>
+      <%= render :partial => 'dossier_numbers/head', :collection => @dossier.numbers.present %>
+    </tr>
+    <tr class="odd">
+      <%= render :partial => 'dossier_numbers/amount', :collection => @dossier.numbers.present %>
+    </tr>
+  </table>
+</div>
 
 <h3>Dossiers</h3>
 <div class="ce_table">
