@@ -1,12 +1,15 @@
 de-CH:
   katalog:
-    search:     "Suchen"
-    search_for: "Suche nach %{query}"
-    count:      "Anzahl"
-    edit:       "Ändern"
-    show:       "Anzeigen"
-    delete:     "Löschen"
-    overview:   "Themenübersicht"
+    search:        "Suchen"
+    search_for:    "Suche nach %{query}"
+    count:         "Anzahl"
+    edit:          "Ändern"
+    show:          "Anzeigen"
+    delete:        "Löschen"
+    overview:      "Themenübersicht"
+    nothing_found:
+      title:       "Kein Treffer"
+      text:        "Für den gewünschten Suchbegriff wurde leider kein Dokument gefunden."
     
   controllers:
     index:

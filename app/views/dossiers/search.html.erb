@@ -1,8 +1,17 @@
 <%= render 'search_form' %>
 
 <%= render 'layouts/page_actions' %>
-<h1><%= t('katalog.search_for', :query => @query) %></h1>
-<%= paginated_section :renderer => PaginationListLinkRenderer do %>
-  <%= render 'list' if @dossiers %>
-<% end %>
+
+<%- if @dossier %>
+  <h1><%= t('katalog.search_for', :query => @query) %></h1>
+  <%= paginated_section :renderer => PaginationListLinkRenderer do %>
+    <%= render 'list' %>
+  <%- end %>
+<%- elsif @query %>
+  <h1><%= t('katalog.nothing_found.title') %></h1>
+  <p><%= t('katalog.nothing_found.text') %></p>
+<%- else %>
+  <h1><%= t('katalog.search') %></h1>
+<%- end %>
+
 <%= highlight_words(@query) %>
