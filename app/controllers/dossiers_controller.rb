@@ -43,15 +43,15 @@ class DossiersController < InheritedResources::Base
     params[:search] ||= {}
     params[:search][:text] ||= params[:search][:query]
     
+    if params[:per_page] == 'all'
+      # Simple hack to simulate all
+      params[:per_page] = 1000000
+    end
     if params[:search][:text].present?
       @query = params[:search][:text]
       @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page])
     else
       @query = params[:search][:signature]
-      if params[:per_page] == 'all'
-        # Simple hack to simulate all
-        params[:per_page] = 1000000
-      end
       @dossiers = apply_scopes(Dossier, params[:search]).paginate :page => params[:page], :per_page => params[:per_page]
     end
     
