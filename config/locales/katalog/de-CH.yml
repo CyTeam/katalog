@@ -10,6 +10,12 @@ de-CH:
     nothing_found:
       title:       "Kein Treffer"
       text:        "Für den gewünschten Suchbegriff wurde leider kein Dokument gefunden."
+    availability:
+      partially:   "Teilweise"
+      title:
+        ready:     "Sofort verfügbar"
+        wait:      "Wartezeit 1 Tag"
+        intern:    "Interne Dokumente"
     
   controllers:
     index:
@@ -33,13 +39,14 @@ de-CH:
         title:          "Titel"
         container_type: "Art"
         location:       "Standort"
-        document_count: "Anzahl Dokumente"
+        document_count: "Dokumente"
         tag:            "Schlagwort"
         keyword:        "Schlagwort"
         keyword_text:   "Schlagworte"
         first_document_on: "Dokumente seit"
         related_to:     "Querverweise"
         dossier_number_list: "Anzahl Dokumente"
+        availability: "Verfügbar"
       container:
         title:          "Titel"
         container_type: "Art"

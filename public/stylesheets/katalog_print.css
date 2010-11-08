@@ -62,3 +62,6 @@ tr {page-break-inside: avoid;}
   border: 0;
 }
 
+#dossiers .availability {
+  display:none;
+}

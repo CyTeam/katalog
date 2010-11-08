@@ -12,9 +12,6 @@ tr.topic.topic_geo td { background-color: #C8B7B7; }
 tr.topic.topic_dossier td { background-color: #E9DDAF; }
 
 /** Index **/
-.index th.container_type, .index th.location {
-  color: transparent;
-}
 .index th {
   border: 0;
 }
