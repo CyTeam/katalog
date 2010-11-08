@@ -3,8 +3,35 @@ module DossiersHelper
     link_to(keyword, search_dossiers_path(:search => {:tag => keyword }), options)
   end
 
-  def availability_text(dossier)
-    dossier.availability.compact.join(', ')
+  def availability_text(availability, partially)
+    title = t(availability, :scope => 'katalog.availability.title')
+    if partially
+      title = t('katalog.availability.partially') + " " + title
+    end
+    
+    text = content_tag 'span', :class => "availability icon-availability_#{availability}-text", :title => title do
+      title
+    end
+    
+    return text
+  end
+  
+  def availability_notes(dossier)
+    # Collect availabilities
+    availabilities = dossier.availability.compact
+
+    partially = availabilities.size > 1
+
+    notes = ""
+    
+    if availabilities.include?('intern')
+      notes += availability_text('intern', partially)
+    end
+    if availabilities.include?('wait')
+      notes += availability_text('wait', partially)
+    end
+
+    return notes.html_safe
   end
   
   def url_for_topic(topic)

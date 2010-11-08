@@ -2,8 +2,6 @@
 <tr class="topic topic_group" data-href="<%= url_for_topic topic_group %>">
   <td><%= @new_signature ? topic_group.new_signature : topic_group.signature %></td>
   <td class="title"><%= topic_group.title %></td>
-  <td></td>
-  <td></td>
   <td style="text-align: right"><%= number_with_delimiter(topic_group.document_count(@new_signature)) %></td>
   <td class="action-links"></td>
 </tr>

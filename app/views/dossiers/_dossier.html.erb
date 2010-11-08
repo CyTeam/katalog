@@ -6,8 +6,10 @@
     <br/>
     <span class="keywords"><%= dossier.keywords.join(', ') %></span>
   </td>
-  <td><%= availability_text(dossier) %></td>
-  <td style="text-align: right"><%= number_with_delimiter(dossier.document_count) %></td>
+  <td style="text-align: right">
+    <%= number_with_delimiter(dossier.document_count) %>
+    <%= availability_notes(dossier) %>
+  </td>
   <td style="width: 70px" class="action-links">
     <% if user_signed_in? %>
       <%= link_to image_tag('icons/edit.png', :title => t('crud.edit', :model => '')), edit_dossier_path(dossier) %>
