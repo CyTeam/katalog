@@ -11,14 +11,14 @@ module DossiersHelper
     link_to(topic, url_for_topic(topic), options)
   end
 
-  def highlight_words(query)
+  def highlight_words(query, element = 'dossiers')
     return unless query.present?
 
     signatures, words, sentences = Dossier.split_search_words(query)
 
     content = ActiveSupport::SafeBuffer.new
     for word in (words + sentences)
-      content += javascript_tag "Element.highlight($('dossiers'), '#{escape_javascript(word)}', 'match');"
+      content += javascript_tag "Element.highlight($('#{element}'), '#{escape_javascript(word)}', 'match');"
     end
     
     return content

@@ -4,11 +4,11 @@
   <%= contextual_link('edit', edit_dossier_path(@dossier)) %>
   <%= contextual_link('pdf', url_for(:format => :pdf)) %>
 </div>
-<h1><%= @dossier.title %></h1>
+<h1 id="title"><%= @dossier.title %></h1>
 <p class="notice"><%= notice %></p>
 
 <h3>Kategorisierung</h3>
-<div class="section">
+<div id="breadcrumb" class="section">
   <ul class="dossier_topic_breadcrumb">
     <% for parent in @dossier.parent_tree %>
       <li><%= link_to_topic(parent) %></li>
@@ -17,17 +17,17 @@
 </div>
 
 <h3>Schlagworte</h3>
-<div class="section">
+<div id="keywords" class="section">
   <%= render 'keywords/list' %>
 </div>
 
 <h3>Querverweise</h3>
-<div class="section">
+<div id="relations" class="section">
   <%= render 'relations/list' if @dossier.related_to.present? %>
 </div>
 
 <h3>Dokumente</h3>
-<div class="ce_table">
+<div id="document_counts" class="ce_table">
   <table class="document_counts">
     <tr>
       <%= render :partial => 'dossier_numbers/head', :collection => @dossier.numbers.present %>
@@ -39,8 +39,10 @@
 </div>
 
 <h3>Dossiers</h3>
-<div class="ce_table">
+<div id="containers" class="ce_table">
   <table>
     <%= @containers = @dossier.containers; render 'containers/list' %>
   </table>
 </div>
+
+<%= highlight_words(params['query'], 'keywords') %>
