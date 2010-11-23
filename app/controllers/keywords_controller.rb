@@ -18,4 +18,17 @@ class KeywordsController < InheritedResources::Base
     @keywords = @dossier.keyword_list.add(params[:keyword][:name])
     @dossier.save
   end
+
+  def search
+    params[:per_page] ||= 25
+    
+    params[:search] ||= {}
+    params[:search][:text] ||= params[:search][:query]
+
+    @query = params[:search][:text]
+
+    @keywords = Dossier.keyword_counts.where("name LIKE ?", "%#{@query}%").order(:name).paginate(:per_page => params[:per_page], :page => params[:page])
+    
+    render :action => 'index'
+  end
 end
