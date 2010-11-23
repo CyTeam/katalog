@@ -18,7 +18,9 @@
 
 <h3>Schlagworte</h3>
 <div id="keywords" class="section">
-  <%= render 'keywords/list' %>
+  <ul id="keyword-list" class="keywords">
+    <%= render :partial => 'keyword', :collection => @dossier.keywords.order('name') %>
+  </ul>
 </div>
 
 <h3>Querverweise</h3>
