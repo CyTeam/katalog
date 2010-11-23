@@ -8,6 +8,9 @@ class KeywordsController < InheritedResources::Base
   # Responders
   respond_to :html, :js
 
+  # Search
+  has_scope :by_character
+
   # Actions
   def index
     @keywords = Dossier.keyword_counts.order(:name).paginate(:per_page => params[:per_page], :page => params[:page])
