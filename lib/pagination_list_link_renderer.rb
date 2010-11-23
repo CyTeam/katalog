@@ -14,7 +14,7 @@ class PaginationListLinkRenderer < WillPaginate::ViewHelpers::LinkRenderer
   end
 
   def alphabetic_page_link(character)
-    if character == @template.params[:search][:by_character]
+    if @template.params[:search] && character == @template.params[:search][:by_character]
       link = "<em>%s</em>" % character.upcase
     else
       link = "<a class='per_page' href='%s'>%s</a>" % [alphabetic_page_href(character), character.upcase]
@@ -24,7 +24,7 @@ class PaginationListLinkRenderer < WillPaginate::ViewHelpers::LinkRenderer
   end
   
   def alphabetic_page_href(character)
-    search_params = @template.params[:search].merge(:by_character => character)
+    search_params = (@template.params[:search] || {}).merge(:by_character => character)
     params = @template.params.merge(:search => search_params)
     
     @template.url_for(params)
