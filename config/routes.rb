@@ -19,5 +19,11 @@ Katalog::Application.routes.draw do
 
   post "dossier_numbers/set_amount"
   
+  resources :keywords do
+    collection do
+      get :search
+    end
+  end
+
   root :to => "dossiers#index"
 end
