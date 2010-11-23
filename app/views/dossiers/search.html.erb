@@ -2,7 +2,7 @@
 
 <%= render 'layouts/page_actions' %>
 
-<%- if @dossiers %>
+<%- if @dossiers.present? %>
   <h1><%= t('katalog.search_for', :query => @query) %></h1>
   <%= paginated_section :renderer => PaginationListLinkRenderer do %>
     <%= render 'list' %>
