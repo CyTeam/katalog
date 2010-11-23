@@ -15,12 +15,6 @@ Katalog::Application.routes.draw do
     end
 
     resources :containers
-    
-    resources :keywords do
-      member do
-        post :set_name
-      end
-    end
   end
 
   post "dossier_numbers/set_amount"
