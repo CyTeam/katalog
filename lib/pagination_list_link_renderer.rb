@@ -27,8 +27,11 @@ class PaginationListLinkRenderer < WillPaginate::ViewHelpers::LinkRenderer
   end
   
   def alphabetic_page_href(character)
+    # Add character to query
     search_params = @params.merge(:by_character => character)
     params = @template.params.merge(@search_key => search_params)
+    # Drop page index
+    @template.params.delete(:page)
     
     @template.url_for(params)
   end
