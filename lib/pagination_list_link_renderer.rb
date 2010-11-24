@@ -4,7 +4,7 @@ class PaginationListLinkRenderer < WillPaginate::ViewHelpers::LinkRenderer
     @search_key = :search
     @params = @template.params[@search_key] || {}
     
-    html += "<span>|</span>" + [per_page_link(25), per_page_link(50), per_page_link(200)].join('')
+    html = [per_page_link(25), per_page_link(50), per_page_link(200)].join('') + "<span>|</span>" + html
     html += "</div><div style='clear: both; padding-top: 0.5em;'>" + alphabetic_pagination
     html = "<div style='clear: both'>" + html + "</div>"
     tag(:div, html, container_attributes)
