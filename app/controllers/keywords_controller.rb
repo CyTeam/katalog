@@ -13,7 +13,7 @@ class KeywordsController < InheritedResources::Base
 
   # Actions
   def index
-    @keywords = Dossier.keyword_counts.order(:name).paginate(:per_page => params[:per_page], :page => params[:page])
+    @keywords = apply_scopes(Keyword, params[:search]).order(:name).paginate(:per_page => params[:per_page], :page => params[:page])
   end
   
   def create
@@ -30,7 +30,7 @@ class KeywordsController < InheritedResources::Base
 
     @query = params[:search][:text]
 
-    @keywords = Dossier.keyword_counts.where("name LIKE ?", "%#{@query}%").order(:name).paginate(:per_page => params[:per_page], :page => params[:page])
+    @keywords = apply_scopes(Keyword, params[:search]).where("name LIKE ?", "%#{@query}%").order(:name).paginate(:per_page => params[:per_page], :page => params[:page])
     
     render :action => 'index'
   end
