@@ -31,7 +31,7 @@ class PaginationListLinkRenderer < WillPaginate::ViewHelpers::LinkRenderer
     search_params = @params.merge(:by_character => character)
     params = @template.params.merge(@search_key => search_params)
     # Drop page index
-    @template.params.delete(:page)
+    params.delete(:page)
     
     @template.url_for(params)
   end
@@ -48,6 +48,8 @@ class PaginationListLinkRenderer < WillPaginate::ViewHelpers::LinkRenderer
 
   def per_page_href(count)
     params = @template.params.merge({:per_page => count})
+    # Drop page index
+    params.delete(:page)
     
     @template.url_for(params)
   end
