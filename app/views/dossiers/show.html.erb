@@ -28,7 +28,7 @@
   <%= render 'relations/list' if @dossier.related_to.present? %>
 </div>
 
-<h3><%= t('katalog.title.document_count_html', :document_count => number_with_delimiter(@dossier.document_count), :first_document => l(@dossier.first_document_on, :format => '%Y')) %></h3>
+<h3><%= t('katalog.title.document_count_html', :document_count => number_with_delimiter(@dossier.document_count), :first_document => @dossier.first_document_on.try(:strftime, '%Y')) %></h3>
 <div id="document_counts" class="ce_table">
   <table class="document_counts">
     <tr>
