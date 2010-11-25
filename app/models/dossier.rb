@@ -43,10 +43,14 @@ class Dossier < ActiveRecord::Base
   
   # Search
   define_index do
+    set_property :group_concat_max_len => 1048576
+
     # fields
     indexes title
     indexes signature
     indexes keywords.name, :as => :keywords
+
+    has sort_key
     has type
     
     set_property :field_weights => {
@@ -61,7 +65,7 @@ class Dossier < ActiveRecord::Base
 
 #  sphinx_scope(:by_text) { |value| {:conditions => value} }
   def self.by_text(value, options = {})
-    params = {:match_mode => :extended, :rank_mode => :match_any, :with => {:type => 'Dossier'}}
+    params = {:match_mode => :extended, :rank_mode => :match_any, :with => {:type => 'Dossier'}, :order => :sort_key, :sort_mode => :desc}
     params.merge!(options)
     
     query = build_query(value)
