@@ -33,9 +33,11 @@
   <table class="document_counts">
     <tr>
       <%= render :partial => 'dossier_numbers/head', :collection => @dossier.numbers.present %>
+      <th><%= t('katalog.total') %></th>
     </tr>
     <tr class="odd">
       <%= render :partial => 'dossier_numbers/amount', :collection => @dossier.numbers.present %>
+      <td><strong><%= @dossier.document_count %></strong></td>
     </tr>
   </table>
 </div>
