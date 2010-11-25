@@ -210,7 +210,7 @@ class Dossier < ActiveRecord::Base
   end
   
   def document_count
-    numbers.sum(:amount)
+    numbers.sum(:amount).to_i
   end
   
   def find_parent
