@@ -13,6 +13,7 @@ class KeywordsController < InheritedResources::Base
 
   # Actions
   def index
+    params[:per_page] ||= 25
     params[:search] ||= {}
     @keywords = apply_scopes(Keyword, params[:search]).order(:name).paginate(:per_page => params[:per_page], :page => params[:page])
   end
