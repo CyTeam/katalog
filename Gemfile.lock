@@ -9,10 +9,10 @@ GIT
 
 GIT
   remote: http://github.com/huerlisi/will_paginate.git
-  revision: ef54916
+  revision: 05fbcb82299a449fc37fb9198346703740cb39cd
   branch: rails3
   specs:
-    will_paginate (3.0.pre2)
+    will_paginate (3.0.pre3)
 
 GEM
   remote: http://rubygems.org/
