@@ -11,7 +11,11 @@ class PaginationListLinkRenderer < WillPaginate::ViewHelpers::LinkRenderer
   end
 
   def alphabetic_pagination
-    page_links = ('a'..'z').map{|character| alphabetic_page_link(character)}
+    paginated_scope = @template.instance_variable_get(:@paginated_scope)
+    return "" unless paginated_scope
+
+    characters = paginated_scope.character_list
+    page_links = characters.map{|character| alphabetic_page_link(character)}
     
     return page_links.join('')
   end
