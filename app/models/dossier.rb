@@ -21,6 +21,12 @@ class Dossier < ActiveRecord::Base
   scope :by_kind, lambda {|value| where(:id => Container.where('container_type_id = ?', ContainerType.find_by_code(value)).map{|c| c.dossier_id}.uniq)}
   scope :by_character, lambda {|value| where("title LIKE CONCAT(?, '%')", value)}
   
+  # Pagination
+  scope :characters, select("DISTINCT substring(upper(title), 1, 1) AS letter").having("letter BETWEEN 'A' AND 'Z'")
+  def self.character_list
+    characters.order('title').map{|t| t.letter}
+  end
+
   # Ordering
   # BUG: Beware of SQL Injection
   scope :order_by, lambda {|value| order("CONCAT(#{value}, IF(type IS NULL, '.a', '')), title")}

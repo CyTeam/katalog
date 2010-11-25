@@ -54,6 +54,12 @@ class DossiersController < InheritedResources::Base
     else
       @query = params[:search][:signature]
       @dossiers = apply_scopes(Dossier, params[:search]).paginate :page => params[:page], :per_page => params[:per_page]
+
+      # Alphabetic pagination
+      alphabetic_topics = ['15', '56', '81']
+      if alphabetic_topics.include?(@query)
+        @paginated_scope = Dossier.by_signature(@query)
+      end
     end
     
     # Drop nil results by stray full text search matches
