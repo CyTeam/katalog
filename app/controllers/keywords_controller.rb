@@ -15,7 +15,9 @@ class KeywordsController < InheritedResources::Base
   def index
     params[:per_page] ||= 25
     params[:search] ||= {}
+  
     @keywords = apply_scopes(Keyword, params[:search]).order(:name).paginate(:per_page => params[:per_page], :page => params[:page])
+    @paginated_scope = Keyword
   end
   
   def create
@@ -33,6 +35,7 @@ class KeywordsController < InheritedResources::Base
     @query = params[:search][:text]
 
     @keywords = apply_scopes(Keyword, params[:search]).where("name LIKE ?", "%#{@query}%").order(:name).paginate(:per_page => params[:per_page], :page => params[:page])
+    @paginated_scope = Keyword.where("name LIKE ?", "%#{@query}%")
     
     render :action => 'index'
   end
