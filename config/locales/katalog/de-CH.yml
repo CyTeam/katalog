@@ -8,6 +8,8 @@ de-CH:
     delete:        "Löschen"
     overview:      "Themenübersicht"
     total:         "Total"
+    title:
+      document_count_html: "Total <strong>%{document_count}</strong> Dokumente seit <strong>%{first_document}</strong>"
     nothing_found:
       title:       "Kein Treffer"
       text:        "Für den gewünschten Suchbegriff wurde leider kein Dokument gefunden."
