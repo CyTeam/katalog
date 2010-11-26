@@ -7,7 +7,7 @@
 <h1 id="title"><%= @dossier.title %></h1>
 <p class="notice"><%= notice %></p>
 
-<h3><%= @dossier.find_parent.signature %></h3>
+<h3><%= @dossier.find_parent.try(:signature) %></h3>
 <div id="breadcrumb" class="section">
   <ul class="dossier_topic_breadcrumb">
     <% for parent in @dossier.parent_tree %>
