@@ -56,7 +56,7 @@ class DossiersController < InheritedResources::Base
       @dossiers = apply_scopes(Dossier, params[:search]).order('signature').paginate :page => params[:page], :per_page => params[:per_page]
 
       # Alphabetic pagination
-      alphabetic_topics = ['15', '56', '81']
+      alphabetic_topics = ['15', '56', '81', '81.5']
       if alphabetic_topics.include?(@query)
         @paginated_scope = Dossier.by_signature(@query)
       end
