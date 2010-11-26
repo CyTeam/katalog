@@ -217,13 +217,12 @@ class Dossier < ActiveRecord::Base
     numbers.sum(:amount).to_i
   end
   
-  def find_parent
-    TopicDossier.where(:signature => signature).first
+  def parent
+    parents.last
   end
   
-  def parent_tree
-    return [] unless parent = find_parent
-    return parent.parent_tree << parent
+  def parents
+    Dossier.where("NOT(type = 'Dossier') AND ? LIKE CONCAT(signature, '%')", signature)
   end
   
   # Importer

@@ -15,10 +15,6 @@ class Topic < Dossier
     children(use_new_signature).includes(:numbers).sum(:amount)
   end
 
-  def find_parent
-    TopicGroup.where(:signature => signature.first).first
-  end
-
   # Importer
   def self.import_filter
     /^[0-9]{2}$/
