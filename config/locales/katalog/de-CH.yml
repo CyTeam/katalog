@@ -48,6 +48,7 @@ de-CH:
         keyword_text:   "Schlagworte"
         first_document_year: "Dokumente seit"
         related_to:     "Querverweise"
+        relation_list:  "Querverweise"
         dossier_number_list: "Anzahl Dokumente"
         availability: "Verfügbar"
       container:
