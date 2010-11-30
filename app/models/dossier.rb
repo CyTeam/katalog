@@ -336,7 +336,7 @@ class Dossier < ActiveRecord::Base
       :from => nil,
       :to   => '1989-12-31'
     }
-    update_or_create_number(amount, range)
+    update_or_create_number(amount, range) unless amount == 0
     
     # 1990-1993
     amount = row[17].nil? ? nil : row[17].delete("',").to_i
@@ -344,7 +344,7 @@ class Dossier < ActiveRecord::Base
       :from => '1990-01-01',
       :to   => '1993-12-31'
     }
-    update_or_create_number(amount, range)
+    update_or_create_number(amount, range) unless amount == 0
 
     # 1994-
     year = 1994
@@ -354,7 +354,7 @@ class Dossier < ActiveRecord::Base
         :from   => Date.new(year, 1, 1),
         :to     => Date.new(year, 12, 31)
       }
-      update_or_create_number(amount, range)
+      update_or_create_number(amount, range) unless amount == 0
       year += 1
     end
   end
