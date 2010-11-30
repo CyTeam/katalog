@@ -222,7 +222,7 @@ class Dossier < ActiveRecord::Base
   end
   
   def parents
-    Dossier.where("NOT(type = 'Dossier') AND ? LIKE CONCAT(signature, '%')", signature)
+    Dossier.where("NOT(type = 'Dossier') AND ? LIKE CONCAT(signature, '%')", signature).order(:signature)
   end
   
   # Importer
