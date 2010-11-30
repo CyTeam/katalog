@@ -144,7 +144,7 @@ class ImportTest < ActiveSupport::TestCase
     # Cleanup database and import
     reset_and_import('dossiers')
     
-    assert_equal 21, Dossier.find_by_title('City history').numbers.size
+    assert_equal 19, Dossier.find_by_title('City history').numbers.size
   end
   
   test "real data" do
