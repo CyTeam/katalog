@@ -255,4 +255,33 @@ class DossierTest < ActiveSupport::TestCase
   test "relation_titles drops leading topic indicator" do
     assert_equal ["Worker Movement general", "City history"], dossiers(:worker_movement_history).relation_titles
   end
+  
+  # Numbers
+  test "creates number if no number for specified range" do
+    @dossier.update_or_create_number(99, {:from => '2001-01-01', :to => '2002-12-31'})
+    @dossier.save
+    
+    assert_equal 1, @dossier.numbers.count
+    assert_equal 99, @dossier.document_count
+    
+    @dossier.update_or_create_number(100, {:from => '2001-01-01', :to => '2002-12-31'})
+    @dossier.save
+    
+    assert_equal 1, @dossier.numbers.count
+    assert_equal 199, @dossier.document_count
+  end
+
+  test "update_or_create_number understands nil range" do
+    @dossier.update_or_create_number(99, {:from => nil, :to => '2002-12-31'})
+    @dossier.save
+    
+    assert_equal 1, @dossier.numbers.count
+    assert_equal 99, @dossier.document_count
+    
+    @dossier.update_or_create_number(100, {:from => nil, :to => '2002-12-31'})
+    @dossier.save
+    
+    assert_equal 1, @dossier.numbers.count
+    assert_equal 199, @dossier.document_count
+  end
 end

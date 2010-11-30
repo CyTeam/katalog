@@ -316,8 +316,8 @@ class Dossier < ActiveRecord::Base
   end
   
   def update_or_create_number(amount, range)
-    # We can't use .count or .where as the Dossier is guarateed to be saved
-    number = numbers.select{|n| n.from.to_s == range[:from] and n.to.to_s == range[:to]}.first
+    # We can't use .count or .where until the Dossier is guaranteed to be saved
+    number = numbers.select{|n| n.from.to_s == range[:from].to_s && n.to.to_s == range[:to].to_s}.first
     if number
       amount += number.amount
     else
