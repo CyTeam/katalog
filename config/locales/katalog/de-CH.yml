@@ -46,7 +46,7 @@ de-CH:
         tag:            "Schlagwort"
         keyword:        "Schlagwort"
         keyword_text:   "Schlagworte"
-        first_document_on: "Dokumente seit"
+        first_document_year: "Dokumente seit"
         related_to:     "Querverweise"
         dossier_number_list: "Anzahl Dokumente"
         availability: "Verfügbar"
@@ -55,7 +55,6 @@ de-CH:
         container_type: "Art"
         location:       "Standort"
         document_count: "Anzahl Dokumente"
-        first_document_on: "Dokumente seit"
       location:
         title:        "Titel"
         code:         "Kürzel"

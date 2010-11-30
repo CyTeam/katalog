@@ -6,6 +6,7 @@
     <%= f.input :title %>
     <%= f.input :keyword_text, :as => :text, :input_html => {:rows => @dossier.keyword_list.count + 1} %>
     <%= f.input :relation_list, :as => :text, :input_html => {:rows => @dossier.relations.count} %>
+    <%= f.input :first_document_year, :input_html => {:size => '6'} %>
     <%= f.input :dossier_number_list, :as => :text, :input_html => {:rows => @dossier.numbers.count} %>
   <% end %>
 

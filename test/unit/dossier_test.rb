@@ -52,8 +52,8 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal "Terroranschlag, USA: 11. September 2001.", Dossier.truncate_title("Terroranschlag, USA: 11. September 2001. 12. 9. - 16. 9. 2001")
   end
   
-  test "first document calculation" do
-    assert_equal containers(:city_history_1900_1999).first_document_on, dossiers(:city_history).first_document_on
+  test "take first document from table" do
+    assert_equal Date.parse('1910-01-01'), dossiers(:city_history).first_document_on
   end
   
   test "dossier collects all container locations" do

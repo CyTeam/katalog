@@ -197,10 +197,6 @@ class Dossier < ActiveRecord::Base
   alias keyword_text= keyword_list=
   
   # Calculations
-  def first_document_on
-    containers.minimum(:first_document_on)
-  end
-  
   def availability
     containers.collect{|c| c.location.availability}.uniq
   end
@@ -225,6 +221,14 @@ class Dossier < ActiveRecord::Base
     Dossier.where("NOT(type = 'Dossier') AND ? LIKE CONCAT(signature, '%')", signature).order(:signature)
   end
   
+  def first_document_year
+    first_document_on.try(:year)
+  end
+
+  def first_document_year=(value)
+    self.first_document_on = Date.new(value.to_i, 1, 1)
+  end
+
   # Importer
   def self.filter_tags(values)
     boring = ["in", "und", "für"]

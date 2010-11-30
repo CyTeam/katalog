@@ -17,14 +17,12 @@ city_history_1900_1999:
   title: City history
   container_type: DA
   location: RI
-  first_document_on: 1910-01-01
 
 city_history_2000_2001:
   dossier: city_history
   title: City history
   container_type: DH
   location: RI
-  first_document_on: 2000-01-01
 
 city_history_2002:
   dossier: city_history

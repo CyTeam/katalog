@@ -67,7 +67,7 @@ class ContainerTest < ActiveSupport::TestCase
     
     assert_equal dossier, container.dossier
     assert_equal "City history 2000 -", container.title
-    assert_equal Date.parse('2001-01-01'), container.first_document_on
+    assert_equal Date.parse('1910-01-01'), dossier.first_document_on
     assert_equal container_types(:DH), container.container_type
     assert_equal locations(:EG), container.location
   end

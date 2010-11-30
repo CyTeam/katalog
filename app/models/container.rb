@@ -40,12 +40,8 @@ class Container < ActiveRecord::Base
   end
   alias location_code= location=
   
-  def first_document_year
-    first_document_on.try(:year)
-  end
-  
-  def first_document_year=(value)
-    self.first_document_on = Date.new(value.to_i, 1, 1)
+  def first_document_on=(value)
+    dossier.first_document_on = value unless dossier.first_document_on && (value >= dossier.first_document_on)
   end
   
   # Import
