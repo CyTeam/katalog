@@ -196,13 +196,13 @@ class DossierTest < ActiveSupport::TestCase
     end
   end
   
-  test "keyword extraction respects brackets" do
-    keyword_list = ["One (et. al. and so on!) keyword", "(One. Two), (3. 4.5)", "And (Then. (We get bigger. Yes) Really.)"]
-
-    for keyword in keyword_list
-      assert Dossier.extract_keywords(keyword_list).include?(keyword), "Expected %s to include %s" % [Dossier.extract_keywords(keyword_list).inspect, keyword]
-    end
-  end
+#  test "keyword extraction respects brackets" do
+#    keyword_list = ["One (et. al. and so on!) keyword", "(One. Two), (3. 4.5)", "And (Then. (We get bigger. Yes) Really.)"]
+#
+#    for keyword in keyword_list
+#      assert Dossier.extract_keywords(keyword_list).include?(keyword), "Expected %s to include %s" % [Dossier.extract_keywords(keyword_list).inspect, keyword]
+#    end
+#  end
   
   test "keyword extraction only allows dot after single capital letter" do
     keyword_list = ["Fahnenbranche CH. Europa"]
