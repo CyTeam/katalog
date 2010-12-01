@@ -8,16 +8,16 @@ class TopicTest < ActiveSupport::TestCase
     assert :dossier, dossiers(:important_zug_topic).topic_type
   end
 
-  test "childrens are collected recursivly" do
+  test "children are collected recursivly" do
     assert dossiers(:group_7).children.include?(dossiers(:first_topic))
     assert dossiers(:group_7).children.include?(dossiers(:topic_local))
   end
 
-  test "childrens include dossiers" do
+  test "children include dossiers" do
     assert dossiers(:group_7).children.include?(dossiers(:city_counsil))
   end
 
-  test "childrens only include matching signatures" do
+  test "children only include matching signatures" do
     assert !dossiers(:group_7).children.include?(dossiers(:worker_movement_general))
   end
 
