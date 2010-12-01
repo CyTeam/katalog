@@ -61,11 +61,10 @@ class DossiersControllerTest < ActionController::TestCase
   test "index should list only topic groups and topics" do
     get :index
 
-    # TODO: hack to get only Dossier, not Topic records
     assert_select 'tr.dossier', 0
 
-    # TODO: hack to get only Dossier, not Topic records
-    assert_select 'tr.topic', 9
+    assert_select 'tr.topic_group', 2
+    assert_select 'tr.topic', 4
   end
   
   test "should list by signature" do
