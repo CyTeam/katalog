@@ -5,6 +5,15 @@ class Topic < Dossier
   scope :geos, where("char_length(signature) = 4")
   scope :dossiers, where("char_length(signature) = 8")
   
+  def topic_type
+    case signature.length
+      when 1: :topic_group
+      when 2: :topic
+      when 4: :topic_geo
+      when 8: :topic_dossier
+    end
+  end
+  
   # Associations
   has_many :dossiers, :foreign_key => :parent_id
 

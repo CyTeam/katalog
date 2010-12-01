@@ -1,6 +1,13 @@
 require 'test_helper'
 
 class TopicTest < ActiveSupport::TestCase
+  test "topic_type knows group, topic, geo, and dossier" do
+    assert :topic_group, dossiers(:group_7).topic_type
+    assert :topic, dossiers(:first_topic).topic_type
+    assert :topic_geo, dossiers(:topic_local).topic_type
+    assert :topic_dossier, dossiers(:important_zug_topic).topic_type
+  end
+
   test "childrens are collected recursivly" do
     assert dossiers(:group_7).children.include?(dossiers(:first_topic))
     assert dossiers(:group_7).children.include?(dossiers(:topic_local))
