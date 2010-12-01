@@ -35,7 +35,7 @@ class TopicTest < ActiveSupport::TestCase
 
   test "move children on signature update if requested" do
     main_topic = dossiers(:first_topic)
-    children = main_topic.children
+    children = main_topic.children.all
     
     main_topic.update_signature '9'
     
