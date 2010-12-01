@@ -11,6 +11,13 @@ tr.topic td { background-color: #E1E6EC; }
 tr.topic.topic_geo td { background-color: #C8B7B7; }
 tr.topic.topic_dossier td { background-color: #E9DDAF; }
 
+td.action-links {
+}
+
+th.action-links {
+  width: 40px;
+}
+
 /** Index **/
 .index th {
   border: 0;
