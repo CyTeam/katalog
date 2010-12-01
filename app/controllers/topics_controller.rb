@@ -6,4 +6,14 @@ class TopicsController < InheritedResources::Base
   def collection
     @topics ||= end_of_association_chain.paginate(:page => params[:page])
   end
+
+  # Actions
+  public
+  def update
+    @topic = Topic.find(params[:id])
+    if params[:update_signature]
+      @topic.update_signature(params[:topic][:signature])
+    end
+    update!
+  end
 end

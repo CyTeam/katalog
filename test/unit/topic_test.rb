@@ -32,4 +32,13 @@ class TopicTest < ActiveSupport::TestCase
   test "document_count returns integer" do
     assert dossiers(:group_7).document_count.is_a?(Integer)
   end
+
+  test "move children on signature update if requested" do
+    main_topic = dossiers(:first_topic)
+    children = main_topic.children
+    
+    main_topic.update_signature '9'
+    
+    assert_equal children, main_topic.children
+  end
 end

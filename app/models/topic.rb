@@ -33,6 +33,19 @@ class Topic < Dossier
     children(use_new_signature).send(children_topic_type)
   end
 
+  # Attribute handlers
+  def update_signature(value)
+    for child in children
+      s = child.signature
+      new_s = s.gsub(/^#{self.signature}/, value)
+      child.signature = new_s
+      child.save
+    end
+    
+    self.signature = value
+    save
+  end
+  
   # Calculations
   def document_count(use_new_signature = false)
     children(use_new_signature).includes(:numbers).sum(:amount).to_i
