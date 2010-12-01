@@ -3,14 +3,14 @@ class Topic < Dossier
   scope :group, where("char_length(signature) = 1")
   scope :main, where("char_length(signature) = 2")
   scope :geo, where("char_length(signature) = 4")
-  scope :dossier, where("char_length(signature) = 8")
+  scope :detail, where("char_length(signature) = 8")
   
   def topic_type
     case signature.length
       when 1: :group
       when 2: :main
       when 4: :geo
-      when 8: :dossier
+      when 8: :detail
     end
   end
   

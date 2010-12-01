@@ -9,7 +9,7 @@
 tr.topic.group td { background-color: #96B1CD; }
 tr.topic.main td { background-color: #E1E6EC; }
 tr.topic.geo td { background-color: #C8B7B7; }
-tr.topic.dossier td { background-color: #E9DDAF; }
+tr.topic.detail td { background-color: #E9DDAF; }
 
 td.action-links {
 }

@@ -14,7 +14,7 @@ class DossiersControllerTest < ActionController::TestCase
     get :index
     assert_response :success
 
-    assert_same_set (Topic.groups + Topic.topics), assigns(:dossiers)
+    assert_same_set (Topic.group + Topic.main), assigns(:dossiers)
   end
 
   test "should get new" do
@@ -63,8 +63,8 @@ class DossiersControllerTest < ActionController::TestCase
 
     assert_select 'tr.dossier', 0
 
-    assert_select 'tr.topic_group', 2
-    assert_select 'tr.topic', 4
+    assert_select 'tr.topic.group', 2
+    assert_select 'tr.topic.main', 2
   end
   
   test "should list by signature" do
