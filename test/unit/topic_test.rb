@@ -21,4 +21,8 @@ class TopicTest < ActiveSupport::TestCase
   test "document_count works" do
     assert 0, dossiers(:group_empty).document_count
   end
+
+  test "document_count returns integer" do
+    assert dossiers(:group_7).document_count.is_a?(Integer)
+  end
 end

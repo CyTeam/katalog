@@ -284,4 +284,8 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal 1, @dossier.numbers.count
     assert_equal 199, @dossier.document_count
   end
+
+  test "document_count returns integer" do
+    assert @dossier.document_count.is_a?(Integer)
+  end
 end
