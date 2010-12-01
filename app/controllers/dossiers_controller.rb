@@ -31,7 +31,7 @@ class DossiersController < InheritedResources::Base
       params[:dossier][:order_by] ||= 'new_signature'
     end
     
-    @dossiers = apply_scopes(Dossier, params[:dossier]).where("type IN ('TopicGroup', 'Topic')")
+    @dossiers = apply_scopes(Topic, params[:dossier]).where("char_length(signature) <= 2")
     
     index!
   end

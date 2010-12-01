@@ -13,7 +13,8 @@ class DossiersControllerTest < ActionController::TestCase
     
     get :index
     assert_response :success
-    assert_not_nil assigns(:dossiers)
+
+    assert_same_set (Topic.groups + Topic.topics), assigns(:dossiers)
   end
 
   test "should get new" do
