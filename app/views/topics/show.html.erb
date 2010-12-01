@@ -3,10 +3,9 @@
 <div id="page_actions" style="float: right; margin: 1em">
   <%= contextual_link('edit', edit_topic_path(@topic)) %>
 </div>
-<h1 id="title"><%= @topic.title %></h1>
+<h1 id="title"><%= @topic.signature %> <%= @topic.title %></h1>
 <p class="notice"><%= notice %></p>
 
-<h3><%= @topic.signature %></h3>
 <div id="breadcrumb" class="section">
   <ul class="dossier_topic_breadcrumb">
     <% for parent in @topic.parents %>
