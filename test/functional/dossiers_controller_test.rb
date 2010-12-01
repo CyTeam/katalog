@@ -72,13 +72,13 @@ class DossiersControllerTest < ActionController::TestCase
     dossiers = Dossier.by_signature('77.0.100')
 
     # TODO: hack to get only Dossier, not Topic records
-    assert_select 'tr.dossier', dossiers.where(:type => nil).count
+    assert_select 'tr.dossier', dossiers.dossier.count
 
     get :search, :search => {:signature => '77.0'}
     dossiers = Dossier.by_signature('77.0')
 
     # TODO: hack to get only Dossier, not Topic records
-    assert_select 'tr.dossier', dossiers.where(:type => nil).count
+    assert_select 'tr.dossier', dossiers.dossier.count
   end
   
   test "should list by location" do
@@ -86,7 +86,7 @@ class DossiersControllerTest < ActionController::TestCase
     dossiers = Dossier.by_location('EG')
 
     # TODO: hack to get only Dossier, not Topic records
-    assert_select 'tr.dossier', dossiers.where(:type => nil).count
+    assert_select 'tr.dossier', dossiers.dossier.count
   end
 
   test "dossier view should contain links to topics" do

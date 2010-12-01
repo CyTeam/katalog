@@ -2,6 +2,14 @@ class Dossier < ActiveRecord::Base
   # Validations
   validates_presence_of :signature, :title
   
+  # Type Scopes
+  scope :dossier, where(:type => nil)
+  scope :topic, where("type IS NOT NULL")
+  scope :group, topic.where("char_length(signature) = 1")
+  scope :main, topic.where("char_length(signature) = 2")
+  scope :geo, topic.where("char_length(signature) = 4")
+  scope :detail, topic.where("char_length(signature) = 8")
+
   # Scopes
   scope :by_text2, lambda {|value|
     signatures, words = split_search_words(value)

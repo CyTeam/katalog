@@ -1,10 +1,4 @@
 class Topic < Dossier
-  # Type Scopes
-  scope :group, where("char_length(signature) = 1")
-  scope :main, where("char_length(signature) = 2")
-  scope :geo, where("char_length(signature) = 4")
-  scope :detail, where("char_length(signature) = 8")
-  
   def topic_type
     case signature.length
       when 1: :group
@@ -16,6 +10,15 @@ class Topic < Dossier
   
   # Associations
   has_many :dossiers, :foreign_key => :parent_id
+  
+  def children_topic_type
+    case topic_type
+      when :group:  :main
+      when :main:   :geo
+      when :geo:    :detail
+      when :detail: :dossier
+    end
+  end
 
   def children(use_new_signature = false)
     if use_new_signature
@@ -27,7 +30,7 @@ class Topic < Dossier
   
   def direct_children(use_new_signature = false)
     # TODO: support or drop new_signature
-    children(use_new_signature)
+    children(use_new_signature).send(children_topic_type)
   end
 
   # Calculations

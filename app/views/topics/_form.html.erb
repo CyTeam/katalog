@@ -9,5 +9,5 @@
   <% end %>
 <% end %>
 
-<% @dossiers = @topic.children %>
+<% @dossiers = @topic.direct_children %>
 <%= render 'dossiers/list' %>
