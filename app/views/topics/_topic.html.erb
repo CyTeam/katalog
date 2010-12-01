@@ -1,5 +1,5 @@
 <% cache topic do %>
-<tr class="topic topic" data-href="<%= url_for_topic topic %>">
+<tr class="topic <%= topic.topic_type%>" data-href="<%= url_for_topic topic %>">
   <td><%= @new_signature ? topic.new_signature : topic.signature %></td>
   <td class="title"><%= topic.title %></td>
   <td style="text-align: right"><%= number_with_delimiter(topic.document_count(@new_signature)) %></td>
