@@ -6,10 +6,10 @@
 .dossier .title {font-weight: bold;}
 .dossier .keywords {font-style: italic; font-size: 80%;}
 
-tr.topic.topic_group td { background-color: #96B1CD; }
-tr.topic td { background-color: #E1E6EC; }
-tr.topic.topic_geo td { background-color: #C8B7B7; }
-tr.topic.topic_dossier td { background-color: #E9DDAF; }
+tr.topic.group td { background-color: #96B1CD; }
+tr.topic.main td { background-color: #E1E6EC; }
+tr.topic.geo td { background-color: #C8B7B7; }
+tr.topic.dossier td { background-color: #E9DDAF; }
 
 td.action-links {
 }
@@ -29,7 +29,7 @@ th.action-links {
   border: 0;
   font-size: 85%;
 }
-.index tr.topic.topic_group td {
+.index tr.topic.group td {
   padding-top: 8px;
   padding-bottom: 8px;
   border: 0;
@@ -37,28 +37,28 @@ th.action-links {
 }
 
 /** Sidebar Topic Index **/
-li.topic_group {
+li.topic.group {
   font-weight: bold;
 }
 
-li.topic_group .signature {
+li.topic.group .signature {
   float: left;
   width: 1.2em;
 }
 
-li.topic_group a {
+li.topic.group a {
   margin-left: 1.5em;
   display: block;
   text-decoration: none;
 }
 
-li.topic .signature {
+li.topic.main .signature {
   margin-left: 1.5em;
   float: left;
   width: 1.2em;
 }
 
-li.topic a {
+li.topic.main a {
   margin-left: 3em; display: block;
   text-decoration: none;
 }

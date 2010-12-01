@@ -1,16 +1,16 @@
 class Topic < Dossier
   # Type Scopes
-  scope :groups, where("char_length(signature) = 1")
-  scope :topics, where("char_length(signature) = 2")
-  scope :geos, where("char_length(signature) = 4")
-  scope :dossiers, where("char_length(signature) = 8")
+  scope :group, where("char_length(signature) = 1")
+  scope :main, where("char_length(signature) = 2")
+  scope :geo, where("char_length(signature) = 4")
+  scope :dossier, where("char_length(signature) = 8")
   
   def topic_type
     case signature.length
-      when 1: :topic_group
-      when 2: :topic
-      when 4: :topic_geo
-      when 8: :topic_dossier
+      when 1: :group
+      when 2: :main
+      when 4: :geo
+      when 8: :dossier
     end
   end
   
@@ -25,6 +25,11 @@ class Topic < Dossier
     end
   end
   
+  def direct_children(use_new_signature = false)
+    # TODO: support or drop new_signature
+    children(use_new_signature)
+  end
+
   # Calculations
   def document_count(use_new_signature = false)
     children(use_new_signature).includes(:numbers).sum(:amount).to_i

@@ -8,3 +8,6 @@
     <%= f.commit_button %>
   <% end %>
 <% end %>
+
+<% @dossiers = @topic.children %>
+<%= render 'dossiers/list' %>
