@@ -7,7 +7,8 @@ Katalog::Application.routes.draw do
 
   resources :locations
 
-  resources :dossiers, :topics, :topic_groups do
+  resources :topics
+  resources :dossiers do
     collection do
       get :search
     end

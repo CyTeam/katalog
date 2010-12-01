@@ -3,6 +3,11 @@
   <td><%= @new_signature ? topic.new_signature : topic.signature %></td>
   <td class="title"><%= topic.title %></td>
   <td style="text-align: right"><%= number_with_delimiter(topic.document_count(@new_signature)) %></td>
-  <td class="action-links"></td>
+  <td class="action-links">
+    <% if user_signed_in? %>
+      <%= link_to image_tag('icons/edit.png', :title => t('crud.edit', :model => '')), edit_topic_path(topic) %>
+      <%= link_to image_tag('icons/delete.png', :title => t('crud.delete', :model => '')), topic, :confirm => t_confirm_delete(topic), :remote => true, :method => :delete %>
+    <% end %>
+  </td>
 </tr>
 <% end %>
