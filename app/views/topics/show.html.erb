@@ -13,3 +13,6 @@
     <% end %>
   </ul>
 </div>
+
+<% @dossiers = @topic.direct_children %>
+<%= render 'dossiers/list' %>
