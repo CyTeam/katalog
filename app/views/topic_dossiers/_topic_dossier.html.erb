@@ -1,8 +1,0 @@
-<% cache topic_dossier do %>
-<tr class="topic topic_dossier" data-href="<%= url_for_topic topic_dossier %>">
-  <td><%= @new_signature ? topic_dossier.new_signature : topic_dossier.signature %></td>
-  <td class="title"><%= topic_dossier.title %></td>
-  <td style="text-align: right"><%= number_with_delimiter(topic_dossier.document_count(@new_signature)) %></td>
-  <td class="action-links"></td>
-</tr>
-<% end %>

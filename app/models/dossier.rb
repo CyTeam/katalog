@@ -437,17 +437,8 @@ class Dossier < ActiveRecord::Base
     rows = FasterCSV.read(path, :col_sep => ';')
     
     # Select rows containing topics
-    topic_group_rows = rows.select{|row| TopicGroup.import_filter.match(row[0])}
-    topic_group_rows.map{|row| TopicGroup.import(row).save!}
-    
-    topic_rows = rows.select{|row| Topic.import_filter.match(row[0])}
+    topic_rows = rows.select{|row| Topic.import_filter.match(row[0]) && row[9].blank?}
     topic_rows.map{|row| Topic.import(row).save!}
-
-    topic_rows = rows.select{|row| TopicGeo.import_filter.match(row[0])}
-    topic_rows.map{|row| TopicGeo.import(row).save!}
-
-    topic_rows = rows.select{|row| TopicDossier.import_filter.match(row[0]) && row[9].blank?}
-    topic_rows.map{|row| TopicDossier.import(row).save!}
 
     import_all(import_filter(rows))
   end

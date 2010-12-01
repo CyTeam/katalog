@@ -40,22 +40,19 @@ class ImportTest < ActiveSupport::TestCase
     reset_and_import('topics')
     
     # Test data
-    assert_equal 2, TopicGroup.count
-    assert_similar group_empty, TopicGroup.find_by_signature(8)
-    assert_similar group_7, TopicGroup.find_by_signature(7)
-    
     assert_equal 9, Topic.count
+    assert_similar group_empty, Topic.find_by_signature(8)
+    assert_similar group_7, Topic.find_by_signature(7)
+    
     assert_similar first_topic, Topic.find_by_signature(77)
     assert_similar empty_topic, Topic.find_by_signature(78)
 
-    assert_equal 2, TopicGeo.count
-    assert_similar topic_local, TopicGeo.find_by_signature('77.0')
-    assert_similar topic_nowhere, TopicGeo.find_by_signature('77.9')
+    assert_similar topic_local, Topic.find_by_signature('77.0')
+    assert_similar topic_nowhere, Topic.find_by_signature('77.9')
 
-    assert_equal 3, TopicDossier.count
-    assert_similar important_zug_topic, TopicDossier.find_by_signature('77.0.100')
-    assert_similar simple_zug_topic, TopicDossier.find_by_signature('77.0.200')
-    assert_similar empty_zug_topic, TopicDossier.find_by_signature('77.0.999')
+    assert_similar important_zug_topic, Topic.find_by_signature('77.0.100')
+    assert_similar simple_zug_topic, Topic.find_by_signature('77.0.200')
+    assert_similar empty_zug_topic, Topic.find_by_signature('77.0.999')
   end
 
   test "creates one dossier for multiple containers" do
@@ -154,10 +151,7 @@ class ImportTest < ActiveSupport::TestCase
     # Test data
     assert_equal 24, Dossier.count
 
-    assert_equal 2, TopicGroup.count
     assert_equal 18, Topic.count
-    assert_equal 1, TopicGeo.count
-    assert_equal 12, TopicDossier.count
 
     # Fields
     dossier = Dossier.find_by_title("Kapitalismus grundsätzlich")

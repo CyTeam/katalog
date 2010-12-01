@@ -1,4 +1,10 @@
 class Topic < Dossier
+  # Type Scopes
+  scope :groups, where("char_length(signature) = 1")
+  scope :topics, where("char_length(signature) = 2")
+  scope :geos, where("char_length(signature) = 4")
+  scope :dossiers, where("char_length(signature) = 8")
+  
   # Associations
   has_many :dossiers, :foreign_key => :parent_id
 
@@ -12,12 +18,12 @@ class Topic < Dossier
   
   # Calculations
   def document_count(use_new_signature = false)
-    children(use_new_signature).includes(:numbers).sum(:amount)
+    children(use_new_signature).includes(:numbers).sum(:amount).to_i
   end
 
   # Importer
   def self.import_filter
-    /^[0-9]{2}$/
+    /^[0-9][.0-9]*$/
   end
 
   def self.import(row)

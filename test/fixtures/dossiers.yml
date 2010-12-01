@@ -1,13 +1,13 @@
 # Topic Groups
 # ============
 group_empty:
-  type: TopicGroup
+  type: Topic
   signature: 8
   new_signature: 8
   title: Test Group empty
 
 group_7:
-  type: TopicGroup
+  type: Topic
   signature: 7
   new_signature: 7
   title: Test Group 7
@@ -29,13 +29,13 @@ empty_topic:
 # Geo Topics
 # ==========
 topic_local:
-  type: TopicGeo
+  type: Topic
   signature: 77.0
   new_signature: 77.0
   title: All about our City
 
 topic_nowhere:
-  type: TopicGeo
+  type: Topic
   signature: 77.9
   new_signature: 77.9
   title: Nothing to say 'bout nowhere
@@ -43,19 +43,19 @@ topic_nowhere:
 # Dossier Topics
 # ==============
 important_zug_topic:
-  type: TopicDossier
+  type: Topic
   signature: 77.0.100
   new_signature: 77.100.0
   title: Many, many dossiers about this in our City
 
 simple_zug_topic:
-  type: TopicDossier
+  type: Topic
   signature: 77.0.200
   new_signature: 77.200.0
   title: Some simple dossiers about this in our City
 
 empty_zug_topic:
-  type: TopicDossier
+  type: Topic
   signature: 77.0.999
   new_signature: 77.999.0
   title: Boooooring City
