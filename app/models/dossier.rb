@@ -341,6 +341,13 @@ class Dossier < ActiveRecord::Base
     number.amount = amount
   end
   
+  def build_default_numbers
+    periods = DossierNumber.default_periods
+    for period in periods
+      numbers.build(period)
+    end
+  end
+  
   def import_numbers(row)
     # < 1990, 1990-1993, 1994 - 2010
     periods = DossierNumber.default_periods(2010)

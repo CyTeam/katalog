@@ -8,6 +8,13 @@ class DossierTest < ActiveSupport::TestCase
     Dossier.all.map{|dossier| dossier.update_tags; dossier.save}
   end
   
+  test "#build_default_numbers adds default numbers" do
+    dossier = Dossier.new
+    dossier.build_default_numbers
+    
+    assert_equal DossierNumber.default_periods.count, dossier.numbers.size
+  end
+  
   test "to_s" do
     assert_equal "77.0.100: City counsil", dossiers(:city_counsil).to_s
     assert_equal "77.0.100: City history", dossiers(:city_history).to_s
