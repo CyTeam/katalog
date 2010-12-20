@@ -133,4 +133,31 @@ class DossierNumberTest < ActiveSupport::TestCase
     5.times {Factory :dossier_number_with_amount, :from => Date.new(2009, 1, 1), :to => Date.new(2009, 12, 31)}
     assert_equal 5, DossierNumber.by_period('2009').count
   end
+
+  test "#default_periods uses current year for last period" do
+    # Not so much, but a very little unstable... TimeMachine to the rescue...
+    this_year = Date.today.year
+    period = DossierNumber.default_periods.last
+    assert_equal Date.new(this_year, 1, 1), period[:from]
+    assert_equal Date.new(this_year, 12, 31), period[:to]
+  end
+
+  test "#default_periods uses given year for last period" do
+    that_year = 2001
+    period = DossierNumber.default_periods(that_year).last
+    assert_equal Date.new(that_year, 1, 1), period[:from]
+    assert_equal Date.new(that_year, 12, 31), period[:to]
+  end
+
+  test "#default_periods start with - 1990" do
+    period = DossierNumber.default_periods.first
+    assert_equal nil , period[:from]
+    assert_equal Date.new(1989, 12, 31), period[:to]
+  end
+
+  test "#default_periods has 1990 - 1993 second" do
+    period = DossierNumber.default_periods[1]
+    assert_equal Date.new(1990, 1, 1), period[:from]
+    assert_equal Date.new(1993, 12, 31), period[:to]
+  end
 end

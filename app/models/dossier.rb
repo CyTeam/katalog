@@ -342,32 +342,14 @@ class Dossier < ActiveRecord::Base
   end
   
   def import_numbers(row)
-    # before 1990
-    amount = row[16].nil? ? nil : row[16].delete("',").to_i
-    range = {
-      :from => nil,
-      :to   => '1989-12-31'
-    }
-    update_or_create_number(amount, range) unless amount == 0
-    
-    # 1990-1993
-    amount = row[17].nil? ? nil : row[17].delete("',").to_i
-    range = {
-      :from => '1990-01-01',
-      :to   => '1993-12-31'
-    }
-    update_or_create_number(amount, range) unless amount == 0
-
-    # 1994-
-    year = 1994
-    for amount in row[18..36]
+    # < 1990, 1990-1993, 1994 - 2010
+    periods = DossierNumber.default_periods(2010)
+    first_column = 16
+    for i in 0..20
+      amount = row[first_column + i]
       amount = amount.nil? ? nil : amount.delete("',").to_i
-      range = {
-        :from   => Date.new(year, 1, 1),
-        :to     => Date.new(year, 12, 31)
-      }
-      update_or_create_number(amount, range) unless amount == 0
-      year += 1
+
+      update_or_create_number(amount, periods[i]) unless amount == 0
     end
   end
   

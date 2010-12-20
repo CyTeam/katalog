@@ -84,4 +84,22 @@ class DossierNumber < ActiveRecord::Base
   def period=(value)
     self.from, self.to = self.class.from_s(value)
   end
+
+  # "All" Periods
+  # 
+  # < 1990, 1990-1993, 1994 - :up_to
+  def self.default_periods(up_to = Date.today.year)
+    periods = []
+    # before 1990
+    periods << {:from => nil, :to => Date.new(1989, 12, 31)}
+    # 1990-1993
+    periods << {:from => Date.new(1990, 1, 1), :to => Date.new(1993, 12, 31)}
+    
+    # 1994-
+    for year in 1994..up_to
+      periods << {:from => Date.new(year, 1, 1), :to => Date.new(year, 12, 31)}
+    end
+    
+    periods
+  end
 end
