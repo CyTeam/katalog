@@ -341,6 +341,10 @@ class Dossier < ActiveRecord::Base
     number.amount = amount
   end
   
+  def prepare_numbers(year = Date.today.year)
+    update_or_create_number(0, :from => Date.new(year, 1, 1), :to => Date.new(year, 12, 31))
+  end
+  
   def build_default_numbers
     periods = DossierNumber.default_periods
     for period in periods

@@ -78,4 +78,11 @@ class DossiersController < InheritedResources::Base
     
     new!
   end
+
+  def edit
+    @dossier = Dossier.find(params[:id])
+    @dossier.prepare_numbers
+    
+    edit!
+  end
 end
