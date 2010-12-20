@@ -14,7 +14,7 @@ class KeywordsController < InheritedResources::Base
   # Actions
   def index
     params[:per_page] ||= 25
-    params[:search] = {"by_character" => 'A'}.merge(params[:search] || {})
+    params[:search] = {"by_character" => ''}.merge(params[:search] || {})
   
     @keywords = apply_scopes(Keyword, params[:search]).order(:name).paginate(:per_page => params[:per_page], :page => params[:page])
     @paginated_scope = Keyword
