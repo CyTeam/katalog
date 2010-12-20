@@ -200,10 +200,10 @@ class Dossier < ActiveRecord::Base
   end
 
   def keyword_text
-    keyword_list.join("\n")
+    keyword_list.sort.join("\n")
   end
   alias keyword_text= keyword_list=
-  
+
   # Calculations
   def availability
     containers.collect{|c| c.location.availability}.uniq
