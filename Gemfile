@@ -32,7 +32,7 @@ gem 'formtastic', '~> 1.1.0'
 gem 'will_paginate', :git => 'http://github.com/huerlisi/will_paginate.git', :branch => 'rails3'
 gem 'inherited_resources'
 gem 'has_scope'
-gem 'i18n_rails_helpers', '~> 0.8.0'
+gem 'i18n_rails_helpers', '~> 0.9'
 
 # Katalog
 # =======
