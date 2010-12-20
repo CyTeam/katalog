@@ -28,11 +28,13 @@ The second possibility to install ruby via RVM (Ruby version manager).
 Dependencies for RVM: see here http://rvm.beginrescueend.com/packages/
 
 Install RVM with and follow the instructions:
+
 <pre>
 bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )
 </pre>
 
-After the installation of RVM you can install the lastest version of Ruby 1.8.7 with:
+After the installation of RVM you can install the latest version of Ruby 1.8.7 with:
+
 <pre>
 rvm install ruby-1.8.7
 </pre>
@@ -106,6 +108,7 @@ sudo dpkg -i sphinxsearch_0.9.9-6_i386.deb
 </pre>
 
 For 64bit:
+
 <pre>
 wget http://de.archive.ubuntu.com/ubuntu/pool/universe/s/sphinxsearch/sphinxsearch_0.9.9-6_amd64.deb
 sudo dpkg -i sphinxsearch_0.9.8.1-2_amd64.deb
