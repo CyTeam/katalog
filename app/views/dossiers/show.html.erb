@@ -43,7 +43,6 @@
 </div>
 
 <% if current_user %>
-  <h3>Dossiers</h3>
   <div id="containers" class="ce_table">
     <table>
       <%= @containers = @dossier.containers; render 'containers/list' %>
