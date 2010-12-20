@@ -5,10 +5,14 @@
 <%= paginated_section :show_always => true do %>
 <div class="ce_table block">
 <table>
-  <tr>
-    <th><%= t_attr('keyword', Dossier) %></th>
-  </tr>
-  <%= render @keywords.map{|keyword| keyword.becomes(Keyword)} %>
+  <thead>
+    <tr>
+      <th><%= t_attr('keyword', Dossier) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @keywords.map{|keyword| keyword.becomes(Keyword)} %>
+  </tbody>
 </table>
 </div>
 <% end %>
