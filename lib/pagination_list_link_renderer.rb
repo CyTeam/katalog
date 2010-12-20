@@ -17,7 +17,7 @@ class PaginationListLinkRenderer < WillPaginate::ViewHelpers::LinkRenderer
     characters = paginated_scope.character_list
     page_links = characters.map{|character| alphabetic_page_link(character)}
     
-    return page_links.join('')
+    page_links.join('')
   end
 
   def alphabetic_page_link(character)
@@ -27,7 +27,7 @@ class PaginationListLinkRenderer < WillPaginate::ViewHelpers::LinkRenderer
       link = "<a class='per_page' href='%s'>%s</a>" % [alphabetic_page_href(character), character.upcase]
     end
     
-    return link
+    link
   end
   
   def alphabetic_page_href(character)
@@ -47,7 +47,7 @@ class PaginationListLinkRenderer < WillPaginate::ViewHelpers::LinkRenderer
       link = "<a class='per_page' href='%s'>%s</a>" % [per_page_href(count), count]
     end
     
-    return link
+    link
   end
 
   def per_page_href(count)
