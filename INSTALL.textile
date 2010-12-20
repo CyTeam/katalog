@@ -111,7 +111,7 @@ For 64bit:
 
 <pre>
 wget http://de.archive.ubuntu.com/ubuntu/pool/universe/s/sphinxsearch/sphinxsearch_0.9.9-6_amd64.deb
-sudo dpkg -i sphinxsearch_0.9.8.1-2_amd64.deb
+sudo dpkg -i sphinxsearch_0.9.9-6_amd64.deb
 </pre>
 
 Copy development.sphinx.conf.example to development.sphinx.conf in config/ and
