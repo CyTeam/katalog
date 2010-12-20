@@ -38,6 +38,8 @@
               <% if user_signed_in? %>
                 <%= navigation_item("Abmelden", destroy_user_session_path) %>
                 <%= navigation_item("Dossier anlegen", new_dossier_path) %>
+                <%= navigation_item("Standorte verwalten", locations_path) %>
+                <%= navigation_item("Dossier Art verwalten", container_types_path) %>
               <% else %>
                 <%= navigation_item("Anmelden", new_user_session_path) %>
               <% end %>

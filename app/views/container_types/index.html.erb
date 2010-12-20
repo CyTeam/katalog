@@ -1,4 +1,6 @@
-<h1><%= t_model %></h1>
+<%= contextual_links %>
+
+<h1><%= t_title %></h1>
 
 <div class="ce_table block">
 <table>
@@ -25,7 +27,3 @@
 </div>
 
 <%= will_paginate %>
-
-<br />
-
-<%= link_to 'New Container', new_container_type_path %>
