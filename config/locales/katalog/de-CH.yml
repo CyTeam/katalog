@@ -43,7 +43,7 @@ de-CH:
         title:          "Titel"
         container_type: "Art"
         location:       "Standort"
-        document_count: "Dokumente"
+        document_count: "Anzahl Dokumente"
         tag:            "Schlagwort"
         keyword:        "Schlagwort"
         keyword_text:   "Schlagworte"
