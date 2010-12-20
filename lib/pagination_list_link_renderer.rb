@@ -16,15 +16,18 @@ class PaginationListLinkRenderer < WillPaginate::ViewHelpers::LinkRenderer
 
     characters = paginated_scope.character_list
     page_links = characters.map{|character| alphabetic_page_link(character)}
+    all_links = Array.new
+    all_links << alphabetic_page_link(I18n.t('katalog.show_all'), :link_keyword => '')
+    all_links.concat(page_links)
     
-    page_links.join('')
+    all_links.join('')
   end
 
-  def alphabetic_page_link(character)
+  def alphabetic_page_link(character, options = {})
     if character == @params[:by_character]
       link = "<em>%s</em>" % character.upcase
     else
-      link = "<a class='per_page' href='%s'>%s</a>" % [alphabetic_page_href(character), character.upcase]
+      link = "<a class='per_page' href='%s'>%s</a>" % [alphabetic_page_href((options[:link_keyword] ? options[:link_keyword] : character)), character.upcase]
     end
     
     link
