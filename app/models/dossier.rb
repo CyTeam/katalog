@@ -345,7 +345,7 @@ class Dossier < ActiveRecord::Base
     # < 1990, 1990-1993, 1994 - 2010
     periods = DossierNumber.default_periods(2010)
     first_column = 16
-    for i in 0..20
+    for i in 0..18
       amount = row[first_column + i]
       amount = amount.nil? ? nil : amount.delete("',").to_i
 
