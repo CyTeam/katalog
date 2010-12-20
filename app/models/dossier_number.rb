@@ -39,13 +39,6 @@ class DossierNumber < ActiveRecord::Base
     return [from, to, amount_s.to_i]
   end
   
-  def self.update_or_create_amount_by_period(period, amount)
-    record = find_or_build(period, scope)
-    
-    record.amount = amount
-    record.save
-  end
-  
   # Attributes
   def from_year
     return nil unless from
