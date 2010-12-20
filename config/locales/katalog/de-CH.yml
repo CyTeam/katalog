@@ -35,7 +35,7 @@ de-CH:
       session: "Sitzung"
       user:    "Nutzer"
       keyword: "Schlagwort"
-      topic:   "Haupttitel"
+      topic:   "Titel"
 
     attributes:
       dossier:
