@@ -1,11 +1,5 @@
 module ApplicationHelper
   # i18n
-  def t_paginate(collection = nil, options = {})
-    options.merge!(:previous_label => t('crud.previous'), :next_label => t('crud.next'))
-
-    will_paginate(collection, options)
-  end
-  
   def t_attr(attribute, model = nil)
     if model.is_a? Class
       model_name = model.name.underscore
