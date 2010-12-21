@@ -55,3 +55,5 @@ gem 'pdfkit'
 gem 'sphinx'
 gem 'SystemTimer'
 
+# CRUD helpers
+gem 'show_for'

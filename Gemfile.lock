@@ -104,6 +104,7 @@ GEM
     responders (0.6.2)
     riddle (1.2.1)
     ruby-graphviz (0.9.19)
+    show_for (0.2.3)
     sphinx (0.9.10.2122)
     thinking-sphinx (2.0.1)
       activerecord (>= 3.0.3)
@@ -136,6 +137,7 @@ DEPENDENCIES
   pdfkit
   rails (~> 3.0.0)
   rails-erd
+  show_for
   sphinx
   thinking-sphinx (~> 2.0.1)
   will_paginate!

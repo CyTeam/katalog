@@ -6,4 +6,8 @@ class Location < ActiveRecord::Base
   def to_s
     "#{title} (#{code})"
   end
+
+  def human_availability
+    I18n.translate(availability, :scope => 'katalog.availability.title')
+  end
 end
