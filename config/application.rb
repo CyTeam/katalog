@@ -48,5 +48,7 @@ module Katalog
     config.middleware.use PDFKit::Middleware
     # generic Cyt JS
     config.action_view.javascript_expansions[:defaults] += %w(cyt)
+    # jQuery Plugins
+    config.action_view.javascript_expansions[:defaults] += %w(jquery-elastic)
   end
 end

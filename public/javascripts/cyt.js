@@ -37,3 +37,8 @@ function addLinkifyContainersBehaviour() {
     });
   });
 }
+
+// Autogrow
+function addAutogrowBehaviour() {
+  $(".autogrow").elastic();
+}
