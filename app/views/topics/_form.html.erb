@@ -2,7 +2,12 @@
   <%= f.inputs do %>
     <%= f.input :signature %>
     <%= f.input :title %>
-    <%= check_box_tag 'update_signature', 'Auf alle anwenden' %>
+    <li>
+      <label for="update_signature">
+        Auf alle anwenden
+      </label>
+      <%= check_box_tag 'update_signature', 'Auf alle anwenden' %>
+    </li>
   <% end %>
 
   <%= f.buttons do %>
