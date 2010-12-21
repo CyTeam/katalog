@@ -1,4 +1,6 @@
-<h1>Standorte</h1>
+<%= contextual_links %>
+
+<h1><%= t_title %></h1>
 
 <div class="ce_table block">
 <table>
@@ -15,7 +17,7 @@
     <td><%= location.title %></td>
     <td><%= location.code %></td>
     <td><%= location.address %></td>
-    <td><%= location.availability %></td>
+    <td><%= location.human_availability %></td>
     <td>
       <%= link_to image_tag('icons/show.png', :title => 'Show'), location %>
       <%= link_to image_tag('icons/edit.png', :title => 'Edit'), edit_location_path(location) %>
@@ -26,8 +28,4 @@
 </table>
 </div>
 
-<%= t_paginate %>
-
-<br />
-
-<%= link_to 'New Location', new_location_path %>
+<%= will_paginate %>

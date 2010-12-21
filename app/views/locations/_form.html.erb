@@ -1,21 +1,13 @@
 <%= semantic_form_for(@location) do |f| %>
-  <% if @location.errors.any? %>
-  <div id="errorExplanation">
-    <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
-    <ul>
-    <% @location.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-  <% end %>
+  <%= f.semantic_errors %>
 
-  <%= f.inputs :name => "Basic" do %>
+  <%= f.inputs do %>
     <%= f.input :title %>
     <%= f.input :code %>
     <%= f.input :address %>
-    <%= f.input :availability %>
+    <%= f.input :availability, :as => :select, :collection => Location.availabilities_for_collection %>
   <% end %>
+
   <%= f.buttons do %>
     <%= f.commit_button %>
   <% end %>

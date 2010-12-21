@@ -1,5 +1,6 @@
-<h1><%= t_crud %></h1>
+<div id="page_actions" style="float: right; margin: 1em">
+  <%= contextual_link('index', dossiers_path) %>
+</div>
+<h1><%= t_title %></h1>
 
 <%= render 'form' %>
-
-<%= link_to t_crud('back'), dossiers_path %>

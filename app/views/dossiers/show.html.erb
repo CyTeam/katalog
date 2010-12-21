@@ -42,7 +42,7 @@
   </table>
 </div>
 
-<% if current_user %>
+<% if user_signed_in? %>
   <div id="containers" class="ce_table">
     <table>
       <%= @containers = @dossier.containers; render 'containers/list' %>

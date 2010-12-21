@@ -3,10 +3,10 @@
     <%= f.semantic_errors :containers %>
     <%= f.input :signature %>
     <%= f.input :title %>
-    <%= f.input :keyword_text, :as => :text, :input_html => {:rows => @dossier.keyword_list.count + 1} %>
-    <%= f.input :relation_list, :as => :text, :input_html => {:rows => @dossier.relations.count} %>
+    <%= f.input :keyword_text, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.keyword_list.size + 1} %>
+    <%= f.input :relation_list, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.relations.size + 1} %>
     <%= f.input :first_document_year, :input_html => {:size => '6'} %>
-    <%= f.input :dossier_number_list, :as => :text, :input_html => {:rows => @dossier.numbers.count} %>
+    <%= f.input :dossier_number_list, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.numbers.size + 1} %>
   <% end %>
 
   <h3>Dossiers</h3>

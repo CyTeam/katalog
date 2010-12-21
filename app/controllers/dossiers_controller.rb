@@ -71,4 +71,18 @@ class DossiersController < InheritedResources::Base
       index!
     end
   end
+
+  def new
+    @dossier = Dossier.new(params[:dossier])
+    @dossier.build_default_numbers
+    
+    new!
+  end
+
+  def edit
+    @dossier = Dossier.find(params[:id])
+    @dossier.prepare_numbers
+    
+    edit!
+  end
 end

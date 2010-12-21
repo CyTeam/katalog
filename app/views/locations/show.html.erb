@@ -1,15 +1,7 @@
-<p class="notice"><%= notice %></p>
+<%= contextual_links %>
 
-<p>
-  <b>Title:</b>
-  <%= @location.title %>
-</p>
+<h1><%= t_title %></h1>
 
-<p>
-  <b>Address:</b>
-  <%= @location.address %>
-</p>
-
-
-<%= link_to 'Edit', edit_location_path(@location) %> |
-<%= link_to 'Back', locations_path %>
+<%= show_for @location do |l| %>
+  <%= l.attributes :title, :code, :address, :availability %>
+<% end %>

@@ -3,7 +3,7 @@
   display: none;
 }
 
-#page_actions {
+#page_actions, .contextual {
   display: none;
 }
 
