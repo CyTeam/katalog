@@ -35,10 +35,8 @@ class Topic < Dossier
 
   # Attribute handlers
   def update_signature(value)
-    for child in children
-      s = child.signature
-      new_s = s.gsub(/^#{self.signature}/, value)
-      child.signature = new_s
+    children.each do |child|
+      child.signature = child.signature.gsub(/^#{self.signature}/, value)
       child.save
     end
     
