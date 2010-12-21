@@ -10,4 +10,12 @@ class Location < ActiveRecord::Base
   def human_availability
     I18n.translate(availability, :scope => 'katalog.availability.title')
   end
+
+  def self.availabilities
+    ['ready', 'wait', 'intern']
+  end
+
+  def self.availabilities_for_collection
+    self.availabilities.map{|availability| [I18n.translate(availability, :scope => 'katalog.availability.title'), availability]}
+  end
 end

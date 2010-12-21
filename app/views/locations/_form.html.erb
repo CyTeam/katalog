@@ -5,7 +5,7 @@
     <%= f.input :title %>
     <%= f.input :code %>
     <%= f.input :address %>
-    <%= f.input :availability %>
+    <%= f.input :availability, :as => :select, :collection => Location.availabilities_for_collection %>
   <% end %>
 
   <%= f.buttons do %>
