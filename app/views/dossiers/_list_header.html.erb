@@ -1,6 +1,6 @@
 <tr class="header">
   <th class="signature"><%= t_attr('signature', Dossier) %></th>
   <th class="title"><%= t_attr('title', Dossier) %></th>
-  <th class="document_count" style="text-align: right"><%= t('katalog.total_count', :count => number_with_delimiter(@document_count)) if @document_count %></th>
+  <th class="document_count" style="text-align: right"><%= @document_count ? t('katalog.total_count', :count => number_with_delimiter(@document_count)) : t_attr(:document_count, Dossier) %></th>
   <th class="action-links"></th>
 </tr>
