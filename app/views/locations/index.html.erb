@@ -17,7 +17,7 @@
     <td><%= location.title %></td>
     <td><%= location.code %></td>
     <td><%= location.address %></td>
-    <td><%= location.availability %></td>
+    <td><%= t(location.availability, :scope => 'katalog.availability.title') %></td>
     <td>
       <%= link_to image_tag('icons/show.png', :title => 'Show'), location %>
       <%= link_to image_tag('icons/edit.png', :title => 'Edit'), edit_location_path(location) %>
