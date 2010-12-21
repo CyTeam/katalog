@@ -8,6 +8,7 @@ de-CH:
     delete:        "Löschen"
     overview:      "Themenübersicht"
     total:         "Total"
+    total_count:   "Total %{count}"
     show_all:      "Alles anzeigen"
     title:
       document_count_html: "Total <strong>%{document_count}</strong> Dokumente seit <strong>%{first_document}</strong>"

@@ -217,6 +217,11 @@ class Dossier < ActiveRecord::Base
     containers.collect{|c| c.container_type}.uniq
   end
   
+  # Grand total of documents
+  def self.document_count
+    includes(:numbers).sum(:amount).to_i
+  end
+  
   def document_count
     numbers.sum(:amount).to_i
   end
