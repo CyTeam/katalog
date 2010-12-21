@@ -5,6 +5,7 @@
     <%= f.input :title %>
     <%= f.input :keyword_text, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.keyword_list.size + 1} %>
     <%= f.input :relation_list, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.relations.size + 1} %>
+    <a id="insert_relation" href="#">Querverweis hinzufügen</a>
     <%= f.input :first_document_year, :input_html => {:size => '6'} %>
     <%= f.input :dossier_number_list, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.numbers.size + 1} %>
   <% end %>
