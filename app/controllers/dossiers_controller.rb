@@ -32,7 +32,8 @@ class DossiersController < InheritedResources::Base
     end
     
     @dossiers = apply_scopes(Topic, params[:dossier]).where("char_length(signature) <= 2")
-    
+    @document_count = Dossier.document_count
+
     index!
   end
 
