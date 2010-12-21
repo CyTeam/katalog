@@ -1,7 +1,7 @@
 <% cache topic do %>
-<tr class="topic <%= topic.topic_type%>" data-href="<%= url_for_topic topic %>">
+<tr class="topic <%= topic.topic_type%>">
   <td><%= @new_signature ? topic.new_signature : topic.signature %></td>
-  <td class="title"><%= topic.title %></td>
+  <td class="title"><%= link_to topic.title, url_for_topic(topic), {'data-href-container' => 'tr'} %></td>
   <td style="text-align: right"><%= number_with_delimiter(topic.document_count(@new_signature)) %></td>
   <td class="action-links">
     <% if user_signed_in? %>

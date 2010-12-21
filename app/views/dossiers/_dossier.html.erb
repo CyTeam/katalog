@@ -1,8 +1,8 @@
 <% cache dossier do %>
-<tr id="dossier-<%= dossier.id %>" class="dossier <%= cycle('odd', 'even') %>" data-href="<%= url_for dossier %>">
+<tr id="dossier-<%= dossier.id %>" class="dossier <%= cycle('odd', 'even') %>">
   <td><%= @new_signature ? dossier.new_signature : dossier.signature %></td>
   <td>
-    <span class="title"><%= dossier.title %></span>
+    <span class="title"><%= link_to dossier.title, dossier, {'data-href-container' => 'tr'} %></span>
     <br/>
     <span class="keywords"><%= dossier.keywords.join(', ') %></span>
   </td>
