@@ -27,6 +27,7 @@ function addLinkifyContainersBehaviour() {
     var container = element.closest(element.data('href-container'));
     container.css('cursor', "pointer");
     var href = element.attr('href');
+    element.addClass('linkified_container')
 
     container.delegate('*', 'click', {href: href}, function(event) {
       // Don't override original link behaviour
