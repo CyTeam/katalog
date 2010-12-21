@@ -4,7 +4,7 @@ module ApplicationHelper
     unless fields.object.new_record?
       out = ''
       out << fields.hidden_field(:_destroy)
-      out << link_to_function(image_tag('icons/delete.png', :title => t('crud.delete', :model => '')), "$(this).up('.#{fields.object.class.name.underscore}').hide(); $(this).previous().value = '1'")
+      out << link_to_function(image_tag('icons/delete.png', :title => t('crud.delete', :model => '')), "$(this).parents('.#{fields.object.class.name.underscore}').hide(); $(this).prev().attr('value', '1')")
       out.html_safe
     end
   end

@@ -46,5 +46,7 @@ module Katalog
 
     # PDF generation
     config.middleware.use PDFKit::Middleware
+    # generic Cyt JS
+    config.action_view.javascript_expansions[:defaults] += %w(cyt)
   end
 end

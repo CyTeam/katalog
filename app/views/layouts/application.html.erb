@@ -35,6 +35,10 @@
               <%= navigation_item("Dossier auflisten", dossiers_path) %>
               <%= navigation_item("Dossier suchen", search_dossiers_path) %>
               <%= navigation_item(t('controllers.index.keyword'), keywords_path) %>
+              <% if current_user %>
+                <%= navigation_item("Dossier anlegen", new_dossier_path) %>
+                <%= navigation_item('Dossier Art erfassen', new_container_type_path) %>
+              <% end %>
               <% if user_signed_in? %>
                 <%= navigation_item("Abmelden", destroy_user_session_path) %>
                 <%= navigation_item("Dossier anlegen", new_dossier_path) %>

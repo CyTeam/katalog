@@ -1,1 +1,1 @@
-page.replace "dossier-#{@dossier.id}", ''
+page["#dossier-#{@dossier.id}"].remove()

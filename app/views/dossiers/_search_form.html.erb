@@ -4,5 +4,6 @@
   <%= image_submit_tag('doku-zug.ch/search2.png', :alt => t('katalog.search')) %>
 <% end %>
 
-<%= javascript_tag "Form.Element.setValue('search_text', '#{escape_javascript(@query || params[:query])}');" %>
-<%= javascript_tag "$('search_text').activate();" %>
+<%= javascript_tag "$('#search_text').val('#{escape_javascript(@query || params[:query])}');" %>
+<%= javascript_tag "$('#search_text').focus();" %>
+

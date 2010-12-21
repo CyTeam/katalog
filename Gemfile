@@ -22,6 +22,7 @@ end
 group :development do
   gem "rails-erd"
 end
+gem 'jquery-rails'
 
 # Standard helpers
 # ================
