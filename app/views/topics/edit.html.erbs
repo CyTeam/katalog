@@ -1,6 +1,0 @@
-<div id="page_actions" style="float: right; margin: 1em">
-  <%= contextual_link('show', topic_path(@topic)) %>
-</div>
-<h1><%= t_title %></h1>
-
-<%= render 'form' %>
