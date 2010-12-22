@@ -55,6 +55,7 @@ de-CH:
         dossier_number_list: "Anzahl Dokumente"
         availability: "Verfügbar"
       container:
+        period:         "Zeitraum"
         title:          "Titel"
         container_type: "Art"
         location:       "Standort"
