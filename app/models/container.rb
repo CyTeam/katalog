@@ -5,7 +5,7 @@ class Container < ActiveRecord::Base
   belongs_to :container_type
 
   # Validations
-  validates_presence_of :dossier, :location, :container_type
+  validates_presence_of :title, :dossier, :location, :container_type
   
   # Helpers
   def to_s
@@ -42,6 +42,14 @@ class Container < ActiveRecord::Base
   
   def first_document_on=(value)
     dossier.first_document_on = value unless dossier.first_document_on && (value >= dossier.first_document_on)
+  end
+  
+  def period
+    result = title.gsub(/^#{dossier.title}/, '').strip
+    if result.empty?
+      result = "#{dossier.first_document_year} -"
+    end
+    return result
   end
   
   # Import

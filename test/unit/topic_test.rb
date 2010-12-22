@@ -25,6 +25,14 @@ class TopicTest < ActiveSupport::TestCase
     assert !dossiers(:group_empty).children.include?(dossiers(:group_empty))
   end
 
+  test "children no record on new topic" do
+    assert 0, Topic.new.children.size
+  end
+  
+  test "direct_children no record on new topic" do
+    assert 0, Topic.new.direct_children.size
+  end
+  
   test "document_count works" do
     assert 0, dossiers(:group_empty).document_count
   end

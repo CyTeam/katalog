@@ -16,4 +16,8 @@ class TopicsController < InheritedResources::Base
     end
     update!
   end
+
+  def index
+    redirect_to dossiers_path
+  end
 end
