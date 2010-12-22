@@ -5,7 +5,7 @@ class Container < ActiveRecord::Base
   belongs_to :container_type
 
   # Validations
-  validates_presence_of :dossier, :location, :container_type
+  validates_presence_of :title, :dossier, :location, :container_type
   
   # Helpers
   def to_s
