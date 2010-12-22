@@ -1,5 +1,7 @@
 class Topic < Dossier
   def topic_type
+    return if signature.nil?
+    
     case signature.length
       when 1: :group
       when 2: :main
@@ -12,6 +14,7 @@ class Topic < Dossier
   has_many :dossiers, :foreign_key => :parent_id
   
   def children_topic_type
+    return if topic_type.nil?
     case topic_type
       when :group:  :main
       when :main:   :geo
@@ -30,7 +33,11 @@ class Topic < Dossier
   
   def direct_children(use_new_signature = false)
     # TODO: support or drop new_signature
-    children(use_new_signature).send(children_topic_type)
+    result = children(use_new_signature)
+
+    result = result.send(children_topic_type) if children_topic_type
+    
+    return result
   end
 
   # Attribute handlers
