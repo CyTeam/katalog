@@ -52,3 +52,58 @@ function addAutoAddNewContainer() {
     }
   });
 }
+
+var cities = [
+ "Aberdeen", "Ada", "Adamsville", "Addyston", "Adelphi", "Adena", "Adrian", "Akron",
+ "Albany", "Alexandria", "Alger", "Alledonia", "Alliance", "Alpha", "Alvada"
+];
+
+function addRelationAutoCompletionBehaviour() {
+  $('#insert_relation').click(function(e){
+    var id = 'relation_list_auto_completion';
+    var link = $('#insert_relation');
+    var text_area = $('#dossier_relation_list');
+    e.preventDefault();
+    text_area.after('<input type="text" value="Um nach einem Querverweis zu suchen. Hier den Suchbegriff eingeben." size="50" id="' + id + '" style="margin-left:25%;width:74%;">');
+    link.hide();
+    $('#' + id).click(function(){
+      var input = $(this);
+      input.val('');
+      input.autocomplete({
+        source: function( request, response ) {
+          $.ajax({
+            url: '/dossiers.json',
+            dataType: 'json',
+            data: {
+              title:    request.term,
+              per_page: 'all'
+            },
+            success: function( data ) {
+              response( $.map( data, function( object ) {
+                item = object.topic;
+                return {
+                  label: item.title,
+                  value: item.signature + ': ' + item.title
+                }
+              }));
+            }
+          });
+        },
+        minLength: 2,
+        close: function() {
+          console.log(input.val());
+          var value = input.val();
+          var text = text_area.val();
+          var rows = text_area.attr('rows');
+          var height = text_area.css('height');
+          input.remove();
+          link.show();
+//          text_area.attr('rows', rows + 1);
+//          text_area.css('height', (height / rows) * (rows + 1));
+          text_area.val(text + "\n" + value);
+          text_area.elastic();
+        }
+      });
+    });
+  });
+}

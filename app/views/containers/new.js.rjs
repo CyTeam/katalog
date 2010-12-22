@@ -1,1 +1,1 @@
-page.insert_html :bottom, 'container-list', :partial => 'new'
+page['#container-list'].append(render(:partial => 'new'))

@@ -3,4 +3,5 @@ $(document).ready(function() {
   addLinkifyContainersBehaviour();
   addAutogrowBehaviour();
   addAutoAddNewContainer();
+  addRelationAutoCompletionBehaviour();
 });

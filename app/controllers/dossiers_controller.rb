@@ -5,7 +5,7 @@ class DossiersController < InheritedResources::Base
   before_filter :authenticate_user!, :except => [:index, :search, :show]
   
   # Responders
-  respond_to :html, :js
+  respond_to :html, :js, :json
   
   # Search
   has_scope :by_text, :as => :text
@@ -44,6 +44,7 @@ class DossiersController < InheritedResources::Base
     
     params[:search] ||= {}
     params[:search][:text] ||= params[:search][:query]
+    params[:search][:text] ||= params[:query]
     
     if params[:per_page] == 'all'
       # Simple hack to simulate all
@@ -66,7 +67,7 @@ class DossiersController < InheritedResources::Base
     # Drop nil results by stray full text search matches
     @dossiers.compact!
     
-    if @dossiers.count == 1
+    if (@dossiers.count == 1 and not request.format.json?)
       redirect_to dossier_path(@dossiers.first, :query => @query)
     else
       index!

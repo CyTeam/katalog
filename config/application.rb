@@ -49,6 +49,6 @@ module Katalog
     # generic Cyt JS
     config.action_view.javascript_expansions[:defaults] += %w(cyt)
     # jQuery Plugins
-    config.action_view.javascript_expansions[:defaults] += %w(jquery-elastic)
+    config.action_view.javascript_expansions[:defaults] += %w(jquery-elastic jquery-ui)
   end
 end
