@@ -42,3 +42,13 @@ function addLinkifyContainersBehaviour() {
 function addAutogrowBehaviour() {
   $(".autogrow").elastic();
 }
+
+function addAutoAddNewContainer() {
+  $('.container:last input[type=text]:first').keyup(function(){
+    var text = $(this).val();
+    if(text.match(/\d{4}\s?-\s?\d{4}/)){
+      $('#add_record_link').trigger('click');
+      $(this).unbind('keyup', addAutoAddNewContainer());
+    }
+  });
+}
