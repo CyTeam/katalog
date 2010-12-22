@@ -53,11 +53,6 @@ function addAutoAddNewContainer() {
   });
 }
 
-var cities = [
- "Aberdeen", "Ada", "Adamsville", "Addyston", "Adelphi", "Adena", "Adrian", "Akron",
- "Albany", "Alexandria", "Alger", "Alledonia", "Alliance", "Alpha", "Alvada"
-];
-
 function addRelationAutoCompletionBehaviour() {
   $('#insert_relation').click(function(e){
     var id = 'relation_list_auto_completion';
