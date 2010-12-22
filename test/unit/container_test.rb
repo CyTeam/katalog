@@ -77,4 +77,10 @@ class ContainerTest < ActiveSupport::TestCase
     
     assert_equal '1989 -', container.period
   end
+
+  test ".period without period" do
+    container = Factory(:container_without_period)
+    
+    assert_equal '1990 -', container.period
+  end
 end
