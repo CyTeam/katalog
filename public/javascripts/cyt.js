@@ -94,12 +94,9 @@ function addRelationAutoCompletionBehaviour() {
           console.log(input.val());
           var value = input.val();
           var text = text_area.val();
-          var rows = text_area.attr('rows');
-          var height = text_area.css('height');
+          
           input.remove();
           link.show();
-//          text_area.attr('rows', rows + 1);
-//          text_area.css('height', (height / rows) * (rows + 1));
           text_area.val(text + "\n" + value);
           text_area.elastic();
         }
