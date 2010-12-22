@@ -44,6 +44,10 @@ class Container < ActiveRecord::Base
     dossier.first_document_on = value unless dossier.first_document_on && (value >= dossier.first_document_on)
   end
   
+  def period
+    title.gsub(/^#{dossier.title} /, '')
+  end
+  
   # Import
   def self.import(row, dossier)
     container = self.create(
