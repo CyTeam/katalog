@@ -54,10 +54,12 @@ function addAutoAddNewContainer() {
 }
 
 function addRelationAutoCompletionBehaviour() {
-  $('#insert_relation').click(function(e){
+  var text_area = $('#dossier_relation_list');
+  var insert_link = $('#insert_relation');
+  text_area.after(insert_link);
+  insert_link.click(function(e){
     var id = 'relation_list_auto_completion';
     var link = $('#insert_relation');
-    var text_area = $('#dossier_relation_list');
     e.preventDefault();
     text_area.after('<input type="text" value="Um nach einem Querverweis zu suchen. Hier den Suchbegriff eingeben." size="50" id="' + id + '" style="margin-left:25%;width:74%;">');
     link.hide();
@@ -86,7 +88,6 @@ function addRelationAutoCompletionBehaviour() {
         },
         minLength: 2,
         close: function() {
-          console.log(input.val());
           var value = input.val();
           var text = text_area.val();
           
