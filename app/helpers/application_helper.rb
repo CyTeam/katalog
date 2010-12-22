@@ -14,7 +14,7 @@ module ApplicationHelper
       record = render('containers/new_form', :form => form)
       page << %{
 var new_record_id = "new_" + new Date().getTime();
-$('container-list').insert({ bottom: "#{ escape_javascript record }".replace(/new_\\d+/g, new_record_id) });
+$('#container-list').append("#{ escape_javascript record }".replace(/new_\\d+/g, new_record_id));
 }
     end
   end
