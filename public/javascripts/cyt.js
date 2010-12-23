@@ -69,15 +69,16 @@ function addRelationAutoCompletionBehaviour() {
       input.autocomplete({
         source: function( request, response ) {
           $.ajax({
-            url: '/dossiers.json',
+            url: '/dossiers/search.json',
             dataType: 'json',
             data: {
-              title:    request.term,
-              per_page: 'all'
+              page:     1,
+              per_page: 10,
+              query:    request.term
             },
             success: function( data ) {
               response( $.map( data, function( object ) {
-                item = object.topic;
+                item = object.dossier;
                 return {
                   label: item.title,
                   value: item.signature + ': ' + item.title
@@ -87,8 +88,8 @@ function addRelationAutoCompletionBehaviour() {
           });
         },
         minLength: 2,
-        close: function() {
-          var value = input.val();
+        select: function(event, ui) {
+          var value = ui.item.value;
           var text = text_area.val();
           
           input.remove();
