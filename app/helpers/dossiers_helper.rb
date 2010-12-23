@@ -42,6 +42,7 @@ module DossiersHelper
     link_to(topic, url_for_topic(topic), options)
   end
 
+  # JS Highlighting
   def highlight_words(query, element = 'dossiers')
     return unless query.present?
 
@@ -49,7 +50,7 @@ module DossiersHelper
 
     content = ActiveSupport::SafeBuffer.new
     for word in (words + sentences)
-      content += javascript_tag "Element.highlight($('#{element}'), '#{escape_javascript(word)}', 'match');"
+      content += javascript_tag "$('##{element}').highlight('#{escape_javascript(word)}', 'match');"
     end
     
     return content
