@@ -44,10 +44,23 @@ function addAutogrowBehaviour() {
 }
 
 function addAutoAddNewContainer() {
-  $('.container:last input[type=text]:first').keyup(function(){
+  var container = $('.container:last');
+  var first_input = 'td.container_title input[type=text]';
+  var second_input = 'td.type_code input[type=text]';
+  var last_input = 'td.location_code input[type=text]';
+
+  container.find(first_input).keyup(function(){
     var text = $(this).val();
+
     if(text.match(/\d{4}\s?-\s?\d{4}/)){
       $('#add_record_link').trigger('click');
+      var new_container = $('.container:last');
+      var d = new Date();
+
+      new_container.find(first_input).val(d.getFullYear() + ' -');
+      container.find(second_input).val('DA');
+      new_container.find(second_input).val('DH');
+      new_container.find(last_input).val(container.find(last_input).val());
       $(this).unbind('keyup', addAutoAddNewContainer());
     }
   });
