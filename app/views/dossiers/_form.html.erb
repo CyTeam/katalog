@@ -10,7 +10,6 @@
     <%= f.input :dossier_number_list, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.numbers.size + 1} %>
   <% end %>
 
-  <h3>Dossiers</h3>
   <div class="ce_table">
     <table class="ce_table" id="container-list" style="width: 100%">
       <%= render 'containers/list_header', :form_helper => f %>
