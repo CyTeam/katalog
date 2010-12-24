@@ -5,5 +5,5 @@
 <% end %>
 
 <%= javascript_tag "$('#search_text').val('#{escape_javascript(@query || params[:query])}');" %>
-<%= javascript_tag "$('#search_text').focus();" %>
+<%= javascript_tag "$('#search_text').select().focus();" %>
 
