@@ -4,4 +4,6 @@ $(document).ready(function() {
   addAutogrowBehaviour();
   addAutoAddNewContainer();
   addRelationAutoCompletionBehaviour();
+  addEditToolTipBehaviour();
+  addPrintToolTipBehaviour();
 });

@@ -17,9 +17,9 @@
     <td><%= container_type.code %></td>
     <td><%= container_type.description %></td>
     <td>
-      <%= link_to image_tag('icons/show.png', :title => 'Show'), container_type %>
-      <%= link_to image_tag('icons/edit.png', :title => 'Edit'), edit_container_type_path(container_type) %>
-      <%= link_to image_tag('icons/delete.png', :title => 'Destroy'), container_type, :confirm => t_confirm_delete(container_type), :method => :delete %>
+      <%= link_to image_tag('icons/show.png', :title => t('tooltips.container_types.show')), container_type %>
+      <%= link_to image_tag('icons/edit.png', :title => t('tooltips.container_types.edit')), edit_container_type_path(container_type) %>
+      <%= link_to image_tag('icons/delete.png', :title => t('tooltips.container_types.delete')), container_type, :confirm => t_confirm_delete(container_type), :method => :delete %>
     </td>
   </tr>
 <% end %>

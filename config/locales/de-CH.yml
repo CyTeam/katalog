@@ -149,3 +149,19 @@ de-CH:
         odd: "muss ungerade sein"
         even: "muss gerade sein"
         record_invalid: "Gültigkeitsprüfung ist fehlgeschlagen: %{errors}"
+
+  tooltips:
+    dossiers:
+      show_pdf: Hier können Sie eine PDF der Dossierübersicht erstellen.
+      search: Hier können Sie nach ihren gewünschten Themen suchen.
+      search_input: Hier können Sie ihre Suchbegriffe eingeben.
+      edit: Editieren
+      delete: Löschen
+    container_types:
+      show: Anzeigen
+      edit: Editieren
+      delete: Löschen
+    locations:
+      show: Anzeigen
+      edit: Editieren
+      delete: Löschen

@@ -130,3 +130,31 @@ function showUnlessNewRecord(container) {
  container.find('.flash').remove();
  container.show();
 }
+
+function addEditToolTipBehaviour() {
+ $('*[title]').each(function(){
+   if($(this).attr('title')!=''){
+     $(this).qtip({
+                    style: {
+                        name: 'blue',
+                        tip: true,
+                        width: 200,
+                        background: '#E5E8E9',
+                        color: '#00669C',
+                        border: {
+                          color: '#00669C'
+                        }
+                    },
+                    position: {
+                        corner: {
+                             target: 'topRight',
+                             tooltip: 'bottomLeft'
+                        }
+                    }
+             });
+   }
+ });
+}
+function addPrintToolTipBehaviour() {
+
+}
