@@ -165,3 +165,9 @@ de-CH:
       show: Anzeigen
       edit: Editieren
       delete: Löschen
+    contextual:
+      show: Anzeigen
+      edit: Editieren
+      delete: Löschen
+      index: Alle anzeigen
+      new: Neu hinzufügen
