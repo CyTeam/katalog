@@ -51,6 +51,7 @@ gem 'thinking-sphinx', '~> 2.0.1'
 
 # Reports
 gem 'pdfkit'
+gem 'wkhtmltopdf-binary'
 
 # Full text search engine
 gem 'sphinx'

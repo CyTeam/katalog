@@ -117,6 +117,7 @@ GEM
     tzinfo (0.3.23)
     warden (0.10.7)
       rack (>= 1.0.0)
+    wkhtmltopdf-binary (0.9.5.1)
 
 PLATFORMS
   ruby
@@ -144,3 +145,4 @@ DEPENDENCIES
   sphinx
   thinking-sphinx (~> 2.0.1)
   will_paginate!
+  wkhtmltopdf-binary
