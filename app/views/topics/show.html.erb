@@ -1,7 +1,7 @@
 <%= render '/dossiers/search_form' %>
 
 <div id="page_actions" style="float: right; margin: 1em">
-  <%= contextual_link('edit', edit_topic_path(@topic)) %>
+  <%= contextual_link('edit', edit_topic_path(@topic), :title => t('tooltips.topics.edit')) %>
 </div>
 <h1 id="title"><%= @topic.signature %> <%= @topic.title %></h1>
 <p class="notice"><%= notice %></p>

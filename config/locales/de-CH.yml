@@ -171,3 +171,5 @@ de-CH:
       delete: Löschen
       index: Alle anzeigen
       new: Neu hinzufügen
+    topics:
+      edit: Editieren
