@@ -157,6 +157,7 @@ de-CH:
       search_input: Hier können Sie ihre Suchbegriffe eingeben.
       edit: Editieren
       delete: Löschen
+      show_themeoverview: Themenübersicht mit 5-Jahresansicht
     container_types:
       show: Anzeigen
       edit: Editieren
@@ -173,3 +174,7 @@ de-CH:
       new: Neu hinzufügen
     topics:
       edit: Editieren
+
+  crud:
+    action:
+      overview: Übersicht
