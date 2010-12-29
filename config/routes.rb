@@ -8,6 +8,7 @@ Katalog::Application.routes.draw do
   resources :locations
 
   resources :topics
+  get 'dossiers/overview'
   resources :dossiers do
     collection do
       get :search

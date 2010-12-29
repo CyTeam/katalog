@@ -1,6 +1,6 @@
 <div id="page_actions" style="float: right; margin: 1em">
   <%= contextual_link('pdf', url_for(params.merge({:format => :pdf, :per_page => 'all'})), :title => t('tooltips.dossiers.show_pdf')) %>
   <% if user_signed_in? %>
-    <%= contextual_link('overview', url_for(params.merge({:format => :pdf, :layout => '5year', :per_page => 'all'})), :title => t('tooltips.dossiers.show_themeoverview')) %>
+    <%= contextual_link('overview', url_for({:controller => 'dossiers', :action => 'overview', :format => :pdf, :per_page => 'all'}), {:format => :pdf, :title => t('tooltips.dossiers.show_themeoverview')}) %>
   <% end %>
 </div>

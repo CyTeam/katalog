@@ -87,4 +87,8 @@ class DossiersController < InheritedResources::Base
     
     edit!
   end
+
+  def overview
+    index
+  end
 end
