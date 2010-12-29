@@ -161,7 +161,7 @@ class Dossier < ActiveRecord::Base
     
     titles = stripped_relations.map{|relation| relation.gsub(/^[0-9.]{1,8}:[ ]*/, '')}
 
-    return titles
+    titles
   end
   
   # Attributes
