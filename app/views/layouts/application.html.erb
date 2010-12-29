@@ -35,11 +35,9 @@
               <%= navigation_item("Dossier auflisten", dossiers_path) %>
               <%= navigation_item("Dossier suchen", search_dossiers_path) %>
               <%= navigation_item(t('controllers.index.keyword'), keywords_path) %>
-              <% if current_user %>
+              <% if user_signed_in? %>
                 <%= navigation_item("Dossier anlegen", new_dossier_path) %>
                 <%= navigation_item("Titel anlegen", new_topic_path) %>
-              <% end %>
-              <% if user_signed_in? %>
                 <%= navigation_item("Abmelden", destroy_user_session_path) %>
                 <%= navigation_item("Standorte verwalten", locations_path) %>
                 <%= navigation_item("Dossier Art verwalten", container_types_path) %>
