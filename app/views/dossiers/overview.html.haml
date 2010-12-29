@@ -1,0 +1,37 @@
+%h1
+  = t('katalog.overview')
+.index
+  #dossiers.ce_table.block
+    %table
+      %tr.header
+        %th{:colspan => 2}
+          &nbsp;
+
+        %th{:colspan => 3,:style => 'text-align: center;'}
+          Anzahl Dokumente
+
+      %tr.header
+        %th.signature
+          = t_attr('signature', Dossier)
+
+        %th.title
+          = t_attr('title', Dossier)
+
+        %th.document_count{:style => 'text-align: right;'}
+          = @document_count ? t('katalog.total_count', :count => number_with_delimiter(@document_count)) : t_attr(:document_count, Dossier)
+
+      - @dossiers.each do |dossier|
+        %tr{:id => "dossier-#{dossier.id}", :class => "topic #{dossier.topic_type}", :style => 'cursor: pointer;'}
+          %td
+            = @new_signature ? dossier.new_signature : dossier.signature
+
+          %td.title
+            = link_to dossier.title, dossier, {'data-href-container' => 'tr'}
+            %br
+            %span.keywords
+              = dossier.keywords.join(', ')
+
+          %td{:style => "text-align: right"}
+            = number_with_delimiter(dossier.document_count)
+            = availability_notes(dossier)
+            
