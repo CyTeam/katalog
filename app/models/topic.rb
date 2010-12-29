@@ -34,10 +34,9 @@ class Topic < Dossier
   def direct_children(use_new_signature = false)
     # TODO: support or drop new_signature
     result = children(use_new_signature)
-
     result = result.send(children_topic_type) if children_topic_type
     
-    return result
+    result
   end
 
   # Attribute handlers
@@ -48,6 +47,7 @@ class Topic < Dossier
     end
     
     self.signature = value
+
     save
   end
   
@@ -68,8 +68,8 @@ class Topic < Dossier
   def import(row)
     self.signature = row[0]
     self.title     = row[1]
-    
     puts self unless Rails.env.test?
-    return self
+
+    self
   end
 end
