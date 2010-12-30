@@ -324,6 +324,21 @@ class Dossier < ActiveRecord::Base
     
     return "[ ]*#{date_range}[ ]*"
   end
+
+  def self.years(interval = 1)
+    years = DossierNumber.default_periods(Date.today.year, false)
+    for i in years.size..0
+      years.delete_at(i)
+    end
+
+    years.inject([]) do |result, year|
+      if year.eql?years.first
+        result << 'vor 1990'
+      else
+        result << "#{year[:from] ? year[:from].strftime("%Y") : ''} - #{year[:to].strftime("%Y")}"
+      end
+    end
+  end
   
   def self.truncate_title(value)
     value.gsub(/ #{date_range}$/, '')

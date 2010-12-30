@@ -302,4 +302,12 @@ class DossierTest < ActiveSupport::TestCase
 
     assert_equal Date.today.year.to_s, dossier.numbers.last.period
   end
+
+  test 'returns period of years with interval of 1 year' do
+    assert_equal Dossier.years.count, 22
+  end
+
+  test 'returns period of years with interval of 1 year' do
+    assert_equal Dossier.years(5).count, 5
+  end
 end
