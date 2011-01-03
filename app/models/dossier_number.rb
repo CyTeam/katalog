@@ -17,6 +17,11 @@ class DossierNumber < ActiveRecord::Base
     
     where(:from => from, :to => to)
   }
+  scope :between, lambda {|value|
+    from, to = from_s(value)
+    
+    where("(`from` IS NULL AND `to` >= :to) OR (`from` >= :from AND `to` <= :to) OR (`from` <= :from AND `to` IS NULL)", {:from => from, :to => to})
+  }
   
   def to_s(format = :default)
     "#{period(format)}: #{amount}"
