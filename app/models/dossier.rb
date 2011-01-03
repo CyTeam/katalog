@@ -128,10 +128,16 @@ class Dossier < ActiveRecord::Base
     end
 
     if words.present?
-      quoted_words = words.select{|word| word.length >= 3}.map{|word| "*" + word + "*"}
-      medium_words = words.select{|word| word.length == 2}.map{|word| word + "*"}
-      short_words = words.select{|word| word.length < 2}
-      word_query = "@* (\"#{words.join(' ')}\" | (#{(quoted_words + medium_words + short_words).join(' ')}))"
+      quoted_words = words.map {|word|
+        if word.length < 2
+          word
+        elsif word.length == 2
+          word + "*"
+        elsif word.length > 2
+          "*" + word + "*"
+        end
+      }
+      word_query = "@* (\"#{words.join(' ')}\" | (#{(quoted_words).join(' ')}))"
     end
     
     query = [signature_query, sentence_query, word_query].join(' ')

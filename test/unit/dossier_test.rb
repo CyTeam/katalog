@@ -90,6 +90,18 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal '@signature ("77.0.10*")', Dossier.build_query("77.0.10").strip
   end
   
+  test ".build_query adds no * to short search words" do
+    assert_match /[^*]a[^*]/, Dossier.build_query("nr a history").strip
+  end
+  
+  test ".build_query adds trailing * to medium short search words" do
+    assert_match /[^*]nr\*/, Dossier.build_query("nr a history").strip
+  end
+  
+  test ".build_query adds surrounding * to non-short search words" do
+    assert_match /\*history\*/, Dossier.build_query("nr as history").strip
+  end
+  
 =begin
   test "find by text" do
     keyword_list = ["City"]
