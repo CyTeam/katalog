@@ -16,10 +16,10 @@ class Topic < Dossier
   def children_topic_type
     return if topic_type.nil?
     case topic_type
-      when :group:  :main
-      when :main:   :geo
-      when :geo:    :detail
-      when :detail: :dossier
+      when :group  then :main
+      when :main   then :geo
+      when :geo    then :detail
+      when :detail then :dossier
     end
   end
 
