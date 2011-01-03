@@ -329,4 +329,8 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal years.first, 'vor 1990'
     assert_equal years[1], '1990 - 1994'
   end
+
+  test 'returns year and the count of documents' do
+    dossier = Factory(:dossier)
+  end
 end

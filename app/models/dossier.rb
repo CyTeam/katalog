@@ -358,6 +358,13 @@ class Dossier < ActiveRecord::Base
       end
     end
   end
+
+  def years_counts(interval = 1)
+    periods = Dossier.years(interval)
+    periods.inject([]) do |result, period|
+      result << {:period => period, :count => document_count(period)}
+    end
+  end
   
   def self.truncate_title(value)
     value.gsub(/ #{date_range}$/, '')
