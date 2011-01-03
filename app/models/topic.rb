@@ -31,6 +31,11 @@ class Topic < Dossier
     end
   end
   
+  
+  def numbers
+    DossierNumber.joins(:dossier).where("signature LIKE CONCAT(?, '%')", signature)
+  end
+
   def direct_children(use_new_signature = false)
     # TODO: support or drop new_signature
     result = children(use_new_signature)
@@ -51,15 +56,6 @@ class Topic < Dossier
     save
   end
   
-  def numbers
-    DossierNumber.joins(:dossier).where("signature LIKE CONCAT(?, '%')", signature)
-  end
-  
-  # Calculations
-  def document_count(use_new_signature = false)
-    children(use_new_signature).includes(:numbers).sum(:amount).to_i
-  end
-
   # Importer
   def self.import_filter
     /^[0-9][.0-9]*$/

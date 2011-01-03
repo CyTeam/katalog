@@ -134,7 +134,7 @@ class Dossier < ActiveRecord::Base
         elsif word.length == 2
           word + "*"
         elsif word.length > 2
-          word + "*" + " " + "*" + word + "*"
+          "+\"" + word + "*\"" + " | " + "*" + word + "*"
         end
       }
       word_query = "@* (\"#{words.join(' ')}\" | (#{(quoted_words).join(' ')}))"
@@ -229,8 +229,10 @@ class Dossier < ActiveRecord::Base
     includes(:numbers).sum(:amount).to_i
   end
   
-  def document_count
-    numbers.sum(:amount).to_i
+  def document_count(period = nil)
+    document_counts = period ? numbers.between(period) : numbers
+
+    document_counts.sum(:amount).to_i
   end
   
   def parent
