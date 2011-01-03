@@ -39,4 +39,8 @@
           %td{:style => "text-align: right"}
             = number_with_delimiter(dossier.document_count)
             = availability_notes(dossier)
+          
+          - dossier.years_counts(5).each do |count|
+            %td
+              = count[:count]
             
