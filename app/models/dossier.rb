@@ -327,11 +327,22 @@ class Dossier < ActiveRecord::Base
 
   def self.years(interval = 1)
     years = DossierNumber.default_periods(Date.today.year, false)
-    for i in years.size..0
-      years.delete_at(i)
+    prepared_years = years.dup
+    if interval > 1
+      prepared_years.reject! do |item|
+        years.index(item).modulo(interval) != 0
+      end
+
+      prepared_years << {:from => prepared_years.last[:from] + 1, :to => years.last[:to]}
+
+      previous_item = nil
+      prepared_years.each do |item|
+        item[:from] = previous_item[:to] + 1 if previous_item
+        previous_item = item
+      end
     end
 
-    years.inject([]) do |result, year|
+    prepared_years.inject([]) do |result, year|
       if year.eql?years.first
         result << 'vor 1990'
       else

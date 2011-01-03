@@ -1,3 +1,5 @@
+- years = Dossier.years(5)
+
 %h1
   = t('katalog.overview')
 .index
@@ -7,9 +9,8 @@
         %th{:colspan => 2}
           &nbsp;
 
-        %th{:colspan => 3,:style => 'text-align: center;'}
+        %th{:colspan => (years.count + 1),:style => 'text-align: center;'}
           Anzahl Dokumente
-
       %tr.header
         %th.signature
           = t_attr('signature', Dossier)
@@ -19,6 +20,10 @@
 
         %th.document_count{:style => 'text-align: right;'}
           = @document_count ? t('katalog.total_count', :count => number_with_delimiter(@document_count)) : t_attr(:document_count, Dossier)
+
+        - years.each do |year|
+          %th.year
+            = year
 
       - @dossiers.each do |dossier|
         %tr{:id => "dossier-#{dossier.id}", :class => "topic #{dossier.topic_type}", :style => 'cursor: pointer;'}

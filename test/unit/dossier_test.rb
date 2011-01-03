@@ -304,10 +304,17 @@ class DossierTest < ActiveSupport::TestCase
   end
 
   test 'returns period of years with interval of 1 year' do
-    assert_equal Dossier.years.count, 22
+    assert_equal Dossier.years.count, 23
   end
 
-  test 'returns period of years with interval of 1 year' do
+  test 'returns period of years with interval of 5 years' do
     assert_equal Dossier.years(5).count, 5
+  end
+
+  test 'returns the right label of the persiod with interval of 5 years' do
+    years = Dossier.years(5)
+    assert_equal years.count, 5
+    assert_equal years.first, 'vor 1990'
+    assert_equal years[1], '1990 - 1994'
   end
 end

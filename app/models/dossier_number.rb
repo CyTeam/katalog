@@ -81,15 +81,15 @@ class DossierNumber < ActiveRecord::Base
   # "All" Periods
   # 
   # < 1990, 1990-1993, 1994 - :up_to
-  def self.default_periods(up_to = Date.today.year)
+  def self.default_periods(up_to = Date.today.year, special = true)
     periods = []
     # before 1990
     periods << {:from => nil, :to => Date.new(1989, 12, 31)}
     # 1990-1993
-    periods << {:from => Date.new(1990, 1, 1), :to => Date.new(1993, 12, 31)}
-    
+    periods << {:from => Date.new(1990, 1, 1), :to => Date.new(1993, 12, 31)} if special
+    start_year = special ? 1994 : 1990
     # 1994-
-    for year in 1994..up_to
+    for year in start_year..up_to
       periods << {:from => Date.new(year, 1, 1), :to => Date.new(year, 12, 31)}
     end
     
