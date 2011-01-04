@@ -45,7 +45,9 @@ module Katalog
     config.filter_parameters += [:password]
 
     # PDF generation
+    config.middleware.use PDFKit::Middleware, {:orientation => 'Landscape'}, :only => '/dossiers/report.pdf'
     config.middleware.use PDFKit::Middleware
+
     # generic Cyt JS
     config.action_view.javascript_expansions[:defaults] += %w(cyt)
     # jQuery Plugins
