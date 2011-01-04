@@ -50,7 +50,7 @@ gem 'fastercsv'
 gem 'thinking-sphinx', '~> 2.0.1'
 
 # Reports
-gem 'pdfkit'
+gem 'pdfkit', '~> 0.5'
 gem 'wkhtmltopdf-binary'
 
 # Full text search engine
