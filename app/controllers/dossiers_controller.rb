@@ -91,4 +91,8 @@ class DossiersController < InheritedResources::Base
   def overview
     index
   end
+
+  def report
+    search
+  end
 end

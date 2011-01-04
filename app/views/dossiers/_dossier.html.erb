@@ -3,18 +3,40 @@
   <td><%= @new_signature ? dossier.new_signature : dossier.signature %></td>
   <td>
     <span class="title"><%= link_to dossier.title, dossier, {'data-href-container' => 'tr'} %></span>
-    <br/>
-    <span class="keywords"><%= dossier.keywords.join(', ') %></span>
-  </td>
-  <td style="text-align: right">
-    <%= number_with_delimiter(dossier.document_count) %>
-    <%= availability_notes(dossier) %>
-  </td>
-  <td class="action-links">
-    <% if user_signed_in? %>
-      <%= link_to image_tag('icons/edit.png', :title => t('tooltips.dossiers.edit')), edit_dossier_path(dossier) %>
-      <%= link_to image_tag('icons/delete.png', :title => t('tooltips.dossiers.edit')), dossier, :confirm => t_confirm_delete(dossier), :remote => true, :method => :delete %>
+    <% unless local_assigns[:report] %>
+      <br/>
+      <span class="keywords">
+        <%= dossier.keywords.join(', ') %>
+      </span>
     <% end %>
   </td>
+  <% unless local_assigns[:report] %>
+    <td style="text-align: right">
+      <%= number_with_delimiter(dossier.document_count) %>
+      <%= availability_notes(dossier) unless local_assigns[:report] %>
+    </td>
+    <td class="action-links">
+      <% if user_signed_in? %>
+        <%= link_to image_tag('icons/edit.png', :title => t('tooltips.dossiers.edit')), edit_dossier_path(dossier) %>
+        <%= link_to image_tag('icons/delete.png', :title => t('tooltips.dossiers.edit')), dossier, :confirm => t_confirm_delete(dossier), :remote => true, :method => :delete %>
+      <% end %>
+    </td>
+  <% else %>
+    <td>
+      <%= dossier.first_document_year %>
+    </td>
+    <td>
+      <%= dossier.container_types_shortcut.join(', ') %>
+    </td>
+    <td>
+      <%= dossier.locations_shortcut.join(', ') %>
+    </td>
+    <td>
+      Thema
+    </td>
+    <td>
+      <%= dossier.keywords.join(', ') %>
+    </td>
+  <% end %>
 </tr>
 <% end %>
