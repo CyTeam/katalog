@@ -2,17 +2,7 @@
 <tr class="topic <%= topic.topic_type%>">
   <td><%= @new_signature ? topic.new_signature : topic.signature %></td>
   <td class="title"><%= link_to topic.title, url_for_topic(topic), {'data-href-container' => 'tr'} %></td>
-  <% unless local_assigns[:report] %>
-    <td style="text-align: right">
-      <%= number_with_delimiter(topic.document_count(@new_signature)) %>
-    </td>
-    <td class="action-links">
-      <% if user_signed_in? %>
-        <%= link_to image_tag('icons/edit.png', :title => t('crud.edit', :model => '')), edit_topic_path(topic) %>
-        <%= link_to image_tag('icons/delete.png', :title => t('crud.delete', :model => '')), topic, :confirm => t_confirm_delete(topic), :remote => true, :method => :delete %>
-      <% end %>
-    </td>
-  <% else %>
+  <% if local_assigns[:report] %>
     <td colspan="3">
       &nbsp;
     </td>
@@ -21,7 +11,21 @@
     </td>
     <td>
       &nbsp;
-    </td>    
+    </td> 
+  <% elsif local_assigns[:year_report] %>
+    <td colspan="<%= year_report + 3 %>">
+      &nbsp;
+    </td>
+  <% else %> 
+    <td style="text-align: right">
+      <%= number_with_delimiter(topic.document_count(@new_signature)) %>
+    </td>
+    <td class="action-links">
+      <% if user_signed_in? %>
+        <%= link_to image_tag('icons/edit.png', :title => t('crud.edit', :model => '')), edit_topic_path(topic) %>
+        <%= link_to image_tag('icons/delete.png', :title => t('crud.delete', :model => '')), topic, :confirm => t_confirm_delete(topic), :remote => true, :method => :delete %>
+      <% end %>
+    </td>  
   <% end %>
 </tr>
 <% end %>

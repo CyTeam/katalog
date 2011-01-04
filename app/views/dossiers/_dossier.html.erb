@@ -3,25 +3,14 @@
   <td><%= @new_signature ? dossier.new_signature : dossier.signature %></td>
   <td>
     <span class="title"><%= link_to dossier.title, dossier, {'data-href-container' => 'tr'} %></span>
-    <% unless local_assigns[:report] %>
+    <% unless local_assigns[:report] or local_assigns[:year_report] %>
       <br/>
       <span class="keywords">
         <%= dossier.keywords.join(', ') %>
       </span>
     <% end %>
   </td>
-  <% unless local_assigns[:report] %>
-    <td style="text-align: right">
-      <%= number_with_delimiter(dossier.document_count) %>
-      <%= availability_notes(dossier) unless local_assigns[:report] %>
-    </td>
-    <td class="action-links">
-      <% if user_signed_in? %>
-        <%= link_to image_tag('icons/edit.png', :title => t('tooltips.dossiers.edit')), edit_dossier_path(dossier) %>
-        <%= link_to image_tag('icons/delete.png', :title => t('tooltips.dossiers.edit')), dossier, :confirm => t_confirm_delete(dossier), :remote => true, :method => :delete %>
-      <% end %>
-    </td>
-  <% else %>
+  <% if local_assigns[:report] %>
     <td>
       <%= dossier.first_document_year %>
     </td>
@@ -36,6 +25,26 @@
     </td>
     <td>
       <%= dossier.keywords.join(', ') %>
+    </td>
+  <% elsif local_assigns[:year_report] %>
+    <td>
+      <%= dossier.first_document_year %>
+    </td>
+    <% dossier.years_counts.each do |count| %>
+      <td>
+        <%= number_with_delimiter count[:count] %>
+      </td>
+    <% end %>  
+  <% else %>
+    <td style="text-align: right">
+      <%= number_with_delimiter(dossier.document_count) %>
+      <%= availability_notes(dossier) unless local_assigns[:report] %>
+    </td>
+    <td class="action-links">
+      <% if user_signed_in? %>
+        <%= link_to image_tag('icons/edit.png', :title => t('tooltips.dossiers.edit')), edit_dossier_path(dossier) %>
+        <%= link_to image_tag('icons/delete.png', :title => t('tooltips.dossiers.edit')), dossier, :confirm => t_confirm_delete(dossier), :remote => true, :method => :delete %>
+      <% end %>
     </td>
   <% end %>
 </tr>

@@ -95,4 +95,8 @@ class DossiersController < InheritedResources::Base
   def report
     search
   end
+
+  def year_report
+    search
+  end
 end
