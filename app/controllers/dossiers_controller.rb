@@ -93,12 +93,20 @@ class DossiersController < InheritedResources::Base
   end
 
   def report
-    @pdfkit_options = { 'orientation' => 'Landscape' }
+    @pdfkit_options = {
+      'orientation'  => 'Landscape',
+      'margin-left'  => '0.2cm',
+      'margin-right' => '0.2cm'
+    }
     search
   end
 
   def year_report
-    @pdfkit_options = { 'orientation' => 'Landscape' }
+    @pdfkit_options = {
+      'orientation'  => 'Landscape',
+      'margin-left'  => '0.2cm',
+      'margin-right' => '0.2cm'
+    }
     search
   end
 end
