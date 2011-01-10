@@ -3,6 +3,9 @@
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   <title>Katalog</title>
+  <% @pdfkit_options && @pdfkit_options.each do |key, value|%>
+    <meta name="pdfkit-<%= key %>" content="<%= value %>" />
+  <% end %>
 
   <%= stylesheet_link_tag 'doku-zug.ch/typolight', 'doku-zug.ch/basic', 'doku-zug.ch/content', 'doku-zug.ch/layout', 'doku-zug.ch/navigation', 'doku-zug.ch/welcome', 'doku-zug.ch/application', :media => 'all' %>
   <%= stylesheet_link_tag 'doku-zug.ch/print', :media => 'print' %>

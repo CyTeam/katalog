@@ -93,10 +93,12 @@ class DossiersController < InheritedResources::Base
   end
 
   def report
+    @pdfkit_options = { 'orientation' => 'Landscape' }
     search
   end
 
   def year_report
+    @pdfkit_options = { 'orientation' => 'Landscape' }
     search
   end
 end
