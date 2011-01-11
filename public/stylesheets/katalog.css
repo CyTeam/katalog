@@ -79,6 +79,10 @@ li.topic.main a {
   margin-left: 1.5em;
 }
 
+#description {
+  margin-left: 1.3em;
+}
+
 .document_counts {
   width: 100%;
 }

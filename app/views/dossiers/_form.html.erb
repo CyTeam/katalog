@@ -3,6 +3,7 @@
     <%= f.semantic_errors :containers %>
     <%= f.input :signature %>
     <%= f.input :title %>
+    <%= f.input :description, :input_html => {:class => 'autogrow', :rows => 5} %>
     <%= f.input :keyword_text, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.keyword_list.size + 1} %>
     <%= f.input :relation_list, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.relations.size + 1} %>
     <a id="insert_relation" style="margin-left:25%;" href="#">Querverweis hinzufügen</a>
