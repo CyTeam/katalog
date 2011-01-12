@@ -8,7 +8,7 @@
         %th.title{:style => 'width: 450px;'}
           = t_attr('title', Dossier)
         %th.first_document_year
-          = t_attr('since', Dossier)
+          = t_attr('first_document_year', Dossier)
         - years = Dossier.years
         - years.each do |year|
           %th.year

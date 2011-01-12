@@ -54,8 +54,6 @@ de-CH:
         relation_list:  "Querverweise"
         dossier_number_list: "Anzahl Dokumente"
         availability: "Verfügbar"
-        theme:          "Thema"
-        since:          "Seit"
       container:
         period:         "Zeitraum"
         title:          "Titel"
