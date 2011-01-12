@@ -1,4 +1,4 @@
-- years = Dossier.years(5)
+- years = Dossier.years(@collect_year_count)
 
 = render 'title'
 .index
@@ -8,7 +8,7 @@
         %th{:colspan => 2}
           &nbsp;
 
-        %th{:colspan => (years.count + 1),:style => 'text-align: center;'}
+        %th{:colspan => (@collect_year_count + 2), :style => 'text-align: center;'}
           Anzahl Dokumente
       %tr.header
         %th.signature
@@ -39,7 +39,7 @@
             = number_with_delimiter(dossier.document_count)
             = availability_notes(dossier)
           
-          - dossier.years_counts(5).each do |count|
+          - dossier.years_counts(@collect_year_count).each do |count|
             %td{:style => "text-align: right"}
               = number_with_delimiter count[:count]
             
