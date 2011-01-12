@@ -1,2 +1,5 @@
 %h1
-  = t('katalog.search_for', :query => @query)
+  - if params[:search][:signature]
+    = @dossiers.first.to_s
+  - else
+    = t('katalog.search_for', :query => @query)
