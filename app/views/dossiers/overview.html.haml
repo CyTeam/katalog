@@ -5,27 +5,17 @@
   #dossiers.ce_table.block
     %table
       %tr.header
-        %th{:colspan => 2}
-          &nbsp;
-
-        %th{:colspan => (@collect_year_count + 2), :style => 'text-align: center;'}
-          Anzahl Dokumente
-      %tr.header
-        %th.signature
-          = t_attr('signature', Dossier)
-
-        %th.title
-          = t_attr('title', Dossier)
+        %th.signature= t_attr(:signature)
+        %th.title= t_attr(:title)
 
         %th.document_count{:style => 'text-align: right;'}
-          = @document_count ? t('katalog.total_count', :count => number_with_delimiter(@document_count)) : t_attr(:document_count, Dossier)
+          = @document_count ? t('katalog.total_count', :count => number_with_delimiter(@document_count)) : t_attr(:document_count)
 
         - years.each do |year|
-          %th.year{:style => "text-align: right"}
-            = year
+          %th.year{:style => "text-align: right"}= year
 
       - @dossiers.each do |dossier|
-        %tr{:id => "dossier-#{dossier.id}", :class => "topic #{dossier.topic_type}", :style => 'cursor: pointer;'}
+        %tr{:id => "dossier-#{dossier.id}", :class => "topic #{dossier.topic_type}"}
           %td
             = @new_signature ? dossier.new_signature : dossier.signature
 
@@ -42,4 +32,3 @@
           - dossier.years_counts(@collect_year_count).each do |count|
             %td{:style => "text-align: right"}
               = number_with_delimiter count[:count]
-            
