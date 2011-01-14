@@ -16,8 +16,7 @@
 
       - @dossiers.each do |dossier|
         %tr{:id => "dossier-#{dossier.id}", :class => "topic #{dossier.topic_type}"}
-          %td
-            = @new_signature ? dossier.new_signature : dossier.signature
+          %td= dossier.signature
 
           %td.title
             = link_to dossier.title, dossier, {'data-href-container' => 'tr'}
