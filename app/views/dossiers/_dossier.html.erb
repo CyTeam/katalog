@@ -11,22 +11,12 @@
     <% end %>
   </td>
   <% if local_assigns[:report] %>
-    <td>
-      <%= dossier.first_document_year %>
-    </td>
-    <td>
-      <%= dossier.container_types_shortcut.join(', ') %>
-    </td>
-    <td>
-      <%= dossier.locations_shortcut.join(', ') %>
-    </td>
-    <td>
-      <%= dossier.keywords.join(', ') %>
-    </td>
+    <td><%= dossier.first_document_year %></td>
+    <td><%= dossier.container_types_shortcut.join(', ') %></td>
+    <td><%= dossier.locations_shortcut.join(', ') %></td>
+    <td><%= dossier.keywords.join(', ') %></td>
   <% elsif local_assigns[:year_report] %>
-    <td>
-      <%= dossier.first_document_year %>
-    </td>
+    <td><%= dossier.first_document_year %></td>
     <% dossier.years_counts.each do |count| %>
       <td class="year"><%= number_with_delimiter count[:count] %></td>
     <% end %>  
