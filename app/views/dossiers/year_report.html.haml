@@ -1,3 +1,5 @@
+- years = Dossier.years(@collect_year_count)
+
 = render 'search_title'
 .index
   #dossiers.ce_table.block.landscape-table
@@ -7,8 +9,7 @@
           %th{:class => attr.to_s}= t_attr(attr.to_s)
 
         %th.first_document_year= t_attr(:first_document_year)
-        - years = Dossier.years
         - years.each do |year|
           %th.year= year
 
-      = render :partial => @dossiers, :locals => {:year_report => years.count}
+      = render :partial => @dossiers, :locals => {:year_report => years.count - 2}

@@ -102,6 +102,9 @@ class DossiersController < InheritedResources::Base
     }
 
     @columns = [:signature, :title, :first_document_year, :container_type, :location, :keyword_text]
+    if params[:columns]
+      @columns = params[:columns].split(',').select{|column| Dossier.columns.include?(column)}
+    end
     search
   end
 
@@ -112,7 +115,11 @@ class DossiersController < InheritedResources::Base
       'margin-right' => '0.2cm'
     }
 
+    @collect_year_count = (params[:collect_year_count] || 1).to_i
     @columns = [:signature, :title]
+    if params[:columns]
+      @columns = params[:columns].split(',').select{|column| Dossier.columns.include?(column)}
+    end
     search
   end
 end
