@@ -3,9 +3,9 @@
   #dossiers.ce_table.block.landscape-table
     %table
       %tr.header
-        %th.signature= t_attr('signature', Dossier)
-        %th.title{:style => 'width: 450px;'}= t_attr('title', Dossier)
-        %th.first_document_year= t_attr('first_document_year', Dossier)
+        %th.signature= t_attr(:signature)
+        %th.title{:style => 'width: 450px;'}= t_attr(:title)
+        %th.first_document_year= t_attr(:first_document_year)
         - years = Dossier.years
         - years.each do |year|
           %th.year
