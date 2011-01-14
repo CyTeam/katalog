@@ -100,6 +100,8 @@ class DossiersController < InheritedResources::Base
       'margin-left'  => '0.2cm',
       'margin-right' => '0.2cm'
     }
+
+    @columns = [:signature, :title, :first_document_year, :container_type, :location, :keyword_text]
     search
   end
 
@@ -109,6 +111,8 @@ class DossiersController < InheritedResources::Base
       'margin-left'  => '0.2cm',
       'margin-right' => '0.2cm'
     }
+
+    @columns = [:signature, :title]
     search
   end
 end

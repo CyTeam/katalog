@@ -3,10 +3,7 @@
   #dossiers.ce_table.block.landscape-table
     %table
       %tr.header
-        %th.signature= t_attr(:signature)
-        %th.title= t_attr(:title)
-
-        - [:first_document_year, :container_type, :location, :keyword_text].each do |attr|
+        - @columns.each do |attr|
           %th{:class => attr.to_s}= t_attr(attr.to_s)
         
       = render :partial => @dossiers, :locals => {:report => true}
