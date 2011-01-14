@@ -3,14 +3,10 @@
   #dossiers.ce_table.block.landscape-table
     %table
       %tr.header
-        %th.signature
-          = t_attr('signature', Dossier)
-        %th.title{:style => 'width: 450px;'}
-          = t_attr('title', Dossier)
+        %th.signature= t_attr(:signature)
+        %th.title{:style => 'width: 450px;'}= t_attr(:title)
+
         - [:first_document_year, :container_type, :location, :keyword_text].each do |attr|
-          %th{:class => attr.to_s}
-            = t_attr(attr.to_s, Dossier)
+          %th{:class => attr.to_s}= t_attr(attr.to_s)
         
       = render :partial => @dossiers, :locals => {:report => true}
-
-

@@ -8,6 +8,6 @@
         %th.first_document_year= t_attr(:first_document_year)
         - years = Dossier.years
         - years.each do |year|
-          %th.year
-            = year
+          %th.year= year
+
       = render :partial => @dossiers, :locals => {:year_report => years.count}
