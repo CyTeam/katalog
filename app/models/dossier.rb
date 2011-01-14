@@ -341,6 +341,7 @@ class Dossier < ActiveRecord::Base
     return "[ ]*#{date_range}[ ]*"
   end
 
+  # Report helpers
   def self.years(interval = 1)
     years = DossierNumber.default_periods(Date.today.year, false)
     prepared_years = years.dup

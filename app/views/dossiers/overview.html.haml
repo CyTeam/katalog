@@ -12,7 +12,7 @@
           = @document_count ? t('katalog.total_count', :count => number_with_delimiter(@document_count)) : t_attr(:document_count)
 
         - years.each do |year|
-          %th.year{:style => "text-align: right"}= year
+          %th.year= year
 
       - @dossiers.each do |dossier|
         %tr{:id => "dossier-#{dossier.id}", :class => "topic #{dossier.topic_type}"}
@@ -25,10 +25,9 @@
             %span.keywords
               = dossier.keywords.join(', ')
 
-          %td{:style => "text-align: right"}
+          %td.year
             = number_with_delimiter(dossier.document_count)
             = availability_notes(dossier)
           
           - dossier.years_counts(@collect_year_count).each do |count|
-            %td{:style => "text-align: right"}
-              = number_with_delimiter count[:count]
+            %td.year= number_with_delimiter count[:count]
