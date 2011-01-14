@@ -4,7 +4,7 @@
     %table
       %tr.header
         %th.signature= t_attr(:signature)
-        %th.title{:style => 'width: 450px;'}= t_attr(:title)
+        %th.title= t_attr(:title)
 
         %th.first_document_year= t_attr(:first_document_year)
         - years = Dossier.years
