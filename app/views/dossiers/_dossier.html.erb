@@ -28,9 +28,7 @@
       <%= dossier.first_document_year %>
     </td>
     <% dossier.years_counts.each do |count| %>
-      <td>
-        <%= number_with_delimiter count[:count] %>
-      </td>
+      <td class="year"><%= number_with_delimiter count[:count] %></td>
     <% end %>  
   <% else %>
     <td style="text-align: right">
