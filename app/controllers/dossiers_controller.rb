@@ -22,7 +22,6 @@ class DossiersController < InheritedResources::Base
   has_scope :order_by, :default => 'signature'
   
   # GET /dossiers
-  # GET /dossiers.xml
   def index
     params[:dossier] ||= {}
 
@@ -38,7 +37,6 @@ class DossiersController < InheritedResources::Base
   end
 
   # GET /dossiers/search
-  # GET /dossiers/search.xml
   def search
     params[:per_page] ||= 25
     
@@ -105,6 +103,7 @@ class DossiersController < InheritedResources::Base
     if params[:columns]
       @columns = params[:columns].split(',').select{|column| Dossier.columns.include?(column)}
     end
+
     search
   end
 
@@ -120,6 +119,7 @@ class DossiersController < InheritedResources::Base
     if params[:columns]
       @columns = params[:columns].split(',').select{|column| Dossier.columns.include?(column)}
     end
+
     search
   end
 end
