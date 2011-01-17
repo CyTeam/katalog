@@ -1,0 +1,12 @@
+%tr.header
+  %th.signature= t_attr(:signature)
+  %th.title{:colspan => 2}
+    = t_attr(:title)
+    %span.document_count
+      = @document_count ? t('katalog.total_count', :count => number_with_delimiter(@document_count)) : t_attr(:document_count)
+
+  - if @years
+    -@years.each do |year|
+      %th.year= year
+
+  %th.action-links

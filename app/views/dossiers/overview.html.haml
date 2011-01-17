@@ -1,18 +1,10 @@
-- years = Dossier.years(@collect_year_count)
+- @years = Dossier.years(@collect_year_count)
 
 = render 'title'
-.index.report
+.index.report.overview
   #dossiers.ce_table.block
     %table
-      %tr.header
-        %th.signature= t_attr(:signature)
-        %th.title{:colspan => 2}
-          = t_attr(:title)
-          %span.document_count{:style => "float: right"}
-            = @document_count ? t('katalog.total_count', :count => number_with_delimiter(@document_count)) : t_attr(:document_count)
-
-        - years.each do |year|
-          %th.year= year
+      = render 'list_header'
 
       - @dossiers.each do |dossier|
         %tr{:id => "dossier-#{dossier.id}", :class => "topic #{dossier.topic_type}"}
