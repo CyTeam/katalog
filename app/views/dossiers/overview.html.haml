@@ -1,6 +1,10 @@
 - @years = Dossier.years(@collect_year_count)
 
+= render 'search_form'
+
+= render 'layouts/page_actions'
 = render 'title'
+
 .index.report.overview
   #dossiers.ce_table.block
     %table
