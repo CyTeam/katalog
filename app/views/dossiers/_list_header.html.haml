@@ -1,9 +1,9 @@
 %tr.header
-  %th.signature= t_attr(:signature)
+  %th.signature= t_attr(:signature, Dossier)
   %th.title{:colspan => 2}
-    = t_attr(:title)
+    = t_attr(:title, Dossier)
     %span.document_count
-      = @document_count ? t('katalog.total_count', :count => number_with_delimiter(@document_count)) : t_attr(:document_count)
+      = @document_count ? t('katalog.total_count', :count => number_with_delimiter(@document_count)) : t_attr(:document_count, Dossier)
 
   - if @years
     -@years.each do |year|
