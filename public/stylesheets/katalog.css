@@ -104,6 +104,9 @@ td .keywords li, .tags li{
 table.document_counts th {
   text-align: right;
 }
+table.document_counts td {
+  text-align: right;
+}
 
 td.document_count {
   text-align: right;
