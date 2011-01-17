@@ -16,7 +16,7 @@
             %span.keywords
               = dossier.keywords.join(', ')
 
-          %td.year
+          %td.document_count.availability
             = number_with_delimiter(dossier.document_count)
             = availability_notes(dossier)
           
