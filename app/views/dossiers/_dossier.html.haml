@@ -1,5 +1,5 @@
-- cache dossier do
-  %tr{:class => "dossier #{cycle('odd', 'even')}", :id => "dossier-#{dossier.id}"}
+%tr{:class => "dossier #{cycle('odd', 'even')}", :id => "dossier-#{dossier.id}"}
+  - cache dossier do
     %td= @new_signature ? dossier.new_signature : dossier.signature
     %td
       %span.title= link_to dossier.title, dossier, {'data-href-container' => 'tr'}
