@@ -10,6 +10,7 @@ DEADJOE
 db/*.sqlite3
 log/
 tmp/**/*
+tmp/restart.txt
 
 # Vendor
 vendor/cache
