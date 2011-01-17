@@ -3,7 +3,7 @@
 = render 'layouts/page_actions'
 #page_actions.contextual
   = contextual_link 'report', report_dossiers_path(:format => :pdf, :per_page => 'all', :search => params[:search]), :title => t('tooltips.dossiers.show_report')
-  = contextual_link 'year_report', year_report_dossiers_path(:format => :pdf, :per_page => 'all', :search => params[:search]), :title => t('tooltips.dossiers.show_year_report')
+  = contextual_link 'year_report', report_dossiers_path(:report_name => 'year', :format => :pdf, :per_page => 'all', :search => params[:search]), :title => t('tooltips.dossiers.show_year_report')
 
 - if @dossiers.present?
   = render 'search_title'

@@ -42,6 +42,19 @@ module DossiersHelper
     link_to(topic, url_for_topic(topic), options)
   end
 
+  def show_column_for_report(dossier, column)
+    case column
+      when :title
+        link_to dossier.title, dossier, {'data-href-container' => 'tr'}
+      when :signature, :first_document_year, :keyword_text
+        dossier.send(column)
+      when :container_type
+        dossier.container_types.collect{|t| t.code}.join(', ')
+      when :location
+        dossier.locations.collect{|l| l.code}.join(', ')
+    end
+  end
+
   # JS Highlighting
   def highlight_words(query, element = 'dossiers')
     return unless query.present?

@@ -40,6 +40,11 @@ th.action-links {
   font-size: 100%;
 }
 
+.report tr td {
+  border: 0;
+  font-size: 85%;
+}
+
 /** Sidebar Topic Index **/
 li.topic.group {
   font-weight: bold;
