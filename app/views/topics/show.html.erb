@@ -1,6 +1,6 @@
 <%= render '/dossiers/search_form' %>
 
-<div id="page_actions" style="float: right; margin: 1em">
+<div id="page_actions" class="contextual">
   <%= contextual_link('edit', edit_topic_path(@topic), :title => t('tooltips.topics.edit')) %>
 </div>
 <h1 id="title"><%= @topic.signature %> <%= @topic.title %></h1>

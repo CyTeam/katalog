@@ -1,6 +1,6 @@
 <%= render 'search_form' %>
 
-<div id="page_actions" style="float: right; margin: 1em">
+<div id="page_actions" class="contextual">
   <%= contextual_link('edit', edit_dossier_path(@dossier)) %>
   <%= contextual_link('pdf', url_for(:format => :pdf)) %>
 </div>
