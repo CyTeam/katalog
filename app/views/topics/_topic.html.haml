@@ -1,6 +1,6 @@
 - cache topic do
-  %tr{:class => "topic #{topic.topic_type}"}
-    %td= @new_signature ? topic.new_signature : topic.signature
+  %tr[topic]{:class => "#{topic.topic_type}"}
+    %td= topic.signature
     %td.title= link_to topic.title, url_for_topic(topic), {'data-href-container' => 'tr'}
     - if local_assigns[:report]
       %td{:colspan => "3"}
@@ -11,8 +11,8 @@
       %td{:colspan => year_report + 3}
         \&nbsp;
     - else
-      %td{:style => "text-align: right"}
-        = number_with_delimiter(topic.document_count(@new_signature))
+      %td.document_count
+        = number_with_delimiter(topic.document_count)
       %td.action-links
         - if user_signed_in?
         = link_to image_tag('icons/edit.png', :title => t('crud.edit', :model => '')), edit_topic_path(topic)

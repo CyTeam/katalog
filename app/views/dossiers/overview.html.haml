@@ -7,7 +7,7 @@
       = render 'list_header'
 
       - @dossiers.each do |dossier|
-        %tr{:id => "dossier-#{dossier.id}", :class => "topic #{dossier.topic_type}"}
+        %tr[dossier]{:class => "#{dossier.topic_type}"}
           %td= dossier.signature
 
           %td.title
