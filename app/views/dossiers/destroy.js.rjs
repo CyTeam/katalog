@@ -1,1 +1,1 @@
-page["#dossier-#{@dossier.id}"].remove()
+page["#dossier_#{@dossier.id}"].remove()
