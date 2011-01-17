@@ -20,7 +20,12 @@ end
 # Development
 # ===========
 group :development do
-  gem "rails-erd"
+  # UML documentation
+  gem 'rails-erd'
+
+  # Haml generators
+  gem 'hpricot'
+  gem 'ruby_parser'
 end
 gem 'jquery-rails'
 
