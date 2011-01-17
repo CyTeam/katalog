@@ -2,8 +2,8 @@
 
 <%= render 'layouts/page_actions' %>
 <div id="page_actions" class="contextual">
-  <%= contextual_link 'report', url_for({:controller => 'dossiers', :action => 'report', :format => :pdf, :per_page => 'all', :search => {:signature => @query}}), {:format => :pdf, :title => t('tooltips.dossiers.show_report')} %>
-  <%= contextual_link 'year_report', url_for({:controller => 'dossiers', :action => 'year_report', :format => :pdf, :per_page => 'all', :search => {:signature => @query}}), {:format => :pdf, :title => t('tooltips.dossiers.show_year_report')} %>
+  <%= contextual_link 'report', report_dossiers_path(:format => :pdf, :per_page => 'all', :search => params[:search]), :title => t('tooltips.dossiers.show_report') %>
+  <%= contextual_link 'year_report', year_report_path(:format => :pdf, :per_page => 'all', :search => params[:search]), :title => t('tooltips.dossiers.show_year_report') %>
 </div>
 <%- if @dossiers.present? %>
   <%= render 'search_title' %>
