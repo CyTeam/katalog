@@ -21,3 +21,11 @@ production:
   username: katalog
   password:
   socket:   /var/run/mysqld/mysqld.sock
+
+import:
+  encoding: utf8
+  adapter: mysql2
+  database: katalog_import
+  username: katalog
+  password:
+  socket:   /var/run/mysqld/mysqld.sock

@@ -65,7 +65,7 @@ class Dossier < ActiveRecord::Base
       :title    => 500,
       :keywords => 2
     }
-    set_property :delta => true
+    set_property :delta => true unless Rails.env.import? # Disable delta update in import as it slows down too much
       
     # attributes
     has created_at, updated_at
