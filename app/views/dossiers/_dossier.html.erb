@@ -21,7 +21,7 @@
       <td class="year"><%= number_with_delimiter count[:count] %></td>
     <% end %>  
   <% else %>
-    <td style="text-align: right">
+    <td class="document_count availability">
       <%= number_with_delimiter(dossier.document_count) %>
       <%= availability_notes(dossier) unless local_assigns[:report] %>
     </td>
