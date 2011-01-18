@@ -40,10 +40,11 @@ class KeywordsController < InheritedResources::Base
     index!
   end
 
+  # Return list of tags useable as suggestions in dossier search.
   def suggestions
     @query = params[:query]
 
-    @keywords = Keyword.includes(:taggings).where("taggings.context = 'tags'").where("name LIKE ?", "%#{@query}%").order(:name).limit(10)
+    @keywords = Keyword.unscoped.includes(:taggings).where("taggings.context = 'tags'").where("name LIKE ?", "%#{@query}%").order(:name).limit(10)
     
     index!
   end
