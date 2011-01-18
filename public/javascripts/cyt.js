@@ -161,6 +161,13 @@ function addPrintToolTipBehaviour() {
 }
 
 function addSearchSuggestionBehaviour() {
+  function split( val ) {
+    return val.split( / \s*/ );
+  }
+  function extractLast( term ) {
+    return split( term ).pop();
+  }
+
   var input = $('#search_text');
   input.attr('autocomplete', 'false');
   
@@ -170,7 +177,7 @@ function addSearchSuggestionBehaviour() {
         url: '/keywords/suggestions.json',
         dataType: 'json',
         data: {
-          query:    request.term
+          query:    extractLast(request.term)
         },
         success: function( data ) {
           response( $.map( data, function( object ) {
@@ -179,10 +186,27 @@ function addSearchSuggestionBehaviour() {
               label: item.name
             }
           }));
-          $('.ui-autocomplete').highlight(request.term, 'match');
+          $('.ui-autocomplete').highlight(extractLast(request.term), 'match');
         }
       });
     },
-    minLength: 2
+    search: function() {
+      // custom minLength
+      var term = extractLast( this.value );
+      if ( term.length < 2 ) {
+        return false;
+      }
+    },
+    select: function( event, ui ) {
+      var terms = split( this.value );
+      // remove the current input
+      terms.pop();
+      // add the selected item
+      terms.push( ui.item.value );
+      // add placeholder to get the comma-and-space at the end
+      terms.push( "" );
+      this.value = terms.join( " " );
+      return false;
+    }
   });
 }
