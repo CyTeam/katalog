@@ -25,7 +25,6 @@ group :development do
 
   # Haml generators
   gem 'hpricot'
-  gem 'ruby_parser'
 end
 gem 'jquery-rails'
 
