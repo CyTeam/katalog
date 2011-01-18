@@ -167,11 +167,9 @@ function addSearchSuggestionBehaviour() {
   input.autocomplete({
     source: function( request, response ) {
       $.ajax({
-        url: '/keywords/search.json',
+        url: '/keywords/suggestions.json',
         dataType: 'json',
         data: {
-          page:     1,
-          per_page: 10,
           query:    request.term
         },
         success: function( data ) {
@@ -184,15 +182,6 @@ function addSearchSuggestionBehaviour() {
         }
       });
     },
-    minLength: 2,
-    select: function(event, ui) {
-      var value = ui.item.value;
-      var text = text_area.val();
-      
-      input.remove();
-      link.show();
-      text_area.val(text + "\n" + value);
-      text_area.elastic();
-    }
+    minLength: 2
   });
 }

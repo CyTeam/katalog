@@ -20,7 +20,7 @@ Katalog::Application.routes.draw do
   
   resources :keywords do
     collection do
-      get :search
+      get :search, :suggestions
     end
   end
 
