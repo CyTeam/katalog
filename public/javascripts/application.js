@@ -6,4 +6,5 @@ $(document).ready(function() {
   addRelationAutoCompletionBehaviour();
   addEditToolTipBehaviour();
   addPrintToolTipBehaviour();
+  addSearchSuggestionBehaviour();
 });

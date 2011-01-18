@@ -6,7 +6,7 @@ class KeywordsController < InheritedResources::Base
   before_filter :authenticate_user!, :except => [:index, :search, :show]
   
   # Responders
-  respond_to :html, :js
+  respond_to :html, :js, :json
 
   # Search
   has_scope :by_character
@@ -31,12 +31,13 @@ class KeywordsController < InheritedResources::Base
     
     params[:search] ||= {}
     params[:search][:text] ||= params[:search][:query]
+    params[:search][:text] ||= params[:query]
 
     @query = params[:search][:text]
 
     @keywords = apply_scopes(Keyword, params[:search]).where("name LIKE ?", "%#{@query}%").order(:name).paginate(:per_page => params[:per_page], :page => params[:page])
     @paginated_scope = Keyword.where("name LIKE ?", "%#{@query}%")
     
-    render :action => 'index'
+    index!
   end
 end

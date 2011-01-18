@@ -155,6 +155,44 @@ function addEditToolTipBehaviour() {
    }
  });
 }
+
 function addPrintToolTipBehaviour() {
 
+}
+
+function addSearchSuggestionBehaviour() {
+  var input = $('#search_text');
+  input.attr('autocomplete', 'false');
+  
+  input.autocomplete({
+    source: function( request, response ) {
+      $.ajax({
+        url: '/keywords/search.json',
+        dataType: 'json',
+        data: {
+          page:     1,
+          per_page: 10,
+          query:    request.term
+        },
+        success: function( data ) {
+          response( $.map( data, function( object ) {
+            item = object.keyword;
+            return {
+              label: item.name
+            }
+          }));
+        }
+      });
+    },
+    minLength: 2,
+    select: function(event, ui) {
+      var value = ui.item.value;
+      var text = text_area.val();
+      
+      input.remove();
+      link.show();
+      text_area.val(text + "\n" + value);
+      text_area.elastic();
+    }
+  });
 }
