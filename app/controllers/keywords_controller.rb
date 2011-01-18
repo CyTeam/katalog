@@ -43,7 +43,7 @@ class KeywordsController < InheritedResources::Base
   def suggestions
     @query = params[:query]
 
-    @keywords = Keyword.where("name LIKE ?", "%#{@query}%").order(:name).limit(10)
+    @keywords = Keyword.includes(:taggings).where("taggings.context = 'tags'").where("name LIKE ?", "%#{@query}%").order(:name).limit(10)
     
     index!
   end
