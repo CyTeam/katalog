@@ -343,6 +343,8 @@ class Dossier < ActiveRecord::Base
 
   # Report helpers
   def self.years(interval = 1)
+    return [] if interval.nil?
+    
     years = DossierNumber.default_periods(Date.today.year, false)
     prepared_years = years.dup
     if interval > 1

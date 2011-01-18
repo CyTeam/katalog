@@ -10,7 +10,7 @@ Katalog::Application.routes.draw do
   resources :topics
   resources :dossiers do
     collection do
-      get :search, :overview, :report, :year_report
+      get :search, :overview, :report
     end
 
     resources :containers

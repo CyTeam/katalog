@@ -315,6 +315,10 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal Date.today.year.to_s, dossier.numbers.last.period
   end
 
+  test 'returns [] when called with nil as interval' do
+    assert_equal Dossier.years(nil), []
+  end
+
   test 'returns period of years with interval of 1 year' do
     assert_equal Dossier.years.count, 23
   end

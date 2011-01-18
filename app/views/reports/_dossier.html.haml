@@ -1,0 +1,6 @@
+%tr[dossier]{:class => [cycle('odd', 'even'), (dossier.topic_type if dossier.is_a?(Topic))]}
+  - @report[:columns].each do |attr|
+    %td{:class => attr.to_s}= show_column_for_report(dossier, attr)
+  - if @report[:collect_year_count]
+    - dossier.years_counts.each do |count|
+      %td.year= number_with_delimiter count[:count]

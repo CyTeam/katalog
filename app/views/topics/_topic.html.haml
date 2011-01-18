@@ -1,19 +1,10 @@
 - cache topic do
-  %tr[topic]{:class => "#{topic.topic_type}"}
+  %tr[topic]{:class => topic.topic_type}
     %td= topic.signature
     %td.title= link_to topic.title, url_for_topic(topic), {'data-href-container' => 'tr'}
-    - if local_assigns[:report]
-      %td{:colspan => "3"}
-        \&nbsp;
-      %td
-        \&nbsp;
-    - elsif local_assigns[:year_report]
-      %td{:colspan => year_report + 3}
-        \&nbsp;
-    - else
-      %td.document_count
-        = number_with_delimiter(topic.document_count)
-      %td.action-links
-        - if user_signed_in?
+    %td.document_count
+      = number_with_delimiter(topic.document_count)
+    %td.action-links
+      - if user_signed_in?
         = link_to image_tag('icons/edit.png', :title => t('crud.edit', :model => '')), edit_topic_path(topic)
         = link_to image_tag('icons/delete.png', :title => t('crud.delete', :model => '')), topic, :confirm => t_confirm_delete(topic), :remote => true, :method => :delete

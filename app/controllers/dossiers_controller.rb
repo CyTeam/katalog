@@ -22,7 +22,6 @@ class DossiersController < InheritedResources::Base
   has_scope :order_by, :default => 'signature'
   
   # GET /dossiers
-  # GET /dossiers.xml
   def index
     params[:dossier] ||= {}
 
@@ -38,7 +37,6 @@ class DossiersController < InheritedResources::Base
   end
 
   # GET /dossiers/search
-  # GET /dossiers/search.xml
   def search
     params[:per_page] ||= 25
     
@@ -95,31 +93,35 @@ class DossiersController < InheritedResources::Base
   end
 
   def report
-    @pdfkit_options = {
-      'orientation'  => 'Landscape',
-      'margin-left'  => '0.2cm',
-      'margin-right' => '0.2cm'
-    }
+    report_name = params[:report_name] || 'overview'
+    @report = {}
+    
+    # Preset parameters
+    case report_name
+      when 'overview'
+        @report[:orientation] = 'landscape'
+        @report[:columns] = [:signature, :title, :first_document_year, :container_type, :location, :keyword_text]
 
-    @columns = [:signature, :title, :first_document_year, :container_type, :location, :keyword_text]
-    if params[:columns]
-      @columns = params[:columns].split(',').select{|column| Dossier.columns.include?(column)}
+      when 'year'
+        @report[:orientation] = 'landscape'
+        @report[:collect_year_count] = (params[:collect_year_count] || 1).to_i
+        @report[:columns] = [:signature, :title, :first_document_year]
     end
-    search
-  end
 
-  def year_report
-    @pdfkit_options = {
-      'orientation'  => 'Landscape',
-      'margin-left'  => '0.2cm',
-      'margin-right' => '0.2cm'
-    }
-
-    @collect_year_count = (params[:collect_year_count] || 1).to_i
-    @columns = [:signature, :title]
+    # Sanitize and use columns parameter if present
     if params[:columns]
-      @columns = params[:columns].split(',').select{|column| Dossier.columns.include?(column)}
+      @report[:columns] = params[:columns].split(',').select{|column| Dossier.columns.include?(column)}
     end
+
+    # Pass landscape options to PDFKit
+    if @report[:orientation] == 'landscape'
+      @pdfkit_options = {
+        'orientation'  => 'Landscape',
+        'margin-left'  => '0.2cm',
+        'margin-right' => '0.2cm'
+      }
+    end
+    
     search
   end
 end
