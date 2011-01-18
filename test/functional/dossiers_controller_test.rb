@@ -101,15 +101,15 @@ class DossiersControllerTest < ActionController::TestCase
     get :overview
     assert_response :success
 
-    assert_select 'th.year', Dossier.years(5).size + 2
+    assert_select 'th.year', Dossier.years(5).size
   end
 
   test "should get overview with collect_years_count" do
-    get :overview, :collect_years_count => 10
+    get :overview, :collect_year_count => 10
 
     assert_response :success
     
-    assert_select 'th.year', Dossier.years(10).size + 2
+    assert_select 'th.year', Dossier.years(10).size
   end
 
   test "should get report" do

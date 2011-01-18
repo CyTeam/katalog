@@ -1,7 +1,7 @@
 = render 'search_title'
 
 .index.report
-  #dossiers.ce_table.block.landscape-table
+  #dossiers.ce_table.block{:class => @report[:orientation] }
     %table
       %tr.header
         - @report[:columns].each do |attr|
