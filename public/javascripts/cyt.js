@@ -179,6 +179,7 @@ function addSearchSuggestionBehaviour() {
               label: item.name
             }
           }));
+          $('.ui-autocomplete').highlight(request.term, 'match');
         }
       });
     },
