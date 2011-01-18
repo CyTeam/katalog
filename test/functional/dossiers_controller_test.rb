@@ -96,4 +96,24 @@ class DossiersControllerTest < ActionController::TestCase
       assert_select 'li a', 4
     end
   end
+
+  test "should get overview" do
+    get :overview
+    assert_response :success
+
+    assert_select 'th.year', Dossier.years(5).size + 2
+  end
+
+  test "should get overview with collect_years_count" do
+    get :overview, :collect_years_count => 10
+
+    assert_response :success
+    
+    assert_select 'th.year', Dossier.years(10).size + 2
+  end
+
+  test "should get report" do
+    get :report
+    assert_response :success
+  end
 end

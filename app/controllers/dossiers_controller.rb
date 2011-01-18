@@ -87,7 +87,8 @@ class DossiersController < InheritedResources::Base
   end
 
   def overview
-    @collect_year_count = (params[:collect_year_count] || 5).to_i
+    @report = {}
+    @report[:collect_year_count] = (params[:collect_year_count] || 5).to_i
 
     index
   end

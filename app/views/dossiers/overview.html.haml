@@ -1,4 +1,4 @@
-- @years = Dossier.years(@collect_year_count)
+- @years = Dossier.years(@report[:collect_year_count])
 
 = render 'search_form'
 
@@ -24,5 +24,5 @@
             = number_with_delimiter(dossier.document_count)
             = availability_notes(dossier)
           
-          - dossier.years_counts(@collect_year_count).each do |count|
+          - dossier.years_counts(@report[:collect_year_count]).each do |count|
             %td.year= number_with_delimiter count[:count]
