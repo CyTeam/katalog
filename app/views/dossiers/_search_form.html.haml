@@ -1,0 +1,9 @@
+= form_tag(search_dossiers_path, :method => :get, :id => 'search_form') do
+  %label{:for => "search_text"}
+    Suche:
+  = text_field :search, :text, :style => 'width: 30em', :title => t('tooltips.dossiers.search_input'), :autocomplete => 'off'
+  = image_submit_tag('doku-zug.ch/search2.png', :alt => t('katalog.search'), :title => t('tooltips.dossiers.search'))
+
+= javascript_tag "$('#search_text').val('#{escape_javascript(@query || params[:query])}');"
+= javascript_tag "$('#search_text').select().focus();"
+
