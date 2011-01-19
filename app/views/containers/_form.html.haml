@@ -1,0 +1,9 @@
+%tr.container
+  %td.container_title
+    = container.text_field :title, :style => 'width: 98%'
+  %td.type_code
+    = container.text_field :container_type_code, :size => '2'
+  %td.location_code
+    = container.text_field :location_code, :size => '2'
+  %td.remove_link
+    = remove_link_unless_new_record(container)
