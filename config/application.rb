@@ -45,7 +45,7 @@ module Katalog
     config.filter_parameters += [:password]
 
     # PDF generation
-    config.middleware.use PDFKit::Middleware
+    config.middleware.use "PDFKit::Middleware", :footer_right => "[page]/[toPage]"
 
     # generic Cyt JS
     config.action_view.javascript_expansions[:defaults] += %w(cyt)
