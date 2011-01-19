@@ -24,7 +24,7 @@
   <div id="wrapper">
     <div id="header">
       <div class="inside">
-        <%= render user_signed_in? ? 'layouts/internal_header' : 'layouts/public_header' %>
+        <%= render user_signed_in? ? 'shared/internal_header' : 'shared/public_header' %>
       </div>
     </div>
 
@@ -58,13 +58,13 @@
             <h1>Blättern</h1>
 
             <div class="layout_full block odd">
-              <%= render 'layouts/topic_index' %>
+              <%= render 'shared/topic_index' %>
             </div>
 
             <h1>Stöbern</h1>
 
             <div class="layout_full block last odd">
-              <%= render 'layouts/tag_cloud' %>
+              <%= render 'shared/tag_cloud' %>
             </div>
           </div>
         </div>
@@ -84,12 +84,11 @@
     <div id="footer">
       <div class="inside">
 
-        <%= render 'layouts/public_footer' unless user_signed_in? %>
+        <%= render 'shared/public_footer' unless user_signed_in? %>
 
         <div class="clear"></div> 
       </div>
     </div>
-    <%= render 'shared/print_footer' %>
   </div>
 </body>
 </html>

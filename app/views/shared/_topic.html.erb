@@ -1,0 +1,6 @@
+<li class="topic <%= topic.topic_type %>">
+  <span class="signature"><%= topic.signature %></span>
+  <%= link_to(topic.title, url_for_topic(topic)) %>
+
+  <%= render :partial => 'shared/topic', :collection => topic.direct_children if topic.topic_type == :group and params[:search] and params[:search][:signature] and params[:search][:signature].starts_with?(topic.signature) %>
+</li>
