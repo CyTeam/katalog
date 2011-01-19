@@ -61,6 +61,8 @@ GEM
     factory_girl_rails (1.0)
       factory_girl (~> 1.3)
       rails (>= 3.0.0.beta4)
+    fancy-buttons (1.0.4)
+      compass (>= 0.10.6)
     fastercsv (1.5.3)
     formtastic (1.1.0)
       actionpack (>= 2.3.0)
@@ -136,6 +138,7 @@ DEPENDENCIES
   compass (~> 0.10.4)
   devise (~> 1.1)
   factory_girl_rails
+  fancy-buttons
   fastercsv
   formtastic (~> 1.1.0)
   haml
