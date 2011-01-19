@@ -21,6 +21,14 @@ de-CH:
         ready:     "Sofort verfügbar"
         wait:      "Wartezeit 1 Tag"
         intern:    "Interne Dokumente"
+    search:
+      tips:
+        title: Suchtips
+        hints: [
+                  'tip eins',
+                  'tip zwei',
+                  'tip drei'
+               ]
     
   controllers:
     index:
