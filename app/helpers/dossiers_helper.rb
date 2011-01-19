@@ -13,7 +13,7 @@ module DossiersHelper
       title
     end
     
-    return text
+    text
   end
   
   def availability_notes(dossier)
@@ -31,7 +31,7 @@ module DossiersHelper
       notes += availability_text('wait', partially)
     end
 
-    return notes.html_safe
+    notes.html_safe
   end
   
   def url_for_topic(topic)
@@ -66,7 +66,7 @@ module DossiersHelper
       content += javascript_tag "$('##{element}').highlight('#{escape_javascript(word)}', 'match');"
     end
     
-    return content
+    content
   end
 
   def search_tips
