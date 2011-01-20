@@ -20,10 +20,6 @@
   margin-top: 10px;
 }
 
-#mainmenu {
-  margin-top: 20px;
-}
-
 /* Reduce horizontal space waste */
 #container {
   width: 98%;
@@ -32,10 +28,6 @@
 #main .inside {
   padding-left: 1em;
   padding-right: 1em;
-}
-
-#mainmenu {
-  margin-right: 0px;
 }
 
 #footer {

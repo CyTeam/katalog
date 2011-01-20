@@ -27,18 +27,7 @@
           .inside
             #mainmenu.mod_navigation.block
               %a.invisible{:href => "#skipNavigation3"} Navigation überspringen
-              %ul.level_1
-                = navigation_item("Dossier auflisten", dossiers_path)
-                = navigation_item("Dossier suchen", search_dossiers_path)
-                = navigation_item(t('controllers.index.keyword'), keywords_path)
-                - if user_signed_in?
-                  = navigation_item("Dossier anlegen", new_dossier_path)
-                  = navigation_item("Titel anlegen", new_topic_path)
-                  = navigation_item("Abmelden", destroy_user_session_path)
-                  = navigation_item("Standorte verwalten", locations_path)
-                  = navigation_item("Dossier Art verwalten", container_types_path)
-                - else
-                  = navigation_item("Anmelden", new_user_session_path)
+              = render_navigation(:context => :main)
               %a#skipNavigation3.invisible{:name => "skipNavigation3"} &nbsp;
         #right
           .inside

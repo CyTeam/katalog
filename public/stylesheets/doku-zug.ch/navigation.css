@@ -1,14 +1,4 @@
 /* Style sheet navigation */
-#mainmenu{margin-top:72px;margin-right:34px;}
-#mainmenu ul.level_1{border-top:1px dotted #003d61;}
-#mainmenu li{border-bottom:1px dotted #003d61;line-height:1.5;list-style: url(../../images/doku-zug.ch/navbullet.gif) inside;}
-#mainmenu a,#mainmenu span{display:inline;padding-left:5px;font-weight:normal;text-decoration:none;font-size:14px;color:#003d61;text-transform: uppercase;}
-#mainmenu a:hover,#mainmenu span,#mainmenu a.trail{font-weight:bold;color:#9d6524;}
-#mainmenu .trail,#mainmenu .active{list-style: url(../../images/doku-zug.ch/navbullet_over.gif) inside;}
-#mainmenu .level_2 li{padding-left:11px;color:#9d6524;}
-#mainmenu .level_2 li a{color:#9d6524;}
-#mainmenu .level_2 li.last{border-bottom:0px;}
-#mainmenu ul ul{margin-bottom:3px;}
 .mod_breadcrumb{top:9px;position:relative;padding-top:133px;padding-left:236px;font-size:11px;color:#003D61;}
 .mod_breadcrumb a{text-decoration:underline;color:#003D61;}
 .mod_breadcrumb:before{content:"Ihre Position: ";}

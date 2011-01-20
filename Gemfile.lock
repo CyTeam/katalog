@@ -115,6 +115,8 @@ GEM
     riddle (1.2.1)
     ruby-graphviz (0.9.19)
     show_for (0.2.3)
+    simple-navigation (3.0.2)
+      activesupport (>= 2.3.2)
     thinking-sphinx (2.0.1)
       activerecord (>= 3.0.3)
       riddle (>= 1.2.1)
@@ -151,6 +153,7 @@ DEPENDENCIES
   rails (~> 3.0.0)
   rails-erd
   show_for
+  simple-navigation
   thinking-sphinx (~> 2.0.1)
   will_paginate!
   wkhtmltopdf-binary
