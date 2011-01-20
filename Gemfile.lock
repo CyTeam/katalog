@@ -118,7 +118,6 @@ GEM
     sanitize (1.2.1)
       nokogiri (~> 1.4.1)
     show_for (0.2.3)
-    sphinx (0.9.10.2122)
     thinking-sphinx (2.0.1)
       activerecord (>= 3.0.3)
       riddle (>= 1.2.1)
@@ -156,7 +155,6 @@ DEPENDENCIES
   rails-erd
   sanitize
   show_for
-  sphinx
   thinking-sphinx (~> 2.0.1)
   will_paginate!
   wkhtmltopdf-binary

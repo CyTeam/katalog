@@ -60,7 +60,6 @@ gem 'pdfkit', :git => 'http://github.com/huerlisi/PDFKit.git'
 gem 'wkhtmltopdf-binary'
 
 # Full text search engine
-gem 'sphinx'
 gem 'SystemTimer'
 
 # CRUD helpers
