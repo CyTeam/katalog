@@ -114,6 +114,10 @@ function addRelationAutoCompletionBehaviour() {
       });
     });
   });
+
+  if($('#dossier_relation_list').val() == ''){
+    $('#insert_relation').trigger('click');
+  }
 }
 
 function hideUnlessNewRecord(container) {
