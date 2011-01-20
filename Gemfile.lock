@@ -87,6 +87,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.16)
     mysql2 (0.2.6)
+    nokogiri (1.4.4)
     polyglot (0.3.1)
     rack (1.2.1)
     rack-mount (0.6.13)
@@ -114,6 +115,8 @@ GEM
     responders (0.6.2)
     riddle (1.2.1)
     ruby-graphviz (0.9.19)
+    sanitize (1.2.1)
+      nokogiri (~> 1.4.1)
     show_for (0.2.3)
     sphinx (0.9.10.2122)
     thinking-sphinx (2.0.1)
@@ -151,6 +154,7 @@ DEPENDENCIES
   pdfkit!
   rails (~> 3.0.0)
   rails-erd
+  sanitize
   show_for
   sphinx
   thinking-sphinx (~> 2.0.1)
