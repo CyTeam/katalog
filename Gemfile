@@ -64,6 +64,3 @@ gem 'SystemTimer'
 
 # CRUD helpers
 gem 'show_for'
-
-# Auto-Linking
-gem 'sanitize'
