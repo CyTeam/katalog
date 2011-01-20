@@ -1,0 +1,18 @@
+= semantic_form_for(@dossier) do |f|
+  = f.inputs do
+    = f.semantic_errors :containers
+    = f.input :signature
+    = f.input :title
+    = f.input :description, :input_html => {:class => 'autogrow', :rows => 5}
+    ~ f.input :keyword_text, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.keyword_list.size + 1}
+    ~ f.input :relation_list, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.relations.size + 1}
+    %a#insert_relation{:href => "#", :style => "margin-left:25%;"} Querverweis hinzufügen
+    = f.input :first_document_year, :input_html => {:size => '6'}
+    ~ f.input :dossier_number_list, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.numbers.size + 1}
+  .ce_table
+    %table#container-list.ce_table{:style => "width: 100%"}
+      = render 'containers/list_header', :form_helper => f
+      = f.semantic_fields_for :containers do |container|
+        = render 'containers/form', :container => container
+  = f.buttons do
+    = f.commit_button
