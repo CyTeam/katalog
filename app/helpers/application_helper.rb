@@ -16,6 +16,7 @@ module ApplicationHelper
       page << %{
 var new_record_id = "new_" + new Date().getTime();
 $('#container-list').append("#{ escape_javascript record }".replace(/new_\\d+/g, new_record_id));
+addContainerSuggestionBehaviour();
 }
     end
   end

@@ -62,6 +62,7 @@ function addAutoAddNewContainer() {
       new_container.find(second_input).val('DH');
       new_container.find(last_input).val(container.find(last_input).val());
       $(this).unbind('keyup', addAutoAddNewContainer());
+      addContainerSuggestionBehaviour();
     }
   });
 }
@@ -208,5 +209,14 @@ function addSearchSuggestionBehaviour() {
       this.value = terms.join( " " );
       return false;
     }
+  });
+}
+
+function addContainerSuggestionBehaviour() {
+  $('.container_type_code_auto_completion').autocomplete({
+      source: type_codes
+  });
+  $('.container_location_code_auto_completion').autocomplete({
+      source: location_codes
   });
 }

@@ -9,6 +9,17 @@
     %a#insert_relation{:href => "#", :style => "margin-left:25%;"} Querverweis hinzufügen
     = f.input :first_document_year, :input_html => {:size => '6'}
     ~ f.input :dossier_number_list, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.numbers.size + 1}
+    
+  :javascript
+    var type_codes = #{ContainerType.all.map {|e| e.code }.to_json};
+    var location_codes = #{Location.all.map {|e| e.code }.to_json};
+  :css
+    .ui-autocomplete {
+      max-height: 70px;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
   .ce_table
     %table#container-list.ce_table{:style => "width: 100%"}
       = render 'containers/list_header', :form_helper => f
