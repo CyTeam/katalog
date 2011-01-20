@@ -161,10 +161,6 @@ function addEditToolTipBehaviour() {
  });
 }
 
-function addPrintToolTipBehaviour() {
-
-}
-
 function addSearchSuggestionBehaviour() {
   function split( val ) {
     return val.split( / \s*/ );

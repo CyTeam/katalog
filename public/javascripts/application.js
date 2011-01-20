@@ -5,7 +5,6 @@ $(document).ready(function() {
   addAutoAddNewContainer();
   addRelationAutoCompletionBehaviour();
   addEditToolTipBehaviour();
-  addPrintToolTipBehaviour();
   addSearchSuggestionBehaviour();
   addContainerSuggestionBehaviour();
 });
