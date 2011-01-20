@@ -210,6 +210,12 @@ function addSearchSuggestionBehaviour() {
       return false;
     }
   });
+
+  input.keydown(function(event) {
+    if(event.keyCode == 13) {
+      $(this).parent('form').submit();
+    }
+  });
 }
 
 function addContainerSuggestionBehaviour() {
