@@ -25,9 +25,10 @@ de-CH:
       tips:
         title: Suchtips
         hints: [
-                  'tip eins',
-                  'tip zwei',
-                  'tip drei'
+                  'Mit "" schränken Sie die Suche auf genaue Treffer ein. z.B. Burg Zug gibt viele Resultate und "Burg Zug" genau eines.',
+                  'Wenn Sie einen Teil einer Signatur und ein Wort eingeben, werden nur Treffer angezeigt, die sowohl den Signaturteil als auch das Suchwort beinhalten',
+                  'Wenn Sie zwei Signaturteile eingeben, werden alle Dossiers angezeigt, die entweder den einen ODER den anderen Signaturteil beinhalten',
+                  'Wenn Sie zwei Signaturteile und ein Wort eingeben, erhalten Sie sämtliche Dossiers, welche den einen Signaturteil ODER den anderen Signaturteil UND das Suchwort beinhalten'
                ]
     
   controllers:
