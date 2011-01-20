@@ -213,10 +213,14 @@ function addSearchSuggestionBehaviour() {
 }
 
 function addContainerSuggestionBehaviour() {
-  $('.container_type_code_auto_completion').autocomplete({
+  if(typeof type_codes != 'undefined'){
+    $('.container_type_code_auto_completion').autocomplete({
       source: type_codes
-  });
-  $('.container_location_code_auto_completion').autocomplete({
+    });
+  }
+  if(typeof location_codes != 'undefined'){
+    $('.container_location_code_auto_completion').autocomplete({
       source: location_codes
-  });
+    });
+  }
 }
