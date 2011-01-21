@@ -4,6 +4,7 @@ Katalog::Application.routes.draw do
   resources :container_types
 
   devise_for :users
+  resource :users
 
   resources :locations
 

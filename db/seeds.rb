@@ -25,3 +25,8 @@ ContainerType.create!([
   {:code => "CD",    :title => "CD"},
   {:code => "Disk",  :title => "Diskette"}
 ])
+
+Role.create!([
+  {:name => 'admin'},
+  {:name => 'editor'}
+])

@@ -1,4 +1,4 @@
-class ContainersController < InheritedResources::Base
+class ContainersController < AuthorizedController
   # Authentication
   before_filter :authenticate_user!, :except => [:index, :search, :show]
   
