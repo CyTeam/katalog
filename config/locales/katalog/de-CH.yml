@@ -83,6 +83,8 @@ de-CH:
         password:              "Passwort"
         password_confirmation: "Passwort Bestätigung"
         remember_me:           "Angemeldet bleiben"
+        roles:                 "Berechtigungen"
+        created_at:            "Erstellt am"
 
   formtastic:
     hints:
@@ -111,3 +113,7 @@ de-CH:
     sign_up: "Registrieren"
     new_password: "Passwort vergessen?"
     
+  cancan:
+    roles:
+      admin:  "Administrator"
+      editor: "Editor

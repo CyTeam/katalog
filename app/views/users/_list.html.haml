@@ -1,0 +1,19 @@
+.ce_table.block
+  %table.list#user_list
+    %thead
+      %tr
+        %th
+          = t_attr :email
+        %th
+          = t_attr :roles
+        %th
+          = t_attr :created_at
+        %th
+
+    %tfoot
+      %tr
+        %th{:colspan => "6", :style => "text-align: right"}
+          = will_paginate @users
+    %tbody
+      = render @users
+

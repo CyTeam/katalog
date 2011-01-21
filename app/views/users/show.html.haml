@@ -1,0 +1,11 @@
+= contextual_links
+
+%h1= @user
+
+#user
+  %h2= t_attr(:roles)
+
+  %ul#roles
+  - @user.roles.each do |role|
+    %li
+      = role.to_s

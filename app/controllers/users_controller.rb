@@ -4,6 +4,7 @@
 class UsersController < AuthorizedController
   # Scopes
   has_scope :tagged_with
+  actions :index
   
   # Actions
   def update

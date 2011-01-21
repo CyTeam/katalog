@@ -50,4 +50,21 @@ addContainerSuggestionBehaviour();
     
     output << link_to_function(t_action(action), function, options)
   end
+
+  # Nested form helpers
+  def show_new_form(model)
+    model_name = model.to_s.underscore
+
+    output = <<EOF
+$('##{model_name}_list').replaceWith('#{escape_javascript(render('form'))}');
+addAutofocusBehaviour();
+addAutocompleteBehaviour();
+addNestedFormsBehaviour();
+addCorrectnessIndicatorBehaviour();
+addDatePickerBehaviour();
+addAutogrowBehaviour();
+EOF
+
+    output.html_safe
+  end
 end
