@@ -23,53 +23,12 @@ class DossiersController < AuthorizedController
   
   # GET /dossiers
   def index
-    params[:dossier] ||= {}
-
-    # Support new_signature
-    if @new_signature = params[:dossier][:order_by] == "new_signature"
-      params[:dossier][:order_by] ||= 'new_signature'
-    end
-    
-    @dossiers = apply_scopes(Topic, params[:dossier]).where("char_length(signature) <= 2")
-    @document_count = Dossier.document_count
-
-    index!
+    dossier_index
   end
 
   # GET /dossiers/search
   def search
-    params[:per_page] ||= 25
-    
-    params[:search] ||= {}
-    params[:search][:text] ||= params[:search][:query]
-    params[:search][:text] ||= params[:query]
-    
-    if params[:per_page] == 'all'
-      # Simple hack to simulate all
-      params[:per_page] = 1000000
-    end
-    if params[:search][:text].present?
-      @query = params[:search][:text]
-      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page])
-    else
-      @query = params[:search][:signature]
-      @dossiers = apply_scopes(Dossier, params[:search]).order('signature').paginate :page => params[:page], :per_page => params[:per_page]
-
-      # Alphabetic pagination
-      alphabetic_topics = ['15', '15.0', '15.0.100', '56', '56.0.130', '56.0.500', '81', '81.5', '81.5.100']
-      if alphabetic_topics.include?(@query)
-        @paginated_scope = Dossier.by_signature(@query)
-      end
-    end
-    
-    # Drop nil results by stray full text search matches
-    @dossiers.compact!
-    
-    if (@dossiers.count == 1 and not request.format.json?)
-      redirect_to dossier_path(@dossiers.first, :query => @query)
-    else
-      index!
-    end
+    dossier_search
   end
 
   def new
@@ -124,5 +83,63 @@ class DossiersController < AuthorizedController
     end
     
     search
+  end
+
+  def edit_report
+    unless params[:search]
+      dossier_index
+    else
+      dossier_search
+    end
+  end
+
+  private
+  def dossier_index
+    params[:dossier] ||= {}
+
+    # Support new_signature
+    if @new_signature = params[:dossier][:order_by] == "new_signature"
+      params[:dossier][:order_by] ||= 'new_signature'
+    end
+
+    @dossiers = apply_scopes(Topic, params[:dossier]).where("char_length(signature) <= 2")
+    @document_count = Dossier.document_count
+
+    index!
+  end
+
+  def dossier_search
+    params[:per_page] ||= 25
+
+    params[:search] ||= {}
+    params[:search][:text] ||= params[:search][:query]
+    params[:search][:text] ||= params[:query]
+
+    if params[:per_page] == 'all'
+      # Simple hack to simulate all
+      params[:per_page] = 1000000
+    end
+    if params[:search][:text].present?
+      @query = params[:search][:text]
+      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page])
+    else
+      @query = params[:search][:signature]
+      @dossiers = apply_scopes(Dossier, params[:search]).order('signature').paginate :page => params[:page], :per_page => params[:per_page]
+
+      # Alphabetic pagination
+      alphabetic_topics = ['15', '15.0', '15.0.100', '56', '56.0.130', '56.0.500', '81', '81.5', '81.5.100']
+      if alphabetic_topics.include?(@query)
+        @paginated_scope = Dossier.by_signature(@query)
+      end
+    end
+
+    # Drop nil results by stray full text search matches
+    @dossiers.compact!
+
+    if (@dossiers.count == 1 and not request.format.json?)
+      redirect_to dossier_path(@dossiers.first, :query => @query)
+    else
+      index!
+    end
   end
 end

@@ -2,13 +2,21 @@
   - cache dossier do
     %td= dossier.signature
     %td
-      %span.title= link_to dossier.title, dossier, {'data-href-container' => 'tr'}
-      %br/
-      %span.keywords= dossier.keywords.join(', ')
-    %td.document_count.availability
-      = number_with_delimiter(dossier.document_count)
-      = availability_notes(dossier)
-    %td.action-links
-      - if user_signed_in?
+      %span.title
+        - if is_edit_report?
+          = dossier.title
+        - else
+          = link_to dossier.title, dossier, {'data-href-container' => 'tr'}
+      - if not is_edit_report?
+        %br/
+        %span.keywords= dossier.keywords.join(', ')
+    - if not is_edit_report?
+      %td.document_count.availability
+        = number_with_delimiter(dossier.document_count)
+        = availability_notes(dossier)
+    %td.action-links{:colspan => is_edit_report? ? '2' : ''}
+      - if user_signed_in? and not is_edit_report?
         = link_to image_tag('icons/edit.png', :title => t('tooltips.dossiers.edit')), edit_dossier_path(dossier)
         = link_to image_tag('icons/delete.png', :title => t('tooltips.dossiers.edit')), dossier, :confirm => t_confirm_delete(dossier), :remote => true, :method => :delete
+      - elsif is_edit_report?
+        %input{:class => 'dossier-last-container-title', 'data-dossier' => dossier.id, 'data-container' => dossier.containers.last.id, :type => 'text', :value => dossier.containers.last.title.to_s}

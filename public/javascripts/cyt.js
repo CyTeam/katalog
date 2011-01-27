@@ -230,3 +230,20 @@ function addContainerSuggestionBehaviour() {
     });
   }
 }
+
+function addUpdateLastContainerTitleOfDossier() {
+  $('.dossier-last-container-title').focusout(function(){
+    var dossier_id = $(this).attr('data-dossier');
+    var container_id = $(this).attr('data-container');
+    var title = $(this).val();
+    
+    $.ajax({
+      url: '/dossiers/' + dossier_id + '/containers/'+ container_id,
+      type: 'PUT',
+      data: {
+        id: container_id,
+        title: title
+      }
+    });
+  });
+}

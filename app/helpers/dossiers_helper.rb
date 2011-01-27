@@ -35,7 +35,11 @@ module DossiersHelper
   end
   
   def url_for_topic(topic)
-    search_dossiers_url(:search => {:signature => topic.signature})
+    if 'edit_report'.eql?action_name
+      edit_report_dossiers_url(:search => {:signature => topic.signature})
+    else
+      search_dossiers_url(:search => {:signature => topic.signature})
+    end
   end
   
   def link_to_topic(topic, options = {})
@@ -83,5 +87,9 @@ module DossiersHelper
         tip
       end
     end
+  end
+
+  def is_edit_report?
+    'edit_report'.eql?action_name
   end
 end
