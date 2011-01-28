@@ -24,7 +24,7 @@ CKEDITOR.editorConfig = function( config )
   // works only with en, ru, uk languages
   config.extraPlugins = "embed,attachment";
   
-  config.toolbar = 'Easy';
+  config.toolbar = 'Small';
   
   config.toolbar_Easy =
     [
@@ -38,6 +38,17 @@ CKEDITOR.editorConfig = function( config )
         ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
         ['Link','Unlink','Anchor'],
         ['Image','Embed','Flash','Attachment','Table','HorizontalRule','Smiley','SpecialChar','PageBreak']
+    ];
+
+  config.toolbar_Small =
+    [
+        ['Source','-','Preview'],
+        ['Cut','Copy','Paste','PasteText','PasteFromWord'],
+        ['Maximize','-','About'],
+        ['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
+        ['Bold','Italic','Underline','Strike','-','Subscript','Superscript', 'TextColor'],
+        ['NumberedList','BulletedList'],
+        ['Link','Unlink']
     ];
 };
 
