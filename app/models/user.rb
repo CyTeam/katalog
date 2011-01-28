@@ -28,9 +28,6 @@ class User < ActiveRecord::Base
   end
   
   def role_texts=(role_names)
-    roles.delete_all
-    for role_name in role_names
-      roles.build(:name => role_name)
-    end
+    roles = Role.where(:name => role_names)
   end
 end
