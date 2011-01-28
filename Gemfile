@@ -67,3 +67,7 @@ gem 'SystemTimer'
 
 # CRUD helpers
 gem 'show_for'
+
+# WYSIWYG Editor
+gem 'ckeditor', '3.4.2.pre'
+

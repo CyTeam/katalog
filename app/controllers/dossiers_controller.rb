@@ -86,6 +86,7 @@ class DossiersController < AuthorizedController
   end
 
   def edit_report
+    @tabindex = 1
     unless params[:search]
       dossier_index
     else
