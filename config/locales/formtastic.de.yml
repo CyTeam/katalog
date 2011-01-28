@@ -1,4 +1,4 @@
-de-CH:
+de:
   formtastic:
     :yes: 'Ja'
     :no: 'Nein'
@@ -7,3 +7,6 @@ de-CH:
     save: '%{model} speichern'
     submit: 'Abschicken'
     required: 'Erforderlich'
+
+    actions:
+      send_e_mail: E-Mail versenden
