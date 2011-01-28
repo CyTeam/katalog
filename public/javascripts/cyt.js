@@ -232,18 +232,29 @@ function addContainerSuggestionBehaviour() {
 }
 
 function addUpdateLastContainerTitleOfDossier() {
-  $('.dossier-last-container-title').focusout(function(){
-    var dossier_id = $(this).attr('data-dossier');
-    var container_id = $(this).attr('data-container');
-    var title = $(this).val();
-    
-    $.ajax({
-      url: '/dossiers/' + dossier_id + '/containers/'+ container_id,
-      type: 'PUT',
-      data: {
-        id: container_id,
-        title: title
-      }
-    });
+  var inputs = $('.dossier-last-container-title');
+
+  inputs.focusout(function(){
+    updateNumberAmount(this);
+  });
+
+  inputs.keydown(function(event) {
+    if(event.keyCode == 13) {
+      updateNumberAmount(this);
+    }
   });
 }
+
+function updateNumberAmount(e){
+    var dossier_id = $(e).attr('data-dossier');
+    var number_id = $(e).attr('data-number');
+    var amount = $(e).val();
+
+    $.ajax({
+      url: '/dossiers/' + dossier_id + '/dossier_numbers/'+ number_id,
+      type: 'PUT',
+      data: {
+        amount: amount
+      }
+    });
+  }
