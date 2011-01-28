@@ -19,4 +19,5 @@
         = link_to image_tag('icons/edit.png', :title => t('tooltips.dossiers.edit')), edit_dossier_path(dossier)
         = link_to image_tag('icons/delete.png', :title => t('tooltips.dossiers.edit')), dossier, :confirm => t_confirm_delete(dossier), :remote => true, :method => :delete
       - elsif is_edit_report?
-        %input{:class => 'dossier-last-container-title', 'data-dossier' => dossier.id, 'data-number' => dossier.numbers.last.id, :type => 'text', :value => dossier.numbers.last.amount}
+        %input{:tabindex => @tabindex, :class => 'dossier-last-container-title', 'data-dossier' => dossier.id, 'data-number' => dossier.numbers.last.id, :type => 'text', :value => dossier.numbers.last.amount}
+        - @tabindex += 1
