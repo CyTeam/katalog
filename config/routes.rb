@@ -4,11 +4,6 @@ Katalog::Application.routes.draw do
   resources :container_types
 
   devise_for :users
-#  scope "admin", :as => "admin" do
-#    resource :users do
-#      get 'index'
-#    end
-#  end
   resources :users do
     member do
       post :unlock
