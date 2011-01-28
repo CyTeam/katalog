@@ -1,7 +1,57 @@
 de:
   katalog:
+    main_navigation:
+      dossiers:         "Dossiers"
+      dossier_index:    "Auflistung"
+      search:           "Dossier suchen"
+      administration:   "Verwaltung"
+      locations:        "Standorte"
+      container_types:  "Dossier Arten"
+      users:            "Benutzer"
+      edit_year:        "Jahr bearbeiten"
+      new_dossier:      "Dossier anlegen"
+      new_title:        "Titel anlegen"
+      login:            "Anmelden"
+      logout:           "Abmelden"
+    application:
+      title:            "Katalog"
+      skip_navigation:  "Navigation überspringen"
+      scroll:           "Blättern"
+      grub:             "Stöbern"
+    shared:
+      doku: "doku-zug.ch"
+      logo:
+        alt:    "doku-zug.ch - Öffentliches Dokumentationszentrum"
+        title:  "doku-zug.ch - Öffentliches Dokumentationszentrum"
+      footer:
+        navigation:
+          over_us: "Über uns"
+          team: "Team"
+          newsletter: "Newsletter"
+          links: "Links"
+          contact: "Kontakt"
+          new_books: "Neue Bücher"
+          subject_of_the_week: "Thema der Woche"
+          latest: "Aktuell"
+          news: "News"
+          catalogue: "Kataloge"
+          publication: "Publikationen"
+          archive: "Archiv, Bibliothek"
+          offer: "Unser Angebot"
+          history: "Geschichte"
+          concept: "Leitbild"
+          skip: "Navigation überspringen"
+        short_cuts:
+          library: "Stadt- und Kantonsbibliothek Zug"
+          state_archive: "Staatsarchiv des Kantons Zug"
+          zurich_archive: "Archiv für Zeitgeschichte Zürich"
+          social_archive: "Schweizerisches Sozialarchiv"
+          economy_archive: "Schweizerisches Wirtschaftsarchiv"
+          archivist: "Verein Schweizerischer ArchivarInnen"
+          library_information: "Bibliothek Information Schweiz"
     search:        "Suchen"
     search_for:    "Suche nach %{query}"
+    the_search:    "Suche"
     count:         "Anzahl"
     edit:          "Ändern"
     show:          "Anzeigen"
@@ -30,6 +80,7 @@ de:
                   'Wenn Sie zwei Signaturteile eingeben, werden alle Dossiers angezeigt, die entweder den einen ODER den anderen Signaturteil beinhalten',
                   'Wenn Sie zwei Signaturteile und ein Wort eingeben, erhalten Sie sämtliche Dossiers, welche den einen Signaturteil ODER den anderen Signaturteil UND das Suchwort beinhalten'
                ]
+    insert_relation: "Querverweis hinzufügen"
     
   controllers:
     index:

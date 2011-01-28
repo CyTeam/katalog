@@ -16,19 +16,19 @@
   </ul>
 </div>
 
-<h3>Erschliessungstext</h3>
+<h3><%= t('activerecord.attributes.dossier.description') %></h3>
 <div id="description">
   <%= auto_link(@dossier.description) %>
 </div>
 
-<h3>Schlagworte</h3>
+<h3><%= t('activerecord.attributes.dossier.keyword_text') %></h3>
 <div id="keywords" class="section">
   <ul id="keyword-list" class="keywords">
     <%= render :partial => 'keyword', :collection => @dossier.keywords.order('name') %>
   </ul>
 </div>
 
-<h3>Querverweise</h3>
+<h3><%= t('activerecord.attributes.dossier.relation_list') %></h3>
 <div id="relations" class="section">
   <%= render 'relations/list' if @dossier.related_to.present? %>
 </div>

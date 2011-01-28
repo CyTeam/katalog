@@ -2,7 +2,8 @@
 %html{:xmlns => "http://www.w3.org/1999/xhtml"}
   %head
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}/
-    %title Katalog
+    %title
+      = t('katalog.application.title')
     - @pdfkit_options && @pdfkit_options.each do |key, value|
       %meta{:content => value, :name => "pdfkit-#{key}"}/
     = stylesheet_link_tag 'doku-zug.ch/typolight', 'doku-zug.ch/basic', 'doku-zug.ch/content', 'doku-zug.ch/layout', 'doku-zug.ch/navigation', 'doku-zug.ch/welcome', 'doku-zug.ch/application', :media => 'all'
@@ -26,16 +27,20 @@
         #left
           .inside
             #mainmenu.mod_navigation.block
-              %a.invisible{:href => "#skipNavigation3"} Navigation überspringen
+              %a.invisible{:href => "#skipNavigation3"}
+                = t('katalog.application.skip_navigation')
               = render_navigation(:context => :main)
-              %a#skipNavigation3.invisible{:name => "skipNavigation3"} &nbsp;
+              %a#skipNavigation3.invisible{:name => "skipNavigation3"}
+                &nbsp;
         #right
           .inside
             .mod_newslist.block
-              %h1 Blättern
+              %h1
+                = t('katalog.application.scroll')
               .layout_full.block.odd
                 = render 'shared/topic_index'
-              %h1 Stöbern
+              %h1
+                = t('katalog.application.grub')
               .layout_full.block.last.odd
                 = render 'shared/tag_cloud'
         #main
