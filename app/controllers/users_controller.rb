@@ -7,6 +7,9 @@ class UsersController < AuthorizedController
   
   # Actions
   def update
+    # Preset role_texts to ensure it clears roles.
+    params[:user][:role_texts] ||= []
+
     @user = User.find(params[:id])
     
     # Don't try to update password if not provided

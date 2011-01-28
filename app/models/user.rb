@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   end
   
   def role_texts=(role_names)
-    roles = Role.where(:name => role_names)
+    self.roles = Role.where(:name => role_names)
   end
 
   # Helpers
