@@ -63,6 +63,7 @@ de:
         relation_list:  "Querverweise"
         dossier_number_list: "Anzahl Dokumente"
         availability: "Verfügbar"
+        description: "Erschliessungstext"
       container:
         period:         "Zeitraum"
         title:          "Titel"
