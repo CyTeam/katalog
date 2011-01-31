@@ -71,3 +71,6 @@ gem 'show_for'
 # WYSIWYG Editor
 gem 'ckeditor', '3.4.2.pre'
 
+# Change log for model data
+gem 'paper_trail'
+

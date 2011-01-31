@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110121085613) do
+ActiveRecord::Schema.define(:version => 20110131134439) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -57,6 +57,19 @@ ActiveRecord::Schema.define(:version => 20110121085613) do
 
   add_index "dossiers", ["signature"], :name => "index_dossiers_on_signature"
   add_index "dossiers", ["type"], :name => "index_dossiers_on_type"
+
+  create_table "histories", :force => true do |t|
+    t.string   "message"
+    t.string   "username"
+    t.integer  "item"
+    t.string   "table"
+    t.integer  "month",      :limit => 2
+    t.integer  "year",       :limit => 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "histories", ["item", "table", "month", "year"], :name => "index_histories_on_item_and_table_and_month_and_year"
 
   create_table "locations", :force => true do |t|
     t.string   "title"
@@ -116,5 +129,16 @@ ActiveRecord::Schema.define(:version => 20110121085613) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "versions", :force => true do |t|
+    t.string   "item_type",  :null => false
+    t.integer  "item_id",    :null => false
+    t.string   "event",      :null => false
+    t.string   "whodunnit"
+    t.text     "object"
+    t.datetime "created_at"
+  end
+
+  add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
 
 end
