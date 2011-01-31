@@ -1,6 +1,4 @@
 Katalog::Application.routes.draw do
-  get "index/title"
-
   resources :container_types
 
   devise_for :users
