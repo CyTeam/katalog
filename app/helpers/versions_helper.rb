@@ -8,6 +8,10 @@ module VersionsHelper
   end
 
   def difference_to_current(version)
-    link_to 'Differenz anzeigen zum aktuellen Eintrag', version
+    link_to 'Differenz anzeigen zum aktuellen Eintrag', version, :class => 'icon-show-text'
+  end
+
+  def original(version)
+    version.item_type.constantize.find(version.item_id)
   end
 end

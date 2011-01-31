@@ -4,24 +4,33 @@
 %h2
   = t('katalog.versions.difference_to_current', :model => @version.item_type)
 
-%h3
-  Alte Version
+#version-left-side
+  %h3
+    Alte Version
 
-= @version.reify
+  = @version.reify
 
-%h3
-  Neue Version
+#version-right-side
+  %h3
+    Neue Version
 
+  = original(@version)
 
 %br
   
 %h2
   Zusatzinformationen  
 
-%ul
+%ul#version-information
   %li
-    = t('katalog.versions.changed_from', :user => user_email(@version))
+    %label
+      = t('katalog.versions.changed_from')
+    = user_email(@version)
   %li
-    = t('katalog.versions.changed_at', :date => @version.created_at)
+    %label
+      = t('katalog.versions.changed_at')
+    = @version.created_at
   %li
-    = t('katalog.versions.action', :action => @version.event)
+    %label
+      = t('katalog.versions.action')
+    = @version.event
