@@ -1,4 +1,6 @@
 class Container < ActiveRecord::Base
+  # change log
+  has_paper_trail
   # Associations
   belongs_to :dossier
   belongs_to :location

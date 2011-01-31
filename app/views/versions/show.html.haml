@@ -1,0 +1,27 @@
+%h1
+  = t('katalog.versions.changes_of', :model => @version.item_type)
+
+%h2
+  = t('katalog.versions.difference_to_current', :model => @version.item_type)
+
+%h3
+  Alte Version
+
+= @version.reify
+
+%h3
+  Neue Version
+
+
+%br
+  
+%h2
+  Zusatzinformationen  
+
+%ul
+  %li
+    = t('katalog.versions.changed_from', :user => user_email(@version))
+  %li
+    = t('katalog.versions.changed_at', :date => @version.created_at)
+  %li
+    = t('katalog.versions.action', :action => @version.event)

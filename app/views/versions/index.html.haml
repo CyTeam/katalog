@@ -1,0 +1,17 @@
+%h1
+  = t('katalog.main_navigation.changes')
+
+.ce_table.block
+  %table
+    %tbody
+      %tr
+        %th
+          Datentyp
+        %th
+          Geändert durch
+        %th
+          Geändert am
+        %th
+
+      = render @versions
+

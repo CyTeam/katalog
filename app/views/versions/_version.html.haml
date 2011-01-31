@@ -1,0 +1,9 @@
+%tr[version]{:class => cycle('odd', 'even')}
+  %td
+    = model_name version
+  %td
+    = user_email version
+  %td
+    = version.created_at
+  %td
+    = difference_to_current(version)

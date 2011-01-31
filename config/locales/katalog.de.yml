@@ -13,6 +13,7 @@ de:
       new_title:        "Titel anlegen"
       login:            "Anmelden"
       logout:           "Abmelden"
+      changes:          "Änderungen"
     application:
       title:            "Katalog"
       skip_navigation:  "Navigation überspringen"
@@ -81,7 +82,13 @@ de:
                   'Wenn Sie zwei Signaturteile und ein Wort eingeben, erhalten Sie sämtliche Dossiers, welche den einen Signaturteil ODER den anderen Signaturteil UND das Suchwort beinhalten'
                ]
     insert_relation: "Querverweis hinzufügen"
-    
+
+    versions:
+      changes_of:             "Änderungen von %{model}"
+      difference_to_current:  "Unterschied zur aktuellen Version."
+      changed_from:           "Geändert durch: %{user}"
+      changed_at:             "Geändert am: %{date}"
+      action:                 "Durchgeführte Aktion: %{action}"
   controllers:
     index:
       keyword: "Schlagwortindex"

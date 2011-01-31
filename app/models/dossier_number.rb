@@ -1,4 +1,6 @@
 class DossierNumber < ActiveRecord::Base
+  # change log
+  has_paper_trail
   # Associations
   belongs_to :dossier
 

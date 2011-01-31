@@ -31,5 +31,7 @@ Katalog::Application.routes.draw do
     end
   end
 
+  resources :versions
+
   root :to => "dossiers#index"
 end
