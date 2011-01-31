@@ -2,7 +2,7 @@ de:
   katalog:
     main_navigation:
       dossiers:         "Dossiers"
-      dossier_index:    "Auflistung"
+      dossier_index:    "Themenübersicht"
       search:           "Dossier suchen"
       administration:   "Verwaltung"
       locations:        "Standorte"
@@ -160,11 +160,6 @@ de:
       pdf:    "PDF anzeigen"
       print: "Seite drucken"
 
-  devise:
-    sign_in: "Anmelden"
-    sign_up: "Registrieren"
-    new_password: "Passwort vergessen?"
-    
   cancan:
     roles:
       admin:  "Administrator"

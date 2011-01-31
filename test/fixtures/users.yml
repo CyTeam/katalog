@@ -1,6 +1,11 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
 editor:
   email:              "editor@example.com"
   encrypted_password: "$2a$10$5hAhIA21D3hJjHfjaS6ltuX6FltRqXTJqXR7J6fskNGuxaZ03nXvO"
   password_salt:      "$2a$10$5hAhIA21D3hJjHfjaS6ltu"
+  roles:              editor
+
+admin:
+  email:              "admin@example.com"
+  encrypted_password: "$2a$10$5hAhIA21D3hJjHfjaS6ltuX6FltRqXTJqXR7J6fskNGuxaZ03nXvO"
+  password_salt:      "$2a$10$5hAhIA21D3hJjHfjaS6ltu"
+  roles:              admin
