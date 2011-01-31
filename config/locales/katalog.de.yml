@@ -86,9 +86,10 @@ de:
     versions:
       changes_of:             "Änderungen von %{model}"
       difference_to_current:  "Unterschied zur aktuellen Version."
-      changed_from:           "Geändert durch: %{user}"
-      changed_at:             "Geändert am: %{date}"
-      action:                 "Durchgeführte Aktion: %{action}"
+      changed_from:           "Geändert durch"
+      changed_at:             "Geändert am"
+      action:                 "Durchgeführte Aktion"
+      item_type:              "Datentyp"
   controllers:
     index:
       keyword: "Schlagwortindex"
