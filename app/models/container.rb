@@ -45,11 +45,17 @@ class Container < ActiveRecord::Base
   end
   
   def period
+    return '' if dossier.nil?
+    
     result = title.gsub(/^#{dossier.title}/, '').strip
     if result.empty?
       result = "#{dossier.first_document_year} -"
     end
     return result
+  end
+  
+  def period=(value)
+    self.title = "#{dossier.title} #{value}"
   end
   
   # Import
