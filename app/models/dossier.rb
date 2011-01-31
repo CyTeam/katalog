@@ -391,8 +391,16 @@ class Dossier < ActiveRecord::Base
       from = n.from.nil? ? '' : n.from.to_s(:db)
       to   = n.to.nil? ? '' : n.to.to_s(:db)
        
-      range_from = range[:from].nil? ? '' : range[:from].to_s(:db)
-      range_to   = range[:to].nil? ? '' : range[:to].to_s(:db)
+      if range[:from]
+        range_from = range[:from].is_a?(String) ? range[:from] : range[:from].to_s(:db)
+      else
+        range_from = ''
+      end
+      if range[:to]
+        range_to = range[:to].is_a?(String) ? range[:to] : range[:to].to_s(:db)
+      else
+        range_to = ''
+      end
 
       from == range_from && to == range_to
     }.first
