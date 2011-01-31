@@ -297,6 +297,21 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal 199, @dossier.document_count
   end
 
+  test "update_or_create_number understands Date object" do
+    @dossier.update_or_create_number(99, {:from => nil, :to => Date.new(2002, 12, 31)})
+    @dossier.save
+    
+    assert_equal 1, @dossier.numbers.count
+    assert_equal 99, @dossier.document_count
+    
+    @dossier.update_or_create_number(100, {:from => nil, :to => Date.new(2002, 12, 31)})
+    @dossier.save
+    
+    assert_equal 1, @dossier.numbers.count
+    assert_equal 199, @dossier.document_count
+  
+  end
+
   test "document_count returns integer" do
     assert @dossier.document_count.is_a?(Integer)
   end
