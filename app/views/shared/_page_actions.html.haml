@@ -1,0 +1,5 @@
+#page_actions.contextual
+  = contextual_link('pdf', url_for(params.merge({:format => :pdf, :per_page => 'all'})), :title => t('tooltips.dossiers.show_pdf'))
+  - if user_signed_in?
+    = contextual_link('overview', overview_dossiers_path(:format => :pdf, :per_page => 'all'), :title => t('tooltips.dossiers.show_themeoverview'))
+
