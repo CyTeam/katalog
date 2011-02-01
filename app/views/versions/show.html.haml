@@ -4,17 +4,18 @@
 %h2
   = t('katalog.versions.difference_to_current', :model => @version.item_type)
 
-#version-left-side
-  %h3
-    Alte Version
+#versions
+  #version-left-side
+    %h3
+      Alte Version
 
-  = @version.reify
+    = render :partial => 'object', :locals => {:object => @version.reify}
 
-#version-right-side
-  %h3
-    Neue Version
+  #version-right-side
+    %h3
+      Neue Version
 
-  = original(@version)
+    = render :partial => 'object', :locals => {:object => original(@version)}
 
 %br
   
