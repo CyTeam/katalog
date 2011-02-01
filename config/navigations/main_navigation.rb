@@ -14,9 +14,9 @@ SimpleNavigation::Configuration.run do |navigation|
         administration.item :locations, t('katalog.main_navigation.locations'), locations_path
         administration.item :dossier_types, t('katalog.main_navigation.container_types'), container_types_path
         administration.item :users, t('katalog.main_navigation.users'), users_path, :if => Proc.new { can?(:new, User) }
-        administration.item :versions_nav, t('katalog.main_navigation.changes'), versions_path, :hightlights_on => /\/versions/, :if => Proc.new { current_user.role?'admin' }
+        administration.item :versions_nav, t('katalog.main_navigation.changes'), versions_path, :highlights_on => /\/versions/, :if => Proc.new { current_user.role?'admin' }
         administration.item :edit_dossier_years, t('katalog.main_navigation.edit_year'), edit_report_dossiers_path, :if => Proc.new { can?(:update, Dossier) }
-        administration.item :new_dossier, t('katalog.main_navigation.new_dossier'), new_dossier_path, :hightlights_on => /\/dossiers\/new/, :if => Proc.new { can?(:new, Dossier) }
+        administration.item :new_dossier, t('katalog.main_navigation.new_dossier'), new_dossier_path, :highlights_on => /\/dossiers\/new/, :if => Proc.new { can?(:new, Dossier) }
         administration.item :new_title, t('katalog.main_navigation.new_title'), new_topic_path, :if => Proc.new { can?(:new, Topic) }
       end
       primary.item :log_out, t('katalog.main_navigation.logout'), destroy_user_session_path

@@ -7,20 +7,20 @@
 #versions
   #version-left-side
     %h3
-      Alte Version
+      = t('katalog.versions.previous_version')
 
     = render :partial => 'object', :locals => {:object => @version.reify}
 
   #version-right-side
     %h3
-      Neue Version
+      = t('katalog.versions.current_version')
 
     = render :partial => 'object', :locals => {:object => original(@version)}
 
 %br
   
 %h2
-  Zusatzinformationen  
+  = t('katalog.versions.additional_information')  
 
 %ul#version-information
   %li

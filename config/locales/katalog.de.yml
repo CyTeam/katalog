@@ -90,6 +90,13 @@ de:
       changed_at:             "Geändert am"
       action:                 "Durchgeführte Aktion"
       item_type:              "Datentyp"
+      actions:
+        update: "geändert"
+        destroy: "gelöscht"
+      was_deleted:            "Wurde gelöscht"
+      additional_information: "Zusatzinformationen"
+      current_version:        "Aktuelle Version"
+      previous_version:       "Alte Version"
   controllers:
     index:
       keyword: "Schlagwortindex"

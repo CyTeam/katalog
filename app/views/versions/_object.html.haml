@@ -1,7 +1,11 @@
 %ul
-  - object.attributes.each do |attr|
+  - if object
+    - object.attributes.each do |attr|
+      %li
+        %label
+          = attr[0]
+        .content
+          = attr[1]
+  - else
     %li
-      %label
-        = attr[0]
-      .content
-        = attr[1]
+      = t('katalog.versions.was_deleted')

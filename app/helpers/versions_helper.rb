@@ -12,6 +12,10 @@ module VersionsHelper
   end
 
   def original(version)
-    version.item_type.constantize.find(version.item_id)
+    version.item_type.constantize.exists?(version.item_id) ? version.item_type.constantize.find(version.item_id) : nil
+  end
+
+  def action(version)
+    I18n.t("katalog.versions.actions.#{version.event}")
   end
 end
