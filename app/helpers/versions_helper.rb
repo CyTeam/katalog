@@ -19,7 +19,12 @@ module VersionsHelper
     I18n.t("katalog.versions.actions.#{version.event}")
   end
 
+  def differences(version)
+    object_after = next_object(version) ? next_object(version) : original(version)
+    Version.differences(version, object_after)
+  end
+
   def next_object(version)
-    
+    version.next ? version.next.reify : nil
   end
 end

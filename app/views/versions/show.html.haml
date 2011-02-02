@@ -14,15 +14,25 @@
   #version-right-side
     %h3
       = t('katalog.versions.next_version')
-
-    = render :partial => 'object', :locals => {:object => next_object(@version)}
+    - next_version = next_object(@version)
+    = render :partial => 'object', :locals => {:object => next_version ? next_version : original(@version) }
 
 #versions-bottom
-  #version-left-side-bottom
-    %h3
-      = t('katalog.versions.current_version')
-
-    = render :partial => 'object', :locals => {:object => original(@version)}
+  .right
+    %ul
+      - differences(@version).each do |attr|
+        %li
+          %label
+            = t("activerecord.attributes.#{@version.item_type.underscore}.#{attr[:attribute]}")
+          %ul
+            %li
+              %label
+                vorher
+              = attr[:before]
+            %li
+              %lable
+                nachher
+              = attr[:after]
 
 %br
   
