@@ -48,6 +48,8 @@ th.action-links {
 /** Sidebar Topic Index **/
 li.topic.group {
   font-weight: bold;
+  list-style-type: none;
+  list-style-image: none;
 }
 
 li.topic.group .signature {
