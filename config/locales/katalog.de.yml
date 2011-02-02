@@ -96,7 +96,8 @@ de:
       was_deleted:            "Wurde gelöscht"
       additional_information: "Zusatzinformationen"
       current_version:        "Aktuelle Version"
-      previous_version:       "Alte Version"
+      previous_version:       "Vorherige Version"
+      next_version:       "Geänderte Version"
   controllers:
     index:
       keyword: "Schlagwortindex"
@@ -174,6 +175,7 @@ de:
     action:
       pdf:    "PDF anzeigen"
       print: "Seite drucken"
+      history:  "Änderungsverlauf"
 
   cancan:
     roles:

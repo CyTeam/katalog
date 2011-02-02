@@ -21,6 +21,7 @@ Katalog::Application.routes.draw do
 
     resources :containers
     resources :dossier_numbers
+    resources :versions
   end
 
   post "dossier_numbers/set_amount"

@@ -4,7 +4,7 @@
 %h2
   = t('katalog.versions.difference_to_current', :model => @version.item_type)
 
-#versions
+#versions-top
   #version-left-side
     %h3
       = t('katalog.versions.previous_version')
@@ -12,6 +12,13 @@
     = render :partial => 'object', :locals => {:object => @version.reify}
 
   #version-right-side
+    %h3
+      = t('katalog.versions.next_version')
+
+    = render :partial => 'object', :locals => {:object => next_object(@version)}
+
+#versions-bottom
+  #version-left-side-bottom
     %h3
       = t('katalog.versions.current_version')
 

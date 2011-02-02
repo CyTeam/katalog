@@ -1,9 +1,9 @@
 %ul
   - if object
-    - object.attributes.each do |attr|
+    - object.attributes.except('id', 'created_at', 'updated_at').each do |attr|
       %li
         %label
-          = attr[0]
+          = t("activerecord.attributes.#{object.class.to_s.underscore}.#{attr[0]}")
         .content
           = attr[1]
   - else

@@ -18,4 +18,8 @@ module VersionsHelper
   def action(version)
     I18n.t("katalog.versions.actions.#{version.event}")
   end
+
+  def next_object(version)
+    
+  end
 end
