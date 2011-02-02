@@ -131,6 +131,11 @@ de:
         dossier_number_list: "Anzahl Dokumente"
         availability: "Verfügbar"
         description: "Erschliessungstext"
+        new_signature: "Neue Signatur"
+        type:          "Dossier-Art"
+        sort_key:       "Sortier-Schlüssel"
+        first_document_on: "Erstes Dokument von"
+        delta:          "Delta"
       container:
         period:         "Zeitraum"
         title:          "Titel"
