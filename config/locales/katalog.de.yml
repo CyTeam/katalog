@@ -97,7 +97,7 @@ de:
       additional_information: "Zusatzinformationen"
       current_version:        "Aktuelle Version"
       previous_version:       "Vorherige Version"
-      next_version:       "Geänderte Version"
+      next_version:           "Neue Version"
   controllers:
     index:
       keyword: "Schlagwortindex"
