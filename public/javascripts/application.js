@@ -8,4 +8,5 @@ $(document).ready(function() {
   addSearchSuggestionBehaviour();
   addContainerSuggestionBehaviour();
   addUpdateLastContainerTitleOfDossier();
+  showVersionsBehaviour();
 });

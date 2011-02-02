@@ -4,7 +4,26 @@
 %h2
   = t('katalog.versions.difference_to_current', :model => @version.item_type)
 
-#versions-top
+%ul#version-changes
+  - differences(@version).each do |attr|
+    %li
+      %h3
+        = t("activerecord.attributes.#{@version.item_type.underscore}.#{attr[:attribute]}")
+      %ul.changes
+        %li
+          %label
+            = t('katalog.versions.previous_version')
+          = attr[:before]
+        %li
+          %label
+            = t('katalog.versions.next_version')
+          = attr[:after]
+
+%a#show-versions{:href => '#'}
+  = t('katalog.versions.show_versions')
+
+
+#versions-bottom{:style => 'display:none'}
   #version-left-side
     %h3
       = t('katalog.versions.previous_version')
@@ -16,23 +35,6 @@
       = t('katalog.versions.next_version')
     - next_version = next_object(@version)
     = render :partial => 'object', :locals => {:object => next_version ? next_version : original(@version) }
-
-#versions-bottom
-  .right
-    %ul
-      - differences(@version).each do |attr|
-        %li
-          %label
-            = t("activerecord.attributes.#{@version.item_type.underscore}.#{attr[:attribute]}")
-          %ul
-            %li
-              %label
-                vorher
-              = attr[:before]
-            %li
-              %lable
-                nachher
-              = attr[:after]
 
 %br
   

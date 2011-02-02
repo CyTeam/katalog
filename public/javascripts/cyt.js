@@ -258,3 +258,11 @@ function updateNumberAmount(e){
     }
   });
 }
+
+function showVersionsBehaviour(){
+  $('a#show-versions').toggle(function(){
+    $('#versions-bottom').show();
+  }, function(){
+    $('#versions-bottom').hide();
+  });
+}

@@ -98,6 +98,7 @@ de:
       current_version:        "Aktuelle Version"
       previous_version:       "Vorherige Version"
       next_version:           "Neue Version"
+      show_versions:          "Detailierte Versionen anzeigen"
   controllers:
     index:
       keyword: "Schlagwortindex"
@@ -136,6 +137,7 @@ de:
         sort_key:             "Sortier-Schlüssel"
         first_document_on:    "Erstes Dokument von"
         delta:                "Delta"
+        updated_at:           "Geändert am"
       container:
         period:         "Zeitraum"
         title:          "Titel"
