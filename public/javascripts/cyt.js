@@ -246,15 +246,15 @@ function addUpdateLastContainerTitleOfDossier() {
 }
 
 function updateNumberAmount(e){
-    var dossier_id = $(e).attr('data-dossier');
-    var number_id = $(e).attr('data-number');
-    var amount = $(e).val();
+  var dossier_id = $(e).attr('data-dossier');
+  var number_id = $(e).attr('data-number');
+  var amount = $(e).val();
 
-    $.ajax({
-      url: '/dossiers/' + dossier_id + '/dossier_numbers/'+ number_id,
-      type: 'PUT',
-      data: {
-        amount: amount
-      }
-    });
-  }
+  $.ajax({
+    url: '/dossiers/' + dossier_id + '/dossier_numbers/'+ number_id,
+    type: 'PUT',
+    data: {
+      amount: amount
+    }
+  });
+}
