@@ -4,7 +4,13 @@ class VersionsController < AuthorizedController
 
   def index
     if params[:dossier_id]
-      @versions = Dossier.find(params[:dossier_id]).versions
+      dossiers = Dossier.find(params[:dossier_id])
+      @versions = dossiers.versions
+      dossiers.numbers.each do |n|
+        n.versions.each do |v|
+          @versions << v
+        end
+      end
     end
 
     index!
