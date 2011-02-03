@@ -57,7 +57,7 @@ class Container < ActiveRecord::Base
   end
   
   def period=(value)
-    self.title = "#{dossier.title} #{value}"
+    self.title = value
   end
   
   # Import
