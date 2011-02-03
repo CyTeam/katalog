@@ -14,8 +14,11 @@ module ApplicationHelper
     link_to_function image_tag('icons/add.png', :title => t('crud.new', :model => '')), :id => 'add_record_link' do |page|
       record = render('containers/new_form', :form => form)
       page << %{
-var new_record_id = "new_" + new Date().getTime();
-$('#container-list').append("#{ escape_javascript record }".replace(/new_\\d+/g, new_record_id));
+var new_record_id = new Date().getTime();
+var content = "#{ escape_javascript record }";
+content = content.replace(/\\[\\d+\\]/g, "[" + new_record_id + "]");
+content = content.replace(/_\\d+_/g, "_" + new_record_id + "_");
+$('#container-list').append(content);
 addContainerSuggestionBehaviour();
 }
     end
