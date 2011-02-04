@@ -1,0 +1,8 @@
+%h1
+  = t('katalog.main_navigation.search_exceptions')
+
+= add_new_link
+
+#sphinx_admins
+- @sphinx_admins.each do |sphinx_admin|
+  = render :partial =>'form', :locals => {:sphinx_admin => sphinx_admin}

@@ -34,5 +34,11 @@ Katalog::Application.routes.draw do
 
   resources :versions
 
+  resource :sphinx_admins do
+    collection do
+      get :exceptions, :word_forms
+    end
+  end
+
   root :to => "dossiers#index"
 end
