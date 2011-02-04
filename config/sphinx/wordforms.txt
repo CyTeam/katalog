@@ -1,10 +1,8 @@
 kt > kanton
 ch > schweiz
-
 ag > aargau
 ar > appenzell ausserrhoden
 zg > zug
-
 nr > nationalrat
 ggr > grosser gemeinderat
 gr > gemeinderat
