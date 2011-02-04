@@ -4,14 +4,11 @@ class SphinxAdmin < ActiveRecord::Base
   WORD_FORM_SPACER = '>'
   EXCEPTION_SPACER = "=>"
 
-  def self.initial_import
+  def self.import
     exceptions = SphinxAdminException
     word_forms = SphinxAdminWordForm
-    exceptions.all.each do |e|
+    self.all.each do |e|
       e.delete
-    end
-    word_forms.all.each do |w|
-      w.delete
     end
     import_file('exceptions.txt', exceptions)
     import_file('wordforms.txt', word_forms)
@@ -30,7 +27,7 @@ class SphinxAdmin < ActiveRecord::Base
   end
   
   def self.spacer
-    if self.class.name.eql?SphinxAdminException.to_s
+    if self.name.eql?SphinxAdminException.to_s
       EXCEPTION_SPACER
     else
       WORD_FORM_SPACER
