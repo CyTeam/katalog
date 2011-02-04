@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110203101548) do
+ActiveRecord::Schema.define(:version => 20110204095714) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -93,9 +93,10 @@ ActiveRecord::Schema.define(:version => 20110203101548) do
 
   create_table "sphinx_admins", :force => true do |t|
     t.string   "type"
-    t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "from"
+    t.string   "to"
   end
 
   create_table "taggings", :force => true do |t|
