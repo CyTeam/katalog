@@ -1,9 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  type: MyString
-  value: MyString
+nr:
+  type: SphinxAdminWordForm
+  from: nr
+  to:   Nationalrat
 
-two:
-  type: MyString
-  value: MyString
+first:
+  type: SphinxAdminException
+  from: 1.
+  to:   erster
