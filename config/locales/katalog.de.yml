@@ -14,7 +14,7 @@ de:
       login:              "Anmelden"
       logout:             "Abmelden"
       changes:            "Änderungen"
-      search_admin:       "Suche"
+      search_admin:       "Volltextsuche"
       search_exceptions:  "Ausnahmen"
       search_word_forms:  "Wortformen"
     application:
