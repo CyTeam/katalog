@@ -1,7 +1,7 @@
 class ImportSphinxConfigurations < ActiveRecord::Migration
   def self.up
-    SphinxAdminWordForm.rewrite
-    SphinxAdminException.rewrite
+    SphinxAdminWordForm.seed
+    SphinxAdminException.seed
   end
 
   def self.down

@@ -30,3 +30,6 @@ Role.create!([
   {:name => 'admin'},
   {:name => 'editor'}
 ])
+
+SphinxAdminWordForm.seed
+SphinxAdminException.seed

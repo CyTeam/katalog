@@ -42,3 +42,4 @@ data
 # Sphinx Freetext Search
 db/sphinx
 config/*.sphinx.conf
+config/sphinx/
