@@ -1,19 +1,13 @@
 class SphinxAdmin < ActiveRecord::Base
+  FOLDER = Rails.root.join('config', 'sphinx')
 
-  FOLDER = "#{Rails.root}/config/sphinx/"
-  WORD_FORM_SPACER = '>'
-  EXCEPTION_SPACER = "=>"
-
-  def self.import
-    exceptions = SphinxAdminException
-    word_forms = SphinxAdminWordForm
-
-    delete_all
-
-    import_file('exceptions.txt', exceptions)
-    import_file('wordforms.txt', word_forms)
-    write_file('exceptions.txt', exceptions)
-    write_file('wordforms.txt', word_forms)
+  cattr_accessor :file_name
+  cattr_accessor :spacer
+  
+  def self.rewrite
+    self.delete_all
+    self.import_file
+    self.export_file
   end
 
   def value
@@ -26,28 +20,12 @@ class SphinxAdmin < ActiveRecord::Base
     self.from  = values[:from]
   end
   
-  def self.spacer
-    if self.name.eql?SphinxAdminException.to_s
-      EXCEPTION_SPACER
-    else
-      WORD_FORM_SPACER
-    end
-  end
-
-  def spacer
-    if self.class.name.eql?SphinxAdminException.to_s
-      EXCEPTION_SPACER
-    else
-      WORD_FORM_SPACER
-    end
-  end
-
   private
 
   def write_file
-    file = File.new("#{FOLDER}#{FILE_NAME}", "w+")
+    file = File.new(FOLDER.join(FILE_NAME), "w+")
     self.all.each do |ex|
-      file.puts ex.from + ' ' + SPACER + ' ' + ex.to
+      file.puts ex.spacer
     end
     file.close
   end
@@ -61,18 +39,20 @@ class SphinxAdmin < ActiveRecord::Base
     a
   end
 
-  def self.import_file(name, model)
-    file = File.new("#{FOLDER}#{name}", "r")
+  def self.import_file
+    file = File.new(FOLDER.join(self.file_name), "r")
+
     file.each do |line|
-      model.create(:value => line) unless line.strip.empty?
+      self.create(:value => line) unless line.blank?
     end
+
     file.close
   end
 
-  def self.write_file(name, model)
-    file = File.new("#{FOLDER}#{name}", "w+")
-    model.all.each do |ex|
-      file.puts ex.from + ' ' + spacer + ' ' + ex.to
+  def self.export_file
+    file = File.new(FOLDER.join(self.file_name), "w+")
+    self.all.each do |ex|
+      file.puts ex.value
     end
     file.close
   end

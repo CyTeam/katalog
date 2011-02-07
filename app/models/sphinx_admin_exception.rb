@@ -1,5 +1,4 @@
 class SphinxAdminException < SphinxAdmin
-
-  SphinxAdmin::FILE_NAME = 'exceptions.txt'
-
+  @@file_name = 'exceptions.txt'
+  @@spacer    = '=>'
 end

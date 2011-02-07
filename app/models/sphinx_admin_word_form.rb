@@ -1,5 +1,4 @@
 class SphinxAdminWordForm < SphinxAdmin
-
-  SphinxAdmin::FILE_NAME = 'wordforms.txt'
-
+  @@file_name = 'wordforms.txt'
+  @@spacer    = '>'
 end
