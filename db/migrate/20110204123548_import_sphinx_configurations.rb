@@ -4,8 +4,6 @@ class ImportSphinxConfigurations < ActiveRecord::Migration
   end
 
   def self.down
-    SphinxAdmin.all.each do |s|
-      s.delete
-    end
+    SphinxAdmin.delete_all
   end
 end

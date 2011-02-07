@@ -7,9 +7,9 @@ class SphinxAdmin < ActiveRecord::Base
   def self.import
     exceptions = SphinxAdminException
     word_forms = SphinxAdminWordForm
-    self.all.each do |e|
-      e.delete
-    end
+
+    delete_all
+
     import_file('exceptions.txt', exceptions)
     import_file('wordforms.txt', word_forms)
     write_file('exceptions.txt', exceptions)
