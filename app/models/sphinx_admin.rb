@@ -4,13 +4,14 @@ class SphinxAdmin < ActiveRecord::Base
   cattr_accessor :file_name
   cattr_accessor :spacer
   
-  def self.rewrite
+  def self.seed
     self.delete_all
-    self.import_file
+    self.import_file(Rails.root.join('db', 'seeds', 'sphinx', file_name))
+    FOLDER.mkpath
     self.export_file
   end
 
-  def value
+  def to_s
     "#{from} #{spacer} #{to}"
   end
 
@@ -39,19 +40,19 @@ class SphinxAdmin < ActiveRecord::Base
     a
   end
 
-  def self.import_file
-    File.open(FOLDER.join(self.file_name), "r") do |file|
+  def self.import_file(file_name = nil)
+    file_name ||= FOLDER.join(self.file_name)
+    
+    File.open(file_name, "r") do |file|
       file.each do |line|
         self.create(:value => line) unless line.blank?
       end
     end
   end
 
-  def self.export_file
-    File.open(FOLDER.join(self.file_name), "w+") do |file|
-      self.all.each do |ex|
-        file.puts ex.value
-      end
-    end
+  def self.export_file(file_name = nil)
+    file_name ||= FOLDER.join(self.file_name)
+
+    File.open(file_name, "w+").puts self.all
   end
 end
