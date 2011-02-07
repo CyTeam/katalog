@@ -40,20 +40,18 @@ class SphinxAdmin < ActiveRecord::Base
   end
 
   def self.import_file
-    file = File.new(FOLDER.join(self.file_name), "r")
-
-    file.each do |line|
-      self.create(:value => line) unless line.blank?
+    File.open(FOLDER.join(self.file_name), "r") do |file|
+      file.each do |line|
+        self.create(:value => line) unless line.blank?
+      end
     end
-
-    file.close
   end
 
   def self.export_file
-    file = File.new(FOLDER.join(self.file_name), "w+")
-    self.all.each do |ex|
-      file.puts ex.value
+    File.open(FOLDER.join(self.file_name), "w+") do |file|
+      self.all.each do |ex|
+        file.puts ex.value
+      end
     end
-    file.close
   end
 end
