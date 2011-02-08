@@ -111,6 +111,7 @@ de:
   activerecord:
     models:
       dossier:        "Dossier"
+      dossier_number: "Dokumentenanzahl"
       location:       "Standort"
       container:      "Dossier"
       container_type: "Dossier Art"
