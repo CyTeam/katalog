@@ -48,7 +48,7 @@ class SphinxAdmin < ActiveRecord::Base
   end
 
   def sync_sphinx
-    self.class.export_file(file_name)
+    self.class.export_file
     
     call_rake("thinking_sphinx:reindex")
   end
