@@ -37,7 +37,6 @@ Katalog::Application.routes.draw do
   resources :sphinx_admins do
     collection do
       get :exceptions, :word_forms
-      puts :update
     end
   end
 
