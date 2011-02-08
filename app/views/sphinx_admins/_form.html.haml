@@ -1,6 +1,4 @@
-- sphinx_admin = form.becomes(SphinxAdmin)
-= form_for sphinx_admin do |f|
-  = f.text_field :from
-  >
-  = f.text_field :to
-  = f.submit
+= form_tag sphinx_admins_path, :method => :post do
+  #list
+    = text_area_tag "#{@model}[list]", @model.list, :rows => @model.list.lines.count + 4, :cols => 80
+  = submit_tag t('formtastic.save', :model => t_model(@model))

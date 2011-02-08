@@ -117,6 +117,8 @@ de:
       user:    "Nutzer"
       keyword: "Schlagwort"
       topic:   "Titel"
+      sphinx_admin_exception: "Ausnahmen"
+      sphinx_admin_word_form: "Wortformen"
 
     attributes:
       dossier:

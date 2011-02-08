@@ -2,20 +2,23 @@ class SphinxAdminsController < AuthorizedController
   before_filter :authenticate_user!
 
   def exceptions
+    @model = SphinxAdminException
     @sphinx_admins = SphinxAdminException.all
   end
 
   def word_forms
+    @model = SphinxAdminWordForm
     @sphinx_admins = SphinxAdminWordForm.all
   end
 
-  def update
-    # User :back to redirect to list where we come from
-    update!{ :back }
-  end
-
   def create
+    if params['SphinxAdminException']
+      SphinxAdminException.list = params['SphinxAdminException']['list']
+    end
+    if params['SphinxAdminWordForm']
+      SphinxAdminWordForm.list = params['SphinxAdminWordForm']['list']
+    end
     # User :back to redirect to list where we come from
-    create!{ :back }
+    redirect_to :back
   end
 end
