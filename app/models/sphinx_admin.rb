@@ -23,14 +23,6 @@ class SphinxAdmin < ActiveRecord::Base
   
   private
 
-  def write_file
-    file = File.new(FOLDER.join(FILE_NAME), "w+")
-    self.all.each do |ex|
-      file.puts ex.spacer
-    end
-    file.close
-  end
-
   def divide_input(input)
     values = input.split(spacer)
     a = Hash.new
