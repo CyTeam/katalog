@@ -22,8 +22,8 @@ class SphinxAdmin < ActiveRecord::Base
   end
   
   private
-  after_save :export_file
-  after_destroy :export_file
+  after_save :sync_sphinx
+  after_destroy :sync_sphinx
   
   def self.import_file(file_name = nil)
     file_name ||= FOLDER.join(self.file_name)
@@ -41,7 +41,15 @@ class SphinxAdmin < ActiveRecord::Base
     File.open(file_name, "w+").puts self.all
   end
   
-  def export_file(file_name = nil)
+  def call_rake(task, options = {})
+    options[:rails_env] ||= Rails.env
+    args = options.map { |n, v| "#{n.to_s.upcase}='#{v}'" }
+    system "rake #{task} #{args.join(' ')}"
+  end
+
+  def sync_sphinx
     self.class.export_file(file_name)
+    
+    call_rake("thinking_sphinx:reindex")
   end
 end
