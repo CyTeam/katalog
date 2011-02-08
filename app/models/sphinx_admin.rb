@@ -22,6 +22,9 @@ class SphinxAdmin < ActiveRecord::Base
   end
   
   private
+  after_save :export_file
+  after_destroy :export_file
+  
   def self.import_file(file_name = nil)
     file_name ||= FOLDER.join(self.file_name)
     
@@ -36,5 +39,9 @@ class SphinxAdmin < ActiveRecord::Base
     file_name ||= FOLDER.join(self.file_name)
 
     File.open(file_name, "w+").puts self.all
+  end
+  
+  def export_file(file_name = nil)
+    self.class.export_file(file_name)
   end
 end
