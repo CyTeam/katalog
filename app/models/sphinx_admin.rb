@@ -5,7 +5,6 @@ class SphinxAdmin < ActiveRecord::Base
   cattr_accessor :spacer
   
   def self.seed
-    self.delete_all
     self.import_file(Rails.root.join('db', 'seeds', 'sphinx', file_name))
     FOLDER.mkpath
     self.export_file
@@ -21,6 +20,14 @@ class SphinxAdmin < ActiveRecord::Base
     self.from  = values[1].strip
   end
   
+  def self.import_text(value)
+    self.delete_all
+    
+    value.each do |line|
+      self.create(:value => line) unless line.blank?
+    end
+  end
+  
   private
   after_save :sync_sphinx
   after_destroy :sync_sphinx
@@ -28,11 +35,7 @@ class SphinxAdmin < ActiveRecord::Base
   def self.import_file(file_name = nil)
     file_name ||= FOLDER.join(self.file_name)
     
-    File.open(file_name, "r") do |file|
-      file.each do |line|
-        self.create(:value => line) unless line.blank?
-      end
-    end
+    self.import_text File.read(file_name)
   end
 
   def self.export_file(file_name = nil)
