@@ -16,22 +16,12 @@ class SphinxAdmin < ActiveRecord::Base
   end
 
   def value=(input)
-    values = divide_input(input)
-    self.to    = values[:to]
-    self.from  = values[:from]
+    values = input.split(spacer)
+    self.to    = values[0].strip
+    self.from  = values[1].strip
   end
   
   private
-
-  def divide_input(input)
-    values = input.split(spacer)
-    a = Hash.new
-    a[:from] = values[0].strip
-    a[:to] = values[1].strip
-
-    a
-  end
-
   def self.import_file(file_name = nil)
     file_name ||= FOLDER.join(self.file_name)
     
