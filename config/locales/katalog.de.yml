@@ -164,6 +164,7 @@ de:
         password_confirmation: "Passwort Bestätigung"
         remember_me:           "Angemeldet bleiben"
         roles:                 "Berechtigungen"
+        role_texts:            "Berechtigungen"
         created_at:            "Erstellt am"
 
   formtastic:
