@@ -5,9 +5,7 @@ class SphinxAdmin < ActiveRecord::Base
   cattr_accessor :spacer
   
   def self.seed
-    
     self.import_file(Rails.root.join('db', 'seeds', 'sphinx', file_name))
-    FOLDER.mkpath
     self.export_file
   end
 
@@ -58,6 +56,7 @@ class SphinxAdmin < ActiveRecord::Base
   end
 
   def self.sync_sphinx
+    FOLDER.mkpath
     self.export_file
     
     call_rake("thinking_sphinx:reindex")
