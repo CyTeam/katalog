@@ -94,8 +94,9 @@ de:
       action:                 "Durchgeführte Aktion"
       item_type:              "Datentyp"
       actions:
-        update: "geändert"
+        update:  "geändert"
         destroy: "gelöscht"
+        create:  "erzeugt"
       was_deleted:            "Wurde gelöscht"
       additional_information: "Zusatzinformationen"
       current_version:        "Aktuelle Version"
@@ -115,6 +116,7 @@ de:
       container_type: "Dossier Art"
       session: "Sitzung"
       user:    "Nutzer"
+      role:    "Rolle"
       keyword: "Schlagwort"
       topic:   "Titel"
       sphinx_admin_exception: "Ausnahmen"
