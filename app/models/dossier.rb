@@ -222,18 +222,10 @@ class Dossier < ActiveRecord::Base
     containers.collect{|c| c.location}.uniq
   end
 
-  def locations_shortcut
-    locations.collect{|l| l.to_s.scan(/\((\w*)\)/).first }
-  end
-  
   def container_types
     containers.collect{|c| c.container_type}.uniq
   end
 
-  def container_types_shortcut
-    container_types.collect{|l| l.to_s.scan(/\((\w*)\)/).first }
-  end
-  
   # Grand total of documents
   def self.document_count
     includes(:numbers).sum(:amount).to_i
