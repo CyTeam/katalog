@@ -21,7 +21,11 @@ module VersionsHelper
 
   def differences(version)
     object_after = next_object(version) ? next_object(version) : original(version)
-    Version.differences(version, object_after)
+    changes = Version.differences(version, object_after)
+
+    # Ignore timestamps and Model specific boring attributes
+    ignore_attributes = ["created_at", "updated_at"] + version.item_type.constantize.ignore
+    changes.select{|change| !ignore_attributes.include?(change[:attribute])}
   end
 
   def next_object(version)
