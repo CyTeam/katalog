@@ -2,8 +2,8 @@
 = semantic_form_for(@dossier) do |f|
   = f.inputs do
     = f.semantic_errors :containers
-    = f.input :signature
-    = f.input :title
+    = f.input :signature, :input_html => {:size => '12'}
+    = f.input :title, :input_html => {:style => 'width: 100%'}
     = f.input :description, :as => :ckeditor, :input_html => {:class => 'autogrow', :rows => 5, :width => '74%'}
     ~ f.input :keyword_text, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.keyword_list.size + 1}
     ~ f.input :relation_list, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.relations.size + 1}
