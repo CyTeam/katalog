@@ -51,7 +51,7 @@ class Dossier < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :keywords
   
-  # Search
+  # Freetext search
   define_index do
     set_property :group_concat_max_len => 1048576
 
@@ -73,7 +73,6 @@ class Dossier < ActiveRecord::Base
     has created_at, updated_at
   end
 
-#  sphinx_scope(:by_text) { |value| {:conditions => value} }
   def self.by_text(value, options = {})
     params = {:match_mode => :extended, :rank_mode => :match_any, :with => {:type => 'Dossier'}, :order => :sort_key, :sort_mode => :desc}
     params.merge!(options)
@@ -82,11 +81,6 @@ class Dossier < ActiveRecord::Base
     search(query, params)
   end
 
-  # Helpers
-  def to_s
-    "#{signature}: #{title}"
-  end
-  
   def self.split_search_words(query)
     sentences = []
 
@@ -146,6 +140,12 @@ class Dossier < ActiveRecord::Base
     return query
   end
   
+  # Helpers
+  def to_s
+    "#{signature}: #{title}"
+  end
+  
+  # Attributes
   def relations
     return [] if related_to.blank?
     
@@ -172,7 +172,6 @@ class Dossier < ActiveRecord::Base
     titles
   end
   
-  # Attributes
   def location=(value)
     if value.is_a?(String)
       write_attribute(:location, Location.find_by_code(value))
