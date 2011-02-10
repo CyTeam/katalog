@@ -485,6 +485,7 @@ class Dossier < ActiveRecord::Base
             :signature         => row[0],
             :title             => title
           )
+          puts dossier unless Rails.env.test?
         end
         
         dossier.import(row)
@@ -494,7 +495,8 @@ class Dossier < ActiveRecord::Base
         puts e.message
         puts e.backtrace
       end
-      puts dossier unless Rails.env.test?
+
+      puts "  #{dossier.containers.last.period}" unless Rails.env.test?
       end
     end
 
