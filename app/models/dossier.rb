@@ -456,6 +456,10 @@ class Dossier < ActiveRecord::Base
   end
   
   def self.import_all(rows)
+    # Disable PaperTrail for speedup
+    paper_trail_enabled = PaperTrail.enabled?
+    PaperTrail.enabled = false
+    
     new_dossier = true
     title = nil
     dossier = nil
@@ -493,6 +497,9 @@ class Dossier < ActiveRecord::Base
       puts dossier unless Rails.env.test?
       end
     end
+
+    # Reset PaperTrail state
+    PaperTrail.enabled = paper_trail_enabled
   end
   
   def self.import_filter(rows)
