@@ -2,10 +2,11 @@
   %td
     = model_name version
   %td
+    = link_to version.reify.to_s, version, {'data-href-container' => 'tr'}
+  %td
     = user_email version
   %td
     = version.created_at
   %td
     = action(version)
   %td
-    = difference_to_current(version)

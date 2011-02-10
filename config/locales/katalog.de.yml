@@ -93,6 +93,7 @@ de:
       changed_at:             "Geändert am"
       action:                 "Durchgeführte Aktion"
       item_type:              "Datentyp"
+      object:                 "Objekt"
       actions:
         update:  "geändert"
         destroy: "gelöscht"
@@ -115,7 +116,7 @@ de:
       container:      "Dossier"
       container_type: "Dossier Art"
       session: "Sitzung"
-      user:    "Nutzer"
+      user:    "Benutzer"
       role:    "Rolle"
       keyword: "Schlagwort"
       topic:   "Titel"
