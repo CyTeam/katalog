@@ -99,7 +99,7 @@ class DossiersController < AuthorizedController
     if params[:search][:text].present?
       @query = params[:search][:text]
       @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page])
-    elsif params[:search][:signature]
+    elsif params[:search][:signature].present?
       @query = params[:search][:signature]
       @dossiers = Dossier.by_signature(params[:search][:signature]).dossier.order('signature').paginate :page => params[:page], :per_page => params[:per_page]
     else
