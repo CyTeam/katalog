@@ -1,8 +1,9 @@
 class SphinxAdmin < ActiveRecord::Base
   FOLDER = Rails.root.join('config', 'sphinx')
 
-  cattr_accessor :file_name
-  cattr_accessor :spacer
+  def spacer
+    self.class.spacer
+  end
   
   def self.seed
     self.import_file(Rails.root.join('db', 'seeds', 'sphinx', file_name))
