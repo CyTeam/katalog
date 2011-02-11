@@ -4,5 +4,6 @@
     %span.title
       = dossier.title
   %td
-    %input.dossier-last-container-title{:tabindex => @tabindex, 'data-dossier' => dossier.id, 'data-number' => dossier.numbers.last.id, :type => 'text', :value => dossier.numbers.last.amount}
-    - @tabindex += 1
+    - if number = dossier.numbers.last
+      %input.dossier-last-container-title{:tabindex => @tabindex, 'data-dossier' => dossier.id, 'data-number' => number.id, :type => 'text', :value => number.amount}
+      - @tabindex += 1
