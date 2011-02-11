@@ -1,4 +1,9 @@
 class SphinxAdminWordForm < SphinxAdmin
-  @@file_name = 'wordforms.txt'
-  @@spacer    = '>'
+  def self.file_name
+    'wordforms.txt'
+  end
+
+  def self.spacer
+    '>'
+  end
 end
