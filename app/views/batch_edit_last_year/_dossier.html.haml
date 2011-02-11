@@ -1,0 +1,8 @@
+%tr[dossier]{:class => cycle('odd', 'even')}
+  %td= dossier.signature
+  %td
+    %span.title
+      = dossier.title
+  %td.action-links{:colspan => '2'}
+    %input{:tabindex => @tabindex, :class => 'dossier-last-container-title', 'data-dossier' => dossier.id, 'data-number' => dossier.numbers.last.id, :type => 'text', :value => dossier.numbers.last.amount}
+    - @tabindex += 1

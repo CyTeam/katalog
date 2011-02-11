@@ -1,4 +1,6 @@
 %h1= t('katalog.main_navigation.edit_year')
 
-.index
-  = render 'list'
+#dossiers.ce_table.block
+  %table
+    = render 'dossiers/list_header'
+    = render :partial => 'batch_edit_last_year/dossier', :collection => @dossiers
