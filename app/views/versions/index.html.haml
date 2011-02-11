@@ -1,21 +1,21 @@
 %h1
   = t('katalog.main_navigation.changes')
 
-.ce_table.block
-  %table
-    %tbody
-      %tr
-        %th
-          = t('katalog.versions.item_type')
-        %th
-          = t('katalog.versions.object')
-        %th
-          = t('katalog.versions.changed_from')
-        %th
-          = t('katalog.versions.changed_at')
-        %th
-          = t('katalog.versions.action')
-        %th
+= paginated_section :renderer => PaginationListLinkRenderer do
+  .ce_table.block
+    %table
+      %tbody
+        %tr
+          %th
+            = t('katalog.versions.item_type')
+          %th
+            = t('katalog.versions.object')
+          %th
+            = t('katalog.versions.changed_from')
+          %th
+            = t('katalog.versions.changed_at')
+          %th
+            = t('katalog.versions.action')
+          %th
 
-      = render @versions
-
+        = render @versions
