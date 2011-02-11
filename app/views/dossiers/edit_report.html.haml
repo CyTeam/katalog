@@ -4,4 +4,5 @@
   #dossiers.ce_table.block
     %table
       = render 'batch_edit_last_year/list_header'
+      - @tabindex = 1
       = render :partial => 'batch_edit_last_year/dossier', :collection => @dossiers
