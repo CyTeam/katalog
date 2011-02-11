@@ -1,6 +1,7 @@
 %h1= t('katalog.main_navigation.edit_year')
 
-#dossiers.ce_table.block
-  %table
-    = render 'dossiers/list_header'
-    = render :partial => 'batch_edit_last_year/dossier', :collection => @dossiers
+= paginated_section :renderer => PaginationListLinkRenderer do
+  #dossiers.ce_table.block
+    %table
+      = render 'dossiers/list_header'
+      = render :partial => 'batch_edit_last_year/dossier', :collection => @dossiers
