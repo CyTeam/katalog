@@ -97,14 +97,6 @@ class DossiersControllerTest < ActionController::TestCase
     end
   end
 
-  test "should get report with collect_years_count" do
-    get :report, :collect_year_count => 10
-
-    assert_response :success
-    
-    assert_select 'th.year', Dossier.years(10).size
-  end
-
   test "should get report" do
     get :report
     assert_response :success
