@@ -5,7 +5,7 @@ class VersionsController < AuthorizedController
   def index
     if params[:dossier_id]
       dossiers = Dossier.find(params[:dossier_id])
-      @versions = dossiers.versions
+      @versions = dossiers.versions.paginate(:page => params[:page])
       dossiers.numbers.each do |n|
         n.versions.each do |v|
           @versions << v
