@@ -100,6 +100,7 @@ class DossiersController < AuthorizedController
     # Collection setup
     @year = params[:year]
     
+    params[:search] ||= {}
     if params[:search][:text].present?
       @query = params[:search][:text]
       @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page])
