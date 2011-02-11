@@ -86,6 +86,7 @@ class DossiersController < AuthorizedController
   end
 
   def edit_report
+    @search_path = edit_report_dossiers_path
     dossier_search
   end
 
