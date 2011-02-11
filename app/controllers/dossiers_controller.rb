@@ -86,6 +86,7 @@ class DossiersController < AuthorizedController
   end
 
   def edit_report
+    # Stay on this action after search
     @search_path = edit_report_dossiers_path
 
     # Pagination
@@ -96,6 +97,8 @@ class DossiersController < AuthorizedController
     end
 
     # Collection setup
+    @year = params[:year]
+    
     if params[:search][:text].present?
       @query = params[:search][:text]
       @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page])
