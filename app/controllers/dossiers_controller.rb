@@ -87,7 +87,29 @@ class DossiersController < AuthorizedController
 
   def edit_report
     @search_path = edit_report_dossiers_path
-    dossier_search
+
+    # Pagination
+    params[:per_page] ||= 50
+    if params[:per_page] == 'all'
+      # Simple hack to simulate all
+      params[:per_page] = 1000000
+    end
+
+    # Collection setup
+    if params[:search][:text].present?
+      @query = params[:search][:text]
+      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page])
+    elsif params[:search][:signature]
+      @query = params[:search][:signature]
+      @dossiers = Dossier.by_signature(params[:search][:signature]).dossier.order('signature').paginate :page => params[:page], :per_page => params[:per_page]
+    else
+      @dossiers = Topic.where("char_length(signature) <= 2").paginate :page => params[:page], :per_page => 10000
+      render 'index'
+      return
+    end
+
+    # Drop nil results by stray full text search matches
+    @dossiers.compact!
   end
 
   private
