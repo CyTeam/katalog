@@ -12,6 +12,18 @@ class Dossier < ActiveRecord::Base
   scope :geo, topic.where("char_length(signature) = 4")
   scope :detail, topic.where("char_length(signature) = 8")
 
+  cattr_reader :level_to_prefix_length
+  def self.level_to_prefix_length(level)
+    case level.to_s
+      when "1": 1
+      when "2": 2
+      when "3": 4
+      when "4": 8
+    end
+  end
+  
+  scope :by_level, lambda {|level| where("char_length(signature) <= ?", self.level_to_prefix_length(level))}
+  
   # Scopes
   scope :by_text2, lambda {|value|
     signatures, words = split_search_words(value)

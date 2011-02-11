@@ -135,6 +135,7 @@ de:
         tag:                  "Schlagwort"
         keyword:              "Schlagwort"
         keyword_text:         "Schlagworte"
+        keywords:             "Schlagworte"
         first_document_year:  "Dokumente seit"
         related_to:           "Querverweise"
         relation_list:        "Querverweise"

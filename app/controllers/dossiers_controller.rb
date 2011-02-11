@@ -14,6 +14,7 @@ class DossiersController < AuthorizedController
   has_scope :by_location, :as => :location
   has_scope :by_kind, :as => :kind
   has_scope :by_character
+  has_scope :by_level, :as => :level
   
   # Tags
   has_scope :tagged_with, :as => :tag
@@ -45,13 +46,6 @@ class DossiersController < AuthorizedController
     edit!
   end
 
-  def overview
-    @report = {}
-    @report[:collect_year_count] = (params[:collect_year_count] || 5).to_i
-
-    index
-  end
-
   def report
     report_name = params[:report_name] || 'overview'
     @report = {}
@@ -66,6 +60,13 @@ class DossiersController < AuthorizedController
         @report[:orientation] = 'landscape'
         @report[:collect_year_count] = (params[:collect_year_count] || 1).to_i
         @report[:columns] = [:signature, :title, :first_document_year]
+        
+      when '5-year'
+        @report[:orientation] = 'portrait'
+        @report[:collect_year_count] = (params[:collect_year_count] || 5).to_i
+        @report[:columns] = [:signature, :title, :document_count]
+        @report[:level] = 2
+        params[:per_page] = 'all'
     end
 
     # Sanitize and use columns parameter if present
@@ -141,7 +142,7 @@ class DossiersController < AuthorizedController
       @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page])
     else
       @query = params[:search][:signature]
-      @dossiers = apply_scopes(Dossier, params[:search]).order('signature').paginate :page => params[:page], :per_page => params[:per_page]
+      @dossiers = apply_scopes(Dossier, params[:search].merge(@report || {})).order('signature').paginate :page => params[:page], :per_page => params[:per_page]
 
       # Alphabetic pagination
       alphabetic_topics = ['15', '15.0', '15.0.100', '56', '56.0.130', '56.0.500', '81', '81.5', '81.5.100']

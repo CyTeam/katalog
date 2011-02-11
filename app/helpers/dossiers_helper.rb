@@ -56,6 +56,10 @@ module DossiersHelper
         dossier.container_types.collect{|t| t.code}.join(', ')
       when :location
         dossier.locations.collect{|l| l.code}.join(', ')
+      when :document_count
+        number_with_delimiter(dossier.document_count)
+      when :keywords
+        dossier.keywords.join(', ')
     end
   end
 
