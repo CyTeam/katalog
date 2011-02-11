@@ -456,10 +456,6 @@ class Dossier < ActiveRecord::Base
   end
   
   def self.import_all(rows)
-    # Disable PaperTrail for speedup
-    paper_trail_enabled = PaperTrail.enabled?
-    PaperTrail.enabled = false
-    
     new_dossier = true
     title = nil
     dossier = nil
@@ -497,9 +493,6 @@ class Dossier < ActiveRecord::Base
       puts dossier unless Rails.env.test?
       end
     end
-
-    # Reset PaperTrail state
-    PaperTrail.enabled = paper_trail_enabled
   end
   
   def self.import_filter(rows)
@@ -509,6 +502,10 @@ class Dossier < ActiveRecord::Base
   end
   
   def self.import_from_csv(path)
+    # Disable PaperTrail for speedup
+    paper_trail_enabled = PaperTrail.enabled?
+    PaperTrail.enabled = false
+    
     # Load file at path using ; as delimiter
     rows = FasterCSV.read(path, :col_sep => ';')
     
@@ -517,5 +514,8 @@ class Dossier < ActiveRecord::Base
     topic_rows.map{|row| Topic.import(row).save!}
 
     import_all(import_filter(rows))
+
+    # Reset PaperTrail state
+    PaperTrail.enabled = paper_trail_enabled
   end
 end
