@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   # change log
-  has_paper_trail
+  has_paper_trail :ignore => [:reset_password_token, :remember_token, :remember_created_at, :sign_in_count, :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip]
   
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
