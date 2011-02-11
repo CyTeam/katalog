@@ -3,13 +3,11 @@
 group_empty:
   type: Topic
   signature: 8
-  new_signature: 8
   title: Test Group empty
 
 group_7:
   type: Topic
   signature: 7
-  new_signature: 7
   title: Test Group 7
 
 # Topics
@@ -17,13 +15,11 @@ group_7:
 first_topic:
   type: Topic
   signature: 77
-  new_signature: 77
   title: Test 77 Topic
 
 empty_topic:
   type: Topic
   signature: 78
-  new_signature: 78
   title: Empty Topic
 
 # Geo Topics
@@ -31,13 +27,11 @@ empty_topic:
 topic_local:
   type: Topic
   signature: 77.0
-  new_signature: 77.0
   title: All about our City
 
 topic_nowhere:
   type: Topic
   signature: 77.9
-  new_signature: 77.9
   title: Nothing to say 'bout nowhere
 
 # Dossier Topics
@@ -45,59 +39,49 @@ topic_nowhere:
 important_zug_topic:
   type: Topic
   signature: 77.0.100
-  new_signature: 77.100.0
   title: Many, many dossiers about this in our City
 
 simple_zug_topic:
   type: Topic
   signature: 77.0.200
-  new_signature: 77.200.0
   title: Some simple dossiers about this in our City
 
 empty_zug_topic:
   type: Topic
   signature: 77.0.999
-  new_signature: 77.999.0
   title: Boooooring City
 
 # Dossiers
 # ========
 city_counsil:
   signature: 77.0.100
-  new_signature: 77.100.0
   title: City counsil
 
 city_parties:
   signature: 77.0.100
-  new_signature: 77.100.0
   title: City parties
   related_to: City counsil
 
 city_history:
   signature: 77.0.100
-  new_signature: 77.100.0
   title: City history
   first_document_on: 1910-01-01
 #  keywords: War. Peace. Ying and Yang. Upper Class. Lower Class
 
 city_lonely_dossier:
   signature: 77.0.200
-  new_signature: 77.200.0
   title: Lonely dossier
 
 city_counsil_notes:
   signature: 77.0.101
-  new_signature: 77.101.0
   title: City counsil notes
 
 worker_movement_general:
   signature: 11.0.100
-  new_signature: 11.100.0
   title: Worker movement general
   related_to: " Worker Movement History;  Movements general "
 
 worker_movement_history:
   signature: 11.0.500
-  new_signature: 11.500.0
   title: Worker Movement history
   related_to: "Worker Movement general; 77: City history"

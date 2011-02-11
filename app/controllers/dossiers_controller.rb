@@ -98,11 +98,6 @@ class DossiersController < AuthorizedController
   def dossier_index
     params[:dossier] ||= {}
 
-    # Support new_signature
-    if @new_signature = params[:dossier][:order_by] == "new_signature"
-      params[:dossier][:order_by] ||= 'new_signature'
-    end
-
     @dossiers = apply_scopes(Topic, params[:dossier]).where("char_length(signature) <= 2")
     @document_count = Dossier.document_count
 
