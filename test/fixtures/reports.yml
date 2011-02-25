@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  title: MyString
+  orientation: MyString
+  collect_year_count: MyString
+  columns: MyString
+  per_page: MyString
+
+two:
+  name: MyString
+  title: MyString
+  orientation: MyString
+  collect_year_count: MyString
+  columns: MyString
+  per_page: MyString
