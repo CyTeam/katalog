@@ -123,6 +123,7 @@ de:
       topic:   "Titel"
       sphinx_admin_exception: "Ausnahmen"
       sphinx_admin_word_form: "Wortformen"
+      report:  "Report"
 
     attributes:
       dossier:
@@ -174,6 +175,14 @@ de:
         current_sign_in_at:    "Aktueller Login um"
         last_sign_in_at:       "Letzer Login um"
         sign_in_count:         "Anzahl Logins"
+      report:
+        collect_year_count: "Jahresschritte"
+        columns:            "Spalten"
+        level:              "Gliederungsebene"
+        name:               "Name"
+        title:              "Titel"
+        orientation:        "Seitenformat"
+        per_page:           "Blättern"
 
   formtastic:
     hints:
