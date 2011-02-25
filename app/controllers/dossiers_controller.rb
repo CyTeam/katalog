@@ -56,7 +56,7 @@ class DossiersController < AuthorizedController
         @report[:orientation] = 'portrait'
         @report[:columns] = [:signature, :title, :document_count]
         @report[:level] = 2
-        params[:per_page] = 'all'
+        @report[:per_page] = 'all'
 
       when 'overview'
         @report[:orientation] = 'landscape'
@@ -72,7 +72,7 @@ class DossiersController < AuthorizedController
         @report[:collect_year_count] = (params[:collect_year_count] || 5).to_i
         @report[:columns] = [:signature, :title, :document_count]
         @report[:level] = 2
-        params[:per_page] = 'all'
+        @report[:per_page] = 'all'
     end
 
     # Sanitize and use columns parameter if present
@@ -88,6 +88,9 @@ class DossiersController < AuthorizedController
         'margin-right' => '0.2cm'
       }
     end
+    
+    # Set pagination parameter
+    params[:per_page] = @report[:per_page]
     
     search
   end
