@@ -52,6 +52,12 @@ class DossiersController < AuthorizedController
     
     # Preset parameters
     case report_name
+      when 'index'
+        @report[:orientation] = 'portrait'
+        @report[:columns] = [:signature, :title, :document_count]
+        @report[:level] = 2
+        params[:per_page] = 'all'
+
       when 'overview'
         @report[:orientation] = 'landscape'
         @report[:columns] = [:signature, :title, :first_document_year, :container_type, :location, :keyword_text]
@@ -108,6 +114,7 @@ class DossiersController < AuthorizedController
       @query = params[:search][:signature]
       @dossiers = Dossier.by_signature(params[:search][:signature]).dossier.order('signature').paginate :page => params[:page], :per_page => params[:per_page]
     else
+      # Show index
       @dossiers = Topic.where("char_length(signature) <= 2").paginate :page => params[:page], :per_page => 10000
       render 'index'
       return
