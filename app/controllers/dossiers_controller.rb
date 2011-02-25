@@ -132,8 +132,9 @@ class DossiersController < AuthorizedController
   private
   def dossier_index
     params[:dossier] ||= {}
+    params[:dossier][:level] ||= 2
 
-    @dossiers = apply_scopes(Topic, params[:dossier]).where("char_length(signature) <= 2")
+    @dossiers = apply_scopes(Dossier, params[:dossier])
     @document_count = Dossier.document_count
 
     index!
