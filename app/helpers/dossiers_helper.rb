@@ -46,6 +46,15 @@ module DossiersHelper
     link_to(topic, url_for_topic(topic), options)
   end
 
+  def show_header_for_report(column)
+    case column
+      when :document_count
+        @document_count ? t('katalog.total_count', :count => number_with_delimiter(@document_count)) : t_attr(:document_count, Dossier)
+      else
+        t_attr(column.to_s, Dossier)
+    end
+  end
+  
   def show_column_for_report(dossier, column)
     case column
       when :title
