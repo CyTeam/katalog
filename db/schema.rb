@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110225095250) do
+ActiveRecord::Schema.define(:version => 20110225110238) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(:version => 20110225095250) do
   create_table "reports", :force => true do |t|
     t.string   "name"
     t.string   "title"
-    t.string   "orientation"
-    t.string   "collect_year_count"
+    t.string   "orientation",        :default => "landscape"
+    t.integer  "collect_year_count"
     t.string   "columns"
     t.string   "per_page"
     t.datetime "created_at"

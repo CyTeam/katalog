@@ -48,31 +48,13 @@ class DossiersController < AuthorizedController
 
   def report
     report_name = params[:report_name] || 'overview'
-    @report = {}
+    @report = Report.find_by_name(report_name)
     
     # Preset parameters
     case report_name
       when 'index'
-        @report[:orientation] = 'portrait'
-        @report[:columns] = [:signature, :title, :document_count]
-        @report[:level] = 2
-        @report[:per_page] = 'all'
-
-      when 'overview'
-        @report[:orientation] = 'landscape'
-        @report[:columns] = [:signature, :title, :first_document_year, :container_type, :location, :keyword_text]
-
-      when 'year'
-        @report[:orientation] = 'landscape'
-        @report[:collect_year_count] = (params[:collect_year_count] || 1).to_i
-        @report[:columns] = [:signature, :title, :first_document_year]
-        
-      when '5-year'
-        @report[:orientation] = 'portrait'
-        @report[:collect_year_count] = (params[:collect_year_count] || 5).to_i
-        @report[:columns] = [:signature, :title, :document_count]
-        @report[:level] = 2
-        @report[:per_page] = 'all'
+         @document_count = Dossier.document_count
+         @report = Report.find_by_name('index')
     end
 
     # Sanitize and use columns parameter if present
@@ -94,7 +76,7 @@ class DossiersController < AuthorizedController
     
     @report[:title] ||= report_name
     
-    search
+    dossier_report
   end
 
   def edit_report
@@ -156,7 +138,7 @@ class DossiersController < AuthorizedController
       @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page])
     else
       @query = params[:search][:signature]
-      @dossiers = apply_scopes(Dossier, params[:search].merge(@report || {})).order('signature').paginate :page => params[:page], :per_page => params[:per_page]
+      @dossiers = apply_scopes(Dossier, params[:search].order('signature').paginate :page => params[:page], :per_page => params[:per_page]
 
       # Alphabetic pagination
       alphabetic_topics = ['15', '15.0', '15.0.100', '56', '56.0.130', '56.0.500', '81', '81.5', '81.5.100']
@@ -173,5 +155,29 @@ class DossiersController < AuthorizedController
     else
       index!
     end
+  end
+
+  def dossier_report
+    params[:per_page] ||= 50
+
+    params[:search] ||= {}
+    params[:search][:text] ||= params[:search][:query]
+    params[:search][:text] ||= params[:query]
+
+    if params[:per_page] == 'all'
+      # Simple hack to simulate all
+      params[:per_page] = 1000000
+    end
+    if params[:search][:text].present?
+      @query = params[:search][:text]
+      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page])
+    else
+      @query = params[:search][:signature]
+      params[:search].merge!(:per_page => @report[:per_page], :level => @report[:level])
+      @dossiers = apply_scopes(Dossier, params[:search]).order('signature').paginate :page => params[:page], :per_page => params[:per_page]
+    end
+
+    # Drop nil results by stray full text search matches
+    @dossiers.compact!
   end
 end
