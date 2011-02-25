@@ -92,6 +92,8 @@ class DossiersController < AuthorizedController
     # Set pagination parameter
     params[:per_page] = @report[:per_page]
     
+    @report[:title] ||= report_name
+    
     search
   end
 
