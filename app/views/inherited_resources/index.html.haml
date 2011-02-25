@@ -2,6 +2,4 @@
 
 %h2= t_title
 
-= paginated_section collection do
-  - if collection.any?
-    = render "collection_table"
+= render 'list'

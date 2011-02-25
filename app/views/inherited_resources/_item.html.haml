@@ -1,0 +1,7 @@
+%tr{:class => cycle('odd', 'even')}
+  - @attributes.each do |field|
+    %td= item.send(field) if item.respond_to?(field)
+  %td.action-links
+    =link_to t_action(:show), resource_url(item), 'data-href-container' => 'tr'
+    =link_to t_action(:edit), edit_resource_url(item)
+    =link_to t_action(:delete), resource_url(item), :confirm => t_confirm_delete(item), :method => :delete

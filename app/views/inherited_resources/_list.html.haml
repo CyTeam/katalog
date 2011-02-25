@@ -1,0 +1,11 @@
+- @attributes ||= collection.first.attribute_names - ['id', 'created_at', 'updated_at']
+= paginated_section collection do
+  .ce_table.block
+    %table.list#user_list
+      %thead
+        %tr
+          - @attributes.each do |field|
+            %th= t_attr field, collection.first.class
+
+      %tbody
+        = render :partial => 'item', :collection => collection
