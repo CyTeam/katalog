@@ -1,15 +1,11 @@
-# Boring files
-# ============
-*~
-.#*
-DEADJOE
-
 # Rails
 # =====
 .bundle
 db/*.sqlite3
-log/
+log/*.log
 tmp/**/*
+
+# Passenger
 tmp/restart.txt
 
 # Vendor
@@ -18,17 +14,11 @@ vendor/bundle
 
 # Volatile
 doc/api
+doc/app
+public/stylesheets/all.css
 
 # Local
 config/database.yml
-
-# Development
-# ===========
-# RVM
-.rvmrc
-
-# Rubymine
-.idea
 
 # Plugins
 # =======
