@@ -1,4 +1,4 @@
-- cache topic do
+- cache [topic.cache_key, action_name] do
   %tr[topic]{:class => topic.topic_type}
     %td= topic.signature
     %td.title= link_to topic.title, url_for_topic(topic), {'data-href-container' => 'tr'}
