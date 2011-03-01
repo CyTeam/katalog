@@ -210,6 +210,8 @@ de:
       pdf:    "PDF anzeigen"
       print: "Seite drucken"
       history:  "Änderungsverlauf"
+    title:
+      preview: "%{model} Vorschau"
 
   cancan:
     roles:
