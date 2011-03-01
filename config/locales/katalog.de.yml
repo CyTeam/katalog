@@ -23,6 +23,9 @@ de:
       skip_navigation:  "Navigation überspringen"
       scroll:           "Blättern"
       grub:             "Stöbern"
+    orientation:
+      portrait:         "Hochformat"
+      landscape:        "Querformat"
     shared:
       doku: "doku-zug.ch"
       logo:
