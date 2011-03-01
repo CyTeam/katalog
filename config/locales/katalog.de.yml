@@ -17,6 +17,7 @@ de:
       search_admin:       "Volltextsuche"
       search_exceptions:  "Ausnahmen"
       search_word_forms:  "Wortformen"
+      reports:            "Reports"
     application:
       title:            "Katalog"
       skip_navigation:  "Navigation überspringen"
