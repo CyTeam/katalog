@@ -103,7 +103,7 @@ class DossiersController < AuthorizedController
     else
       # Show index
       @dossiers = Topic.where("char_length(signature) <= 2").paginate :page => params[:page], :per_page => 10000
-      render 'index'
+      render 'batch_edit_last_year/index'
       return
     end
 
