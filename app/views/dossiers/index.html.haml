@@ -1,4 +1,4 @@
-- cache :index do
+- cache [current_user.try(:id), :index] do
   = render 'search_form'
 
   = render 'shared/page_actions'
