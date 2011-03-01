@@ -158,7 +158,7 @@ class DossiersController < AuthorizedController
   end
 
   def dossier_report
-    params[:per_page] ||= 50
+    params[:per_page] ||= 'all'
 
     params[:search] ||= {}
     params[:search][:text] ||= params[:search][:query]
