@@ -1,4 +1,4 @@
-before "deploy:setup", :db
+before "deploy:setup", "db"
 after "deploy:update_code", "db:symlink"
 
 namespace :db do
