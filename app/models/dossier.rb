@@ -12,6 +12,18 @@ class Dossier < ActiveRecord::Base
   scope :geo, topic.where("char_length(signature) = 4")
   scope :detail, topic.where("char_length(signature) = 8")
 
+  cattr_reader :level_to_prefix_length
+  def self.level_to_prefix_length(level)
+    case level.to_s
+      when "1": 1
+      when "2": 2
+      when "3": 4
+      when "4": 8
+    end
+  end
+  
+  scope :by_level, lambda {|level| where("char_length(signature) <= ?", self.level_to_prefix_length(level))}
+  
   # Scopes
   scope :by_text2, lambda {|value|
     signatures, words = split_search_words(value)
@@ -186,8 +198,6 @@ class Dossier < ActiveRecord::Base
     
     group = value[0,1]
     topic, geo, dossier = value.split('.')
-    new_signature = [topic, dossier, geo].compact.join('.')
-    write_attribute(:new_signature, new_signature)
   end
   
   # Association attributes
@@ -456,10 +466,6 @@ class Dossier < ActiveRecord::Base
   end
   
   def self.import_all(rows)
-    # Disable PaperTrail for speedup
-    paper_trail_enabled = PaperTrail.enabled?
-    PaperTrail.enabled = false
-    
     new_dossier = true
     title = nil
     dossier = nil
@@ -499,9 +505,6 @@ class Dossier < ActiveRecord::Base
       puts "  #{dossier.containers.last.period}" unless Rails.env.test?
       end
     end
-
-    # Reset PaperTrail state
-    PaperTrail.enabled = paper_trail_enabled
   end
   
   def self.import_filter(rows)
@@ -510,7 +513,18 @@ class Dossier < ActiveRecord::Base
     rows.select{|row| (signature_filter.match(row[0]) && row[9].present?) || (row[0].blank? && (row[13].present? || row[14].present? || row[15].present?))}
   end
   
+  def self.prepare_db_for_import
+    Container.delete_all
+    Dossier.delete_all
+    DossierNumber.delete_all
+    ActsAsTaggableOn::Tag.delete_all
+  end
+  
   def self.import_from_csv(path)
+    # Disable PaperTrail for speedup
+    paper_trail_enabled = PaperTrail.enabled?
+    PaperTrail.enabled = false
+    
     # Load file at path using ; as delimiter
     rows = FasterCSV.read(path, :col_sep => ';')
     
@@ -519,5 +533,8 @@ class Dossier < ActiveRecord::Base
     topic_rows.map{|row| Topic.import(row).save!}
 
     import_all(import_filter(rows))
+
+    # Reset PaperTrail state
+    PaperTrail.enabled = paper_trail_enabled
   end
 end

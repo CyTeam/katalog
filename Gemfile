@@ -25,6 +25,10 @@ group :development do
 
   # Haml generators
   gem 'hpricot'
+
+  # Deployment
+  gem 'capistrano'
+  gem 'capistrano-ext'
 end
 gem 'jquery-rails'
 
@@ -45,11 +49,15 @@ gem 'simple-navigation'
 # =======
 # Authentication
 gem 'devise', '~> 1.1'
+
 # Authorization
 gem 'cancan'
 
 # Tagging
 gem 'acts-as-taggable-on', '~> 2.0.6'
+
+# CRUD helpers
+gem 'inherited_resources_views'
 
 # Import
 gem 'fastercsv'

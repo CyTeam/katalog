@@ -46,16 +46,29 @@ module DossiersHelper
     link_to(topic, url_for_topic(topic), options)
   end
 
-  def show_column_for_report(dossier, column)
+  def show_header_for_report(column)
     case column
-      when :title
+      when :document_count
+        @document_count ? t('katalog.total_count', :count => number_with_delimiter(@document_count)) : t_attr(:document_count, Dossier)
+      else
+        t_attr(column.to_s, Dossier)
+    end
+  end
+  
+  def show_column_for_report(dossier, column)
+    case column.to_s
+      when 'title'
         link_to dossier.title, dossier, {'data-href-container' => 'tr'}
-      when :signature, :first_document_year, :keyword_text
+      when 'signature', 'first_document_year', 'keyword_text'
         dossier.send(column)
-      when :container_type
+      when 'container_type'
         dossier.container_types.collect{|t| t.code}.join(', ')
-      when :location
+      when 'location'
         dossier.locations.collect{|l| l.code}.join(', ')
+      when 'document_count'
+        number_with_delimiter(dossier.document_count)
+      when 'keywords'
+        dossier.keywords.join(', ')
     end
   end
 

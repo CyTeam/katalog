@@ -1,8 +1,8 @@
-- cache :index do
+- cache [current_user.try(:id), :index] do
   = render 'search_form'
 
   = render 'shared/page_actions'
-  = render 'title'
+  %h1= t('katalog.overview')
 
   .index
     = render 'list'

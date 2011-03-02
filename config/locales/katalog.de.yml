@@ -17,11 +17,15 @@ de:
       search_admin:       "Volltextsuche"
       search_exceptions:  "Ausnahmen"
       search_word_forms:  "Wortformen"
+      reports:            "Reports"
     application:
       title:            "Katalog"
       skip_navigation:  "Navigation überspringen"
       scroll:           "Blättern"
       grub:             "Stöbern"
+    orientation:
+      portrait:         "Hochformat"
+      landscape:        "Querformat"
     shared:
       doku: "doku-zug.ch"
       logo:
@@ -93,6 +97,7 @@ de:
       changed_at:             "Geändert am"
       action:                 "Durchgeführte Aktion"
       item_type:              "Datentyp"
+      object:                 "Objekt"
       actions:
         update:  "geändert"
         destroy: "gelöscht"
@@ -111,16 +116,18 @@ de:
   activerecord:
     models:
       dossier:        "Dossier"
+      dossier_number: "Dokumentenanzahl"
       location:       "Standort"
       container:      "Dossier"
       container_type: "Dossier Art"
       session: "Sitzung"
-      user:    "Nutzer"
+      user:    "Benutzer"
       role:    "Rolle"
       keyword: "Schlagwort"
       topic:   "Titel"
       sphinx_admin_exception: "Ausnahmen"
       sphinx_admin_word_form: "Wortformen"
+      report:  "Report"
 
     attributes:
       dossier:
@@ -133,6 +140,7 @@ de:
         tag:                  "Schlagwort"
         keyword:              "Schlagwort"
         keyword_text:         "Schlagworte"
+        keywords:             "Schlagworte"
         first_document_year:  "Dokumente seit"
         related_to:           "Querverweise"
         relation_list:        "Querverweise"
@@ -171,6 +179,14 @@ de:
         current_sign_in_at:    "Aktueller Login um"
         last_sign_in_at:       "Letzer Login um"
         sign_in_count:         "Anzahl Logins"
+      report:
+        collect_year_count: "Jahresschritte"
+        columns:            "Spalten"
+        level:              "Gliederungsebene"
+        name:               "Name"
+        title:              "Titel"
+        orientation:        "Seitenformat"
+        per_page:           "Blättern"
 
   formtastic:
     hints:
@@ -194,6 +210,8 @@ de:
       pdf:    "PDF anzeigen"
       print: "Seite drucken"
       history:  "Änderungsverlauf"
+    title:
+      preview: "%{model} Vorschau"
 
   cancan:
     roles:

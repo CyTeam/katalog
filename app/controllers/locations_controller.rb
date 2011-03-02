@@ -2,8 +2,7 @@ class LocationsController < AuthorizedController
   # Authentication
   before_filter :authenticate_user!, :except => [:index, :show]
 
-  protected
-  def collection
-    @locations ||= end_of_association_chain.paginate(:page => params[:page])
+  def attributes
+    ['title', 'code', 'address', 'availability']
   end
 end

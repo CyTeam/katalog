@@ -19,6 +19,7 @@ SimpleNavigation::Configuration.run do |navigation|
         administration.item :new_title, t('katalog.main_navigation.new_title'), new_topic_path, :if => Proc.new { can?(:new, Topic) }
         if current_user.role?'admin'
           administration.item :versions_nav, t('katalog.main_navigation.changes'), versions_path, :highlights_on => /\/versions/
+          administration.item :reports, t('katalog.main_navigation.reports'), reports_path, :highlights_on => /\/reports/
           administration.item :sphinx, t('katalog.main_navigation.search_admin'), exceptions_sphinx_admins_path do |sphinx|
             sphinx.item :exceptions, t('katalog.main_navigation.search_exceptions'), exceptions_sphinx_admins_path
             sphinx.item :word_forms, t('katalog.main_navigation.search_word_forms'), word_forms_sphinx_admins_path

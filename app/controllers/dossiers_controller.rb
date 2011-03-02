@@ -14,6 +14,7 @@ class DossiersController < AuthorizedController
   has_scope :by_location, :as => :location
   has_scope :by_kind, :as => :kind
   has_scope :by_character
+  has_scope :by_level, :as => :level
   
   # Tags
   has_scope :tagged_with, :as => :tag
@@ -45,27 +46,15 @@ class DossiersController < AuthorizedController
     edit!
   end
 
-  def overview
-    @report = {}
-    @report[:collect_year_count] = (params[:collect_year_count] || 5).to_i
-
-    index
-  end
-
   def report
     report_name = params[:report_name] || 'overview'
-    @report = {}
+    @report = Report.find_by_name(report_name)
     
     # Preset parameters
     case report_name
-      when 'overview'
-        @report[:orientation] = 'landscape'
-        @report[:columns] = [:signature, :title, :first_document_year, :container_type, :location, :keyword_text]
-
-      when 'year'
-        @report[:orientation] = 'landscape'
-        @report[:collect_year_count] = (params[:collect_year_count] || 1).to_i
-        @report[:columns] = [:signature, :title, :first_document_year]
+      when 'index'
+         @document_count = Dossier.document_count
+         @report = Report.find_by_name('index')
     end
 
     # Sanitize and use columns parameter if present
@@ -82,28 +71,52 @@ class DossiersController < AuthorizedController
       }
     end
     
-    search
+    # Set pagination parameter
+    params[:per_page] = @report[:per_page]
+    
+    @report[:title] ||= report_name
+    
+    dossier_report
   end
 
   def edit_report
-    @tabindex = 1
-    unless params[:search]
-      dossier_index
-    else
-      dossier_search
+    # Stay on this action after search
+    @search_path = edit_report_dossiers_path
+
+    # Pagination
+    params[:per_page] ||= 50
+    if params[:per_page] == 'all'
+      # Simple hack to simulate all
+      params[:per_page] = 1000000
     end
+
+    # Collection setup
+    @year = params[:year]
+    
+    params[:search] ||= {}
+    if params[:search][:text].present?
+      @query = params[:search][:text]
+      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page])
+    elsif params[:search][:signature].present?
+      @query = params[:search][:signature]
+      @dossiers = Dossier.by_signature(params[:search][:signature]).dossier.order('signature').paginate :page => params[:page], :per_page => params[:per_page]
+    else
+      # Show index
+      @dossiers = Topic.where("char_length(signature) <= 2").paginate :page => params[:page], :per_page => 10000
+      render 'batch_edit_last_year/index'
+      return
+    end
+
+    # Drop nil results by stray full text search matches
+    @dossiers.compact!
   end
 
   private
   def dossier_index
     params[:dossier] ||= {}
+    params[:dossier][:level] ||= 2
 
-    # Support new_signature
-    if @new_signature = params[:dossier][:order_by] == "new_signature"
-      params[:dossier][:order_by] ||= 'new_signature'
-    end
-
-    @dossiers = apply_scopes(Topic, params[:dossier]).where("char_length(signature) <= 2")
+    @dossiers = apply_scopes(Dossier, params[:dossier])
     @document_count = Dossier.document_count
 
     index!
@@ -142,5 +155,29 @@ class DossiersController < AuthorizedController
     else
       index!
     end
+  end
+
+  def dossier_report
+    params[:per_page] ||= 'all'
+
+    params[:search] ||= {}
+    params[:search][:text] ||= params[:search][:query]
+    params[:search][:text] ||= params[:query]
+
+    if params[:per_page] == 'all'
+      # Simple hack to simulate all
+      params[:per_page] = 1000000
+    end
+    if params[:search][:text].present?
+      @query = params[:search][:text]
+      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page])
+    else
+      @query = params[:search][:signature]
+      params[:search].merge!(:per_page => @report[:per_page], :level => @report[:level])
+      @dossiers = apply_scopes(Dossier, params[:search]).order('signature').paginate :page => params[:page], :per_page => params[:per_page]
+    end
+
+    # Drop nil results by stray full text search matches
+    @dossiers.compact!
   end
 end

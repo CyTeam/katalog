@@ -1,4 +1,5 @@
 Katalog::Application.routes.draw do
+  resources :reports
   resources :container_types
 
   devise_for :users

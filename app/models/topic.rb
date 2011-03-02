@@ -25,12 +25,8 @@ class Topic < Dossier
     end
   end
 
-  def children(use_new_signature = false)
-    if use_new_signature
-      Dossier.where("new_signature LIKE CONCAT(?, '%')", new_signature).where("dossiers.id != ?", id)
-    else
-      Dossier.where("signature LIKE CONCAT(?, '%')", signature).where("dossiers.id != ?", id)
-    end
+  def children
+    Dossier.where("signature LIKE CONCAT(?, '%')", signature).where("dossiers.id != ?", id)
   end
   
   
@@ -38,9 +34,8 @@ class Topic < Dossier
     DossierNumber.joins(:dossier).where("signature LIKE CONCAT(?, '%')", signature)
   end
 
-  def direct_children(use_new_signature = false)
-    # TODO: support or drop new_signature
-    result = children(use_new_signature)
+  def direct_children
+    result = children
     result = result.send(children_topic_type) if children_topic_type
     
     result
