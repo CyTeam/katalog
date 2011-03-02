@@ -511,6 +511,13 @@ class Dossier < ActiveRecord::Base
     rows.select{|row| (signature_filter.match(row[0]) && row[9].present?) || (row[0].blank? && (row[13].present? || row[14].present? || row[15].present?))}
   end
   
+  def self.prepare_db_for_import
+    Container.delete_all
+    Dossier.delete_all
+    DossierNumber.delete_all
+    ActsAsTaggableOn::Tag.delete_all
+  end
+  
   def self.import_from_csv(path)
     # Disable PaperTrail for speedup
     paper_trail_enabled = PaperTrail.enabled?
