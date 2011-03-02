@@ -25,6 +25,10 @@ group :development do
 
   # Haml generators
   gem 'hpricot'
+
+  # Deployment
+  gem 'capistrano'
+  gem 'capistrano-ext'
 end
 gem 'jquery-rails'
 

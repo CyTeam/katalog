@@ -2,15 +2,14 @@
 set :application, "katalog"
 set :repository,  "git@github.com:huerlisi/katalog.git"
 
+# Staging
+set :stages, %w(production development)
+set :default_stage, "development"
+require 'capistrano/ext/multistage'
+
 # Deployment
 set :server, :passenger
 set :user, "deployer"                               # The server's user for deploys
-
-set :deploy_to, '/srv/cyt.ch/katalog'
-set :branch, "stable"
-role :web, "web01.doku-zug"                          # Your HTTP server, Apache/etc
-role :app, "web01.doku-zug"                          # This may be the same as your `Web` server
-role :db,  "web01.doku-zug", :primary => true        # This is where Rails migrations will run
 
 # Configuration
 set :scm, :git
