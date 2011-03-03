@@ -1,4 +1,17 @@
+before "deploy:setup", "import:setup"
+after "deploy:update_code", "import:symlink"
+
 namespace :import do
+  desc "Create data directory"
+  task :setup do
+    run "mkdir -p #{shared_path}/data"
+  end
+
+  desc "Make symlink for data"
+  task :symlink do
+    run "ln -nfs #{shared_path}/data #{release_path}/data"
+  end
+
   desc "Upload XLS file"
   task :push do
     run "mkdir -p #{shared_path}/data"
