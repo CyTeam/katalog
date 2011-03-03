@@ -517,7 +517,11 @@ class Dossier < ActiveRecord::Base
     Container.delete_all
     Dossier.delete_all
     DossierNumber.delete_all
+
     ActsAsTaggableOn::Tag.delete_all
+    ActsAsTaggableOn::Tagging.delete_all
+
+    Version.delete_all
   end
   
   def self.import_from_csv(path)
@@ -528,6 +532,9 @@ class Dossier < ActiveRecord::Base
     # Load file at path using ; as delimiter
     rows = FasterCSV.read(path, :col_sep => ';')
     
+    # Drop all entries
+    prepare_db_for_import
+
     # Select rows containing topics
     topic_rows = rows.select{|row| Topic.import_filter.match(row[0]) && row[9].blank?}
     topic_rows.map{|row| Topic.import(row).save!}
