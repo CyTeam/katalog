@@ -9,7 +9,11 @@ namespace :mysql do
 
     on_rollback { run "rm #{filename}" }
     run "mysqldump -u #{yaml[rails_env]['username']} -p #{yaml[rails_env]['database']} -h #{yaml[rails_env]['host']}| bzip2 -c > #{filename}" do |ch, stream, out|
-      ch.send_data "#{yaml[rails_env]['password']}\n" if out =~ /^Enter password:/
+      if out =~ /^Enter password:/
+        ch.send_data "#{yaml[rails_env]['password']}\n"
+      else
+        puts out
+      end
     end
     
     run "ln -nfs #{filename} #{backup_dir}/#{application}.latest"
@@ -22,8 +26,12 @@ namespace :mysql do
     text = capture "cat #{deploy_to}/current/config/database.yml"
     yaml = YAML::load(text)
 
-    run "bzip2 -d < #{filename} | mysql -u #{yaml[rails_env]['username']} -p #{yaml[rails_env]['database']} -h #{yaml[rails_env]['host']}" do |ch, stream, out|
-      ch.send_data "#{yaml[rails_env]['password']}\n" if out =~ /^Enter password:/
+    run "bzip2 -d < #{filename} | mysql -u #{yaml[rails_env]['username']} -p=\"#{yaml[rails_env]['password']}\" #{yaml[rails_env]['database']} -h #{yaml[rails_env]['host']}" do |ch, stream, out|
+      if out =~ /^Enter password:/
+        ch.send_data "#{yaml[rails_env]['password']}"
+      else
+        puts out
+      end
     end
   end
 end
