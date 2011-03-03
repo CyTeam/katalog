@@ -533,7 +533,7 @@ class Dossier < ActiveRecord::Base
     rows = FasterCSV.read(path, :col_sep => ';')
     
     # Drop all entries
-    prepare_db_for_import
+    self.prepare_db_for_import
 
     # Select rows containing topics
     topic_rows = rows.select{|row| Topic.import_filter.match(row[0]) && row[9].blank?}
