@@ -7,7 +7,7 @@ namespace :ts do
     run "mkdir -p #{shared_path}/config"
     upload "config/development.sphinx.conf.example", "#{shared_path}/config/production.sphinx.conf", :via => :scp
 
-    run "mkdir -p #{shared_path}/sphinx"
+    run "mkdir -p #{shared_path}/config/sphinx"
   end
 
   desc "Make symlink for sphinx configs"
