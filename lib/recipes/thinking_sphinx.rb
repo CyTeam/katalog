@@ -3,7 +3,7 @@ after "deploy:update_code", "ts:symlink"
 
 namespace :ts do
   desc "Create thinking sphinx config"
-  task :setup do
+  task :setup, :roles => :app do
     run "mkdir -p #{shared_path}/config"
     
     logger.info "Creating thinking sphinx configuration"
@@ -28,35 +28,35 @@ namespace :ts do
   end
 
   desc "Make symlink for sphinx configs"
-  task :symlink do
+  task :symlink, :roles => :app do
     run "ln -nfs #{shared_path}/config/#{rails_env}.sphinx.conf #{release_path}/config/#{rails_env}.sphinx.conf"
     run "ln -nfs #{shared_path}/config/sphinx #{release_path}/config/sphinx"
   end
 
-  task :rake do
+  task :rake, :roles => :app do
     run("cd #{deploy_to}/current && /usr/bin/env rake ts:#{rake_task} RAILS_ENV=#{rails_env}")
   end
   
   desc "Stop sphinx search daemon"
-  task :stop do
+  task :stop, :roles => :app do
     set :rake_task, 'stop'
     rake
   end
   
   desc "Start sphinx search daemon"
-  task :start do
+  task :start, :roles => :app do
     set :rake_task, 'start'
     rake
   end
   
   desc "Restart sphinx search daemon"
-  task :restart do
+  task :restart, :roles => :app do
     set :rake_task, 'restart'
     rake
   end
 
   desc "Reindex sphinx search daemon"
-  task :reindex do
+  task :reindex, :roles => :app do
     set :rake_task, 'reindex'
     rake
   end
