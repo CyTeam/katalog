@@ -7,7 +7,7 @@ searchd
   listen = 127.0.0.1:9312
   log = log/searchd.log
   query_log = log/searchd.query.log
-  pid_file = log/searchd.<%= rails_env %>.pid
+  pid_file = tmp/pids/searchd.<%= rails_env %>.pid
 }
 
 source dossier_core_0
