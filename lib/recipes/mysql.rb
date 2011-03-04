@@ -9,7 +9,7 @@ namespace :mysql do
     backup_dir ||= "#{deploy_to}/backups"
     run "mkdir -p #{backup_dir}"
 
-    filename = "#{backup_dir}/#{application}.dump.#{Time.now.to_f}.sql.bz2"
+    filename = "#{backup_dir}/#{application}.dump.#{Time.now.strftime('%Y-%m-%d_%H-%M')}.sql.bz2"
     text = capture "cat #{deploy_to}/current/config/database.yml"
     yaml = YAML::load(text)
 
