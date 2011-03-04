@@ -6,6 +6,7 @@ namespace :ts do
   task :setup do
     run "mkdir -p #{shared_path}/config"
     
+    logger.info "Creating thinking sphinx configuration"
     # Load parameters
     db_yml = capture "cat #{deploy_to}/current/config/database.yml"
     yaml = YAML::load(db_yml)
@@ -30,5 +31,33 @@ namespace :ts do
   task :symlink do
     run "ln -nfs #{shared_path}/config/#{rails_env}.sphinx.conf #{release_path}/config/#{rails_env}.sphinx.conf"
     run "ln -nfs #{shared_path}/config/sphinx #{release_path}/config/sphinx"
+  end
+
+  task :rake do
+    run("cd #{deploy_to}/current && /usr/bin/env rake ts:#{rake_task} RAILS_ENV=#{rails_env}")
+  end
+  
+  desc "Stop sphinx search daemon"
+  task :stop do
+    set :rake_task, 'stop'
+    rake
+  end
+  
+  desc "Start sphinx search daemon"
+  task :start do
+    set :rake_task, 'start'
+    rake
+  end
+  
+  desc "Restart sphinx search daemon"
+  task :restart do
+    set :rake_task, 'restart'
+    rake
+  end
+
+  desc "Reindex sphinx search daemon"
+  task :reindex do
+    set :rake_task, 'reindex'
+    rake
   end
 end
