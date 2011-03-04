@@ -38,7 +38,7 @@ namespace :import do
     mysql.restore
   end
   
-  task :run, :roles => :import do
+  task :import_csv, :roles => :import do
     old_rails_env = rails_env
     set :rails_env, 'import'
     
@@ -49,7 +49,7 @@ namespace :import do
   task :default do
     push
     seed_import_db
-    run
+    import_csv
     push_import_db
     ts.reindex
   end
