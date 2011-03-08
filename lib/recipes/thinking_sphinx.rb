@@ -1,5 +1,6 @@
 before "deploy:setup", "ts:setup"
 after "deploy:update_code", "ts:symlink"
+after "ts:symlink", "ts:restart"
 
 namespace :ts do
   desc "Create thinking sphinx config"
