@@ -25,12 +25,14 @@ namespace :ts do
     put config.result(binding), "#{shared_path}/config/#{rails_env}.sphinx.conf"
 
     run "mkdir -p #{shared_path}/config/sphinx"
+    run "mkdir -p #{shared_path}/db/sphinx"
   end
 
-  desc "Make symlink for sphinx configs"
+  desc "Make symlink for sphinx configs and data"
   task :symlink, :roles => :app do
-    run "ln -nfs #{shared_path}/config/#{rails_env}.sphinx.conf #{release_path}/config/#{rails_env}.sphinx.conf"
-    run "ln -nfs #{shared_path}/config/sphinx #{release_path}/config/sphinx"
+    run "ln -nfs #{shared_path}/config/#{rails_env}.sphinx.conf #{deploy_to}/current/config/#{rails_env}.sphinx.conf"
+    run "ln -nfs #{shared_path}/config/sphinx #{deploy_to}/current/config/sphinx"
+    run "ln -nfs #{shared_path}/db/sphinx #{deploy_to}/current/db/sphinx"
   end
 
   task :rake, :roles => :app do
