@@ -1,6 +1,10 @@
 class Dossier < ActiveRecord::Base
   # change log
   has_paper_trail
+
+  # Hooks
+  before_save :update_tags
+
   # Validations
   validates_presence_of :signature, :title
   
@@ -151,6 +155,202 @@ class Dossier < ActiveRecord::Base
     query = [signature_query, sentence_query, word_query].join(' ')
     return query
   end
+
+  def self.import_all(rows)
+    new_dossier = true
+    title = nil
+    dossier = nil
+    for row in rows
+      transaction do
+      begin
+        # Skip empty rows
+        next if row.select{|column| column.present?}.empty?
+
+        # Only import keywords if row has no reference
+        if row[0].blank? && (row[13].present? || row[14].present? || row[15].present?)
+          dossier.import_keywords(row)
+          dossier.save!
+          next
+        end
+
+        old_title = title
+        title = Dossier.truncate_title(row[1])
+        new_dossier = (old_title != title)
+
+        if new_dossier
+          dossier = self.create(
+            :signature         => row[0],
+            :title             => title
+          )
+          puts dossier unless Rails.env.test?
+        end
+
+        dossier.import(row)
+
+        dossier.save!
+      rescue Exception => e
+        puts e.message
+        puts e.backtrace
+      end
+
+      puts "  #{dossier.containers.last.period}" unless Rails.env.test?
+      end
+    end
+  end
+
+  def self.import_filter(rows)
+    signature_filter = /^[ ]*[0-9]{2}\.[0-9]\.[0-9]{3}[ ]*$/
+
+    rows.select{|row| (signature_filter.match(row[0]) && row[9].present?) || (row[0].blank? && (row[13].present? || row[14].present? || row[15].present?))}
+  end
+
+  def self.prepare_db_for_import
+    Container.delete_all
+    Dossier.delete_all
+    DossierNumber.delete_all
+
+    ActsAsTaggableOn::Tag.delete_all
+    ActsAsTaggableOn::Tagging.delete_all
+
+    Version.delete_all
+  end
+
+  def self.import_from_csv(path)
+    # Disable PaperTrail for speedup
+    paper_trail_enabled = PaperTrail.enabled?
+    PaperTrail.enabled = false
+
+    # Load file at path using ; as delimiter
+    rows = FasterCSV.read(path, :col_sep => ';')
+
+    # Drop all entries
+    self.prepare_db_for_import
+
+    # Select rows containing topics
+    topic_rows = rows.select{|row| Topic.import_filter.match(row[0]) && row[9].blank?}
+    topic_rows.map{|row| Topic.import(row).save!}
+
+    import_all(import_filter(rows))
+
+    # Reset PaperTrail state
+    PaperTrail.enabled = paper_trail_enabled
+  end
+
+  # Grand total of documents
+  def self.document_count
+    includes(:numbers).sum(:amount).to_i
+  end
+
+  # Importer
+  def self.filter_tags(values)
+    boring = ["in", "und", "für"]
+    values -= boring
+
+    values.reject!{|value| value.match /^[0-9.']*$/}
+    values.reject!{|value| value.match /^(Jan|Feb|März|Apr|Mai|Juni|Juli|Aug|Sep|Sept|Okt|Nov|Dez)$/}
+
+    return values
+  end
+
+  def self.split_words(value)
+    value.split(/[ %.();,:-]/).uniq.select{|t| t.present?}
+  end
+
+  def self.extract_tags(values)
+    values = values.join(',') if values.is_a? Array
+    filter_tags(split_words(values)).compact
+  end
+
+  def self.extract_keywords(values)
+    value_list = values.join('. ')
+
+    # Build quotation substitutes
+    abbrs = ["HK.H.", "Evang.", "jun.", "P.G.Z.", "Inh.", " Ltd.", "progr.", "z.", "...", "Änd.", "Ex.", "P.M.", "P.S.", "C.E.D.R.I.", "betr.", "Kt.", "Präs.", "St.", "EXPO.02", "Abst.", "Lib.", "gest.", "ex.", "Hrsg.", "S.o.S", "S.O.S.", "S.o.S.", "s.a.", "SA.", "S.A.", "A.O.M.", "Dr.", "jur.", "etc.", "ca.", "schweiz.", "Dir.", "Hist.", "Chr.", "ev.-ref.", "Kand.", "ev.", "ref.", "ehem.", "str."]
+    quoted_abbrs = {}
+    for abbr in abbrs
+      quoted_abbrs[abbr] = abbr.gsub('.', '|')
+    end
+
+    # Quote abbreviations
+    quoted_abbrs.each{|abbr, quoted_abbr| value_list.gsub!(abbr, quoted_abbr)}
+
+    # Quote dates
+    # TODO: Check if this could be done much simpler using gsub and block
+    list = value_list
+    quoted = ""
+    while match = /#{date_range}/.match(list)
+      quoted += match.pre_match
+
+      date = list.slice(match.begin(0)..match.end(0)-1)
+      quoted += date.gsub('.', '|')
+
+      list = match.post_match
+    end
+    value_list = quoted + list
+
+    # Quote initials
+    value_list.gsub!(/((^|[ ])[A-Z])\./, '\1|')
+
+    # Quote bracketed terms
+    # Need a clone or slice! will do some harm
+#    value_term = value_list.clone
+#    value_brackets = value_term.slice!(/^[^(]*/)
+#    while bracket_term = value_term.slice!(/\([^(]*\)/)
+#      value_brackets << bracket_term.gsub('.', '|');
+#    end
+#    value_brackets << value_term
+#    value_list = value_brackets
+
+    # Split and unquote
+    keywords = value_list.split('.')
+    keywords.map!{|keyword| keyword.gsub('|', '.')}
+
+    # Cleanup
+    keywords.compact!
+    keywords.map!{|value| value.strip.presence}
+
+    return keywords
+  end
+
+  def self.date_range
+    month_abbrs = '(Jan\.|Feb\.|März|Apr\.|Mai|Juni|Juli|Aug\.|Sep\.|Sept\.|Okt\.|Nov\.|Dez\.)'
+    month_ordinals = '([1-9]\.|1[0-2]\.)'
+
+    year = '[0-9]{4}'
+    date = "([0-9]{1,2}\\.)?[ ]*((#{month_abbrs}|#{month_ordinals}|#{year})[ ]*){1,2}"
+    date_range = "#{date}([ ]*-[ ]*(#{date})?)?"
+
+    return "[ ]*#{date_range}[ ]*"
+  end
+
+  # Report helpers
+  def self.years(interval = 1)
+    return [] if interval.nil?
+
+    years = DossierNumber.default_periods(Date.today.year, false)
+    prepared_years = years.dup
+    if interval > 1
+      prepared_years.reject! do |item|
+        years.index(item).modulo(interval) != 0
+      end
+
+      prepared_years << {:from => prepared_years.last[:from] + 1, :to => years.last[:to]}
+
+      previous_item = nil
+      prepared_years.each do |item|
+        item[:from] = previous_item[:to] + 1 if previous_item
+        previous_item = item
+      end
+    end
+
+    prepared_years.inject([]) do |result, year|
+      if year.eql?years.first
+        result << 'vor 1990'
+      else
+        result << "#{year[:from] ? year[:from].strftime("%Y") : ''} - #{year[:to].strftime("%Y")}"
+      end
+    end
+  end
   
   # Helpers
   def to_s
@@ -234,11 +434,6 @@ class Dossier < ActiveRecord::Base
   def container_types
     containers.collect{|c| c.container_type}.uniq
   end
-
-  # Grand total of documents
-  def self.document_count
-    includes(:numbers).sum(:amount).to_i
-  end
   
   def document_count(period = nil)
     document_counts = period ? numbers.between(period) : numbers
@@ -260,117 +455,6 @@ class Dossier < ActiveRecord::Base
 
   def first_document_year=(value)
     self.first_document_on = Date.new(value.to_i, 1, 1)
-  end
-
-  # Importer
-  def self.filter_tags(values)
-    boring = ["in", "und", "für"]
-    values -= boring
-    
-    values.reject!{|value| value.match /^[0-9.']*$/}
-    values.reject!{|value| value.match /^(Jan|Feb|März|Apr|Mai|Juni|Juli|Aug|Sep|Sept|Okt|Nov|Dez)$/}
-
-    return values
-  end
-  
-  def self.split_words(value)
-    value.split(/[ %.();,:-]/).uniq.select{|t| t.present?}
-  end
-  
-  def self.extract_tags(values)
-    values = values.join(',') if values.is_a? Array
-    filter_tags(split_words(values)).compact
-  end
-  
-  def self.extract_keywords(values)
-    value_list = values.join('. ')
-
-    # Build quotation substitutes
-    abbrs = ["HK.H.", "Evang.", "jun.", "P.G.Z.", "Inh.", " Ltd.", "progr.", "z.", "...", "Änd.", "Ex.", "P.M.", "P.S.", "C.E.D.R.I.", "betr.", "Kt.", "Präs.", "St.", "EXPO.02", "Abst.", "Lib.", "gest.", "ex.", "Hrsg.", "S.o.S", "S.O.S.", "S.o.S.", "s.a.", "SA.", "S.A.", "A.O.M.", "Dr.", "jur.", "etc.", "ca.", "schweiz.", "Dir.", "Hist.", "Chr.", "ev.-ref.", "Kand.", "ev.", "ref.", "ehem.", "str."]
-    quoted_abbrs = {}
-    for abbr in abbrs
-      quoted_abbrs[abbr] = abbr.gsub('.', '|')
-    end
-    
-    # Quote abbreviations
-    quoted_abbrs.each{|abbr, quoted_abbr| value_list.gsub!(abbr, quoted_abbr)}
-    
-    # Quote dates
-    # TODO: Check if this could be done much simpler using gsub and block
-    list = value_list
-    quoted = ""
-    while match = /#{date_range}/.match(list)
-      quoted += match.pre_match
-      
-      date = list.slice(match.begin(0)..match.end(0)-1)
-      quoted += date.gsub('.', '|')
-      
-      list = match.post_match
-    end
-    value_list = quoted + list
-    
-    # Quote initials
-    value_list.gsub!(/((^|[ ])[A-Z])\./, '\1|')
-    
-    # Quote bracketed terms
-    # Need a clone or slice! will do some harm
-#    value_term = value_list.clone
-#    value_brackets = value_term.slice!(/^[^(]*/)
-#    while bracket_term = value_term.slice!(/\([^(]*\)/)
-#      value_brackets << bracket_term.gsub('.', '|');
-#    end
-#    value_brackets << value_term
-#    value_list = value_brackets
-    
-    # Split and unquote
-    keywords = value_list.split('.')
-    keywords.map!{|keyword| keyword.gsub('|', '.')}
-    
-    # Cleanup
-    keywords.compact!
-    keywords.map!{|value| value.strip.presence}
-
-    return keywords
-  end
-
-  def self.date_range
-    month_abbrs = '(Jan\.|Feb\.|März|Apr\.|Mai|Juni|Juli|Aug\.|Sep\.|Sept\.|Okt\.|Nov\.|Dez\.)'
-    month_ordinals = '([1-9]\.|1[0-2]\.)'
-    
-    year = '[0-9]{4}'
-    date = "([0-9]{1,2}\\.)?[ ]*((#{month_abbrs}|#{month_ordinals}|#{year})[ ]*){1,2}"
-    date_range = "#{date}([ ]*-[ ]*(#{date})?)?"
-    
-    return "[ ]*#{date_range}[ ]*"
-  end
-
-  # Report helpers
-  def self.years(interval = 1)
-    return [] if interval.nil?
-    
-    years = DossierNumber.default_periods(Date.today.year, false)
-    prepared_years = years.dup
-    if interval > 1
-      prepared_years.reject! do |item|
-        years.index(item).modulo(interval) != 0
-      end
-
-      prepared_years << {:from => prepared_years.last[:from] + 1, :to => years.last[:to]}
-
-      previous_item = nil
-      prepared_years.each do |item|
-        item[:from] = previous_item[:to] + 1 if previous_item
-        previous_item = item
-      end
-    end
-
-    prepared_years.inject([]) do |result, year|
-      if year.eql?years.first
-        result << 'vor 1990'
-      else
-        result << "#{year[:from] ? year[:from].strftime("%Y") : ''} - #{year[:to].strftime("%Y")}"
-      end
-    end
   end
 
   def years_counts(interval = 1)
@@ -441,8 +525,7 @@ class Dossier < ActiveRecord::Base
       update_or_create_number(amount, periods[i]) unless amount == 0
     end
   end
-  
-  before_save :update_tags
+
   def update_tags
     tag_string = self.keyword_list.join(',') + "," + self.title
     self.tag_list = self.class.extract_tags(tag_string)
@@ -463,85 +546,5 @@ class Dossier < ActiveRecord::Base
     import_keywords(row)
     update_tags
     import_numbers(row)
-  end
-  
-  def self.import_all(rows)
-    new_dossier = true
-    title = nil
-    dossier = nil
-    for row in rows
-      transaction do
-      begin
-        # Skip empty rows
-        next if row.select{|column| column.present?}.empty?
-        
-        # Only import keywords if row has no reference
-        if row[0].blank? && (row[13].present? || row[14].present? || row[15].present?)
-          dossier.import_keywords(row)
-          dossier.save!
-          next
-        end
-        
-        old_title = title
-        title = Dossier.truncate_title(row[1])
-        new_dossier = (old_title != title)
-        
-        if new_dossier
-          dossier = self.create(
-            :signature         => row[0],
-            :title             => title
-          )
-          puts dossier unless Rails.env.test?
-        end
-        
-        dossier.import(row)
-        
-        dossier.save!
-      rescue Exception => e
-        puts e.message
-        puts e.backtrace
-      end
-
-      puts "  #{dossier.containers.last.period}" unless Rails.env.test?
-      end
-    end
-  end
-  
-  def self.import_filter(rows)
-    signature_filter = /^[ ]*[0-9]{2}\.[0-9]\.[0-9]{3}[ ]*$/
-
-    rows.select{|row| (signature_filter.match(row[0]) && row[9].present?) || (row[0].blank? && (row[13].present? || row[14].present? || row[15].present?))}
-  end
-  
-  def self.prepare_db_for_import
-    Container.delete_all
-    Dossier.delete_all
-    DossierNumber.delete_all
-
-    ActsAsTaggableOn::Tag.delete_all
-    ActsAsTaggableOn::Tagging.delete_all
-
-    Version.delete_all
-  end
-  
-  def self.import_from_csv(path)
-    # Disable PaperTrail for speedup
-    paper_trail_enabled = PaperTrail.enabled?
-    PaperTrail.enabled = false
-    
-    # Load file at path using ; as delimiter
-    rows = FasterCSV.read(path, :col_sep => ';')
-    
-    # Drop all entries
-    self.prepare_db_for_import
-
-    # Select rows containing topics
-    topic_rows = rows.select{|row| Topic.import_filter.match(row[0]) && row[9].blank?}
-    topic_rows.map{|row| Topic.import(row).save!}
-
-    import_all(import_filter(rows))
-
-    # Reset PaperTrail state
-    PaperTrail.enabled = paper_trail_enabled
   end
 end
