@@ -530,7 +530,7 @@ class Dossier < ActiveRecord::Base
     tags = self.class.extract_tags(self.keyword_list.join(',')) # TODO: Removed the title from the tag list which should eventually be reimplemented.
     self.tag_list = tags unless (self.tag_list & tags).length.eql?self.tag_list.length
   end
-  
+
   def import_keywords(row)
     keys = self.class.extract_keywords(row[13..15])
     self.keyword_list.add(keys)
