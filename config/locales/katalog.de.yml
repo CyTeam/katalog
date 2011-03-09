@@ -154,11 +154,14 @@ de:
         delta:                "Delta"
         updated_at:           "Geändert am"
       container:
-        period:         "Zeitraum"
-        title:          "Titel"
-        container_type: "Art"
-        location:       "Standort"
-        document_count: "Anzahl Dokumente"
+        period:            "Zeitraum"
+        title:             "Titel"
+        container_type:    "Art"
+        location:          "Standort"
+        document_count:    "Anzahl Dokumente"
+        dossier_id:        "Dossier-ID"
+        container_type_id: "Container-Typ-ID"
+        location_id:       "Standort-ID"
       location:
         title:        "Titel"
         code:         "Kürzel"
@@ -187,6 +190,11 @@ de:
         title:              "Titel"
         orientation:        "Seitenformat"
         per_page:           "Blättern"
+      dossier_number:
+        from:       "Von"
+        amount:     "Anzahl"
+        dossier_id: "Dossier-ID"
+        to:         "Bis"
 
   formtastic:
     hints:
