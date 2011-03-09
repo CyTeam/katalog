@@ -57,6 +57,19 @@ ActiveRecord::Schema.define(:version => 20110225110238) do
   add_index "dossiers", ["signature"], :name => "index_dossiers_on_signature"
   add_index "dossiers", ["type"], :name => "index_dossiers_on_type"
 
+  create_table "histories", :force => true do |t|
+    t.string   "message"
+    t.string   "username"
+    t.integer  "item"
+    t.string   "table"
+    t.integer  "month",      :limit => 2
+    t.integer  "year",       :limit => 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "histories", ["item", "table", "month", "year"], :name => "index_histories_on_item_and_table_and_month_and_year"
+
   create_table "locations", :force => true do |t|
     t.string   "title"
     t.string   "address"
