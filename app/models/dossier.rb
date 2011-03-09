@@ -411,7 +411,7 @@ class Dossier < ActiveRecord::Base
     
     # Parse list
     dossier_number_strings = value.split("\n")
-    for dossier_number_string in dossier_number_strings
+    dossier_number_strings.each do |dossier_number_string|
       from, to, amount = DossierNumber.from_s(dossier_number_string)
       numbers.build(:from => from, :to => to, :amount => amount)
     end
