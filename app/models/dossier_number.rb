@@ -6,12 +6,7 @@ class DossierNumber < ActiveRecord::Base
 
   # Validation
   validate :presence_of_from_or_to
-  private
-    def presence_of_from_or_to
-      errors.add(:base, "From, To or both need to be present") unless (from || to)
-    end
-  public
-  
+
   # Scopes
   scope :present, where("amount > 0")
   scope :by_period, lambda {|value|
@@ -24,11 +19,7 @@ class DossierNumber < ActiveRecord::Base
     
     where("(`from` IS NULL AND `to` >= :to) OR (`from` >= :from AND `to` <= :to) OR (`from` <= :from AND `to` IS NULL)", {:from => from, :to => to})
   }
-  
-  def to_s(format = :default)
-    "#{period(format)}: #{amount}"
-  end
-  
+
   def self.from_s(value)
     # Convert integers to string
     value = value.to_s
@@ -45,7 +36,29 @@ class DossierNumber < ActiveRecord::Base
     to = Date.new(to, 12, 31) if to
     return [from, to, amount_s.to_i]
   end
+
+  # "All" Periods
+  #
+  # < 1990, 1990-1993, 1994 - :up_to
+  def self.default_periods(up_to = Date.today.year, special = true)
+    periods = []
+    # before 1990
+    periods << {:from => nil, :to => Date.new(1989, 12, 31)}
+    # 1990-1993
+    periods << {:from => Date.new(1990, 1, 1), :to => Date.new(1993, 12, 31)} if special
+    start_year = special ? 1994 : 1990
+    # 1994-
+    for year in start_year..up_to
+      periods << {:from => Date.new(year, 1, 1), :to => Date.new(year, 12, 31)}
+    end
+
+    periods
+  end
   
+  def to_s(format = :default)
+    "#{period(format)}: #{amount}"
+  end
+
   # Attributes
   def from_year
     return nil unless from
@@ -85,21 +98,8 @@ class DossierNumber < ActiveRecord::Base
     self.from, self.to = self.class.from_s(value)
   end
 
-  # "All" Periods
-  # 
-  # < 1990, 1990-1993, 1994 - :up_to
-  def self.default_periods(up_to = Date.today.year, special = true)
-    periods = []
-    # before 1990
-    periods << {:from => nil, :to => Date.new(1989, 12, 31)}
-    # 1990-1993
-    periods << {:from => Date.new(1990, 1, 1), :to => Date.new(1993, 12, 31)} if special
-    start_year = special ? 1994 : 1990
-    # 1994-
-    for year in start_year..up_to
-      periods << {:from => Date.new(year, 1, 1), :to => Date.new(year, 12, 31)}
-    end
-    
-    periods
+  private
+  def presence_of_from_or_to
+    errors.add(:base, "From, To or both need to be present") unless (from || to)
   end
 end
