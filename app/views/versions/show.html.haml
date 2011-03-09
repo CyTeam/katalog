@@ -49,7 +49,7 @@
   %li
     %label
       = t('katalog.versions.changed_at')
-    = @version.created_at
+    = @version.created_at.to_s(:time_with_seconds)
   %li
     %label
       = t('katalog.versions.action')
