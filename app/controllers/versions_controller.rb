@@ -15,4 +15,18 @@ class VersionsController < AuthorizedController
 
     index!
   end
+
+  def restore
+    object = Version.find(params[:id]).reify
+    original = object.class.find(object.id)
+    original = object
+    original.save
+    
+    redirect_to :action => 'index'
+  end
+
+  private
+  def paginated_dossiers
+
+  end
 end

@@ -33,7 +33,11 @@ Katalog::Application.routes.draw do
     end
   end
 
-  resources :versions
+  resources :versions do
+    member do
+      get 'restore'
+    end
+  end
 
   resources :sphinx_admins do
     collection do

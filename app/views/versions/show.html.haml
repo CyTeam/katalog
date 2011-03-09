@@ -1,6 +1,9 @@
 %h1
   = t('katalog.versions.changes_of', :model => @version.item_type)
 
+.actions
+  = link_to 'restore', restore_version_path(@version)
+
 %h2
   = t('katalog.versions.difference_to_current', :model => @version.item_type)
 
