@@ -54,6 +54,20 @@ class DossierNumber < ActiveRecord::Base
 
     periods
   end
+
+  def self.period(from_year, to_year, format = :default)
+    return nil unless (from_year or to_year)
+
+    return "vor %i" % (to_year.try(:year).to_i + 1) if format == :default && from_year.nil? && to_year
+    
+    return from_year.try(:year) if from_year.try(:year) == to_year.try(:year)
+
+    [from_year.try(:year) || '', to_year.try(:year) || ''].compact.join(' - ')
+  end
+
+  def self.as_string(from, to, amount, format = :default)
+    "#{self.period(from, to, format)}: #{amount}"
+  end
   
   def to_s(format = :default)
     "#{period(format)}: #{amount}"

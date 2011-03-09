@@ -406,14 +406,24 @@ class Dossier < ActiveRecord::Base
   end
   
   def dossier_number_list=(value)
-    # Clean list
-    numbers.delete_all
-    
-    # Parse list
+    # Check if values changed.
     dossier_number_strings = value.split("\n")
-    dossier_number_strings.each do |dossier_number_string|
+    new_numbers = dossier_number_strings.inject([]) do |ret, dossier_number_string|
       from, to, amount = DossierNumber.from_s(dossier_number_string)
-      numbers.build(:from => from, :to => to, :amount => amount)
+      ret << DossierNumber.as_string(from, to, amount)
+    end
+    old_numbers = numbers.inject([]) do |ret, number|
+      ret << number.to_s
+    end
+
+    unless (old_numbers & new_numbers).length.eql?old_numbers.length
+      # Clean list
+      numbers.delete_all
+      
+      dossier_number_strings.each do |dossier_number_string|
+        from, to, amount = DossierNumber.from_s(dossier_number_string)
+        numbers.build(:from => from, :to => to, :amount => amount)
+      end
     end
   end
 
