@@ -17,10 +17,19 @@ class VersionsController < AuthorizedController
   end
 
   def restore
-    object = Version.find(params[:id]).reify
-    original = object.class.find(object.id)
-    original = object
-    original.save
+    version = Version.find(params[:id])
+    object = version.reify
+    if object
+      original = 'destroy'.eql?version.event ? nil : object.class.find(object.id)
+      if original
+        original = object
+        original.save
+      else
+        object.save
+      end
+    else
+      version.item_type.constantize.find(version.item_id).destroy
+    end
     
     redirect_to :action => 'index'
   end
