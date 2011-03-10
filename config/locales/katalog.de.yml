@@ -224,6 +224,7 @@ de:
       pdf:    "PDF anzeigen"
       print: "Seite drucken"
       history:  "Änderungsverlauf"
+      revert:   "Rückgangig"
     title:
       preview: "%{model} Vorschau"
 
