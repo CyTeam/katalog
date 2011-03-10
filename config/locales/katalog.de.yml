@@ -26,6 +26,10 @@ de:
     orientation:
       portrait:         "Hochformat"
       landscape:        "Querformat"
+    reports:
+      hints:
+        level:              "Level 1 => Signatur 1\nLevel 2 => Signatur 1.20\nLevel 3 => Signatur 1.20.300"
+        collect_year_count: "Interval der Jahre"
     shared:
       doku: "doku-zug.ch"
       logo:

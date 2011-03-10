@@ -3,10 +3,10 @@
     = f.semantic_errors
     = f.input :name
     = f.input :title
-    = f.input :level
+    = f.input :level, :hint => t('katalog.reports.hints.level')
     = f.input :orientation, :as => :select, :collection => orientation_for_select, :include_blank => false
     = f.input :columns, :as => :select, :collection => report_columns_for_select, :multiple => :multiple, :include_blank => false
-    = f.input :collect_year_count
+    = f.input :collect_year_count, :hint => t('katalog.reports.hints.collect_year_count')
     
   = f.buttons do
     = f.commit_button
