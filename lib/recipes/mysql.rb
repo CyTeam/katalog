@@ -5,7 +5,7 @@
 # * http://www.martin-probst.com/blog/2007/11/20/mysql-backup-restore-task-for-capistrano/
 
 namespace :mysql do
-  task :backup, :roles => :db, :only => { :primary => true } do
+  task :backup, :roles => :import do
     backup_dir ||= "#{deploy_to}/backups"
     run "mkdir -p #{backup_dir}"
 
@@ -29,7 +29,7 @@ namespace :mysql do
     logger.info "Backup successfull."
   end
 
-  task :restore, :roles => :db, :only => { :primary => true } do
+  task :restore, :roles => :import do
     backup_dir ||= "#{deploy_to}/backups"
 
     filename = "#{backup_dir}/#{application}.latest"
