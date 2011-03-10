@@ -222,6 +222,18 @@ function addSearchSuggestionBehaviour() {
   });
 }
 
+function addReportActionsMenuBehaviour() {
+  var ul = '#report_actions';
+
+  $(ul).hover(function(){
+    $(ul + ' ul').show();
+    console.log('in');
+  },function(){
+    console.log('out');
+    $(ul + ' ul').hide();
+  });
+}
+
 $(document).ready(function() {
   addAutofocusBehaviour();
   addLinkifyContainersBehaviour();
@@ -233,4 +245,5 @@ $(document).ready(function() {
   addContainerSuggestionBehaviour();
   addUpdateLastContainerTitleOfDossier();
   showVersionsBehaviour();
+  addReportActionsMenuBehaviour();
 });
