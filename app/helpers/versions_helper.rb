@@ -3,6 +3,12 @@ module VersionsHelper
     I18n.t("activerecord.models.#{version.item_type.underscore}")
   end
 
+  def title(version)
+    old_object = version.reify
+
+    old_object.to_s.empty? ? version.item.to_s : old_object.to_s
+  end
+
   def user_email(version)
     User.find(version.whodunnit).email if version.whodunnit
   end
