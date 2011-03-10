@@ -92,22 +92,10 @@ de:
 
     versions:
       changes_of:             "Änderungen von %{model}"
-      difference_to_current:  "Unterschied zur aktuellen Version."
-      changed_from:           "Geändert durch"
-      changed_at:             "Geändert am"
-      action:                 "Durchgeführte Aktion"
-      item_type:              "Datentyp"
-      object:                 "Objekt"
       actions:
         update:  "geändert"
         destroy: "gelöscht"
         create:  "erzeugt"
-      was_deleted:            "Wurde gelöscht"
-      additional_information: "Zusatzinformationen"
-      current_version:        "Aktuelle Version"
-      previous_version:       "Vorherige Version"
-      next_version:           "Neue Version"
-      show_versions:          "Detailierte Versionen anzeigen"
   controllers:
     index:
       keyword: "Schlagwortindex"
@@ -128,6 +116,7 @@ de:
       sphinx_admin_exception: "Ausnahmen"
       sphinx_admin_word_form: "Wortformen"
       report:  "Report"
+      version: "Version"
 
     attributes:
       dossier:
@@ -195,6 +184,23 @@ de:
         amount:     "Anzahl"
         dossier_id: "Dossier-ID"
         to:         "Bis"
+      version:
+        difference_to_current:  "Unterschied zur aktuellen Version."
+        changed_from:           "Geändert durch"
+        changed_at:             "Geändert am"
+        action:                 "Durchgeführte Aktion"
+        item_type:              "Datentyp"
+        object:                 "Objekt"
+        actions:
+          update:  "geändert"
+          destroy: "gelöscht"
+          create:  "erzeugt"
+        was_deleted:            "Wurde gelöscht"
+        additional_information: "Zusatzinformationen"
+        current_version:        "Aktuelle Version"
+        previous_version:       "Vorherige Version"
+        next_version:           "Neue Version"
+        show_versions:          "Detailierte Versionen anzeigen"
 
   formtastic:
     hints:

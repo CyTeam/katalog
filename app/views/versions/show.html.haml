@@ -5,7 +5,7 @@
   = link_to 'restore', restore_version_path(@version)
 
 %h2
-  = t('katalog.versions.difference_to_current', :model => @version.item_type)
+  = t_attr(:difference_to_current)
 
 %ul#version-changes
   - differences(@version).each do |attr|
@@ -15,45 +15,45 @@
       %ul.changes
         %li
           %label
-            = t('katalog.versions.previous_version')
+            = t_attr(:previous_version)
           = attr[:before]
         %li
           %label
-            = t('katalog.versions.next_version')
+            = t_attr(:next_version)
           = attr[:after]
 
 %a#show-versions{:href => '#'}
-  = t('katalog.versions.show_versions')
+  = t_attr(:show_versions)
 
 
 #versions-bottom{:style => 'display:none'}
   #version-left-side
     %h3
-      = t('katalog.versions.previous_version')
+      = t_attr(:previous_version)
 
     = render :partial => 'object', :locals => {:object => @version.reify}
 
   #version-right-side
     %h3
-      = t('katalog.versions.next_version')
+      = t_attr(:next_version)
     - next_version = next_object(@version)
     = render :partial => 'object', :locals => {:object => next_version ? next_version : original(@version) }
 
 %br
   
 %h2
-  = t('katalog.versions.additional_information')  
+  = t_attr(:additional_information)
 
 %ul#version-information
   %li
     %label
-      = t('katalog.versions.changed_from')
+      = t_attr(:changed_from)
     = user_email(@version)
   %li
     %label
-      = t('katalog.versions.changed_at')
+      = t_attr(:changed_at)
     = @version.created_at.to_s(:time_with_seconds)
   %li
     %label
-      = t('katalog.versions.action')
+      = t_attr(:action)
     = @version.event
