@@ -232,6 +232,13 @@ function addReportActionsMenuBehaviour() {
   });
 }
 
+function addReportColumnMultiselectBehaviour() {
+  $('#report_columns').multiselect({
+    width: 410,
+    height: 160
+  });
+}
+
 $(document).ready(function() {
   addAutofocusBehaviour();
   addLinkifyContainersBehaviour();
@@ -244,4 +251,5 @@ $(document).ready(function() {
   addUpdateLastContainerTitleOfDossier();
   showVersionsBehaviour();
   addReportActionsMenuBehaviour();
+  addReportColumnMultiselectBehaviour();
 });
