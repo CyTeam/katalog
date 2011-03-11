@@ -7,15 +7,15 @@
       %tbody
         %tr
           %th
-            = t('katalog.versions.item_type')
+            = t_attr(:item_type)
           %th
-            = t('katalog.versions.object')
+            = t_attr(:object)
           %th
-            = t('katalog.versions.changed_from')
+            = t_attr(:changed_from)
           %th
-            = t('katalog.versions.changed_at')
+            = t_attr(:changed_at)
           %th
-            = t('katalog.versions.action')
+            = t_attr(:action)
           %th
 
         = render @versions
