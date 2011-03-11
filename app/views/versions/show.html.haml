@@ -30,13 +30,13 @@
     %h3
       = t_attr(:previous_version)
 
-    = render :partial => 'object', :locals => {:object => @version.reify}
+    = render 'object', :object => @version.reify
 
   #version-right-side
     %h3
       = t_attr(:next_version)
     - next_version = next_object(@version)
-    = render :partial => 'object', :locals => {:object => next_version ? next_version : original(@version) }
+    = render 'object', :object => next_version ? next_version : original(@version)
 
 %h2
   = t_attr(:additional_information)

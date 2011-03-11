@@ -1,11 +1,11 @@
 %ul
   - if object
-    - object.attributes.except('id', 'created_at', 'updated_at').each do |attr|
+    - object.attributes.except('id', 'created_at', 'updated_at').each do |key, value|
       %li
         %label
-          = t("activerecord.attributes.#{object.class.to_s.underscore}.#{attr[0]}")
+          = t_attr(key, object.class)
         .content
-          = attr[1]
+          = value
   - else
     %li
       = t('katalog.versions.was_deleted')
