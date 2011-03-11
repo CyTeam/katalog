@@ -22,7 +22,7 @@ module VersionsHelper
   end
 
   def action(version)
-    I18n.t("katalog.versions.actions.#{version.event}")
+    t(version.event, :scope => "katalog.versions.actions")
   end
 
   def differences(version)
