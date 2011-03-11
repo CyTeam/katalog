@@ -14,7 +14,7 @@ class VersionsController < AuthorizedController
         @previous_item = @version.previous.reify
       when "destroy"
         @current_item = nil
-        @previous_item = @version.previous.reify
+        @previous_item = @version.reify
     end
     
     show!
@@ -35,6 +35,21 @@ class VersionsController < AuthorizedController
   end
 
   def revert
+    @version = Version.find(params[:id])
+    
+    case @version.event
+      when "create"
+        @version.item.destroy
+      when "update"
+        @previous_item = @version.previous.reify.save
+      when "destroy"
+        @previous_item = @version.reify.save
+    end
+    
+    redirect_to versions_path
+
+    return
+    
     version = Version.find(params[:id])
     object = version.reify
     if object
