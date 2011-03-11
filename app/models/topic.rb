@@ -1,4 +1,14 @@
 class Topic < Dossier
+  # Alphabetic topics
+  ALPHABETIC = ['15.0.100', '56.0.130', '56.0.500', '81.5.100']
+  def self.alphabetic?(signature)
+    for alphabetic in ALPHABETIC
+      return true if alphabetic.starts_with?(signature)
+    end
+    
+    return false
+  end
+  
   # change log
   has_paper_trail
   def topic_type
