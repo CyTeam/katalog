@@ -76,7 +76,6 @@ class Dossier < ActiveRecord::Base
     indexes signature
     indexes keywords.name, :as => :keywords
 
-    has sort_key
     has type
     
     set_property :field_weights => {
@@ -90,7 +89,7 @@ class Dossier < ActiveRecord::Base
   end
 
   def self.by_text(value, options = {})
-    params = {:match_mode => :extended, :rank_mode => :match_any, :with => {:type => 'Dossier'}, :order => :sort_key, :sort_mode => :desc}
+    params = {:match_mode => :extended, :rank_mode => :match_any, :with => {:type => 'Dossier'}}
     params.merge!(options)
     
     query = build_query(value)
