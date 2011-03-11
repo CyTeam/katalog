@@ -232,6 +232,21 @@ function addReportActionsMenuBehaviour() {
   });
 }
 
+function addReportColumnMultiselectBehaviour() {
+  $.extend($.ui.multiselect, {
+      locale: {
+          addAll:'Alle hinzufügen',
+          removeAll:'Alle entfernen',
+          itemsCount:' ausgewählt'
+      }
+  });
+  
+  $('#report_columns').multiselect({
+    width: 410,
+    height: 160
+  });
+}
+
 $(document).ready(function() {
   addAutofocusBehaviour();
   addLinkifyContainersBehaviour();
@@ -244,4 +259,5 @@ $(document).ready(function() {
   addUpdateLastContainerTitleOfDossier();
   showVersionsBehaviour();
   addReportActionsMenuBehaviour();
+  addReportColumnMultiselectBehaviour();
 });
