@@ -156,6 +156,12 @@ class Dossier < ActiveRecord::Base
     return query
   end
 
+  # Grand total of documents
+  def self.document_count
+    includes(:numbers).sum(:amount).to_i
+  end
+
+   # Importer
   def self.import_all(rows)
     new_dossier = true
     title = nil
@@ -215,6 +221,12 @@ class Dossier < ActiveRecord::Base
     Version.delete_all
   end
 
+  def self.finish_import
+    for topics in Topic.alphabetic_sub_topics
+      topics.destroy_all
+    end
+  end
+  
   def self.import_from_csv(path)
     # Disable PaperTrail for speedup
     paper_trail_enabled = PaperTrail.enabled?
@@ -232,16 +244,13 @@ class Dossier < ActiveRecord::Base
 
     import_all(import_filter(rows))
 
+    # Drop alphabetic subtitles
+    self.finish_import
+    
     # Reset PaperTrail state
     PaperTrail.enabled = paper_trail_enabled
   end
 
-  # Grand total of documents
-  def self.document_count
-    includes(:numbers).sum(:amount).to_i
-  end
-
-  # Importer
   def self.filter_tags(values)
     boring = ["in", "und", "für"]
     values -= boring
