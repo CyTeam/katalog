@@ -1,14 +1,26 @@
 class Topic < Dossier
   # Alphabetic topics
-  ALPHABETIC = ['15.0.100', '56.0.130', '56.0.500', '81.5.100']
+  ALPHABETIC = {
+    '15.0.100' => 'Personen',
+    '56.0.130' => 'Firmen',
+    '56.0.500' => 'Öko-ethische Geldanlagen. Ökoinvest-Firmen',
+    '81.5.000' => 'Länder'
+  }
+  
   def self.alphabetic?(signature)
-    for alphabetic in ALPHABETIC
+    for alphabetic in ALPHABETIC.keys
       return true if alphabetic.starts_with?(signature)
     end
     
     return false
   end
   
+  def self.alphabetic_sub_topics
+    ALPHABETIC.collect {|key, value|
+      self.by_signature(key).where(["title LIKE ?", "#{value} %"])
+    }
+  end
+
   # change log
   has_paper_trail
   def topic_type
