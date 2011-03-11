@@ -227,9 +227,7 @@ function addReportActionsMenuBehaviour() {
 
   $(ul).hover(function(){
     $(ul + ' ul').show();
-    console.log('in');
   },function(){
-    console.log('out');
     $(ul + ' ul').hide();
   });
 }
