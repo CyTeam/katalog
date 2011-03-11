@@ -142,8 +142,7 @@ class DossiersController < AuthorizedController
       @dossiers = apply_scopes(Dossier, params[:search]).order('signature').paginate :page => params[:page], :per_page => params[:per_page]
 
       # Alphabetic pagination
-      alphabetic_topics = ['15', '15.0', '15.0.100', '56', '56.0.130', '56.0.500', '81', '81.5', '81.5.100']
-      if alphabetic_topics.include?(@query)
+      if Topic.alphabetic?(@query)
         @paginated_scope = Dossier.by_signature(@query)
       end
     end
