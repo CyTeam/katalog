@@ -1,7 +1,4 @@
 #page_actions.contextual
-  -#= contextual_link('pdf', url_for(params.merge({:format => :pdf, :per_page => 'all'})), :title => t('tooltips.dossiers.show_pdf'))
-  -#- if user_signed_in?
-  -#  = contextual_link('overview', report_dossiers_path(:format => :pdf, :report_name => '5-year'), :title => t('tooltips.dossiers.show_themeoverview'))
   %ul#report_actions
     %li
       %a{:href => '#'}
@@ -10,5 +7,5 @@
         - Report.all.each do |report|
           %li
             = link_to report.title, report_dossiers_path(:report_name => report.name)
-  = link_to 'Print as PDF', url_for(params.merge(:only_path => false, :format => :pdf, :per_page => 'all')), :id => 'print-as-pdf', :class => 'icon icon-pdf', :title => t('tooltips.dossiers.show_pdf')
+  = contextual_link('pdf', url_for(params.merge(:only_path => false, :format => :pdf, :per_page => 'all')), :id => 'print-as-pdf', :class => 'icon icon-pdf', :title => t('tooltips.dossiers.show_pdf'))
 
