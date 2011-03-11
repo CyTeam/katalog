@@ -43,4 +43,48 @@ namespace :mysql do
     
     logger.info "Restore successfull."
   end
+
+  namespace :sync do
+    desc "Sync down the mysql db to local"
+    task :down do
+      sync_dir ||= "#{deploy_to}/sync"
+      run "mkdir -p #{sync_dir}"
+
+      filename = "#{application}.dump.#{Time.now.strftime('%Y-%m-%d_%H-%M')}.sql.bz2"
+      text = capture "cat #{deploy_to}/current/config/database.yml"
+      yaml = YAML::load(text)
+      on_rollback { delete filename }
+
+      # Remote DB dump
+      run "mysqldump -u #{yaml[rails_env]['username']} -p #{yaml[rails_env]['database']} -h #{yaml[rails_env]['host']} | bzip2 -9 > #{sync_dir}/#{filename}" do |channel, stream, data|
+        if data =~ /^Enter password:/
+          channel.send_data "#{yaml[rails_env]['password']}\n"
+        else
+          puts data
+        end
+      end
+
+      # Download dump
+      download "#{sync_dir}/#{filename}", filename
+
+      run "rm #{sync_dir}/#{filename}"
+
+      # Local DB import
+      username, password, database = database_config('development')
+      system "bzip2 -d -c #{filename} | mysql -u #{username} --password='#{password}' #{database}; rm -f #{filename}"
+
+      logger.important "sync database from the stage '#{stage}' to local finished"
+    end
+
+    #
+    # Reads the database credentials from the local config/database.yml file
+    # +db+ the name of the environment to get the credentials for
+    # Returns username, password, database
+    #
+    def database_config(db)
+      database = YAML::load_file('config/database.yml')
+      return database["#{db}"]['username'], database["#{db}"]['password'], database["#{db}"]['database']
+    end
+  end
+
 end
