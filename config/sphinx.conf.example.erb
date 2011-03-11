@@ -22,12 +22,11 @@ source dossier_core_0
   sql_query_pre = SET SESSION group_concat_max_len = 1048576
   sql_query_pre = SET NAMES utf8
   sql_query_pre = SET TIME_ZONE = '+0:00'
-  sql_query = SELECT SQL_NO_CACHE `dossiers`.`id` * 1 + 0 AS `id` , `dossiers`.`title` AS `title`, `dossiers`.`signature` AS `signature`, GROUP_CONCAT(DISTINCT IFNULL(`tags`.`name`, '0') SEPARATOR ' ') AS `keywords`, `dossiers`.`id` AS `sphinx_internal_id`, CAST(IFNULL(CRC32(NULLIF(`dossiers`.`type`,'')), 4076198315) AS UNSIGNED) AS `class_crc`, 0 AS `sphinx_deleted`, `dossiers`.`sort_key` AS `sort_key`, IFNULL(type, '') AS `type`, UNIX_TIMESTAMP(`dossiers`.`created_at`) AS `created_at`, UNIX_TIMESTAMP(`dossiers`.`updated_at`) AS `updated_at` FROM `dossiers` LEFT OUTER JOIN `taggings` ON `dossiers`.`id` = `taggings`.`taggable_id` AND `taggings`.`taggable_type` = 'Dossier' LEFT OUTER JOIN `tags` ON taggings.tag_id = tags.id AND taggings.tagger_id IS NULL AND taggings.context = 'keywords' WHERE (`dossiers`.`id` >= $start AND `dossiers`.`id` <= $end AND `dossiers`.`delta` = 0) GROUP BY `dossiers`.`id`, `dossiers`.`title`, `dossiers`.`signature`, `dossiers`.`id`, `dossiers`.`sort_key`, `dossiers`.`created_at`, `dossiers`.`updated_at`, `dossiers`.`type` ORDER BY NULL
+  sql_query = SELECT SQL_NO_CACHE `dossiers`.`id` * 1 + 0 AS `id` , `dossiers`.`title` AS `title`, `dossiers`.`signature` AS `signature`, GROUP_CONCAT(DISTINCT IFNULL(`tags`.`name`, '0') SEPARATOR ' ') AS `keywords`, `dossiers`.`id` AS `sphinx_internal_id`, CAST(IFNULL(CRC32(NULLIF(`dossiers`.`type`,'')), 4076198315) AS UNSIGNED) AS `class_crc`, 0 AS `sphinx_deleted`, IFNULL(type, '') AS `type`, UNIX_TIMESTAMP(`dossiers`.`created_at`) AS `created_at`, UNIX_TIMESTAMP(`dossiers`.`updated_at`) AS `updated_at` FROM `dossiers` LEFT OUTER JOIN `taggings` ON `dossiers`.`id` = `taggings`.`taggable_id` AND `taggings`.`taggable_type` = 'Dossier' LEFT OUTER JOIN `tags` ON taggings.tag_id = tags.id AND taggings.tagger_id IS NULL AND taggings.context = 'keywords' WHERE (`dossiers`.`id` >= $start AND `dossiers`.`id` <= $end AND `dossiers`.`delta` = 0) GROUP BY `dossiers`.`id`, `dossiers`.`title`, `dossiers`.`signature`, `dossiers`.`id`, `dossiers`.`created_at`, `dossiers`.`updated_at`, `dossiers`.`type` ORDER BY NULL
   sql_query_range = SELECT IFNULL(MIN(`id`), 1), IFNULL(MAX(`id`), 1) FROM `dossiers` WHERE `dossiers`.`delta` = 0
   sql_attr_uint = sphinx_internal_id
   sql_attr_uint = class_crc
   sql_attr_uint = sphinx_deleted
-  sql_attr_uint = sort_key
   sql_attr_timestamp = created_at
   sql_attr_timestamp = updated_at
   sql_attr_str2ordinal = type
@@ -58,12 +57,11 @@ source dossier_delta_0 : dossier_core_0
   sql_query_pre = SET SESSION group_concat_max_len = 1048576
   sql_query_pre = SET NAMES utf8
   sql_query_pre = SET TIME_ZONE = '+0:00'
-  sql_query = SELECT SQL_NO_CACHE `dossiers`.`id` * 1 + 0 AS `id` , `dossiers`.`title` AS `title`, `dossiers`.`signature` AS `signature`, GROUP_CONCAT(DISTINCT IFNULL(`tags`.`name`, '0') SEPARATOR ' ') AS `keywords`, `dossiers`.`id` AS `sphinx_internal_id`, CAST(IFNULL(CRC32(NULLIF(`dossiers`.`type`,'')), 4076198315) AS UNSIGNED) AS `class_crc`, 0 AS `sphinx_deleted`, `dossiers`.`sort_key` AS `sort_key`, IFNULL(type, '') AS `type`, UNIX_TIMESTAMP(`dossiers`.`created_at`) AS `created_at`, UNIX_TIMESTAMP(`dossiers`.`updated_at`) AS `updated_at` FROM `dossiers` LEFT OUTER JOIN `taggings` ON `dossiers`.`id` = `taggings`.`taggable_id` AND `taggings`.`taggable_type` = 'Dossier' LEFT OUTER JOIN `tags` ON taggings.tag_id = tags.id AND taggings.tagger_id IS NULL AND taggings.context = 'keywords' WHERE (`dossiers`.`id` >= $start AND `dossiers`.`id` <= $end AND `dossiers`.`delta` = 1) GROUP BY `dossiers`.`id`, `dossiers`.`title`, `dossiers`.`signature`, `dossiers`.`id`, `dossiers`.`sort_key`, `dossiers`.`created_at`, `dossiers`.`updated_at`, `dossiers`.`type` ORDER BY NULL
+  sql_query = SELECT SQL_NO_CACHE `dossiers`.`id` * 1 + 0 AS `id` , `dossiers`.`title` AS `title`, `dossiers`.`signature` AS `signature`, GROUP_CONCAT(DISTINCT IFNULL(`tags`.`name`, '0') SEPARATOR ' ') AS `keywords`, `dossiers`.`id` AS `sphinx_internal_id`, CAST(IFNULL(CRC32(NULLIF(`dossiers`.`type`,'')), 4076198315) AS UNSIGNED) AS `class_crc`, 0 AS `sphinx_deleted`, IFNULL(type, '') AS `type`, UNIX_TIMESTAMP(`dossiers`.`created_at`) AS `created_at`, UNIX_TIMESTAMP(`dossiers`.`updated_at`) AS `updated_at` FROM `dossiers` LEFT OUTER JOIN `taggings` ON `dossiers`.`id` = `taggings`.`taggable_id` AND `taggings`.`taggable_type` = 'Dossier' LEFT OUTER JOIN `tags` ON taggings.tag_id = tags.id AND taggings.tagger_id IS NULL AND taggings.context = 'keywords' WHERE (`dossiers`.`id` >= $start AND `dossiers`.`id` <= $end AND `dossiers`.`delta` = 1) GROUP BY `dossiers`.`id`, `dossiers`.`title`, `dossiers`.`signature`, `dossiers`.`id`, `dossiers`.`created_at`, `dossiers`.`updated_at`, `dossiers`.`type` ORDER BY NULL
   sql_query_range = SELECT IFNULL(MIN(`id`), 1), IFNULL(MAX(`id`), 1) FROM `dossiers` WHERE `dossiers`.`delta` = 1
   sql_attr_uint = sphinx_internal_id
   sql_attr_uint = class_crc
   sql_attr_uint = sphinx_deleted
-  sql_attr_uint = sort_key
   sql_attr_timestamp = created_at
   sql_attr_timestamp = updated_at
   sql_attr_str2ordinal = type

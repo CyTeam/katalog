@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110225110238) do
+ActiveRecord::Schema.define(:version => 20110311140451) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -46,11 +46,9 @@ ActiveRecord::Schema.define(:version => 20110225110238) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "type"
-    t.integer  "document_count"
     t.date     "first_document_on"
     t.string   "related_to"
     t.boolean  "delta",             :default => true, :null => false
-    t.integer  "sort_key"
     t.text     "description"
   end
 
