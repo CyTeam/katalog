@@ -16,7 +16,7 @@ class VersionsController < AuthorizedController
     index!
   end
 
-  def restore
+  def revert
     version = Version.find(params[:id])
     object = version.reify
     if object
@@ -43,10 +43,5 @@ class VersionsController < AuthorizedController
     end
     
     redirect_to :action => 'index'
-  end
-
-  private
-  def paginated_dossiers
-
   end
 end
