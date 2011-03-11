@@ -2,6 +2,24 @@ class VersionsController < AuthorizedController
   # Authentication
   before_filter :authenticate_user!
 
+  def show
+    @version = Version.find(params[:id])
+    
+    case @version.event
+      when "create"
+        @current_item = @version.item
+        @previous_item = nil
+      when "update"
+        @current_item = @version.reify
+        @previous_item = @version.previous.reify
+      when "destroy"
+        @current_item = nil
+        @previous_item = @version.previous.reify
+    end
+    
+    show!
+  end
+  
   def index
     if params[:dossier_id]
       dossiers = Dossier.find(params[:dossier_id])

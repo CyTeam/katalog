@@ -11,7 +11,7 @@
   - differences(@version).each do |attr|
     %li
       %h3
-        = t("activerecord.attributes.#{@version.item_type.underscore}.#{attr[:attribute]}")
+        = t_attr(attr[:attribute], @current_item.class)
       %ul.changes
         %li
           %label
@@ -30,13 +30,12 @@
     %h3
       = t_attr(:previous_version)
 
-    = render 'object', :object => @version.reify
+    = render 'object', :object => @previous_item
 
   #version-right-side
     %h3
       = t_attr(:next_version)
-    - next_version = next_object(@version)
-    = render 'object', :object => next_version ? next_version : original(@version)
+    = render 'object', :object => @current_item
 
 %h2
   = t_attr(:additional_information)
