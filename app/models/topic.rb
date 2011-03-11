@@ -39,11 +39,14 @@ class Topic < Dossier
     Dossier.where("signature LIKE CONCAT(?, '%')", signature).where("dossiers.id != ?", id)
   end
   
-  
-  def numbers
-    DossierNumber.joins(:dossier).where("signature LIKE CONCAT(?, '%')", signature)
-  end
+  # Grand total of documents
+  def document_count(period = nil)
+    topic_numbers = DossierNumber.joins(:dossier).where("signature LIKE CONCAT(?, '%')", signature)
+    document_counts = period ? topic_numbers.between(period) : topic_numbers
 
+    document_counts.sum(:amount).to_i
+  end
+  
   def direct_children
     result = children
     result = result.send(children_topic_type) if children_topic_type
