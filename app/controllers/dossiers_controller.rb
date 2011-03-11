@@ -1,3 +1,4 @@
+
 require 'ostruct'
 
 class DossiersController < AuthorizedController
