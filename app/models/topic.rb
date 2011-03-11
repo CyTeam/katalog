@@ -1,8 +1,14 @@
 class Topic < Dossier
   # Alphabetic topics
-  ALPHABETIC = ['15.0.100', '56.0.130', '56.0.500', '81.5.100']
+  ALPHABETIC = {
+    '15.0.100' => 'Personen',
+    '56.0.130' => 'Firmen',
+    '56.0.500' => 'Öko-ethische Geldanlagen. Ökoinvest-Firmen',
+    '81.5.100' => 'Länder'
+  }
+  
   def self.alphabetic?(signature)
-    for alphabetic in ALPHABETIC
+    for alphabetic in ALPHABETIC.keys
       return true if alphabetic.starts_with?(signature)
     end
     
