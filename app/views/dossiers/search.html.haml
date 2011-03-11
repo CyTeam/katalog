@@ -12,4 +12,5 @@
 - else
   %h1= t('katalog.search')
 
-= highlight_words(@query)
+- content_for :javascript do
+  = highlight_words(@query)

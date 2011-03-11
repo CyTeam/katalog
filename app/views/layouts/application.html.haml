@@ -52,4 +52,5 @@
           = render 'shared/public_footer' unless user_signed_in?
           .clear
     = javascript_include_tag :defaults
+    = yield :javascript
     

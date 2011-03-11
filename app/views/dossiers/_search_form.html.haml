@@ -5,7 +5,8 @@
   = text_field :search, :text, :style => 'width: 30em', :title => t('tooltips.dossiers.search_input'), :autocomplete => 'off'
   = image_submit_tag('doku-zug.ch/search2.png', :alt => t('katalog.search'), :title => t('tooltips.dossiers.search'))
 
-= javascript_tag "$('#search_text').val('#{escape_javascript(@query || params[:query])}');"
-= javascript_tag "$('#search_text').select().focus();"
+- content_for :javascript do
+  = javascript_tag "$('#search_text').val('#{escape_javascript(@query || params[:query])}');"
+  = javascript_tag "$('#search_text').select().focus();"
 
 = search_tips
