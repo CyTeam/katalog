@@ -2,6 +2,10 @@ class VersionsController < AuthorizedController
   # Authentication
   before_filter :authenticate_user!
 
+  def attributes
+    ['item_type', 'object', 'changed_from', 'changed_at', 'action']
+  end
+  
   def show
     @version = Version.find(params[:id])
     
@@ -9,14 +13,18 @@ class VersionsController < AuthorizedController
       when "create"
         @current_item = @version.item
         @previous_item = nil
+        @versions = @current_item.versions
       when "update"
         @current_item = @version.reify
         @previous_item = @version.previous.reify
+        @versions = @current_item.versions
       when "destroy"
         @current_item = nil
         @previous_item = @version.reify
+        @versions = @previous_item.versions
     end
     
+    @versions = @versions.paginate(:page => params[:page])
     show!
   end
   

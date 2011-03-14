@@ -101,6 +101,7 @@ de:
     versions:
       description: "%{action} von %{user} um %{date_time}"
       changes_of:             "Änderungen von %{model}"
+      history:  "Geschichte"
       actions:
         update:  "geändert"
         destroy: "gelöscht"
