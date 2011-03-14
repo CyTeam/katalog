@@ -214,6 +214,8 @@ de:
     hints:
       dossier:
         text: "\"Geschichte CH\", medizin zug 61.3"
+      report:
+        columns: "Um ein Spalte auswählen, mit dem Mauszeiger draufklicken, halten und nach links ziehen."
   messages:
     confirm_delete: "%{record} löschen?"
 
@@ -227,12 +229,14 @@ de:
     back: "zurück"
     previous: "vorherige"
     next:     "nächste"
+    preview: "Vorschau"
     
     action:
       pdf:    "PDF anzeigen"
       print: "Seite drucken"
       history:  "Änderungsverlauf"
       revert:   "Rückgangig"
+      refresh: "Aktualisiern"
     title:
       preview: "%{model} Vorschau"
 

@@ -6,4 +6,14 @@ class ReportsController < AuthorizedController
   def edit
     edit!{ report_path }
   end
+
+  def show
+    if params[:get_preview]
+      @report = Report.new(params[:report])
+      render :partial => 'show'
+      return
+    end
+
+    show!
+  end
 end
