@@ -1,6 +1,6 @@
 class ReportsController < AuthorizedController
   def attributes
-    ['name', 'title', 'columns']
+    ['title', 'columns']
   end
 
   def edit
