@@ -7,21 +7,6 @@
 %h2
   = t_attr(:difference_to_current)
 
-%ul#version-changes
-  - differences(@version).each do |attr|
-    %li
-      %h3
-        = t_attr(attr[:attribute], @current_item.class)
-      %ul.changes
-        %li
-          %label
-            = t_attr(:previous_version)
-          = attr[:before]
-        %li
-          %label
-            = t_attr(:next_version)
-          = attr[:after]
-
 %a#show-unchanged{:href => '#'}
   = t_attr(:show_versions)
 
