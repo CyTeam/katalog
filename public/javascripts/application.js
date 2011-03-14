@@ -245,6 +245,24 @@ function addReportColumnMultiselectBehaviour() {
   });
 }
 
+function addReportPreviewUpdateBehaviour() {
+  var link = $('#report-preview-update');
+
+  link.show();
+  link.click(function(e){
+    var preview = $('#report-preview');
+    var form = $('form.report');
+    var action = form.attr('action') + '?get_preview=true';
+    var select = $('#report_columns');
+
+//    select.registerAddEvents();
+    e.preventDefault();
+    $.get(action, form.serializeArray(), function(data){
+      preview.html(data);
+    });
+  });
+}
+
 $(document).ready(function() {
   addAutofocusBehaviour();
   addLinkifyContainersBehaviour();
@@ -258,4 +276,5 @@ $(document).ready(function() {
   showVersionsBehaviour();
   addReportActionsMenuBehaviour();
   addReportColumnMultiselectBehaviour();
+  addReportPreviewUpdateBehaviour();
 });

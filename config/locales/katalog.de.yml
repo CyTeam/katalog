@@ -32,8 +32,6 @@ de:
         "2": "Level 2 => Signatur 12"
         "3": "Level 3 => Signatur 12.3"
         "4": "Level 4 => Signatur 12.3.400"
-      hints:
-        collect_year_count: "Interval der Jahre"
     shared:
       doku: "doku-zug.ch"
       logo:
@@ -216,6 +214,9 @@ de:
     hints:
       dossier:
         text: "\"Geschichte CH\", medizin zug 61.3"
+      report:
+        columns: "Um ein Spalte auswählen, mit dem Mauszeiger draufklicken, halten und nach links ziehen."
+        collect_year_count: "Interval der Jahre"
   messages:
     confirm_delete: "%{record} löschen?"
 
@@ -229,12 +230,14 @@ de:
     back: "zurück"
     previous: "vorherige"
     next:     "nächste"
+    preview: "Vorschau"
     
     action:
       pdf:    "PDF anzeigen"
       print: "Seite drucken"
       history:  "Änderungsverlauf"
       revert:   "Rückgangig"
+      refresh: "Aktualisiern"
     title:
       preview: "%{model} Vorschau"
 
