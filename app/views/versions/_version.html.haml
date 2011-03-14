@@ -10,4 +10,4 @@
   %td
     = action(version)
   %td.action-links
-    = link_to image_tag('icons/revert.png', :title => t_action(:revert)), revert_version_path(version)
+    = link_to image_tag('icons/revert.png', :title => t_action(:revert)), revert_version_path(version), :method => :post

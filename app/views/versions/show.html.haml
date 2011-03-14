@@ -1,5 +1,5 @@
 #page_actions.contextual
-  = contextual_link('revert', revert_version_path(@version))
+  = contextual_link('revert', revert_version_path(@version), :method => :post)
 
 %h1
   = t('katalog.versions.changes_of', :model => @version.item_type)
