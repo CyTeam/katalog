@@ -22,20 +22,27 @@
             = t_attr(:next_version)
           = attr[:after]
 
-%a#show-versions{:href => '#'}
+%a#show-unchanged{:href => '#'}
   = t_attr(:show_versions)
 
-#versions-bottom{:style => 'display:none'}
-  #version-left-side
-    %h3
-      = t_attr(:previous_version)
-
-    = render 'object', :object => @previous_item
-
-  #version-right-side
-    %h3
-      = t_attr(:next_version)
-    = render 'object', :object => @current_item
+#versions-bottom
+  - item_class = @version.item_type.constantize
+  - items = [@previous_item, @current_item]
+  - attributes = item_class.column_names
+  - attributes = attributes - item_class.ignore - [item_class.primary_key]
+  
+  %table.ce_table
+    %tr
+      %th
+      %th= t_attr(:previous_version)
+      %th= t_attr(:next_version)
+    - for column_name in attributes
+      - previous_value = @previous_item.try(:send, column_name)
+      - current_value = @current_item.try(:send, column_name)
+      %tr{:class => change_type(previous_value, current_value)}
+        %th= t_attr(column_name, item_class)
+        %td.previous= previous_value
+        %td.current= current_value
 
 %h2
   = t_attr(:additional_information)

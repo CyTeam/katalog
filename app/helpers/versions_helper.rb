@@ -1,4 +1,16 @@
 module VersionsHelper
+  def change_type(previous, current)
+    if previous == current
+      return "unchanged"
+    elsif previous.nil?
+      return "added"
+    elsif current.nil?
+      return "removed"
+    else
+      return "changed"
+    end
+  end
+  
   def title(version)
     old_object = version.reify
 
