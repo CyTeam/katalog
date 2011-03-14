@@ -41,9 +41,9 @@ class VersionsController < AuthorizedController
       when "create"
         @version.item.destroy
       when "update"
-        @previous_item = @version.previous.reify.save
+        @version.previous.reify.save
       when "destroy"
-        @previous_item = @version.reify.save
+        @version.reify.save
     end
     
     redirect_to versions_path
