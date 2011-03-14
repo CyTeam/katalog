@@ -1,49 +1,15 @@
-#version-information,
-#versions-top ul,
-#versions-bottom ul
-  label
-    display: block
-    width: 150px
-    float: left
-  .content
-    display: block
-    float: left
-  li
-    list-style-image: none
-    list-style: none
-    float: left
-    width: 100%
-    margin-bottom: 10px
+$version_added=#AAD8A1
+$version_changed=#FEEE8B
+$version_removed=#EDA093
 
-#version-information
-  width: 50%
+.unchanged
+  display: none
+.changed
+  background-color: $version_changed
+.added td.current
+  background-color: $version_added
+.removed td.previous
+  background-color: $version_removed
 
-#version-left-side,
-#version-right-side
-  display: block
-  width: 50%
-  float: left
-
-#versions-top,
-#versions-bottom
-  float: left
-
-#versions-bottom
-  width: 100%
-  margin-bottom: 20px
-
-#version-changes
-  float: left
-  width: 100%
-  label
-    width: 150px
-    display: block
-    float: left
-  li
-    float: left
-    width: 100%
-    ul
-      float: left
-      li label
-        width: 150px
-        display: block
+  
+ 

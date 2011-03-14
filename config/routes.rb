@@ -35,7 +35,7 @@ Katalog::Application.routes.draw do
 
   resources :versions do
     member do
-      get :revert
+      post :revert
     end
   end
 

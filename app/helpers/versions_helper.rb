@@ -1,4 +1,16 @@
 module VersionsHelper
+  def change_type(previous, current)
+    if previous == current
+      return "unchanged"
+    elsif previous.nil?
+      return "added"
+    elsif current.nil?
+      return "removed"
+    else
+      return "changed"
+    end
+  end
+  
   def title(version)
     old_object = version.reify
 
@@ -19,19 +31,5 @@ module VersionsHelper
 
   def action(version)
     t(version.event, :scope => "katalog.versions.actions")
-  end
-
-  def differences(version)
-    object_after = next_object(version) ? next_object(version) : original(version)
-    changes = Version.differences(version, object_after) if version.reify
-    # Ignore timestamps and Model specific boring attributes
-    ignore_attributes = ["created_at", "updated_at"] + version.item_type.constantize.ignore
-    return [] unless changes
-
-    changes.select{|change| !ignore_attributes.include?(change[:attribute])}
-  end
-
-  def next_object(version)
-    version.next ? version.next.reify : nil
   end
 end

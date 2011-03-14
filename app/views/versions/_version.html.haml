@@ -9,4 +9,5 @@
     = version.created_at.to_s(:time_with_seconds)
   %td
     = action(version)
-  %td
+  %td.action-links
+    = link_to image_tag('icons/revert.png', :title => t_action(:revert)), revert_version_path(version), :method => :post
