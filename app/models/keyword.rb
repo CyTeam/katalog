@@ -1,6 +1,6 @@
 class Keyword < ActsAsTaggableOn::Tag
   # change log
-  has_paper_trail
+  has_paper_trail :ignore => [:created_at, :updated_at]
 
   scope :by_character, lambda {|value| where("name LIKE CONCAT(?, '%')", value)}
   scope :characters, select("DISTINCT substring(upper(name), 1, 1) AS letter").having("letter BETWEEN 'A' AND 'Z'")
