@@ -5,7 +5,8 @@
   = t('katalog.versions.changes_of', :model => @version.item_type)
 
 %h2
-  = t_attr(:difference_to_current)
+  = t('katalog.versions.description', :user => user_email(@version), :date_time => @version.created_at.to_s(:time_with_seconds), :action => action(@version))
+
 
 %a#show-unchanged{:href => '#'}
   = t_attr(:show_versions)
@@ -28,20 +29,3 @@
         %th= t_attr(column_name, item_class)
         %td.previous= previous_value
         %td.current= current_value
-
-%h2
-  = t_attr(:additional_information)
-
-%ul#version-information
-  %li
-    %label
-      = t_attr(:changed_from)
-    = user_email(@version)
-  %li
-    %label
-      = t_attr(:changed_at)
-    = @version.created_at.to_s(:time_with_seconds)
-  %li
-    %label
-      = t_attr(:action)
-    = action(@version)
