@@ -37,14 +37,7 @@ class VersionsController < AuthorizedController
   def revert
     @version = Version.find(params[:id])
     
-    case @version.event
-      when "create"
-        @version.item.destroy
-      when "update"
-        @version.previous.reify.save
-      when "destroy"
-        @version.reify.save
-    end
+    @version.revert
     
     redirect_to versions_path
 
