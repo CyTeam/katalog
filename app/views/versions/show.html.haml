@@ -13,7 +13,6 @@
 
 #versions-bottom
   - item_class = @version.item_type.constantize
-  - items = [@previous_item, @current_item]
   - attributes = item_class.column_names
   - attributes = attributes - item_class.ignore - [item_class.primary_key]
   
