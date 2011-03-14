@@ -1,8 +1,4 @@
 module VersionsHelper
-  def model_name(version)
-    I18n.t("activerecord.models.#{version.item_type.underscore}")
-  end
-
   def title(version)
     old_object = version.reify
 

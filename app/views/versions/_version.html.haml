@@ -1,6 +1,6 @@
 %tr[version]{:class => cycle('odd', 'even')}
   %td
-    = model_name version
+    = t_model version.item_type.constantize
   %td
     = link_to title(version), version, {'data-href-container' => 'tr'}
   %td
