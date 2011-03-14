@@ -21,14 +21,6 @@ module VersionsHelper
     User.find(version.whodunnit).email if version.whodunnit
   end
 
-  def difference_to_current(version)
-    link_to 'Differenz anzeigen zum aktuellen Eintrag', version, :class => 'icon-show-text'
-  end
-
-  def original(version)
-    version.item_type.constantize.exists?(version.item_id) ? version.item_type.constantize.find(version.item_id) : nil
-  end
-
   def action(version)
     t(version.event, :scope => "katalog.versions.actions")
   end
