@@ -19,6 +19,10 @@ class SphinxAdmin < ActiveRecord::Base
     self.from = values[0].strip
     self.to   = values[1].strip
   end
+
+  def self.look_up(value)
+    
+  end
   
   def self.list=(value)
     self.delete_all
