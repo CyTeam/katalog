@@ -1,0 +1,6 @@
+= paginated_section @versions, :renderer => PaginationListLinkRenderer do
+  .ce_table.block
+    %table
+      = render 'versions/list_header'
+      %tbody
+        = render @versions

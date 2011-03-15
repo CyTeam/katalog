@@ -23,8 +23,6 @@ class Topic < Dossier
     }
   end
 
-  # change log
-  has_paper_trail
   def topic_type
     return if signature.nil?
     
