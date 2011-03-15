@@ -2,9 +2,7 @@
   %td
     = version.created_at.to_s(:time_with_seconds)
   %td
-    = t_model version.item_type.constantize
-  %td
-    = link_to title(version), version, {'data-href-container' => 'tr'}
+    = link_to version_title(version), version, {'data-href-container' => 'tr'}
   %td
     = action(version)
   %td.action-links

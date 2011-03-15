@@ -11,10 +11,15 @@ module VersionsHelper
     end
   end
   
-  def title(version)
-    old_object = version.reify
-
-    old_object.to_s.empty? ? version.item.to_s : old_object.to_s
+  def version_title(version = nil)
+    version ||= @version
+    if version.event == "destroy"
+      item = version.reify
+    else
+      item = version.item
+    end
+    
+    item.to_s
   end
 
   def user_email(version)

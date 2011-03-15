@@ -15,8 +15,8 @@ class VersionsController < AuthorizedController
         @previous_item = nil
         @versions = @current_item.versions
       when "update"
-        @current_item = @version.reify
-        @previous_item = @version.previous.reify
+        @current_item = @version.item
+        @previous_item = @current_item.previous_version
         @versions = @current_item.versions
       when "destroy"
         @current_item = nil
@@ -31,12 +31,14 @@ class VersionsController < AuthorizedController
   def index
     if params[:dossier_id]
       dossiers = Dossier.find(params[:dossier_id])
-      @versions = dossiers.versions.paginate(:page => params[:page])
+      @versions = dossiers.versions.order('created_at DESC').paginate(:page => params[:page])
       dossiers.numbers.each do |n|
         n.versions.each do |v|
           @versions << v
         end
       end
+    else
+      @versions = Version.order('created_at DESC').paginate(:page => params[:page])
     end
 
     index!
