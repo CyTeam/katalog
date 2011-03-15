@@ -17,7 +17,10 @@ class Container < ActiveRecord::Base
 
   def container_type=(value)
     value = ContainerType.find_by_code(value) if value.is_a?(String)
-    return if value.nil?
+    if value.nil?
+      self[:container_type_id] = nil
+      return
+    end
     
     self[:container_type_id] = value.id
     self.container_type.reload
