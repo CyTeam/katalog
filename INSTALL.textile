@@ -48,7 +48,7 @@ After that you can jump directly to step "Install katalog".
 
 h2. Install Ruby'n'Rails
 
-katalog is developed and tested using Rails 3.0.1 and Ruby 1.8.
+katalog is developed and tested using Rails 3.0.5 and Ruby 1.8.7
 
 Install packages to support installing rails:
 
