@@ -23,7 +23,7 @@ class SphinxAdmin < ActiveRecord::Base
   def self.list=(value)
     self.delete_all
     
-    value.each do |line|
+    value.each_line do |line|
       self.create(:value => line) unless line.blank?
     end
     
