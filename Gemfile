@@ -59,9 +59,6 @@ gem 'acts-as-taggable-on', '~> 2.0.6'
 # CRUD helpers
 gem 'inherited_resources_views'
 
-# Import
-gem 'fastercsv'
-
 # Search
 gem 'thinking-sphinx', '~> 2.0.1'
 
@@ -70,8 +67,13 @@ gem 'thinking-sphinx', '~> 2.0.1'
 gem 'pdfkit', :git => 'http://github.com/huerlisi/PDFKit.git'
 gem 'wkhtmltopdf-binary'
 
-# Full text search engine
-gem 'SystemTimer'
+platforms :ruby_18 do
+  # Full text search engine
+  gem 'SystemTimer'
+
+  # Import
+  gem 'fastercsv'
+end
 
 # CRUD helpers
 gem 'show_for'

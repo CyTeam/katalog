@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Topic < Dossier
   # Alphabetic topics
   ALPHABETIC = {
@@ -27,10 +29,14 @@ class Topic < Dossier
     return if signature.nil?
     
     case signature.length
-      when 1: :group
-      when 2: :main
-      when 4: :geo
-      when 8: :detail
+      when 1
+        :group
+      when 2
+        :main
+      when 4
+        :geo
+      when 8
+        :detail
     end
   end
   

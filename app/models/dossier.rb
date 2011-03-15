@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Dossier < ActiveRecord::Base
   # change log
   has_paper_trail :ignore => [:created_at, :updated_at, :delta]
@@ -19,10 +21,14 @@ class Dossier < ActiveRecord::Base
   cattr_reader :level_to_prefix_length
   def self.level_to_prefix_length(level)
     case level.to_s
-      when "1": 1
-      when "2": 2
-      when "3": 4
-      when "4": 8
+      when "1"
+        1
+      when "2" 
+        2
+      when "3"
+        4
+      when "4"
+        8
     end
   end
   
