@@ -114,7 +114,7 @@ class Dossier < ActiveRecord::Base
     strings = value.split(/[ %();,:-]/).uniq.select{|t| t.present?}
     words = []
     signatures = []
-    for string in strings
+    strings.each do |string|
       if /^[0-9]*\.$/.match(string)
         # is an ordinal
         words << string
@@ -171,7 +171,7 @@ class Dossier < ActiveRecord::Base
     new_dossier = true
     title = nil
     dossier = nil
-    for row in rows
+    rows.each do |row|
       transaction do
       begin
         # Skip empty rows
@@ -227,7 +227,7 @@ class Dossier < ActiveRecord::Base
   end
 
   def self.finish_import
-    for topics in Topic.alphabetic_sub_topics
+    Topic.alphabetic_sub_topics.each do |topics|
       topics.destroy_all
     end
   end
