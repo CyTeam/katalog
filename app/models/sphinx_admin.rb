@@ -20,8 +20,22 @@ class SphinxAdmin < ActiveRecord::Base
     self.to   = values[1].strip
   end
 
-  def self.look_up(value)
-    
+  def self.find_by_value(value)
+    sphinx_admin = self.find_by_from(value)
+    sphinx_admin = self.find_by_to(value) unless sphinx_admin
+
+    sphinx_admin
+  end
+
+  def self.extend_words(words)
+    words.inject([]) do |out, word|
+      sphinx_admin = find_by_value(word)
+      if sphinx_admin
+        out << sphinx_admin.from
+        out << sphinx_admin.to
+      end
+      out << word
+    end.uniq
   end
   
   def self.list=(value)
