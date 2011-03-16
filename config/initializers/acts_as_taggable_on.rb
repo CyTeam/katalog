@@ -1,2 +1,2 @@
-# Use dot (.) as delimiter
+# Use newline as delimiter
 ActsAsTaggableOn::TagList.delimiter = "\n"
