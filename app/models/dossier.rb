@@ -486,10 +486,6 @@ class Dossier < ActiveRecord::Base
     value.gsub(/ #{date_range}$/, '')
   end
   
-  def self.import_filter
-    /^[0-9]{2}\.[0-9]\.[0-9]{3}$/
-  end
-  
   def update_or_create_number(amount, range)
     # We can't use .count or .where until the Dossier is guaranteed to be saved
     number = numbers.select{|n|
