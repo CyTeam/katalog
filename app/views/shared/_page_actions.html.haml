@@ -7,5 +7,5 @@
         - Report.all.each do |report|
           %li
             = link_to report.title, report_dossiers_path(:report_name => report.name)
-  = contextual_link('pdf', url_for(params.merge(:only_path => false, :format => :pdf, :per_page => 'all')), :id => 'print-as-pdf', :class => 'icon icon-pdf', :title => t('tooltips.dossiers.show_pdf'))
+  = contextual_link('pdf', url_for(params.merge(:only_path => false, :format => :pdf, :per_page => 'all')), :title => t('tooltips.dossiers.show_pdf'))
 
