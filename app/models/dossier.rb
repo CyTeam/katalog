@@ -127,8 +127,10 @@ class Dossier < ActiveRecord::Base
         words << string.split('.')
       end
     end
-    
-    return signatures, words.flatten, sentences
+
+    words = SphinxAdmin.extend_words(words.flatten)
+
+    return signatures, words, sentences
   end
   
   def self.build_query(value)
