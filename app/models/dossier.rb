@@ -420,25 +420,25 @@ class Dossier < ActiveRecord::Base
   end
   
   def dossier_number_list=(value)
-    # Check if values changed.
     dossier_number_strings = value.split("\n")
-    new_numbers = dossier_number_strings.inject([]) do |ret, dossier_number_string|
-      from, to, amount = DossierNumber.from_s(dossier_number_string)
-      ret << DossierNumber.as_string(from, to, amount)
-    end
-    old_numbers = numbers.inject([]) do |ret, number|
-      ret << number.to_s
-    end
+    
+    # Remember number objects
+    old_numbers = numbers.clone
+    new_numbers = []
+    
+    dossier_number_strings.map{|number_string|
+      # Parse string
+      from, to, amount = DossierNumber.from_s(number_string)
+      # Remember updated/created number
+      new_numbers << update_or_create_number(amount, {:from => from, :to => to}, false)
+    }
+    
+    removed_numbers = old_numbers - new_numbers
+    # Remove now unused number from the association
+    self.numbers = self.numbers - removed_numbers
 
-    unless (old_numbers & new_numbers).length.eql?old_numbers.length
-      # Clean list
-      numbers.delete_all
-      
-      dossier_number_strings.each do |dossier_number_string|
-        from, to, amount = DossierNumber.from_s(dossier_number_string)
-        numbers.build(:from => from, :to => to, :amount => amount)
-      end
-    end
+    # Destroy the number object
+    removed_numbers.map{|number| number.destroy}
   end
 
   def keyword_text
@@ -492,7 +492,7 @@ class Dossier < ActiveRecord::Base
     value.gsub(/ #{date_range}$/, '')
   end
   
-  def update_or_create_number(amount, range)
+  def update_or_create_number(amount, range, accumulate = true)
     # We can't use .count or .where until the Dossier is guaranteed to be saved
     number = numbers.select{|n|
       from = n.from.nil? ? '' : n.from.to_s(:db)
@@ -515,12 +515,14 @@ class Dossier < ActiveRecord::Base
     if number
       amount ||= 0
       number.amount ||= 0
-      amount += number.amount
+      amount += number.amount if accumulate
     else
       number = numbers.build(range)
     end
 
     number.amount = amount
+    
+    return number
   end
   
   def prepare_numbers(year = Date.today.year)

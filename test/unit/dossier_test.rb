@@ -313,6 +313,51 @@ class DossierTest < ActiveSupport::TestCase
   
   end
 
+  test "Assigning a number list ensures relevant number objects" do
+    @dossier.dossier_number_list = "1990: 10\n1991: 20"
+    
+    assert_equal 2, @dossier.numbers.size
+    assert_equal "1990: 10", @dossier.numbers.first.to_s
+    assert_equal "1991: 20", @dossier.numbers.last.to_s
+  end
+  
+  test "Re-assigning same dossier number list does not change objects" do
+    list = @dossier.dossier_number_list
+    objects = @dossier.numbers
+    
+    @dossier.dossier_number_list = list
+    @dossier.save
+    
+    assert_equal objects, @dossier.numbers
+  end
+  
+  test "Adding a dossier number using list does not change other objects" do
+    list = @dossier.dossier_number_list
+    objects = @dossier.numbers
+    
+    list += "\n15: 100"
+    @dossier.dossier_number_list = list
+    @dossier.save
+    
+    assert_equal objects, @dossier.numbers
+  end
+  
+  test "Removing a number from list drops the object" do
+    @dossier.dossier_number_list = "1999: 100"
+    @dossier.dossier_number_list = "2000: 100"
+    
+    assert_equal 1, @dossier.numbers.size
+    assert_equal "2000: 100", @dossier.numbers.to_s
+  end
+  
+  test "Updating a number from list sets amount" do
+    @dossier.dossier_number_list = "1999: 100"
+    @dossier.dossier_number_list = "1999: 50"
+    
+    assert_equal 1, @dossier.numbers.size
+    assert_equal "1999: 50", @dossier.numbers.to_s
+  end
+  
   test "document_count returns integer" do
     assert @dossier.document_count.is_a?(Integer)
   end
