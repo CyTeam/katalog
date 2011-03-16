@@ -6,6 +6,5 @@
       %ul
         - Report.all.each do |report|
           %li
-            = link_to report.title, report_dossiers_path(:report_name => report.name)
+            = link_to report.title, report_dossiers_path(:report_name => report.name, :search => params[:search])
   = contextual_link('pdf', url_for(params.merge(:format => :pdf)), :title => t('tooltips.dossiers.show_pdf'))
-
