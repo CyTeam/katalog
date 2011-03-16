@@ -106,7 +106,7 @@ class ImportTest < ActiveSupport::TestCase
 
     keyword_list = Dossier.find_by_title('City counsil').keyword_list
     assert_equal 4, keyword_list.count
-    assert_superset keyword_list, ["Politics", "City", "counsil", "Corruption"]
+    assert_superset keyword_list, ["Politics", "City", "Counsil", "Corruption"]
   end
 
   test "document count" do
