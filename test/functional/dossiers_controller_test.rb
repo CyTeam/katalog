@@ -97,8 +97,9 @@ class DossiersControllerTest < ActionController::TestCase
     end
   end
 
-  test "should get report" do
-    get :report
+  test "should get named report" do
+    Factory(:report)
+    get :report, :report_name => 'simple'
     assert_response :success
   end
 end
