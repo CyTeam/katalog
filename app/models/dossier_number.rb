@@ -56,6 +56,24 @@ class DossierNumber < ActiveRecord::Base
     periods
   end
 
+  def self.main_report_periods
+    periods = []
+    # before 1990
+    periods << {:from => nil, :to => Date.new(1989, 12, 31)}
+    # 1990-2001
+    periods << {:from => Date.new(1990, 1, 1), :to => Date.new(2000, 12, 31)}
+    # 2001-2005
+    periods << {:from => Date.new(2001, 1, 1), :to => Date.new(2005, 12, 31)}
+    # 2006 -
+    to_year = Date.today.year.to_i
+    from_year = 2006
+    for year in from_year..to_year
+      periods << {:from => Date.new(year, 1, 1), :to => Date.new(year, 12, 31)}
+    end
+
+    periods
+  end
+
   def self.period(from_year, to_year, format = :default)
     return nil unless (from_year or to_year)
 

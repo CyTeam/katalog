@@ -340,10 +340,18 @@ class Dossier < ActiveRecord::Base
   end
 
   # Report helpers
-  def self.years(interval = 1)
+  def self.years(interval = 1, custom = nil)
     return [] if interval.nil?
 
-    years = DossierNumber.default_periods(Date.today.year, false)
+    years = nil
+
+    case custom
+      when 'main'
+      years = DossierNumber.main_report_periods
+      else
+      years = DossierNumber.default_periods(Date.today.year, false)
+    end
+
     prepared_years = years.dup
     if interval > 1
       prepared_years.reject! do |item|
@@ -489,8 +497,8 @@ class Dossier < ActiveRecord::Base
     self.first_document_on = Date.new(value.to_i, 1, 1)
   end
 
-  def years_counts(interval = 1)
-    periods = Dossier.years(interval)
+  def years_counts(interval = 1, custom = nil)
+    periods = Dossier.years(interval, custom)
     periods.inject([]) do |result, period|
       result << {:period => period, :count => document_count(period)}
     end

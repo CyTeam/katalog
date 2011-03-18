@@ -2,5 +2,5 @@
   - @report[:columns].each do |attr|
     %td{:class => attr.to_s}= show_column_for_report(dossier, attr)
   - if @report[:collect_year_count]
-    - dossier.years_counts(@report[:collect_year_count]).each do |count|
+    - dossier.years_counts(@report[:collect_year_count], @report[:name]).each do |count|
       %td.year= number_with_delimiter count[:count]

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110318110213) do
+ActiveRecord::Schema.define(:version => 20110318161000) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"

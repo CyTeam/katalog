@@ -4,7 +4,7 @@
       %tr.header
         - @report[:columns].each do |attr|
           %th{:class => attr.to_s}= show_header_for_report(attr)
-        - Dossier.years(@report[:collect_year_count]).each do |year|
+        - Dossier.years(@report[:collect_year_count], @report[:name]).each do |year|
           %th.year= year
 
       = render :partial => 'reports/dossier', :collection => [Topic.group.first, Topic.main.first, Topic.geo.first, Topic.detail.first, Dossier.dossier.first]
