@@ -19,4 +19,5 @@
   = t('crud.preview')
   
 #report-preview
-  = render 'reports/show'
+  - if @report.columns
+    = render 'reports/show'
