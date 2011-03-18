@@ -374,6 +374,12 @@ class Dossier < ActiveRecord::Base
   end
   
   # Attributes
+  def preorder
+    containers.each do |c|
+      return true if c.preorder
+    end
+  end
+
   def relations
     return [] if related_to.blank?
     

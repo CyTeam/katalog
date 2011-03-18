@@ -15,6 +15,10 @@ class Container < ActiveRecord::Base
     "#{title} (#{container_type.code}@#{location.code})"
   end
 
+  def preorder
+    location.preorder
+  end
+
   def container_type=(value)
     value = ContainerType.find_by_code(value) if value.is_a?(String)
     if value.nil?

@@ -3,6 +3,6 @@ class LocationsController < AuthorizedController
   before_filter :authenticate_user!, :except => [:index, :show]
 
   def attributes
-    ['title', 'code', 'address', 'availability']
+    ['title', 'code', 'address', 'availability', 'preorder']
   end
 end

@@ -159,11 +159,13 @@ de:
         dossier_id:        "Dossier-ID"
         container_type_id: "Container-Typ-ID"
         location_id:       "Standort-ID"
+        preorder:          "Nur auf Vorbestellung"
       location:
         title:        "Titel"
         code:         "Kürzel"
         address:      "Adresse"
         availability: "Verfügbarkeit"
+        preorder:     "Vorbestellung"
       container_type:
         title:       "Titel"
         code:        "Kürzel"
