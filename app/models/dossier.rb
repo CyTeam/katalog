@@ -387,21 +387,35 @@ class Dossier < ActiveRecord::Base
   def to_xls
     xls = StringIO.new
     book = Spreadsheet::Workbook.new
-    sheet = book.create_worksheet
-    5.times {|j| 5.times {|i| sheet[j,i] = (i+1)*10**j}}
+    sheet = book.create_worksheet(:name => "Dossier-No.: #{id}") # Encoding problem when using title
+    present_numbers = numbers.present
+    
+    label_columns = xls_columns.inject([]) do |out, column|
+      out << I18n.t(column, :scope => 'activerecord.attributes.dossier')
+    end
 
-    # column
-    sheet.column(2).hidden = true
-    sheet.column(3).hidden = true
-    sheet.column(2).outline_level = 1
-    sheet.column(3).outline_level = 1
+    present_numbers.each do |number|
+      label_columns << number.period
+    end
 
-    # row
-    sheet.row(2).hidden = true
-    sheet.row(3).hidden = true
-    sheet.row(2).outline_level = 1
-    sheet.row(3).outline_level = 1
+    sheet.row(0).concat(label_columns)
 
+    value_columns = xls_columns.inject([]) do |out, column|
+      case column
+        when :container_type
+          out << containers.last.container_type.code
+        when :location
+          out << containers.last.location.code
+        else
+          out << self.send(column)
+      end
+    end
+    
+    present_numbers.each do |number|
+      value_columns << number.amount
+    end
+    
+    sheet.row(1).concat(value_columns)
     book.write xls
 
     xls.string
@@ -610,5 +624,10 @@ class Dossier < ActiveRecord::Base
     import_keywords(row)
     update_tags
     import_numbers(row)
+  end
+
+  private
+  def xls_columns
+    [:signature, :title, :container_type, :location, :related_to, :keywords]
   end
 end
