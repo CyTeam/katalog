@@ -240,6 +240,7 @@ de:
       history:  "Änderungsverlauf"
       revert:   "Rückgangig"
       refresh: "Aktualisiern"
+      excel: "Als Excel exportieren"
     title:
       preview: "%{model} Vorschau"
 

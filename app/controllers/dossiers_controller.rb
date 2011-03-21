@@ -6,7 +6,7 @@ class DossiersController < AuthorizedController
   before_filter :authenticate_user!, :except => [:index, :search, :show]
   
   # Responders
-  respond_to :html, :js, :json
+  respond_to :html, :js, :json, :xls
   
   # Search
   has_scope :by_text, :as => :text
@@ -22,7 +22,16 @@ class DossiersController < AuthorizedController
   
   # Ordering
   has_scope :order_by, :default => 'signature'
-  
+
+  def show
+    show! do |format|
+      format.xls {
+        send_data(@dossier.to_xls,
+          :filename => "dossier_#{@dossier.signature}.xls",
+          :type => 'application/vnd.ms-excel')
+      }
+    end
+  end
   # GET /dossiers
   def index
     dossier_index

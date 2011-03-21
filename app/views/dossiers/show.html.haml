@@ -6,6 +6,7 @@
     - if current_user.role?'admin'
       = contextual_link('history', dossier_versions_path(@dossier))
   = contextual_link('pdf', url_for(:format => :pdf))
+  = contextual_link('excel', url_for(:format => :xls))
 
 %h1#title
   = @dossier.title

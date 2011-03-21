@@ -85,3 +85,6 @@ gem 'ckeditor', '3.4.2.pre'
 gem 'paper_trail'
 
 gem 'revertible_paper_trail'
+
+# Generate excel files
+gem 'spreadsheet'
