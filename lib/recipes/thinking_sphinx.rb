@@ -1,6 +1,6 @@
 before "deploy:setup", "ts:setup"
 after "deploy:update_code", "ts:symlink"
-after "ts:symlink", "ts:restart"
+before "deploy:restart", "ts:restart"
 
 namespace :ts do
   desc "Create thinking sphinx config"
@@ -9,7 +9,7 @@ namespace :ts do
     
     logger.info "Creating thinking sphinx configuration"
     # Load parameters
-    db_yml = capture "cat #{deploy_to}/current/config/database.yml"
+    db_yml = capture "cat #{shared_path}/config/database.yml"
     yaml = YAML::load(db_yml)
     db_conf = yaml[rails_env]
     
@@ -31,9 +31,9 @@ namespace :ts do
 
   desc "Make symlink for sphinx configs and data"
   task :symlink, :roles => :app do
-    run "ln -nfs #{shared_path}/config/#{rails_env}.sphinx.conf #{deploy_to}/current/config/#{rails_env}.sphinx.conf"
-    run "ln -nfs #{shared_path}/config/sphinx #{deploy_to}/current/config/sphinx"
-    run "ln -nfs #{shared_path}/db/sphinx #{deploy_to}/current/db/sphinx"
+    run "ln -nfs #{shared_path}/config/#{rails_env}.sphinx.conf #{release_path}/config/#{rails_env}.sphinx.conf"
+    run "ln -nfs #{shared_path}/config/sphinx #{release_path}/config/sphinx"
+    run "ln -nfs #{shared_path}/db/sphinx #{release_path}/db/sphinx"
   end
 
   task :rake, :roles => :app do
