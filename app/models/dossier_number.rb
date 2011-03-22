@@ -56,6 +56,12 @@ class DossierNumber < ActiveRecord::Base
     periods
   end
 
+  def self.default_periods_as_s
+    self.default_periods.inject([]) do |out, period|
+      out << self.period(period[:from], period[:to])
+    end
+  end
+
   def self.main_report_periods
     periods = []
     # before 1990

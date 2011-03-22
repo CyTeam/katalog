@@ -129,7 +129,7 @@ class DossiersController < AuthorizedController
     @dossiers = apply_scopes(Dossier, params[:dossier])
     @document_count = Dossier.document_count
 
-    index!
+    index_excel
   end
 
   def dossier_search
@@ -162,7 +162,7 @@ class DossiersController < AuthorizedController
     if (@dossiers.count == 1 and not request.format.json?)
       redirect_to dossier_path(@dossiers.first, :query => @query)
     else
-      index!
+      index_excel
     end
   end
 
@@ -188,5 +188,15 @@ class DossiersController < AuthorizedController
 
     # Drop nil results by stray full text search matches
     @dossiers.compact!
+  end
+
+  def index_excel
+    index! do |format|
+      format.xls {
+        send_data(Dossier.to_xls(@dossiers),
+          :filename => "dossiers_#{@dossiers.first.signature}.xls",
+          :type => 'application/vnd.ms-excel')
+      }
+    end
   end
 end

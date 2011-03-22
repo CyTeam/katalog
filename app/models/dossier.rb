@@ -390,7 +390,7 @@ class Dossier < ActiveRecord::Base
     sheet = book.create_worksheet(:name => "Dossier-No.: #{id}") # Encoding problem when using title
     present_numbers = numbers.present
     
-    label_columns = xls_columns.inject([]) do |out, column|
+    label_columns = Dossier.xls_columns.inject([]) do |out, column|
       out << I18n.t(column, :scope => 'activerecord.attributes.dossier')
     end
 
@@ -400,7 +400,7 @@ class Dossier < ActiveRecord::Base
 
     sheet.row(0).concat(label_columns)
 
-    value_columns = xls_columns.inject([]) do |out, column|
+    value_columns = Dossier.xls_columns.inject([]) do |out, column|
       case column
         when :container_type
           out << containers.last.container_type.code
@@ -420,7 +420,58 @@ class Dossier < ActiveRecord::Base
 
     xls.string
   end
-  
+
+  def self.to_xls(dossiers)
+    xls = StringIO.new
+    book = Spreadsheet::Workbook.new
+    sheet = book.create_worksheet(:name => "Dossier-Signature: #{dossiers.first.signature}") # Encoding problem when using title
+    present_numbers = DossierNumber.default_periods_as_s
+    row = 0
+
+    label_columns = xls_columns.inject([]) do |out, column|
+      out << I18n.t(column, :scope => 'activerecord.attributes.dossier')
+    end
+
+    present_numbers.each do |number|
+      label_columns << number
+    end
+
+    sheet.row(row).concat(label_columns)
+    row += 1
+
+    dossiers.each do |dossier|
+      value_columns = xls_columns.inject([]) do |out, column|
+        case column
+          when :container_type
+            unless dossier.containers.empty?
+              out << dossier.containers.last.container_type.code
+            else
+              out << ''
+            end
+          when :location
+            unless dossier.containers.empty?
+              out << dossier.containers.last.location.code
+            else
+              out << ''
+            end
+          else
+            out << dossier.send(column)
+        end
+      end
+
+      dossier.numbers.each do |number|
+        value_columns << number.amount
+      end unless dossier.kind_of?Topic
+
+      sheet.row(row).concat(value_columns)
+      row += 1
+    end
+
+    book.write xls
+
+    xls.string
+  end
+
   # Attributes
   def preorder
     containers.each do |c|
@@ -627,7 +678,7 @@ class Dossier < ActiveRecord::Base
   end
 
   private
-  def xls_columns
+  def self.xls_columns
     [:signature, :title, :container_type, :location, :related_to, :keywords]
   end
 end

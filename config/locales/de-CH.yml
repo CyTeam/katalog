@@ -160,6 +160,7 @@ de-CH:
       show_themeoverview: Themenübersicht mit 5-Jahresansicht
       show_report: Druck das Suchresultat mit Detailangaben aus.
       show_year_report: Druck die Jahresansicht mit den hinzugekommen Anzahl Dokumenten.
+      save_as_excel: Speichert den Auszug als Excel-Datei ab.
     container_types:
       show: Anzeigen
       edit: Editieren
