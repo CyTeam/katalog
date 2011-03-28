@@ -72,6 +72,7 @@ namespace :mysql do
       # Local DB import
       username, password, database = database_config('development')
       system "bzip2 -d -c #{filename} | mysql -u #{username} --password='#{password}' #{database}; rm -f #{filename}"
+      system "rake db:migrate"
 
       logger.important "sync database from the stage '#{stage}' to local finished"
     end
