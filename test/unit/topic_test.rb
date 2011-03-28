@@ -1,10 +1,19 @@
 require 'test_helper'
 
 class TopicTest < ActiveSupport::TestCase
-  test "topic_type knows group, topic, geo, and dossier" do
+  test "topic_type knows group" do
     assert :group, dossiers(:group_7).topic_type
+  end
+
+  test "topic_type knows main" do
     assert :main, dossiers(:first_topic).topic_type
+  end
+
+  test "topic_type knows geo" do
     assert :geo, dossiers(:topic_local).topic_type
+  end
+
+  test "topic_type knows dossier" do
     assert :dossier, dossiers(:important_zug_topic).topic_type
   end
 
