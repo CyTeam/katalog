@@ -31,3 +31,5 @@ end
 # Bundle install
 require "bundler/capistrano"
 after "bundle:install", "deploy:migrate"
+# Clean up the releases after deploy.
+after "deploy", "deploy:cleanup"
