@@ -33,7 +33,7 @@ Install RVM with and follow the instructions:
 bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )
 </pre>
 
-After the installation of RVM you can install the latest version of Ruby 1.8.7 or 1.9.2 with:
+After the installation of RVM you can install the latest version of Ruby 1.8.7 or 1.9.2 (actually the export to an excel sheet doesn't works) with:
 
 <pre>
 rvm install ruby-1.8.7

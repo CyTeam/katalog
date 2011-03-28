@@ -2,6 +2,7 @@
 
 require 'spreadsheet'
 require 'stringio'
+require 'iconv'
 
 class Dossier < ActiveRecord::Base
   # change log
