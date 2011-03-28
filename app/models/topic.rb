@@ -25,15 +25,18 @@ class Topic < Dossier
 
   def topic_type
     return if signature.nil?
-    
-    case signature.length
+
+    case signature.split('.').length
       when 1
-        :group
+        case signature.length
+          when 1
+          :group
+          when 2
+            :main
+        end
       when 2
-        :main
-      when 4
         :geo
-      when 8
+      when 3
         :detail
     end
   end
