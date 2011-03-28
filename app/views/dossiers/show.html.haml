@@ -62,4 +62,5 @@
     %table
       = @containers = @dossier.containers; render 'containers/list'
 
-= highlight_words(params['query'], 'keywords')
+- content_for :javascript do
+  = highlight_words(params['query'], 'keywords')
