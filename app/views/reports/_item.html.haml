@@ -5,6 +5,11 @@
     - item.columns.each do |column|
       = t_attr(column, Dossier)
       %br
+  %td
+    - if item.public?
+      = t_attr('public')
+    - else
+      = t_attr('not_public')
   %td.action-links
     =link_to image_tag('icons/show.png', :title => t_action(:show)), resource_url(item), 'data-href-container' => 'tr'
     =link_to image_tag('icons/edit.png', :title => t_action(:edit)), edit_resource_url(item) if can?(:edit, item)

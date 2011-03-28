@@ -189,6 +189,8 @@ de:
         title:              "Titel"
         orientation:        "Seitenformat"
         per_page:           "Blättern"
+        public:             "Öffentlich Zugänglich"
+        not_public:          "Nicht öffentlich Zugänglich"
       dossier_number:
         from:       "Von"
         amount:     "Anzahl"
