@@ -20,7 +20,7 @@ SimpleNavigation::Configuration.run do |navigation|
         if current_user.role?'admin'
           administration.item :versions_nav, t('katalog.main_navigation.changes'), versions_path, :highlights_on => /\/versions/
           administration.item :reports, t('katalog.main_navigation.reports'), reports_path, :highlights_on => /\/reports/
-          administration.item :search_replace, t('katalog.main_navigation.search_replace'), search_replace_index_path, :highlights_on => /\/search_replace/
+          administration.item :search_replace, t('katalog.main_navigation.search_replace'), search_replaces_path, :highlights_on => /\/search_replaces/
           administration.item :sphinx, t('katalog.main_navigation.search_admin'), exceptions_sphinx_admins_path do |sphinx|
             sphinx.item :exceptions, t('katalog.main_navigation.search_exceptions'), exceptions_sphinx_admins_path
             sphinx.item :word_forms, t('katalog.main_navigation.search_word_forms'), word_forms_sphinx_admins_path
