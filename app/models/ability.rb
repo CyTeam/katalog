@@ -27,7 +27,8 @@ class Ability
     elsif user.role? :editor
       can :manage, [Container, ContainerType, Dossier, DossierNumber, Keyword, Location, Topic]
     else
-      can [:index, :show, :search], :all
+      can [:index, :show, :search], [Dossier, Topic], :internal => false
+      can [:index, :show, :search], [Container, ContainerType, DossierNumber, Keyword, Location]
     end
   end
 end

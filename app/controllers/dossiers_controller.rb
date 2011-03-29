@@ -126,7 +126,7 @@ class DossiersController < AuthorizedController
     params[:dossier] ||= {}
     params[:dossier][:level] ||= 2
 
-    @dossiers = apply_scopes(Dossier, params[:dossier])
+    @dossiers = apply_scopes(Dossier, params[:dossier]).accessible_by(current_ability, :index)
     @document_count = Dossier.document_count
 
     index_excel
@@ -145,10 +145,10 @@ class DossiersController < AuthorizedController
     end
     if params[:search][:text].present?
       @query = params[:search][:text]
-      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page])
+      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page], :internal => can?(:search, Dossier, :internal => true))
     else
       @query = params[:search][:signature]
-      @dossiers = apply_scopes(Dossier, params[:search]).order('signature').paginate :page => params[:page], :per_page => params[:per_page]
+      @dossiers = apply_scopes(Dossier, params[:search]).order('signature').accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
 
       # Alphabetic pagination
       if Topic.alphabetic?(@query)

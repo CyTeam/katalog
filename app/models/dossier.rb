@@ -87,6 +87,7 @@ class Dossier < ActiveRecord::Base
     indexes keywords.name, :as => :keywords
 
     has type
+    has internal
     
     set_property :field_weights => {
       :title    => 500,
