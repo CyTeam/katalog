@@ -84,7 +84,7 @@ class Dossier < ActiveRecord::Base
     # fields
     indexes title
     indexes signature
-    indexes keywords.name, :as => :keywords
+    indexes keyword_taggings.tag.name, :as => :keywords
 
     has type
     has internal
