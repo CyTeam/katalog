@@ -149,7 +149,7 @@ class DossiersController < AuthorizedController
     end
     if params[:search][:text].present?
       @query = params[:search][:text]
-      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page], :internal => can?(:search, Dossier, :internal => true))
+      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?)
     else
       @query = params[:search][:signature]
       @dossiers = apply_scopes(Dossier, params[:search]).order('signature').accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
@@ -183,7 +183,7 @@ class DossiersController < AuthorizedController
     end
     if params[:search][:text].present?
       @query = params[:search][:text]
-      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page], :internal => can?(:search, Dossier, :internal => true))
+      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?)
     else
       @query = params[:search][:signature]
       params[:search].merge!(:per_page => @report[:per_page], :level => @report[:level])

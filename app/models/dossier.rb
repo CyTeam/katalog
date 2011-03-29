@@ -104,7 +104,10 @@ class Dossier < ActiveRecord::Base
   end
 
   def self.by_text(value, options = {})
-    params = {:match_mode => :extended, :rank_mode => :match_any, :with => {:type => 'Dossier'}}
+    attributes = {:type => 'Dossier'}
+    attributes[:internal] = false if (options.delete(:internal) == false)
+    
+    params = {:match_mode => :extended, :rank_mode => :match_any, :with => attributes}
     params.merge!(options)
     
     query = build_query(value)
