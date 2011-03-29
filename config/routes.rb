@@ -45,5 +45,7 @@ Katalog::Application.routes.draw do
     end
   end
 
+  get "search_replace/index"
+
   root :to => "dossiers#index"
 end
