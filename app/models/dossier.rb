@@ -9,7 +9,7 @@ class Dossier < ActiveRecord::Base
   has_paper_trail :ignore => [:created_at, :updated_at, :delta]
 
   # Hooks
-  after_save :update_tags
+  before_save :update_tags
 
   # Validations
   validates_presence_of :signature, :title
@@ -665,8 +665,8 @@ class Dossier < ActiveRecord::Base
   end
 
   def update_tags
-    tags = self.class.extract_tags(self.keyword_list.join(',')) # TODO: Removed the title from the tag list which should eventually be reimplemented.
-    self.tag_list = tags unless (self.tag_list & tags).length.eql?self.tag_list.length
+    tag_string = self.keyword_list.join(',') + "," + self.title
+    self.tag_list = self.class.extract_tags(tag_string)
   end
 
   def import_keywords(row)
