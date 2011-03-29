@@ -30,7 +30,7 @@ class Topic < Dossier
       when 1
         case signature.length
           when 1
-          :group
+            :group
           when 2
             :main
         end
