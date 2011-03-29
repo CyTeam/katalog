@@ -150,6 +150,7 @@ de:
         first_document_on:    "Erstes Dokument von"
         delta:                "Delta"
         updated_at:           "Geändert am"
+        internal:             "Internes Dossier"
       container:
         period:            "Zeitraum"
         title:             "Titel"
