@@ -79,24 +79,28 @@ class Dossier < ActiveRecord::Base
   
   # Freetext search
   define_index do
+    # Needed for tag/keyword search
     set_property :group_concat_max_len => 1048576
 
-    # fields
+    # Indexed Fields
     indexes title
     indexes signature
+    # Use _taggings relation to fix thinking sphinx issue #167
     indexes keyword_taggings.tag.name, :as => :keywords
 
-    has type
-    has internal
-    
+    # Weights
     set_property :field_weights => {
       :title    => 500,
       :keywords => 2
     }
-    set_property :delta => true unless Rails.env.import? # Disable delta update in import as it slows down too much
+
+    # Disable delta update in import as it slows down too much
+    set_property :delta => true unless Rails.env.import?
       
-    # attributes
+    # Attributes
     has created_at, updated_at
+    has type
+    has internal
   end
 
   def self.by_text(value, options = {})
