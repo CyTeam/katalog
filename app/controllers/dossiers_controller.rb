@@ -4,7 +4,7 @@ require 'ostruct'
 class DossiersController < AuthorizedController
   # Authentication
   before_filter :authenticate_user!, :except => [:index, :search, :show]
-  
+
   # Responders
   respond_to :html, :js, :json, :xls
   
@@ -24,6 +24,9 @@ class DossiersController < AuthorizedController
   has_scope :order_by, :default => 'signature'
 
   def show
+    @dossier = Dossier.find(params[:id])
+    authorize! :show, @dossier
+    
     show! do |format|
       format.xls {
         send_data(@dossier.to_xls,
@@ -32,6 +35,7 @@ class DossiersController < AuthorizedController
       }
     end
   end
+
   # GET /dossiers
   def index
     dossier_index
@@ -152,7 +156,7 @@ class DossiersController < AuthorizedController
 
       # Alphabetic pagination
       if Topic.alphabetic?(@query)
-        @paginated_scope = Dossier.by_signature(@query)
+        @paginated_scope = Dossier.accessible_by(current_ability, :index).by_signature(@query)
       end
     end
 
@@ -179,11 +183,11 @@ class DossiersController < AuthorizedController
     end
     if params[:search][:text].present?
       @query = params[:search][:text]
-      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page])
+      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page], :internal => can?(:search, Dossier, :internal => true))
     else
       @query = params[:search][:signature]
       params[:search].merge!(:per_page => @report[:per_page], :level => @report[:level])
-      @dossiers = apply_scopes(Dossier, params[:search]).order('signature').paginate :page => params[:page], :per_page => params[:per_page]
+      @dossiers = apply_scopes(Dossier, params[:search]).order('signature').accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
     end
 
     # Drop nil results by stray full text search matches
