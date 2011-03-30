@@ -25,7 +25,7 @@ module DossiersHelper
     notes = ""
     
     if availabilities.include?('intern')
-      notes += availability_text('intern', partially)
+      notes += availability_text('intern', false)
     end
     if availabilities.include?('wait')
       notes += availability_text('wait', partially)
