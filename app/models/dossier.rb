@@ -564,7 +564,10 @@ class Dossier < ActiveRecord::Base
 
   # Calculations
   def availability
-    containers.collect{|c| c.location.availability}.uniq
+    availabilities = containers.collect{|c| c.location.availability}
+    availabilities << 'intern' if self.internal?
+
+    availabilities.uniq
   end
   
   def locations
