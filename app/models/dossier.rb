@@ -9,7 +9,7 @@ class Dossier < ActiveRecord::Base
   has_paper_trail :ignore => [:created_at, :updated_at, :delta]
 
   # Hooks
-  after_save :update_tags
+  before_save :update_tags
 
   # Validations
   validates_presence_of :signature, :title
@@ -79,28 +79,35 @@ class Dossier < ActiveRecord::Base
   
   # Freetext search
   define_index do
+    # Needed for tag/keyword search
     set_property :group_concat_max_len => 1048576
 
-    # fields
+    # Indexed Fields
     indexes title
     indexes signature
-    indexes keywords.name, :as => :keywords
+    # Use _taggings relation to fix thinking sphinx issue #167
+    indexes keyword_taggings.tag.name, :as => :keywords
 
-    has type
-    has internal
-    
+    # Weights
     set_property :field_weights => {
       :title    => 500,
       :keywords => 2
     }
-    set_property :delta => true unless Rails.env.import? # Disable delta update in import as it slows down too much
+
+    # Disable delta update in import as it slows down too much
+    set_property :delta => true unless Rails.env.import?
       
-    # attributes
+    # Attributes
     has created_at, updated_at
+    has type
+    has internal
   end
 
   def self.by_text(value, options = {})
-    params = {:match_mode => :extended, :rank_mode => :match_any, :with => {:type => 'Dossier'}}
+    attributes = {:type => 'Dossier'}
+    attributes[:internal] = false if (options.delete(:internal) == false)
+    
+    params = {:match_mode => :extended, :rank_mode => :match_any, :with => attributes}
     params.merge!(options)
     
     query = build_query(value)
@@ -557,7 +564,10 @@ class Dossier < ActiveRecord::Base
 
   # Calculations
   def availability
-    containers.collect{|c| c.location.availability}.uniq
+    availabilities = containers.collect{|c| c.location.availability}
+    availabilities << 'intern' if self.internal?
+
+    availabilities.uniq
   end
   
   def locations
@@ -658,8 +668,8 @@ class Dossier < ActiveRecord::Base
   end
 
   def update_tags
-    tags = self.class.extract_tags(self.keyword_list.join(',')) # TODO: Removed the title from the tag list which should eventually be reimplemented.
-    self.tag_list = tags unless (self.tag_list & tags).length.eql?self.tag_list.length
+    tag_string = self.keyword_list.join(',') + "," + self.title
+    self.tag_list = self.class.extract_tags(tag_string)
   end
 
   def import_keywords(row)

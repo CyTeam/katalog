@@ -55,6 +55,6 @@ namespace :import do
     seed_import_db
     import_csv
     push_import_db
-    ts.reindex
+    thinking_sphinx.rebuild
   end
 end

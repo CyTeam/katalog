@@ -235,9 +235,8 @@ class DossierTest < ActiveSupport::TestCase
   end
 
   test "assigning keyword_list adds to global tag list" do
-    # Add 2 keywords
-    assert_difference('ActsAsTaggableOn::Tag.count', 2) do
-      t1 = ActsAsTaggableOn::Tag.all
+    # Add 2 keywords and 1 tag
+    assert_difference('ActsAsTaggableOn::Tag.count', 2 + 1) do
       @dossier.keyword_list.add(['Word 1', 'Word 2', 'Word 2'])
       @dossier.save!
     end
