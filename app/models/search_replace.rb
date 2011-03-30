@@ -5,7 +5,7 @@ class SearchReplace < FormtasticFauxModel
   validates_presence_of :search, :replace, :columns
   
   def self.editable_attributes
-    ['signature', 'description', 'title', 'related_to', 'keywords', 'relation_list']
+    ['signature', 'description', 'title', 'keywords', 'relation_list']
   end
   
   self.types = {
@@ -16,7 +16,12 @@ class SearchReplace < FormtasticFauxModel
   
   def do
     columns.each do |column|
-      Dossier.update_all(["#{column} = REPLACE(#{column}, ?, ?)", search, replace], ["#{column} LIKE ?", '%' + search + '%']) if check_column(column)
+      case column
+      when 'keywords'
+        ActsAsTaggableOn::Tag.update_all(["title = REPLACE(title, ?, ?)", search, replace], ["title LIKE ?", '%' + search + '%'])
+      else
+        Dossier.update_all(["#{column} = REPLACE(#{column}, ?, ?)", search, replace], ["#{column} LIKE ?", '%' + search + '%'])
+      end if check_column(column)
     end
   end
 
