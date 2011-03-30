@@ -631,7 +631,7 @@ class Dossier < ActiveRecord::Base
 
     number.amount = amount
     
-    return number
+    number
   end
   
   def prepare_numbers(year = Date.today.year)
