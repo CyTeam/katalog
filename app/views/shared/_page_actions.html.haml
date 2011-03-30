@@ -10,6 +10,6 @@
               %li
                 = link_to report.title, report_dossiers_path(:report_name => report.name, :search => params[:search])
 
-  = contextual_link('pdf', url_for(params.merge(:format => :pdf)), :title => t('tooltips.dossiers.show_pdf'))
+  = contextual_link('pdf', url_for(params.merge(:format => :pdf)), :title => t('tooltips.dossiers.show_pdf'), :target => '_blank')
   - if user_signed_in?
     = contextual_link('excel', url_for(params.merge(:format => :xls, :per_page => 'all')), :title => t('tooltips.dossiers.save_as_excel'))
