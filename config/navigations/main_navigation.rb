@@ -9,7 +9,7 @@ SimpleNavigation::Configuration.run do |navigation|
     end
     primary.item :key_words, t('controllers.index.keyword'), keywords_path
 
-    if current_user.role?(:editor) or current_user.role?(:admin)
+    if current_user and (current_user.role?(:editor) or current_user.role?(:admin))
       primary.item :edit, t('katalog.main_navigation.edit'), versions_path do |edit|
         edit.item :new_dossier, t('katalog.main_navigation.new_dossier'), new_dossier_path
         edit.item :new_title, t('katalog.main_navigation.new_title'), new_topic_path
@@ -18,7 +18,7 @@ SimpleNavigation::Configuration.run do |navigation|
       end
     end
     
-    if current_user.role?(:admin)
+    if current_user and current_user.role?(:admin)
       primary.item :adminstration, t('katalog.main_navigation.administration'), users_path do |administration|
         administration.item :users, t('katalog.main_navigation.users'), users_path
         administration.item :locations, t('katalog.main_navigation.locations'), locations_path
