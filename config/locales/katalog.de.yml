@@ -218,6 +218,11 @@ de:
         show_versions:          "Detailierte Versionen anzeigen"
 
   formtastic:
+    labels:
+      search_replace:
+        columns: In den Spalten
+        search:  Suchen nach
+        replace: Ersetzen mit
     hints:
       dossier:
         text: "\"Geschichte CH\", medizin zug 61.3"
