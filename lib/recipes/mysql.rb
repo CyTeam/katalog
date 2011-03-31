@@ -46,7 +46,7 @@ namespace :mysql do
 
   namespace :sync do
     desc "Sync down the mysql db to local"
-    task :down do
+    task :down, :roles => :app do
       sync_dir ||= "#{deploy_to}/sync"
       run "mkdir -p #{sync_dir}"
 
