@@ -3,4 +3,4 @@
   %th.title
     = t_attr(:title, Dossier)
   %th.year
-    = Time.now.year
+    = select 'dossier_numbers', 'year', DossierNumber.default_periods.collect {|d| [ d[:from], d[:from] ] }, {:selected => Date.new(Time.now.year, 1, 1), :include_blank => false}
