@@ -94,10 +94,10 @@ function addRelationAutoCompletionBehaviour() {
             },
             success: function( data ) {
               response( $.map( data, function( object ) {
-                item = object.dossier;
+                var item = object['dossier'];
                 return {
-                  label: item.title,
-                  value: item.signature + ': ' + item.title
+                  label: item['title'],
+                  value: item['signature'] + ': ' + item['title']
                 }
               }));
             }
@@ -184,9 +184,9 @@ function addSearchSuggestionBehaviour() {
         },
         success: function( data ) {
           response( $.map( data, function( object ) {
-            item = object.keyword;
+            var item = object['keyword'];
             return {
-              label: item.name
+              label: item['name']
             }
           }));
           $('.ui-autocomplete').highlight(extractLast(request.term), 'match');
