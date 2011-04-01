@@ -240,7 +240,7 @@ de:
         text: "\"Geschichte CH\", medizin zug 61.3"
       report:
         columns: "Um ein Spalte auswählen, mit dem Mauszeiger draufklicken, halten und nach links ziehen."
-        collect_year_count: "Interval der Jahre"
+        collect_year_count: "Intervall der Jahre"
   messages:
     confirm_delete: "%{record} löschen?"
 
@@ -261,7 +261,7 @@ de:
       print: "Seite drucken"
       history:  "Änderungsverlauf"
       revert:   "Rückgangig"
-      refresh: "Aktualisiern"
+      refresh: "Aktualisieren"
       excel: "Als Excel exportieren"
     title:
       preview: "%{model} Vorschau"
