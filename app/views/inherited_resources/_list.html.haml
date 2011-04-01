@@ -6,7 +6,7 @@
       %thead
         %tr
           - @attributes.each do |field|
-            %th= t_attr field, collection.first.class
+            %th= t_attr field, resource_class
           %th
 
       %tbody
