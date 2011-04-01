@@ -47,5 +47,7 @@ Katalog::Application.routes.draw do
 
   resources :search_replaces
 
+  resources :visitor_logs
+
   root :to => "dossiers#index"
 end
