@@ -16,9 +16,4 @@ class ReportsController < AuthorizedController
 
     show!
   end
-
-  def update
-    expire_fragment('page_actions')
-    update!
-  end
 end
