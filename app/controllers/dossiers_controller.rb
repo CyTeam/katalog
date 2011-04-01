@@ -105,7 +105,8 @@ class DossiersController < AuthorizedController
     end
 
     # Collection setup
-    @year = params[:year]
+    @year = params[:dossier_numbers][:year] if params[:dossier_numbers]
+    @year ||= Time.now.year - 1
     
     params[:search] ||= {}
     if params[:search][:text].present?

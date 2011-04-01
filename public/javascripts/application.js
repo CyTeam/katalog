@@ -263,6 +263,13 @@ function addReportPreviewUpdateBehaviour() {
   });
 }
 
+function addEditReportBehaviour() {
+  $('#dossier_numbers_year').change(function(){
+    var url = 'http://' + window.location.host + window.location.pathname + '?search[signature]=' + $.query.get('search[signature]').toString() + '&dossier_numbers[year]=' + $(this).val();
+    window.location.replace(url);
+  });
+}
+
 $(document).ready(function() {
   addAutofocusBehaviour();
   addLinkifyContainersBehaviour();
@@ -277,4 +284,5 @@ $(document).ready(function() {
   addReportActionsMenuBehaviour();
   addReportColumnMultiselectBehaviour();
   addReportPreviewUpdateBehaviour();
+  addEditReportBehaviour();
 });
