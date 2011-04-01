@@ -4,5 +4,3 @@
     = t_attr(:title, Dossier)
   %th.year
     = select 'dossier_numbers', 'year', DossierNumber.default_periods.collect {|d| [ "#{d[:from].year} - #{d[:to].year}", d[:from].year ] if d[:from] }, {:selected => @year, :include_blank => false}
-    -#= form_for 'dossier_numbers', :method => 'get' do |f|
-      -#= f.hidden_field_tag 'signature', params[:search][:signature]
