@@ -270,6 +270,14 @@ function addEditReportBehaviour() {
   });
 }
 
+function informUserAboutBigPDF(amount){
+  if(amount < 100){
+    return true;
+  }else{
+    return confirm("Sie sind dran ein grosses PDF zugenerieren.\nDies wird einige Zeit in Anspruchen nehmen können.\nMöchten Sie dies wirklich tun?")
+  }
+}
+
 $(document).ready(function() {
   addAutofocusBehaviour();
   addLinkifyContainersBehaviour();
