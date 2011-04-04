@@ -278,6 +278,10 @@ function informUserAboutBigPDF(amount){
   }
 }
 
+function submitDossierForm() {
+  $('form.dossier').submit();
+}
+
 $(document).ready(function() {
   addAutofocusBehaviour();
   addLinkifyContainersBehaviour();
