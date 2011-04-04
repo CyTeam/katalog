@@ -1,0 +1,6 @@
+%tr{:class => cycle('odd', 'even')}
+  - @attributes.each do |field|
+    %td
+      = item.send(field) if item.respond_to?(field)
+  %td.action-links
+    =link_to image_tag('icons/show.png', :title => t_action(:show)), resource_url(item), 'data-href-container' => 'tr'

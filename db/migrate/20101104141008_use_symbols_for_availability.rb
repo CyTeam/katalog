@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class UseSymbolsForAvailability < ActiveRecord::Migration
   def self.up
     Location.update_all("availability = 'ready'", "availability = 'Diese Dokumente sind bei uns sofort einsehbar.'")

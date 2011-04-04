@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110329085403) do
+ActiveRecord::Schema.define(:version => 20110401120634) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -147,5 +147,13 @@ ActiveRecord::Schema.define(:version => 20110329085403) do
   end
 
   add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
+
+  create_table "visitor_logs", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

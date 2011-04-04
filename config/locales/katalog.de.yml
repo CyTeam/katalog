@@ -20,6 +20,9 @@ de:
       reports:            "Reports"
       search_replace:     "Suchen&Ersetzen"
       edit:               "Editieren"
+      visitor_logs:       "Logbuch"
+      visitor_logs_list:  "Einträge"
+      new_visitor_log:    "Neuer Eintrag"
     application:
       title:            "Katalog"
       skip_navigation:  "Navigation überspringen"
@@ -128,6 +131,7 @@ de:
       sphinx_admin_word_form: "Wortformen"
       report:  "Report"
       version: "Version"
+      visitor_log: "Logeintrag"
 
     attributes:
       dossier:
@@ -217,6 +221,11 @@ de:
         previous_version:       "Vorherige Version"
         next_version:           "Neue Version"
         show_versions:          "Detailierte Versionen anzeigen"
+      visitor_log:
+        title:      "Titel"
+        content:    "Inhalt"
+        user:       "Benutzer"
+        created_at: "Erfasst am"
 
   formtastic:
     labels:
@@ -224,12 +233,14 @@ de:
         columns: In den Spalten
         search:  Suchen nach
         replace: Ersetzen mit
+      visior_log:
+        create: "Eintrag anlegen"
     hints:
       dossier:
         text: "\"Geschichte CH\", medizin zug 61.3"
       report:
         columns: "Um ein Spalte auswählen, mit dem Mauszeiger draufklicken, halten und nach links ziehen."
-        collect_year_count: "Interval der Jahre"
+        collect_year_count: "Intervall der Jahre"
   messages:
     confirm_delete: "%{record} löschen?"
 
@@ -250,7 +261,7 @@ de:
       print: "Seite drucken"
       history:  "Änderungsverlauf"
       revert:   "Rückgangig"
-      refresh: "Aktualisiern"
+      refresh: "Aktualisieren"
       excel: "Als Excel exportieren"
     title:
       preview: "%{model} Vorschau"

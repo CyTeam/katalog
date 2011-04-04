@@ -557,6 +557,10 @@ class Dossier < ActiveRecord::Base
     removed_numbers.map{|number| number.destroy}
   end
 
+  def dossier_number_from_year(from = Time.now.year)
+    numbers.where(:from => "#{from}-01-01").first
+  end
+
   def keyword_text
     keyword_list.sort.join("\n")
   end

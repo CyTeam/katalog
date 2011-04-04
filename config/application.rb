@@ -49,6 +49,6 @@ module Katalog
     # generic Cyt JS
     config.action_view.javascript_expansions[:defaults] += %w(cyt)
     # jQuery Plugins
-    config.action_view.javascript_expansions[:defaults] += %w(jquery-elastic jquery-ui jquery-highlight jquery.qtip ui.multiselect)
+    config.action_view.javascript_expansions[:defaults] += %w(jquery-elastic jquery-ui jquery-highlight jquery.qtip ui.multiselect jquery.query-2.1.7)
   end
 end

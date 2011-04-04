@@ -94,10 +94,10 @@ function addRelationAutoCompletionBehaviour() {
             },
             success: function( data ) {
               response( $.map( data, function( object ) {
-                item = object.dossier;
+                var item = object['dossier'];
                 return {
-                  label: item.title,
-                  value: item.signature + ': ' + item.title
+                  label: item['title'],
+                  value: item['signature'] + ': ' + item['title']
                 }
               }));
             }
@@ -184,9 +184,9 @@ function addSearchSuggestionBehaviour() {
         },
         success: function( data ) {
           response( $.map( data, function( object ) {
-            item = object.keyword;
+            var item = object['keyword'];
             return {
-              label: item.name
+              label: item['name']
             }
           }));
           $('.ui-autocomplete').highlight(extractLast(request.term), 'match');
@@ -263,6 +263,25 @@ function addReportPreviewUpdateBehaviour() {
   });
 }
 
+function addEditReportBehaviour() {
+  $('#dossier_numbers_year').change(function(){
+    var url = 'http://' + window.location.host + window.location.pathname + '?search[signature]=' + $.query.get('search[signature]').toString() + '&dossier_numbers[year]=' + $(this).val();
+    window.location.replace(url);
+  });
+}
+
+function informUserAboutBigPDF(amount){
+  if(amount < 100){
+    return true;
+  }else{
+    return confirm("Sie sind dran ein grosses PDF zugenerieren.\nDies wird einige Zeit in Anspruchen nehmen können.\nMöchten Sie dies wirklich tun?")
+  }
+}
+
+function submitDossierForm() {
+  $('form.dossier').submit();
+}
+
 $(document).ready(function() {
   addAutofocusBehaviour();
   addLinkifyContainersBehaviour();
@@ -277,4 +296,5 @@ $(document).ready(function() {
   addReportActionsMenuBehaviour();
   addReportColumnMultiselectBehaviour();
   addReportPreviewUpdateBehaviour();
+  addEditReportBehaviour();
 });

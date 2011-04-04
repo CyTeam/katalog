@@ -1,0 +1,10 @@
+= javascript_include_tag :ckeditor
+= semantic_form_for resource do |f|
+  = f.semantic_errors
+  
+  = f.inputs do
+    = f.input :title
+    = f.input :content, :as => :ckeditor, :input_html => {:class => 'autogrow', :rows => 5, :width => '74%'}
+
+  = f.buttons do
+    = f.commit_button

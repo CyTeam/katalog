@@ -16,6 +16,10 @@ SimpleNavigation::Configuration.run do |navigation|
         edit.item :edit_dossier_years, t('katalog.main_navigation.edit_year'), edit_report_dossiers_path
         edit.item :versions_nav, t('katalog.main_navigation.changes'), versions_path
       end
+      primary.item :visitor_logs, t('katalog.main_navigation.visitor_logs'), visitor_logs_path do |log|
+        log.item :visitor_logs_list, t('katalog.main_navigation.visitor_logs_list'), visitor_logs_path, :highlights_on => /\/visitor_logs/
+        log.item :new_visitor_log, t('katalog.main_navigation.new_visitor_log'), new_visitor_log_path
+      end
     end
     
     if current_user and current_user.role?(:admin)
