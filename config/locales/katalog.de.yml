@@ -95,10 +95,10 @@ de:
       tips:
         title: Suchtips
         hints: [
-                  'Mit "" schränken Sie die Suche auf genaue Treffer ein. z.B. Burg Zug gibt viele Resultate und "Burg Zug" genau eines.',
-                  'Wenn Sie einen Teil einer Signatur und ein Wort eingeben, werden nur Treffer angezeigt, die sowohl den Signaturteil als auch das Suchwort beinhalten',
-                  'Wenn Sie zwei Signaturteile eingeben, werden alle Dossiers angezeigt, die entweder den einen ODER den anderen Signaturteil beinhalten',
-                  'Wenn Sie zwei Signaturteile und ein Wort eingeben, erhalten Sie sämtliche Dossiers, welche den einen Signaturteil ODER den anderen Signaturteil UND das Suchwort beinhalten'
+                  'Mit " " schränken Sie die Suche auf genaue Treffer ein. z.B. Burg Zug gibt viele Resultate und "Burg Zug" genau eines.',
+                  'Wenn Sie eine Teilsignatur zusammen mit einem Suchbegriff eingeben, werden alle Treffer angezeigt, die sowohl die Teilsignatur als auch das Suchwort beinhalten.',
+                  'Wenn Sie zwei Teilsignaturen eingeben, werden alle Treffer angezeigt, die entweder die eine ODER die andere Teilsignatur beinhalten.',
+                  'Wenn Sie zwei Teilsignaturen zusammen mit einem Suchbegriff eingeben, erhalten Sie sämtliche Treffer, welche die eine ODER die andere Teilsignatur UND das Suchwort beinhalten.'
                ]
     insert_relation: "Querverweis hinzufügen"
 
@@ -109,7 +109,7 @@ de:
       actions:
         update:  "geändert"
         destroy: "gelöscht"
-        create:  "erzeugt"
+        create:  "erstellt"
   controllers:
     index:
       keyword: "Schlagwortindex"
@@ -263,6 +263,7 @@ de:
       revert:   "Rückgangig"
       refresh: "Aktualisieren"
       excel: "Als Excel exportieren"
+      current: "Aktueller Datensatz"
     title:
       preview: "%{model} Vorschau"
 

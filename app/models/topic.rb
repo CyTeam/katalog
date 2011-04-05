@@ -65,6 +65,7 @@ class Topic < Dossier
 
     document_counts.sum(:amount).to_i
   end
+  alias amount document_count
   
   def direct_children
     result = children

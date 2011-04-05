@@ -3,7 +3,7 @@ require 'ostruct'
 
 class DossiersController < AuthorizedController
   # Authentication
-  before_filter :authenticate_user!, :except => [:index, :search, :show]
+  before_filter :authenticate_user!, :except => [:index, :search, :show, :report]
 
   # Responders
   respond_to :html, :js, :json, :xls
@@ -193,6 +193,8 @@ class DossiersController < AuthorizedController
 
     # Drop nil results by stray full text search matches
     @dossiers.compact!
+
+    index_excel
   end
 
   def index_excel
