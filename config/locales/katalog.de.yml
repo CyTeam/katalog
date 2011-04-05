@@ -1,5 +1,7 @@
 de:
   katalog:
+    visitor_logs:
+      create_by_on: "Erstellt durch %{user} am %{date}."
     main_navigation:
       dossiers:           "Dossiers"
       dossier_index:      "Themenübersicht"
@@ -189,6 +191,7 @@ de:
         current_sign_in_at:    "Aktueller Login um"
         last_sign_in_at:       "Letzer Login um"
         sign_in_count:         "Anzahl Logins"
+        username:              "Login"
       report:
         collect_year_count: "Jahresschritte"
         columns:            "Spalten"

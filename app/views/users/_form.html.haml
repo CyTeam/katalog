@@ -1,6 +1,7 @@
 = semantic_form_for @user do |f|
   = f.semantic_errors
   = f.inputs do
+    = f.input :username
     = f.input :email
     = f.input :password, :hint => !f.object.new_record?, :input_html => {:autocomplete => "off"}
     = f.input :password_confirmation

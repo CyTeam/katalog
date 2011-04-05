@@ -7,13 +7,17 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  attr_accessor :login
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation
+  attr_accessible :email, :password, :password_confirmation, :username, :login
 
   # Authorization roles
   has_and_belongs_to_many :roles, :autosave => true
   scope :by_role, lambda{|role| include(:roles).where(:name => role)}
   attr_accessible :role_texts
+
+  validates_presence_of :username
+  validates_uniqueness_of :username
 
   # Return current role name.
   def role_name
@@ -36,5 +40,12 @@ class User < ActiveRecord::Base
   # Helpers
   def to_s
     email
+  end
+
+  # Overwritten for login with username
+  # Code snippet from: https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign_in-using-their-username-or-email-address
+  def self.find_for_database_authentication(conditions)
+   login = conditions.delete(:login)
+   where(conditions).where(["username = :value OR email = :value", { :value => login }]).first
   end
 end
