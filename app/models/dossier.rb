@@ -472,6 +472,11 @@ class Dossier < ActiveRecord::Base
         value_columns << number.amount
       end unless dossier.kind_of?Topic
 
+
+      present_numbers.each do |number|
+        value_columns << dossier.amount(number)
+      end if dossier.kind_of?Topic
+
       sheet.row(row).concat(value_columns)
       row += 1
     end

@@ -29,6 +29,8 @@ class Ability
     else
       can [:index, :show, :search], [Dossier, Topic], :internal => false
       can [:index, :show, :search], [Container, ContainerType, DossierNumber, Keyword, Location]
+      can :show, Report
+      can :report, Dossier
     end
   end
 end
