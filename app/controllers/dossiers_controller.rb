@@ -97,6 +97,11 @@ class DossiersController < AuthorizedController
     # Stay on this action after search
     @search_path = edit_report_dossiers_path
 
+    @pdfkit_options = {
+      'margin-left'  => '1cm',
+      'margin-right' => '1cm'
+    }
+
     # Pagination
     params[:per_page] ||= 50
     if params[:per_page] == 'all'
