@@ -193,6 +193,8 @@ class DossiersController < AuthorizedController
 
     # Drop nil results by stray full text search matches
     @dossiers.compact!
+
+    index_excel
   end
 
   def index_excel
