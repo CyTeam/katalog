@@ -263,6 +263,7 @@ de:
       revert:   "Rückgangig"
       refresh: "Aktualisieren"
       excel: "Als Excel exportieren"
+      current: "Aktueller Datensatz"
     title:
       preview: "%{model} Vorschau"
 

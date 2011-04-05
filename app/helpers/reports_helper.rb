@@ -9,7 +9,7 @@ module ReportsHelper
   end
   
   def report_columns_for_select
-    columns = [:signature, :title, :first_document_year, :keyword_text, :container_type, :location, :document_count, :keywords]
+    columns = [:signature, :title, :first_document_year, :keyword_text, :container_type, :location, :document_count]
     
     columns.map{|column| [t_attr(column, Dossier), column]}
   end
