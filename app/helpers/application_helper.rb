@@ -60,6 +60,7 @@ addContainerSuggestionBehaviour();
 
     output = <<EOF
 $('##{model_name}_list').replaceWith('#{escape_javascript(render('form'))}');
+addReportColumnMultiselectBehaviour();
 addAutofocusBehaviour();
 addAutocompleteBehaviour();
 addNestedFormsBehaviour();
