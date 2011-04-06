@@ -87,8 +87,8 @@ class DossiersController < AuthorizedController
     
     # Set pagination parameter
     params[:per_page] = @report[:per_page]
-    
     @report[:title] ||= report_name
+    @is_a_report = true
     
     dossier_report
   end
