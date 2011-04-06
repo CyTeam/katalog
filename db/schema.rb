@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110405122345) do
+ActiveRecord::Schema.define(:version => 20110406071919) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(:version => 20110405122345) do
     t.integer  "dossier_id"
     t.date     "to"
     t.date     "from"
-    t.integer  "amount"
+    t.integer  "amount",     :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
