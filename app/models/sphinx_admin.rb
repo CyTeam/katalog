@@ -1,10 +1,22 @@
+# This class is a parent class of SphinxAdminException and SphinxAdminWordForm.
+# It creates the sphinx config files in the directory config/sphinx.
+# Before sphinx search can be started these files should be created.
+# The easiest way to do it is:
+# * Start the rails application
+# * Login with an admin user
+# * Go to "Verwaltung > Volltextsuche"
+# * And open the two sub links to save the forms
 class SphinxAdmin < ActiveRecord::Base
+
+  # The default folder for the config files.
   FOLDER = Rails.root.join('config', 'sphinx')
 
+  # The default spacer sign.
   def spacer
     self.class.spacer
   end
-  
+
+  # Imports entries from db seeds.
   def self.seed
     self.import_file(Rails.root.join('db', 'seeds', 'sphinx', file_name))
     self.export_file
@@ -14,12 +26,14 @@ class SphinxAdmin < ActiveRecord::Base
     "#{from} #{spacer} #{to}"
   end
 
+  # Splits the input with the spacer and saves them.
   def value=(input)
     values = input.split(spacer)
     self.from = values[0].strip
     self.to   = values[1].strip
   end
 
+  # Find by value searches in find_by_from and find_by_to.
   def self.find_by_value(value)
     sphinx_admin = self.find_by_from(value)
     sphinx_admin = self.find_by_to(value) unless sphinx_admin
@@ -27,6 +41,7 @@ class SphinxAdmin < ActiveRecord::Base
     sphinx_admin
   end
 
+  #
   def self.extend_words(words)
     words.inject([]) do |out, word|
       sphinx_admin = find_by_value(word)
@@ -37,7 +52,8 @@ class SphinxAdmin < ActiveRecord::Base
       out << word
     end.uniq
   end
-  
+
+  # Saves the values as entries of SphinxAdmin.
   def self.list=(value)
     self.delete_all
     
@@ -47,12 +63,13 @@ class SphinxAdmin < ActiveRecord::Base
     
     self.sync_sphinx
   end
-  
+
+  # Returns all entries of a type (SphinxAdminException or SphinxAdminWordForms).
   def self.list
     self.all.join("\n")
   end
   
-  private
+  private # :nodoc
   
   def self.import_file(file_name = nil)
     file_name ||= FOLDER.join(self.file_name)

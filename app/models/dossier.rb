@@ -4,8 +4,10 @@ require 'spreadsheet'
 require 'stringio'
 require 'iconv'
 
+# This class represents a dossier with many containers.
 class Dossier < ActiveRecord::Base
-  # change log
+
+  # PaperTrail: change log
   has_paper_trail :ignore => [:created_at, :updated_at, :delta]
 
   # Hooks
@@ -21,24 +23,9 @@ class Dossier < ActiveRecord::Base
   scope :main, topic.where("char_length(signature) = 2")
   scope :geo, topic.where("char_length(signature) = 4")
   scope :detail, topic.where("char_length(signature) = 8")
-
-  cattr_reader :level_to_prefix_length
-  def self.level_to_prefix_length(level)
-    case level.to_s
-      when "1"
-        1
-      when "2" 
-        2
-      when "3"
-        4
-      when "4"
-        8
-    end
-  end
-  
-  scope :by_level, lambda {|level| where("char_length(signature) <= ?", self.level_to_prefix_length(level))}
   
   # Scopes
+  scope :by_level, lambda {|level| where("char_length(signature) <= ?", self.level_to_prefix_length(level))}
   scope :by_text2, lambda {|value|
     signatures, words = split_search_words(value)
 
@@ -52,12 +39,11 @@ class Dossier < ActiveRecord::Base
   }
   scope :by_signature, lambda {|value| where("signature LIKE CONCAT(?, '%')", value)}
   scope :by_title, lambda {|value| where("title LIKE CONCAT('%', ?, '%')", value)}
-  # TODO: check if arel provides nicer code:
-  scope :by_location, lambda {|value| where(:id => Container.where('location_id = ?', Location.find_by_code(value)).map{|c| c.dossier_id}.uniq)}
+  scope :by_location, lambda {|value| where(:id => Container.where('location_id = ?', Location.find_by_code(value)).map{|c| c.dossier_id}.uniq)} # TODO: check if arel provides nicer code
   scope :by_kind, lambda {|value| where(:id => Container.where('container_type_id = ?', ContainerType.find_by_code(value)).map{|c| c.dossier_id}.uniq)}
   scope :by_character, lambda {|value| where("title LIKE CONCAT(?, '%')", value)}
-  
-  # Pagination
+
+  # Pagination scope
   scope :characters, select("DISTINCT substring(upper(title), 1, 1) AS letter").having("letter BETWEEN 'A' AND 'Z'")
   def self.character_list
     characters.order('title').map{|t| I18n.transliterate(t.letter) }
@@ -77,7 +63,8 @@ class Dossier < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :keywords
   
-  # Freetext search
+  # Sphinx configuration:
+  # Free text search
   define_index do
     # Needed for tag/keyword search
     set_property :group_concat_max_len => 1048576
@@ -101,6 +88,21 @@ class Dossier < ActiveRecord::Base
     has created_at, updated_at
     has type
     has internal
+  end
+
+
+  cattr_reader :level_to_prefix_length
+  def self.level_to_prefix_length(level)
+    case level.to_s
+      when "1"
+        1
+      when "2"
+        2
+      when "3"
+        4
+      when "4"
+        8
+    end
   end
 
   def self.by_text(value, options = {})
@@ -144,7 +146,8 @@ class Dossier < ActiveRecord::Base
 
     return signatures, words, sentences
   end
-  
+
+  # Builds the query for a dossier search.
   def self.build_query(value)
     signatures, words, sentences = split_search_words(value)
 
@@ -180,7 +183,7 @@ class Dossier < ActiveRecord::Base
     includes(:numbers).sum(:amount).to_i
   end
 
-   # Importer
+  # Importer
   def self.import_all(rows)
     new_dossier = true
     title = nil
@@ -223,12 +226,22 @@ class Dossier < ActiveRecord::Base
     end
   end
 
+  # Defines the import filter.
   def self.import_filter(rows)
     signature_filter = /^[ ]*[0-9]{2}\.[0-9]\.[0-9]{3}[ ]*$/
 
     rows.select{|row| (signature_filter.match(row[0]) && row[9].present?) || (row[0].blank? && (row[13].present? || row[14].present? || row[15].present?))}
   end
 
+  # Prepares the database for a new import.
+  # It will delete all entries of the classes:
+  #
+  # * Container
+  # * Dossier
+  # * DossierNumber
+  # * ActsAsTaggableOn::Tag
+  # * ActsAsTaggableOn::Tagging
+  # * Version
   def self.prepare_db_for_import
     Container.delete_all
     Dossier.delete_all
@@ -245,7 +258,8 @@ class Dossier < ActiveRecord::Base
       topics.destroy_all
     end
   end
-  
+
+  # Imports the data from a csv file.
   def self.import_from_csv(path)
     # Disable PaperTrail for speedup
     paper_trail_enabled = PaperTrail.enabled?
@@ -387,12 +401,12 @@ class Dossier < ActiveRecord::Base
       end
     end
   end
-  
-  # Helpers
+
   def to_s
     "#{signature}: #{title}"
   end
 
+  # Exports the current dossier to an Excel file.
   def to_xls
     xls = StringIO.new
     book = Spreadsheet::Workbook.new
@@ -430,6 +444,7 @@ class Dossier < ActiveRecord::Base
     xls.string
   end
 
+  # Exports some dossiers to an Excel file.
   def self.to_xls(dossiers)
     xls = StringIO.new
     book = Spreadsheet::Workbook.new
@@ -486,31 +501,36 @@ class Dossier < ActiveRecord::Base
     xls.string
   end
 
-  # Attributes
+  # Returns if the current dossier should be preorder.
   def preorder
     containers.each do |c|
       return true if c.preorder
     end
   end
 
+  # Returns the relations as array.
   def relations
     return [] if related_to.blank?
     
     related_to.split(';').map{|relation| relation.strip.presence}.compact
   end
-  
+
+  # Sets the relations from an array.
   def relations=(value)
     self.related_to = value.join('; ')
   end
-  
+
+  # Returns a relations list with the relations separated throw new lines.
   def relation_list
     relations.join("\n")
   end
-  
+
+  # Sets the relations from a value which is separated throw new lines.
   def relation_list=(value)
     self.relations = value.split("\n")
   end
-  
+
+  # Returns the titles of the relations.
   def relation_titles
     stripped_relations = relations.map{|relation| relation.strip.presence}.compact
     
@@ -518,7 +538,8 @@ class Dossier < ActiveRecord::Base
 
     titles
   end
-  
+
+  # Sets the location.
   def location=(value)
     if value.is_a?(String)
       write_attribute(:location, Location.find_by_code(value))
@@ -526,7 +547,8 @@ class Dossier < ActiveRecord::Base
       write_attribute(:location, value)
     end
   end
-  
+
+  # Sets the signature.
   def signature=(value)
     value.strip!
     write_attribute(:signature, value)
@@ -539,7 +561,8 @@ class Dossier < ActiveRecord::Base
   def dossier_number_list
     numbers.map{|number| number.to_s(:short)}.join("\n")
   end
-  
+
+  # Saves the dossier numbers from a list.
   def dossier_number_list=(value)
     dossier_number_strings = value.split("\n")
     
@@ -562,10 +585,12 @@ class Dossier < ActiveRecord::Base
     removed_numbers.map{|number| number.destroy}
   end
 
+  # Returns the dossier number of a year.
   def dossier_number_from_year(from = Time.now.year)
     numbers.where(:from => "#{from}-01-01").first
   end
 
+  # Returns the keywords as text separated throw new lines.
   def keyword_text
     keyword_list.sort.join("\n")
   end
@@ -578,39 +603,48 @@ class Dossier < ActiveRecord::Base
 
     availabilities.uniq
   end
-  
+
+  # Returns the locations unified.
   def locations
     containers.collect{|c| c.location}.uniq
   end
 
+  # Returns the container types unified.
   def container_types
     containers.collect{|c| c.container_type}.uniq
   end
-  
+
+  # Returns the document count of a specified period.
   def document_count(period = nil)
     document_counts = period ? numbers.between(period) : numbers
 
     document_counts.sum(:amount).to_i
   end
-  
+
+  # Returns the last entry of the parents.
   def parent
     parents.last
   end
-  
+
+  # Returns all parent dossiers.
   def parents
     Dossier.where("NOT(type = 'Dossier') AND ? LIKE CONCAT(signature, '%')", signature).order(:signature)
   end
-  
+
+  # Returns the year of the first document.
   def first_document_year
     first_document_on.try(:year)
   end
 
+  # Sets the year of the first document.
   def first_document_year=(value)
     self.first_document_on = Date.new(value.to_i, 1, 1)
   end
 
+  # Returns a list with how much document count a year has
   def years_counts(interval = 1, custom = nil)
     periods = Dossier.years(interval, custom)
+
     periods.inject([]) do |result, period|
       result << {:period => period, :count => document_count(period)}
     end
@@ -619,7 +653,8 @@ class Dossier < ActiveRecord::Base
   def self.truncate_title(value)
     value.gsub(/ #{date_range}$/, '')
   end
-  
+
+  # Updates or creates dossier numbers.
   def update_or_create_number(amount, range, accumulate = true)
     # We can't use .count or .where until the Dossier is guaranteed to be saved
     number = numbers.select{|n|
@@ -652,11 +687,13 @@ class Dossier < ActiveRecord::Base
     
     number
   end
-  
+
+  # Prepares a new dossier number.
   def prepare_numbers(year = Date.today.year)
     update_or_create_number(0, :from => Date.new(year, 1, 1), :to => Date.new(year, 12, 31))
   end
-  
+
+  # Builds the default dossier numbers.
   def build_default_numbers
     periods = DossierNumber.default_periods
     for period in periods
@@ -676,16 +713,19 @@ class Dossier < ActiveRecord::Base
     end
   end
 
+  # Updates the dossier tags.
   def update_tags
     tag_string = self.keyword_list.join(',') + "," + self.title
     self.tag_list = self.class.extract_tags(tag_string)
   end
 
+  # Imports the key words.
   def import_keywords(row)
     keys = self.class.extract_keywords(row[13..15])
     self.keyword_list.add(keys)
   end
-  
+
+  # Imports the dossier.
   def import(row)
     # containers
     containers << Container.import(row, self)
@@ -698,7 +738,8 @@ class Dossier < ActiveRecord::Base
     import_numbers(row)
   end
 
-  private
+  private # :nodoc
+
   def self.xls_columns
     [:signature, :title, :container_type, :location, :related_to, :keywords]
   end
