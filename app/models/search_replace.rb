@@ -1,19 +1,26 @@
+# This class is a sub class of FormtasticFauxModel.
+# It is used to do global search and replace actions.
 class SearchReplace < FormtasticFauxModel
-  
+
+  # The attributes of SearchReplace.
   attr_accessor :search, :replace, :columns
-  
+
+  # Validates the presence of all attributes.
   validates_presence_of :search, :replace, :columns
-  
+
+  # Defines the search and replaceable attributes in the Dossier.
   def self.editable_attributes
     ['signature', 'description', 'title', 'keywords', 'relation_list']
   end
-  
+
+  # Definies the attribute types of this model.
   self.types = {
     :search => :string,
     :replace => :string,
     :columns => :string
   }
-  
+
+  # Does the search and replace action.
   def do
     columns.each do |column|
       case column
@@ -25,7 +32,8 @@ class SearchReplace < FormtasticFauxModel
     end
   end
 
-  private
+  private # :nodoc
+
   def check_column(column)
     return false if column.empty?
     

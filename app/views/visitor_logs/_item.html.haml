@@ -1,6 +1,7 @@
-%tr{:class => cycle('odd', 'even')}
-  - @attributes.each do |field|
-    %td
-      = item.send(field) if item.respond_to?(field)
-  %td.action-links
-    =link_to image_tag('icons/show.png', :title => t_action(:show)), resource_url(item), 'data-href-container' => 'tr'
+.entry{:class => cycle('odd', 'even')}
+
+  %h2
+    = item.title
+  != item.content
+  .author
+    = t('katalog.visitor_logs.create_by_on', :user => item.user.username, :date => item.created_at)

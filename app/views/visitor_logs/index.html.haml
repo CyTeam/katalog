@@ -1,3 +1,8 @@
+= contextual_links
+
 %h1= t_title
 
-= render 'inherited_resources/list'
+= javascript_include_tag :ckeditor
+
+#visitor_log_list
+  = render :partial => 'item', :collection => collection

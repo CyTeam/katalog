@@ -90,14 +90,9 @@ module DossiersHelper
     hints = t('katalog.search.tips.hints')
     content_tag :div, :id => 'search_tips' do
       content_tag :div, :id => 'search_tips_border' do
-        tip = content_tag 'h2' do
-          t('katalog.search.tips.title')
-        end
-        tip += content_tag :div, :id => 'search_tip' do
+        content_tag :div, :id => 'search_tip' do
           hints[rand(hints.length)]
         end
-
-        tip
       end
     end
   end

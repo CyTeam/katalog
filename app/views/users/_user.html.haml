@@ -1,6 +1,6 @@
 %tr[user]
   %td
-    = link_to user.email, user, {'data-href-container' => 'tr'}
+    = link_to user.username, user, {'data-href-container' => 'tr'}
   %td
     = user.roles.map{|role| t(role.name, :scope => 'cancan.roles')}.join(', ')
   %td
