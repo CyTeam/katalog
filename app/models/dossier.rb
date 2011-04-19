@@ -730,7 +730,7 @@ class Dossier < ActiveRecord::Base
     # containers
     containers << Container.import(row, self)
     
-    self.related_to = row[12]
+    self.related_to = row[12] || ''
 
     # tags and keywords
     import_keywords(row)
