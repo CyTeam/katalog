@@ -1,6 +1,6 @@
 class CreateVisitorLogs < ActiveRecord::Migration
   def self.up
-    create_table :visitor_logs do |t|
+    create_table :visitor_logs, :force => true do |t|
       t.string :title
       t.text :content
       t.integer :user_id
