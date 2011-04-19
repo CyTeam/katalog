@@ -80,7 +80,7 @@ class DossierNumberTest < ActiveSupport::TestCase
     @new.from_year = nil
     @new.to_year = "2009"
     
-    assert_equal " - 2009: ", @new.to_s(:simple)
+    assert_equal " - 2009: 0", @new.to_s(:simple)
   end
   
   test "#from_s handles single year string" do
