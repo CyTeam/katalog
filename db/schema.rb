@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110406071919) do
+ActiveRecord::Schema.define(:version => 20110419084026) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(:version => 20110406071919) do
     t.datetime "updated_at"
     t.string   "type"
     t.date     "first_document_on"
-    t.string   "related_to"
+    t.string   "related_to",        :default => ""
     t.boolean  "delta",             :default => true,  :null => false
     t.text     "description"
     t.boolean  "internal",          :default => false
