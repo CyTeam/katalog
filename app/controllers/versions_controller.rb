@@ -11,11 +11,20 @@ class VersionsController < AuthorizedController
     
     case @version.event
       when "create"
-        @current_item = @version.item
+        if @version.next
+          @current_item = @version.next.reify
+        else
+          @current_item = @version.item
+        end
         @previous_item = nil
         @versions = @current_item.versions
       when "update"
-        @current_item = @version.item
+        if @version.next
+          @current_item = @version.next.reify
+        else
+          # Use active item as it should exist
+          @current_item = @version.item
+        end
         @previous_item = @current_item.previous_version
         @versions = @current_item.versions
       when "destroy"
