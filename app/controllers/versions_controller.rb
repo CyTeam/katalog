@@ -33,23 +33,19 @@ class VersionsController < AuthorizedController
         @versions = @previous_item.versions
     end
     
-    @versions = @versions.paginate(:page => params[:page])
+    @versions = @versions.reorder('created_at DESC').paginate(:page => params[:page])
     show!
   end
   
   def index
     if params[:dossier_id]
-      dossiers = Dossier.find(params[:dossier_id])
-      @versions = dossiers.versions.order('created_at DESC').paginate(:page => params[:page])
-      dossiers.numbers.each do |n|
-        n.versions.each do |v|
-          @versions << v
-        end
-      end
+      dossier = Dossier.find(params[:dossier_id])
+      @versions = Version.where("(item_type = 'Dossier' AND item_id = ?) OR (item_type = 'DossierNumber' AND item_id IN (?))", dossier.id, dossier.number_ids)
     else
-      @versions = Version.order('created_at DESC').paginate(:page => params[:page])
+      @versions = Version
     end
 
+    @versions = @versions.reorder('created_at DESC').paginate(:page => params[:page])
     index!
   end
 
