@@ -14,7 +14,7 @@ SimpleNavigation::Configuration.run do |navigation|
         edit.item :new_dossier, t('katalog.main_navigation.new_dossier'), new_dossier_path
         edit.item :new_title, t('katalog.main_navigation.new_title'), new_topic_path
         edit.item :edit_dossier_years, t('katalog.main_navigation.edit_year'), edit_report_dossiers_path
-        edit.item :versions_nav, t('katalog.main_navigation.changes'), versions_path
+        edit.item :versions_nav, t('katalog.main_navigation.changes'), versions_path, :highlights_on => /\/versions($|\/[0-9]*($|\/.*))/
       end
       primary.item :visitor_logs, t('katalog.main_navigation.visitor_logs'), visitor_logs_path, :highlights_on => /\/visitor_logs/
     end
