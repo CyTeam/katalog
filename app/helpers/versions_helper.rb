@@ -12,14 +12,7 @@ module VersionsHelper
   end
   
   def version_title(version = nil)
-    version ||= @version
-    if version.event == "destroy"
-      item = version.reify
-    else
-      item = version.item
-    end
-    
-    item.to_s
+    active_item(version).to_s
   end
 
   def user_email(version)
@@ -30,15 +23,23 @@ module VersionsHelper
     t(version.event, :scope => "katalog.versions.actions")
   end
 
-  def current_object_path(version)
-    case version.item_type
-      when 'DossierNumber'
-      model_name = Dossier.to_s.pluralize.underscore
-      model_id = DossierNumber.find(version.item_id).dossier_id
-      else
-      model_name = version.item_type.pluralize.underscore
-      model_id = version.item_id
+  def active_item(version)
+    # Fast track if item currently exists
+    active_item = version.item
+    return active_item if active_item
+
+    # Take latest and reify
+    return Version.subsequent(version).last.reify
+  end
+  
+  def active_main_item(version)
+    item = active_item(version)
+    
+    case item.class.name
+    when 'DossierNumber'
+      return item.dossier
+    else
+      return item
     end
-    "/#{model_name}/#{model_id}"
   end
 end
