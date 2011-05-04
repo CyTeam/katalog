@@ -102,7 +102,12 @@ class DossierNumber < ActiveRecord::Base
   end
   
   def to_s(format = :default)
-    "#{period(format)}: #{amount}"
+    case format
+    when :long
+      "#{dossier}: #{period(format)}: #{amount}"
+    else
+      "#{period(format)}: #{amount}"
+    end
   end
 
   # Returns from which year the dossier number is.
