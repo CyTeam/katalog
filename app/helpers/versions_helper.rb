@@ -12,14 +12,7 @@ module VersionsHelper
   end
   
   def version_title(version = nil)
-    version ||= @version
-    if version.event == "destroy"
-      item = version.reify
-    else
-      item = version.item
-    end
-    
-    item.to_s
+    active_item(version).to_s
   end
 
   def user_email(version)
