@@ -631,6 +631,12 @@ class Dossier < ActiveRecord::Base
     Dossier.where("NOT(type = 'Dossier') AND ? LIKE CONCAT(signature, '%')", signature).order(:signature)
   end
 
+  # Cache invalidating
+  after_save :expire_parents
+  def expire_parents
+    parents.map{|parent| parent.touch}
+  end
+
   # Returns the year of the first document.
   def first_document_year
     first_document_on.try(:year)
