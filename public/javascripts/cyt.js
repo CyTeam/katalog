@@ -1,14 +1,14 @@
 // Autofocus element having attribute data-autofocus
 function addAutofocusBehaviour() {
   $('*[data-autofocus=true]').first().focus();
-}
+};
 
 // Add datepicker
 function addDatePickerBehaviour() {
   $('*[date-picker=true]').each(function(){
     $(this).datepicker({ dateFormat: 'dd.mm.yy' });
   });
-}
+};
 
 //
 function addSortableBehaviour() {
@@ -16,7 +16,7 @@ function addSortableBehaviour() {
     placeholder: 'ui-state-highlight'
   });
   $(".sortable").disableSelection();
-}
+};
 
 
 // Linkify containers having attribute data-href-container
@@ -33,13 +33,30 @@ function addLinkifyContainersBehaviour() {
       // Don't override original link behaviour
       if ($(event.target).parents('a').length == 0) {
         document.location.href = href;
-      }
+      };
     });
   });
-}
+};
 
 // Autogrow
 function addAutogrowBehaviour() {
   $(".autogrow").elastic();
-}
+};
 
+// Add tooltips for overview
+function addOverviewTooltipBehaviour() {
+  $('.overview-list li a[title]').tooltip({
+    position: 'center right',
+    predelay: 500,
+    effect: 'fade'
+  });
+};
+
+// Add icon action tooltips
+function addIconTooltipBehaviour() {
+  $('a.icon-tooltip[title]').tooltip({
+    tipClass: 'icon-tooltip-popup',
+    effect: 'fade',
+    fadeOutSpeed: 100
+  });
+};
