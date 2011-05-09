@@ -12,7 +12,7 @@ class Container < ActiveRecord::Base
   
   # Helpers
   def to_s
-    "#{title} (#{container_type.code}@#{location.code})"
+    "#{dossier.title} #{period} (#{container_type.code}@#{location.code})"
   end
 
   def preorder
