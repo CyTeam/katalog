@@ -11,6 +11,7 @@ class DossierNumber < ActiveRecord::Base
   validate :presence_of_from_or_to
 
   # Scopes
+  default_scope order("`to`")
   scope :present, where("amount > 0")
   scope :by_period, lambda {|value|
     from, to = from_s(value)
