@@ -26,17 +26,6 @@ class Dossier < ActiveRecord::Base
   
   # Scopes
   scope :by_level, lambda {|level| where("char_length(signature) <= ?", self.level_to_prefix_length(level))}
-  scope :by_text2, lambda {|value|
-    signatures, words = split_search_words(value)
-
-    signature_condition = (["(signature LIKE CONCAT(?, '%'))"] * signatures.count).join(' OR ')
-    word_condition = (["(id IN (SELECT taggable_id FROM tags INNER JOIN taggings ON taggings.tag_id = tags.id WHERE name LIKE CONCAT('%', ?, '%')))"] * words.count).join(' AND ')
-
-    condition = [signature_condition.presence, word_condition.presence].compact.join(' AND ')
-    params = signatures + words
-    
-    Dossier.where(condition, *params)
-  }
   scope :by_signature, lambda {|value| where("signature LIKE CONCAT(?, '%')", value)}
   scope :by_title, lambda {|value| where("title LIKE CONCAT('%', ?, '%')", value)}
   scope :by_location, lambda {|value| where(:id => Container.where('location_id = ?', Location.find_by_code(value)).map{|c| c.dossier_id}.uniq)} # TODO: check if arel provides nicer code
