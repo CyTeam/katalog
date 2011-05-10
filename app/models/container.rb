@@ -3,7 +3,10 @@ class Container < ActiveRecord::Base
   has_paper_trail :ignore => [:created_at, :updated_at]
 
   # Associations
-  belongs_to :dossier
+  belongs_to :dossier, :touch => true, :inverse_of => :containers
+  
+  after_save lambda { dossier.touch }
+  
   belongs_to :location
   belongs_to :container_type
 
@@ -57,7 +60,7 @@ class Container < ActiveRecord::Base
   def period
     return '' if dossier.nil?
     
-    result = title.gsub(/^#{dossier.title}/, '').strip
+    result = (title || '').gsub(/^#{dossier.title}/, '').strip
     if result.empty?
       if dossier.first_document_year.blank?
         return ''

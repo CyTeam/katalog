@@ -86,14 +86,54 @@ class ContainerTest < ActiveSupport::TestCase
   end
   
   test ".period" do
-    container = Factory(:container)
+    container = Factory(:container, :title => '1989 -')
     
     assert_equal '1989 -', container.period
   end
 
   test ".period without period" do
-    container = Factory.build(:container, :title => '', :dossier => Factory.build(:dossier_since_1990))
+    container = Factory.build(:container, :dossier => Factory.build(:dossier_since_1990))
     
     assert_equal '1990 -', container.period
+  end
+
+  # Caching
+  test "adding a container updates dossier timestamp" do
+    dossier = Factory(:dossier)
+    updated_at = dossier.updated_at
+    
+    sleep(1)
+    dossier.containers.create(Factory.attributes_for(:container_with_period, :location => Factory(:location), :container_type => Factory(:container_type)))
+    dossier.reload
+    
+    assert dossier.updated_at > updated_at
+  end
+
+  test "removing a container updates dossier timestamp" do
+    dossier = Factory(:dossier)
+    dossier.containers.create(Factory.attributes_for(:container_with_period, :location => Factory(:location), :container_type => Factory(:container_type)))
+    dossier.containers.create(Factory.attributes_for(:container_with_period, :location => Factory(:location), :container_type => Factory(:container_type)))
+    updated_at = dossier.updated_at
+    
+    sleep(1)
+    dossier.containers.last.destroy
+    dossier.reload
+    
+    assert dossier.updated_at > updated_at
+  end
+
+  test "updating a container updates dossier timestamp" do
+    dossier = Factory(:dossier)
+    dossier.containers.create(Factory.attributes_for(:container_with_period, :location => Factory(:location), :container_type => Factory(:container_type)))
+    dossier.containers.create(Factory.attributes_for(:container_with_period, :location => Factory(:location), :container_type => Factory(:container_type)))
+    updated_at = dossier.updated_at
+    
+    sleep(1)
+    container = dossier.containers.last
+    container.title = "1990 - 1998"
+    container.save
+    dossier.reload
+    
+    assert dossier.updated_at > updated_at
   end
 end
