@@ -6,6 +6,9 @@
       = t('katalog.application.title')
     - @pdfkit_options && @pdfkit_options.each do |key, value|
       %meta{:content => value, :name => "pdfkit-#{key}"}/
+
+    %link{:rel => "shortcut icon", :href => image_path('favicon.ico')}/
+
     = stylesheet_link_tag 'doku-zug.ch/typolight', 'doku-zug.ch/basic', 'doku-zug.ch/content', 'doku-zug.ch/layout', 'doku-zug.ch/navigation', 'doku-zug.ch/welcome', 'doku-zug.ch/application', :media => 'all'
     = stylesheet_link_tag 'katalog', :media => 'all'
     = stylesheet_link_tag 'katalog_internal' if user_signed_in?
