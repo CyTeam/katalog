@@ -12,7 +12,7 @@ class Container < ActiveRecord::Base
   
   # Helpers
   def to_s
-    "#{dossier.title} #{period} (#{container_type.code}@#{location.code})"
+    "#{dossier.title} #{period + " " unless period.blank?}(#{container_type.code}@#{location.code})"
   end
 
   def preorder
@@ -59,7 +59,11 @@ class Container < ActiveRecord::Base
     
     result = title.gsub(/^#{dossier.title}/, '').strip
     if result.empty?
-      result = "#{dossier.first_document_year} -"
+      if dossier.first_document_year.blank?
+        return ''
+      else
+        result = "#{dossier.first_document_year} -"
+      end
     end
     return result
   end

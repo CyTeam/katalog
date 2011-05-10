@@ -72,6 +72,19 @@ class ContainerTest < ActiveSupport::TestCase
     assert_equal locations(:EG), container.location
   end
 
+  # .period
+  test ".period is empty if no dossier assigned" do
+    container = Container.new(:dossier => nil)
+    
+    assert_equal '', container.period
+  end
+  
+  test ".period is empty if no period assigned and no first_document_year set" do
+    container = Factory.build(:container, :title => '')
+    
+    assert_equal '', container.period
+  end
+  
   test ".period" do
     container = Factory(:container)
     
@@ -79,7 +92,7 @@ class ContainerTest < ActiveSupport::TestCase
   end
 
   test ".period without period" do
-    container = Factory(:container_without_period)
+    container = Factory.build(:container, :title => '', :dossier => Factory.build(:dossier_since_1990))
     
     assert_equal '1990 -', container.period
   end
