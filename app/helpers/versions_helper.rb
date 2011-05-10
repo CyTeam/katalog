@@ -29,7 +29,9 @@ module VersionsHelper
     return active_item if active_item
 
     # Take latest and reify
-    return Version.subsequent(version).last.reify
+    latest_version = Version.subsequent(version).last || version
+
+    return latest_version.reify
   end
   
   def active_main_item(version)
