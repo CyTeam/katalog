@@ -160,4 +160,44 @@ class DossierNumberTest < ActiveSupport::TestCase
     assert_equal Date.new(1990, 1, 1), period[:from]
     assert_equal Date.new(1993, 12, 31), period[:to]
   end
+
+  # Caching
+  test "adding a number updates dossier timestamp" do
+    dossier = Factory(:dossier)
+    updated_at = dossier.updated_at
+    
+    sleep(1)
+    dossier.numbers.create(:from => '1990-01-01', :amount => 10)
+    dossier.reload
+    
+    assert dossier.updated_at > updated_at
+  end
+
+  test "removing a number updates dossier timestamp" do
+    dossier = Factory(:dossier)
+    dossier.numbers.create(:from => '1990-01-01', :amount => 10)
+    dossier.numbers.create(:from => '1991-01-01', :amount => 12)
+    updated_at = dossier.updated_at
+    
+    sleep(1)
+    dossier.numbers.last.destroy
+    dossier.reload
+    
+    assert dossier.updated_at > updated_at
+  end
+
+  test "updating a number updates dossier timestamp" do
+    dossier = Factory(:dossier)
+    dossier.numbers.create(:from => '1990-01-01', :amount => 10)
+    dossier.numbers.create(:from => '1991-01-01', :amount => 12)
+    updated_at = dossier.updated_at
+    
+    sleep(1)
+    number = dossier.numbers.last
+    number.amount = 20
+    number.save
+    dossier.reload
+    
+    assert dossier.updated_at > updated_at
+  end
 end

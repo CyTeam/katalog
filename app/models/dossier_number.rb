@@ -5,8 +5,10 @@ class DossierNumber < ActiveRecord::Base
   has_paper_trail :ignore => [:created_at, :updated_at]
 
   # Associations
-  belongs_to :dossier
+  belongs_to :dossier, :touch => true, :inverse_of => :numbers
 
+  after_save lambda { dossier.touch }
+  
   # Validation
   validate :presence_of_from_or_to
 
