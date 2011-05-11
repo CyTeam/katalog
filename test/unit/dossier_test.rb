@@ -405,4 +405,28 @@ class DossierTest < ActiveSupport::TestCase
     
     assert_equal dossier.description, ''
   end
+
+  test 'first_document_year handles blanks' do
+    dossier = Factory.create(:dossier)
+    
+    dossier.first_document_year = nil
+    assert_equal nil, dossier.first_document_year
+
+    dossier.first_document_year = ''
+    assert_equal nil, dossier.first_document_year
+  end
+
+  test 'first_document_year handles four digit years' do
+    dossier = Factory.create(:dossier)
+    
+    dossier.first_document_year = '2011'
+    assert_equal 2011, dossier.first_document_year
+  end
+
+  test 'first_document_year handles two digit years' do
+    dossier = Factory.create(:dossier)
+    
+    dossier.first_document_year = '11'
+    assert !(dossier.valid?)
+  end
 end

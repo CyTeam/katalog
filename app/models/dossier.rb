@@ -18,6 +18,7 @@ class Dossier < ActiveRecord::Base
 
   # Validations
   validates_presence_of :signature, :title
+  validates_format_of :first_document_year, :with => /[12][0-9]{3}/, :allow_blank => true
   
   # Type Scopes
   scope :dossier, where(:type => nil)
@@ -636,7 +637,13 @@ class Dossier < ActiveRecord::Base
 
   # Sets the year of the first document.
   def first_document_year=(value)
-    self.first_document_on = Date.new(value.to_i, 1, 1)
+    if value.blank?
+      date = nil
+    else
+      date = Date.new(value.to_i, 1, 1)
+    end
+    
+    self.first_document_on = date
   end
 
   # Returns a list with how much document count a year has
