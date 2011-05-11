@@ -9,31 +9,11 @@ class VersionsController < AuthorizedController
   def show
     @version = Version.find(params[:id])
     
-    case @version.event
-      when "create"
-        if @version.next
-          @current_item = @version.next.reify
-        else
-          @current_item = @version.item
-        end
-        @previous_item = nil
-        @versions = @current_item.versions
-      when "update"
-        if @version.next
-          @current_item = @version.next.reify
-        else
-          # Use active item as it should exist
-          @current_item = @version.item
-        end
-        @previous_item = @current_item.previous_version
-        @versions = @current_item.versions
-      when "destroy"
-        @current_item = nil
-        @previous_item = @version.reify
-        @versions = @previous_item.versions
-    end
-    
-    @versions = @versions.reorder('created_at DESC').paginate(:page => params[:page])
+    @current_item = @version.current_item
+    @previous_item = @version.previous_item
+
+    @versions = @version.versions.reorder('created_at DESC').paginate(:page => params[:page])
+
     show!
   end
   
