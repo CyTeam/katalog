@@ -12,7 +12,7 @@ module VersionsHelper
   end
   
   def version_title(version = nil)
-    active_item(version).to_s
+    version.active_item.to_s
   end
 
   def user_email(version)
@@ -23,19 +23,8 @@ module VersionsHelper
     t(version.event, :scope => "katalog.versions.actions")
   end
 
-  def active_item(version)
-    # Fast track if item currently exists
-    active_item = version.item
-    return active_item if active_item
-
-    # Take latest and reify
-    latest_version = Version.subsequent(version).last || version
-
-    return latest_version.reify
-  end
-  
   def active_main_item(version)
-    item = active_item(version)
+    item = version.active_item
     
     case item.class.name
     when 'DossierNumber'
