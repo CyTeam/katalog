@@ -141,11 +141,10 @@ GEM
       thor (~> 0.14.4)
     rake (0.8.7)
     responders (0.6.2)
-    revertible_paper_trail (0.2.1)
-      paper_trail
-      paper_trail
+    revertible_paper_trail (0.3.1)
+      paper_trail (~> 2.2)
+      paper_trail (~> 2.2)
       rails (~> 3.0.0)
-      revertible_paper_trail
     riddle (1.2.2)
     ruby-graphviz (0.9.21)
     ruby-ole (1.2.11.1)
@@ -195,7 +194,7 @@ DEPENDENCIES
   pdfkit!
   rails (~> 3.0.0)
   rails-erd
-  revertible_paper_trail
+  revertible_paper_trail (~> 0.3)
   show_for
   simple-navigation
   spreadsheet
