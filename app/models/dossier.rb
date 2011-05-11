@@ -12,6 +12,9 @@ class Dossier < ActiveRecord::Base
 
   # Hooks
   before_save :update_tags
+  
+  # Simulate default value '' for description as MySQL doesn't support it
+  before_save lambda { self.description ||= '' }
 
   # Validations
   validates_presence_of :signature, :title

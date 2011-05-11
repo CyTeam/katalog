@@ -399,4 +399,10 @@ class DossierTest < ActiveSupport::TestCase
   test 'returns year and the count of documents' do
     dossier = Factory(:dossier)
   end
+  
+  test 'description column gets empty string on save' do
+    dossier = Factory.create(:dossier)
+    
+    assert_equal dossier.description, ''
+  end
 end

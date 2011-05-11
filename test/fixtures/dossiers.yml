@@ -4,11 +4,13 @@ group_empty:
   type: Topic
   signature: 8
   title: Test Group empty
+  description: ""
 
 group_7:
   type: Topic
   signature: 7
   title: Test Group 7
+  description: ""
 
 # Topics
 # ======
@@ -16,11 +18,13 @@ first_topic:
   type: Topic
   signature: 77
   title: Test 77 Topic
+  description: ""
 
 empty_topic:
   type: Topic
   signature: 78
   title: Empty Topic
+  description: ""
 
 # Geo Topics
 # ==========
@@ -28,11 +32,13 @@ topic_local:
   type: Topic
   signature: 77.0
   title: All about our City
+  description: ""
 
 topic_nowhere:
   type: Topic
   signature: 77.9
   title: Nothing to say 'bout nowhere
+  description: ""
 
 # Dossier Topics
 # ==============
@@ -40,48 +46,58 @@ important_zug_topic:
   type: Topic
   signature: 77.0.100
   title: Many, many dossiers about this in our City
+  description: ""
 
 simple_zug_topic:
   type: Topic
   signature: 77.0.200
   title: Some simple dossiers about this in our City
+  description: ""
 
 empty_zug_topic:
   type: Topic
   signature: 77.0.999
   title: Boooooring City
+  description: ""
 
 # Dossiers
 # ========
 city_counsil:
   signature: 77.0.100
   title: City counsil
+  description: ""
 
 city_parties:
   signature: 77.0.100
   title: City parties
   related_to: City counsil
+  description: ""
 
 city_history:
   signature: 77.0.100
   title: City history
   first_document_on: 1910-01-01
+  description: ""
 #  keywords: War. Peace. Ying and Yang. Upper Class. Lower Class
 
 city_lonely_dossier:
   signature: 77.0.200
   title: Lonely dossier
+  description: ""
 
 city_counsil_notes:
   signature: 77.0.101
   title: City counsil notes
+  description: ""
 
 worker_movement_general:
   signature: 11.0.100
   title: Worker movement general
   related_to: " Worker Movement History;  Movements general "
+  description: ""
 
 worker_movement_history:
   signature: 11.0.500
   title: Worker Movement history
   related_to: "Worker Movement general; 77: City history"
+  description: ""
