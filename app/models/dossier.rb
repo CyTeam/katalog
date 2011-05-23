@@ -74,8 +74,8 @@ class Dossier < ActiveRecord::Base
       :keywords => 2
     }
 
-    # Disable delta update in import as it slows down too much
-    set_property :delta => true unless Rails.env.import?
+    # Disable delta update in import as it slows down too much and otherwise do it delayed.
+    set_property :delta => :delayed unless Rails.env.import?
       
     # Attributes
     has created_at, updated_at
