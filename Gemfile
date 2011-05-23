@@ -7,7 +7,7 @@ source 'http://rubygems.org'
 gem 'rails', '~> 3.0.0'
 
 # Database
-gem 'mysql2'
+gem 'mysql2', '0.2.7'
 
 # Test
 # ===
@@ -35,6 +35,7 @@ gem 'jquery-rails'
 # Standard helpers
 # ================
 gem 'haml'
+gem 'sass'
 gem 'compass', '~> 0.10.4'
 gem 'fancy-buttons'
 
@@ -61,6 +62,7 @@ gem 'inherited_resources_views'
 
 # Search
 gem 'thinking-sphinx', '~> 2.0.1'
+gem 'ts-delayed-delta'
 
 # Reports
 #gem 'pdfkit', '~> 0.5'
