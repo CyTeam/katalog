@@ -34,3 +34,14 @@ after "bundle:install", "deploy:migrate"
 
 # Clean up the releases after deploy.
 after "deploy", "deploy:cleanup"
+
+# For ts delayed delta
+require "delayed/recipes"
+
+# Delayed Job
+before "deploy:restart", "delayed_job:stop"
+after  "deploy:restart", "delayed_job:start"
+
+after "deploy:stop",  "delayed_job:stop"
+after "deploy:start", "delayed_job:start"
+
