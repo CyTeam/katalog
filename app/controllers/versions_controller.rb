@@ -1,4 +1,6 @@
 class VersionsController < AuthorizedController
+
+  include VersionsHelper
   # Authentication
   before_filter :authenticate_user!
 
@@ -34,7 +36,7 @@ class VersionsController < AuthorizedController
     
     @version.revert
     
-    redirect_to versions_path
+    redirect_to dossier_versions_path(active_main_item(@version))
 
     return
     
