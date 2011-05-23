@@ -56,10 +56,12 @@ function addAutoAddNewContainer() {
 
     if(text.match(/\d{4}\s?-\s?\d{4}/)){
       $('#add_record_link').trigger('click');
+      var yearRegex = /\d{4}\s?-\s?(\d{4})/;
       var new_container = $('.container:last');
-      var d = new Date();
+      yearRegex.exec(text);
+      var year = parseInt(RegExp.$1) + 1;
 
-      new_container.find(first_input).val(d.getFullYear() + ' -');
+      new_container.find(first_input).val(year + ' -');
       container.find(second_input).val('DA');
       new_container.find(second_input).val('DH');
       new_container.find(last_input).val(container.find(last_input).val());
