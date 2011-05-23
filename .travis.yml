@@ -1,1 +1,2 @@
 env: "RAILS_ENV='test'"
+script: "bundle exec rake test"
