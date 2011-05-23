@@ -34,8 +34,7 @@ gem 'jquery-rails'
 
 # Standard helpers
 # ================
-gem 'haml'
-gem 'sass'
+gem 'haml', '3.0.25'
 gem 'compass', '~> 0.10.4'
 gem 'fancy-buttons'
 
@@ -62,7 +61,8 @@ gem 'inherited_resources_views'
 
 # Search
 gem 'thinking-sphinx', '~> 2.0.1'
-gem 'ts-delayed-delta'
+gem 'ts-delayed-delta', :require => 'thinking_sphinx/deltas/delayed_delta'
+gem 'delayed_job'
 
 # Reports
 #gem 'pdfkit', '~> 0.5'
