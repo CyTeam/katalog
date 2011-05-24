@@ -83,11 +83,11 @@ class DossiersController < AuthorizedController
 
     # Pass landscape options to PDFKit
     if @report[:orientation] == 'landscape'
-      @pdfkit_options = {
-        'orientation'  => 'Landscape',
-        'margin-left'  => '0.2cm',
-        'margin-right' => '0.2cm'
-      }
+#      @pdfkit_options = {
+#        'orientation'  => 'Landscape',
+#        'margin-left'  => '0.2cm',
+#        'margin-right' => '0.2cm'
+#      }
     end
     
     # Set pagination parameter
@@ -102,10 +102,10 @@ class DossiersController < AuthorizedController
     # Stay on this action after search
     @search_path = edit_report_dossiers_path
 
-    @pdfkit_options = {
-      'margin-left'  => '1cm',
-      'margin-right' => '1cm'
-    }
+#    @pdfkit_options = {
+#      'margin-left'  => '1cm',
+#      'margin-right' => '1cm'
+#    }
 
     # Pagination
     params[:per_page] ||= 50
