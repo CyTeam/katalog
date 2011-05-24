@@ -6,7 +6,7 @@ class DossiersController < AuthorizedController
   before_filter :authenticate_user!, :except => [:index, :search, :show, :report]
 
   # Responders
-  respond_to :html, :js, :json, :xls
+  respond_to :html, :js, :json, :xls, :pdf
   
   # Search
   has_scope :by_text, :as => :text
