@@ -1,0 +1,16 @@
+= render 'search_form'
+
+= render 'shared/page_actions'
+
+- if @dossiers.present?
+  = render 'search_title'
+  = paginated_section :renderer => PaginationListLinkRenderer, :show_always => @paginated_scope.present? do
+    = render 'list'
+- elsif @query
+  %h1= t('katalog.nothing_found.title')
+  %p= t('katalog.nothing_found.text')
+- else
+  %h1= t('katalog.search')
+
+- content_for :javascript do
+  = highlight_words(@query)

@@ -17,7 +17,7 @@ Katalog::Application.routes.draw do
   resources :topics
   resources :dossiers do
     collection do
-      get :search, :overview, :report, :edit_report
+      get :search, :overview, :report, :edit_report, :expert_search
     end
 
     resources :containers
