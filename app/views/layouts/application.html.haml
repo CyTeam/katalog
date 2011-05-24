@@ -4,8 +4,6 @@
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}/
     %title
       = t('katalog.application.title')
-    - @pdfkit_options && @pdfkit_options.each do |key, value|
-      %meta{:content => value, :name => "pdfkit-#{key}"}/
 
     %link{:rel => "shortcut icon", :href => image_path('favicon.ico')}/
 
