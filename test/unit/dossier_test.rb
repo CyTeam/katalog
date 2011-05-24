@@ -79,6 +79,7 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal [[], ['test', 'new'], []], Dossier.split_search_words('test. new')
 
     assert_equal [['77.0.'], ['test', 'new'], []], Dossier.split_search_words('test. 77.0, new')
+    assert_equal [[], ['1979'], []], Dossier.split_search_words('1979')
   end
   
   test "search word extraction detects double quote sentences" do

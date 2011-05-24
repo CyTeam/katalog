@@ -129,7 +129,11 @@ class Dossier < ActiveRecord::Base
         # signature is as ordinal by index
         signatures << string + "."
       elsif /^[0-9.]{1,8}$/.match(string)
-        signatures << string
+        if (string.include?'.') || string.length == 1
+          signatures << string
+        else
+          words << string
+        end
       else
         words << string.split('.')
       end
