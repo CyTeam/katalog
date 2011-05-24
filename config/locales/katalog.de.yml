@@ -25,6 +25,7 @@ de:
       visitor_logs:       "Logbuch"
       visitor_logs_list:  "Einträge"
       new_visitor_log:    "Neuer Eintrag"
+      expert_search:      "Expertensuche"
     application:
       title:            "Katalog"
       skip_navigation:  "Navigation überspringen"
