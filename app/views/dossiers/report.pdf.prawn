@@ -1,14 +1,18 @@
 prawn_document do |pdf|
 
   items = @dossiers.map do |item|
-    [
-      item.signature,
-      item.title,
-      item.document_count
-    ]
+    @report[:columns].inject([]) do |output, attr|
+      output.push(show_column_for_report(item, attr, true))
+    end
   end
 
-  pdf.table items, :headers => [I18n.t('activerecord.attributes.dossier.signature'), I18n.t('activerecord.attributes.dossier.title'), I18n.t('activerecord.attributes.dossier.document_count')],
+  header_column = @report[:columns].inject([]) do |output, attr|
+    output << show_header_for_report(attr)
+  end
+
+  pdf.text @report[:title] if @report[:title]
+
+  pdf.table items, :headers => header_column,
                    :row_colors => ["FFFFFF","DDDDDD"],
                    :column_widths => {0 => 70, 1 => pdf.margin_box.width - 70 - 150, 2 => 150},
                    :width => pdf.margin_box.width,
