@@ -55,10 +55,10 @@ module DossiersHelper
     end
   end
   
-  def show_column_for_report(dossier, column)
+  def show_column_for_report(dossier, column, only_text = false)
     case column.to_s
       when 'title'
-        link_to dossier.title, dossier, {'data-href-container' => 'tr'}
+        only_text == true ? dossier.title : link_to(dossier.title, dossier, {'data-href-container' => 'tr'})
       when 'signature', 'first_document_year', 'keyword_text'
         dossier.send(column)
       when 'container_type'
