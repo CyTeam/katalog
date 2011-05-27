@@ -1,4 +1,4 @@
-prawn_document do |pdf|
+prawn_document(:page_size => 'A4') do |pdf|
 
   items = @dossiers.map do |item|
     [

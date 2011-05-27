@@ -1,4 +1,4 @@
-prawn_document do |pdf|
+prawn_document(:page_size => 'A4') do |pdf|
 
   items = @dossiers.map do |item|
     @report[:columns].inject([]) do |output, attr|
@@ -11,6 +11,8 @@ prawn_document do |pdf|
   end
 
   pdf.text @report[:title] if @report[:title]
+
+  pdf.move_down(20)
 
   pdf.table items, :headers => header_column,
                    :row_colors => ["FFFFFF","DDDDDD"],
