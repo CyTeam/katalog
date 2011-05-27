@@ -69,6 +69,8 @@ gem 'delayed_job'
 #gem 'pdfkit', :git => 'http://github.com/huerlisi/PDFKit.git'
 #gem 'wkhtmltopdf-binary'
 gem 'prawn_rails'
+gem 'prawn', '~> 0.11.1'
+gem 'prawn-layout', '~> 0.8.4'
 
 platforms :ruby_18 do
   # Full text search engine
