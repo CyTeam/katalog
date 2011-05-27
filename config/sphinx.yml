@@ -1,5 +1,4 @@
 development:
-  bin_path: '/usr/local/bin/'
   enable_star: true
   min_infix_len: 1
   charset_type: utf-8
