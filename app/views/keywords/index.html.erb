@@ -3,16 +3,16 @@
 <h1><%= t('controllers.index.keyword') %></h1>
 
 <%= paginated_section :show_always => true do %>
-<div class="ce_table block">
-<table>
-  <thead>
-    <tr>
-      <th><%= t_attr('keyword', Dossier) %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render @keywords.map{|keyword| keyword.becomes(Keyword)} %>
-  </tbody>
-</table>
-</div>
+  <div class="ce_table block">
+    <table>
+      <thead>
+        <tr>
+          <th><%= t_attr('keyword', Dossier) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @keywords.map{|keyword| keyword.becomes(Keyword)} %>
+      </tbody>
+    </table>
+  </div>
 <% end %>
