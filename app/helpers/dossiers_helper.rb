@@ -55,12 +55,18 @@ module DossiersHelper
     end
   end
   
-  def show_column_for_report(dossier, column, only_text = false)
+  def show_column_for_report(dossier, column, for_pdf = false)
     case column.to_s
       when 'title'
-        only_text == true ? dossier.title : link_to(dossier.title, dossier, {'data-href-container' => 'tr'})
-      when 'signature', 'first_document_year', 'keyword_text'
-        dossier.send(column)
+        for_pdf == true ? dossier.title : link_to(dossier.title, dossier, {'data-href-container' => 'tr'})
+      when 'signature', 'first_document_year'
+        value = dossier.send(column)
+
+        value == nil ? '' : value
+      when 'keyword_text'
+        value = dossier.send(column)
+
+        value == nil ? '' : value
       when 'container_type'
         dossier.container_types.collect{|t| t.code}.join(', ')
       when 'location'
