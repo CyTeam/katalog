@@ -1,7 +1,8 @@
 prawn_document(:page_size => 'A4', :page_layout => @report[:orientation].to_sym) do |pdf|
 
   items = @dossiers.map do |item|
-    (@report[:columns] + (@report[:collect_year_count] ? item.years_counts(@report[:collect_year_count], @report[:name]) : nil)).inject([]) do |output, attr|
+    years = item.years_counts(@report[:collect_year_count], @report[:name])
+    (@report[:columns] + (years.empty? ? Array.new : years)).inject([]) do |output, attr|
       if @report[:columns].include?attr
         output << show_column_for_report(item, attr, true)
       else
