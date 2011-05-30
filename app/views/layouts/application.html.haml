@@ -1,28 +1,30 @@
 !!!
 %html{:xmlns => "http://www.w3.org/1999/xhtml"}
   %head
-    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}/
-    %title
-      = t('katalog.application.title')
+    - cache 'application_header_' + user_signed_in?.to_s  do
+      %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}/
+      %title
+        = t('katalog.application.title')
 
-    %link{:rel => "shortcut icon", :href => image_path('favicon.ico')}/
+      %link{:rel => "shortcut icon", :href => image_path('favicon.ico')}/
 
-    = stylesheet_link_tag 'doku-zug.ch/typolight', 'doku-zug.ch/basic', 'doku-zug.ch/content', 'doku-zug.ch/layout', 'doku-zug.ch/navigation', 'doku-zug.ch/welcome', 'doku-zug.ch/application', :media => 'all'
-    = stylesheet_link_tag 'katalog', :media => 'all'
-    = stylesheet_link_tag 'katalog_internal' if user_signed_in?
-    = stylesheet_link_tag 'scaffold'
-    = stylesheet_link_tag 'formtastic', 'formtastic_changes'
-    = stylesheet_link_tag 'pagination'
-    = stylesheet_link_tag 'compiled/screen.css', :media => 'all'
-    = stylesheet_link_tag 'compiled/print', :media => 'print'
-    /[if lt IE 7]
-      = stylesheet_link_tag 'compiled/ie6.css', :media => 'screen, projection'
+      = stylesheet_link_tag 'doku-zug.ch/typolight', 'doku-zug.ch/basic', 'doku-zug.ch/content', 'doku-zug.ch/layout', 'doku-zug.ch/navigation', 'doku-zug.ch/welcome', 'doku-zug.ch/application', :media => 'all'
+      = stylesheet_link_tag 'katalog', :media => 'all'
+      = stylesheet_link_tag 'katalog_internal' if user_signed_in?
+      = stylesheet_link_tag 'scaffold'
+      = stylesheet_link_tag 'formtastic', 'formtastic_changes'
+      = stylesheet_link_tag 'pagination'
+      = stylesheet_link_tag 'compiled/screen.css', :media => 'all'
+      = stylesheet_link_tag 'compiled/print', :media => 'print'
+      /[if lt IE 7]
+        = stylesheet_link_tag 'compiled/ie6.css', :media => 'screen, projection'
     = csrf_meta_tag
   %body#top
     #wrapper
-      #header
-        .inside
-          = render user_signed_in? ? 'shared/internal_header' : 'shared/public_header'
+      - cache 'header_' + user_signed_in?.to_s do
+        #header
+          .inside
+            = render user_signed_in? ? 'shared/internal_header' : 'shared/public_header'
       #container
         #left
           .inside
