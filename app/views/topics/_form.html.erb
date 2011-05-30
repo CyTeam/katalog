@@ -1,17 +1,19 @@
-<%= semantic_form_for(@topic) do |f| %>
-  <%= f.inputs do %>
-    <%= f.input :signature %>
-    <%= f.input :title %>
-    <li>
-      <label for="update_signature">
-        Auf alle anwenden
-      </label>
-      <%= check_box_tag 'update_signature', 'Auf alle anwenden' %>
-    </li>
-  <% end %>
+<% cache @topic do %>
+  <%= semantic_form_for(@topic) do |f| %>
+    <%= f.inputs do %>
+      <%= f.input :signature %>
+      <%= f.input :title %>
+      <li>
+        <label for="update_signature">
+          Auf alle anwenden
+        </label>
+        <%= check_box_tag 'update_signature', 'Auf alle anwenden' %>
+      </li>
+    <% end %>
 
-  <%= f.buttons do %>
-    <%= f.commit_button %>
+    <%= f.buttons do %>
+      <%= f.commit_button %>
+    <% end %>
   <% end %>
 <% end %>
 

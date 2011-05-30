@@ -1,18 +1,24 @@
 <%= render '/dossiers/search_form' %>
 
-<div id="page_actions" class="contextual">
-  <%= contextual_link('edit', edit_topic_path(@topic), :title => t('tooltips.topics.edit')) %>
-</div>
-<h1 id="title"><%= @topic.signature %> <%= @topic.title %></h1>
-<p class="notice"><%= notice %></p>
+<% cache @topic do %>
+  <div id="page_actions" class="contextual">
+    <%= contextual_link('edit', edit_topic_path(@topic), :title => t('tooltips.topics.edit')) %>
+  </div>
 
-<div id="breadcrumb" class="section">
-  <ul class="dossier_topic_breadcrumb">
-    <% for parent in @topic.parents %>
-      <li><%= link_to_topic(parent) %></li>
-    <% end %>
-  </ul>
-</div>
+  <h1 id="title"><%= @topic.signature %> <%= @topic.title %></h1>
+
+  <p class="notice">
+    <%= notice %>
+  </p>
+
+  <div id="breadcrumb" class="section">
+    <ul class="dossier_topic_breadcrumb">
+      <% for parent in @topic.parents %>
+        <li><%= link_to_topic(parent) %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
 <% @dossiers = @topic.direct_children %>
 <%= render 'dossiers/list' %>
