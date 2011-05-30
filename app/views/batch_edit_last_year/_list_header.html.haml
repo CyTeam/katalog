@@ -1,6 +1,7 @@
-%tr.header
-  %th.signature= t_attr(:signature, Dossier)
-  %th.title
-    = t_attr(:title, Dossier)
-  %th.year
-    = select 'dossier_numbers', 'year', DossierNumber.default_periods.collect {|d| [ "#{d[:from].year} - #{d[:to].year}", d[:from].year ] if d[:from] }, {:selected => @year, :include_blank => false}
+- cache :batch_edit_last_year_index do
+  %tr.header
+    %th.signature= t_attr(:signature, Dossier)
+    %th.title
+      = t_attr(:title, Dossier)
+    %th.year
+      = select 'dossier_numbers', 'year', DossierNumber.default_periods.collect {|d| [ "#{d[:from].year} - #{d[:to].year}", d[:from].year ] if d[:from] }, {:selected => @year, :include_blank => false}
