@@ -1,7 +1,9 @@
-<%= contextual_links %>
+<% cache @container_type.cache_key + '_show' do %>
+  <%= contextual_links %>
 
-<h1><%= t_title %></h1>
+  <h1><%= t_title %></h1>
 
-<%= show_for @container_type do |l| %>
-  <%= l.attributes :title, :code, :description %>
+  <%= show_for @container_type do |l| %>
+    <%= l.attributes :title, :code, :description %>
+  <% end %>
 <% end %>
