@@ -1,10 +1,12 @@
-<tr id="container-<%= container.id %>" class="<%= cycle('odd', 'even', :name => :container) %>" title="<%= container.preorder ? t_attr(:preorder, Container) : '' %>">
-  <td><%= container.period %></td>
-  <td><%= container.container_type.try(:code) %></td>
-  <td>
-    <%= container.location.try(:code) %>
-    <%- if container.preorder %>
-      <img alt="<%= t_attr(:preorder, Container) %>" src="/images/16x16/availability_wait.png"/>
-    <%- end %>
-  </td>
-</tr>
+<% cache container do %>
+  <tr id="container-<%= container.id %>" class="<%= cycle('odd', 'even', :name => :container) %>" title="<%= container.preorder ? t_attr(:preorder, Container) : '' %>">
+    <td><%= container.period %></td>
+    <td><%= container.container_type.try(:code) %></td>
+    <td>
+      <%= container.location.try(:code) %>
+      <%- if container.preorder %>
+        <img alt="<%= t_attr(:preorder, Container) %>" src="/images/16x16/availability_wait.png"/>
+      <%- end %>
+    </td>
+  </tr>
+<% end %>

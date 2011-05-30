@@ -1,33 +1,34 @@
-= javascript_include_tag :ckeditor
-= semantic_form_for(@dossier) do |f|
-  = f.inputs do
-    = f.semantic_errors :containers
-    = f.input :internal
-    = f.input :signature, :input_html => {:size => '12'}
-    = f.input :title, :input_html => {:style => 'width: 100%'}
-    = f.input :description, :as => :ckeditor, :input_html => {:class => 'autogrow', :rows => 5, :width => '74%'}
-    ~ f.input :keyword_text, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.keyword_list.size + 1}
-    ~ f.input :relation_list, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.relations.size + 1}
-    %a#insert_relation{:href => "#", :style => "margin-left:25%;"}
-      = t('katalog.insert_relation')
-    = f.input :first_document_year, :input_html => {:size => '6'}
-    ~ f.input :dossier_number_list, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.numbers.size + 1}
-    
-  :javascript
-    var type_codes = #{ContainerType.all.map {|e| e.code }.to_json};
-    var location_codes = #{Location.all.map {|e| e.code }.to_json};
-  :css
-    .ui-autocomplete {
-      max-height: 70px;
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
+- cache [@dossier.cache_key, 'form'] do
+  = javascript_include_tag :ckeditor
+  = semantic_form_for(@dossier) do |f|
+    = f.inputs do
+      = f.semantic_errors :containers
+      = f.input :internal
+      = f.input :signature, :input_html => {:size => '12'}
+      = f.input :title, :input_html => {:style => 'width: 100%'}
+      = f.input :description, :as => :ckeditor, :input_html => {:class => 'autogrow', :rows => 5, :width => '74%'}
+      ~ f.input :keyword_text, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.keyword_list.size + 1}
+      ~ f.input :relation_list, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.relations.size + 1}
+      %a#insert_relation{:href => "#", :style => "margin-left:25%;"}
+        = t('katalog.insert_relation')
+      = f.input :first_document_year, :input_html => {:size => '6'}
+      ~ f.input :dossier_number_list, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.numbers.size + 1}
 
-  .ce_table
-    %table#container-list.ce_table{:style => "width: 100%"}
-      = render 'containers/list_header', :form_helper => f
-      = f.semantic_fields_for :containers do |container|
-        = render 'containers/form', :container => container
-  = f.buttons do
-    = f.commit_button
+    :javascript
+      var type_codes = #{ContainerType.all.map {|e| e.code }.to_json};
+      var location_codes = #{Location.all.map {|e| e.code }.to_json};
+    :css
+      .ui-autocomplete {
+        max-height: 70px;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
+    .ce_table
+      %table#container-list.ce_table{:style => "width: 100%"}
+        = render 'containers/list_header', :form_helper => f
+        = f.semantic_fields_for :containers do |container|
+          = render 'containers/form', :container => container
+    = f.buttons do
+      = f.commit_button
 
