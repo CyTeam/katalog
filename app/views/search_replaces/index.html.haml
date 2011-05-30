@@ -1,12 +1,13 @@
-%h1
-  = t('katalog.search_replace')
+- cache :search_replace do
+  %h1
+    = t('katalog.search_replace')
 
-= semantic_form_for @search_replace do |f|
-  = f.semantic_errors
-  = f.inputs do
-    = f.input :search
-    = f.input :replace
-    = f.input :columns, :as => :check_boxes, :collection => SearchReplace.editable_attributes.collect {|a| [ t(a, :scope => 'activerecord.attributes.dossier'), a ] }
+  = semantic_form_for @search_replace do |f|
+    = f.semantic_errors
+    = f.inputs do
+      = f.input :search
+      = f.input :replace
+      = f.input :columns, :as => :check_boxes, :collection => SearchReplace.editable_attributes.collect {|a| [ t(a, :scope => 'activerecord.attributes.dossier'), a ] }
 
-  = f.buttons do
-    = f.commit_button
+    = f.buttons do
+      = f.commit_button
