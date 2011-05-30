@@ -1,11 +1,12 @@
-%tr[version]{:class => cycle('odd', 'even')}
-  %td
-    = version.created_at.to_s(:time_with_seconds)
-  %td
-    = link_to version_title(version), version, {'data-href-container' => 'tr'}
-  %td
-    = action(version)
-  %td
-    = user_email(version)
-  %td.action-links
-    = link_to image_tag('icons/revert.png', :title => t_action(:revert)), revert_version_path(version), :method => :post
+- cache version do
+  %tr[version]{:class => cycle('odd', 'even')}
+    %td
+      = version.created_at.to_s(:time_with_seconds)
+    %td
+      = link_to version_title(version), version, {'data-href-container' => 'tr'}
+    %td
+      = action(version)
+    %td
+      = user_email(version)
+    %td.action-links
+      = link_to image_tag('icons/revert.png', :title => t_action(:revert)), revert_version_path(version), :method => :post

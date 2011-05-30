@@ -1,36 +1,37 @@
-#page_actions.contextual
-  = contextual_link('revert', revert_version_path(@version), :method => :post)
-  = contextual_link('current', active_main_item(@version))
+- cache [@version.cache_key, @previous_item == nil ? '' : @previous_item.cache_key, @current_item == nil ? '' : @current_item.cache_key] do
+  #page_actions.contextual
+    = contextual_link('revert', revert_version_path(@version), :method => :post)
+    = contextual_link('current', active_main_item(@version))
 
-%h1
-  = t('katalog.versions.changes_of', :model => @version.item_type)
+  %h1
+    = t('katalog.versions.changes_of', :model => @version.item_type)
 
-%h2
-  = t('katalog.versions.description', :user => user_email(@version), :date_time => @version.created_at.to_s(:time_with_seconds), :action => action(@version))
+  %h2
+    = t('katalog.versions.description', :user => user_email(@version), :date_time => @version.created_at.to_s(:time_with_seconds), :action => action(@version))
 
 
-%a#show-unchanged{:href => '#'}
-  = t_attr(:show_versions)
+  %a#show-unchanged{:href => '#'}
+    = t_attr(:show_versions)
 
-#versions-bottom
-  - item_class = @version.item_type.constantize
-  - attributes = item_class.column_names
-  - attributes = attributes - item_class.ignore - [item_class.primary_key]
-  
-  %table.ce_table
-    %tr
-      %th
-      %th= t_attr(:previous_version)
-      %th= t_attr(:next_version)
-    - for column_name in attributes
-      - previous_value = @previous_item.try(:send, column_name)
-      - current_value = @current_item.try(:send, column_name)
-      %tr{:class => change_type(previous_value, current_value)}
-        %th= t_attr(column_name, item_class)
-        %td.previous= previous_value
-        %td.current= current_value
+  #versions-bottom
+    - item_class = @version.item_type.constantize
+    - attributes = item_class.column_names
+    - attributes = attributes - item_class.ignore - [item_class.primary_key]
 
-%h2
-  = t('katalog.versions.history')
+    %table.ce_table
+      %tr
+        %th
+        %th= t_attr(:previous_version)
+        %th= t_attr(:next_version)
+      - for column_name in attributes
+        - previous_value = @previous_item.try(:send, column_name)
+        - current_value = @current_item.try(:send, column_name)
+        %tr{:class => change_type(previous_value, current_value)}
+          %th= t_attr(column_name, item_class)
+          %td.previous= previous_value
+          %td.current= current_value
+
+  %h2
+    = t('katalog.versions.history')
 
 = render 'list'
