@@ -1,18 +1,19 @@
-%h1= t_title
+- cache resource do
+  %h1= t_title
 
-%table{:class => "#{collection.first.class.to_s.downcase} detail"}
-  - resource.attributes.each_pair do |attr, value|
-    - next if ['id', 'updated_at', 'user_id', 'content'].include?(attr)
+  %table{:class => "#{collection.first.class.to_s.downcase} detail"}
+    - resource.attributes.each_pair do |attr, value|
+      - next if ['id', 'updated_at', 'user_id', 'content'].include?(attr)
+      %tr
+        %th= t(attr, :scope => 'activerecord.attributes.visitor_log')
+        %td= value
     %tr
-      %th= t(attr, :scope => 'activerecord.attributes.visitor_log')
-      %td= value
-  %tr
-    %th
-      = t('activerecord.attributes.visitor_log.user')
-    %td
-      = resource.user
-  %tr
-    %th
-      = t('activerecord.attributes.visitor_log.content')
-    %td
-      != resource.content
+      %th
+        = t('activerecord.attributes.visitor_log.user')
+      %td
+        = resource.user
+    %tr
+      %th
+        = t('activerecord.attributes.visitor_log.content')
+      %td
+        != resource.content

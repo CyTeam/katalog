@@ -1,7 +1,7 @@
-.entry{:class => cycle('odd', 'even')}
-
-  %h2
-    = item.title
-  != item.content
-  .author
-    = t('katalog.visitor_logs.create_by_on', :user => item.user.username, :date => item.created_at)
+- cache item do
+  .entry{:class => cycle('odd', 'even')}
+    %h2
+      = item.title
+    != item.content
+    .author
+      = t('katalog.visitor_logs.create_by_on', :user => item.user.username, :date => item.created_at)

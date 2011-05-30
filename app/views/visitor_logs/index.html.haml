@@ -1,8 +1,9 @@
-= contextual_links
+- cache :visitor_logs
+  = contextual_links
 
-%h1= t_title
+  %h1= t_title
 
-= javascript_include_tag :ckeditor
+  = javascript_include_tag :ckeditor
 
 #visitor_log_list
   = render :partial => 'item', :collection => collection
