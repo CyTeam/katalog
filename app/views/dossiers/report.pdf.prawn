@@ -11,7 +11,7 @@ prawn_document(:page_size => 'A4', :page_layout => @report[:orientation].to_sym)
       end
     end
 
-    row_styling(item.topic_type, row)
+    row_styling(item, row)
   end
 
   # Creates the table header.

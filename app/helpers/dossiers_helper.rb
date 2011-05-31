@@ -109,9 +109,11 @@ module DossiersHelper
 
   # Styles the row dependent on the topic type.
   # For use in the prawn view.
-  def row_styling(type, row)
+  def row_styling(item, row)
+    return row unless item.is_a?Topic
+
     row.map do |cell|
-      case type
+      case item.topic_type
       when :group
         cell.background_color = "96B1CD"
       when :main
@@ -136,7 +138,7 @@ module DossiersHelper
         pdf.make_cell(:content => item.document_count.to_s)
       ]
 
-      row_styling(item.topic_type, row)
+      row_styling(item, row)
     end
   end
 end
