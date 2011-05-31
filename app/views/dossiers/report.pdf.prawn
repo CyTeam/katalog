@@ -28,14 +28,16 @@ prawn_document(:page_size => 'A4', :page_layout => @report[:orientation].to_sym)
   pdf.move_down(20)
 
   # Draws the table with the content from the items.
-  pdf.table items, :headers => header_column,
+  pdf.table(items, :headers => header_column,
                    :row_colors => ["FFFFFF","DDDDDD"],
                    :column_widths => {0 => 70},
                    :width => pdf.margin_box.width,
                    :position => :center,
                    :align => {0 => :left, 1 => :left, 2 => :right},
                    :align_headers => :left,
-                   :border_style => :grid
+                   :border_style => :grid) do
+    style row(0), :style => :bold
+  end
 
 
   # Draws the line above the page number on each page.
