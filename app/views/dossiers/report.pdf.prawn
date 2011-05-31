@@ -39,7 +39,7 @@ prawn_document(:page_size => 'A4', :page_layout => @report[:orientation].to_sym)
 
     # Headings styling
     row(0).font_style = :bold
-    row(0).borders = [:bottom]
+    row(0).background_color = 'E1E6EC'
 
     # Columns width
     column(0).width = 70
