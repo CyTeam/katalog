@@ -30,7 +30,9 @@ prawn_document(:page_size => 'A4', :page_layout => @report[:orientation].to_sym)
   pdf.move_down(20)
 
   # Draws the table with the content from the items.
-  pdf.table([header_column] + items, :header => true) do
+  pdf.table([header_column] + items, :header => true,
+                                     :width => pdf.margin_box.width,
+                                     :cell_style => { :overflow => :shrink_to_fit, :min_font_size => 8}) do
     # General cell styling
     cells.valign = :top
     cells.border_width = 0.1
