@@ -141,7 +141,7 @@ module DossiersHelper
     items.map do |item|
       row = [
         pdf.make_cell(:content => item.signature.to_s),
-        pdf.make_cell(:content => link_to(item.title, url_for(item), :trailing_slash => true).to_s, :inline_format => true),
+        pdf.make_cell(:content => "<link href='#{url_for(item)}'>#{item.title}</link>", :inline_format => true),
         pdf.make_cell(:content => item.document_count.to_s)
       ]
 
