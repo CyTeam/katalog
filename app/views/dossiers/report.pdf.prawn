@@ -35,7 +35,7 @@ prawn_document(:page_size => 'A4', :page_layout => @report[:orientation].to_sym)
                                      :cell_style => { :overflow => :shrink_to_fit, :min_font_size => 8}) do
     # General cell styling
     cells.valign = :top
-    cells.border_width = 0.1
+    cells.border_width = 0
 
     # Headings styling
     row(0).font_style = :bold

@@ -13,7 +13,7 @@ prawn_document(:page_size => 'A4') do |pdf|
 
     # General cell styling
     cells.valign = :top
-    cells.border_width = 0.1
+    cells.border_width = 0
 
     # Headings styling
     row(0).font_style = :bold
