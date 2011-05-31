@@ -1,5 +1,6 @@
 prawn_document(:page_size => 'A4', :page_layout => @report[:orientation].to_sym) do |pdf|
 
+  # Gets the table data.
   items = @dossiers.map do |item|
     years = item.years_counts(@report[:collect_year_count], @report[:name])
     (@report[:columns] + (years.empty? ? Array.new : years)).inject([]) do |output, attr|
@@ -11,6 +12,7 @@ prawn_document(:page_size => 'A4', :page_layout => @report[:orientation].to_sym)
     end
   end
 
+  # Creates the table header.
   header_column = (@report[:columns] + Dossier.years(@report[:collect_year_count], @report[:name])).inject([]) do |output, attr|
     if @report[:columns].include?attr
       output << show_header_for_report(attr)
@@ -19,23 +21,29 @@ prawn_document(:page_size => 'A4', :page_layout => @report[:orientation].to_sym)
     end
   end
 
+  # Draws the title of the report.
   pdf.text @report[:title] if @report[:title]
 
+  # Adds space after the title.
   pdf.move_down(20)
 
+  # Draws the table with the content from the items.
   pdf.table items, :headers => header_column,
                    :row_colors => ["FFFFFF","DDDDDD"],
                    :column_widths => {0 => 70},
                    :width => pdf.margin_box.width,
                    :position => :center,
                    :align => {0 => :left, 1 => :left, 2 => :right},
-                   :align_headers => :left
+                   :align_headers => :left,
+                   :border_style => :grid
 
 
+  # Draws the line above the page number on each page.
   pdf.repeat :all do
     pdf.stroke_line [pdf.bounds.right - 50, 0], [pdf.bounds.right, 0]
   end
 
+  # Draws the page number on each page.
   pdf.number_pages "<page>", :at => [pdf.bounds.right - 150, -5],
                              :width => 150,
                              :align => :right,
