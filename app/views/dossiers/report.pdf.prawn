@@ -5,7 +5,7 @@ prawn_document(:page_size => 'A4', :page_layout => @report[:orientation].to_sym)
     years = item.years_counts(@report[:collect_year_count], @report[:name])
     row = (@report[:columns] + (years.empty? ? Array.new : years)).inject([]) do |output, attr|
       if @report[:columns].include?attr
-        output << pdf.make_cell(:content => show_column_for_report(item, attr, true).to_s)
+        output << pdf.make_cell(:content => show_column_for_report(item, attr, true).to_s, :inline_format => true)
       else
         output << pdf.make_cell(:content => attr[:count].to_s)
       end
