@@ -1,12 +1,6 @@
 prawn_document(:page_size => 'A4') do |pdf|
 
-  items = @dossiers.map do |item|
-    [
-      item.signature,
-      item.title,
-      item.document_count
-    ]
-  end
+  items = table_data(pdf, @dossiers)
 
   pdf.table items, :headers => [I18n.t('activerecord.attributes.dossier.signature'), I18n.t('activerecord.attributes.dossier.title'), I18n.t('activerecord.attributes.dossier.document_count')],
                    :row_colors => ["FFFFFF","DDDDDD"],

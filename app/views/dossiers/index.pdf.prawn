@@ -1,29 +1,7 @@
 prawn_document(:page_size => 'A4') do |pdf|
 
   # Table content creation.
-  items = @dossiers.map do |item|
-    row = [
-      pdf.make_cell(:content => item.signature.to_s),
-      pdf.make_cell(:content => item.title.to_s),
-      pdf.make_cell(:content => item.document_count.to_s)
-    ]
-
-    # Row styling
-    row.map do |cell|
-      case item.topic_type
-      when :group
-        cell.background_color = "96B1CD"
-      when :main
-        cell.background_color = "E1E6EC"
-      when :geo
-        cell.background_color = "C8B7B7"
-      when :detail
-        cell.background_color = "E9DDAF"
-      end
-    end
-
-    row
-  end
+  items = table_data(pdf, @dossiers)
 
   # Table header creation.
   headers = [[t_attr(:signature), t_attr(:title), t_attr(:document_count)]]

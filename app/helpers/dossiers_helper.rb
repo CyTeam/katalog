@@ -106,4 +106,37 @@ module DossiersHelper
   def is_edit_report?
     'edit_report'.eql?action_name
   end
+
+  # Styles the row dependent on the topic type.
+  # For use in the prawn view.
+  def row_styling(type, row)
+    row.map do |cell|
+      case type
+      when :group
+        cell.background_color = "96B1CD"
+      when :main
+        cell.background_color = "E1E6EC"
+      when :geo
+        cell.background_color = "C8B7B7"
+      when :detail
+        cell.background_color = "E9DDAF"
+      end
+    end
+
+    row
+  end
+
+  # Creates the table data.
+  # For use in the prawn view.
+  def table_data(pdf, items)
+    items.map do |item|
+      row = [
+        pdf.make_cell(:content => item.signature.to_s),
+        pdf.make_cell(:content => item.title.to_s),
+        pdf.make_cell(:content => item.document_count.to_s)
+      ]
+
+      row_styling(item.topic_type, row)
+    end
+  end
 end
