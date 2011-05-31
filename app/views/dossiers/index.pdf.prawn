@@ -6,6 +6,8 @@ prawn_document(:page_size => 'A4') do |pdf|
   # Table header creation.
   headers = [[t_attr(:signature), t_attr(:title), t_attr(:document_count)]]
 
+  font(pdf)
+
   # Draw the title
   pdf_title(pdf, t('katalog.overview'))
 
@@ -23,7 +25,7 @@ prawn_document(:page_size => 'A4') do |pdf|
     row(0).background_color = 'E1E6EC'
 
     # Columns width
-    column(0).width = 70
+    column(0).width = 50
     column(2).width = 150
 
     # Columns align

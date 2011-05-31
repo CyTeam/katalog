@@ -23,6 +23,8 @@ prawn_document(:page_size => 'A4', :page_layout => @report[:orientation].to_sym)
     end
   end
 
+  font(pdf)
+
   # Draw the title
   pdf_title(pdf, @report[:title])
 
@@ -39,7 +41,7 @@ prawn_document(:page_size => 'A4', :page_layout => @report[:orientation].to_sym)
     row(0).background_color = 'E1E6EC'
 
     # Columns width
-    column(0).width = 70
+    column(0).width = 50
 
     # Columns align
     columns(0..1).align = :left

@@ -2,6 +2,8 @@ prawn_document(:page_size => 'A4') do |pdf|
 
   items = table_data(pdf, @dossiers)
 
+  font(pdf)
+
   # Draw the title
   pdf_title(pdf, params[:search][:signature] != nil ? @dossiers.first.to_s : t('katalog.search_for', :query => @query))
 
@@ -19,7 +21,7 @@ prawn_document(:page_size => 'A4') do |pdf|
     row(0).background_color = 'E1E6EC'
 
     # Columns width
-    column(0).width = 70
+    column(0).width = 50
     column(2).width = 150
 
     # Columns align

@@ -147,10 +147,17 @@ module DossiersHelper
   def pdf_title(pdf, text)
     if text
       # Draws the title of the report.
-      pdf.text text
+      pdf.text text.upcase, :size => 20, :color => "E1E6EC"
 
       # Adds space after the title.
       pdf.move_down(10)
     end
+  end
+
+  # Sets the default font
+  # For use in the prawn view.
+  def font(pdf)
+    pdf.font  'Helvetica'
+    pdf.font_size 10
   end
 end
