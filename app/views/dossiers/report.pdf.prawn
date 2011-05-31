@@ -23,11 +23,8 @@ prawn_document(:page_size => 'A4', :page_layout => @report[:orientation].to_sym)
     end
   end
 
-  # Draws the title of the report.
-  pdf.text @report[:title] if @report[:title]
-
-  # Adds space after the title.
-  pdf.move_down(20)
+  # Draw the title
+  pdf_title(pdf, @report[:title])
 
   # Draws the table with the content from the items.
   pdf.table([header_column] + items, :header => true,

@@ -141,4 +141,16 @@ module DossiersHelper
       row_styling(item, row)
     end
   end
+
+  # Creates the title with bottom space to the next element.
+  # For use in the prawn view.
+  def pdf_title(pdf, text)
+    if text
+      # Draws the title of the report.
+      pdf.text text
+
+      # Adds space after the title.
+      pdf.move_down(10)
+    end
+  end
 end

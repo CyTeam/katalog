@@ -2,6 +2,9 @@ prawn_document(:page_size => 'A4') do |pdf|
 
   items = table_data(pdf, @dossiers)
 
+  # Draw the title
+  pdf_title(pdf, params[:search][:signature] != nil ? @dossiers.first.to_s : t('katalog.search_for', :query => @query))
+
   # Table creation.
   pdf.table headers + items, :header => true,
                              :width => pdf.margin_box.width,
