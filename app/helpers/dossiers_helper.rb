@@ -58,7 +58,7 @@ module DossiersHelper
   def show_column_for_report(dossier, column, for_pdf = false)
     case column.to_s
       when 'title'
-        for_pdf == true ? dossier.title : link_to(dossier.title, dossier, {'data-href-container' => 'tr'})
+        for_pdf == true ? link_to(dossier.title, dossier) : link_to(dossier.title, dossier, {'data-href-container' => 'tr'})
       when 'signature', 'first_document_year'
         value = dossier.send(column)
 
@@ -141,7 +141,7 @@ module DossiersHelper
     items.map do |item|
       row = [
         pdf.make_cell(:content => item.signature.to_s),
-        pdf.make_cell(:content => item.title.to_s),
+        pdf.make_cell(:content => link_to(item.title, url_for(item), :trailing_slash => true).to_s, :inline_format => true),
         pdf.make_cell(:content => item.document_count.to_s)
       ]
 
