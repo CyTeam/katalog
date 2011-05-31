@@ -3,13 +3,15 @@ prawn_document(:page_size => 'A4', :page_layout => @report[:orientation].to_sym)
   # Gets the table data.
   items = @dossiers.map do |item|
     years = item.years_counts(@report[:collect_year_count], @report[:name])
-    (@report[:columns] + (years.empty? ? Array.new : years)).inject([]) do |output, attr|
+    row = (@report[:columns] + (years.empty? ? Array.new : years)).inject([]) do |output, attr|
       if @report[:columns].include?attr
-        output << show_column_for_report(item, attr, true)
+        output << pdf.make_cell(:content => show_column_for_report(item, attr, true).to_s)
       else
-        output << attr[:count]
+        output << pdf.make_cell(:content => attr[:count].to_s)
       end
     end
+
+    row_styling(item.topic_type, row)
   end
 
   # Creates the table header.
@@ -28,15 +30,20 @@ prawn_document(:page_size => 'A4', :page_layout => @report[:orientation].to_sym)
   pdf.move_down(20)
 
   # Draws the table with the content from the items.
-  pdf.table(items, :headers => header_column,
-                   :row_colors => ["FFFFFF","DDDDDD"],
-                   :column_widths => {0 => 70},
-                   :width => pdf.margin_box.width,
-                   :position => :center,
-                   :align => {0 => :left, 1 => :left, 2 => :right},
-                   :align_headers => :left,
-                   :border_style => :grid) do
-    style row(0), :style => :bold
+  pdf.table([header_column] + items, :header => true) do
+    # General cell styling
+    cells.valign = :top
+    cells.border_width = 0.1
+
+    # Headings styling
+    row(0).font_style = :bold
+    row(0).borders = [:bottom]
+
+    # Columns width
+    column(0).width = 70
+
+    # Columns align
+    columns(0..1).align = :left
   end
 
 
