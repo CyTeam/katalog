@@ -68,18 +68,30 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal 3 + 1, Dossier.by_signature('77.0.100').count
   end
 
-  test "search extraction detects signatures and words" do
+  test "search extraction detects empty search" do
     assert_equal [[], [], []], Dossier.split_search_words('')
+    assert_equal [[], [], []], Dossier.split_search_words('   ')
+  end
+
+  test "search extraction detects signatures" do
     assert_equal [['77.0.'], [], []], Dossier.split_search_words('77.0')
     assert_equal [['77.0.', '77.0.100', '77.0.10', '7', '77.0.1'], [], []], Dossier.split_search_words('77.0 77.0.100 77.0.10 7 77.0.1')
+  end
 
-    assert_equal [[], ['test'], []], Dossier.split_search_words('test')
+  test "search extraction detects words" do
     assert_equal [[], ['test', 'new'], []], Dossier.split_search_words('test new')
     assert_equal [[], ['test', 'new'], []], Dossier.split_search_words('test, new')
     assert_equal [[], ['test', 'new'], []], Dossier.split_search_words('test. new')
+  end
 
+  test "search extraction detects signatures and words" do
     assert_equal [['77.0.'], ['test', 'new'], []], Dossier.split_search_words('test. 77.0, new')
+    assert_equal [['77.0.1', '77.2.'], ['haha', 'bla'], []], Dossier.split_search_words('haha. 77.0.1, bla 77.2')
+  end
+
+  test "search extraction detects year" do
     assert_equal [[], ['1979'], []], Dossier.split_search_words('1979')
+    assert_equal [[], ['2012'], []], Dossier.split_search_words('2012')
   end
   
   test "search word extraction detects double quote sentences" do
