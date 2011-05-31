@@ -110,18 +110,25 @@ module DossiersHelper
   # Styles the row dependent on the topic type.
   # For use in the prawn view.
   def row_styling(item, row)
+    row.map do |cell|
+      cell.padding = [1, 5, 1, 5]
+    end
+
     return row unless item.is_a?Topic
 
     row.map do |cell|
       case item.topic_type
-      when :group
-        cell.background_color = "96B1CD"
-      when :main
-        cell.background_color = "E1E6EC"
-      when :geo
-        cell.background_color = "C8B7B7"
-      when :detail
-        cell.background_color = "E9DDAF"
+        when :group
+          cell.background_color = "96B1CD"
+          cell.padding = [5, 5, 5, 5]
+          cell.font_style = :bold
+          cell.size = 10
+        when :main
+          cell.background_color = "E1E6EC"
+        when :geo
+          cell.background_color = "C8B7B7"
+        when :detail
+          cell.background_color = "E9DDAF"
       end
     end
 
@@ -147,10 +154,10 @@ module DossiersHelper
   def pdf_title(pdf, text)
     if text
       # Draws the title of the report.
-      pdf.text text.upcase, :size => 20, :color => "E1E6EC"
+      pdf.text text.upcase, :size => 16, :color => "E1E6EC"
 
       # Adds space after the title.
-      pdf.move_down(10)
+      pdf.move_down(5)
     end
   end
 
@@ -158,6 +165,6 @@ module DossiersHelper
   # For use in the prawn view.
   def font(pdf)
     pdf.font  'Helvetica'
-    pdf.font_size 10
+    pdf.font_size 8
   end
 end
