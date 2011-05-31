@@ -120,7 +120,7 @@ module DossiersHelper
       case item.topic_type
         when :group
           cell.background_color = "96B1CD"
-          cell.padding = [5, 5, 5, 5]
+          cell.padding = [3, 5, 3, 5]
           cell.font_style = :bold
           cell.size = 10
         when :main
