@@ -70,6 +70,7 @@ gem 'delayed_job'
 #gem 'wkhtmltopdf-binary'
 gem 'prawn_rails'
 gem 'prawn', '~> 0.11.1'
+gem "prawn-core", "~> 0.8.4"
 gem 'prawn-layout', '~> 0.8.4'
 
 platforms :ruby_18 do
