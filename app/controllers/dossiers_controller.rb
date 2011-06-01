@@ -81,15 +81,6 @@ class DossiersController < AuthorizedController
       @report[:columns] = params[:columns].split(',').select{|column| Dossier.columns.include?(column)}
     end
 
-    # Pass landscape options to PDFKit
-    if @report[:orientation] == 'landscape'
-#      @pdfkit_options = {
-#        'orientation'  => 'Landscape',
-#        'margin-left'  => '0.2cm',
-#        'margin-right' => '0.2cm'
-#      }
-    end
-    
     # Set pagination parameter
     params[:per_page] = @report[:per_page]
     @report[:title] ||= report_name
@@ -101,11 +92,6 @@ class DossiersController < AuthorizedController
   def edit_report
     # Stay on this action after search
     @search_path = edit_report_dossiers_path
-
-#    @pdfkit_options = {
-#      'margin-left'  => '1cm',
-#      'margin-right' => '1cm'
-#    }
 
     # Pagination
     params[:per_page] ||= 50
