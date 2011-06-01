@@ -1,4 +1,3 @@
-
 require 'ostruct'
 
 class DossiersController < AuthorizedController
@@ -73,7 +72,6 @@ class DossiersController < AuthorizedController
     case report_name
       when 'index'
          @document_count = Dossier.document_count
-         @report = Report.find_by_name('index')
     end
 
     # Sanitize and use columns parameter if present
