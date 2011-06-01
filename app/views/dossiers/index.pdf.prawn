@@ -45,5 +45,4 @@ prawn_document(:page_size => 'A4') do |pdf|
                              :page_filter => :all,
                              :start_count_at => 1,
                              :total_pages => pdf.page_count
-
 end
