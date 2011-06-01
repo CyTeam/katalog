@@ -5,6 +5,9 @@ class DossiersController < AuthorizedController
   before_filter :authenticate_user!, :except => [:index, :search, :show, :report]
 
   # Responders
+  def self.responder
+    Responders::ExcelResponder
+  end
   respond_to :html, :js, :json, :xls, :pdf
   
   # Search
@@ -25,14 +28,6 @@ class DossiersController < AuthorizedController
   def show
     @dossier = Dossier.find(params[:id])
     authorize! :show, @dossier
-    
-    show! do |format|
-      format.xls {
-        send_data(@dossier.to_xls,
-          :filename => "dossier_#{@dossier.signature}.xls",
-          :type => 'application/vnd.ms-excel')
-      }
-    end
   end
 
   # GET /dossiers
@@ -127,8 +122,6 @@ class DossiersController < AuthorizedController
 
     @dossiers = apply_scopes(Dossier, params[:dossier]).accessible_by(current_ability, :index)
     @document_count = Dossier.document_count
-
-    index_excel
   end
 
   def dossier_search
@@ -160,8 +153,6 @@ class DossiersController < AuthorizedController
 
     if (@dossiers.count == 1 and not request.format.json?)
       redirect_to dossier_path(@dossiers.first, :query => @query)
-    else
-      index_excel
     end
   end
 
@@ -187,17 +178,5 @@ class DossiersController < AuthorizedController
 
     # Drop nil results by stray full text search matches
     @dossiers.compact!
-
-    index_excel
-  end
-
-  def index_excel
-    index! do |format|
-      format.xls {
-        send_data(Dossier.to_xls(@dossiers),
-          :filename => "dossiers_#{@dossiers.first.signature}.xls",
-          :type => 'application/vnd.ms-excel')
-      }
-    end
   end
 end
