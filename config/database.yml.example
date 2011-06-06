@@ -1,31 +1,47 @@
-development:
-  adapter: mysql2
+# Database configuration
+# ======================
+# This file can be use as a template for the database.yml file.
+#
+# We're currently not supporting SQLite as we're using Sphinx for
+# freetext search.
+#
+# You need to setup the databases and adapt this file:
+#
+# 1. create the database and grant access
+# 2. update host, username and password settings in the 'Common
+#    settings' section
+
+# Common settings
+# ===============
+# MySQL
+mysql: &mysql
+  adapter:  mysql2
   encoding: utf8
+  pool:     5
+  timeout:  5000
+  host:     localhost
+
+# Environments
+development:
+  <<: *mysql
   database: katalog_development
   username: katalog
   password: 
-  socket:   /var/run/mysqld/mysqld.sock
 
 test:
-  encoding: utf8
-  adapter: mysql2
+  <<: *mysql
   database: katalog_test
   username: katalog
   password:
-  socket:   /var/run/mysqld/mysqld.sock
 
 production:
-  encoding: utf8
-  adapter: mysql2
+  <<: *mysql
   database: katalog_production
   username: katalog
   password:
-  socket:   /var/run/mysqld/mysqld.sock
 
 import:
-  encoding: utf8
-  adapter: mysql2
+  <<: *mysql
   database: katalog_import
   username: katalog
   password:
-  socket:   /var/run/mysqld/mysqld.sock
