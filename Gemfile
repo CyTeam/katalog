@@ -20,6 +20,9 @@ end
 # Development
 # ===========
 group :development do
+  # RDoc
+  gem 'rdoc'
+
   # UML documentation
   gem 'rails-erd'
 
