@@ -5,7 +5,7 @@ require File.expand_path('../config/application', __FILE__)
 
 require 'rake'
 require 'rake/testtask'
-require 'rdoc/task'
+require 'rdoc/task' if Rails.env.development?
 require 'thinking_sphinx/deltas/delayed_delta/tasks'
 
 Katalog::Application.load_tasks
