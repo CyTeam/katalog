@@ -8,45 +8,43 @@ module Dossiers
   module ExportToXls
     extend ActiveSupport::Concern
 
-    module InstanceMethods
-      # Exports the current dossier to an Excel file.
-      def to_xls
-        book = Spreadsheet::Workbook.new
-        sheet = book.create_worksheet(:name => "Katalog")
-        present_numbers = numbers.present
-        
-        label_columns = Dossier.xls_columns.inject([]) do |out, column|
-          out << I18n.t(column, :scope => 'activerecord.attributes.dossier')
-        end
-
-        present_numbers.each do |number|
-          label_columns << number.period
-        end
-
-        sheet.row(0).concat(label_columns)
-
-        value_columns = Dossier.xls_columns.inject([]) do |out, column|
-          case column
-            when :container_type
-              out << containers.last.container_type.code
-            when :location
-              out << containers.last.location.code
-            else
-              out << self.send(column)
-          end
-        end
-        
-        present_numbers.each do |number|
-          value_columns << number.amount
-        end
-        
-        sheet.row(1).concat(value_columns)
-
-        # Return as XLS String
-        xls = StringIO.new
-        book.write xls
-        xls.string
+    # Exports the current dossier to an Excel file.
+    def to_xls
+      book = Spreadsheet::Workbook.new
+      sheet = book.create_worksheet(:name => "Katalog")
+      present_numbers = numbers.present
+      
+      label_columns = Dossier.xls_columns.inject([]) do |out, column|
+        out << I18n.t(column, :scope => 'activerecord.attributes.dossier')
       end
+
+      present_numbers.each do |number|
+        label_columns << number.period
+      end
+
+      sheet.row(0).concat(label_columns)
+
+      value_columns = Dossier.xls_columns.inject([]) do |out, column|
+        case column
+          when :container_type
+            out << containers.last.container_type.code
+          when :location
+            out << containers.last.location.code
+          else
+            out << self.send(column)
+        end
+      end
+      
+      present_numbers.each do |number|
+        value_columns << number.amount
+      end
+      
+      sheet.row(1).concat(value_columns)
+
+      # Return as XLS String
+      xls = StringIO.new
+      book.write xls
+      xls.string
     end
 
     module ClassMethods
