@@ -3,13 +3,6 @@
 require 'test_helper'
 
 class DossierTest < ActiveSupport::TestCase
-  setup do
-    @dossier = Dossier.new(:signature => "99.9.999", :title => 'Testing everything')
-    @dossier.save
-    
-    Dossier.all.map{|dossier| dossier.update_tags; dossier.save}
-  end
-  
   test "search extraction detects empty search" do
     assert_equal [[], [], []], Dossier.split_search_words('')
     assert_equal [[], [], []], Dossier.split_search_words('   ')
