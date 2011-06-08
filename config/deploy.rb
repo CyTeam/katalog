@@ -3,8 +3,8 @@ set :application, "katalog"
 set :repository,  "git@github.com:huerlisi/katalog.git"
 
 # Staging
-set :stages, %w(production development)
-set :default_stage, "development"
+set :stages, %w(production staging)
+set :default_stage, "staging"
 require 'capistrano/ext/multistage'
 
 # Deployment
