@@ -11,7 +11,6 @@ module Dossiers
     module InstanceMethods
       # Exports the current dossier to an Excel file.
       def to_xls
-        xls = StringIO.new
         book = Spreadsheet::Workbook.new
         sheet = book.create_worksheet(:name => "Dossier-No.: #{id}") # Encoding problem when using title
         present_numbers = numbers.present
@@ -42,8 +41,10 @@ module Dossiers
         end
         
         sheet.row(1).concat(value_columns)
-        book.write xls
 
+        # Return as XLS String
+        xls = StringIO.new
+        book.write xls
         xls.string
       end
     end
@@ -51,7 +52,6 @@ module Dossiers
     module ClassMethods
       # Exports some dossiers to an Excel file.
       def to_xls(dossiers)
-        xls = StringIO.new
         book = Spreadsheet::Workbook.new
         sheet = book.create_worksheet(:name => "Dossier-Signature: #{dossiers.first.signature}") # Encoding problem when using title
         present_numbers = DossierNumber.default_periods_as_s
@@ -101,8 +101,9 @@ module Dossiers
           row += 1
         end
 
+        # Return as XLS String
+        xls = StringIO.new
         book.write xls
-
         xls.string
       end
 
