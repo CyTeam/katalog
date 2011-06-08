@@ -9,6 +9,9 @@ module Dossiers
         # Needed for tag/keyword search
         set_property :group_concat_max_len => 1048576
 
+        # Disable delta update in import as it slows down too much and otherwise do it delayed.
+        set_property :delta => :delayed unless Rails.env.import?
+
         # Indexed Fields
         indexes title
         indexes signature
@@ -21,9 +24,6 @@ module Dossiers
           :keywords => 2
         }
 
-        # Disable delta update in import as it slows down too much and otherwise do it delayed.
-        set_property :delta => :delayed unless Rails.env.import?
-          
         # Attributes
         has created_at, updated_at
         has type
