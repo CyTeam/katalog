@@ -3,6 +3,7 @@
 require 'test_helper'
 
 class DossierTest < ActiveSupport::TestCase
+  # .split_search_words
   test "search extraction detects empty search" do
     assert_equal [[], [], []], Dossier.split_search_words('')
     assert_equal [[], [], []], Dossier.split_search_words('   ')
@@ -35,21 +36,21 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal [[], ['before', 'between', 'last'], ['one two', 'next, two']], Dossier.split_search_words('before, "one two" between "next, two" last')
   end
   
+  # .build_query
   test ".build_query adds * to signature searches" do
-    assert_equal '@signature ("7*")', Dossier.build_query("7").strip
-    assert_equal '@signature ("77.0.10*")', Dossier.build_query("77.0.10").strip
+    assert_equal '@signature ("7*")', Dossier.build_query("7")
+    assert_equal '@signature ("77.0.10*")', Dossier.build_query("77.0.10")
   end
   
   test ".build_query adds no * to short search words" do
-    assert_match /[^*]a[^*]/, Dossier.build_query("nr a history").strip
+    assert_match /[^*]a[^*]/, Dossier.build_query("nr a history")
   end
   
   test ".build_query adds trailing * to medium short search words" do
-    assert_match /[^*]nr\*/, Dossier.build_query("nr a history").strip
+    assert_match /[^*]nr\*/, Dossier.build_query("nr a history")
   end
   
   test ".build_query adds surrounding * to non-short search words" do
-    assert_match /\*history\*/, Dossier.build_query("nr as history").strip
+    assert_match /\*history\*/, Dossier.build_query("nr as history")
   end
-  
 end

@@ -78,7 +78,7 @@ module Dossiers
         return signatures, words, sentences
       end
 
-      # Builds the query for a dossier search.
+      # Build sphinx query from freetext
       def build_query(value)
         signatures, words, sentences = split_search_words(value)
 
@@ -106,7 +106,7 @@ module Dossiers
         end
         
         query = [signature_query, sentence_query, word_query].join(' ')
-        return query
+        return query.strip
       end
     end
   end
