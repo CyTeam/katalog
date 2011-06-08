@@ -96,5 +96,6 @@ class SphinxAdmin < ActiveRecord::Base
     self.export_file
     
     call_rake("thinking_sphinx:reindex")
+    call_rake("thinking_sphinx:restart")
   end
 end
