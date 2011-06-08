@@ -85,6 +85,13 @@ class SphinxAdmin < ActiveRecord::Base
     end
   end
   
+  # Runs rake tasks
+  #
+  # This runs a rake task and ensures the environment is correct and output
+  # gets logged to the correct file.
+  #
+  # Be aware that you need to take care to sync multiple calls by yourself
+  # as we run rake as a backround task.
   def self.call_rake(task, options = {})
     options[:rails_env] ||= Rails.env
     args = options.map { |n, v| "#{n.to_s.upcase}='#{v}'" }
@@ -95,7 +102,6 @@ class SphinxAdmin < ActiveRecord::Base
     FOLDER.mkpath
     self.export_file
     
-    call_rake("thinking_sphinx:reindex")
-    call_rake("thinking_sphinx:restart")
+    call_rake("thinking_sphinx:rebuild")
   end
 end
