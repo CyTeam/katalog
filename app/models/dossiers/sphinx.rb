@@ -73,7 +73,7 @@ module Dossiers
           end
         end
 
-        words = SphinxAdmin.extend_words(words.flatten)
+        words = words.flatten
 
         return signatures, words, sentences
       end

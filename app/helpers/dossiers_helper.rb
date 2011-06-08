@@ -83,6 +83,8 @@ module DossiersHelper
     return unless query.present?
 
     signatures, words, sentences = Dossier.split_search_words(query)
+    # Highlight all alternatives for words
+    words = SphinxAdmin.extend_words(words.flatten)
 
     content = ActiveSupport::SafeBuffer.new
     for word in (words + sentences)

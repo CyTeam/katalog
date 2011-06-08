@@ -54,5 +54,9 @@ class DossierTest < ActiveSupport::TestCase
     should "add surrounding * to non-short search words" do
       assert_match /\*history\*/, Dossier.build_query("nr as history")
     end
+
+    should "not include alternative word forms for words" do
+      assert_no_match /Nationalrat/, Dossier.build_query("nr")
+    end
   end
 end
