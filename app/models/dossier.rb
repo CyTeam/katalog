@@ -650,10 +650,4 @@ class Dossier < ActiveRecord::Base
 
   # Excel Export
   include Dossiers::ExportToXls
-
-  private # :nodoc
-
-  def self.xls_columns
-    [:signature, :title, :container_type, :location, :related_to, :keywords]
-  end
 end

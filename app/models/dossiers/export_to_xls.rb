@@ -105,6 +105,12 @@ module Dossiers
 
         xls.string
       end
+
+      private # :nodoc
+
+      def xls_columns
+        [:signature, :title, :container_type, :location, :related_to, :keywords]
+      end
     end
   end
 end
