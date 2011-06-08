@@ -12,7 +12,7 @@ module Dossiers
       # Exports the current dossier to an Excel file.
       def to_xls
         book = Spreadsheet::Workbook.new
-        sheet = book.create_worksheet(:name => "Dossier-No.: #{id}") # Encoding problem when using title
+        sheet = book.create_worksheet(:name => "Katalog")
         present_numbers = numbers.present
         
         label_columns = Dossier.xls_columns.inject([]) do |out, column|
@@ -53,7 +53,7 @@ module Dossiers
       # Exports some dossiers to an Excel file.
       def to_xls(dossiers)
         book = Spreadsheet::Workbook.new
-        sheet = book.create_worksheet(:name => "Dossier-Signature: #{dossiers.first.signature}") # Encoding problem when using title
+        sheet = book.create_worksheet(:name => "Katalog")
         present_numbers = DossierNumber.default_periods_as_s
         row = 0
 
