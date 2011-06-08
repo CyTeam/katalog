@@ -1,9 +1,5 @@
 # encoding: utf-8
 
-require 'spreadsheet'
-require 'stringio'
-require 'iconv'
-
 # This class represents a dossier with many containers.
 class Dossier < ActiveRecord::Base
 
@@ -403,101 +399,6 @@ class Dossier < ActiveRecord::Base
     "#{signature}: #{title}"
   end
 
-  # Exports the current dossier to an Excel file.
-  def to_xls
-    xls = StringIO.new
-    book = Spreadsheet::Workbook.new
-    sheet = book.create_worksheet(:name => "Dossier-No.: #{id}") # Encoding problem when using title
-    present_numbers = numbers.present
-    
-    label_columns = Dossier.xls_columns.inject([]) do |out, column|
-      out << I18n.t(column, :scope => 'activerecord.attributes.dossier')
-    end
-
-    present_numbers.each do |number|
-      label_columns << number.period
-    end
-
-    sheet.row(0).concat(label_columns)
-
-    value_columns = Dossier.xls_columns.inject([]) do |out, column|
-      case column
-        when :container_type
-          out << containers.last.container_type.code
-        when :location
-          out << containers.last.location.code
-        else
-          out << self.send(column)
-      end
-    end
-    
-    present_numbers.each do |number|
-      value_columns << number.amount
-    end
-    
-    sheet.row(1).concat(value_columns)
-    book.write xls
-
-    xls.string
-  end
-
-  # Exports some dossiers to an Excel file.
-  def self.to_xls(dossiers)
-    xls = StringIO.new
-    book = Spreadsheet::Workbook.new
-    sheet = book.create_worksheet(:name => "Dossier-Signature: #{dossiers.first.signature}") # Encoding problem when using title
-    present_numbers = DossierNumber.default_periods_as_s
-    row = 0
-
-    label_columns = xls_columns.inject([]) do |out, column|
-      out << I18n.t(column, :scope => 'activerecord.attributes.dossier')
-    end
-
-    present_numbers.each do |number|
-      label_columns << number
-    end
-
-    sheet.row(row).concat(label_columns)
-    row += 1
-
-    dossiers.each do |dossier|
-      value_columns = xls_columns.inject([]) do |out, column|
-        case column
-          when :container_type
-            unless dossier.containers.empty?
-              out << dossier.containers.last.container_type.code
-            else
-              out << ''
-            end
-          when :location
-            unless dossier.containers.empty?
-              out << dossier.containers.last.location.code
-            else
-              out << ''
-            end
-          else
-            out << dossier.send(column)
-        end
-      end
-
-      dossier.numbers.each do |number|
-        value_columns << number.amount
-      end unless dossier.kind_of?Topic
-
-
-      present_numbers.each do |number|
-        value_columns << dossier.amount(number)
-      end if dossier.kind_of?Topic
-
-      sheet.row(row).concat(value_columns)
-      row += 1
-    end
-
-    book.write xls
-
-    xls.string
-  end
-
   # Returns if the current dossier should be preorder.
   def preorder
     containers.each do |c|
@@ -746,6 +647,9 @@ class Dossier < ActiveRecord::Base
     update_tags
     import_numbers(row)
   end
+
+  # Excel Export
+  include Dossiers::ExportToXls
 
   private # :nodoc
 
