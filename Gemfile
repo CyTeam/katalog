@@ -12,7 +12,13 @@ gem 'mysql2', '~> 0.2.6'
 # Test
 # ===
 group :test do
+  # Fixtures
   gem 'factory_girl_rails'
+
+  # Matchers/Helpers
+  gem 'shoulda'
+
+  # Autotest
   gem 'autotest'
   gem 'autotest-rails'
 end
