@@ -1,11 +1,9 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
 one:
-  title: MyString
-  content: MyText
-  user_id: 1
+  title: Hi
+  content: My name is editor!
+  user: editor
 
 two:
-  title: MyString
-  content: MyText
-  user_id: 1
+  title: Follow up
+  content: An I'm visitting as admin:-)
+  user: admin
