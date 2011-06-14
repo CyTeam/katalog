@@ -29,7 +29,7 @@
     = t_attr(:description)
 
   #description
-    = auto_link(@dossier.description)
+    = simple_format(auto_link(@dossier.description))
 
   %h3
     = t_attr(:keyword_text)
