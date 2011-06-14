@@ -24,13 +24,6 @@ class DossierTest < ActiveSupport::TestCase
     
   end
   
-  test "container association" do
-    assert dossiers(:city_counsil).containers.include?(containers(:city_counsil))
-
-    assert dossiers(:city_history).containers.include?(containers(:city_history_1900_1999))
-    assert_equal 3, dossiers(:city_history).containers.count
-  end
-
   test "title truncation" do
     for title in ["City counsil notes 2000 - 2001", "City counsil notes Jan. - Feb. 2002", "City counsil notes März 2002 - Feb. 2003", "City counsil notes 1. Apr. - 15. Mai 2003", "City counsil notes 16. Mai 2003 - 1. Apr. 2004", "City counsil notes 2005 -"]
       assert_equal "City counsil notes", Dossier.truncate_title(title)
@@ -58,11 +51,6 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal Date.parse('1910-01-01'), dossiers(:city_history).first_document_on
   end
   
-  test "dossier collects all container locations" do
-    # TODO: using .reverse is not stable
-    assert_equal Location.where(:code => ["RI", "EG"]).reverse, dossiers(:city_history).locations
-  end
-
   test "find by signature" do
     # 3 actual dossiers, 1 topic
     assert_equal 3 + 1, Dossier.by_signature('77.0.100').count
@@ -107,12 +95,6 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal 1, Dossier.by_location('RI').count
 
     assert_equal 0, Dossier.by_location('Dummy').count
-  end
-
-  test "destroying dossier destroys it's containers" do
-    assert_difference('Container.count', -3) do
-      dossiers(:city_history).destroy
-    end
   end
 
   test "destroying dossier destroys it's document numbers" do
@@ -392,5 +374,28 @@ class DossierTest < ActiveSupport::TestCase
     
     dossier.first_document_year = '11'
     assert !(dossier.valid?)
+  end
+
+  test "dossier collects all container locations" do
+    # TODO: using .reverse is not stable
+    assert_equal Location.where(:code => ["RI", "EG"]).reverse, dossiers(:city_history).locations
+  end
+
+  context "containers association" do
+    should "should accept attributes" do
+      attributes = Factory.attributes_for(:dossier,
+        :containers_attributes => { 1 => {:title => 'neu 2000', :container_type => ContainerType.first, :location => Location.first} }
+      )
+      assert_difference('Container.count', 1) do
+        dossier = Dossier.create(attributes)
+        assert dossier.persisted?
+      end
+    end
+
+    should "be destroyed on dossier destroy" do
+      assert_difference('Container.count', -3) do
+        dossiers(:city_history).destroy
+      end
+    end
   end
 end

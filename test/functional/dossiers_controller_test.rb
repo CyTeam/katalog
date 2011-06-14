@@ -141,11 +141,23 @@ class DossiersControllerTest < ActionController::TestCase
       assert_redirected_to dossier_path(assigns(:dossier))
     end
 
-    should "should show form again on validation errors" do
+    should "show form again on validation errors" do
       post :create, :dossier => Factory.attributes_for(:dossier, :signature => '')
 
       assert assigns(:dossier)
       assert_select "#dossier_signature_input.error"
+    end
+
+    should "create associated containers" do
+      attributes = Factory.attributes_for(:dossier,
+        :containers_attributes => { 1 => {:title => 'neu 2000', :container_type => ContainerType.first, :location => Location.first} }
+      )
+
+      assert_difference('Dossier.count', 1) do
+        post :create, :dossier => attributes
+      end
+
+      assert_redirected_to dossier_path(assigns(:dossier))
     end
   end
 end

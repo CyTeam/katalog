@@ -45,7 +45,7 @@ class Dossier < ActiveRecord::Base
   # Associations
   has_many :numbers, :class_name => 'DossierNumber', :dependent => :destroy, :validate => true, :autosave => true
   accepts_nested_attributes_for :numbers
-  has_many :containers, :dependent => :destroy, :validate => true, :autosave => true
+  has_many :containers, :dependent => :destroy, :validate => true, :autosave => true, :inverse_of => :dossier
   accepts_nested_attributes_for :containers, :allow_destroy => true, :reject_if => :all_blank
     
   # Tags
