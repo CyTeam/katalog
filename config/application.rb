@@ -50,5 +50,8 @@ module Katalog
     config.action_view.javascript_expansions[:defaults] += %w(cyt)
     # jQuery Plugins
     config.action_view.javascript_expansions[:defaults] += %w(jquery-elastic jquery-ui jquery-highlight jquery.qtip ui.multiselect jquery.query-2.1.7)
+
+    # Allow target in links, used in description
+    config.action_view.sanitized_allowed_attributes = 'target'
   end
 end

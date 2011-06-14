@@ -124,5 +124,13 @@ class DossiersControllerTest < ActionController::TestCase
 
       assert_select '#description p', :text => 'Single paragraph'
     end
+
+    should "create links for http and email " do
+      @dossier = Factory.create(:dossier, :description => '<p>Visit http://www.cyt.ch or mail info@cyt.ch</p>')
+      get :show, :id => @dossier.to_param
+
+      assert_select "#description a[href='http://www.cyt.ch'][target='_blank']", :text => 'http://www.cyt.ch'
+      assert_select "#description a[href='mailto:info@cyt.ch']", :text => "info@cyt.ch"
+    end
   end
 end
