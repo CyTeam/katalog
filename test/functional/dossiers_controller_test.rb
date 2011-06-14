@@ -102,4 +102,27 @@ class DossiersControllerTest < ActionController::TestCase
     get :report, :report_name => 'simple'
     assert_response :success
   end
+  
+  context "show" do
+    should "show description" do
+      @dossier = Factory.create(:dossier)
+      get :show, :id => @dossier.to_param
+
+      assert_select '#description'
+    end
+
+    should "include description" do
+      @dossier = Factory.create(:dossier, :description => 'Simple text')
+      get :show, :id => @dossier.to_param
+
+      assert_select '#description', :text => 'Simple text'
+    end
+
+    should "not quote description" do
+      @dossier = Factory.create(:dossier, :description => '<p>Single paragraph</p>')
+      get :show, :id => @dossier.to_param
+
+      assert_select '#description p', :text => 'Single paragraph'
+    end
+  end
 end
