@@ -13,8 +13,7 @@
     = f.commit_button
 
 .contextual
-  %a#report-preview-update.icon.icon-update{:href => '#', :style => 'display:none;'}
-    = t('crud.action.refresh')
+  .icon.icon-update= link_to_function t_action('refresh'), 'previewReport()'
 
 %h3#report-preview-title
   = t('crud.preview')
