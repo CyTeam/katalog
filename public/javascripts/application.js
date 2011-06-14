@@ -255,9 +255,7 @@ function addReportPreviewUpdateBehaviour() {
     var preview = $('#report-preview');
     var form = $('form.report');
     var action = form.attr('action') + '?get_preview=true';
-    var select = $('#report_columns');
 
-//    select.registerAddEvents();
     e.preventDefault();
     $.get(action, form.serializeArray(), function(data){
       preview.html(data);
