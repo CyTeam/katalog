@@ -133,4 +133,19 @@ class DossiersControllerTest < ActionController::TestCase
       assert_select "#description a[href='mailto:info@cyt.ch']", :text => "info@cyt.ch"
     end
   end
+
+  context "create" do
+    should "redirect to new dossier" do
+      post :create, :dossier => Factory.attributes_for(:dossier)
+
+      assert_redirected_to dossier_path(assigns(:dossier))
+    end
+
+    should "should show form again on validation errors" do
+      post :create, :dossier => Factory.attributes_for(:dossier, :signature => '')
+
+      assert assigns(:dossier)
+      assert_select "#dossier_signature_input.error"
+    end
+  end
 end
