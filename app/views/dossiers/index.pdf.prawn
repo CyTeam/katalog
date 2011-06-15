@@ -33,5 +33,6 @@ prawn_document(:page_size => 'A4') do |pdf|
     column(2).align     = :right
   end
 
+  # Footer
   page_footer(pdf)
 end
