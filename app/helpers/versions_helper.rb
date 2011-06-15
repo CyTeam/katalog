@@ -27,7 +27,7 @@ module VersionsHelper
     item = version.active_item
     
     case item.class.name
-    when 'DossierNumber'
+    when 'DossierNumber', 'Container', 'Keyword'
       return item.dossier
     else
       return item
