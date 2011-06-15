@@ -146,7 +146,7 @@ module DossiersHelper
       row = [
         pdf.make_cell(:content => item.signature.to_s),
         pdf.make_cell(:content => link_to(item.title, polymorphic_url(item)).to_s, :inline_format => true),
-        pdf.make_cell(:content => item.document_count.to_s)
+        pdf.make_cell(:content => number_with_delimiter(item.document_count))
       ]
 
       row_styling(item, row)
