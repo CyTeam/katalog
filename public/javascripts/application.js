@@ -233,18 +233,13 @@ function addReportActionsMenuBehaviour() {
 }
 
 function addReportColumnMultiselectBehaviour() {
-  $.extend($.ui.multiselect, {
-      locale: {
-          addAll:'Alle hinzufügen',
-          removeAll:'Alle entfernen',
-          itemsCount:' ausgewählt'
-      }
+  $.extend($.ui.multiselect.locale, {
+    addAll:'Alle hinzufügen',
+    removeAll:'Alle entfernen',
+    itemsCount:'Spalten ausgewählt'
   });
   
-  $('#report_columns').multiselect({
-    width: 410,
-    height: 160
-  });
+  $('#report_columns').multiselect();
 }
 
 function previewReport() {
