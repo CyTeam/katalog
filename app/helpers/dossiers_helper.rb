@@ -169,4 +169,25 @@ module DossiersHelper
     pdf.font  'Helvetica'
     pdf.font_size 8
   end
+
+  # Footer
+  # =====
+  # Draws the line above the page number on each page.
+  def page_footer(pdf)
+    pdf.repeat :all do
+      pdf.stroke_line [pdf.bounds.right - 50, 0], [pdf.bounds.right, 0]
+    end
+
+    page_footer_number(pdf)
+  end
+
+  # Draws the page number on each page.
+  def page_footer_number(pdf)
+    pdf.number_pages "<page>", :at => [pdf.bounds.right - 150, -5],
+                               :width => 150,
+                               :align => :right,
+                               :page_filter => :all,
+                               :start_count_at => 1,
+                               :total_pages => pdf.page_count
+  end
 end
