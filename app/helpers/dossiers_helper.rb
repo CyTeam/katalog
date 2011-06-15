@@ -109,6 +109,9 @@ module DossiersHelper
     'edit_report'.eql?action_name
   end
 
+  # PDF
+  # ===
+
   # Styles the row dependent on the topic type.
   # For use in the prawn view.
   def row_styling(item, row)
@@ -138,7 +141,6 @@ module DossiersHelper
   end
 
   # Creates the table data.
-  # For use in the prawn view.
   def table_data(pdf, items)
     items.map do |item|
       row = [
@@ -155,6 +157,9 @@ module DossiersHelper
   # For use in the prawn view.
   def pdf_title(pdf, text)
     if text
+      # User multi byte handling for proper upcasing of umlaute
+      text = text.mb_chars
+
       # Draws the title of the report.
       pdf.text text.upcase, :size => 16, :color => "E1E6EC"
 
