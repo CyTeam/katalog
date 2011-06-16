@@ -24,8 +24,6 @@ prawn_document(:page_size => 'A4', :renderer => DossiersHelper::Prawn, :page_lay
   end
   headers = [header_column]
 
-  pdf.default_font
-
   # Draw the title
   pdf.h1 @report[:title]
 

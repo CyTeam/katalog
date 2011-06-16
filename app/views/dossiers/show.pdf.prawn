@@ -1,8 +1,4 @@
 prawn_document(:page_size => 'A4', :renderer => DossiersHelper::Prawn) do |pdf|
-
-  # Style
-  pdf.default_font
-
   # Heading
   pdf.h1 @dossier.title
   

@@ -14,8 +14,6 @@ prawn_document(:page_size => 'A4', :renderer => DossiersHelper::Prawn) do |pdf|
   # Table header creation.
   headers = [[t_attr(:signature), t_attr(:title), t_attr(:document_count)]]
 
-  pdf.default_font
-
   # Draw the title
   pdf.h1 t('katalog.overview')
 

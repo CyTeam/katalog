@@ -112,6 +112,14 @@ module DossiersHelper
   # PDF
   # ===
   class Prawn < Prawn::Document
+    def initialize(opts = {})
+      super
+      
+      # Default Font
+      font  'Helvetica'
+      font_size 8
+    end
+
     # Styles the row dependent on the topic type.
     def row_styling(item, row)
       row.map do |cell|
@@ -149,12 +157,6 @@ module DossiersHelper
         # Adds space after the title
         move_down(5)
       end
-    end
-
-    # Sets the default font
-    def default_font
-      font  'Helvetica'
-      font_size 8
     end
 
     # Footer
