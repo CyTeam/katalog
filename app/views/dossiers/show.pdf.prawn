@@ -1,13 +1,10 @@
-prawn_document(:page_size => 'A4') do |pdf|
-  # Style
-  font pdf
+prawn_document(:page_size => 'A4', :renderer => DossiersHelper::Prawn) do |pdf|
 
-  # Layout
-  pdf.define_grid(:columns => 5, :rows => 8, :gutter => 10)
-  #pdf.grid.show_all
+  # Style
+  pdf.default_font
 
   # Heading
-  pdf_title pdf, @dossier.title
+  pdf.h1 @dossier.title
   
   # Body
   pdf.text @dossier.signature, :size => 12
@@ -40,6 +37,7 @@ prawn_document(:page_size => 'A4') do |pdf|
     end
   end
   pdf.move_down(10)
+
   # Footer
-  page_footer(pdf)
+  pdf.page_footer
 end

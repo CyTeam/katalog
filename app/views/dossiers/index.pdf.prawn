@@ -1,15 +1,23 @@
-prawn_document(:page_size => 'A4') do |pdf|
+prawn_document(:page_size => 'A4', :renderer => DossiersHelper::Prawn) do |pdf|
 
   # Table content creation.
-  items = table_data(pdf, @dossiers)
+  items = @dossiers.map do |item|
+    row = [
+      pdf.make_cell(:content => item.signature.to_s),
+      pdf.make_cell(:content => link_to(item.title, polymorphic_url(item)).to_s, :inline_format => true),
+      pdf.make_cell(:content => number_with_delimiter(item.document_count))
+    ]
+
+    pdf.row_styling(item, row)
+  end
 
   # Table header creation.
   headers = [[t_attr(:signature), t_attr(:title), t_attr(:document_count)]]
 
-  font(pdf)
+  pdf.default_font
 
   # Draw the title
-  pdf_title(pdf, t('katalog.overview'))
+  pdf.h1 t('katalog.overview')
 
   # Table creation.
   pdf.table headers + items, :header => true,
@@ -34,5 +42,5 @@ prawn_document(:page_size => 'A4') do |pdf|
   end
 
   # Footer
-  page_footer(pdf)
+  pdf.page_footer
 end

@@ -111,88 +111,71 @@ module DossiersHelper
 
   # PDF
   # ===
+  class Prawn < Prawn::Document
+    # Styles the row dependent on the topic type.
+    def row_styling(item, row)
+      row.map do |cell|
+        cell.padding = [1, 5, 1, 5]
+      end
 
-  # Styles the row dependent on the topic type.
-  # For use in the prawn view.
-  def row_styling(item, row)
-    row.map do |cell|
-      cell.padding = [1, 5, 1, 5]
+      return row unless item.is_a?Topic
+
+      row.map do |cell|
+        case item.topic_type
+          when :group
+            cell.background_color = "96B1CD"
+            cell.padding = [3, 5, 3, 5]
+            cell.font_style = :bold
+            cell.size = 10
+          when :main
+            cell.background_color = "E1E6EC"
+          when :geo
+            cell.background_color = "C8B7B7"
+          when :detail
+            cell.background_color = "E9DDAF"
+        end
+      end
+
+      row
     end
 
-    return row unless item.is_a?Topic
+    # Creates the title with bottom space to the next element.
+    def h1(title)
+      if title
+        # User multi byte handling for proper upcasing of umlaute
+        # Draws the title of the report
+        text title.mb_chars.upcase, :size => 16, :color => "E1E6EC"
 
-    row.map do |cell|
-      case item.topic_type
-        when :group
-          cell.background_color = "96B1CD"
-          cell.padding = [3, 5, 3, 5]
-          cell.font_style = :bold
-          cell.size = 10
-        when :main
-          cell.background_color = "E1E6EC"
-        when :geo
-          cell.background_color = "C8B7B7"
-        when :detail
-          cell.background_color = "E9DDAF"
+        # Adds space after the title
+        move_down(5)
       end
     end
 
-    row
-  end
-
-  # Creates the table data.
-  def table_data(pdf, items)
-    items.map do |item|
-      row = [
-        pdf.make_cell(:content => item.signature.to_s),
-        pdf.make_cell(:content => link_to(item.title, polymorphic_url(item)).to_s, :inline_format => true),
-        pdf.make_cell(:content => number_with_delimiter(item.document_count))
-      ]
-
-      row_styling(item, row)
-    end
-  end
-
-  # Creates the title with bottom space to the next element.
-  # For use in the prawn view.
-  def pdf_title(pdf, text)
-    if text
-      # User multi byte handling for proper upcasing of umlaute
-      text = text.mb_chars
-
-      # Draws the title of the report.
-      pdf.text text.upcase, :size => 16, :color => "E1E6EC"
-
-      # Adds space after the title.
-      pdf.move_down(5)
-    end
-  end
-
-  # Sets the default font
-  # For use in the prawn view.
-  def font(pdf)
-    pdf.font  'Helvetica'
-    pdf.font_size 8
-  end
-
-  # Footer
-  # =====
-  # Draws the line above the page number on each page.
-  def page_footer(pdf)
-    pdf.repeat :all do
-      pdf.stroke_line [pdf.bounds.right - 50, 0], [pdf.bounds.right, 0]
+    # Sets the default font
+    def default_font
+      font  'Helvetica'
+      font_size 8
     end
 
-    page_footer_number(pdf)
-  end
+    # Footer
+    # =====
+    # Draws the line above the page number on each page.
+    def page_footer
+      repeat :all do
+        stroke_line [bounds.right - 50, 0], [bounds.right, 0]
+      end
 
-  # Draws the page number on each page.
-  def page_footer_number(pdf)
-    pdf.number_pages "<page>", :at => [pdf.bounds.right - 150, -5],
-                               :width => 150,
-                               :align => :right,
-                               :page_filter => :all,
-                               :start_count_at => 1,
-                               :total_pages => pdf.page_count
+      page_footer_number
+    end
+
+    # Draws the page number on each page.
+    def page_footer_number
+      number_pages "<page>", :at => [bounds.right - 150, -5],
+                                 :width => 150,
+                                 :align => :right,
+                                 :page_filter => :all,
+                                 :start_count_at => 1,
+                                 :total_pages => page_count
+    end
   end
 end

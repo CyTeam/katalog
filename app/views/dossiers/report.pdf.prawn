@@ -1,4 +1,4 @@
-prawn_document(:page_size => 'A4', :page_layout => @report[:orientation].to_sym) do |pdf|
+prawn_document(:page_size => 'A4', :renderer => DossiersHelper::Prawn, :page_layout => @report[:orientation].to_sym) do |pdf|
 
   # Gets the table data.
   items = @dossiers.map do |item|
@@ -11,7 +11,7 @@ prawn_document(:page_size => 'A4', :page_layout => @report[:orientation].to_sym)
       end
     end
 
-    row_styling(item, row)
+    pdf.row_styling(item, row)
   end
 
   # Creates the table header.
@@ -22,16 +22,18 @@ prawn_document(:page_size => 'A4', :page_layout => @report[:orientation].to_sym)
       output << attr
     end
   end
+  headers = [header_column]
 
-  font(pdf)
+  pdf.default_font
 
   # Draw the title
-  pdf_title(pdf, @report[:title])
+  pdf.h1 @report[:title]
 
   # Draws the table with the content from the items.
-  pdf.table([header_column] + items, :header => true,
-                                     :width => pdf.margin_box.width,
-                                     :cell_style => { :overflow => :shrink_to_fit, :min_font_size => 8}) do
+  pdf.table headers + items, :header => true,
+                             :width => pdf.margin_box.width,
+                             :cell_style => { :overflow => :shrink_to_fit, :min_font_size => 8} do
+
     # General cell styling
     cells.valign = :top
     cells.border_width = 0
@@ -48,5 +50,5 @@ prawn_document(:page_size => 'A4', :page_layout => @report[:orientation].to_sym)
   end
 
   # Footer
-  page_footer(pdf)
+  pdf.page_footer
 end
