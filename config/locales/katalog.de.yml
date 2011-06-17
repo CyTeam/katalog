@@ -244,6 +244,10 @@ de:
       report:
         columns: "Um ein Spalte auswählen, mit dem Mauszeiger draufklicken, halten und nach links ziehen."
         collect_year_count: "Intervall der Jahre"
+    actions:
+      search_replace:
+        create: Alle ersetzen
+
   messages:
     confirm_delete: "%{record} löschen?"
 
