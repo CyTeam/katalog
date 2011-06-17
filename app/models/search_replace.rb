@@ -10,7 +10,7 @@ class SearchReplace < FormtasticFauxModel
 
   # Defines the search and replaceable attributes in the Dossier.
   def self.editable_attributes
-    ['signature', 'description', 'title', 'keywords', 'relation_list']
+    ['signature', 'description', 'title', 'keywords', 'related_to']
   end
 
   # Definies the attribute types of this model.
