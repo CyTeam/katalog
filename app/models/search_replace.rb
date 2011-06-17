@@ -23,11 +23,23 @@ class SearchReplace < FormtasticFauxModel
   # Does the search and replace action.
   def do
     columns.each do |column|
-      case column
-      when 'keywords'
-        ActsAsTaggableOn::Tag.update_all(["name = REPLACE(name, ?, ?)", search, replace], ["name LIKE ?", '%' + search + '%'])
-      else
-        Dossier.update_all(["#{column} = REPLACE(#{column}, ?, ?)", search, replace], ["#{column} LIKE ?", '%' + search + '%'])
+      begin
+        case column
+        when 'keywords'
+          model = ActsAsTaggableOn::Tag
+          attr = 'name'
+        else
+          model = Dossier
+          attr = column
+        end
+
+        items = model.where("`#{attr}` LIKE ?", '%' + search + '%')
+
+        # Replace
+        items.update_all(["`#{attr}` = REPLACE(`#{attr}`, ?, ?)", search, replace])
+
+        # Trigger housekeeping
+        items.update_all(:delta => true, :updated_at => DateTime.now) unless column == 'keywords'
       end if check_column(column)
     end
   end
