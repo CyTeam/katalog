@@ -1,15 +1,21 @@
-prawn_document(:page_size => 'A4') do |pdf|
+prawn_document(:page_size => 'A4', :renderer => DossiersHelper::Prawn) do |pdf|
 
   # Table content creation.
-  items = table_data(pdf, @dossiers)
+  items = @dossiers.map do |item|
+    row = [
+      pdf.make_cell(:content => item.signature.to_s),
+      pdf.make_cell(:content => link_to(item.title, polymorphic_url(item)).to_s, :inline_format => true),
+      pdf.make_cell(:content => number_with_delimiter(item.document_count))
+    ]
+
+    pdf.row_styling(item, row)
+  end
 
   # Table header creation.
   headers = [[t_attr(:signature), t_attr(:title), t_attr(:document_count)]]
 
-  font(pdf)
-
   # Draw the title
-  pdf_title(pdf, params[:search][:signature] != nil ? @dossiers.first.to_s : t('katalog.search_for', :query => @query))
+  pdf.h1 params[:search][:signature] != nil ? @dossiers.first.to_s : t('katalog.search_for', :query => @query)
 
   # Table creation.
   pdf.table headers + items, :header => true,
@@ -33,16 +39,6 @@ prawn_document(:page_size => 'A4') do |pdf|
     column(2).align     = :right
   end
 
-  # Draws the line above the page number on each page.
-  pdf.repeat :all do
-    pdf.stroke_line [pdf.bounds.right - 50, 0], [pdf.bounds.right, 0]
-  end
-
-  # Draws the page number on each page.
-  pdf.number_pages "<page>", :at => [pdf.bounds.right - 150, -5],
-                             :width => 150,
-                             :align => :right,
-                             :page_filter => :all,
-                             :start_count_at => 1,
-                             :total_pages => pdf.page_count
+  # Footer
+  pdf.page_footer
 end
