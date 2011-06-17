@@ -45,11 +45,6 @@ class DossiersController < AuthorizedController
     dossier_search
   end
 
-  # GET /dossiers/expert_search
-  def expert_search
-    dossier_search
-  end
-
   def new
     @dossier = Dossier.new(params[:dossier])
     @dossier.build_default_numbers

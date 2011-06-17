@@ -10,7 +10,6 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :key_words, t('controllers.index.keyword'), keywords_path
 
     if current_user and (current_user.role?(:editor) or current_user.role?(:admin))
-      primary.item :expert_search, t('katalog.main_navigation.expert_search'), expert_search_dossiers_path
       primary.item :edit, t('katalog.main_navigation.edit'), versions_path do |edit|
         edit.item :new_dossier, t('katalog.main_navigation.new_dossier'), new_dossier_path
         edit.item :new_title, t('katalog.main_navigation.new_title'), new_topic_path
