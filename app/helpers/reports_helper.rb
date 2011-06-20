@@ -8,9 +8,13 @@ module ReportsHelper
     orientations.map{|orientation| [t(orientation, :scope => 'katalog.orientation'), orientation]}
   end
   
-  def report_columns_for_select
-    columns = [:signature, :title, :first_document_year, :keyword_text, :container_type, :location, :document_count]
-    
+  # Build collection for report columns multi select
+  #
+  # It adds the selected columns first, in the correct order, then comes the available ones.
+  def report_columns_for_select(report)
+    available_columns = [:signature, :title, :first_document_year, :keyword_text, :container_type, :location, :document_count]
+
+    columns = report.columns + (available_columns - report.columns)
     columns.map{|column| [t_attr(column, Dossier), column]}
   end
 end
