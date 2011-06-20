@@ -245,7 +245,7 @@ function addReportColumnMultiselectBehaviour() {
 function previewReport() {
   var preview = $('#report-preview');
   var form = $('form.report');
-  var action = form.attr('action') + '?get_preview=true';
+  var action = '/reports/preview';
 
   $.get(action, form.serializeArray(), function(data){
     preview.html(data);

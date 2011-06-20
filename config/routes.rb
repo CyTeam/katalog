@@ -1,5 +1,9 @@
 Katalog::Application.routes.draw do
-  resources :reports
+  resources :reports do
+    collection do
+      get :preview
+    end
+  end
   resources :container_types
 
   devise_for :users

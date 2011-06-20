@@ -8,12 +8,11 @@ class ReportsController < AuthorizedController
   end
 
   def show
-    if params[:get_preview]
-      @report = Report.new(params[:report])
-      render :partial => 'show'
-      return
-    end
-
     show!
+  end
+
+  def preview
+    @report = Report.new(params[:report])
+    render :partial => 'show'
   end
 end
