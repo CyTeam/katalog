@@ -522,7 +522,10 @@ class Dossier < ActiveRecord::Base
 
   # Updates the dossier tags.
   def update_tags
+    # Take all (multi-word) keywords and the title as input
     tag_string = self.keyword_list.join(',') + "," + self.title
+
+    # Extract single word tags
     self.tag_list = self.class.extract_tags(tag_string)
   end
 
