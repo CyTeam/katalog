@@ -2,9 +2,12 @@
   #dossiers.ce_table.block{:class => @report[:orientation] }
     %table
       %tr.header
-        - @report[:columns].each do |attr|
-          %th{:class => attr.to_s}= show_header_for_report(attr)
-        - Dossier.years(@report[:collect_year_count], @report[:name]).each do |year|
-          %th.year= year
+        - if @report[:columns]
+          - @report[:columns].each do |attr|
+            %th{:class => attr.to_s}= show_header_for_report(attr)
+        - if years = Dossier.years(@report[:collect_year_count], @report[:name])
+          - years.each do |year|
+            %th.year= year
 
-      = render :partial => 'reports/dossier', :collection => [Topic.group.first, Topic.main.first, Topic.geo.first, Topic.detail.first, Dossier.dossier.first]
+      - if @report[:columns]
+        = render :partial => 'reports/dossier', :collection => [Topic.group.first, Topic.main.first, Topic.geo.first, Topic.detail.first, Dossier.dossier.first]
