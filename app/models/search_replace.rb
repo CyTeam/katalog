@@ -22,6 +22,10 @@ class SearchReplace < FormtasticFauxModel
 
   # Does the search and replace action.
   def do
+    # Disable slow processing
+    paper_trail_enabled = PaperTrail.enabled?
+    PaperTrail.enabled = false
+
     columns.each do |column|
       # Guard
       next unless check_column(column)
@@ -48,6 +52,9 @@ class SearchReplace < FormtasticFauxModel
         }
       end
     end
+
+    # Re-enable paper trail
+    PaperTrail.enabled = paper_trail_enabled
   end
 
   private # :nodoc
