@@ -14,7 +14,12 @@ module ReportsHelper
   def report_columns_for_select(report)
     available_columns = [:signature, :title, :first_document_year, :keyword_text, :container_type, :location, :document_count]
 
-    columns = report.columns + (available_columns - report.columns)
+    if report.columns.blank?
+      columns = available_columns
+    else
+      columns = report.columns + (available_columns - report.columns)
+    end
+
     columns.map{|column| [t_attr(column, Dossier), column]}
   end
 end
