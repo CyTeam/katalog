@@ -35,11 +35,14 @@ class SearchReplace < FormtasticFauxModel
 
         items = model.where("`#{attr}` LIKE ?", '%' + search + '%')
 
+        # Trigger housekeeping
+        items.update_all(:delta => true, :updated_at => DateTime.now) unless column == 'keywords'
+
         # Replace
         items.update_all(["`#{attr}` = REPLACE(`#{attr}`, ?, ?)", search, replace])
 
-        # Trigger housekeeping
-        items.update_all(:delta => true, :updated_at => DateTime.now) unless column == 'keywords'
+        # Hack to trigger re-index
+        Dossier.first.save
       end if check_column(column)
     end
   end
