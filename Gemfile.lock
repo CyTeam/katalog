@@ -195,7 +195,6 @@ DEPENDENCIES
   capistrano-ext
   ckeditor
   compass
-  delayed_job
   devise
   factory_girl_rails
   fancy-buttons

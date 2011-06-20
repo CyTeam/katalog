@@ -71,7 +71,6 @@ gem 'inherited_resources_views'
 # Search
 gem 'thinking-sphinx'
 gem 'ts-delayed-delta', :require => 'thinking_sphinx/deltas/delayed_delta'
-gem 'delayed_job'
 
 # Reports
 #gem 'pdfkit', '~> 0.5'
