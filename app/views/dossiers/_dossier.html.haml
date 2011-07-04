@@ -1,4 +1,4 @@
-- cache [dossier.cache_key, user_signed_in?] do
+- cache [dossier.cache_key, current_user.try(:roles)] do
   %tr[dossier]{:class => cycle('odd', 'even')}
     - cache dossier do
       %td= dossier.signature
