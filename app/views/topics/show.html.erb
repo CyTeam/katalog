@@ -1,6 +1,6 @@
 <%= render '/dossiers/search_form' %>
 
-<% cache @topic do %>
+<% cache [@topic.cache_key, current_user.try(:roles)] do %>
   <div id="page_actions" class="contextual">
     <%= contextual_link('edit', edit_topic_path(@topic), :title => t('tooltips.topics.edit')) %>
   </div>
