@@ -2,8 +2,7 @@
   - if user_signed_in? or Report.find_by_public(true)
     %ul#report_actions
       %li
-        %a{:href => '#'}
-          Reports
+        = contextual_link('reports', '#')
         %ul
           - Report.all.each do |report|
             - if user_signed_in? or report.public?

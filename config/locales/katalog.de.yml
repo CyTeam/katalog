@@ -271,6 +271,7 @@ de:
       refresh: "Aktualisieren"
       excel: "Als Excel exportieren"
       current: "Aktueller Datensatz"
+      reports: "Reports"
     title:
       preview: "%{model} Vorschau"
 
