@@ -29,7 +29,7 @@ class DossiersController < AuthorizedController
     show! do |format|
       format.xls {
         send_data(@dossier.to_xls,
-          :filename => "dossier_#{@dossier.signature}.xls",
+          :filename => "#{@dossier}.xls",
           :type => 'application/vnd.ms-excel')
       }
     end
@@ -188,9 +188,11 @@ class DossiersController < AuthorizedController
 
   def index_excel
     index! do |format|
+      filename = params[:search][:signature] ? @dossier.first.to_s : t('katalog.search_for', :query => @query)
+
       format.xls {
         send_data(Dossier.to_xls(@dossiers),
-          :filename => "dossiers_#{@dossiers.first.signature}.xls",
+          :filename => "#{filename}.xls",
           :type => 'application/vnd.ms-excel')
       }
     end
