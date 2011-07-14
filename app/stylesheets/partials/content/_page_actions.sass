@@ -3,18 +3,20 @@
     margin-bottom: 0
     li
       list-style: none
-    ul
-      display: none
-      background-color: white
-      margin-top: 0.5em
-      padding: 5px 5px 0px 5px
-      li
-        padding-bottom: 5px
-#report_actions
+
+#report_actions ul
+  display: none
   position: absolute
-  z-index: 1
-  display: block
-  margin-left: -60px
+  background-color: white
+  border: 1px solid $dark_blue
+  +border-radius
+  padding: 5px
   a
     display: block
     text-decoration: none
+  li
+    padding: 5px
+
+#report_actions:hover
+  ul
+    display: block

@@ -222,16 +222,6 @@ function addSearchSuggestionBehaviour() {
   });
 }
 
-function addReportActionsMenuBehaviour() {
-  var ul = '#report_actions';
-
-  $(ul).hover(function(){
-    $(ul + ' ul').show();
-  },function(){
-    $(ul + ' ul').hide();
-  });
-}
-
 function addReportColumnMultiselectBehaviour() {
   $.extend($.ui.multiselect.locale, {
     addAll:'Alle hinzufügen',
@@ -282,7 +272,6 @@ $(document).ready(function() {
   addContainerSuggestionBehaviour();
   addUpdateLastContainerTitleOfDossier();
   showVersionsBehaviour();
-  addReportActionsMenuBehaviour();
   addReportColumnMultiselectBehaviour();
   addEditReportBehaviour();
 });

@@ -1,13 +1,11 @@
 #page_actions.contextual
   - available_reports = Report.accessible_by(current_ability, :index)
   - unless available_reports.empty?
-    %ul#report_actions
-      %li
-        = contextual_link('reports', '#')
-        %ul
-          - available_reports.each do |report|
-            %li
-              = link_to report.title, report_dossiers_path(:report_name => report.name, :search => params[:search])
+    %span#report_actions
+      = contextual_link('reports', '#')
+      %ul
+        - for report in available_reports
+          %li= link_to(report.title, report_dossiers_path(:report_name => report.name, :search => params[:search]))
 
   = contextual_link('pdf', url_for(params.merge(:format => :pdf)), :title => t('tooltips.dossiers.show_pdf'), :target => '_blank', :onclick => "javascript:return informUserAboutBigPDF(#{@dossiers.length});")
   - if (user_signed_in? and not @is_a_report)
