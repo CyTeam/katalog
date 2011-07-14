@@ -37,7 +37,13 @@ class DossiersController < AuthorizedController
 
   # GET /dossiers
   def index
-    dossier_index
+    params[:dossier] ||= {}
+    params[:dossier][:level] ||= 2
+
+    @dossiers = apply_scopes(Dossier, params[:dossier]).accessible_by(current_ability, :index)
+    @document_count = Dossier.document_count
+
+    index_excel
   end
 
   # GET /dossiers/search
@@ -116,16 +122,6 @@ class DossiersController < AuthorizedController
   end
 
   private
-  def dossier_index
-    params[:dossier] ||= {}
-    params[:dossier][:level] ||= 2
-
-    @dossiers = apply_scopes(Dossier, params[:dossier]).accessible_by(current_ability, :index)
-    @document_count = Dossier.document_count
-
-    index_excel
-  end
-
   def dossier_search
     params[:per_page] ||= 25
 
