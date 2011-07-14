@@ -1,15 +1,17 @@
 $visitor_padding: 5px
 
 #visitor_log_list
-  .entry
+  .visitor_log
     +border-radius
     border: 1px solid $dark_blue
     padding: $visitor_padding
     margin-bottom: $visitor_padding * 2
-    h2
-      margin-top: 0px
-      border-bottom: 1px solid $dark_blue
-      padding-bottom: $visitor_padding
-    .author
-      border-top: 1px solid $dark_blue
-      padding-top: $visitor_padding
+
+.visitor_log
+  h2
+    margin-top: 0px
+    border-bottom: 1px solid $dark_blue
+    padding-bottom: $visitor_padding
+  .author
+    border-top: 1px solid $dark_blue
+    padding-top: $visitor_padding

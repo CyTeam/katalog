@@ -10,6 +10,6 @@ class VisitorLogsController < AuthorizedController
     @visitor_log = VisitorLog.new(params[:visitor_log])
     @visitor_log.user = current_user
     
-    create!
+    create! {visitor_logs_path}
   end
 end

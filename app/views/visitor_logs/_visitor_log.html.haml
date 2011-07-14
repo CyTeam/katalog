@@ -1,7 +1,8 @@
-- cache visitor_log do
-  .entry
-    %h2
-      = visitor_log.title
-    != visitor_log.content
-    .author
-      = t('katalog.visitor_logs.create_by_on', :user => visitor_log.user.username, :date => visitor_log.created_at)
+%div[visitor_log]
+  %h2
+    = visitor_log.title
+
+  != visitor_log.content
+
+  .author
+    = t('katalog.visitor_logs.create_by_on', :user => visitor_log.user.username, :date => visitor_log.created_at)
