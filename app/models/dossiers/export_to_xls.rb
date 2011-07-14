@@ -14,7 +14,7 @@ module Dossiers
       sheet = book.create_worksheet(:name => "Katalog")
       present_numbers = numbers.present
       
-      label_columns = Dossier.xls_columns.inject([]) do |out, column|
+      label_columns = self.class.xls_columns.inject([]) do |out, column|
         out << I18n.t(column, :scope => 'activerecord.attributes.dossier')
       end
 
@@ -24,7 +24,7 @@ module Dossiers
 
       sheet.row(0).concat(label_columns)
 
-      value_columns = Dossier.xls_columns.inject([]) do |out, column|
+      value_columns = self.class.xls_columns.inject([]) do |out, column|
         case column
           when :container_type
             out << containers.last.container_type.code
@@ -104,8 +104,6 @@ module Dossiers
         book.write xls
         xls.string
       end
-
-      private # :nodoc
 
       def xls_columns
         [:signature, :title, :container_type, :location, :related_to, :keywords]
