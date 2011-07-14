@@ -15,7 +15,7 @@ prawn_document(:page_size => 'A4', :renderer => DossiersHelper::Prawn) do |pdf|
   headers = [[t_attr(:signature), t_attr(:title), t_attr(:document_count)]]
 
   # Draw the title
-  pdf.h1 params[:search][:signature] != nil ? @dossiers.first.to_s : t('katalog.search_for', :query => @query)
+  pdf.h1 search_title
 
   # Table creation.
   pdf.table headers + items, :header => true,

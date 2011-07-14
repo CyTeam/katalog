@@ -46,6 +46,16 @@ module DossiersHelper
     link_to(topic, url_for_topic(topic), options)
   end
 
+  def search_title
+    if params[:search][:signature]
+      return @dossier.first.to_s
+    else
+      return t('katalog.search_for', :query => @query)
+    end
+  end
+
+  # Reports
+  # =======
   def show_header_for_report(column)
     case column
       when :document_count
