@@ -184,7 +184,11 @@ class DossiersController < AuthorizedController
 
   def index_excel
     index! do |format|
-      filename = params[:search][:signature] ? @dossier.first.to_s : t('katalog.search_for', :query => @query)
+      if params[:search] and params[:search][:signature]
+        filename = @dossiers.first.to_s
+      else
+        filename = t('katalog.search_for', :query => @query)
+      end
 
       format.xls {
         send_data(Dossier.to_xls(@dossiers),

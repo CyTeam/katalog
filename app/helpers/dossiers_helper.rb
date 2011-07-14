@@ -47,8 +47,8 @@ module DossiersHelper
   end
 
   def search_title
-    if params[:search][:signature]
-      return @dossier.first.to_s
+    if params[:search] and params[:search][:signature]
+      return @dossiers.first.to_s
     else
       return t('katalog.search_for', :query => @query)
     end
