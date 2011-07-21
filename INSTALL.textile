@@ -1,4 +1,4 @@
-We currently support installing on Debian 5.0 Lenny and Ubuntu 10.04 Lucid systems.
+We currently support installing on Debian 5.0 Lenny and Ubuntu 11.04 Natty systems.
 
 h2. Install rubygems
 
@@ -6,20 +6,6 @@ To get access to the binaries provided by rails and other gems you need to exten
 
 <pre>
 export PATH=/var/lib/gems/1.8/bin:$PATH
-</pre>
-
-h3. On Ubuntu Lucid
-
-We need to add huerlisi PPA archive to get a rubygems version supporting rails 3:
-
-<pre>
-sudo apt-add-repository ppa:huerlisi/ppa
-</pre>
-
-Now install the rubygems package:
-
-<pre>
-sudo apt-get install rubygems
 </pre>
 
 h3. Alternative Installation
@@ -104,21 +90,8 @@ rake db:setup
 
 Setup freetext search
 
-We're using Sphinx as our freetext search engine. We depend on a version
-> 0.9.9, but Ubuntu Lucid only comes with 0.9.8, but Maverick has the required
-package. Simplest way to get it installed on Lucid is to manually download
-the .deb and install:
-
 <pre>
-wget http://de.archive.ubuntu.com/ubuntu/pool/universe/s/sphinxsearch/sphinxsearch_0.9.9-6_i386.deb
-sudo dpkg -i sphinxsearch_0.9.9-6_i386.deb
-</pre>
-
-For 64bit:
-
-<pre>
-wget http://de.archive.ubuntu.com/ubuntu/pool/universe/s/sphinxsearch/sphinxsearch_0.9.9-6_amd64.deb
-sudo dpkg -i sphinxsearch_0.9.9-6_amd64.deb
+sudo apt-get install sphinxsearch
 </pre>
 
 Copy development.sphinx.conf.example to development.sphinx.conf in config/ and
