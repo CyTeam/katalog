@@ -57,6 +57,11 @@ sudo gem install rake bundler
 
 h2. Install katalog
 
+Install git if not present already:
+<pre>
+sudo apt-get install git
+</pre>
+
 Install current katalog from git repository. We'll use this checkout as working directory from now on:
 
 <pre>
