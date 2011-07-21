@@ -1,6 +1,6 @@
 #Application
 set :application, "katalog"
-set :repository,  "git@github.com:huerlisi/katalog.git"
+set :repository,  "git@github.com:CyTeam/katalog.git"
 
 # Staging
 set :stages, %w(production staging)
