@@ -193,9 +193,10 @@ namespace :sync do
   # Returns username, password, database
   #
   def remote_database_config(db)
+    env = rails_env || db
     config = capture "cat #{deploy_to}/current/config/database.yml"
     database = YAML::load(config)
-    return database["#{db}"]['username'], database["#{db}"]['password'], database["#{db}"]['database'], database["#{db}"]['host']
+    return database["#{env}"]['username'], database["#{env}"]['password'], database["#{env}"]['database'], database["#{env}"]['host']
   end
 
   #
