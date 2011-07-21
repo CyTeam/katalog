@@ -3,7 +3,7 @@ set :application, "katalog"
 set :repository,  "git@github.com:CyTeam/katalog.git"
 
 # Staging
-set :stages, %w(production staging)
+set :stages, %w(production staging fallback)
 set :default_stage, "staging"
 require 'capistrano/ext/multistage'
 
