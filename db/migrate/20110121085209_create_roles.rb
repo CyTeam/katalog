@@ -6,6 +6,8 @@ class CreateRoles < ActiveRecord::Migration
       t.timestamps
     end
 
+    PaperTrail.enabled = false
+
     Role.create :name => 'admin'
     Role.create :name => 'editor'
   end
