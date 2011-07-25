@@ -77,9 +77,9 @@ GEM
       warden (~> 1.0.3)
     erubis (2.6.6)
       abstract (>= 1.0.0)
-    factory_girl (2.0.0.rc1)
-    factory_girl_rails (1.1.rc1)
-      factory_girl (~> 2.0.0.rc)
+    factory_girl (2.0.1)
+    factory_girl_rails (1.1.0)
+      factory_girl (~> 2.0.0)
       railties (>= 3.0.0)
     fancy-buttons (1.1.1)
       compass (>= 0.11)
@@ -214,7 +214,7 @@ DEPENDENCIES
   ckeditor
   compass
   devise
-  factory_girl_rails (~> 1.1.rc)
+  factory_girl_rails (~> 1.1)
   fancy-buttons
   fastercsv
   formtastic

@@ -1,12 +1,14 @@
-Factory.define :dossier_number do |f|
-  f.association :dossier
-  f.from        Date.new(1900, 1, 1)
-end
+FactoryGirl.define do
+  sequence :dossier_amount do |n|
+    n
+  end
 
-Factory.sequence :dossier_amount do |n|
-  n
-end
+  factory :dossier_number do
+    association :dossier
+    from        Date.new(1900, 1, 1)
 
-Factory.define :dossier_number_with_amount, :parent => :dossier_number do |f|
-  f.amount      {Factory.next :dossier_amount}
+    factory :dossier_number_with_amount do
+      amount      {Factory.next :dossier_amount}
+    end
+  end
 end

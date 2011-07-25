@@ -33,7 +33,7 @@ group :test, :development do
   # gem 'rspec-rails'
 
   # Fixtures
-  gem 'factory_girl_rails', "~> 1.1.rc"
+  gem 'factory_girl_rails', "~> 1.1"
 
   # Integration
   # gem 'cucumber-rails'

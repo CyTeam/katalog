@@ -1,6 +1,8 @@
-Factory.define :location do |f|
-  f.title         'Nice Location'
-  f.address       'Best Way 1'
-  f.code          'LO'
-  f.availability  'Available right now.'
+FactoryGirl.define do
+  factory :location do
+    title         'Nice Location'
+    address       'Best Way 1'
+    code          'LO'
+    availability  'Available right now.'
+  end
 end

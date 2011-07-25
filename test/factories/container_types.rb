@@ -1,5 +1,7 @@
-Factory.define :container_type do |f|
-  f.code        'CO'
-  f.title       'Container'
-  f.description 'Simple container'
+FactoryGirl.define do
+  factory :container_type do
+    code        'CO'
+    title       'Container'
+    description 'Simple container'
+  end
 end
