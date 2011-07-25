@@ -56,40 +56,6 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal 3 + 1, Dossier.by_signature('77.0.100').count
   end
 
-=begin
-  test "find by text" do
-    keyword_list = ["City"]
-    
-    @dossier.keyword_list.add(Dossier.extract_keywords(keyword_list))
-    @dossier.save
-    
-    assert_equal [dossiers(:simple_zug_topic), dossiers(:important_zug_topic), dossiers(:city_history), dossiers(:empty_zug_topic), dossiers(:city_counsil_notes), dossiers(:city_counsil), dossiers(:topic_local), dossiers(:city_parties), @dossier], Dossier.by_text('City')
-  end
-  
-  test "find by text supports ANDs multiple words" do
-    assert_equal [dossiers(:city_counsil_notes)], Dossier.by_text('counsil notes')
-    assert_equal [dossiers(:city_counsil_notes)], Dossier.by_text('notes counsil')
-  end
-  
-  test "find by text ANDs signature, keyword and title words" do
-    assert_equal [dossiers(:city_counsil_notes)], Dossier.by_text('77 counsil notes')
-  end
-  
-  test "find by text ORs signatures" do
-    assert_same_set dossiers(:worker_movement_general, :worker_movement_history), Dossier.by_text('worker 11.0.100 11.0.500')
-    assert_same_set dossiers(:worker_movement_general, :worker_movement_history), Dossier.by_text('11.0.5 worker 11.0.1')
-  end
-  
-  test "find by text strips whitespace" do
-    assert_equal [dossiers(:city_counsil_notes)], Dossier.by_text(' notes ')
-  end
-  
-  test "find by text counts only distinct records" do
-    assert_equal 8, Dossier.by_text('City').count
-    assert_equal 8, Dossier.by_text('city').count
-  end
-  
-=end
   test "find by location" do
     assert_equal 4, Dossier.by_location('EG').count
     assert_equal 1, Dossier.by_location('RI').count
