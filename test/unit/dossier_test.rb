@@ -10,57 +10,72 @@ class DossierTest < ActiveSupport::TestCase
     Dossier.all.map{|dossier| dossier.update_tags; dossier.save}
   end
   
-  test "to_s" do
-    assert_equal "77.0.100: City counsil", dossiers(:city_counsil).to_s
-    assert_equal "77.0.100: City history", dossiers(:city_history).to_s
+  context "#to_s" do
+    should "Include signature" do
+      assert_match "11.1.111", FactoryGirl.build(:dossier).to_s
+    end
+
+    should "Include title" do
+      assert_match "Dossier 1", FactoryGirl.build(:dossier).to_s
+    end
   end
 
-  test "signature gets stripped" do
-    @dossier.signature = "99.7.888"
-    assert_equal "99.7.888", @dossier.signature
-    
-    @dossier.signature = "66.7.888 "
-    assert_equal "66.7.888", @dossier.signature
-    
+  context "#signature=" do
+    should "strip spaces on assign" do
+      @dossier.signature = " 66.7.888 "
+      assert_equal "66.7.888", @dossier.signature
+    end
   end
   
-  test "title truncation" do
-    for title in ["City counsil notes 2000 - 2001", "City counsil notes Jan. - Feb. 2002", "City counsil notes März 2002 - Feb. 2003", "City counsil notes 1. Apr. - 15. Mai 2003", "City counsil notes 16. Mai 2003 - 1. Apr. 2004", "City counsil notes 2005 -"]
-      assert_equal "City counsil notes", Dossier.truncate_title(title)
+  context ".truncate_title" do
+    should "Drop date ranges" do
+      for title in ["City counsil notes 2000 - 2001", "City counsil notes Jan. - Feb. 2002", "City counsil notes März 2002 - Feb. 2003", "City counsil notes 1. Apr. - 15. Mai 2003", "City counsil notes 16. Mai 2003 - 1. Apr. 2004", "City counsil notes 2005 -"]
+        assert_equal "City counsil notes", Dossier.truncate_title(title)
+      end
+    end
+
+    should "leave dates in titles intact" do
+      for title in ["Olympic Games 2001 Preparations 1999 - 2000", "Olympic Games 2001 Preparations 2001"]
+        assert_equal "Olympic Games 2001 Preparations", Dossier.truncate_title(title)
+      end
     end
     
-    for title in ["Olympic Games 2001 Preparations 1999 - 2000", "Olympic Games 2001 Preparations 2001"]
-      assert_equal "Olympic Games 2001 Preparations", Dossier.truncate_title(title)
+    should "leave date ranges in titles intact" do
+      assert_equal "Deiss, Josef (BR CVP 1999 - 2006)", Dossier.truncate_title("Deiss, Josef (BR CVP 1999 - 2006) 1989 - 2006")
+      assert_equal "Hess, Peter (NR CVP 1983 - 2003)", Dossier.truncate_title("Hess, Peter (NR CVP 1983 - 2003) 2001")
+      assert_equal "Hess, Peter (NR CVP 1983 - 2003)", Dossier.truncate_title("Hess, Peter (NR CVP 1983 - 2003) 2002 - ")
+
+      assert_equal "Referenden gegen Teilrevision des Militärgesetzes (Abstimmung 2001)", Dossier.truncate_title("Referenden gegen Teilrevision des Militärgesetzes (Abstimmung 2001) 2000 - 2001")
     end
     
-    assert_equal "Deiss, Josef (BR CVP 1999 - 2006)", Dossier.truncate_title("Deiss, Josef (BR CVP 1999 - 2006) 1989 - 2006")
-    assert_equal "Hess, Peter (NR CVP 1983 - 2003)", Dossier.truncate_title("Hess, Peter (NR CVP 1983 - 2003) 2001")
-    assert_equal "Hess, Peter (NR CVP 1983 - 2003)", Dossier.truncate_title("Hess, Peter (NR CVP 1983 - 2003) 2002 - ")
-    
-    assert_equal "Referenden gegen Teilrevision des Militärgesetzes (Abstimmung 2001)", Dossier.truncate_title("Referenden gegen Teilrevision des Militärgesetzes (Abstimmung 2001) 2000 - 2001")
+    should "leave non-last dates intact" do
+      assert_equal "Terroranschlag, USA: 11. September 2001.", Dossier.truncate_title("Terroranschlag, USA: 11. September 2001. Okt. 2001")
+      assert_equal "Terroranschlag, USA: 11. September 2001.", Dossier.truncate_title("Terroranschlag, USA: 11. September 2001. Nov. - Dez. 2001")
+    end
 
-    assert_equal "Terroranschlag, USA: 11. September 2001.", Dossier.truncate_title("Terroranschlag, USA: 11. September 2001. Okt. 2001")
-    assert_equal "Terroranschlag, USA: 11. September 2001.", Dossier.truncate_title("Terroranschlag, USA: 11. September 2001. Nov. - Dez. 2001")
+    should "detect ordinal month names with spaces" do
+      assert_equal "Terroranschlag, USA: 11. September 2001.", Dossier.truncate_title("Terroranschlag, USA: 11. September 2001. 12. 9. - 16. 9. 2001")
+    end
   end
 
-  test "title truncation detects ordinal month names with spaces" do
-    assert_equal "Terroranschlag, USA: 11. September 2001.", Dossier.truncate_title("Terroranschlag, USA: 11. September 2001. 12. 9. - 16. 9. 2001")
-  end
-  
-  test "take first document from table" do
-    assert_equal Date.parse('1910-01-01'), dossiers(:city_history).first_document_on
-  end
-  
-  test "find by signature" do
-    # 3 actual dossiers, 1 topic
-    assert_equal 3 + 1, Dossier.by_signature('77.0.100').count
+  context "#first_document_on" do
+    should "take first document from table" do
+      assert_equal Date.parse('1910-01-01'), FactoryGirl.build(:dossier, :first_document_on => '1910-01-01').first_document_on
+    end
   end
 
-  test "find by location" do
-    assert_equal 4, Dossier.by_location('EG').count
-    assert_equal 1, Dossier.by_location('RI').count
+  context "find scopes" do
+    should "find by signature" do
+      # 3 actual dossiers, 1 topic
+      assert_equal 3 + 1, Dossier.by_signature('77.0.100').count
+    end
 
-    assert_equal 0, Dossier.by_location('Dummy').count
+    should "find by location" do
+      assert_equal 4, Dossier.by_location('EG').count
+      assert_equal 1, Dossier.by_location('RI').count
+
+      assert_equal 0, Dossier.by_location('Dummy').count
+    end
   end
 
   test "destroying dossier destroys it's document numbers" do
