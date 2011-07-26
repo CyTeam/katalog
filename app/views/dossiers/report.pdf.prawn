@@ -3,11 +3,11 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Doss
   # Gets the table data.
   items = @dossiers.map do |item|
     columns = @report[:columns].collect do |column|
-      pdf.make_cell(:content => show_column_for_report(item, column, true).to_s, :inline_format => true)
+      pdf.make_cell(:content => show_column_for_report(item, column, true), :inline_format => true)
     end
 
     years = item.years_counts(@report[:collect_year_count], @report[:name]).collect do |year|
-      pdf.make_cell(:content => year[:count].to_s)
+      pdf.make_cell(:content => number_with_delimiter(year[:count]))
     end
 
     row = columns + years
@@ -51,6 +51,7 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Doss
     # Columns align
     columns(0..1).align = :left
 
+    # Right align document count and year numbers
     columns(columns.index(:document_count)).align = :right
     columns(columns.size..headers.first.size).align = :right
   end
