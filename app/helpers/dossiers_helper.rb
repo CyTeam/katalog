@@ -70,9 +70,7 @@ module DossiersHelper
       when 'title'
         for_pdf == true ? link_to(dossier.title, polymorphic_url(dossier)) : link_to(dossier.title, dossier, {'data-href-container' => 'tr'})
       when 'signature', 'first_document_year', 'keyword_text'
-        value = dossier.send(column)
-
-        value == nil ? '' : value
+        dossier.send(column) || ''
       when 'container_type'
         dossier.container_types.collect{|t| t.code}.join(', ')
       when 'location'
