@@ -126,19 +126,16 @@ module DossiersHelper
 
     # Styles the row dependent on the topic type.
     def row_styling(item, row)
-      row.map do |cell|
-        cell.padding = [1, 5, 1, 5]
-      end
-
-      return row unless item.is_a?Topic
+      return row unless item.is_a? Topic
 
       row.map do |cell|
         case item.topic_type
           when :group
             cell.background_color = "96B1CD"
-            cell.padding = [3, 5, 3, 5]
-            cell.font_style = :bold
-            cell.size = 10
+            cell.padding_top      = 3
+            cell.padding_bottom   = 3
+            cell.font_style       = :bold
+            cell.size             = 10
           when :main
             cell.background_color = "E1E6EC"
           when :geo

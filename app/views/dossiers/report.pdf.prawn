@@ -37,7 +37,8 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Doss
                              :cell_style => { :overflow => :shrink_to_fit, :min_font_size => 8} do
 
     # General cell styling
-    cells.valign = :top
+    cells.padding      = [1, 5, 1, 5]
+    cells.valign       = :top
     cells.border_width = 0
 
     # Headings styling
