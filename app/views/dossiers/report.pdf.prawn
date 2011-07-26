@@ -2,14 +2,15 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Doss
 
   # Gets the table data.
   items = @dossiers.map do |item|
-    years = item.years_counts(@report[:collect_year_count], @report[:name])
-    row = (@report[:columns] + (years.empty? ? Array.new : years)).inject([]) do |output, attr|
-      if @report[:columns].include? attr
-        output << pdf.make_cell(:content => show_column_for_report(item, attr, true).to_s, :inline_format => true)
-      else
-        output << pdf.make_cell(:content => attr[:count].to_s)
-      end
+    columns = @report[:columns].collect do |column|
+      pdf.make_cell(:content => show_column_for_report(item, column, true).to_s, :inline_format => true)
     end
+
+    years = item.years_counts(@report[:collect_year_count], @report[:name]).collect do |year|
+      pdf.make_cell(:content => year[:count].to_s)
+    end
+
+    row = columns + years
 
     pdf.row_styling(item, row)
   end
