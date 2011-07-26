@@ -112,7 +112,7 @@ class DossiersController < AuthorizedController
       @dossiers = Dossier.by_signature(params[:search][:signature]).dossier.order('signature').paginate :page => params[:page], :per_page => params[:per_page]
     else
       # Show index
-      @dossiers = Topic.where("char_length(signature) <= 2").paginate :page => params[:page], :per_page => 10000
+      @dossiers = Topic.by_level(2)
       render 'batch_edit_last_year/index'
       return
     end
