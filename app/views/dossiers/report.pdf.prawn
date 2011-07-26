@@ -27,6 +27,9 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Doss
   # Draw the title
   pdf.h1 @report[:title]
 
+  # Use local variable as instance vars aren't accessible
+  columns = @report[:columns]
+
   # Draws the table with the content from the items.
   pdf.table headers + items, :header => true,
                              :width => pdf.margin_box.width,
@@ -45,6 +48,9 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Doss
 
     # Columns align
     columns(0..1).align = :left
+
+    columns(columns.index(:document_count)).align = :right
+    columns(columns.size..headers.first.size).align = :right
   end
 
   # Footer
