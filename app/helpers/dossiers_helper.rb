@@ -69,11 +69,7 @@ module DossiersHelper
     case column.to_s
       when 'title'
         for_pdf == true ? link_to(dossier.title, polymorphic_url(dossier)) : link_to(dossier.title, dossier, {'data-href-container' => 'tr'})
-      when 'signature', 'first_document_year'
-        value = dossier.send(column)
-
-        value == nil ? '' : value
-      when 'keyword_text'
+      when 'signature', 'first_document_year', 'keyword_text'
         value = dossier.send(column)
 
         value == nil ? '' : value
