@@ -4,7 +4,7 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Doss
   items = @dossiers.map do |item|
     years = item.years_counts(@report[:collect_year_count], @report[:name])
     row = (@report[:columns] + (years.empty? ? Array.new : years)).inject([]) do |output, attr|
-      if @report[:columns].include?attr
+      if @report[:columns].include? attr
         output << pdf.make_cell(:content => show_column_for_report(item, attr, true).to_s, :inline_format => true)
       else
         output << pdf.make_cell(:content => attr[:count].to_s)
@@ -15,14 +15,14 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Doss
   end
 
   # Creates the table header.
-  header_column = (@report[:columns] + Dossier.years(@report[:collect_year_count], @report[:name])).inject([]) do |output, attr|
-    if @report[:columns].include?attr
-      output << show_header_for_report(attr)
-    else
-      output << attr
-    end
+  column_headers = @report[:columns].collect do |column|
+    show_header_for_report(column)
   end
-  headers = [header_column]
+
+  year_count_headers = Dossier.years(@report[:collect_year_count], @report[:name]).collect do |year|
+    year
+  end
+  headers = [column_headers + year_count_headers]
 
   # Draw the title
   pdf.h1 @report[:title]
