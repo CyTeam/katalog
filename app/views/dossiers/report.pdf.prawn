@@ -51,9 +51,13 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Doss
     # Columns align
     columns(0..1).align = :left
 
-    # Right align document count and year numbers
+    # Right align document count
     columns(columns.index(:document_count)).align = :right
-    columns(columns.size..headers.first.size).align = :right
+
+    # Styles for year columns
+    year_columns = columns(columns.size..headers.first.size)
+    year_columns.align = :right
+    year_columns.width = 45
   end
 
   # Footer
