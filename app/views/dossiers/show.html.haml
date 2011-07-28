@@ -32,9 +32,10 @@
     %ul#keyword-list.keywords
       = render :partial => 'keyword', :collection => @dossier.keywords.order('name')
 
-  %h3= t_attr(:relation_list)
-  #relations.section
-    = render 'relations/list' if @dossier.related_to.present?
+  - if @dossier.related_to.present?
+    %h3= t_attr(:relation_list)
+    #relations.section
+      = render 'relations/list'
 
   %h3= t('katalog.title.document_count_html', :document_count => number_with_delimiter(@dossier.document_count), :first_document => @dossier.first_document_on.try(:strftime, '%Y'))
   #document_counts.ce_table

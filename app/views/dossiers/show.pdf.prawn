@@ -28,13 +28,15 @@ prawn_document(:page_size => 'A4', :filename => "#{@dossier.to_s}.pdf", :rendere
   end
   pdf.move_down(10)
   
-  pdf.text t_attr(:relation_list), :size => 12
-  pdf.indent(10) do
-    for relation in @dossier.relation_titles do
-      pdf.text link_to(relation, search_dossiers_url(:search => {:text => relation})), :inline_format => true
+  if @dossier.related_to.present?
+    pdf.text t_attr(:relation_list), :size => 12
+    pdf.indent(10) do
+      for relation in @dossier.relation_titles do
+        pdf.text link_to(relation, search_dossiers_url(:search => {:text => relation})), :inline_format => true
+      end
     end
+    pdf.move_down(10)
   end
-  pdf.move_down(10)
 
   # Footer
   pdf.page_footer
