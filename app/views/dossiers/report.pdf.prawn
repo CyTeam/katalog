@@ -1,4 +1,4 @@
-prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => DossiersHelper::Prawn, :page_layout => @report[:orientation].to_sym) do |pdf|
+prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => PrawnLayout, :page_layout => @report[:orientation].to_sym) do |pdf|
 
   # Gets the table data.
   items = @dossiers.map do |item|

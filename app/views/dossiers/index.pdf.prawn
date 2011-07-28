@@ -1,4 +1,4 @@
-prawn_document(:page_size => 'A4', :renderer => DossiersHelper::Prawn) do |pdf|
+prawn_document(:page_size => 'A4', :renderer => PrawnLayout) do |pdf|
 
   # Table content creation.
   items = @dossiers.map do |item|

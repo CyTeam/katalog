@@ -1,4 +1,4 @@
-prawn_document(:page_size => 'A4', :filename => "#{@dossier.to_s}.pdf", :renderer => DossiersHelper::Prawn) do |pdf|
+prawn_document(:page_size => 'A4', :filename => "#{@dossier.to_s}.pdf", :renderer => PrawnLayout) do |pdf|
   # Heading
   pdf.h1 @dossier.title
   
