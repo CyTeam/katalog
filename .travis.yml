@@ -1,6 +1,6 @@
 env: "RAILS_ENV='test'"
 before_script:
   - bundle exec rake katalog:setup
-  - bundle exec rake db:create
+  - bundle exec rake db:create db:migrate
 script: "bundle exec rake test"
 
