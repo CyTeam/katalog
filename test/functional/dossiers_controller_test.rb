@@ -160,4 +160,12 @@ class DossiersControllerTest < ActionController::TestCase
       assert_redirected_to dossier_path(assigns(:dossier))
     end
   end
+
+  context "edit_report" do
+    should "show report title" do
+      get :edit_report
+
+      assert_select "h1", :text => I18n::t('katalog.main_navigation.edit_year')
+    end
+  end
 end
