@@ -48,7 +48,27 @@ class PrawnLayout < Prawn::Document
   # Draws the line above the page number on each page.
   def page_footer
     repeat :all do
+      image Rails.root.join("public/images/doku-zug.ch/logo_white.png"), :at => [bounds.right - 70, bounds.top + 10], :width => 70
+
       stroke_line [bounds.right - 50, 0], [bounds.right, 0]
+
+      bounding_box [bounds.left, 0], :width => 150, :height => 40 do
+        font_size 7 do
+          fill_color "96B1CD"
+          text "St. Oswaldsgasse 16, Postfach 1146, 6301 Zug"
+          text "Telefon 041 726 81 81, Fax 041 726 81 88"
+          text "info@doku-zug.ch, www.doku-zug.ch"
+        end
+      end
+
+      bounding_box [bounds.left + 200, 0], :width => 150, :height => 40 do
+        font_size 7 do
+          fill_color "96B1CD"
+          text "Öffnungszeiten:"
+          text "Mo / Di / Mi / Fr 10 - 18 Uhr"
+          text "Do 10 - 20 Uhr"
+        end
+      end
     end
 
     page_footer_number
