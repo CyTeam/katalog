@@ -10,14 +10,11 @@
     - if user_signed_in?
       = contextual_link('excel', url_for(:format => :xls))
 
-  %h1#title
-    = @dossier.title
+  %h1#title= @dossier.title
 
-  %p.notice
-    = notice
+  %p.notice= notice
 
-  %h3
-    = @dossier.signature
+  %h3= @dossier.signature
 
   #breadcrumb.section
     %ul.dossier_topic_breadcrumb
@@ -25,44 +22,39 @@
         %li
           = link_to_topic(parent)
 
-  %h3
-    = t_attr(:description)
+  %h3= t_attr(:description)
 
   #description
     = simple_format(auto_link(@dossier.description, :html => {:target => '_blank'}))
 
-  %h3
-    = t_attr(:keyword_text)
+  %h3= t_attr(:keyword_text)
 
   #keywords.section
     %ul#keyword-list.keywords
       = render :partial => 'keyword', :collection => @dossier.keywords.order('name')
 
-  %h3
-    = t_attr(:relation_list)
+  %h3= t_attr(:relation_list)
 
   #relations.section
     = render 'relations/list' if @dossier.related_to.present?
 
-  %h3
-    = t('katalog.title.document_count_html', :document_count => number_with_delimiter(@dossier.document_count), :first_document => @dossier.first_document_on.try(:strftime, '%Y'))
+  %h3= t('katalog.title.document_count_html', :document_count => number_with_delimiter(@dossier.document_count), :first_document => @dossier.first_document_on.try(:strftime, '%Y'))
 
   #document_counts.ce_table
     %table.document_counts
       %tr
         = render :partial => 'dossier_numbers/head', :collection => @dossier.numbers.present
-        %th
-          = t('katalog.total')
+        %th= t('katalog.total')
       %tr.odd
         = render :partial => 'dossier_numbers/amount', :collection => @dossier.numbers.present
         %td
-          %strong
-            = number_with_delimiter(@dossier.document_count)
+          %strong= number_with_delimiter(@dossier.document_count)
 
   - if user_signed_in?
     #containers.ce_table
       %table
-        = @containers = @dossier.containers; render 'containers/list'
+        - @containers = @dossier.containers
+        = render 'containers/list'
 
   - content_for :javascript do
     = highlight_words(params['query'], 'keywords')
