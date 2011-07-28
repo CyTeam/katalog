@@ -31,8 +31,7 @@ development:
 test:
   <<: *mysql
   database: katalog_test
-  username: katalog
-  password:
+  username: root
 
 production:
   <<: *mysql
