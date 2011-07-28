@@ -263,9 +263,9 @@ class Dossier < ActiveRecord::Base
 
     case custom
       when 'main'
-      years = DossierNumber.main_report_periods
+        years = DossierNumber.main_report_periods
       else
-      years = DossierNumber.default_periods(Date.today.year, false)
+        years = DossierNumber.default_periods(Date.today.year, false)
     end
 
     prepared_years = years.dup
