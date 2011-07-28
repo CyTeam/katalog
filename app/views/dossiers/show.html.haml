@@ -15,7 +15,6 @@
   %p.notice= notice
 
   %h3= @dossier.signature
-
   #breadcrumb.section
     %ul.dossier_topic_breadcrumb
       - for parent in @dossier.parents
@@ -29,18 +28,15 @@
       = simple_format(auto_link(@dossier.description, :html => {:target => '_blank'}))
 
   %h3= t_attr(:keyword_text)
-
   #keywords.section
     %ul#keyword-list.keywords
       = render :partial => 'keyword', :collection => @dossier.keywords.order('name')
 
   %h3= t_attr(:relation_list)
-
   #relations.section
     = render 'relations/list' if @dossier.related_to.present?
 
   %h3= t('katalog.title.document_count_html', :document_count => number_with_delimiter(@dossier.document_count), :first_document => @dossier.first_document_on.try(:strftime, '%Y'))
-
   #document_counts.ce_table
     %table.document_counts
       %tr
