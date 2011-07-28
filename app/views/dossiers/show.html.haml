@@ -22,10 +22,11 @@
         %li
           = link_to_topic(parent)
 
-  %h3= t_attr(:description)
+  - if @dossier.description.present?
+    %h3= t_attr(:description)
 
-  #description
-    = simple_format(auto_link(@dossier.description, :html => {:target => '_blank'}))
+    #description
+      = simple_format(auto_link(@dossier.description, :html => {:target => '_blank'}))
 
   %h3= t_attr(:keyword_text)
 
