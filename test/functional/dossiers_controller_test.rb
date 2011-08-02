@@ -104,18 +104,25 @@ class DossiersControllerTest < ActionController::TestCase
   end
   
   context "show" do
-    should "show description" do
-      @dossier = Factory.create(:dossier)
-      get :show, :id => @dossier.to_param
-
-      assert_select '#description'
-    end
-
-    should "include description" do
+    should "include description if present" do
       @dossier = Factory.create(:dossier, :description => 'Simple text')
       get :show, :id => @dossier.to_param
 
       assert_select '#description', :text => 'Simple text'
+    end
+
+    should "hide description title if description is blank" do
+      @dossier = Factory.create(:dossier, :description => "")
+      get :show, :id => @dossier.to_param
+
+      assert_select '#description', false
+    end
+
+    should "hide description title description is nil" do
+      @dossier = Factory.create(:dossier, :description => nil)
+      get :show, :id => @dossier.to_param
+
+      assert_select '#description', false
     end
 
     should "not quote description" do
