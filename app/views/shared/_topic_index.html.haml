@@ -1,5 +1,5 @@
 - cache params[:search] ? "topic_index_#{params[:search][:signature]}" : 'topic_index' do
   .ce_text
     %p.topic_index
-      %ul
+      %ul#topic_index
         = render :partial => 'shared/topic', :collection =>  Topic.group.all
