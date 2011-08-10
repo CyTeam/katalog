@@ -39,8 +39,10 @@ addContainerSuggestionBehaviour();
     end
   end
 
-  def show_topic?(topic, search, dossier = nil)
-    (search and search[:signature] and search[:signature].starts_with?(topic.signature)) || (dossier and dossier.signature.starts_with?(topic.signature)) ? true : false
+  def show_topic?(topic, search = nil, dossier = nil)
+    return false if controller_name == 'dossiers' && action_name == 'new'
+
+    (search && search[:signature] && search[:signature].starts_with?(topic.signature)) || (dossier && dossier.signature.starts_with?(topic.signature)) ? true : false
   end
 
   # CRUD helpers
