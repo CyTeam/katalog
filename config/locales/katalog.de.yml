@@ -160,6 +160,7 @@ de:
         delta:                "Delta"
         updated_at:           "Geändert am"
         internal:             "Internes Dossier"
+        containers:           ""
       container:
         period:            "Zeitraum"
         title:             "Titel"

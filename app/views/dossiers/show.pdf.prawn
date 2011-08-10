@@ -38,6 +38,29 @@ prawn_document(:page_size => 'A4', :filename => "#{@dossier.to_s}.pdf", :rendere
     pdf.move_down(10)
   end
 
+  if @dossier.years_counts.present?
+    pdf.text t_attr(:dossier_number_list), :size => 12
+    pdf.indent(10) do
+      @dossier.years_counts.each do |year|
+        pdf.text year[:period].to_s + ": " + year[:count].to_s
+      end
+      pdf.text t('katalog.total') + ": " + @dossier.document_count.to_s
+    end
+    pdf.move_down(10)
+  end
+
+  if @dossier.containers.present?
+    pdf.text t_attr(:containers), :size => 12
+    pdf.indent(10) do
+     @dossier.containers.each do |container|
+       pdf.text t_attr(:container_type, Container) + ": " + container.container_type.to_s
+       pdf.text t_attr(:location, Container) + ": " + container.location.to_s
+       pdf.text t_attr(:period, Container) + ": " + container.period.to_s unless container.period.blank?
+     end
+    end
+    pdf.move_down(20)
+  end
+
   # Footer
   pdf.page_footer
 end
