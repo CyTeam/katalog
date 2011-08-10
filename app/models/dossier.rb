@@ -269,9 +269,9 @@ class Dossier < ActiveRecord::Base
     end
 
     prepared_years = years.dup
-    if interval > 1
+    if !(interval.to_s.include?(",")) && interval.to_i > 1
       prepared_years.reject! do |item|
-        years.index(item).modulo(interval) != 0
+        years.index(item).modulo(interval.to_i) != 0
       end
 
       prepared_years << {:from => prepared_years.last[:from] + 1, :to => years.last[:to]}
