@@ -310,6 +310,8 @@ class Dossier < ActiveRecord::Base
     prepared_years.inject([]) do |result, year|
       if year.eql?years.first
         result << 'vor 1990'
+      elsif prepared_years.first.eql?year and (year_intervals && year_intervals.first.starts_with?("-"))
+        result << "vor #{year[:to].strftime("%Y")}"
       else
         result << "#{year[:from] ? year[:from].strftime("%Y") : ''} - #{year[:to].strftime("%Y")}"
       end
@@ -319,6 +321,7 @@ class Dossier < ActiveRecord::Base
   def self.concat_year(year)
     prefix = "20"
     prefix = "19" if year.starts_with?"9"
+    prefix = "19" if year.starts_with?"8"
 
     (prefix + year).to_i
   end
