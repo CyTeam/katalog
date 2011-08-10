@@ -323,6 +323,13 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal years[1], '1990 - 1994'
   end
 
+  test 'concats the year prefix right' do
+    nineties = Dossier.concat_year("90")
+    new_age = Dossier.concat_year("09")
+    assert_equal nineties, 1990
+    assert_equal new_age, 2009
+  end
+
   test 'returns year and the count of documents' do
     dossier = Factory(:dossier)
   end
