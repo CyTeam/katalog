@@ -40,7 +40,6 @@ addContainerSuggestionBehaviour();
   end
 
   def show_topic?(topic, search, dossier = nil)
-    # topic.topic_type == :group and ((search and search[:signature] and search[:signature].starts_with?(topic.signature)) || (dossier and dossier.signature.starts_with?(topic.signature))) ? true : false
     (search and search[:signature] and search[:signature].starts_with?(topic.signature)) || (dossier and dossier.signature.starts_with?(topic.signature)) ? true : false
   end
 
