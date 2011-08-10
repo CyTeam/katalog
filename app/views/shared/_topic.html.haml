@@ -1,5 +1,5 @@
 %li{:class => "topic #{(topic && topic.is_a?(Topic)) ? topic.topic_type : 'dossier'} #{(topic && @dossier && topic.is_a?(Dossier) && topic.id == @dossier.id) ? 'active-dossier' : ''}"}
   %span.signature= topic.signature
   = link_to(topic.title, url_for_topic(topic))
-  - if topic.is_a?Topic
+  - if topic.is_a?(Topic) and topic.topic_type != :detail
     = render :partial => 'shared/topic', :collection => topic.direct_children if show_topic?(topic, params[:search], @dossier)
