@@ -1,4 +1,4 @@
-- cache params[:search] ? "topic_index_#{params[:search][:signature]}" : 'topic_index' do
+- cache [params[:search] ? "topic_index_#{params[:search][:signature]}" : 'topic_index', @dossier ? "topic_index_dossier_#{@dossier.id}" : ""] do
   .ce_text
     %p.topic_index
       %ul#topic_index
