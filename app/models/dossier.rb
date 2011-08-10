@@ -281,6 +281,30 @@ class Dossier < ActiveRecord::Base
         item[:from] = previous_item[:to] + 1 if previous_item
         previous_item = item
       end
+    elsif interval.to_s.include?(",")
+      prepared_years = Array.new
+      year_intervals = interval.to_s.split(",")
+
+      year_intervals.each do |year_interval|
+        if year_interval.include?("-")
+          interval_years = year_interval.split("-")
+          cleaned_interval_years = interval_years.reject {|item| item == ""}
+
+          if cleaned_interval_years.count > 1
+            from_date_time = concat_year(cleaned_interval_years.first)
+            to_date_time = concat_year(cleaned_interval_years.last)
+            prepared_years << {:from => DateTime.new(from_date_time), :to => DateTime.new(to_date_time)}
+          else
+            date_time = concat_year(cleaned_interval_years.first)
+            prepared_years << {:from => nil, :to => DateTime.new(date_time)}
+          end
+        elsif year_interval.include?("*")
+          prepared_years << {:from => prepared_years.last[:to], :to => DateTime.current}
+        else
+          date_time = concat_year(year_interval)
+          prepared_years << {:from => DateTime.new(date_time), :to => DateTime.new(date_time, 12, 31)}
+        end
+      end
     end
 
     prepared_years.inject([]) do |result, year|
@@ -290,6 +314,13 @@ class Dossier < ActiveRecord::Base
         result << "#{year[:from] ? year[:from].strftime("%Y") : ''} - #{year[:to].strftime("%Y")}"
       end
     end
+  end
+
+  def self.concat_year(year)
+    prefix = "20"
+    prefix = "19" if year.starts_with?"9"
+
+    (prefix + year).to_i
   end
 
   def to_s
