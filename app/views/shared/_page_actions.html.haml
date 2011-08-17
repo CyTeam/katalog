@@ -1,6 +1,6 @@
 #page_actions.contextual
   - available_reports = Report.accessible_by(current_ability, :index)
-  - unless available_reports.empty?
+  - unless available_reports.empty? or @report
     %span#report_actions
       = contextual_link('reports', '#')
       %ul
