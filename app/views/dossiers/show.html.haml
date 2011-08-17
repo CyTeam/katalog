@@ -15,11 +15,6 @@
   %p.notice= notice
 
   %h3= @dossier.signature
-  #breadcrumb.section
-    %ul.dossier_topic_breadcrumb
-      - for parent in @dossier.parents
-        %li
-          = link_to_topic(parent)
 
   - if @dossier.description.present?
     %h3= t_attr(:description)
