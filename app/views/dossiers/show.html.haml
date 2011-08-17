@@ -6,7 +6,7 @@
       = contextual_link('edit', edit_dossier_path(@dossier))
       - if current_user.role?'admin'
         = contextual_link('history', dossier_versions_path(@dossier))
-    = contextual_link('pdf', url_for(:format => :pdf))
+    = contextual_link('print', url_for(:format => :pdf))
     - if user_signed_in?
       = contextual_link('excel', url_for(:format => :xls))
 
