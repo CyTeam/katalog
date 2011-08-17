@@ -266,7 +266,7 @@ de:
     
     action:
       pdf:    "PDF anzeigen"
-      print: "Seite drucken"
+      print: "Für Druck aufbereiten (PDF)"
       history:  "Änderungsverlauf"
       revert:   "Rückgangig"
       refresh: "Aktualisieren"
