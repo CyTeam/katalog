@@ -89,14 +89,6 @@ class DossiersControllerTest < ActionController::TestCase
     assert_select 'tr.dossier', dossiers.dossier.count
   end
 
-  test "dossier view should contain links to topics" do
-    get :show, :id => @dossier.to_param
-    
-    assert_select '.dossier_topic_breadcrumb' do
-      assert_select 'li a', 4
-    end
-  end
-
   test "should get named report" do
     Factory(:report)
     get :report, :report_name => 'simple'
