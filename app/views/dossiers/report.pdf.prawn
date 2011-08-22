@@ -36,16 +36,6 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
     pdf.row_styling(item, row)
   end
 
-  # Creates the table header.
-  column_headers = @report[:columns].collect do |column|
-    show_header_for_report(column)
-  end
-
-  year_count_headers = Dossier.years(@report[:collect_year_count], @report[:name]).collect do |year|
-    year
-  end
-  headers = [column_headers + year_count_headers]
-
   # Draw the title
   pdf.h1 @report[:title]
 
