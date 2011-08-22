@@ -1,5 +1,26 @@
 prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => PrawnLayout, :page_layout => @report[:orientation].to_sym) do |pdf|
 
+  # Creates the table header.
+  column_headers = @report[:columns].collect do |column|
+    pdf.make_cell(:content => show_header_for_report(column))
+  end
+
+  year_count_headers = Dossier.years(@report[:collect_year_count], @report[:name]).collect do |year|
+    pdf.make_cell(:content => year)
+  end
+
+  table = 0
+  count = 0
+
+  [column_headers + year_count_headers].first.each do |item|
+    unless table > pdf.margin_box.width
+      table = table + item.width
+      count = [column_headers + year_count_headers].first.index(item)
+    end
+  end
+
+  headers = [column_headers + year_count_headers[0..(count-column_headers.count)]]
+
   # Gets the table data.
   items = @dossiers.map do |item|
     columns = @report[:columns].collect do |column|
