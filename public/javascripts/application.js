@@ -261,6 +261,15 @@ function submitDossierForm() {
   $('form.dossier').submit();
 }
 
+function truncateToHighlighted(element) {
+  element.find('.keywords > span').each(function() {
+    var keyword = $(this);
+    if ($(this).find('.match').length == 0) {
+      keyword.remove();
+    };
+  });
+}
+
 $(document).ready(function() {
   addAutofocusBehaviour();
   addLinkifyContainersBehaviour();

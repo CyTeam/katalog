@@ -7,10 +7,7 @@
         %br/
         %span.keywords
           - for keyword in dossier.keywords
-            - if keyword == dossier.keywords.last
-              %span= keyword.to_s
-            - else
-              %span= keyword.to_s + ", "
+            %span~ keyword.to_s
 
       %td.document_count.availability
         = number_with_delimiter(dossier.document_count)

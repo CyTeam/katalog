@@ -92,7 +92,7 @@ module DossiersHelper
 
     content = ActiveSupport::SafeBuffer.new
     for word in (words + sentences)
-      content += javascript_tag "$('##{element}').highlight('#{escape_javascript(word)}', 'match');"
+      content += javascript_tag "$('##{element}').highlight('#{escape_javascript(word)}', 'match'); truncateToHighlighted($('##{element}'));"
     end
     
     content
