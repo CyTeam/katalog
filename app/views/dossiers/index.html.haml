@@ -6,3 +6,7 @@
 
 .index
   = render 'list'
+
+- content_for :javascript do
+  :javascript
+    truncateToHighlighted($('#dossiers'));
