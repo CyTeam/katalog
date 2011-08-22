@@ -101,3 +101,13 @@ worker_movement_history:
   title: Worker Movement history
   related_to: "Worker Movement general; 77: City history"
   description: ""
+
+ejpd:
+  signature: 12.3.215
+  title: EJPD EIDG. JUSTIZ- UND POLIZEIDEPARTEMENT
+  type: Topic
+
+bfm:
+  signature: 12.3.215
+  title: BFM BUNDESAMT FÜR MIGRATION
+  type: Topic
