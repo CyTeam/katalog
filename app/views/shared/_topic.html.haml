@@ -1,4 +1,4 @@
-%li{:class => "topic #{(topic && topic.is_a?(Topic)) ? topic.topic_type : 'dossier'} #{(topic && @dossier && topic.is_a?(Dossier) && topic.id == @dossier.id) ? 'active-dossier' : ''}"}
+%li{:class => "topic #{(topic && topic.is_a?(Topic)) ? topic.topic_type : 'dossier'} #{active?(topic)}"}
   %span.signature= topic.signature
   = link_to(topic.title, url_for_topic(topic), :title => topic.title)
   - if topic.is_a?(Topic) and topic.topic_type != :detail

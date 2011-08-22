@@ -77,4 +77,12 @@ EOF
 
     output.html_safe
   end
+
+  def active?(topic)
+    if @dossier
+      topic.id == @dossier.id ? 'active' : ''
+    else
+      params[:search] && params[:search][:signature].start_with?(topic.signature) ? 'active' : ''
+    end
+  end
 end
