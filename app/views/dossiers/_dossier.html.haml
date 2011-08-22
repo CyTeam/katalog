@@ -5,7 +5,13 @@
       %td
         %span.title= link_to dossier.title, dossier, {'data-href-container' => 'tr'}
         %br/
-        %span.keywords= dossier.keywords.join(', ')
+        %span.keywords
+          - for keyword in dossier.keywords
+            - if keyword == dossier.keywords.last
+              %span= keyword.to_s
+            - else
+              %span= keyword.to_s + ", "
+
       %td.document_count.availability
         = number_with_delimiter(dossier.document_count)
         = availability_notes(dossier)
