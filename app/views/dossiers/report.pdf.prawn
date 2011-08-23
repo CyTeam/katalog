@@ -9,17 +9,31 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
     pdf.make_cell(:content => year)
   end
 
-  table = 0
-  count = 0
+  table_width = 0
+  count = Array.new
 
   [column_headers + year_count_headers].first.each do |item|
-    unless table > pdf.margin_box.width
-      table = table + item.width
-      count = [column_headers + year_count_headers].first.index(item)
+    table_width = table_width + item.width
+    if table_width > pdf.margin_box.width
+      count << [column_headers + year_count_headers].first.index(item)
+      table_width = 0
     end
   end
 
-  headers = [column_headers + year_count_headers[0..(count-column_headers.count)]]
+  # headers = [column_headers + year_count_headers[0..(count-column_headers.count)]]
+
+  last_added_header = 0
+
+  headers = count.inject([]) do |out, amount|
+    if count.first.eql?amount
+      last_added_header = amount - column_headers.count
+      out << [column_headers + year_count_headers[0..last_added_header]]
+    end
+
+    out
+  end
+
+  headers << [[column_headers.first] + year_count_headers[last_added_header..year_count_headers.count]]
 
   # Gets the table data.
   items = @dossiers.map do |item|
@@ -36,41 +50,45 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
     pdf.row_styling(item, row)
   end
 
-  # Draw the title
-  pdf.h1 @report[:title]
-
   # Use local variable as instance vars aren't accessible
   columns = @report[:columns]
 
-  # Draws the table with the content from the items.
-  pdf.table headers + items, :header => true,
-                             :width => pdf.margin_box.width,
-                             :cell_style => { :overflow => :shrink_to_fit, :min_font_size => 8} do
+  headers.each do |header|
+    # Draw the title
+    pdf.h1 @report[:title]
 
-    # General cell styling
-    cells.padding      = [1, 5, 1, 5]
-    cells.valign       = :top
-    cells.border_width = 0
+    # Draws the table with the content from the items.
+    pdf.table header, :header => true,
+                               :width => pdf.margin_box.width,
+                               :cell_style => { :overflow => :shrink_to_fit, :min_font_size => 8} do
 
-    # Headings styling
-    row(0).font_style = :bold
-    row(0).background_color = 'E1E6EC'
+      # General cell styling
+      cells.padding      = [1, 5, 1, 5]
+      cells.valign       = :top
+      cells.border_width = 0
 
-    # Columns width
-    column(0).width = 50
+      # Headings styling
+      row(0).font_style = :bold
+      row(0).background_color = 'E1E6EC'
 
-    # Columns align
-    columns(0..1).align = :left
+      # Columns width
+      column(0).width = 50
 
-    # Right align document count
-    columns(columns.index(:document_count)).align = :right
+      # Columns align
+      columns(0..1).align = :left
 
-    # Styles for year columns
-    year_columns = columns(columns.size..headers.first.size)
-    year_columns.align = :right
-    year_columns.width = 45
+      # Right align document count
+      columns(columns.index(:document_count)).align = :right
+
+      # Styles for year columns
+      year_columns = columns(columns.size..headers.first.size)
+      year_columns.align = :right
+      year_columns.width = 45
+    end
+    # Footer
+    pdf.page_footer
+    unless headers.last.eql?header
+      pdf.start_new_page
+    end
   end
-
-  # Footer
-  pdf.page_footer
 end
