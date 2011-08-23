@@ -79,7 +79,7 @@ EOF
   end
 
   def active?(topic)
-    if @dossier
+    if @dossier && @dossier.signature
       @dossier.signature.starts_with?(topic.signature) ? 'active' : ''
     else
       params[:search] && params[:search][:signature] && params[:search][:signature].start_with?(topic.signature) ? 'active' : ''
