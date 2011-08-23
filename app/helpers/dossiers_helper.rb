@@ -69,8 +69,6 @@ module DossiersHelper
     case column.to_s
       when 'title'
         for_pdf == true ? link_to(dossier.title, polymorphic_url(dossier)) : link_to(dossier.title, dossier, {'data-href-container' => 'tr'})
-      when 'signature', 'first_document_year', 'keyword_text'
-        dossier.send(column).to_s
       when 'container_type'
         dossier.container_types.collect{|t| t.code}.join(', ')
       when 'location'
@@ -79,6 +77,8 @@ module DossiersHelper
         number_with_delimiter(dossier.document_count)
       when 'keywords'
         dossier.keywords.join(', ')
+      else
+        dossier.send(column).to_s
     end
   end
 
