@@ -40,10 +40,26 @@ prawn_document(:page_size => 'A4', :filename => "#{@dossier.to_s}.pdf", :rendere
 
   if @dossier.years_counts.present?
     pdf.text t_attr(:dossier_number_list), :size => 12
+
+    years = @dossier.years_counts(1)
+    header = years.inject([]) do |out, year|
+      out << year[:period].to_s
+
+      out
+    end
+
+    row = years.inject([]) do |out, year|
+      out << year[:count].to_s
+
+      out
+    end
+
+    pdf.table [header] + [row] do
+      row(0).size = 5
+    end
+
     pdf.indent(10) do
-      @dossier.years_counts.each do |year|
-        pdf.text year[:period].to_s + ": " + year[:count].to_s
-      end
+      pdf.text " "
       pdf.text t('katalog.total') + ": " + @dossier.document_count.to_s
     end
     pdf.move_down(10)
