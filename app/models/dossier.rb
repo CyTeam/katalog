@@ -312,6 +312,8 @@ class Dossier < ActiveRecord::Base
         result << 'vor 1990'
       elsif prepared_years.first.eql?year and (year_intervals && year_intervals.first.starts_with?("-"))
         result << "vor #{year[:to].strftime("%Y")}"
+      elsif year[:from] && year[:from].strftime("%Y").eql?(year[:to].strftime("%Y"))
+        result << "#{year[:from].strftime("%Y")}"
       else
         result << "#{year[:from] ? year[:from].strftime("%Y") : ''} - #{year[:to].strftime("%Y")}"
       end
