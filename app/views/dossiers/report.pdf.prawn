@@ -20,8 +20,6 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
     end
   end
 
-  # headers = [column_headers + year_count_headers[0..(count-column_headers.count)]]
-
   last_added_header = 0
 
   headers = count.inject([]) do |out, amount|
@@ -54,11 +52,16 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
   columns = @report[:columns]
 
   headers.each do |header|
+    rows = items.inject([]) do |out, item|
+      out << item.slice(0..13)
+
+      out
+    end
     # Draw the title
     pdf.h1 @report[:title]
 
     # Draws the table with the content from the items.
-    pdf.table header, :header => true,
+    pdf.table header + rows, :header => true,
                                :width => pdf.margin_box.width,
                                :cell_style => { :overflow => :shrink_to_fit, :min_font_size => 8} do
 
