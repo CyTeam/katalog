@@ -182,7 +182,7 @@ function addSearchSuggestionBehaviour() {
         url: '/keywords/suggestions.json',
         dataType: 'json',
         data: {
-          query:    extractLast(request.term)
+          query:    request.term
         },
         success: function( data ) {
           response( $.map( data, function( object ) {
@@ -198,28 +198,16 @@ function addSearchSuggestionBehaviour() {
     search: function() {
       // custom minLength
       var term = extractLast( this.value );
-      if ( term.length < 2 ) {
+      if ( (this.value.length < 2) || (term.length < 1) ) {
         return false;
       }
-    },
-    select: function( event, ui ) {
-      var terms = split( this.value );
-      // remove the current input
-      terms.pop();
-      // add the selected item
-      terms.push( ui.item.value );
-      // add placeholder to get the comma-and-space at the end
-      terms.push( "" );
-      this.value = terms.join( " " );
-      return false;
     }
   });
-
   input.keydown(function(event) {
     if(event.keyCode == 13) {
       $(this).parent('form').submit();
     }
-  });
+  })
 }
 
 function addReportColumnMultiselectBehaviour() {
