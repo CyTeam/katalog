@@ -74,24 +74,9 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
     # Draw the title
     pdf.h1 @report[:title]
 
-    ## Draws the table with the content from the items.
-    #pdf.table prepared_header + rows, :header => true,
-    #                           :width => pdf.margin_box.width,
-    #                           :cell_style => { :overflow => :shrink_to_fit, :min_font_size => 8} do
-    #
-    #
-    #  # Right align document count
-    #  columns(columns.index(:document_count)).align = :right
-    #
-    #  # Styles for year columns
-    #  year_columns = columns(columns.size..headers.first.size)
-    #  year_columns.align = :right
-    #  year_columns.width = 45
-    #end
-
     table = header + rows
 
-    pdf.table table, :header => true do
+    pdf.table table, :header => true, :cell_style => { :overflow => :shrink_to_fit, :min_font_size => 8} do
       # General cell styling
       cells.padding      = [1, 5, 1, 5]
       cells.valign       = :top
@@ -101,6 +86,13 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
       row(0).background_color = 'E1E6EC'
       # Columns align
       columns(0..1).align = :left
+      columns(0).align = :left
+      # Right align document count
+      columns(columns.index(:document_count)).align = :right
+      # Styles for year columns
+      year_columns = columns(columns.size..headers.first.size)
+      year_columns.align = :right
+    #  year_columns.width = 45
       # Columns width
       #column(0).width = 50
     end
