@@ -2,11 +2,11 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
 
   # Creates the table header.
   column_headers = @report[:columns].collect do |column|
-    pdf.make_cell(:content => show_header_for_report(column), :width => 40)
+    pdf.make_cell(:content => show_header_for_report(column))
   end
 
   year_count_headers = Dossier.years(@report[:collect_year_count], @report[:name]).collect do |year|
-    pdf.make_cell(:content => year, :width => 30)
+    pdf.make_cell(:content => year)
   end
 
   table_width = 50
@@ -63,7 +63,7 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
       out
     end
 
-    first_count = last_count + 1
+    first_count = last_count
 
 
     # Draw the title
@@ -98,7 +98,9 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
     #  year_columns.width = 45
     #end
 
-    pdf.table header, :header => true do
+    table = header + rows
+
+    pdf.table table, :header => true do
       # General cell styling
       cells.padding      = [1, 5, 1, 5]
       cells.valign       = :top
