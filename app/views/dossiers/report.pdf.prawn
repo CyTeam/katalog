@@ -9,14 +9,15 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
     pdf.make_cell(:content => year)
   end
 
-  table_width = 50
+  default_table_width = 95
+  table_width = default_table_width
   count = Array.new
 
   [column_headers + year_count_headers].first.each do |item|
     table_width = table_width + item.width
     if table_width > pdf.margin_box.width
       count << [column_headers + year_count_headers].first.index(item)
-      table_width = 50
+      table_width = default_table_width
     end
   end
 
@@ -31,7 +32,7 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
     out
   end
 
-  headers << [[column_headers.first] + year_count_headers[last_added_header + 1..year_count_headers.count]]
+  headers << [column_headers.first(2).flatten + year_count_headers[last_added_header + 1..year_count_headers.count]]
 
   # Gets the table data.
   items = @dossiers.map do |item|
@@ -55,15 +56,19 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
 
   headers.each do |header|
     last_count = count[headers.index(header)]
-    last_count = 28 unless last_count
+    last_count = items.first.count unless last_count
 
     rows = items.inject([]) do |out, item|
-      out << item.slice(first_count..last_count)
+      unless headers.first.eql?(header)
+        out << item.slice(0..1) + item.slice(first_count..last_count)
+      else
+        out << item.slice(first_count..last_count)
+      end
 
       out
     end
 
-    first_count = last_count
+    first_count = last_count + 1
 
 
     # Draw the title
@@ -74,20 +79,6 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
     #                           :width => pdf.margin_box.width,
     #                           :cell_style => { :overflow => :shrink_to_fit, :min_font_size => 8} do
     #
-    #  # General cell styling
-    #  cells.padding      = [1, 5, 1, 5]
-    #  cells.valign       = :top
-    #  cells.border_width = 0
-    #
-    #  # Headings styling
-    #  row(0).font_style = :bold
-    #  row(0).background_color = 'E1E6EC'
-    #
-    #  # Columns width
-    #  column(0).width = 50
-    #
-    #  # Columns align
-    #  columns(0..1).align = :left
     #
     #  # Right align document count
     #  columns(columns.index(:document_count)).align = :right
@@ -108,6 +99,8 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
       # Headings styling
       row(0).font_style = :bold
       row(0).background_color = 'E1E6EC'
+      # Columns align
+      columns(0..1).align = :left
       # Columns width
       #column(0).width = 50
     end
