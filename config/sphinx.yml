@@ -11,7 +11,6 @@ wikisigns: &common
 # Environments
 development:
   <<: *common
-  bin_path: "/usr/local/bin"
   port: 9310
   pid_file: tmp/pids/searchd.development.pid
 
