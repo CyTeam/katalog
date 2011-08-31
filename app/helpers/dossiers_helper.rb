@@ -1,6 +1,6 @@
 module DossiersHelper
   def link_to_keyword(keyword, options = {})
-    link_to(keyword, search_dossiers_path(:search => {:tag => keyword }), options)
+    link_to(keyword, search_dossiers_path(:search => {:text => keyword}), options)
   end
 
   def availability_text(availability, partially)
