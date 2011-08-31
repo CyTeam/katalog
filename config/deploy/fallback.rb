@@ -1,4 +1,5 @@
 set :rails_env, 'fallback'
+set :repository,  "https://github.com/CyTeam/katalog.git"
 set :branch, "stable"
 
 set :deploy_to, '/srv/doku-zug.ch/katalog'
