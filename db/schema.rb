@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110810073703) do
+ActiveRecord::Schema.define(:version => 20110831074045) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20110810073703) do
     t.boolean  "internal",          :default => false
   end
 
+  add_index "dossiers", ["internal"], :name => "index_dossiers_on_internal"
   add_index "dossiers", ["signature"], :name => "index_dossiers_on_signature"
   add_index "dossiers", ["type"], :name => "index_dossiers_on_type"
 
