@@ -13,4 +13,7 @@ class Keyword < ActsAsTaggableOn::Tag
   def self.character_list
     characters.map{|t| t.letter}
   end
+
+  scope :filter_tags,
+    select("tags.*, COUNT(*) AS count").joins('JOIN dossiers ON dossiers.id = taggings.taggable_id').having("COUNT(*) >= 2").group("tags.id").order("COUNT(*)").limit(12)
 end
