@@ -29,6 +29,8 @@
             = render 'shared/breadcrumb_navigation'
       #container
         #left
+          - if user_signed_in?
+            #logo-signed-in= render 'shared/logo'
           .inside
             #mainmenu.mod_navigation.block
               %a.invisible{:href => "#skipNavigation3"}
