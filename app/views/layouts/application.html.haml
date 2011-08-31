@@ -22,9 +22,11 @@
   %body#top
     #wrapper
       - cache 'header_' + user_signed_in?.to_s do
-        #header
-          .inside
-            = render user_signed_in? ? 'shared/internal_header' : 'shared/public_header'
+        - unless user_signed_in?
+          = render 'shared/public_header'
+        - else
+          #over-main
+            = render 'shared/breadcrumb_navigation'
       #container
         #left
           .inside
