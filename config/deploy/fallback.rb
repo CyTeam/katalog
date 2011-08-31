@@ -1,4 +1,4 @@
-set :rails_env, 'production'
+set :rails_env, 'fallback'
 set :branch, "stable"
 
 set :deploy_to, '/srv/doku-zug.ch/katalog'
