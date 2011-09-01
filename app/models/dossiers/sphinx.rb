@@ -10,7 +10,7 @@ module Dossiers
         set_property :group_concat_max_len => 1048576
 
         # Disable delta update in import as it slows down too much and otherwise do it delayed.
-        set_property :delta => true unless Rails.env.import?
+        set_property :delta => true unless Rails.env.import? or Rails.env.fallback?
 
         # Indexed Fields
         indexes title

@@ -1,6 +1,6 @@
 # Common settings
 # ===============
-wikisigns: &common
+dokuzug: &common
   enable_star: true
   min_infix_len: 1
   charset_type: utf-8
