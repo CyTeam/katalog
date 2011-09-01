@@ -149,10 +149,39 @@ class DossiersController < AuthorizedController
     # Drop nil results by stray full text search matches
     @dossiers.compact!
 
-    if (@dossiers.count == 1 and not request.format.json?)
-      redirect_to dossier_path(@dossiers.first, :query => @query)
-    else
-      index_excel
+    # Handle zero and single matches for direct user requests
+    if not request.format.json?
+      # Directly show single match
+      if @dossiers.count == 1
+        redirect_to dossier_path(@dossiers.first, :query => @query)
+      # Give spellchecking suggestions
+      elsif @dossiers.count == 0
+        spell_checker = Aspell.new1({"dict-dir" => Rails.root.join('data', 'aspell').to_s, "lang"=>"kt"})
+        spell_checker.set_option("ignore-case", "true")
+        spell_checker.suggestion_mode = Aspell::NORMAL
+
+        @spelling_suggestion = @query.gsub(/[\w\']+/) do |word|
+          if spell_checker.check(word)
+            word
+          else
+            # word is wrong
+            suggestion = spell_checker.suggest(word).first
+            if suggestion.blank?
+              # Try harder
+              spell_checker.suggestion_mode = Aspell::BADSPELLER
+              suggestion = spell_checker.suggest(word).first
+            end
+            if suggestion.blank?
+              # Return original word
+              suggestion = word
+            end
+
+            suggestion
+          end
+        end
+      else
+        index_excel
+      end
     end
   end
 
