@@ -251,6 +251,7 @@ de:
 
   messages:
     confirm_delete: "%{record} löschen?"
+    spelling_suggestion: "Meinten sie: %{suggestion}"
 
   crud:
     edit:  "%{model} bearbeiten"
