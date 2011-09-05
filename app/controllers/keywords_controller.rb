@@ -50,7 +50,7 @@ class KeywordsController < InheritedResources::Base
 
     suggestion_count = 10
 
-    keywords = Keyword.unscoped.includes(:taggings).where("taggings.context = 'tags'")
+    keywords = Keyword.unscoped.includes(:taggings).where("taggings.context = 'tags'").order(:name)
     if words.size > 1
       dossiers = Dossier.includes(:taggings => :tag).where("taggings.context = 'tags'").limit(10).group('taggings.taggable_id').having("count(*) = #{words.size - 1}")
 
@@ -62,9 +62,9 @@ class KeywordsController < InheritedResources::Base
       keywords = keywords.where("taggings.taggable_id" => dossiers, "taggings.taggable_type" => 'Dossier')
     end
 
-    prefix_keywords = keywords.where("name LIKE ?", "#{last_word}%").order(:name).limit(10)
+    prefix_keywords = keywords.where("name LIKE ?", "#{last_word}%").limit(10)
     infix_suggestion_count = suggestion_count - prefix_keywords.size
-    infix_keywords = keywords.where("name NOT LIKE ? AND name LIKE ?", "%#{last_word}%", "#{last_word}%").order(:name).limit(infix_suggestion_count)
+    infix_keywords = keywords.where("name NOT LIKE ? AND name LIKE ?", "%#{last_word}%", "#{last_word}%").limit(infix_suggestion_count)
 
     suggestions = (prefix_keywords + infix_keywords).map{|keyword|
       {"keyword" => {"name", previous_words.join(" ") + " " + keyword.name}}
