@@ -12,7 +12,7 @@ module ReportsHelper
   #
   # It adds the selected columns first, in the correct order, then comes the available ones.
   def report_columns_for_select(report)
-    available_columns = [:signature, :title, :first_document_year, :keyword_text, :container_type, :location, :document_count]
+    available_columns = ['signature', 'title', 'first_document_year', 'keyword_text', 'container_type', 'location', 'document_count']
 
     if report.columns.blank?
       columns = available_columns
