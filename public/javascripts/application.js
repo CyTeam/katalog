@@ -188,12 +188,12 @@ function addSearchSuggestionBehaviour() {
           response( $.map( data, function( object ) {
             var item = object['keyword'];
             return {
-              label: item['name']
+              label: item['name'],
+              count: item['count']
             }
           }));
           $('.ui-autocomplete').highlight(extractLast(request.term), 'match');
-        }
-      });
+        }      });
     },
     search: function() {
       // custom minLength
@@ -201,8 +201,23 @@ function addSearchSuggestionBehaviour() {
       if ( (this.value.length < 2) || (term.length < 1) ) {
         return false;
       }
+    },
+    focus: function( event, ui ) {
+      input.val( ui.item.label + " ");
+      return false;
+    },
+    select: function( event, ui ) {
+      input.val( ui.item.label + " ");
+      return false;
     }
-  });
+  }).data("autocomplete")._renderItem = function( ul, item) {
+    return $( "<li></li>" )
+        .data( "item.autocomplete", item )
+        .append(
+          "<a>" + item.label + "<i style='float: right'>(" + item.count + ")</i></a>"
+        )
+        .appendTo( ul );
+  };
   input.keydown(function(event) {
     if(event.keyCode == 13) {
       $(this).parent('form').submit();
