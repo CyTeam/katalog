@@ -166,6 +166,10 @@ function addEditToolTipBehaviour() {
 }
 
 function addSearchSuggestionBehaviour() {
+  var input = $('#search_text');
+  // Drop out if no such input box
+  if (input.length == 0) return;
+
   function split( val ) {
     return val.split( / \s*/ );
   }
@@ -173,7 +177,6 @@ function addSearchSuggestionBehaviour() {
     return split( term ).pop();
   }
 
-  var input = $('#search_text');
   input.attr('autocomplete', 'false');
   
   input.autocomplete({
