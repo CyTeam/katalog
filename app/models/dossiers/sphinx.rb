@@ -99,7 +99,7 @@ module Dossiers
             elsif word.length == 2
               word + "*"
             elsif word.length > 2
-              "+\"" + word + "*\"" + " | " + "*" + word + "*"
+              "+\"" + word + "*\"" + " | " + "\"*" + word + "*\""
             end
           }
           word_query = "@* (\"#{words.join(' ')}\" | (#{(quoted_words).join(' ')}))"
