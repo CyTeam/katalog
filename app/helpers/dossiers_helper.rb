@@ -9,7 +9,7 @@ module DossiersHelper
       title = t('katalog.availability.partially') + " " + title
     end
     
-    text = content_tag 'span', :class => "availability icon-availability_#{availability}-text", :title => title do
+    text = content_tag 'span', :class => "availability icon-availability_#{availability}-text", :title => title, 'data-parent' => '.dossier' do
       title
     end
     

@@ -143,7 +143,13 @@ function showUnlessNewRecord(container) {
 function addEditToolTipBehaviour() {
  $('*[title]').each(function(){
    if($(this).attr('title')!=''){
-     $(this).qtip({
+     var target = $(this);
+     if(target.attr('data-parent')) {
+       var haha = target.attr('data-parent');
+       target = $(this).parents(haha);
+       target.attr('title', $(this).attr('title'));
+     }
+     target.qtip({
                     style: {
                         name: 'blue',
                         tip: true,
