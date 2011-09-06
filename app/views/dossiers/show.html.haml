@@ -11,6 +11,13 @@
       = contextual_link('excel', url_for(:format => :xls))
 
   %h1#title= @dossier.title
+  
+  - unless user_signed_in?
+    %h2{:style => 'color:red;'}
+      Auf folgende Zeitabschnitte besteht eine Wartefrist:
+    - @dossier.waiting_list.each do |container|
+      = container
+      %br
 
   %p.notice= notice
 
