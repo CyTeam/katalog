@@ -31,6 +31,9 @@ SimpleNavigation::Configuration.run do |navigation|
           sphinx.item :word_forms, t('katalog.main_navigation.search_word_forms'), word_forms_sphinx_admins_path
         end
       end
+    end
+    
+    if current_user
       primary.item :log_out, t('katalog.main_navigation.logout'), destroy_user_session_path
     else
       primary.item :log_in, t('katalog.main_navigation.login'), new_user_session_path
