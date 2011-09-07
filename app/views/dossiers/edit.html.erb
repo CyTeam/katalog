@@ -1,9 +1,7 @@
-<% cache :dossier_edit do %>
-  <div class="contextual" style="margin-left: -1em;">
-    <a href="#" onclick="javascript:submitDossierForm();" class="icon icon-edit">Speichern</a>
-  </div>
-  <%= contextual_links %>
-  <h1><%= t_title %></h1>
-<% end %>
+<div class="contextual" style="margin-left: -1em;">
+  <a href="#" onclick="javascript:submitDossierForm();" class="icon icon-edit">Speichern</a>
+</div>
+<%= contextual_links %>
+<h1><%= t_title %></h1>
 
 <%= render 'form' %>
