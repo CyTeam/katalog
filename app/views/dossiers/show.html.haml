@@ -13,11 +13,12 @@
   %h1#title= @dossier.title
   
   - unless user_signed_in?
-    %h2{:style => 'color:red;'}
-      Auf folgende Zeitabschnitte besteht eine Wartefrist:
-    - @dossier.waiting_list.each do |container|
-      = container
-      %br
+    .waiting-time{:style => 'color:red;'}
+      %h2
+        Auf folgende Zeitabschnitte besteht eine Wartefrist:
+      %ul#waiting-list
+        - @dossier.waiting_list.each do |container|
+          %li= container
 
   %p.notice= notice
 
