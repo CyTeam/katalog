@@ -331,6 +331,10 @@ class Dossier < ActiveRecord::Base
   def to_s
     "#{signature}: #{title}"
   end
+  
+  def waiting_list
+    containers.where(:location_id => Location.find_by_code('RI')).map {|container| container.period unless container.period.blank? }
+  end
 
   # Returns if the current dossier should be preorder.
   def preorder
