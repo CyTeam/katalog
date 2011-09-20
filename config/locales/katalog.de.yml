@@ -82,6 +82,7 @@ de:
     total_count:   "Total Dokumente %{count}"
     show_all:      "Alles anzeigen"
     search_replace: "Suchen und Ersetzen"
+    years_amount:  "Anzahl Jahre:"
     title:
       document_count_html: "Total <strong>%{document_count}</strong> Dokumente seit <strong>%{first_document}</strong>"
     nothing_found:

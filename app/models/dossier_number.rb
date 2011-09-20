@@ -104,6 +104,14 @@ class DossierNumber < ActiveRecord::Base
     "#{self.period(from, to, format)}: #{amount}"
   end
   
+  def self.edit_years(params)
+    if params[:year].is_a?Array
+      params[:year]
+    else
+      [params[:year]]
+    end
+  end
+  
   def to_s(format = :default)
     case format
     when :long

@@ -100,8 +100,8 @@ class DossiersController < AuthorizedController
     end
 
     # Collection setup
-    @year = params[:dossier_numbers][:year] if params[:dossier_numbers]
-    @year ||= Time.now.year - 1
+    @years = DossierNumber.edit_years(params[:dossier_numbers]) if params[:dossier_numbers]
+    @years ||= [Time.now.year - 1]
     
     params[:search] ||= {}
     if params[:search][:text].present?

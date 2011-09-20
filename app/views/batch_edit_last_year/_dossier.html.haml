@@ -5,8 +5,8 @@
     %td
       %span.title
         = dossier.title
-    - (1..year_amount).each do
+    - @years.each do |year|
       %td
-        - if number = dossier.dossier_number_from_year(@year)
+        - if number = dossier.dossier_number_from_year(year)
           %input.dossier-last-container-title{:tabindex => @tabindex, 'data-dossier' => dossier.id, 'data-number' => number.id, :type => 'text', :value => number.amount}
           - @tabindex += 1
