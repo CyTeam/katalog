@@ -1,10 +1,9 @@
-- cache ['batch_edit_last_year_index', params[:search]] do
-  = t('katalog.years_amount')
-  = select 'dossier_numbers', 'year_amount', 1..10, {:selected => @years.count}
-  %tr.header
-    %th.signature= t_attr(:signature, Dossier)
-    %th.title
-      = t_attr(:title, Dossier)
-    - @years.each do |year|
-      %th.year
-        = select 'dossier_numbers_year', year, DossierNumber.default_periods.collect {|d| [ "#{d[:from].year} - #{d[:to].year}", d[:from].year ] if d[:from] }, {:selected => year, :include_blank => false}, :class => 'dossier_numbers_year'
+= t('katalog.years_amount')
+= select 'dossier_numbers', 'year_amount', 1..10, {:selected => @years.count}
+%tr.header
+  %th.signature= t_attr(:signature, Dossier)
+  %th.title
+    = t_attr(:title, Dossier)
+  - @years.each do |year|
+    %th.year
+      = select 'dossier_numbers_year', year, DossierNumber.default_periods.collect {|d| [ "#{d[:from].year} - #{d[:to].year}", d[:from].year ] if d[:from] }, {:selected => year, :include_blank => false}, :class => 'dossier_numbers_year'
