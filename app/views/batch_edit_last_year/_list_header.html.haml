@@ -1,4 +1,4 @@
-- cache :batch_edit_last_year_index do
+- cache ['batch_edit_last_year_index', params[:search]] do
   %tr.header
     %th.signature= t_attr(:signature, Dossier)
     %th.title

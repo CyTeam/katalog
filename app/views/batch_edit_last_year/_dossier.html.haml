@@ -1,4 +1,4 @@
-- cache dossier.cache_key + '_batch_edit' do
+- cache [params[:search], dossier.cache_key, 'batch_edit'] do
   %tr[dossier]{:class => cycle('odd', 'even')}
     %td= dossier.signature
     %td
