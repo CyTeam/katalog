@@ -8,6 +8,7 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
   year_count_headers = Dossier.years(@report[:collect_year_count], @report[:name]).collect do |year|
     pdf.make_cell(:content => year)
   end
+  year_count_headers = Array.new unless @report.years_visible?
 
   default_table_width = 95
   table_width = default_table_width
@@ -31,9 +32,13 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
 
     out
   end
-
-  year_header = year_count_headers[last_added_header + 1..year_count_headers.count]
-  headers << [column_headers.first(2).flatten + year_header] if year_header.count > 0
+  
+  if @report.years_visible?
+    year_header = year_count_headers[last_added_header + 1..year_count_headers.count]
+    headers << [column_headers.first(2).flatten + year_header] if year_header.count > 0
+  else
+    headers << [column_headers.first(2).flatten]
+  end
 
   # Gets the table data.
   items = @dossiers.map do |item|
@@ -41,11 +46,14 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
       pdf.make_cell(:content => show_column_for_report(item, column, true), :inline_format => true)
     end
 
-    years = item.years_counts(@report[:collect_year_count], @report[:name]).collect do |year|
-      pdf.make_cell(:content => number_with_delimiter(year[:count]))
+    if @report.years_visible?
+      years = item.years_counts(@report[:collect_year_count], @report[:name]).collect do |year|
+        pdf.make_cell(:content => number_with_delimiter(year[:count]))
+      end
+      row = columns + years
+    else
+      row = columns
     end
-
-    row = columns + years
 
     pdf.row_styling(item, row)
   end
