@@ -255,10 +255,20 @@ function previewReport() {
 }
 
 function addEditReportBehaviour() {
-  $('#dossier_numbers_year').change(function(){
-    var url = 'http://' + window.location.host + window.location.pathname + '?search[signature]=' + $.query.get('search[signature]').toString() + '&dossier_numbers[year]=' + $(this).val();
+  $('#dossier_numbers_year, #dossier_numbers_year_amount').change(function(){
+    var url = getEditReportLink()
     window.location.replace(url);
   });
+}
+
+function getEditReportLink() {
+  var link = 'http://' + window.location.host + window.location.pathname;
+  
+  link += '?search[signature]=' + $.query.get('search[signature]').toString();
+  link += '&dossier_numbers[year]=' + $('#dossier_numbers_year').val();
+  link += '&dossier_numbers[year_amount]=' + $('#dossier_numbers_year_amount').val();
+  
+  return link ;
 }
 
 function informUserAboutBigPDF(amount){
