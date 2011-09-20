@@ -1,10 +1,12 @@
-- cache [params[:search], dossier.cache_key, 'batch_edit'] do
+- year_amount = params[:dossier_numbers] ? params[:dossier_numbers][:year_amount].to_i : 1
+- cache [params[:search], dossier.cache_key, 'batch_edit', year_amount] do
   %tr[dossier]{:class => cycle('odd', 'even')}
     %td= dossier.signature
     %td
       %span.title
         = dossier.title
-    %td
-      - if number = dossier.dossier_number_from_year(@year)
-        %input.dossier-last-container-title{:tabindex => @tabindex, 'data-dossier' => dossier.id, 'data-number' => number.id, :type => 'text', :value => number.amount}
-        - @tabindex += 1
+    - (1..year_amount).each do
+      %td
+        - if number = dossier.dossier_number_from_year(@year)
+          %input.dossier-last-container-title{:tabindex => @tabindex, 'data-dossier' => dossier.id, 'data-number' => number.id, :type => 'text', :value => number.amount}
+          - @tabindex += 1
