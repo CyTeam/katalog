@@ -275,6 +275,8 @@ de:
       excel: "Als Excel exportieren"
       current: "Aktueller Datensatz"
       reports: "Reports"
+      container_excel: "Container exportieren"
+      normal_excel: "Dossiers exportieren"
     title:
       preview: "%{model} Vorschau"
 

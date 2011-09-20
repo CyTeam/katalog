@@ -9,4 +9,8 @@
 
   = contextual_link('print', url_for(params.merge(:format => :pdf)), :title => t('tooltips.dossiers.show_pdf'), :target => '_blank', :onclick => "javascript:return informUserAboutBigPDF(#{@dossiers.length});")
   - if (user_signed_in? and not @is_a_report)
-    = contextual_link('excel', url_for(params.merge(:format => :xls, :per_page => 'all')), :title => t('tooltips.dossiers.save_as_excel'))
+    %span#excel_actions
+      = contextual_link('excel', '#')
+      %ul
+        %li= link_to(t_action(:normal_excel), url_for(params.merge(:format => :xls, :per_page => 'all')))
+        %li= link_to(t_action(:container_excel), url_for(params.merge(:format => :xls, :per_page => 'all', :dossier_excel => true)))
