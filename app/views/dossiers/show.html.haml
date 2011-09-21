@@ -13,7 +13,7 @@
   %h1#title= @dossier.title
   
   - unless user_signed_in?
-    .waiting-time{:style => 'color:red;'}
+    .waiting-time
       %h2
         Auf folgende Zeitabschnitte besteht eine Wartefrist:
       %ul#waiting-list
