@@ -143,7 +143,13 @@ function showUnlessNewRecord(container) {
 function addEditToolTipBehaviour() {
  $('*[title]').each(function(){
    if($(this).attr('title')!=''){
-     $(this).qtip({
+     var target = $(this);
+     if(target.attr('data-parent')) {
+       var haha = target.attr('data-parent');
+       target = $(this).parents(haha);
+       target.attr('title', $(this).attr('title'));
+     }
+     target.qtip({
                     style: {
                         name: 'blue',
                         tip: true,
@@ -166,6 +172,10 @@ function addEditToolTipBehaviour() {
 }
 
 function addSearchSuggestionBehaviour() {
+  var input = $('#search_text');
+  // Drop out if no such input box
+  if (input.length == 0) return;
+
   function split( val ) {
     return val.split( / \s*/ );
   }
@@ -173,7 +183,6 @@ function addSearchSuggestionBehaviour() {
     return split( term ).pop();
   }
 
-  var input = $('#search_text');
   input.attr('autocomplete', 'false');
   
   input.autocomplete({
@@ -188,12 +197,12 @@ function addSearchSuggestionBehaviour() {
           response( $.map( data, function( object ) {
             var item = object['keyword'];
             return {
-              label: item['name']
+              label: item['name'],
+              count: item['count']
             }
           }));
           $('.ui-autocomplete').highlight(extractLast(request.term), 'match');
-        }
-      });
+        }      });
     },
     search: function() {
       // custom minLength
@@ -201,8 +210,23 @@ function addSearchSuggestionBehaviour() {
       if ( (this.value.length < 2) || (term.length < 1) ) {
         return false;
       }
+    },
+    focus: function( event, ui ) {
+      input.val( ui.item.label + " ");
+      return false;
+    },
+    select: function( event, ui ) {
+      input.val( ui.item.label + " ");
+      return false;
     }
-  });
+  }).data("autocomplete")._renderItem = function( ul, item) {
+    return $( "<li></li>" )
+        .data( "item.autocomplete", item )
+        .append(
+          "<a>" + item.label + "<i style='float: right'>(" + item.count + ")</i></a>"
+        )
+        .appendTo( ul );
+  };
   input.keydown(function(event) {
     if(event.keyCode == 13) {
       $(this).parent('form').submit();
@@ -231,10 +255,34 @@ function previewReport() {
 }
 
 function addEditReportBehaviour() {
-  $('#dossier_numbers_year').change(function(){
-    var url = 'http://' + window.location.host + window.location.pathname + '?search[signature]=' + $.query.get('search[signature]').toString() + '&dossier_numbers[year]=' + $(this).val();
+  $('select.dossier_numbers_year, #dossier_numbers_year_amount').change(function(){
+    var url = getEditReportLink()
     window.location.replace(url);
   });
+}
+
+function getEditReportLink() {
+  var link = 'http://' + window.location.host + window.location.pathname;
+  var present_amount = $('select.dossier_numbers_year').lenght;
+  var requested_amount = $('#dossier_numbers_year_amount').val();
+  var inserted_amount = 0;
+  var last_year_link = '';
+  
+  link += '?search[signature]=' + $.query.get('search[signature]').toString();
+  
+  $('select.dossier_numbers_year').each(function(){
+    if(inserted_amount < requested_amount) {
+      last_year_link = '&dossier_numbers[year][]=' + $(this).val();
+      link += last_year_link;
+      inserted_amount++;
+    }
+  });
+  
+  for(var i = inserted_amount; i < requested_amount; i++){
+    link += last_year_link;
+  }
+  
+  return link ;
 }
 
 function informUserAboutBigPDF(amount){

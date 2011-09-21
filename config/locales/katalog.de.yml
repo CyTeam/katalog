@@ -82,6 +82,7 @@ de:
     total_count:   "Total Dokumente %{count}"
     show_all:      "Alles anzeigen"
     search_replace: "Suchen und Ersetzen"
+    years_amount:  "Anzahl Jahre:"
     title:
       document_count_html: "Total <strong>%{document_count}</strong> Dokumente seit <strong>%{first_document}</strong>"
     nothing_found:
@@ -251,6 +252,7 @@ de:
 
   messages:
     confirm_delete: "%{record} löschen?"
+    spelling_suggestion: "Meinten sie: %{suggestion}"
 
   crud:
     edit:  "%{model} bearbeiten"
@@ -273,6 +275,8 @@ de:
       excel: "Als Excel exportieren"
       current: "Aktueller Datensatz"
       reports: "Reports"
+      container_excel: "Container exportieren"
+      normal_excel: "Dossiers exportieren"
     title:
       preview: "%{model} Vorschau"
 

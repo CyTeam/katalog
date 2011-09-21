@@ -116,3 +116,6 @@ gem 'revertible_paper_trail'
 
 # Generate excel files
 gem 'spreadsheet'
+
+# Spellchecking
+gem 'raspell'

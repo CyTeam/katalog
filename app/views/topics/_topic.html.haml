@@ -1,4 +1,4 @@
-- cache [:list, topic.cache_key, current_user.try(:role_texts)] do
+- cache [:list, action_name, topic.cache_key, current_user.try(:roles)] do
   %tr[topic]{:class => topic.topic_type}
     %td= topic.signature
     %td.title= link_to topic.title, url_for_topic(topic), {'data-href-container' => 'tr'}

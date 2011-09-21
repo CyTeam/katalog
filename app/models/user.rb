@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   # Authorization roles
   has_and_belongs_to_many :roles, :autosave => true
   scope :by_role, lambda{|role| include(:roles).where(:name => role)}
+  validates_presence_of :role_texts
   attr_accessible :role_texts
 
   # Validate the presence and uniqueness of the username

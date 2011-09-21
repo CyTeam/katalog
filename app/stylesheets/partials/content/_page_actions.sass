@@ -5,20 +5,22 @@
     li
       list-style: none
 
-#report_actions ul
-  display: none
-  position: absolute
-  margin-top: 16px // 16px as we use text-replace
-  background-color: white
-  border: 1px solid $dark_blue
-  +border-radius
-  padding: 5px
-  a
-    display: block
-    text-decoration: none
-  li
-    padding: 5px
-
-#report_actions:hover
+#report_actions,
+#excel_actions
+  float: left
   ul
-    display: block
+    display: none
+    position: absolute
+    margin-top: 16px // 16px as we use text-replace
+    background-color: white
+    border: 1px solid $dark_blue
+    +border-radius
+    padding: 5px
+    a
+      display: block
+      text-decoration: none
+    li
+      padding: 5px
+  &:hover
+    ul
+      display: block

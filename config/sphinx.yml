@@ -11,7 +11,6 @@ dokuzug: &common
 # Environments
 development:
   <<: *common
-  port: 9310
   pid_file: tmp/pids/searchd.development.pid
 
 test:
