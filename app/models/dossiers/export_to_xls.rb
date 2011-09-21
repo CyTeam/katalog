@@ -105,6 +105,29 @@ module Dossiers
         xls.string
       end
 
+      def to_container_xls(dossiers)
+        book = Spreadsheet::Workbook.new
+        sheet = book.create_worksheet(:name => "Katalog")
+        row = 0
+        
+        dossiers.each do |dossier|
+          unless dossier.containers.empty?          
+            dossier.containers.each do |container|
+              sheet.row(row).concat([dossier.to_s, container.period, container.container_type.code, container.location.code])
+              row += 1
+            end
+          else
+            sheet.row(row).concat([dossier.to_s])
+            row += 1
+          end
+        end
+        
+        # Return as XLS String
+        xls = StringIO.new
+        book.write xls
+        xls.string        
+      end
+
       def xls_columns
         [:signature, :title, :container_type, :location, :related_to, :keywords]
       end
