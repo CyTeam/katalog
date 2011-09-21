@@ -94,6 +94,7 @@ de:
         ready:     "Sofort verfügbar"
         wait:      "Wartezeit 1 Tag"
         intern:    "Interne Dokumente"
+        warning:   "Achtung Wartezeit"
     search:
       tips:
         title: Suchtips
