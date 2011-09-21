@@ -1,4 +1,4 @@
-- cache [@document_count == nil ? 0 : @document_count, @years == nil ? 'years' : @years] do
+- cache [@document_count == nil ? 0 : @document_count, @years == nil ? 'years' : @years, params[:search] == nil ? 'search' : params[:search]] do
   %tr.header
     %th.signature= t_attr(:signature, Dossier)
     %th.title{:colspan => 2}
