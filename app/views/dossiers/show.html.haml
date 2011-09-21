@@ -12,7 +12,7 @@
 
   %h1#title= @dossier.title
   
-  - unless user_signed_in?
+  - unless (user_signed_in? || @dossier.waiting_list.empty?)
     .waiting-time
       %h2
         Auf folgende Zeitabschnitte besteht eine Wartefrist:
