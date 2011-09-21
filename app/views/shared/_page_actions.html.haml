@@ -13,4 +13,4 @@
       = contextual_link('excel', '#')
       %ul
         %li= link_to(t_action(:normal_excel), url_for(params.merge(:format => :xls, :per_page => 'all')))
-        %li= link_to(t_action(:container_excel), url_for(params.merge(:format => :xls, :per_page => 'all', :dossier_excel => true)))
+        %li= link_to(t_action(:container_excel), url_for(params.merge(:format => :xls, :per_page => 'all', :excel_format => 'containers')))
