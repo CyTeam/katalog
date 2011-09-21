@@ -28,6 +28,7 @@ module DossiersHelper
       notes += availability_text('intern', false)
     end
     if availabilities.include?('wait')
+      notes += availability_text('warning', partially)
       notes += availability_text('wait', partially)
     end
 
