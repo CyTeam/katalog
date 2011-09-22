@@ -52,6 +52,8 @@ Katalog::Application.routes.draw do
   resources :search_replaces
 
   resources :visitor_logs
+  
+  match "/user_session" => "application#update_session"
 
   root :to => "dossiers#index"
 end
