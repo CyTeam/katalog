@@ -320,3 +320,19 @@ $(document).ready(function() {
   addReportColumnMultiselectBehaviour();
   addEditReportBehaviour();
 });
+
+// Shows the key words in the dossier view.
+function showKeyWords() {
+  $('#show-key-words-link').hide();
+  $('#hide-key-words-link').show();
+  $('#keywords').show();
+  $.post('/user_session.json');
+}
+
+// Hides the key words in the dossier view.
+function hideKeyWords() {
+  $('#hide-key-words-link').hide();
+  $('#show-key-words-link').show();
+  $('#keywords').hide();
+  $.post('/user_session.json?hide_keywords=true');
+}
