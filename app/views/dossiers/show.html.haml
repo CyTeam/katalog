@@ -32,8 +32,8 @@
 
   %h3
     = t_attr(:keyword_text)
-    = link_to_function 'Show', 'showKeyWords()', :id => 'show-key-words-link',:style => (session[:hide_keywords] == true ? '' : 'display:none;')
-    = link_to_function 'Hide', 'hideKeyWords()', :id => 'hide-key-words-link',:style => (session[:hide_keywords] == true ? 'display:none;' : '')
+    = link_to_function 'Show', 'showKeyWords()', :id => 'show-key-words-link', :class => 'icon-plus-text', :style => (session[:hide_keywords] == true ? '' : 'display:none;')
+    = link_to_function 'Hide', 'hideKeyWords()', :id => 'hide-key-words-link', :class => 'icon-minus-text', :style => (session[:hide_keywords] == true ? 'display:none;' : '')
   #keywords.section{:style => (session[:hide_keywords] == true ? 'display:none;' : '')}
     %ul#keyword-list.keywords
       = render :partial => 'keyword', :collection => @dossier.keywords.order('name')
