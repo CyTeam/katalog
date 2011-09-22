@@ -76,6 +76,7 @@ de:
     count:         "Anzahl"
     edit:          "Ändern"
     show:          "Anzeigen"
+    hide:          "Ausblenden"
     delete:        "Löschen"
     overview:      "Themenübersicht"
     total:         "Total Dokumente"
