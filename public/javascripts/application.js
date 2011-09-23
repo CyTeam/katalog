@@ -319,6 +319,7 @@ $(document).ready(function() {
   showVersionsBehaviour();
   addReportColumnMultiselectBehaviour();
   addEditReportBehaviour();
+  addTopicIndexBehaviour();
 });
 
 // Shows the key words in the dossier view.
@@ -335,4 +336,14 @@ function hideKeyWords() {
   $('#show-key-words-link').show();
   $('#keywords').hide();
   $.post('/user_session.json?hide_keywords=true');
+}
+
+function addTopicIndexBehaviour() {
+  $('#topic_index li a').click(function(){
+    $('#topic_index li.active, #topic_index a.active').removeClass('active');
+    $(this).next().show();
+    $(this).addClass('active');
+    $(this).parent('li').addClass('active');
+    $(this).parentsUntil('#topic_index').addClass('active');
+  });
 }
