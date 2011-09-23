@@ -25,6 +25,7 @@ class SearchReplace < FormtasticFauxModel
     # Disable slow processing
     paper_trail_enabled = PaperTrail.enabled?
     PaperTrail.enabled = false
+    changed_amount = 0
 
     columns.each do |column|
       # Guard
@@ -39,6 +40,7 @@ class SearchReplace < FormtasticFauxModel
 
           dossier.touch
           dossier.save
+          changed_amount += 1
         }
       else
         dossiers = Dossier.where("`#{column}` LIKE ?", '%' + search + '%')
@@ -48,6 +50,7 @@ class SearchReplace < FormtasticFauxModel
 
             dossier.touch
             dossier.save
+            changed_amount += 1
           end
         }
       end
@@ -55,6 +58,8 @@ class SearchReplace < FormtasticFauxModel
 
     # Re-enable paper trail
     PaperTrail.enabled = paper_trail_enabled
+    
+    changed_amount
   end
 
   private # :nodoc

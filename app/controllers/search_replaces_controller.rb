@@ -6,10 +6,10 @@ class SearchReplacesController < AuthorizedController
   def create
     @search_replace = SearchReplace.new(params[:search_replace])
     if @search_replace.valid?
-      @search_replace.do
-      flash[:notice] = 'done'
+      amount = @search_replace.do
+      flash[:notice] = t('katalog.search_replace.done', :amount => amount)
     else
-      flash[:error] = 'failed'
+      flash[:error] = t('katalog.search_replace.failed')
     end
 
     redirect_to :action => :index
