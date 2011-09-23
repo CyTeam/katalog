@@ -12,13 +12,12 @@ module Dossiers
     def to_xls
       book = Spreadsheet::Workbook.new
       sheet = book.create_worksheet(:name => "Katalog")
-      present_numbers = numbers.present
       
       label_columns = self.class.xls_columns.inject([]) do |out, column|
         out << I18n.t(column, :scope => 'activerecord.attributes.dossier')
       end
 
-      present_numbers.each do |number|
+      numbers.each do |number|
         label_columns << number.period
       end
 
@@ -35,7 +34,7 @@ module Dossiers
         end
       end
       
-      present_numbers.each do |number|
+      numbers.each do |number|
         value_columns << number.amount
       end
       

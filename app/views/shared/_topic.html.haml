@@ -1,5 +1,5 @@
 %li{:class => "topic #{topic.topic_type} #{'active' if active?(topic)}"}
   %span.signature= topic.signature
-  = link_to(topic.title, url_for_topic(topic), :title => topic.title)
+  = link_to(topic.title, url_for_topic(topic), :title => topic.title, :class => "#{'active' if active?(topic)}")
   - if topic.is_a?(Topic) and topic.topic_type != :detail
-    = render :partial => 'shared/topic', :collection => topic.direct_children if show_topic?(topic, params[:search], @dossier)
+    %ul= render :partial => 'shared/topic', :collection => topic.direct_children
