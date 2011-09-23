@@ -2,4 +2,4 @@
   #flash
     - [:error, :notice].each do |message|
       -if flash[message]
-        %div{:class => message.to_s}!= flash[message]
+        %div{:class => message.to_s}= flash[message]

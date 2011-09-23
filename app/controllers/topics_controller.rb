@@ -20,4 +20,13 @@ class TopicsController < AuthorizedController
   def index
     redirect_to dossiers_path
   end
+  
+  def create
+    create! do |format|
+      format.html do
+        flash[:notice] = t('katalog.created')
+        redirect_to new_resource_url
+      end
+    end
+  end
 end

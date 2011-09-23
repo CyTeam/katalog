@@ -121,6 +121,15 @@ class DossiersController < AuthorizedController
     @dossiers.compact!
   end
 
+  def create
+    create! do |format|
+      format.html do
+        flash[:notice] = t('katalog.created')
+        redirect_to new_resource_url
+      end
+    end
+  end
+  
   private
   def dossier_search
     params[:per_page] ||= 25
