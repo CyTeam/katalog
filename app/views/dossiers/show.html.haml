@@ -12,8 +12,8 @@
 
   %h1#title= @dossier.title
   
-  - unless user_signed_in?
-    .waiting-time{:style => 'color:red;'}
+  - unless (user_signed_in? || @dossier.waiting_list.empty?)
+    .waiting-time
       %h2
         Auf folgende Zeitabschnitte besteht eine Wartefrist:
       %ul#waiting-list
@@ -30,8 +30,11 @@
     #description
       = simple_format(auto_link(@dossier.description, :html => {:target => '_blank'}))
 
-  %h3= t_attr(:keyword_text)
-  #keywords.section
+  %h3
+    = t_attr(:keyword_text)
+    = link_to_function t('katalog.show'), 'showKeyWords()', :id => 'show-key-words-link', :class => 'icon-plus-text', :title => t('katalog.show'), :style => (session[:hide_keywords] == true ? '' : 'display:none;')
+    = link_to_function t('katalog.hide'), 'hideKeyWords()', :id => 'hide-key-words-link', :class => 'icon-minus-text', :title => t('katalog.hide'), :style => (session[:hide_keywords] == true ? 'display:none;' : '')
+  #keywords.section{:style => (session[:hide_keywords] == true ? 'display:none;' : '')}
     %ul#keyword-list.keywords
       = render :partial => 'keyword', :collection => @dossier.keywords.order('name')
 

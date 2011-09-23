@@ -76,12 +76,17 @@ de:
     count:         "Anzahl"
     edit:          "Ändern"
     show:          "Anzeigen"
+    hide:          "Ausblenden"
     delete:        "Löschen"
     overview:      "Themenübersicht"
     total:         "Total Dokumente"
     total_count:   "Total Dokumente %{count}"
     show_all:      "Alles anzeigen"
-    search_replace: "Suchen und Ersetzen"
+    created:       "Ihre Eingabe wurde gespeichert."
+    search_replace: 
+      title: "Suchen und Ersetzen"
+      done: "Suchen und ersetzen wurde erfolgreich durchgeführt.<br/>%{amount} Dossier/s wurde/n geändert."
+      failed: "Suchen und ersetzen ist leider fehlgeschlagen."
     years_amount:  "Anzahl Jahre:"
     title:
       document_count_html: "Total <strong>%{document_count}</strong> Dokumente seit <strong>%{first_document}</strong>"
@@ -94,6 +99,7 @@ de:
         ready:     "Sofort verfügbar"
         wait:      "Wartezeit 1 Tag"
         intern:    "Interne Dokumente"
+        warning:   "Achtung Wartezeit"
     search:
       tips:
         title: Suchtips

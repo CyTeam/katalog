@@ -1,16 +1,42 @@
 @import "compass/typography/links/hover-link"
 
+$active_color: #9D6524
+$inactive_color: #003d61
+
 #topic_index
   position: relative
   width: 500px
-  .geo
-    padding-left: 30px
-  .detail
-    padding-left: 45px
-  .dossier
-    padding-left: 60px
+  ul
+    width: 500px
+    margin-bottom: 0px
+    display: none
   a
     +hover-link
-  .active,
-  .active a
-    color: #9D6524
+    &.active
+      color: $active_color
+  li.active
+    color: $active_color
+    ul
+      display: block
+      ul
+        display: none
+        li a
+          font-weight: normal
+      li.active ul
+        display: block
+        .signature
+          margin-left: 2.7em
+          width: 2.7em
+          font-weight: normal
+        ul 
+          display: none
+        .active ul
+          display: block
+          .signature
+            margin-left: 4em
+            width: 5.2em
+      li
+        color: $inactive_color
+        font-weight: normal
+        &.active
+          color: $active_color

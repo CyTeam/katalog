@@ -121,6 +121,15 @@ class DossiersController < AuthorizedController
     @dossiers.compact!
   end
 
+  def create
+    create! do |format|
+      format.html do
+        flash[:notice] = t('katalog.created')
+        redirect_to new_resource_url
+      end
+    end
+  end
+  
   private
   def dossier_search
     params[:per_page] ||= 25
@@ -166,11 +175,11 @@ class DossiersController < AuthorizedController
           else
             # word is wrong
             suggestion = spell_checker.suggest(word).first
-            if suggestion.blank?
+            #if suggestion.blank?
               # Try harder
-              spell_checker.suggestion_mode = Aspell::BADSPELLER
-              suggestion = spell_checker.suggest(word).first
-            end
+              #spell_checker.suggestion_mode = Aspell::BADSPELLER
+              #suggestion = spell_checker.suggest(word).first
+            #end
             if suggestion.blank?
               # Return original word
               suggestion = word

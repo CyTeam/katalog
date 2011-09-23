@@ -52,6 +52,7 @@
         #main
           .inside
             .mod_newslist.block
+              = render :partial => 'shared/flash', :locals => {:flash => flash}
               = yield
           #clear
       #footer
