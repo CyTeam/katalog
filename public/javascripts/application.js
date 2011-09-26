@@ -141,14 +141,17 @@ function showUnlessNewRecord(container) {
 }
 
 function addEditToolTipBehaviour() {
-  $('*[title]').each(function(){
-    if($(this).attr('title')!=''){
+  if(!$.browser.msie) { // Disabled for IE cause the selector made some problems.
+    $('[title!=""]').each(function(){
       var target = $(this);
+
       if(target.attr('data-parent')) {
         var haha = target.attr('data-parent');
+
         target = $(this).parents(haha);
         target.attr('title', $(this).attr('title'));
       }
+
       target.qtip({
         style: {
           name: 'blue',
@@ -167,8 +170,8 @@ function addEditToolTipBehaviour() {
           }
         }
       });
-    }
-  });
+    });    
+  }
 }
 
 function addSearchSuggestionBehaviour() {
