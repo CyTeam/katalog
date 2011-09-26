@@ -141,34 +141,37 @@ function showUnlessNewRecord(container) {
 }
 
 function addEditToolTipBehaviour() {
- $('*[title]').each(function(){
-   if($(this).attr('title')!=''){
-     var target = $(this);
-     if(target.attr('data-parent')) {
-       var haha = target.attr('data-parent');
-       target = $(this).parents(haha);
-       target.attr('title', $(this).attr('title'));
-     }
-     target.qtip({
-                    style: {
-                        name: 'blue',
-                        tip: true,
-                        width: 200,
-                        background: '#E5E8E9',
-                        color: '#00669C',
-                        border: {
-                          color: '#00669C'
-                        }
-                    },
-                    position: {
-                        corner: {
-                             target: 'topRight',
-                             tooltip: 'bottomLeft'
-                        }
-                    }
-             });
-   }
- });
+  if(!$.browser.msie) { // Disabled for IE cause the selector made some problems.
+    $('[title!=""]').each(function(){
+      var target = $(this);
+
+      if(target.attr('data-parent')) {
+        var haha = target.attr('data-parent');
+
+        target = $(this).parents(haha);
+        target.attr('title', $(this).attr('title'));
+      }
+
+      target.qtip({
+        style: {
+          name: 'blue',
+          tip: true,
+          width: 200,
+          background: '#E5E8E9',
+          color: '#00669C',
+          border: {
+            color: '#00669C'
+          }
+        },
+        position: {
+          corner: {
+            target: 'topRight',
+            tooltip: 'bottomLeft'
+          }
+        }
+      });
+    });    
+  }
 }
 
 function addSearchSuggestionBehaviour() {
@@ -312,7 +315,7 @@ $(document).ready(function() {
   addAutogrowBehaviour();
   addAutoAddNewContainer();
   addRelationAutoCompletionBehaviour();
-  //addEditToolTipBehaviour();
+  addEditToolTipBehaviour();
   addSearchSuggestionBehaviour();
   addContainerSuggestionBehaviour();
   addUpdateLastContainerTitleOfDossier();
