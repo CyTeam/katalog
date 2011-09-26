@@ -312,7 +312,7 @@ $(document).ready(function() {
   addAutogrowBehaviour();
   addAutoAddNewContainer();
   addRelationAutoCompletionBehaviour();
-  addEditToolTipBehaviour();
+  //addEditToolTipBehaviour();
   addSearchSuggestionBehaviour();
   addContainerSuggestionBehaviour();
   addUpdateLastContainerTitleOfDossier();
