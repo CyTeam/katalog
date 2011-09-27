@@ -329,7 +329,7 @@ $(document).ready(function() {
 function showKeyWords() {
   $('#show-key-words-link').hide();
   $('#hide-key-words-link').show();
-  $('#keywords').show();
+  $('span.keywords').show();
   $.post('/user_session.json');
 }
 
@@ -337,7 +337,7 @@ function showKeyWords() {
 function hideKeyWords() {
   $('#hide-key-words-link').hide();
   $('#show-key-words-link').show();
-  $('#keywords').hide();
+  $('span.keywords').hide();
   $.post('/user_session.json?hide_keywords=true');
 }
 
