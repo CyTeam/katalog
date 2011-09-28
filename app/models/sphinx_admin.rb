@@ -8,6 +8,10 @@
 # * And open the two sub links to save the forms
 class SphinxAdmin < ActiveRecord::Base
 
+  has_paper_trail :ignore => [:created_at, :updated_at]
+
+  default_scope :order => "sphinx_admins.from ASC"
+
   # The default folder for the config files.
   FOLDER = Rails.root.join('config', 'sphinx')
 
@@ -55,10 +59,32 @@ class SphinxAdmin < ActiveRecord::Base
 
   # Saves the values as entries of SphinxAdmin.
   def self.list=(value)
-    self.delete_all
-    
+    # Delete removed line
+    if self.all.count > value.lines.count
+      deleted = self.list.split("\n") - value.split("\n")
+
+      deleted.each do |line|
+        input = line.split(spacer)
+        entry = self.find_by_value(input[0].strip) or self.find_by_value(input[1].strip)
+        entry.delete
+      end
+    end
+
+    # Update the existing or create a new one.
     value.each_line do |line|
-      self.create(:value => line) unless line.blank?
+      input = line.split(spacer)
+      entry = nil
+
+      input.each do |i|
+        entry = self.find_by_value(i.strip) unless entry
+      end
+
+      if entry
+        entry.value = line
+        entry.save
+      else
+        self.create(:value => line) unless line.blank?
+      end
     end
     
     self.sync_sphinx
