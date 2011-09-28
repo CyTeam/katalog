@@ -1,3 +1,5 @@
+require 'recipes/airbrake'
+
 #Application
 set :application, "katalog"
 set :repository,  "git@github.com:CyTeam/katalog.git"
