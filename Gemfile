@@ -53,8 +53,7 @@ group :development do
   gem 'hpricot'
 
   # Deployment
-  gem 'capistrano'
-  gem 'capistrano-ext'
+  gem 'capones_recipes'
 end
 gem 'jquery-rails'
 
@@ -119,3 +118,6 @@ gem 'spreadsheet'
 
 # Spellchecking
 gem 'raspell'
+
+# Error notifier
+gem 'airbrake'
