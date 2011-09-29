@@ -1,6 +1,3 @@
-require 'capones_recipes'
-# Airbrake error notification
-require 'capones_recipes/tasks/rails'
 require 'capones_recipes/tasks/airbrake'
 require './config/boot'
 require 'airbrake/capistrano'
@@ -25,3 +22,19 @@ set :use_sudo, false
 set :deploy_via, :remote_cache
 set :git_enable_submodules, 1
 set :copy_exclude, [".git", "spec"]
+
+# Restart passenger
+namespace :deploy do
+  task :start do ; end
+  task :stop do ; end
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+  end
+end
+
+# Bundle install
+require "bundler/capistrano"
+after "bundle:install", "deploy:migrate"
+
+# Clean up the releases after deploy.
+after "deploy", "deploy:cleanup"
