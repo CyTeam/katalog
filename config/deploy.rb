@@ -1,6 +1,7 @@
+require 'capones_recipes'
 # Airbrake error notification
-require 'recipes/rails'
-require 'recipes/airbrake'
+require 'capones_recipes/tasks/rails'
+require 'capones_recipes/tasks/airbrake'
 require './config/boot'
 require 'airbrake/capistrano'
 
