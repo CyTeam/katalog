@@ -1,11 +1,11 @@
-- cache [:list, dossier.cache_key, current_user.try(:role_texts)] do
+- cache [:list, dossier.cache_key, current_user.try(:roles), session[:hide_keywords]] do
   %tr[dossier]{:class => cycle('odd', 'even')}
     - cache dossier do
       %td= dossier.signature
       %td
         %span.title= link_to dossier.title, dossier, {'data-href-container' => 'tr'}
         %br/
-        %span.keywords
+        %span.keywords{:style => (session[:hide_keywords] == true ? 'display:none;' : '')}
           - for keyword in dossier.keywords
             %span~ keyword.to_s
 

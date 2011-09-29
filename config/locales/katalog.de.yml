@@ -77,6 +77,8 @@ de:
     edit:          "Ändern"
     show:          "Anzeigen"
     hide:          "Ausblenden"
+    show_keywords: "Keywords anzeigen"
+    hide_keywords: "Keywords ausblenden"
     delete:        "Löschen"
     overview:      "Themenübersicht"
     total:         "Total Dokumente"
@@ -258,7 +260,7 @@ de:
 
   messages:
     confirm_delete: "%{record} löschen?"
-    spelling_suggestion: "Meinten sie: %{suggestion}"
+    spelling_suggestion: "Meinten Sie: %{suggestion}?"
 
   crud:
     edit:  "%{model} bearbeiten"
