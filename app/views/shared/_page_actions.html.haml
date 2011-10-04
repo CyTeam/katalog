@@ -1,5 +1,5 @@
 #page_actions.contextual
-  - if @dossiers.count > 0
+  - if @query
     - available_reports = Report.accessible_by(current_ability, :index)
     - unless available_reports.empty? or @report
       %span#report_actions
