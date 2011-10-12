@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/pshoukry/ckeditor.git
+  revision: 3827894e9b08b8fe0b6302b8fa0b7a19bc85790e
+  specs:
+    ckeditor (3.6.1)
+      mime-types (~> 1.16)
+      orm_adapter (~> 0.0.5)
+
+GIT
   remote: http://github.com/huerlisi/will_paginate.git
   revision: 05fbcb82299a449fc37fb9198346703740cb39cd
   branch: rails3
@@ -61,9 +69,6 @@ GEM
     childprocess (0.2.2)
       ffi (~> 1.0.6)
     chunky_png (1.2.5)
-    ckeditor (3.6.2)
-      mime-types (~> 1.16)
-      orm_adapter (~> 0.0.5)
     compass (0.11.5)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -196,7 +201,7 @@ DEPENDENCIES
   autotest-rails
   cancan
   capybara
-  ckeditor
+  ckeditor!
   compass
   devise
   factory_girl_rails (~> 1.1)
