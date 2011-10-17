@@ -84,7 +84,7 @@ de:
     total:         "Total Dokumente"
     total_count:   "Total Dokumente %{count}"
     show_all:      "Alles anzeigen"
-    created:       "Ihre Eingabe wurde gespeichert."
+    created:       "%{signature} %{title} wurde gespeichert."
     search_replace: 
       title: "Suchen und Ersetzen"
       done: "Suchen und ersetzen wurde erfolgreich durchgeführt.<br/>%{amount} Dossier/s wurde/n geändert."

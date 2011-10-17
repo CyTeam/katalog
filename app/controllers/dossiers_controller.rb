@@ -124,7 +124,7 @@ class DossiersController < AuthorizedController
   def create
     create! do |success, failure|
       success.html do
-        flash[:notice] = t('katalog.created')
+        flash[:notice] = self.class.helpers.link_to(t('katalog.created', :signature => @dossier.signature, :title => @dossier.title), dossier_path(@dossier))
         redirect_to new_resource_url
       end
     end
