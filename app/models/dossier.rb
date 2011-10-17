@@ -13,7 +13,8 @@ class Dossier < ActiveRecord::Base
   before_save lambda { self.description ||= '' }
 
   # Validations
-  validates_presence_of :signature, :title
+  validates :signature, :presence => true, :allow_blank => false
+  validates :title, :presence => true, :allow_blank => false
   validates_format_of :first_document_year, :with => /[12][0-9]{3}/, :allow_blank => true
   
   # Type Scopes
