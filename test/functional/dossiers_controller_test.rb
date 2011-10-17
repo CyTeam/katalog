@@ -27,7 +27,7 @@ class DossiersControllerTest < ActionController::TestCase
       post :create, :dossier => @dossier.attributes
     end
 
-    assert_redirected_to dossier_path(assigns(:dossier))
+    assert_redirected_to new_dossier_path
   end
 
   test "should show dossier" do
@@ -137,7 +137,7 @@ class DossiersControllerTest < ActionController::TestCase
     should "redirect to new dossier" do
       post :create, :dossier => Factory.attributes_for(:dossier)
 
-      assert_redirected_to dossier_path(assigns(:dossier))
+      assert_redirected_to new_dossier_path
     end
 
     should "show form again on validation errors" do
@@ -156,7 +156,7 @@ class DossiersControllerTest < ActionController::TestCase
         post :create, :dossier => attributes
       end
 
-      assert_redirected_to dossier_path(assigns(:dossier))
+      assert_redirected_to new_dossier_path
     end
   end
 
