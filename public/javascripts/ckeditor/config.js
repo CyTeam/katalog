@@ -7,7 +7,8 @@ CKEDITOR.editorConfig = function( config )
 {
   config.PreserveSessionOnFileBrowser = true;
   // Define changes to default configuration here. For example:
-  config.language = 'en';
+  // config.language = 'en';
+  config.language = 'de';
   // config.uiColor = '#AADC6E';
 
   //config.ContextMenu = ['Generic','Anchor','Flash','Select','Textarea','Checkbox','Radio','TextField','HiddenField','ImageButton','Button','BulletedList','NumberedList','Table','Form'] ; 
@@ -22,9 +23,9 @@ CKEDITOR.editorConfig = function( config )
   //config.startupFocus = true;
   
   // works only with en, ru, uk languages
-  config.extraPlugins = "embed,attachment";
+  // config.extraPlugins = "embed,attachment";
   
-  config.toolbar = 'Small';
+  config.toolbar = 'Custom';
   
   config.toolbar_Easy =
     [
@@ -48,6 +49,14 @@ CKEDITOR.editorConfig = function( config )
         ['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
         ['Bold','Italic','Underline','Strike','-','Subscript','Superscript', 'TextColor'],
         ['NumberedList','BulletedList'],
+        ['Link','Unlink']
+    ];
+
+  config.toolbar_Custom =
+    [
+        ['Cut','Copy','Paste','PasteText','PasteFromWord'],
+        ['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
+        ['Bold','Italic','Underline'],
         ['Link','Unlink']
     ];
 };
