@@ -216,7 +216,7 @@ function addSearchSuggestionBehaviour() {
       }
     },
     focus: function( event, ui ) {
-      input.val( ui.item.label + " ");
+      // input.val( ui.item.label + " ");
       return false;
     },
     select: function( event, ui ) {
