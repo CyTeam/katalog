@@ -122,8 +122,8 @@ class DossiersController < AuthorizedController
   end
 
   def create
-    create! do |format|
-      format.html do
+    create! do |success, failure|
+      success.html do
         flash[:notice] = t('katalog.created')
         redirect_to new_resource_url
       end
