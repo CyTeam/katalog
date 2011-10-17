@@ -59,7 +59,7 @@ module Dossiers
           if /^[0-9]*\.$/.match(string)
             # is an ordinal
             words << string
-          elsif /^[0-9]{2}(\.[0-9])?$/.match(string)
+          elsif /^[0-9]{2}(\.[0-9A-Za-z])?$/.match(string)
             # signature is as ordinal by index
             signatures << string + "."
           elsif /^[0-9.]{1,8}$/.match(string)
