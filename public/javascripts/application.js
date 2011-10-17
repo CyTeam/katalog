@@ -205,7 +205,8 @@ function addSearchSuggestionBehaviour() {
             }
           }));
           $('.ui-autocomplete').highlight(extractLast(request.term), 'match');
-        }      });
+        }
+      });
     },
     search: function() {
       // custom minLength
