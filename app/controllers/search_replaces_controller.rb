@@ -7,7 +7,7 @@ class SearchReplacesController < AuthorizedController
     @search_replace = SearchReplace.new(params[:search_replace])
     if @search_replace.valid?
       amount = @search_replace.do
-      flash[:notice] = t('katalog.search_replace.done', :amount => amount)
+      flash[:notice] = t('katalog.search_replace.done', :amount => amount).html_safe
     else
       flash[:error] = t('katalog.search_replace.failed')
     end
