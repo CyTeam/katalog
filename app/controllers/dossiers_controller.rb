@@ -191,6 +191,8 @@ class DossiersController < AuthorizedController
       else
         index_excel
       end
+    else
+      render :json => @dossiers
     end
   end
 
