@@ -109,7 +109,7 @@ end
 gem 'show_for'
 
 # WYSIWYG Editor
-gem 'ckeditor', :git => 'git://github.com/pshoukry/ckeditor.git' # This repo has a pending pull request to ckeditor when integrated the git path could be removed.
+gem 'ckeditor', :git => 'http://github.com/pshoukry/ckeditor.git' # This repo has a pending pull request to ckeditor when integrated the git path could be removed.
 
 # Change log for model data
 gem 'paper_trail'
