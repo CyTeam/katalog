@@ -1,5 +1,5 @@
 before_script:
-  - apt-get install aspell libaspell-dev aspell-en aspell-de
+  - apt-get install -y aspell libaspell-dev aspell-en aspell-de
   - "mysql -e 'create database katalog_test;'"
   - DB=mysql bundle exec rake katalog:setup
   - DB=mysql bundle exec rake db:create db:schema:load
