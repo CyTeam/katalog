@@ -4,7 +4,8 @@ class Report < ActiveRecord::Base
   # Serializes the column attribute.
   serialize :columns
 
-  # Associations
-  validates_uniqueness_of :name
-  validates_presence_of :columns
+  # Validations
+  validates :name,    :presence => true, :uniqueness => true
+  validates :columns, :presence => true
+  validates :title,   :presence => true
 end

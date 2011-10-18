@@ -53,8 +53,10 @@ group :development do
   gem 'hpricot'
 
   # Deployment
-  gem 'capistrano'
-  gem 'capistrano-ext'
+  #gem 'capones_recipes'
+
+  # MySQL Query Analyzer
+  gem 'query_reviewer'
 end
 gem 'jquery-rails'
 
@@ -107,7 +109,7 @@ end
 gem 'show_for'
 
 # WYSIWYG Editor
-gem 'ckeditor'
+gem 'ckeditor', :git => 'git://github.com/pshoukry/ckeditor.git' # This repo has a pending pull request to ckeditor when integrated the git path could be removed.
 
 # Change log for model data
 gem 'paper_trail'
@@ -119,3 +121,6 @@ gem 'spreadsheet'
 
 # Spellchecking
 gem 'raspell'
+
+# Error notifier
+gem 'airbrake'

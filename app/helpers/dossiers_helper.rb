@@ -37,9 +37,9 @@ module DossiersHelper
   
   def url_for_topic(topic)
     if 'edit_report'.eql?action_name
-      edit_report_dossiers_url(:search => {:signature => topic.signature})
+      edit_report_dossiers_path(:search => {:signature => topic.signature})
     else
-      search_dossiers_url(:search => {:signature => topic.signature})
+      search_dossiers_path(:search => {:signature => topic.signature})
     end
   end
   

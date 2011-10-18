@@ -122,9 +122,9 @@ class DossiersController < AuthorizedController
   end
 
   def create
-    create! do |format|
-      format.html do
-        flash[:notice] = t('katalog.created')
+    create! do |success, failure|
+      success.html do
+        flash[:notice] = self.class.helpers.link_to(t('katalog.created', :signature => @dossier.signature, :title => @dossier.title), dossier_path(@dossier))
         redirect_to new_resource_url
       end
     end
@@ -191,6 +191,8 @@ class DossiersController < AuthorizedController
       else
         index_excel
       end
+    else
+      render :json => @dossiers
     end
   end
 

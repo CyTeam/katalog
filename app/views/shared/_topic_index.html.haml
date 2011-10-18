@@ -1,5 +1,4 @@
-- cache ['topic_index', (@dossier ? "topic_index_dossier_#{@dossier.id}" : ""), (params[:search] ? params[:search][:signature] : '' )] do
-  .ce_text
-    %p.topic_index
-      %ul#topic_index
-        = render :partial => 'shared/topic', :collection =>  Topic.group.all
+.ce_text#topic_index_scroller
+  %p.topic_index
+    %ul#topic_index
+      = render :partial => 'shared/topic', :collection =>  Topic.group.all

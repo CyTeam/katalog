@@ -6,7 +6,7 @@
 
 # Should all fields be considered "required" by default?
 # Defaults to true, see ValidationReflection notes below.
-Formtastic::SemanticFormBuilder.all_fields_required_by_default = false
+Formtastic::FormBuilder.all_fields_required_by_default = false
 
 # Should select fields have a blank option/prompt by default?
 # Defaults to true.
@@ -47,8 +47,8 @@ Formtastic::SemanticFormBuilder.all_fields_required_by_default = false
 # Specifies if labels/hints for input fields automatically be looked up using I18n.
 # Default value: false. Overridden for specific fields by setting value to true,
 # i.e. :label => true, or :hint => true (or opposite depending on initialized value)
-Formtastic::SemanticFormBuilder.i18n_lookups_by_default = true
+Formtastic::FormBuilder.i18n_lookups_by_default = true
 
 # You can add custom inputs or override parts of Formtastic by subclassing SemanticFormBuilder and
 # specifying that class here.  Defaults to SemanticFormBuilder.
-Formtastic::SemanticFormHelper.builder = CustomFormBuilder
+# Formtastic::SemanticFormHelper.builder = CustomFormBuilder

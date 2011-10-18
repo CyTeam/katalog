@@ -28,15 +28,37 @@ function addUpdateLastContainerTitleOfDossier() {
 function updateNumberAmount(e){
   var dossier_id = $(e).attr('data-dossier');
   var number_id = $(e).attr('data-number');
+  var year = $(e).attr('data-number-year');
   var amount = $(e).val();
 
-  $.ajax({
-    url: '/dossiers/' + dossier_id + '/dossier_numbers/'+ number_id,
-    type: 'PUT',
-    data: {
-      amount: amount
-    }
-  });
+  if(number_id != null){
+    $.ajax({
+      url: '/dossiers/' + dossier_id + '/dossier_numbers/'+ number_id,
+      type: 'PUT',
+      data: {
+        amount: amount
+      }
+    });    
+  }
+  
+  if(year != null){
+    $.ajax({
+      url: '/dossier_numbers.json',
+      type: 'POST',
+      dataType: 'json',
+      data: {
+        dossier_number: {
+          amount:     amount,
+          from_year:  year,
+          to_year:    year,
+          dossier_id: dossier_id
+        }
+      },
+      success: function(id){
+        $(e).attr('data-number', id)
+      }
+    });
+  }
 }
 
 function showVersionsBehaviour(){
@@ -99,7 +121,7 @@ function addRelationAutoCompletionBehaviour() {
                 var item = object['dossier'];
                 return {
                   label: item['title'],
-                  value: item['signature'] + ': ' + item['title']
+                  value: item['title']
                 }
               }));
             }
@@ -205,7 +227,8 @@ function addSearchSuggestionBehaviour() {
             }
           }));
           $('.ui-autocomplete').highlight(extractLast(request.term), 'match');
-        }      });
+        }
+      });
     },
     search: function() {
       // custom minLength
@@ -215,7 +238,7 @@ function addSearchSuggestionBehaviour() {
       }
     },
     focus: function( event, ui ) {
-      input.val( ui.item.label + " ");
+      // input.val( ui.item.label + " ");
       return false;
     },
     select: function( event, ui ) {
@@ -323,6 +346,7 @@ $(document).ready(function() {
   addReportColumnMultiselectBehaviour();
   addEditReportBehaviour();
   addTopicIndexBehaviour();
+  addCsrfTokenToAjaxCalls();
 });
 
 // Shows the key words in the dossier view.
@@ -349,4 +373,14 @@ function addTopicIndexBehaviour() {
     $(this).parent('li').addClass('active');
     $(this).parentsUntil('#topic_index').addClass('active');
   });
+}
+
+function addCsrfTokenToAjaxCalls(){
+  var csrf_token = $('meta[name=csrf-token]').attr('content');
+  
+  $("body").bind("ajaxSend", function(elm, xhr, s){
+     if (s.type == "POST") {
+        xhr.setRequestHeader('X-CSRF-Token', csrf_token);
+     }
+  });  
 }

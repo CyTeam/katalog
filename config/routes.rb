@@ -29,7 +29,11 @@ Katalog::Application.routes.draw do
     resources :versions
   end
 
-  post "dossier_numbers/set_amount"
+  resources :dossier_numbers do
+    collection do
+      post :set_amount
+    end
+  end
   
   resources :keywords do
     collection do

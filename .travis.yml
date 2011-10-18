@@ -1,7 +1,16 @@
-env: "RAILS_ENV='test'"
 before_script:
-  - "mysql -e 'create database katalog_test;' >/dev/null"
-  - bundle exec rake katalog:setup
-  - bundle exec rake db:create db:schema:load
+  - "mysql -e 'create database katalog_test;'"
+  - DB=mysql bundle exec rake katalog:setup
+  - DB=mysql bundle exec rake db:create db:schema:load
+
 script: "bundle exec rake test"
 
+# whitelist
+branches:
+  only:
+    - master
+    - stable
+
+# IRC notification
+notifications:
+  irc: "irc.freenode.org#cyt"

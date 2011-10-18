@@ -1,3 +1,7 @@
+require 'capones_recipes/tasks/airbrake'
+require './config/boot'
+require 'airbrake/capistrano'
+
 #Application
 set :application, "katalog"
 set :repository,  "git@github.com:CyTeam/katalog.git"
