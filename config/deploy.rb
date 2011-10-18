@@ -1,4 +1,3 @@
-require 'capones_recipes/tasks/airbrake'
 require './config/boot'
 require 'airbrake/capistrano'
 

@@ -53,7 +53,7 @@ group :development do
   gem 'hpricot'
 
   # Deployment
-  #gem 'capones_recipes'
+  gem 'capones_recipes'
 
   # MySQL Query Analyzer
   gem 'query_reviewer'
