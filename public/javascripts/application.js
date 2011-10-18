@@ -121,7 +121,7 @@ function addRelationAutoCompletionBehaviour() {
                 var item = object['dossier'];
                 return {
                   label: item['title'],
-                  value: item['signature'] + ': ' + item['title']
+                  value: item['title']
                 }
               }));
             }
