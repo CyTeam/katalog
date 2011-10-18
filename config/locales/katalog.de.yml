@@ -211,7 +211,8 @@ de:
         orientation:        "Seitenformat"
         per_page:           "Blättern"
         public:             "Öffentlich zugänglich"
-        not_public:          "Nicht öffentlich zugänglich"
+        not_public:         "Nicht öffentlich zugänglich"
+        years_visible:      "Jahreszahlen anzeigen"
       dossier_number:
         from:       "Von"
         amount:     "Anzahl"
