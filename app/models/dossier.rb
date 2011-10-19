@@ -544,9 +544,8 @@ class Dossier < ActiveRecord::Base
   # Builds the default dossier numbers.
   def build_default_numbers
     periods = DossierNumber.default_periods
-    for period in periods
-      numbers.build(period)
-    end
+    
+    periods.each {|period| numbers.build(period)}
   end
   
   def import_numbers(row)
