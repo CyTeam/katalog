@@ -369,6 +369,16 @@ function addCsrfTokenToAjaxCalls(){
   });  
 }
 
+// Adds the js behaviour to the main navigation for a faster navigation trough the menu.
+function addMainNavigationBehaviour() {
+  $('#mainmenu a').click(function(){
+    $(this).next('ul').show();
+    $('#mainmenu a, #mainmenu li').removeClass('selected');
+    $(this).addClass('selected');
+    $(this).parent('li').addClass('selected');
+  });
+}
+
 $(document).ready(function() {
   addAutofocusBehaviour();
   addLinkifyContainersBehaviour();
@@ -384,4 +394,5 @@ $(document).ready(function() {
   addEditReportBehaviour();
   addTopicIndexBehaviour();
   addCsrfTokenToAjaxCalls();
+  addMainNavigationBehaviour();
 });
