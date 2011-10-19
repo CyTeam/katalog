@@ -22,9 +22,6 @@ class SearchReplace < FormtasticFauxModel
 
   # Does the search and replace action.
   def do
-    # Disable slow processing
-    paper_trail_enabled = PaperTrail.enabled?
-    PaperTrail.enabled = false
     changed_amount = 0
 
     columns.each do |column|
@@ -55,9 +52,6 @@ class SearchReplace < FormtasticFauxModel
         }
       end
     end
-
-    # Re-enable paper trail
-    PaperTrail.enabled = paper_trail_enabled
     
     changed_amount
   end
