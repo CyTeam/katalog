@@ -332,23 +332,6 @@ function truncateToHighlighted(element) {
   });
 }
 
-$(document).ready(function() {
-  addAutofocusBehaviour();
-  addLinkifyContainersBehaviour();
-  addAutogrowBehaviour();
-  addAutoAddNewContainer();
-  addRelationAutoCompletionBehaviour();
-  addEditToolTipBehaviour();
-  addSearchSuggestionBehaviour();
-  addContainerSuggestionBehaviour();
-  addUpdateLastContainerTitleOfDossier();
-  showVersionsBehaviour();
-  addReportColumnMultiselectBehaviour();
-  addEditReportBehaviour();
-  addTopicIndexBehaviour();
-  addCsrfTokenToAjaxCalls();
-});
-
 // Shows the key words in the dossier view.
 function showKeyWords() {
   $('#show-key-words-link').hide();
@@ -385,3 +368,20 @@ function addCsrfTokenToAjaxCalls(){
      }
   });  
 }
+
+$(document).ready(function() {
+  addAutofocusBehaviour();
+  addLinkifyContainersBehaviour();
+  addAutogrowBehaviour();
+  addAutoAddNewContainer();
+  addRelationAutoCompletionBehaviour();
+  addEditToolTipBehaviour();
+  addSearchSuggestionBehaviour();
+  addContainerSuggestionBehaviour();
+  addUpdateLastContainerTitleOfDossier();
+  showVersionsBehaviour();
+  addReportColumnMultiselectBehaviour();
+  addEditReportBehaviour();
+  addTopicIndexBehaviour();
+  addCsrfTokenToAjaxCalls();
+});
