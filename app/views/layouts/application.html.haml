@@ -36,7 +36,7 @@
             #mainmenu.mod_navigation.block
               %a.invisible{:href => "#skipNavigation3"}
                 = t('katalog.application.skip_navigation')
-              = render_navigation(:context => :main)
+              = render_navigation(:context => :main, :expand_all => true)
               %a#skipNavigation3.invisible{:name => "skipNavigation3"}
                 &nbsp;
         #right
