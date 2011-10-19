@@ -375,6 +375,7 @@ function addTopicIndexBehaviour() {
   });
 }
 
+// Adds the CSRF token to all ajax calls.
 function addCsrfTokenToAjaxCalls(){
   var csrf_token = $('meta[name=csrf-token]').attr('content');
   
