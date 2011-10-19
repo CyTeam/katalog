@@ -89,6 +89,11 @@ de:
       title: "Suchen und Ersetzen"
       done: "Suchen und ersetzen wurde erfolgreich durchgeführt.<br/>%{amount} Dossier/s wurde/n geändert."
       failed: "Suchen und ersetzen ist leider fehlgeschlagen."
+    sphinx_admin:
+      exception:
+        done: Wortausnahmen wurden erfolgreich gespeichert.
+      word_form:
+        done: Wortformen wurden erfolgreich gespeichert.
     years_amount:  "Anzahl Jahre:"
     title:
       document_count_html: "Total <strong>%{document_count}</strong> Dokumente seit <strong>%{first_document}</strong>"
