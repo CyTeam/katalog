@@ -35,3 +35,16 @@ city_lonely_dossier:
   title: Lonely dossier
   container_type: DH
   location: EG
+
+container_wait:
+  title: Wait dossier
+  container_type: DH
+  location: location_wait
+  dossier: dossier_waiting
+  
+container_avaible:
+  title: Avaible dossier
+  container_type: DH
+  location: CO
+  dossier: dossier_available
+    

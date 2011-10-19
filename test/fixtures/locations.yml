@@ -21,3 +21,9 @@ CO:
   address: St. Oswaldsgasse 16
   code: CO
   availability: Diese Dokumente sind bei uns sofort einsehbar.
+
+location_wait:
+  title: Rigistrasse
+  address: Rigistrasse
+  code: RI  
+  availability: wait
