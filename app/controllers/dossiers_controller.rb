@@ -225,15 +225,15 @@ class DossiersController < AuthorizedController
 
   def index_excel
     index! do |format|
-      if params[:search] and params[:search][:signature]
-        filename = @dossiers.first.to_s
-      else
-        filename = t('katalog.search_for', :query => @query)
-      end
-
-      excel = params[:excel_format] == 'containers' ? Dossier.to_container_xls(@dossiers) : Dossier.to_xls(@dossiers)
-
       format.xls {
+        if params[:search] and params[:search][:signature]
+          filename = @dossiers.first.to_s
+        else
+          filename = t('katalog.search_for', :query => @query)
+        end
+
+        excel = params[:excel_format] == 'containers' ? Dossier.to_container_xls(@dossiers) : Dossier.to_xls(@dossiers)
+        
         send_data(excel,
           :filename => "#{filename}.xls",
           :type => 'application/vnd.ms-excel')
