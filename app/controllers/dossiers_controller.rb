@@ -60,6 +60,7 @@ class DossiersController < AuthorizedController
 
   def edit
     @dossier = Dossier.find(params[:id])
+    @dossier.build_default_numbers if @dossier.numbers.empty?
     @dossier.prepare_numbers
     
     edit!
