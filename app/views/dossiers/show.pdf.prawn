@@ -56,6 +56,7 @@ prawn_document(:page_size => 'A4', :filename => "#{@dossier.to_s}.pdf", :rendere
 
     pdf.table [header] + [row] do
       row(0).size = 5
+      row(0).font_style = :bold
     end
 
     pdf.indent(10) do
@@ -66,13 +67,13 @@ prawn_document(:page_size => 'A4', :filename => "#{@dossier.to_s}.pdf", :rendere
   end
 
   if @dossier.containers.present?
-    pdf.text t_attr(:containers), :size => 12
-    pdf.indent(10) do
-     @dossier.containers.each do |container|
-       pdf.text t_attr(:container_type, Container) + ": " + container.container_type.to_s
-       pdf.text t_attr(:location, Container) + ": " + container.location.to_s
-       pdf.text t_attr(:period, Container) + ": " + container.period.to_s unless container.period.blank?
-     end
+    container_header = [t_attr(:container_type, Container), t_attr(:location, Container), t_attr(:period, Container)]
+    container_rows = @dossier.containers.inject([]) {|out, container| out << [container.container_type.to_s, container.location.to_s, (container.period.blank? ? '' : container.period.to_s)]; out }
+    
+    pdf.text t('katalog.title.document_count_html', :document_count => number_with_delimiter(@dossier.document_count), :first_document => @dossier.first_document_on.try(:strftime, '%Y')), :size => 12, :inline_format => true
+    
+    pdf.table [container_header] + container_rows do
+      row(0).font_style = :bold
     end
     pdf.move_down(20)
   end
