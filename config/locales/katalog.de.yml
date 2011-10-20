@@ -126,6 +126,9 @@ de:
         update:  "geändert"
         destroy: "gelöscht"
         create:  "erstellt"
+    welcome:
+      title: Willkommen auf dem Katalog von Doku-Zug
+      content: Hier ein Einleitungstext
   controllers:
     index:
       keyword: "Schlagwortindex"
