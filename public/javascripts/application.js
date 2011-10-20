@@ -349,13 +349,44 @@ function hideKeyWords() {
 }
 
 function addTopicIndexBehaviour() {
-  $('#topic_index li a').click(function(){
-    $('#topic_index li.active, #topic_index a.active').removeClass('active');
-    $(this).next().show();
-    $(this).addClass('active');
-    $(this).parent('li').addClass('active');
-    $(this).parentsUntil('#topic_index').addClass('active');
+  var topic_links = $('#topic_index li a');
+  
+  topic_links.live('click', function(){
+    showSubTopics($(this));
   });
+  
+  topic_links.live('mouseenter', function() {
+    var topic_link = $(this);
+    var signature = topic_link.attr('data-signature');
+    
+    if(!signature.match(/^\d*\.\d*\.\d*$/) && !topic_link.hasClass('children-loaded')) {
+      var id = topic_link.attr('data-id');
+      
+      topic_link.addClass('children-loaded');
+      
+      $.ajax({
+        url: '/topics/' + id + '/sub_topics',
+        success: function( data ) {
+          $('#topic_index li.active, #topic_index a.active').removeClass('active');
+          topic_link.after(data);
+          topic_link.parentsUntil('#topic_index').addClass('active');
+          topic_link.addClass('active');
+        }
+      });
+    }
+    
+    if(!signature.match(/^\d*\.\d*\.\d*$/) && topic_link.hasClass('children-loaded')){
+      showSubTopics(topic_link);      
+    }
+  });
+}
+
+function showSubTopics(element) {
+  $('#topic_index li.active, #topic_index a.active').removeClass('active');
+  element.next().show();
+  element.addClass('active');
+  element.parent('li').addClass('active');
+  element.parentsUntil('#topic_index').addClass('active');
 }
 
 // Adds the CSRF token to all ajax calls.

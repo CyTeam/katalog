@@ -19,7 +19,12 @@ Katalog::Application.routes.draw do
   
   resources :locations
 
-  resources :topics
+  resources :topics do
+    member do
+      get :sub_topics
+    end
+  end
+  
   resources :dossiers do
     collection do
       get :search, :overview, :report, :edit_report

@@ -1,6 +1,8 @@
 class TopicsController < AuthorizedController
   # Authentication
-  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :show, :sub_topics]
+  
+  layout nil, :only => :sub_topics
 
   protected
   def collection
@@ -28,5 +30,11 @@ class TopicsController < AuthorizedController
         redirect_to new_resource_url
       end
     end
+  end
+  
+  def sub_topics 
+    @topics = Topic.find(params[:id]).direct_children
+    
+    index!
   end
 end
