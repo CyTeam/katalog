@@ -367,10 +367,8 @@ function addTopicIndexBehaviour() {
       $.ajax({
         url: '/topics/' + id + '/sub_topics',
         success: function( data ) {
-          $('#topic_index li.active, #topic_index a.active').removeClass('active');
           topic_link.after(data);
-          topic_link.parentsUntil('#topic_index').addClass('active');
-          topic_link.addClass('active');
+          showSubTopics(topic_link);
         }
       });
     }
@@ -383,7 +381,7 @@ function addTopicIndexBehaviour() {
 
 function showSubTopics(element) {
   $('#topic_index li.active, #topic_index a.active').removeClass('active');
-  element.next().show();
+  element.next().addClass('active');
   element.addClass('active');
   element.parent('li').addClass('active');
   element.parentsUntil('#topic_index').addClass('active');
