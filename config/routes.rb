@@ -1,4 +1,6 @@
 Katalog::Application.routes.draw do
+  get "welcome/index"
+
   resources :reports do
     collection do
       get :preview
@@ -59,5 +61,5 @@ Katalog::Application.routes.draw do
   
   match "/user_session" => "application#update_session"
 
-  root :to => "dossiers#index"
+  root :to => "welcome#index"
 end
