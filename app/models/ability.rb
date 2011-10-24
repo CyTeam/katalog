@@ -28,6 +28,7 @@ class Ability
       can :manage, [Container, ContainerType, Dossier, DossierNumber, Keyword, Location, Topic, VisitorLog, Report]
     else
       can [:index, :show, :search], [Dossier, Topic], :internal => false
+      can :sub_topics, Topic
       can [:index, :show, :search], [Container, ContainerType, DossierNumber, Keyword, Location]
       can [:index, :show], Report, :public => true
       can :report, Dossier
