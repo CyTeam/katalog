@@ -178,6 +178,8 @@ de:
         updated_at:           "Geändert am"
         internal:             "Internes Dossier"
         containers:           ""
+        books:                "Bücher"
+        books_link:           "Unsere Bücher zum Thema."
       container:
         period:            "Zeitraum"
         title:             "Titel"
