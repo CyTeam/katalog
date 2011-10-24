@@ -35,13 +35,20 @@
   - if @dossier.related_to.present?
     %h3= t_attr(:relation_list)
     #relations.section= render 'relations/list'
-
+    
+  %h3= t_attr(:books)
+  #books.section
+    %ul
+      %li= link_to 'Unsere Bücher zum Thema.', @dossier.books_link
+      
   %h3= t('katalog.title.document_count_html', :document_count => number_with_delimiter(@dossier.document_count), :first_document => @dossier.first_document_on.try(:strftime, '%Y'))
   #document_counts.ce_table
     %table.document_counts
-      %tr= render :partial => 'dossier_numbers/head', :collection => @dossier.numbers.present
+      %tr
+        = render :partial => 'dossier_numbers/head', :collection => @dossier.numbers.present
         %th= t('katalog.total')
-      %tr.odd= render :partial => 'dossier_numbers/amount', :collection => @dossier.numbers.present
+      %tr.odd
+        = render :partial => 'dossier_numbers/amount', :collection => @dossier.numbers.present
         %td
           %strong= number_with_delimiter(@dossier.document_count)
 
