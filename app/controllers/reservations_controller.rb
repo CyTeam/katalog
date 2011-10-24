@@ -8,6 +8,12 @@ class ReservationsController < AuthorizedController
   end
   
   def create
-    create! { dossier_path(@reservation.dossier) }
+    create! do |success, failure|
+      success.html do
+        ReservationMailer.user_email(@reservation).deliver
+        
+        redirect_to dossier_path(@reservation.dossier)
+      end
+    end
   end
 end

@@ -1,0 +1,10 @@
+<%= "#{I18n.t('activerecord.models.reservation')}: #{@reservation.dossier}" %>
+===================================
+Bestellt durch:
+  <% [:first_name, :last_name, :email].each do |attr|  %>
+    <%= I18n.t(attr, :scope => 'activerecord.attributes.reservation') %>: <%= @reservation.send(attr) %>
+  <% end %>
+
+Vorbestellte Jahre: <%= @reservation.dossier_years %>
+  
+Abholzeit: <%= @reservation.pickup %>
