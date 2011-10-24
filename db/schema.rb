@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111024125031) do
+ActiveRecord::Schema.define(:version => 20111024133942) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(:version => 20111024125031) do
     t.string "name"
   end
 
-  add_index "tags", ["name"], :name => "index_tags_on_name"
+  add_index "tags", ["name"], :name => "index_tags_on_name", :length => {"name"=>10}
 
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
