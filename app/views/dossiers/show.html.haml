@@ -11,14 +11,6 @@
       = contextual_link('excel', url_for(:format => :xls))
 
   %h1#title= @dossier.title
-  
-  - unless (user_signed_in? || @dossier.waiting_list.empty?)
-    .waiting-time
-      %h2
-        Auf folgende Zeitabschnitte besteht eine Wartefrist:
-      %ul#waiting-list
-        - @dossier.waiting_list.each do |container|
-          %li= container
 
   %p.notice= notice
 
@@ -51,6 +43,13 @@
         = render :partial => 'dossier_numbers/amount', :collection => @dossier.numbers.present
         %td
           %strong= number_with_delimiter(@dossier.document_count)
+
+  - unless (user_signed_in? || @dossier.waiting_list.empty?)
+    .waiting-time
+      - waiting_years = @dossier.waiting_list
+      %h3= t('activerecord.attributes.dossier.preorder', :years => waiting_years.each {|container| "#{container}#{(waiting_years.count > 1 && !waiting_years.last.eql?(container)) ? ', ' : '' }" })
+      %ul
+        %li= link_to t_attr(:preorder_link), new_dossier_reservation_path(@dossier)
 
   - if user_signed_in?
     #containers.ce_table
