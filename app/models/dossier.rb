@@ -587,6 +587,11 @@ class Dossier < ActiveRecord::Base
     update_tags
     import_numbers(row)
   end
+  
+  # Creates the link to winmedio.net
+  def books_link
+    "http://www.winmedio.net/doku-zug/default.aspx?q=erw:0%7C34%7C#{signature}"
+  end
 
   # Excel Export
   include Dossiers::ExportToXls
