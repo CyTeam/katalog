@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111024121334) do
+ActiveRecord::Schema.define(:version => 20111024124229) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -85,6 +85,8 @@ ActiveRecord::Schema.define(:version => 20111024121334) do
     t.string   "availability"
     t.boolean  "preorder"
   end
+
+  add_index "locations", ["code"], :name => "index_locations_on_code", :length => {"code"=>20}
 
   create_table "reports", :force => true do |t|
     t.string   "name"
