@@ -33,6 +33,7 @@ Katalog::Application.routes.draw do
     resources :containers
     resources :dossier_numbers
     resources :versions
+    resources :reservations
   end
 
   resources :dossier_numbers do
@@ -62,6 +63,8 @@ Katalog::Application.routes.draw do
   resources :search_replaces
 
   resources :visitor_logs
+  
+  resources :reservations
   
   match "/user_session" => "application#update_session"
 

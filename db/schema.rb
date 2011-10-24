@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110920080356) do
+ActiveRecord::Schema.define(:version => 20111020133847) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -96,6 +96,17 @@ ActiveRecord::Schema.define(:version => 20110920080356) do
     t.integer  "level"
     t.boolean  "public"
     t.boolean  "years_visible",      :default => true
+  end
+
+  create_table "reservations", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "dossier_id"
+    t.string   "dossier_years"
+    t.string   "email"
+    t.datetime "pickup"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "roles", :force => true do |t|

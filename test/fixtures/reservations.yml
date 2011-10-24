@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  dossier_id: 1
+  dossier_years: MyString
+  email: MyString
+  pickup: 2011-10-20 15:38:47
+
+two:
+  first_name: MyString
+  last_name: MyString
+  dossier_id: 1
+  dossier_years: MyString
+  email: MyString
+  pickup: 2011-10-20 15:38:47

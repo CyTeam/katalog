@@ -227,6 +227,8 @@ de:
         not_public:         "Nicht öffentlich zugänglich"
         years_visible:      "Jahreszahlen anzeigen"
       reservation:
+        personal_data: "Personalien"
+        reservation: "Reservation"
         first_name: "Vorname"
         last_name: "Nachname"
         dossier_years: "Jahre"
