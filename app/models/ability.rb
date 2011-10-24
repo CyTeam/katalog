@@ -22,19 +22,24 @@ class Ability
  
     alias_action :index, :to => :list
     
+    # Load the abilities for all roles.
     @user.roles.each {|role| send(role) }
-    visitor
+
+    common
   end
   
+  # The abilities of the admin role.
   def admin
     can :manage, :all
   end
   
+  # The abilities of the editor role.
   def editor
     can :manage, [Container, ContainerType, Dossier, DossierNumber, Keyword, Location, Topic, VisitorLog, Report]
   end
   
-  def visitor
+  # The abilities for everyone.
+  def common
     can [:index, :show, :search], [Dossier, Topic], :internal => false
     can :sub_topics, Topic
     can [:index, :show, :search], [Container, ContainerType, DossierNumber, Keyword, Location]
