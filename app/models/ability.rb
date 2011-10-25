@@ -18,12 +18,13 @@ class Ability
   
   # Main role/ability definitions.
   def initialize(user)
+    @user = user
     @user ||= User.new # guest user
  
     alias_action :index, :to => :list
     
     # Load the abilities for all roles.
-    @user.roles.each {|role| send(role) }
+    @user.roles.each {|role| send(role.name) }
 
     common
   end
