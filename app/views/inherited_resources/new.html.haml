@@ -1,4 +1,4 @@
-before_filter :authenticate_user!, :except => - cache resource.cache_key + '_new' do
+- cache resource.cache_key + '_new' do
   = contextual_links
 
   %h2= t_title
