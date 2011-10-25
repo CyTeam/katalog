@@ -103,7 +103,7 @@ function addRelationAutoCompletionBehaviour() {
     e.preventDefault();
     text_area.after('<input type="text" value="Um nach einem Querverweis zu suchen. Hier den Suchbegriff eingeben." size="50" id="' + id + '" style="margin-left:25%;width:74%;">');
     link.hide();
-    $('#' + id).click(function(){
+    $('#' + id).focusin(function(){
       var input = $(this);
       input.val('');
       input.autocomplete({
@@ -332,23 +332,6 @@ function truncateToHighlighted(element) {
   });
 }
 
-$(document).ready(function() {
-  addAutofocusBehaviour();
-  addLinkifyContainersBehaviour();
-  addAutogrowBehaviour();
-  addAutoAddNewContainer();
-  addRelationAutoCompletionBehaviour();
-  addEditToolTipBehaviour();
-  addSearchSuggestionBehaviour();
-  addContainerSuggestionBehaviour();
-  addUpdateLastContainerTitleOfDossier();
-  showVersionsBehaviour();
-  addReportColumnMultiselectBehaviour();
-  addEditReportBehaviour();
-  addTopicIndexBehaviour();
-  addCsrfTokenToAjaxCalls();
-});
-
 // Shows the key words in the dossier view.
 function showKeyWords() {
   $('#show-key-words-link').hide();
@@ -365,16 +348,54 @@ function hideKeyWords() {
   $.post('/user_session.json?hide_keywords=true');
 }
 
+var topic_navigation_timer;
+
 function addTopicIndexBehaviour() {
-  $('#topic_index li a').click(function(){
-    $('#topic_index li.active, #topic_index a.active').removeClass('active');
-    $(this).next().show();
-    $(this).addClass('active');
-    $(this).parent('li').addClass('active');
-    $(this).parentsUntil('#topic_index').addClass('active');
+  var topic_links = $('#topic_index li a');
+  
+  topic_links.live('click', function(){
+    showSubTopics($(this));
+  });
+  
+  topic_links.live('mouseenter', function() {
+    clearTimeout(topic_navigation_timer);
+    
+    var topic_link = $(this);
+    var signature = topic_link.attr('data-signature');
+
+    if(!signature.match(/^\d*\.\d*\.\d*$/) && !topic_link.hasClass('children-loading')) {
+      var id = topic_link.attr('data-id');
+      topic_link.addClass('children-loading');
+      
+      $.ajax({
+        url: '/topics/' + id + '/sub_topics',
+        success: function( data ) {
+          topic_link.after(data);
+          topic_link.addClass('children-loaded');
+          topic_navigation_timer = setTimeout(function(){
+            showSubTopics(topic_link);      
+          }, 500)
+        }
+      });
+    }
+    
+    if(!signature.match(/^\d*\.\d*\.\d*$/) && topic_link.hasClass('children-loaded')){
+      topic_navigation_timer = setTimeout(function(){
+        showSubTopics(topic_link);      
+      }, 500);
+    }
   });
 }
 
+function showSubTopics(element) {
+  $('#topic_index li.active, #topic_index a.active').removeClass('active');
+  element.next().addClass('active');
+  element.addClass('active');
+  element.parent('li').addClass('active');
+  element.parentsUntil('#topic_index').addClass('active');
+}
+
+// Adds the CSRF token to all ajax calls.
 function addCsrfTokenToAjaxCalls(){
   var csrf_token = $('meta[name=csrf-token]').attr('content');
   
@@ -384,3 +405,31 @@ function addCsrfTokenToAjaxCalls(){
      }
   });  
 }
+
+// Adds the js behaviour to the main navigation for a faster navigation trough the menu.
+function addMainNavigationBehaviour() {
+  $('#mainmenu a').click(function(){
+    $(this).next('ul').show();
+    $('#mainmenu a, #mainmenu li').removeClass('selected');
+    $(this).addClass('selected');
+    $(this).parent('li').addClass('selected');
+  });
+}
+
+$(document).ready(function() {
+  addAutofocusBehaviour();
+  addLinkifyContainersBehaviour();
+  addAutogrowBehaviour();
+  addAutoAddNewContainer();
+  addRelationAutoCompletionBehaviour();
+  addEditToolTipBehaviour();
+  addSearchSuggestionBehaviour();
+  addContainerSuggestionBehaviour();
+  addUpdateLastContainerTitleOfDossier();
+  showVersionsBehaviour();
+  addReportColumnMultiselectBehaviour();
+  addEditReportBehaviour();
+  addTopicIndexBehaviour();
+  addCsrfTokenToAjaxCalls();
+  addMainNavigationBehaviour();
+});

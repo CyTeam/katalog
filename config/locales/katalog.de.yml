@@ -89,6 +89,11 @@ de:
       title: "Suchen und Ersetzen"
       done: "Suchen und ersetzen wurde erfolgreich durchgeführt.<br/>%{amount} Dossier/s wurde/n geändert."
       failed: "Suchen und ersetzen ist leider fehlgeschlagen."
+    sphinx_admin:
+      exception:
+        done: Wortausnahmen wurden erfolgreich gespeichert.
+      word_form:
+        done: Wortformen wurden erfolgreich gespeichert.
     years_amount:  "Anzahl Jahre:"
     title:
       document_count_html: "Total <strong>%{document_count}</strong> Dokumente seit <strong>%{first_document}</strong>"
@@ -121,6 +126,9 @@ de:
         update:  "geändert"
         destroy: "gelöscht"
         create:  "erstellt"
+    welcome:
+      title: Willkommen auf dem Katalog von Doku-Zug
+      content: Hier ein Einleitungstext
   controllers:
     index:
       keyword: "Schlagwortindex"
@@ -138,6 +146,7 @@ de:
       role:    "Rolle"
       keyword: "Schlagwort"
       topic:   "Titel"
+      reservation: "Vorbestellung"
       sphinx_admin_exception: "Ausnahmen"
       sphinx_admin_word_form: "Wortformen"
       report:  "Report"
@@ -170,6 +179,10 @@ de:
         updated_at:           "Geändert am"
         internal:             "Internes Dossier"
         containers:           ""
+        books:                "Bücher"
+        books_link:           "Unsere Bücher zum Thema."
+        preorder:             "Die Dokumente aus den Zeiträumen %{years} sind im Magazin. Wir empfehlen Ihnen hier die Dokument gleich vorzubestellen."
+        preorder_link:        "Zur Vorbestellung gehts hier lang."
       container:
         period:            "Zeitraum"
         title:             "Titel"
@@ -213,6 +226,14 @@ de:
         public:             "Öffentlich zugänglich"
         not_public:         "Nicht öffentlich zugänglich"
         years_visible:      "Jahreszahlen anzeigen"
+      reservation:
+        personal_data: "Personalien"
+        reservation: "Reservation"
+        first_name: "Vorname"
+        last_name: "Nachname"
+        dossier_years: "Jahre"
+        email: "E-Mail-Adresse"
+        pickup: "Abholdatum/-zeit"
       dossier_number:
         from:       "Von"
         amount:     "Anzahl"

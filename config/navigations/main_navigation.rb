@@ -5,7 +5,7 @@ SimpleNavigation::Configuration.run do |navigation|
     # doku zug navigations
     primary.item :nav_dossiers, t('katalog.main_navigation.dossiers'), dossiers_path, :highlights_on => /\/dossiers($|\/search)/ do |dossier|
       dossier.item :index, t('katalog.main_navigation.dossier_index'), dossiers_path
-      dossier.item :search, t('katalog.main_navigation.search'), search_dossiers_path
+      dossier.item :search, t('katalog.main_navigation.search'), search_dossiers_path, :highlights_on => /\/dossiers(\/search|\d*)/
     end
     primary.item :key_words, t('controllers.index.keyword'), keywords_path
 
@@ -22,8 +22,8 @@ SimpleNavigation::Configuration.run do |navigation|
     
     if current_user and current_user.role?(:admin)
       primary.item :adminstration, t('katalog.main_navigation.administration'), users_path do |administration|
-        administration.item :users, t('katalog.main_navigation.users'), users_path
-        administration.item :locations, t('katalog.main_navigation.locations'), locations_path
+        administration.item :users, t('katalog.main_navigation.users'), users_path, :highlights_on => /\/users($|\/new|\/\d*)/
+        administration.item :locations, t('katalog.main_navigation.locations'), locations_path, :highlights_on => /\/locations($|\/new|\/\d*)/
         administration.item :container_types, t('katalog.main_navigation.container_types'), container_types_path, :highlights_on => /\/container_types/
         administration.item :reports, t('katalog.main_navigation.reports'), reports_path, :highlights_on => /\/reports/
         administration.item :sphinx, t('katalog.main_navigation.search_admin'), exceptions_sphinx_admins_path do |sphinx|

@@ -77,7 +77,7 @@ class Container < ActiveRecord::Base
   
   # Import
   def self.import(row, dossier)
-    container = self.create(
+    self.create(
       :dossier           => dossier,
       :title             => row[1],
       :first_document_on => row[3].nil? ? nil : Date.new(row[3].to_i),

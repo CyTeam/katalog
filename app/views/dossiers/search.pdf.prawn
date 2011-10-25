@@ -2,9 +2,12 @@ prawn_document(:page_size => 'A4', :filename => search_title, :renderer => Prawn
 
   # Table content creation.
   items = @dossiers.map do |item|
+    img_file = waiting_for?(item) ? File.new("#{Rails.root}/public/images/16x16/availability_wait.png") : nil
+        
     row = [
       pdf.make_cell(:content => item.signature.to_s),
       pdf.make_cell(:content => link_to(item.title, polymorphic_url(item)).to_s, :inline_format => true),
+      pdf.make_cell(:content => "#{waiting_for?(item) ? t('katalog.availability.title.wait') : ''}"),
       pdf.make_cell(:content => number_with_delimiter(item.document_count))
     ]
 
@@ -12,7 +15,7 @@ prawn_document(:page_size => 'A4', :filename => search_title, :renderer => Prawn
   end
 
   # Table header creation.
-  headers = [[t_attr(:signature), t_attr(:title), t_attr(:document_count)]]
+  headers = [[t_attr(:signature), t_attr(:title), "", t_attr(:document_count)]]
 
   # Draw the title
   pdf.h1 search_title

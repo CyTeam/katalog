@@ -410,7 +410,7 @@ class Dossier < ActiveRecord::Base
       # Parse string
       from, to, amount = DossierNumber.from_s(number_string)
       # Remember updated/created number
-      new_numbers << update_or_create_number(amount, {:from => from, :to => to}, false)
+      new_numbers << update_or_create_number(amount, {:from => from, :to => to}, false) if (amount and amount > 0)
     }
     
     removed_numbers = old_numbers - new_numbers
@@ -544,9 +544,8 @@ class Dossier < ActiveRecord::Base
   # Builds the default dossier numbers.
   def build_default_numbers
     periods = DossierNumber.default_periods
-    for period in periods
-      numbers.build(period)
-    end
+    
+    periods.each {|period| numbers.build(period)}
   end
   
   def import_numbers(row)
@@ -587,6 +586,11 @@ class Dossier < ActiveRecord::Base
     import_keywords(row)
     update_tags
     import_numbers(row)
+  end
+  
+  # Creates the link to winmedio.net
+  def books_link
+    "http://www.winmedio.net/doku-zug/default.aspx?q=erw:0%7C34%7C#{signature}"
   end
 
   # Excel Export

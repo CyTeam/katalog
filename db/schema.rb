@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110920080356) do
+ActiveRecord::Schema.define(:version => 20111024141339) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(:version => 20110920080356) do
     t.datetime "updated_at"
     t.string   "title"
   end
+
+  add_index "containers", ["location_id"], :name => "index_containers_on_location_id"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -70,8 +72,10 @@ ActiveRecord::Schema.define(:version => 20110920080356) do
     t.boolean  "internal",          :default => false
   end
 
+  add_index "dossiers", ["id", "signature"], :name => "index_dossiers_on_id_and_signature", :unique => true
+  add_index "dossiers", ["id"], :name => "index_dossiers_on_id"
   add_index "dossiers", ["internal"], :name => "index_dossiers_on_internal"
-  add_index "dossiers", ["signature"], :name => "index_dossiers_on_signature"
+  add_index "dossiers", ["signature"], :name => "index_dossiers_on_signature", :length => {"signature"=>20}
   add_index "dossiers", ["type"], :name => "index_dossiers_on_type"
 
   create_table "locations", :force => true do |t|
@@ -83,6 +87,8 @@ ActiveRecord::Schema.define(:version => 20110920080356) do
     t.string   "availability"
     t.boolean  "preorder"
   end
+
+  add_index "locations", ["code"], :name => "index_locations_on_code", :length => {"code"=>20}
 
   create_table "reports", :force => true do |t|
     t.string   "name"
@@ -96,6 +102,17 @@ ActiveRecord::Schema.define(:version => 20110920080356) do
     t.integer  "level"
     t.boolean  "public"
     t.boolean  "years_visible",      :default => true
+  end
+
+  create_table "reservations", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "dossier_id"
+    t.string   "dossier_years"
+    t.string   "email"
+    t.datetime "pickup"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "roles", :force => true do |t|
@@ -135,7 +152,7 @@ ActiveRecord::Schema.define(:version => 20110920080356) do
     t.string "name"
   end
 
-  add_index "tags", ["name"], :name => "index_tags_on_name"
+  add_index "tags", ["name"], :name => "index_tags_on_name", :length => {"name"=>10}
 
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "", :null => false

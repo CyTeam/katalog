@@ -18,19 +18,34 @@ class Ability
   
   # Main role/ability definitions.
   def initialize(user)
-    user ||= User.new # guest user
+    @user = user
+    @user ||= User.new # guest user
  
     alias_action :index, :to => :list
     
-    if user.role? :admin
-      can :manage, :all
-    elsif user.role? :editor
-      can :manage, [Container, ContainerType, Dossier, DossierNumber, Keyword, Location, Topic, VisitorLog, Report]
-    else
-      can [:index, :show, :search], [Dossier, Topic], :internal => false
-      can [:index, :show, :search], [Container, ContainerType, DossierNumber, Keyword, Location]
-      can [:index, :show], Report, :public => true
-      can :report, Dossier
-    end
+    # Load the abilities for all roles.
+    @user.roles.each {|role| send(role.name) }
+
+    common
+  end
+  
+  # The abilities of the admin role.
+  def admin
+    can :manage, :all
+  end
+  
+  # The abilities of the editor role.
+  def editor
+    can :manage, [Container, ContainerType, Dossier, DossierNumber, Keyword, Location, Topic, VisitorLog, Report]
+  end
+  
+  # The abilities for everyone.
+  def common
+    can [:index, :show, :search], [Dossier, Topic], :internal => false
+    can :sub_topics, Topic
+    can [:index, :show, :search], [Container, ContainerType, DossierNumber, Keyword, Location]
+    can [:index, :show], Report, :public => true
+    can :report, Dossier
+    can [:new, :create], Reservation 
   end
 end

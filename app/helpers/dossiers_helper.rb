@@ -18,7 +18,7 @@ module DossiersHelper
   
   def availability_notes(dossier)
     # Collect availabilities
-    availabilities = dossier.availability.compact
+    availabilities = availabilities(dossier)
 
     partially = availabilities.size > 1
 
@@ -33,6 +33,12 @@ module DossiersHelper
     end
 
     notes.html_safe
+  end
+  
+  def waiting_for?(dossier)
+    availabilities = availabilities(dossier)
+    
+    availabilities.include?('wait') ? true : false
   end
   
   def url_for_topic(topic)
@@ -112,5 +118,11 @@ module DossiersHelper
 
   def is_edit_report?
     'edit_report'.eql?action_name
+  end
+  
+  private
+  
+  def availabilities(dossier)
+    dossier.availability.compact
   end
 end

@@ -111,3 +111,16 @@ bfm:
   signature: 12.3.215
   title: BFM BUNDESAMT FÜR MIGRATION
   type: Topic
+
+
+# Availability Dossiers
+# ========
+dossier_available:
+  signature: 11.0.500
+  title: Worker Movement history
+  description: ""
+    
+dossier_waiting:
+  signature: 77.0.101
+  title: City counsil notes
+  description: ""  

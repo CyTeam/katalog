@@ -366,7 +366,7 @@ class DossierTest < ActiveSupport::TestCase
 
   test "dossier collects all container locations" do
     # TODO: using .reverse is not stable
-    assert_equal Location.where(:code => ["RI", "EG"]).reverse, dossiers(:city_history).locations
+    assert_equal Location.where(:code => ["RI", "EG"]), dossiers(:city_history).locations
   end
 
   context "containers association" do

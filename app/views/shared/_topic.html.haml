@@ -1,5 +1,6 @@
-%li{:class => "topic #{topic.topic_type} #{'active' if active?(topic)}"}
+- topic_activ = active?(topic)
+%li{:class => "topic #{topic.topic_type} #{'active' if topic_activ}"}
   %span.signature= topic.signature
-  = link_to(topic.title, url_for_topic(topic), :title => topic.title, :class => "#{'active' if active?(topic)}")
-  - if topic.is_a?(Topic) and topic.topic_type != :detail
+  = link_to(topic.title, url_for_topic(topic), :title => topic.title, :class => "#{'active' if topic_activ}", 'data-signature' => topic.signature, 'data-id' => topic.id)
+  - if topic_activ and topic.is_a?(Topic) and topic.topic_type != :detail
     %ul= render :partial => 'shared/topic', :collection => topic.direct_children

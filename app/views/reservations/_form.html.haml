@@ -1,0 +1,15 @@
+= semantic_form_for resource do |f|
+  = f.semantic_errors
+
+  = f.inputs t_attr(:personal_data) do
+    = f.input :first_name
+    = f.input :last_name
+    = f.input :email
+    
+  = f.inputs t_attr(:reservation) do
+    = f.input :year_selection, :as => :check_boxes, :collection => @reservation.dossier.waiting_list, :required => true
+    = f.input :pickup, :hint => 'Unsere Öffnungszeiten sind: Mo, Di, Mi, Fr 10-18 Uhr, Donnerstag 10-20 Uhr'
+    = f.input :dossier_id, :as => :hidden
+
+  = f.buttons do
+    = f.commit_button
