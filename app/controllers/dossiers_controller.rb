@@ -23,7 +23,12 @@ class DossiersController < AuthorizedController
   has_scope :order_by, :default => 'signature'
 
   def show
-    @dossier = Dossier.find(params[:id])
+    if user_signed_in?
+      @dossier = Dossier.find(params[:id], :include => {:containers => [:location, :container_type]})
+    else
+      @dossier = Dossier.find(params[:id])
+    end
+    
     authorize! :show, @dossier
     
     show! do |format|
@@ -145,10 +150,10 @@ class DossiersController < AuthorizedController
     end
     if params[:search][:text].present?
       @query = params[:search][:text]
-      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?)
+      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?, :include => [:location, :containers])
     else
       @query = params[:search][:signature]
-      @dossiers = apply_scopes(Dossier, params[:search]).order('signature').accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
+      @dossiers = apply_scopes(Dossier, params[:search]).includes(:containers => :location).order('signature').accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
 
       # Alphabetic pagination
       if Topic.alphabetic?(@query)
@@ -210,11 +215,11 @@ class DossiersController < AuthorizedController
     end
     if params[:search][:text].present?
       @query = params[:search][:text]
-      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?)
+      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?, :include => [:location, :containers, :keywords])
     else
       @query = params[:search][:signature]
       params[:search].merge!(:per_page => @report[:per_page], :level => @report[:level])
-      @dossiers = apply_scopes(Dossier, params[:search]).order('signature').accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
+      @dossiers = apply_scopes(Dossier, params[:search]).includes(:containers => :location).order('signature').accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
     end
 
     # Drop nil results by stray full text search matches
