@@ -348,6 +348,8 @@ function hideKeyWords() {
   $.post('/user_session.json?hide_keywords=true');
 }
 
+var topic_navigation_timer;
+
 function addTopicIndexBehaviour() {
   var topic_links = $('#topic_index li a');
   
@@ -356,25 +358,31 @@ function addTopicIndexBehaviour() {
   });
   
   topic_links.live('mouseenter', function() {
+    clearTimeout(topic_navigation_timer);
+    
     var topic_link = $(this);
     var signature = topic_link.attr('data-signature');
-    
-    if(!signature.match(/^\d*\.\d*\.\d*$/) && !topic_link.hasClass('children-loaded')) {
+
+    if(!signature.match(/^\d*\.\d*\.\d*$/) && !topic_link.hasClass('children-loading')) {
       var id = topic_link.attr('data-id');
-      
-      topic_link.addClass('children-loaded');
+      topic_link.addClass('children-loading');
       
       $.ajax({
         url: '/topics/' + id + '/sub_topics',
         success: function( data ) {
           topic_link.after(data);
-          showSubTopics(topic_link);
+          topic_link.addClass('children-loaded');
+          topic_navigation_timer = setTimeout(function(){
+            showSubTopics(topic_link);      
+          }, 500)
         }
       });
     }
     
     if(!signature.match(/^\d*\.\d*\.\d*$/) && topic_link.hasClass('children-loaded')){
-      showSubTopics(topic_link);      
+      topic_navigation_timer = setTimeout(function(){
+        showSubTopics(topic_link);      
+      }, 500);
     }
   });
 }
