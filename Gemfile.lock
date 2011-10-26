@@ -46,8 +46,7 @@ GEM
       activemodel (= 3.0.10)
       activesupport (= 3.0.10)
     activesupport (3.0.10)
-    acts-as-taggable-on (2.1.1)
-      rails
+    acts-as-taggable-on (2.0.6)
     airbrake (3.0.4)
       activesupport
       builder
@@ -220,7 +219,7 @@ PLATFORMS
 
 DEPENDENCIES
   SystemTimer
-  acts-as-taggable-on
+  acts-as-taggable-on (= 2.0.6)
   airbrake
   autotest
   autotest-rails
