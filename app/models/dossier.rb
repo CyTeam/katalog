@@ -86,7 +86,7 @@ class Dossier < ActiveRecord::Base
         next if row.select{|column| column.present?}.empty?
 
         # Only import keywords if row has no reference
-        if row[0].blank? && (row[13].present? || row[14].present? || row[15].present?)
+        if row[0].blank? && (row[7].present? || row[8].present? || row[9].present?)
           dossier.import_keywords(row)
           dossier.save!
           next
@@ -121,7 +121,7 @@ class Dossier < ActiveRecord::Base
   def self.import_filter(rows)
     signature_filter = /^[ ]*[0-9]{2}\.[0-9]\.[0-9]{3}[ ]*$/
 
-    rows.select{|row| (signature_filter.match(row[0]) && row[9].present?) || (row[0].blank? && (row[13].present? || row[14].present? || row[15].present?))}
+    rows.select{|row| (signature_filter.match(row[0]) && row[3].present?) || (row[0].blank? && (row[7].present? || row[8].present? || row[9].present?))}
   end
 
   # Prepares the database for a new import.
@@ -163,7 +163,7 @@ class Dossier < ActiveRecord::Base
     self.prepare_db_for_import
 
     # Select rows containing topics
-    topic_rows = rows.select{|row| Topic.import_filter.match(row[0]) && row[9].blank?}
+    topic_rows = rows.select{|row| Topic.import_filter.match(row[0]) && row[3].blank?}
     topic_rows.map{|row| Topic.import(row).save!}
 
     import_all(import_filter(rows))
@@ -551,7 +551,7 @@ class Dossier < ActiveRecord::Base
   def import_numbers(row)
     # < 1990, 1990-1993, 1994 - 2010
     periods = DossierNumber.default_periods(2010)
-    first_column = 16
+    first_column = 10
     for i in 0..18
       amount = row[first_column + i]
       amount = amount.nil? ? nil : amount.delete("',").to_i
@@ -571,7 +571,7 @@ class Dossier < ActiveRecord::Base
 
   # Imports the key words.
   def import_keywords(row)
-    keys = self.class.extract_keywords(row[13..15])
+    keys = self.class.extract_keywords(row[7..9])
     self.keyword_list.add(keys)
   end
 
@@ -580,7 +580,7 @@ class Dossier < ActiveRecord::Base
     # containers
     containers << Container.import(row, self)
     
-    self.related_to = row[12] || ''
+    self.related_to = row[6] || ''
 
     # tags and keywords
     import_keywords(row)

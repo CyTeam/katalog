@@ -80,9 +80,9 @@ class Container < ActiveRecord::Base
     self.create(
       :dossier           => dossier,
       :title             => row[1],
-      :first_document_on => row[3].nil? ? nil : Date.new(row[3].to_i),
-      :container_type    => row[9],
-      :location          => row[10]
+      :first_document_on => row[2].nil? ? nil : Date.new(row[2].to_i),
+      :container_type    => row[3],
+      :location          => row[4]
     )
   end
 end

@@ -155,7 +155,7 @@ class DossierTest < ActiveSupport::TestCase
   end
   
   test "import keywords adds to keyword and tag list" do
-    keyword_row = []; keyword_row[13] = "Counsil"; keyword_row[14] = "Corruption"; keyword_row[15] = "Conflict";
+    keyword_row = []; keyword_row[7] = "Counsil"; keyword_row[8] = "Corruption"; keyword_row[9] = "Conflict";
 
     @dossier.import_keywords(keyword_row)
     assert_superset @dossier.keyword_list, ["Counsil", "Corruption", "Conflict"]

@@ -61,7 +61,7 @@ class ContainerTest < ActiveSupport::TestCase
 
   test "import" do
     dossier = dossiers(:city_history)
-    container_row = ['77.0.100', 'City history 2000 -', 0, '2001', 0, 0, 0, 0, 0, 'DH', 'EG']
+    container_row = ['77.0.100', 'City history 2000 -', '2001', 'DH', 'EG']
 
     container = Container.import(container_row, dossier)
     
