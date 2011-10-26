@@ -82,7 +82,7 @@ gem 'devise'
 gem 'cancan'
 
 # Tagging
-gem 'acts-as-taggable-on'
+gem 'acts-as-taggable-on', '2.0.6'
 
 # CRUD helpers
 gem 'inherited_resources_views'
