@@ -36,7 +36,11 @@ class VersionsController < AuthorizedController
     
     @version.revert
     
-    redirect_to dossier_versions_path(active_main_item(@version))
+    if dossier?@version
+      redirect_to dossier_versions_path(active_main_item(@version))
+    else
+      redirect_to :back
+    end
 
     return
     

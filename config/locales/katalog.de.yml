@@ -147,6 +147,7 @@ de:
       keyword: "Schlagwort"
       topic:   "Titel"
       reservation: "Vorbestellung"
+      sphinx_admin: Konvertor
       sphinx_admin_exception: "Ausnahmen"
       sphinx_admin_word_form: "Wortformen"
       report:  "Report"
@@ -234,6 +235,10 @@ de:
         dossier_years: "Jahre"
         email: "E-Mail-Adresse"
         pickup: "Abholdatum/-zeit"
+      sphinx_admin:
+        type: Konverterart
+        from: Konvertiert von
+        to:   Konvertiert nach
       dossier_number:
         from:       "Von"
         amount:     "Anzahl"

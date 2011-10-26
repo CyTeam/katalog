@@ -59,6 +59,8 @@ Katalog::Application.routes.draw do
       get :exceptions, :word_forms
     end
   end
+  resources :sphinx_admin_exceptions
+  resources :sphinx_admin_word_forms
 
   resources :search_replaces
 
