@@ -25,6 +25,10 @@ CKEDITOR.editorConfig = function( config )
   // works only with en, ru, uk languages
   // config.extraPlugins = "embed,attachment";
   
+  // Link editor customization
+  config.linkShowAdvancedTab = false;
+  config.linkShowTargetTab = false;
+  
   config.toolbar = 'Custom';
   
   config.toolbar_Easy =
