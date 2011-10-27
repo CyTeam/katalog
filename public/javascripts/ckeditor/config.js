@@ -56,7 +56,7 @@ CKEDITOR.editorConfig = function( config )
     [
         ['Cut','Copy','Paste','PasteText','PasteFromWord'],
         ['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
-        ['Bold','Italic','Underline'],
+        ['Bold','Italic','Underline','Subscript','Superscript'],
         ['Link','Unlink']
     ];
 };
