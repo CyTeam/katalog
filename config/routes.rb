@@ -26,6 +26,10 @@ Katalog::Application.routes.draw do
   end
   
   resources :dossiers do
+    member do
+      post :preview
+    end
+    
     collection do
       get :search, :overview, :report, :edit_report
     end

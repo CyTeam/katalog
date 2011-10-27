@@ -2,7 +2,7 @@ require 'ostruct'
 
 class DossiersController < AuthorizedController
   # Authentication
-  before_filter :authenticate_user!, :except => [:index, :search, :show, :report]
+  before_filter :authenticate_user!, :except => [:index, :search, :show, :report, :preview]
 
   # Responders
   respond_to :html, :js, :json, :xls, :pdf
@@ -134,6 +134,10 @@ class DossiersController < AuthorizedController
         redirect_to new_resource_url
       end
     end
+  end
+  
+  def preview
+    show!   
   end
   
   private
