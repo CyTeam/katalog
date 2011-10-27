@@ -31,7 +31,7 @@
   %h3= t_attr(:books)
   #books.section
     %ul
-      %li= link_to t_attr(:books_link), @dossier.books_link
+      %li= link_to t_attr(:books_link), @dossier.books_link, :target => '_blank'
       
   %h3= t('katalog.title.document_count_html', :document_count => number_with_delimiter(@dossier.document_count), :first_document => @dossier.first_document_on.try(:strftime, '%Y'))
   #document_counts.ce_table
