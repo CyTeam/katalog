@@ -68,9 +68,9 @@ CKEDITOR.editorConfig = function( config )
 
   config.toolbar_Custom =
     [
-        ['ServerPreview','-','Cut','Copy','Paste','PasteText','PasteFromWord'],
+        ['ServerPreview','-','Cut','Copy','Paste','PasteFromWord'],
         ['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
-        ['Bold','Italic','Underline','Subscript','Superscript'],
+        ['Bold','Italic','Underline','-','Subscript','Superscript','-','BulletedList'],
         ['Link','Unlink']
     ];
 };
