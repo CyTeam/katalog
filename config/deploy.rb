@@ -38,6 +38,3 @@ after "bundle:install", "deploy:migrate"
 
 # Clean up the releases after deploy.
 after "deploy", "deploy:cleanup"
-
-        require './config/boot'
-        require 'airbrake/capistrano'
