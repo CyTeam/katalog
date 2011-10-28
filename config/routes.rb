@@ -21,7 +21,7 @@ Katalog::Application.routes.draw do
 
   resources :topics do
     member do
-      get :sub_topics
+      get :sub_topics, :navigation
     end
   end
   

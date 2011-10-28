@@ -1,6 +1,6 @@
 class TopicsController < AuthorizedController
   # Authentication
-  before_filter :authenticate_user!, :except => [:index, :show, :sub_topics]
+  before_filter :authenticate_user!, :except => [:index, :show]
 
   protected
   def collection
@@ -27,14 +27,6 @@ class TopicsController < AuthorizedController
         flash[:notice] = t('katalog.created')
         redirect_to new_resource_url
       end
-    end
-  end
-  
-  def sub_topics 
-    @topics = Topic.find(params[:id]).direct_children
-    
-    respond_with @topics do |format|
-      format.html { render :layout => false }
     end
   end
 end

@@ -348,53 +348,6 @@ function hideKeyWords() {
   $.post('/user_session.json?hide_keywords=true');
 }
 
-var topic_navigation_timer;
-
-function addTopicIndexBehaviour() {
-  var topic_links = $('#topic_index li a');
-  
-  topic_links.live('click', function(){
-    showSubTopics($(this));
-  });
-  
-  topic_links.live('mouseenter', function() {
-    clearTimeout(topic_navigation_timer);
-    
-    var topic_link = $(this);
-    var signature = topic_link.attr('data-signature');
-
-    if(!signature.match(/^\d*\.\d*\.\d*$/) && !topic_link.hasClass('children-loading')) {
-      var id = topic_link.attr('data-id');
-      topic_link.addClass('children-loading');
-      
-      $.ajax({
-        url: '/topics/' + id + '/sub_topics',
-        success: function( data ) {
-          topic_link.after(data);
-          topic_link.addClass('children-loaded');
-          topic_navigation_timer = setTimeout(function(){
-            showSubTopics(topic_link);      
-          }, 500)
-        }
-      });
-    }
-    
-    if(!signature.match(/^\d*\.\d*\.\d*$/) && topic_link.hasClass('children-loaded')){
-      topic_navigation_timer = setTimeout(function(){
-        showSubTopics(topic_link);      
-      }, 500);
-    }
-  });
-}
-
-function showSubTopics(element) {
-  $('#topic_index li.active, #topic_index a.active').removeClass('active');
-  element.next().addClass('active');
-  element.addClass('active');
-  element.parent('li').addClass('active');
-  element.parentsUntil('#topic_index').addClass('active');
-}
-
 // Adds the CSRF token to all ajax calls.
 function addCsrfTokenToAjaxCalls(){
   var csrf_token = $('meta[name=csrf-token]').attr('content');
@@ -429,7 +382,6 @@ $(document).ready(function() {
   showVersionsBehaviour();
   addReportColumnMultiselectBehaviour();
   addEditReportBehaviour();
-  addTopicIndexBehaviour();
   addCsrfTokenToAjaxCalls();
   addMainNavigationBehaviour();
 });
