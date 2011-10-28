@@ -6,6 +6,22 @@ class PrawnLayout < Prawn::Document
     font  'Helvetica'
     font_size 8
   end
+  
+  # Styles a html text so that a list is shown.
+  def list(html_input)
+    list = html_input.split(/<ul>(.*)<\/ul>/m)
+
+    list.inject([]) do |out, line|
+      unless line.include?('<li>')
+        out << line.gsub("\t", '').gsub(/<li>/m, "- ").gsub(/<\/li>/m, "") .gsub('&nbsp;', ' ')
+      else
+        prepared_list = "\n" + line.gsub("\t", '').gsub('&nbsp;', ' ').split.join.gsub(/<li>/m, "- ").gsub(/<\/li>/m, "\n")
+        out << prepared_list[0..-2]
+      end
+
+      out
+    end.join('')
+  end
 
   # Styles the row dependent on the topic type.
   def row_styling(item, row)
