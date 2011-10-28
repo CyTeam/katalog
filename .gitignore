@@ -33,3 +33,4 @@ data
 db/sphinx
 config/*.sphinx.conf
 config/sphinx/
+config/initializers/airbrake.rb
