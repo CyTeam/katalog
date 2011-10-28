@@ -42,7 +42,7 @@ class Ability
   # The abilities for everyone.
   def common
     can [:index, :show, :search], [Dossier, Topic], :internal => false
-    can :sub_topics, Topic
+    can :navigation, Topic
     can [:index, :show, :search], [Container, ContainerType, DossierNumber, Keyword, Location]
     can [:index, :show], Report, :public => true
     can :report, Dossier
