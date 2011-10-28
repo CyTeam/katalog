@@ -23,6 +23,8 @@ class VersionsController < AuthorizedController
     if params[:dossier_id]
       dossier = Dossier.find(params[:dossier_id])
       @versions = Version.where("(item_type = 'Dossier' AND item_id = ?) OR (item_type = 'DossierNumber' AND item_id IN (?))", dossier.id, dossier.number_ids)
+    elsif params[:type]
+      @versions = Version.where("item_type = ?", params[:type])
     else
       @versions = Version
     end
