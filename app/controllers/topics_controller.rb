@@ -1,7 +1,7 @@
 class TopicsController < AuthorizedController 
   include DossiersHelper
   # Authentication
-  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :show, :navigation]
 
   protected
   def collection
