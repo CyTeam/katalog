@@ -1,5 +1,6 @@
 require './config/boot'
 require 'airbrake/capistrano'
+require 'capones_recipes/tasks/airbrake'
 
 #Application
 set :application, "katalog"
