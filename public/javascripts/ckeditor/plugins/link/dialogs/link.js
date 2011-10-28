@@ -3,6 +3,9 @@ Copyright (c) 2003-2010, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.html or http://ckeditor.com/license
 */
 
+// workaround for saving the link title
+var link_title = null;
+
 CKEDITOR.dialog.add('link',
 function(a) {
     var b = CKEDITOR.plugins.link,
@@ -355,8 +358,7 @@ function(a) {
                     id: 'advTitle',
                     setup: s,
                     commit: function(C) {
-                      if (!C.adv) C.adv = {};
-                      C.adv.advTitle = this.getValue();
+                        link_title = this.getValue();
                     }
                 }
                 ]
@@ -887,6 +889,7 @@ function(a) {
                 D.push('_cke_pa_onclick', 'onclick');
             }
             if (E.adv) {
+                E.adv.advTitle = link_title;
                 var X = function(ah, ai) {
                     var aj = E.adv[ah];
                     if (aj) C[ai] = aj;
