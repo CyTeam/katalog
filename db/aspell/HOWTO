@@ -1,0 +1,13 @@
+Create dictionary
+=================
+Create wordlist:
+
+    File.open('wordlist', 'w') do |f|
+        f.puts(Tag.select('DISTINCT name').all)
+    end
+
+
+Build dictionary:
+
+    aspell --encoding=UTF-8 --master=kt.dat  --lang=kt create master ./kt.rws <wordlist
+
