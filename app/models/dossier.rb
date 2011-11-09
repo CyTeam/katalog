@@ -345,7 +345,7 @@ class Dossier < ActiveRecord::Base
   # Returns the relations as array.
   def relations
     return [] if related_to.blank?
-    
+
     related_to.split(';').map{|relation| relation.strip.presence}.compact
   end
 
@@ -588,7 +588,15 @@ class Dossier < ActiveRecord::Base
 
   # Creates the link to winmedio.net
   def books_link
-    "http://www.winmedio.net/doku-zug/default.aspx?q=erw:0%7C34%7C#{signature}"
+    if alphabetic?
+      "http://www.winmedio.net/doku-zug/default.aspx?q=#{title}"
+    else
+      "http://www.winmedio.net/doku-zug/default.aspx?q=erw:0%7C34%7C#{signature}"
+    end
+  end
+
+  def alphabetic?
+    Topic.alphabetic?(signature)
   end
 
   # Excel Export
