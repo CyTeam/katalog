@@ -89,4 +89,12 @@ EOF
       params[:search] && params[:search][:signature] && params[:search][:signature].start_with?(topic.signature)
     end
   end
+  
+  def spelling_suggestion_link(inserted, suggested)
+    search_text = params[:search][:text] if params[:search]
+    search_text = search_text.gsub(inserted, suggested)
+    search = params[:search].merge({:text => search_text})
+    
+    params.merge({:search => search})
+  end
 end

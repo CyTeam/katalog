@@ -9,9 +9,11 @@
     = javascript_tag "$('#search_text').val('#{escape_javascript(@query || params[:query])}');"
     = javascript_tag "$('#search_text').select().focus();"
 
-- if @spelling_suggestion
+- if @spelling_suggestion and not @spelling_suggestion.empty?
   .spelling_suggestions
-    - search = params[:search].merge({:text => @spelling_suggestion})
-    %h3= link_to t('messages.spelling_suggestion', :suggestion => @spelling_suggestion), params.merge({:search => search})
+    %h3
+      = t('messages.spelling_suggestion')
+      - @spelling_suggestion.each_pair do |key, suggestion|
+        = link_to suggestion, spelling_suggestion_link(key, suggestion)
 
 = search_tips

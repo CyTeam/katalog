@@ -180,7 +180,8 @@ class DossiersController < AuthorizedController
         spell_checker.set_option("ignore-case", "true")
         spell_checker.suggestion_mode = Aspell::NORMAL
 
-        @spelling_suggestion = @query.gsub(/[\w\']+/) do |word|
+        @spelling_suggestion = {}
+        @query.gsub(/[\w\']+/) do |word|
           if spell_checker.check(word)
             word
           else
@@ -196,7 +197,7 @@ class DossiersController < AuthorizedController
               suggestion = word
             end
 
-            suggestion
+            @spelling_suggestion[word] = suggestion
           end
         end
       else
