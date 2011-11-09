@@ -1,4 +1,5 @@
 require 'ostruct'
+require 'raspell'
 
 class DossiersController < AuthorizedController
   # Authentication
