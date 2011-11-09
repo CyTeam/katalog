@@ -7,7 +7,7 @@ class DossiersController < AuthorizedController
 
   # Responders
   respond_to :html, :js, :json, :xls, :pdf
-  
+
   # Search
   has_scope :by_text, :as => :text
   has_scope :by_signature, :as => :signature
@@ -16,10 +16,10 @@ class DossiersController < AuthorizedController
   has_scope :by_kind, :as => :kind
   has_scope :by_character
   has_scope :by_level, :as => :level
-  
+
   # Tags
   has_scope :tagged_with, :as => :tag
-  
+
   # Ordering
   has_scope :order_by, :default => 'signature'
 
@@ -60,7 +60,7 @@ class DossiersController < AuthorizedController
   def new
     @dossier = Dossier.new(params[:dossier])
     @dossier.build_default_numbers
-    
+
     new!
   end
 
@@ -68,14 +68,14 @@ class DossiersController < AuthorizedController
     @dossier = Dossier.find(params[:id])
     @dossier.build_default_numbers if @dossier.numbers.empty?
     @dossier.prepare_numbers
-    
+
     edit!
   end
 
   def report
     report_name = params[:report_name] || 'overview'
     @report = Report.find_by_name(report_name)
-    
+
     # Preset parameters
     case report_name
       when 'index'
@@ -91,7 +91,7 @@ class DossiersController < AuthorizedController
     params[:per_page] = @report[:per_page]
     @report[:title] ||= report_name
     @is_a_report = true
-    
+
     dossier_report
   end
 
@@ -109,7 +109,7 @@ class DossiersController < AuthorizedController
     # Collection setup
     @years = DossierNumber.edit_years(params[:dossier_numbers]) if params[:dossier_numbers]
     @years ||= [Time.now.year - 1] if params[:search]
-    
+
     params[:search] ||= {}
     if params[:search][:text].present?
       @query = params[:search][:text]
@@ -136,11 +136,11 @@ class DossiersController < AuthorizedController
       end
     end
   end
-  
+
   def preview
     show!   
   end
-  
+
   private
   def dossier_search
     params[:per_page] ||= 25
@@ -243,7 +243,7 @@ class DossiersController < AuthorizedController
         end
 
         excel = params[:excel_format] == 'containers' ? Dossier.to_container_xls(@dossiers) : Dossier.to_xls(@dossiers)
-        
+
         send_data(excel,
           :filename => "#{filename}.xls",
           :type => 'application/vnd.ms-excel')
