@@ -176,7 +176,7 @@ class DossiersController < AuthorizedController
         redirect_to dossier_path(@dossiers.first, :query => @query)
       # Give spellchecking suggestions
       elsif @dossiers.count == 0
-        spell_checker = Aspell.new1({"dict-dir" => Rails.root.join('db', 'aspell').to_s, "lang"=>"kt"})
+        spell_checker = Aspell.new1({"dict-dir" => Rails.root.join('db', 'aspell').to_s, "lang"=>"kt", "encoding"=>"UTF-8"})
         spell_checker.set_option("ignore-case", "true")
         spell_checker.suggestion_mode = Aspell::NORMAL
 
