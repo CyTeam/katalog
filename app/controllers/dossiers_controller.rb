@@ -193,7 +193,17 @@ class DossiersController < AuthorizedController
               #suggestion = spell_checker.suggest(word).first
             #end
 
-            @spelling_suggestion[word] = suggestion if suggestion
+            german_spell_checker = Aspell.new1('lang' => 'de_CH')
+            german_spell_checker.set_option("ignore-case", "true")
+            german_spell_checker.suggestion_mode = Aspell::NORMAL
+
+            if suggestion
+              suggestion = german_spell_checker.suggest(suggestion).first
+              @spelling_suggestion[word] = suggestion
+            else
+              suggestion = german_spell_checker.suggest(word).first
+              @spelling_suggestion[word] = suggestion unless suggestion =~ %r[#{word}]
+            end
           end
         end
       else
