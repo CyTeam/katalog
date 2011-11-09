@@ -192,12 +192,8 @@ class DossiersController < AuthorizedController
               #spell_checker.suggestion_mode = Aspell::BADSPELLER
               #suggestion = spell_checker.suggest(word).first
             #end
-            if suggestion.blank?
-              # Return original word
-              suggestion = word
-            end
 
-            @spelling_suggestion[word] = suggestion unless suggestion =~ %r[#{word}]
+            @spelling_suggestion[word] = suggestion if suggestion
           end
         end
       else
