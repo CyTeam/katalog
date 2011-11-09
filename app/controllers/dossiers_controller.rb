@@ -197,7 +197,7 @@ class DossiersController < AuthorizedController
               suggestion = word
             end
 
-            @spelling_suggestion[word] = suggestion
+            @spelling_suggestion[word] = suggestion unless suggestion =~ %r[#{word}]
           end
         end
       else
