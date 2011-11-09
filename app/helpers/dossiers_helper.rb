@@ -8,14 +8,14 @@ module DossiersHelper
     if partially
       title = t('katalog.availability.partially') + " " + title
     end
-    
+
     text = content_tag 'span', :class => "availability icon-availability_#{availability}-text", :title => (js_popup ? title : ''), 'data-parent' => '.dossier' do
       title
     end
-    
+
     text
   end
-  
+
   def availability_notes(dossier)
     # Collect availabilities
     availabilities = availabilities(dossier)
@@ -23,10 +23,11 @@ module DossiersHelper
     partially = availabilities.size > 1
 
     notes = ""
-    
+
     if availabilities.include?('intern')
       notes += availability_text('intern', false)
     end
+
     if availabilities.include?('wait')
       notes += availability_text('warning', partially, false)
       notes += availability_text('wait', partially)
@@ -34,13 +35,13 @@ module DossiersHelper
 
     notes.html_safe
   end
-  
+
   def waiting_for?(dossier)
     availabilities = availabilities(dossier)
     
     availabilities.include?('wait') ? true : false
   end
-  
+
   def url_for_topic(topic)
     if 'edit_report'.eql?action_name
       edit_report_dossiers_path(:search => {:signature => topic.signature})
@@ -48,7 +49,7 @@ module DossiersHelper
       search_dossiers_path(:search => {:signature => topic.signature})
     end
   end
-  
+
   def link_to_topic(topic, options = {})
     link_to(topic, url_for_topic(topic), options)
   end
@@ -71,7 +72,7 @@ module DossiersHelper
         t_attr(column.to_s, Dossier)
     end
   end
-  
+
   def show_column_for_report(dossier, column, for_pdf = false)
     case column.to_s
       when 'title'
@@ -101,7 +102,7 @@ module DossiersHelper
     for word in (words + sentences)
       content += javascript_tag "$('##{element}').highlight('#{escape_javascript(word)}', 'match')"
     end
-    
+
     content
   end
 
@@ -119,9 +120,9 @@ module DossiersHelper
   def is_edit_report?
     'edit_report'.eql?action_name
   end
-  
+
   private
-  
+
   def availabilities(dossier)
     dossier.availability.compact
   end
