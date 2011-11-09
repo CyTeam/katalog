@@ -181,7 +181,7 @@ de:
         internal:             "Internes Dossier"
         containers:           ""
         books:                "Bücher"
-        books_link:           "Unsere Bücher zum Thema."
+        books_link:           "Suche in unserem Bücherkatalog"
         preorder:             "Die Dokumente aus den Zeiträumen %{years} sind im Magazin. Wir empfehlen Ihnen hier die Dokument gleich vorzubestellen."
         preorder_link:        "Zur Vorbestellung gehts hier lang."
       container:
