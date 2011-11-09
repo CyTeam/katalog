@@ -8,7 +8,7 @@ class Dossier < ActiveRecord::Base
 
   # Hooks
   before_save :update_tags
-  
+
   # Simulate default value '' for description as MySQL doesn't support it
   before_save lambda { self.description ||= '' }
 
@@ -16,7 +16,7 @@ class Dossier < ActiveRecord::Base
   validates :signature, :presence => true, :allow_blank => false
   validates :title, :presence => true, :allow_blank => false
   validates_format_of :first_document_year, :with => /[12][0-9]{3}/, :allow_blank => true
-  
+
   # Type Scopes
   scope :dossier, where(:type => nil)
   scope :topic, where("type IS NOT NULL")
@@ -24,7 +24,7 @@ class Dossier < ActiveRecord::Base
   scope :main, topic.where("char_length(signature) = 2")
   scope :geo, topic.where("char_length(signature) = 4")
   scope :detail, topic.where("char_length(signature) = 8")
-  
+
   # Scopes
   scope :by_level, lambda {|level| where("char_length(signature) <= ?", self.level_to_prefix_length(level))}
   scope :by_signature, lambda {|value| where("signature LIKE CONCAT(?, '%')", value)}
@@ -42,7 +42,7 @@ class Dossier < ActiveRecord::Base
   # Ordering
   # BUG: Beware of SQL Injection
   scope :order_by, lambda {|value| order("CONCAT(#{value}, IF(type IS NULL, '.a', '')), title")}
-  
+
   # Associations
   has_many :numbers, :class_name => 'DossierNumber', :dependent => :destroy, :validate => true, :autosave => true
   accepts_nested_attributes_for :numbers
@@ -66,8 +66,6 @@ class Dossier < ActiveRecord::Base
         8
     end
   end
-
-
 
   # Grand total of documents
   def self.document_count
@@ -332,7 +330,7 @@ class Dossier < ActiveRecord::Base
   def to_s
     "#{signature}: #{title}"
   end
-  
+
   def waiting_list
     containers.where(:location_id => Location.find_by_code('RI')).map {|container| container.period unless container.period.blank? }
   end
@@ -392,7 +390,7 @@ class Dossier < ActiveRecord::Base
     group = value[0,1]
     topic, geo, dossier = value.split('.')
   end
-  
+
   # Association attributes
   def dossier_number_list
     numbers.map{|number| number.to_s(:short)}.join("\n")
@@ -405,14 +403,14 @@ class Dossier < ActiveRecord::Base
     # Remember number objects
     old_numbers = numbers.clone
     new_numbers = []
-    
+
     dossier_number_strings.map{|number_string|
       # Parse string
       from, to, amount = DossierNumber.from_s(number_string)
       # Remember updated/created number
       new_numbers << update_or_create_number(amount, {:from => from, :to => to}, false) if (amount and amount > 0)
     }
-    
+
     removed_numbers = old_numbers - new_numbers
     # Remove now unused number from the association
     self.numbers = self.numbers - removed_numbers
@@ -497,7 +495,7 @@ class Dossier < ActiveRecord::Base
       result << {:period => period, :count => document_count(period)}
     end
   end
-  
+
   def self.truncate_title(value)
     value.gsub(/ #{date_range}$/, '')
   end
@@ -522,7 +520,7 @@ class Dossier < ActiveRecord::Base
 
       from == range_from && to == range_to
     }.first
-    
+
     if number
       amount ||= 0
       number.amount ||= 0
@@ -547,7 +545,7 @@ class Dossier < ActiveRecord::Base
     
     periods.each {|period| numbers.build(period)}
   end
-  
+
   def import_numbers(row)
     # < 1990, 1990-1993, 1994 - 2010
     periods = DossierNumber.default_periods(2010)
@@ -587,7 +585,7 @@ class Dossier < ActiveRecord::Base
     update_tags
     import_numbers(row)
   end
-  
+
   # Creates the link to winmedio.net
   def books_link
     "http://www.winmedio.net/doku-zug/default.aspx?q=erw:0%7C34%7C#{signature}"
