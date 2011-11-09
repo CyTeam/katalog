@@ -47,7 +47,7 @@ module Dossiers
         sentences = []
 
         # Need a clone or slice! will do some harm
-        value = query.clone
+        value = remove_unpleasant_chars(query.clone)
         while sentence = value.slice!(/\".[^\"]*\"/)
           sentences << sentence.delete('"');
         end
@@ -104,9 +104,35 @@ module Dossiers
           }
           word_query = "@* (\"#{words.join(' ')}\" | (#{(quoted_words).join(' ')}))"
         end
-        
+
         query = [signature_query, sentence_query, word_query].join(' ')
+        query = apply_semantic_rules(query)
+
         return query.strip
+      end
+      
+      def remove_unpleasant_chars(string)
+        string = remove_bracket(string)
+        string = remove_short_cuts(string)
+        string = remove_special_chars(string)
+        
+        string
+      end
+      
+      def remove_special_chars(string)
+        string #.gsub(/\W/, "") # TODO: implement
+      end
+      
+      def remove_short_cuts(string)
+        string.gsub(/(AG|SA)/, "")
+      end
+      
+      def remove_bracket(string)
+        string.gsub(/\(.*\)/, "")
+      end
+      
+      def apply_semantic_rules(query)
+        query.gsub(/(\.)/, "|")
       end
     end
   end
