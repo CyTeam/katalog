@@ -16,7 +16,7 @@ namespace :katalog do
   namespace :raspell do
     desc "Update the aspell wordlist"
     task :update => :environment do
-      word_list = "#{Rails.root}/tmp/wordlist"
+      word_list = "#{Rails.root}/tmp/wordlist.txt"
 
       File.open(word_list, 'w') do |f|
           f.puts(Tag.select('DISTINCT name').all)
