@@ -163,7 +163,7 @@ class Dossier < ActiveRecord::Base
     self.prepare_db_for_import
 
     # Select rows containing topics
-    topic_rows = rows.select{|row| Topic.import_filter.match(row[0]) && row[3].blank?}
+    topic_rows = rows.select{|row| Topic.import_filter.match(row[0]) && row[3].blank? && row[1].present?}
     topic_rows.map{|row| Topic.import(row).save!}
 
     import_all(import_filter(rows))
