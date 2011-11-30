@@ -91,9 +91,6 @@ gem 'inherited_resources_views'
 gem 'thinking-sphinx'
 
 # Reports
-#gem 'pdfkit', '~> 0.5'
-#gem 'pdfkit', :git => 'http://github.com/huerlisi/PDFKit.git'
-#gem 'wkhtmltopdf-binary'
 gem 'prawn_rails'
 gem 'prawn'
 
