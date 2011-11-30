@@ -1,5 +1,6 @@
 require 'capones_recipes/cookbook/rails'
 require 'capones_recipes/tasks/airbrake'
+require 'capones_recipes/tasks/thinking_sphinx'
 
 #Application
 set :application, 'katalog'
