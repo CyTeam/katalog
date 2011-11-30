@@ -21,13 +21,5 @@ set :deploy_via, :remote_cache
 set :git_enable_submodules, 1
 set :copy_exclude, [".git", "spec"]
 
-# Bundle install
-require "bundler/capistrano"
-
 # Clean up the releases after deploy.
 after "deploy", "deploy:cleanup"
-
-# Plugins
-# =======
-# Multistaging
-require 'capistrano/ext/multistage'
