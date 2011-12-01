@@ -19,19 +19,9 @@ module DossiersHelper
   def availability_notes(dossier)
     # Collect availabilities
     availabilities = availabilities(dossier)
-
-    partially = availabilities.size > 1
-
     notes = ""
-
-    if availabilities.include?('intern')
-      notes += availability_text('intern', false)
-    end
-
-    if availabilities.include?('wait')
-      notes += availability_text('warning', partially, false)
-      notes += availability_text('wait', partially)
-    end
+    notes += availability_text('intern', false) if availabilities.include?('intern')
+    notes += availability_text('warning', (availabilities.size > 1)) if availabilities.include?('wait')
 
     notes.html_safe
   end
