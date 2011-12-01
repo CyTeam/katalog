@@ -22,6 +22,7 @@ mysql: &mysql
   host:     localhost
 
 # Environments
+# ============
 development:
   <<: *mysql
   database: katalog_development

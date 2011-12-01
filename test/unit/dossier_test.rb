@@ -197,6 +197,16 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal ["Worker Movement general", "City history"], dossiers(:worker_movement_history).relation_titles
   end
   
+  test "related_to accepts more than 256 characters" do
+    long_text = "A" * 500
+    @dossier.related_to = long_text
+
+    @dossier.save
+    @dossier.reload
+
+    assert_equal long_text, @dossier.related_to
+  end
+
   # Numbers
   test "creates number if no number for specified range" do
     @dossier.update_or_create_number(99, {:from => '2001-01-01', :to => '2002-12-31'})
