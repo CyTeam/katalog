@@ -5,8 +5,9 @@ class ReservationMailer < ActionMailer::Base
     @reservation = reservation
     
     mail(
-      :to => 'info@doku-zug.ch',
-      :subject => "#{I18n.t('activerecord.models.reservation')}: #{@reservation.dossier}"
+      :to       => 'info@doku-zug.ch',
+      :reply_to => reservation.email,
+      :subject  => "#{I18n.t('activerecord.models.reservation')}: #{@reservation.dossier}"
     )
   end
 end
