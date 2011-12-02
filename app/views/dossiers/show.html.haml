@@ -47,7 +47,7 @@
   - unless (user_signed_in? || @dossier.waiting_list.empty?)
     .waiting-time
       - waiting_years = @dossier.waiting_list
-      %h3= t('activerecord.attributes.dossier.preorder', :years => waiting_years.each {|container| "#{container}#{(waiting_years.count > 1 && !waiting_years.last.eql?(container)) ? ', ' : '' }" })
+      %h3= t('activerecord.attributes.dossier.preorder', :years => waiting_years.join(", "))
       %ul
         %li= link_to t_attr(:preorder_link), new_dossier_reservation_path(@dossier)
 
