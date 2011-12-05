@@ -235,6 +235,7 @@ de:
         dossier_years: "Jahre"
         email: "E-Mail-Adresse"
         pickup: "Abholdatum/-zeit"
+        year_selection: Jahre
       sphinx_admin:
         type: Konverterart
         from: Konvertiert von
