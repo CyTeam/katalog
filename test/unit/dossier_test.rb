@@ -396,4 +396,44 @@ class DossierTest < ActiveSupport::TestCase
       end
     end
   end
+
+  context "#books_links" do
+    should "of a non alphabetic dossier" do
+      dossier = Dossier.new(:signature => '23.4.100', :title => 'Test')
+
+      assert_equal "http://www.winmedio.net/doku-zug/default.aspx?q=erw:0%7C34%7C23.4.100", dossier.books_link
+    end
+
+    context "of an alphabetic dossier" do
+      should "create books link with sematic or with two words in title" do
+        dossier = Dossier.new(:signature => '15.0.100', :title => 'Test. Test')
+
+        assert_equal "http://www.winmedio.net/doku-zug/default.aspx?q=erw:0%7C1%7CTest%241%7C1%7CTest", dossier.books_link
+      end
+
+      should "create books link with sematic or with four words in title" do
+        dossier = Dossier.new(:signature => '15.0.100', :title => 'Test. Test . Test .Test')
+
+        assert_equal "http://www.winmedio.net/doku-zug/default.aspx?q=erw:0%7C1%7CTest%241%7C1%7CTest%241%7C1%7CTest%241%7C1%7CTest", dossier.books_link
+      end
+
+      should "create a clean books link for AG companies" do
+        dossier = Dossier.new(:signature => '56.0.130', :title => 'CyT AG')
+
+        assert_equal "http://www.winmedio.net/doku-zug/default.aspx?q=CyT", dossier.books_link
+      end
+
+      should "create a clean books link for SA companies" do
+        dossier = Dossier.new(:signature => '56.0.130', :title => 'CyT SA')
+
+        assert_equal "http://www.winmedio.net/doku-zug/default.aspx?q=CyT", dossier.books_link
+      end
+
+      should "create a clean books link without braces and the content of them" do
+        dossier = Dossier.new(:signature => '56.0.130', :title => 'CyT (GmbH from Zug, Switzerland)')
+
+        assert_equal "http://www.winmedio.net/doku-zug/default.aspx?q=CyT", dossier.books_link
+      end
+    end
+  end
 end

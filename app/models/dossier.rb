@@ -595,6 +595,10 @@ class Dossier < ActiveRecord::Base
     end
   end
 
+  def alphabetic?
+    Topic.alphabetic?(signature)
+  end
+
   # Excel Export
   include Dossiers::ExportToXls
 
@@ -603,12 +607,8 @@ class Dossier < ActiveRecord::Base
 
   private
 
-  def alphabetic?
-    Topic.alphabetic?(signature)
-  end
-
   def alphabetic_book_link
-    remove_unpleasant_chars(apply_semantic_rules(title))
+    apply_semantic_rules(title)
   end
 
   def remove_unpleasant_chars(string)
@@ -620,7 +620,7 @@ class Dossier < ActiveRecord::Base
   end
 
   def remove_special_chars(string)
-    (string.gsub(/[^a-zA-Z0-9 \-]/, '')).gsub(/\s/, '%20')
+    (string.gsub(/[^a-zA-Z0-9 \-\.]/, '')).gsub(/\s/, '')
   end
 
   def remove_short_cuts(string)
@@ -632,6 +632,7 @@ class Dossier < ActiveRecord::Base
   end
 
   def apply_semantic_rules(query)
+    query = remove_unpleasant_chars(query)
     return query unless query.include?('.')
 
     'erw:0%7C1%7C' + query.gsub(/(\s*\.\s*)/, "%241%7C1%7C")
