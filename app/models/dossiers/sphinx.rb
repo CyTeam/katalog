@@ -59,10 +59,10 @@ module Dossiers
           if /^[0-9]*\.$/.match(string)
             # is an ordinal
             words << string
-          elsif /^[0-9]{2}(\.[0-9A-Za-z])?$/.match(string)
+          elsif is_ordinal_signature?(string)
             # signature is as ordinal by index
             signatures << string + "."
-          elsif /^[0-9.]{1,8}$/.match(string)
+          elsif is_signature?(string)
             if (string.include?'.') || string.length == 1
               signatures << string
             else
@@ -76,6 +76,14 @@ module Dossiers
         words = words.flatten
 
         return signatures, words, sentences
+      end
+
+      def is_ordinal_signature?(string)
+        /^[0-9]{2}(\.[0-9A-Za-z])?$/.match(string)
+      end
+
+      def is_signature?(string)
+        /^[0-9.]{1,8}$/.match(string)
       end
 
       # Build sphinx query from freetext
