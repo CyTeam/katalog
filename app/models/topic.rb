@@ -37,7 +37,7 @@ class Topic < Dossier
   def topic_type
     return if signature.nil?
 
-    case signature.split('.').length
+    case topic_level
       when 1
         case signature.length
           when 1
@@ -50,6 +50,10 @@ class Topic < Dossier
       when 3
         :detail
     end
+  end
+
+  def topic_level
+    signature.split('.').length
   end
   
   # Associations
