@@ -35,17 +35,19 @@ module Dossiers
       def by_text(value, options = {})
         attributes = {:type => 'Dossier'}
         attributes[:internal] = false if (options.delete(:internal) == false)
-        
+        request_format = options[:format]
+        options.delete(:format) if options[:format]
+
         params = {:match_mode => :extended, :rank_mode => :match_any, :with => attributes}
         params.merge!(options)
         
-        query = build_query(value)
+        query = build_query(value, request_format)
         search(query, params)
       end
 
-      def split_search_words(query)
+      def split_search_words(query, format = 'html')
         sentences = []
-        signature_range = signature_range(query)
+        signature_range = signature_range(query) if format.eql?('html')
         # Need a clone or slice! will do some harm
         value = query.clone
         while sentence = value.slice!(/\".[^\"]*\"/)
@@ -109,8 +111,8 @@ module Dossiers
       end
 
       # Build sphinx query from freetext
-      def build_query(value)
-        signatures, words, sentences, signature_range = split_search_words(value)
+      def build_query(value, format = 'html')
+        signatures, words, sentences, signature_range = split_search_words(value, format)
 
         if signature_range.present?
           quoted_signatures = signature_range.map{|signature| '@signature (^' + signature + '$)'}

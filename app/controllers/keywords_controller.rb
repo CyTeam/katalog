@@ -52,7 +52,7 @@ class KeywordsController < InheritedResources::Base
 
     keywords = Keyword.unscoped.joins(:taggings).where("taggings.context = 'tags'").group('tags.id').order('COUNT(taggings.taggable_id) DESC')
     if words.size > 1
-      dossiers = Dossier.by_text(previous_words.join(" "))
+      dossiers = Dossier.by_text(previous_words.join(" "), {:format => 'json'})
 
       keywords = keywords.where("taggings.taggable_id" => dossiers, "taggings.taggable_type" => 'Dossier')
     end
