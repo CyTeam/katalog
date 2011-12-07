@@ -122,4 +122,24 @@ class Topic < Dossier
 
     self
   end
+
+  private
+
+  def self.clean_signature(signature)
+    text = signature.strip
+
+    if text.last.eql?('.')
+      text[0..(text.length-2)]
+    else
+      text
+    end
+  end
+
+  def self.clean_parents(topics)
+    topics.inject([]) do |out, topic|
+      out << topic if topic.topic_level.eql?(3)
+
+      out
+    end
+  end
 end
