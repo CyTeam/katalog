@@ -45,7 +45,7 @@ module Dossiers
 
       def split_search_words(query)
         sentences = []
-
+        signature_range = signature_range(query)
         # Need a clone or slice! will do some harm
         value = query.clone
         while sentence = value.slice!(/\".[^\"]*\"/)
@@ -75,7 +75,29 @@ module Dossiers
 
         words = words.flatten
 
-        return signatures, words, sentences
+        return signatures, words, sentences, signature_range
+      end
+
+      def signature_range(query)
+        signature_range = []
+
+        if query.include?('-')
+          range = query.split('-')
+
+          is_range = range.inject([]) do |out, signature|
+            out << is_ordinal_signature?(signature) || is_signature?(signature)
+
+            out
+          end
+
+          unless is_range.include?(false)
+            topics = Topic.by_range(range[0], range[1])
+
+            signature_range = topics.inject([]) {|out, topic| out << topic.signature; out }
+          end
+        end
+
+        signature_range
       end
 
       def is_ordinal_signature?(string)
