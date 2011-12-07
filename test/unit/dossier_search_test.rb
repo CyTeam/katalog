@@ -58,5 +58,13 @@ class DossierTest < ActiveSupport::TestCase
     should "not include alternative word forms for words" do
       assert_no_match /Nationalrat/, Dossier.build_query("nr")
     end
+
+    should "build a signature range" do
+      query = Dossier.build_query("7. - 77.0.200")
+      assert_match '@signature (^77.0.100$)', query
+      assert_match '@signature (^77.0.200$)', query
+      assert_match '|', query
+      assert_no_match '@signature (^77.0.999$)', query
+    end
   end
 end
