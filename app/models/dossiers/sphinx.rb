@@ -110,7 +110,13 @@ module Dossiers
 
       # Build sphinx query from freetext
       def build_query(value)
-        signatures, words, sentences = split_search_words(value)
+        signatures, words, sentences, signature_range = split_search_words(value)
+
+        if signature_range.present?
+          quoted_signatures = signature_range.map{|signature| '@signature (^' + signature + '$)'}
+
+          return quoted_signatures.join(' | ')
+        end
 
         if signatures.present?
           quoted_signatures = signatures.map{|signature| '"' + signature + '*"'}
