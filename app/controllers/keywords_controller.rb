@@ -77,6 +77,7 @@ class KeywordsController < InheritedResources::Base
         }
       }
     }
+
     render :json => suggestions
   end
 end
