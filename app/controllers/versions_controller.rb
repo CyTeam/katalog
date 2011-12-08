@@ -26,7 +26,7 @@ class VersionsController < AuthorizedController
     elsif params[:type]
       @versions = Version.where("item_type = ?", params[:type])
     else
-      @versions = Version.where((:item_type ^ DossierNumber.to_s) & (:event >> 'destroy'))
+      @versions = Version.where(:nested_model => false)
     end
 
     @versions = @versions.reorder('created_at DESC').paginate(:page => params[:page])
