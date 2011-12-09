@@ -25,6 +25,7 @@ de:
       visitor_logs:       "Logbuch"
       visitor_logs_list:  "Einträge"
       new_visitor_log:    "Neuer Eintrag"
+      new_query_topic:    "Pseudo-Titel anlegen"
     application:
       title:            "Katalog"
       skip_navigation:  "Navigation überspringen"
