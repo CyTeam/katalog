@@ -269,6 +269,8 @@ de:
         content:    "Inhalt"
         user:       "Benutzer"
         created_at: "Erfasst am"
+      query_topic:
+        query: "Suchbegriffe"
 
   formtastic:
     labels:
