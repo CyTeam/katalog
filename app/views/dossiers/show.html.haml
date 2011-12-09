@@ -1,6 +1,6 @@
 = render 'search_form'
 
-- cache [@dossier.cache_key, current_user.try(:roles)] do
+- cache [@dossier.cache_key, @dossier.tags, current_user.try(:roles)] do
   #page_actions.contextual
     - if user_signed_in?
       = contextual_link('edit', edit_dossier_path(@dossier))
