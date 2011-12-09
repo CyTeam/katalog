@@ -1,0 +1,11 @@
+- cache @query_topic do
+  = semantic_form_for(@query_topic) do |f|
+    = f.inputs do
+      = f.input :signature
+      = f.input :title
+      = f.input :query
+    = f.buttons do
+      = f.commit_button
+
+- @dossiers = @query_topic.dossiers
+= render 'dossiers/list'

@@ -1,0 +1,12 @@
+- cache [:list, action_name, query_topic.cache_key, current_user.try(:roles)] do
+  %tr[query_topic]{:class => "#{query_topic.topic_type} topic"}
+    %td= query_topic.signature
+    %td.title= link_to query_topic.title, query_topic_path(query_topic), {'data-href-container' => 'tr'}
+    %td.document_count
+      = number_with_delimiter(query_topic.document_count)
+    %td.action-links
+      - if user_signed_in? and not is_edit_report?
+        = link_to image_tag('icons/edit.png', :title => t('crud.edit', :model => '')), edit_query_topic_path(query_topic)
+        = link_to image_tag('icons/delete.png', :title => t('crud.delete', :model => '')), query_topic, :confirm => t_confirm_delete(query_topic), :remote => true, :method => :delete
+  - query_topic.dossiers.each do |dossier|
+    = render dossier

@@ -1,0 +1,3 @@
+class QueryTopicsController < AuthorizedController
+
+end
