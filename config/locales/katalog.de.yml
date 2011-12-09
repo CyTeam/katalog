@@ -147,6 +147,7 @@ de:
       role:    "Rolle"
       keyword: "Schlagwort"
       topic:   "Titel"
+      query_topic: "Pseudo-Titel"
       reservation: "Vorbestellung"
       sphinx_admin: Konvertor
       sphinx_admin_exception: "Ausnahmen"

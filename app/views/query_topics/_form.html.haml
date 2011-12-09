@@ -7,5 +7,5 @@
     = f.buttons do
       = f.commit_button
 
-- @dossiers = @query_topic.dossiers
-= render 'dossiers/list'
+- if @dossiers = @query_topic.dossiers
+  = render 'dossiers/list'
