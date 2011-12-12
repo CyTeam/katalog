@@ -3,7 +3,6 @@
     %td= query_topic.signature
     %td.title= link_to query_topic.title, query_topic_path(query_topic), {'data-href-container' => 'tr'}
     %td.document_count
-      = number_with_delimiter(query_topic.document_count)
     %td.action-links
       - if user_signed_in? and not is_edit_report?
         = link_to image_tag('icons/edit.png', :title => t('crud.edit', :model => '')), edit_query_topic_path(query_topic)
