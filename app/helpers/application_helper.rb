@@ -81,6 +81,8 @@ EOF
   def active?(topic)
     if @dossier.try(:signature)
       @dossier.signature.starts_with?(topic.signature)
+    elsif @query_topic.try(:signature)
+      @query_topic.signature.starts_with?(topic.signature)
     elsif params[:action] == 'navigation'
       current_topic = Topic.find(params[:id])
       
