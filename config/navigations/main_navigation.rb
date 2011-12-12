@@ -13,6 +13,8 @@ SimpleNavigation::Configuration.run do |navigation|
       primary.item :edit, t('katalog.main_navigation.edit'), versions_path do |edit|
         edit.item :new_dossier, t('katalog.main_navigation.new_dossier'), new_dossier_path
         edit.item :new_title, t('katalog.main_navigation.new_title'), new_topic_path
+        edit.item :new_query_title, t('katalog.main_navigation.new_query_topic'), new_query_topic_path
+        edit.item :query_title_list, t('katalog.main_navigation.query_topic_list'), query_topics_path
         edit.item :edit_dossier_years, t('katalog.main_navigation.edit_year'), edit_report_dossiers_path
         edit.item :search_replace, t('katalog.main_navigation.search_replace'), search_replaces_path
         edit.item :versions_nav, t('katalog.main_navigation.changes'), versions_path, :highlights_on => /\/versions($|\/[0-9]*($|\/.*))/

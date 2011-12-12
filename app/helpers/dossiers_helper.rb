@@ -33,6 +33,8 @@ module DossiersHelper
   end
 
   def url_for_topic(topic)
+    return query_topic_path(topic) if topic.kind_of?(QueryTopic)
+
     if 'edit_report'.eql?action_name
       edit_report_dossiers_path(:search => {:signature => topic.signature})
     else

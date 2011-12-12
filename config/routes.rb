@@ -24,6 +24,8 @@ Katalog::Application.routes.draw do
       get :sub_topics, :navigation
     end
   end
+
+  resources :query_topics
   
   resources :dossiers do
     member do
