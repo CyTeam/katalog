@@ -96,7 +96,7 @@ EOF
     search_text = params[:search][:text] if params[:search]
     search_text = search_text.gsub(inserted, suggested)
     search = params[:search].merge({:text => search_text})
-    
-    params.merge({:search => search})
+
+    link_to(suggested, params.merge({:search => search}))
   end
 end
