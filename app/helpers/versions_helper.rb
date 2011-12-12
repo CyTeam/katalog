@@ -12,6 +12,8 @@ module VersionsHelper
   end
   
   def version_title(version = nil)
+    return version.reify.to_s if version.event.eql?('destroy')
+
     version.active_item.to_s
   end
 
