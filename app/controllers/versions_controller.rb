@@ -30,6 +30,7 @@ class VersionsController < AuthorizedController
     end
 
     @versions = @versions.reorder('created_at DESC').paginate(:page => params[:page])
+
     index!
   end
 
