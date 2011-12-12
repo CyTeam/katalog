@@ -150,7 +150,7 @@ function hideUnlessNewRecord(container) {
  container.find('.container_title').hide();
  container.find('.type_code').hide();
  container.find('.location_code').hide();
- container.prepend('<td class="flash" colspan="3"><input value="Dieser Eintrag wird beim Speicher gelöscht." style="border:solid white;color:red;font-weight:bold;" /></td>');
+ container.prepend('<td class="flash" colspan="3"><input value="Dieser Eintrag wird beim Speicher gelöscht." style="border:solid white;color:red;font-weight:bold;width:100%;" /></td>');
  container.show();
 }
 
