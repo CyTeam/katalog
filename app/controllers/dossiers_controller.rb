@@ -180,6 +180,10 @@ class DossiersController < AuthorizedController
         spell_checker.set_option("ignore-case", "true")
         spell_checker.suggestion_mode = Aspell::NORMAL
 
+        german_spell_checker = Aspell.new1('lang' => 'de_CH')
+        german_spell_checker.set_option("ignore-case", "true")
+        german_spell_checker.suggestion_mode = Aspell::NORMAL
+
         @spelling_suggestion = {}
         @query.gsub(/[\w\']+/) do |word|
           if spell_checker.check(word)
@@ -192,10 +196,6 @@ class DossiersController < AuthorizedController
               #spell_checker.suggestion_mode = Aspell::BADSPELLER
               #suggestion = spell_checker.suggest(word).first
             #end
-
-            german_spell_checker = Aspell.new1('lang' => 'de_CH')
-            german_spell_checker.set_option("ignore-case", "true")
-            german_spell_checker.suggestion_mode = Aspell::NORMAL
 
             if suggestion
               suggestion = german_spell_checker.suggest(suggestion).first
