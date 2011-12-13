@@ -176,9 +176,9 @@ ActiveRecord::Schema.define(:version => 20111209122822) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "versions", :force => true do |t|
-    t.string   "item_type",  :null => false
-    t.integer  "item_id",    :null => false
-    t.string   "event",      :null => false
+    t.string   "item_type",                       :null => false
+    t.integer  "item_id",                         :null => false
+    t.string   "event",                           :null => false
     t.string   "whodunnit"
     t.text     "object"
     t.datetime "created_at"
