@@ -15,7 +15,7 @@ class Container < ActiveRecord::Base
   
   # Helpers
   def to_s
-    "#{dossier.title} #{period + " " unless period.blank?}(#{container_type.code}@#{location.code})"
+    "#{dossier.title if dossier.present?} #{period + " " unless period.blank?}(#{container_type.code}@#{location.code})"
   end
 
   def preorder

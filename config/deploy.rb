@@ -6,6 +6,7 @@ require 'capones_recipes/cookbook/rails'
 require 'capones_recipes/tasks/airbrake'
 require 'capones_recipes/tasks/thinking_sphinx'
 require 'capones_recipes/tasks/email'
+require 'capones_recipes/tasks/sync'
 
 # Staging
 set :default_stage, "staging"

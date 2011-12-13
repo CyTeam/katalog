@@ -25,6 +25,8 @@ de:
       visitor_logs:       "Logbuch"
       visitor_logs_list:  "Einträge"
       new_visitor_log:    "Neuer Eintrag"
+      new_query_topic:    "Pseudo-Titel anlegen"
+      query_topic_list:   "Pseudo-Titel"
     application:
       title:            "Katalog"
       skip_navigation:  "Navigation überspringen"
@@ -146,6 +148,7 @@ de:
       role:    "Rolle"
       keyword: "Schlagwort"
       topic:   "Titel"
+      query_topic: "Pseudo-Titel"
       reservation: "Vorbestellung"
       sphinx_admin: Konvertor
       sphinx_admin_exception: "Ausnahmen"
@@ -235,6 +238,7 @@ de:
         dossier_years: "Jahre"
         email: "E-Mail-Adresse"
         pickup: "Abholdatum/-zeit"
+        year_selection: Jahre
       sphinx_admin:
         type: Konverterart
         from: Konvertiert von
@@ -266,6 +270,8 @@ de:
         content:    "Inhalt"
         user:       "Benutzer"
         created_at: "Erfasst am"
+      query_topic:
+        query: "Suchbegriffe"
 
   formtastic:
     labels:

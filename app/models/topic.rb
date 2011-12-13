@@ -27,11 +27,17 @@ class Topic < Dossier
     }
   end
 
+  def self.by_range(from_signature, to_signature)
+    topics = self.where("signature BETWEEN ? AND ?", clean_signature(from_signature), clean_signature(to_signature))
+
+    clean_parents(topics)
+  end
+
   # Returns which type of Topic it is.
   def topic_type
     return if signature.nil?
 
-    case signature.split('.').length
+    case topic_level
       when 1
         case signature.length
           when 1
@@ -44,6 +50,10 @@ class Topic < Dossier
       when 3
         :detail
     end
+  end
+
+  def topic_level
+    signature.split('.').length
   end
   
   # Associations
@@ -111,5 +121,25 @@ class Topic < Dossier
     puts self unless Rails.env.test?
 
     self
+  end
+
+  private
+
+  def self.clean_signature(signature)
+    text = signature.strip
+
+    if text.last.eql?('.')
+      text[0..(text.length-2)]
+    else
+      text
+    end
+  end
+
+  def self.clean_parents(topics)
+    topics.inject([]) do |out, topic|
+      out << topic if topic.topic_level.eql?(3)
+
+      out
+    end
   end
 end
