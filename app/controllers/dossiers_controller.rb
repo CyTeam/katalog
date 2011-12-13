@@ -186,7 +186,9 @@ class DossiersController < AuthorizedController
 
         @spelling_suggestion = {}
         @query.gsub(/[\w\']+/) do |word|
-          if spell_checker.check(word)
+          if word =~ /[0-9]/
+            word
+          elsif spell_checker.check(word)
             word
           else
             # word is wrong
