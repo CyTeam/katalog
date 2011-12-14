@@ -616,11 +616,11 @@ class Dossier < ActiveRecord::Base
     string = remove_short_cuts(string)
     string = remove_special_chars(string)
 
-    string
+    replace_comma(string)
   end
 
   def remove_special_chars(string)
-    (string.gsub(/[^a-zA-Z0-9 \-\.]/, '')).gsub(/\s/, '')
+    (string.gsub(/[^[[:alphanum]] \-\.]/, '')).gsub(/\s/, '')
   end
 
   def remove_short_cuts(string)
@@ -629,6 +629,10 @@ class Dossier < ActiveRecord::Base
 
   def remove_bracket(string)
     string.gsub(/\(.*\)/, "")
+  end
+
+  def replace_comma(string)
+    string.gsub(',', ' ')
   end
 
   def apply_semantic_rules(query)
