@@ -37,10 +37,8 @@ module VersionsHelper
   end
   
   def dossier?(version)
-    item = version.active_item
-    
-    case item.class.name
-    when 'DossierNumber', 'Container', 'Keyword'
+    case version.item_type
+    when 'DossierNumber', 'Container', 'Keyword', 'Dossier'
       true
     else
       false
