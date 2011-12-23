@@ -36,14 +36,12 @@ class VersionsController < AuthorizedController
 
   def revert
     @version = Version.find(params[:id])
-    
     @version.revert
-    
+
     if dossier?@version
-      redirect_to dossier_versions_path(active_main_item(@version))
-    else
-      redirect_to :back
+      restore_dossier_relations(@version.item_id)
     end
+    redirect_to :back
 
     return
     
@@ -73,5 +71,23 @@ class VersionsController < AuthorizedController
     end
     
     redirect_to :action => 'index'
+  end
+  
+  private
+
+  def restore_dossier_relations(dossier_id)
+    related_objects = Version.where((:item_type >> DossierNumber.to_s) | (:item_type >> Container.to_s)).find_all {|v| v.reify.dossier_id = dossier_id if v.reify }
+    related_objects.each do |sub_version|
+      sub_object = sub_version.reify
+      sub_original = ('destroy'.eql?sub_version.event ? nil : sub_version.item_type.constantize.find(sub_version.item_id))
+      if sub_original
+        sub_original = sub_object
+        sub_original.dossier_id = dossier_id
+        sub_original.save
+      else
+        sub_object.dossier_id = dossier_id
+        sub_object.save
+      end
+    end
   end
 end
