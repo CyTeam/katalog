@@ -47,7 +47,7 @@ GEM
       activesupport (= 3.0.11)
     activesupport (3.0.11)
     acts-as-taggable-on (2.0.6)
-    airbrake (3.0.5)
+    airbrake (3.0.8)
       activesupport
       builder
     arel (2.0.10)
@@ -68,7 +68,7 @@ GEM
     capistrano-ext (1.2.1)
       capistrano (>= 1.0.0)
     capistrano_colors (0.5.5)
-    capones_recipes (1.11.3)
+    capones_recipes (1.13.1)
       cap-recipes
       capistrano
       capistrano-ext
