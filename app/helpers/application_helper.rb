@@ -94,9 +94,11 @@ EOF
   
   def spelling_suggestion_link(inserted, suggested)
     search_text = params[:search][:text] if params[:search]
-    search_text = search_text.gsub(inserted, suggested)
-    search = params[:search].merge({:text => search_text})
+    if search_text
+      search_text = search_text.gsub(inserted, suggested)
+      search = params[:search].merge({:text => search_text})
 
-    link_to(suggested, params.merge({:search => search}))
+      link_to(suggested, params.merge({:search => search}))
+    end
   end
 end
