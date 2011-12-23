@@ -256,7 +256,7 @@ class Dossier < ActiveRecord::Base
 
   # Report helpers
   def self.years(interval = 1, custom = nil)
-    return [] if interval.nil?
+    interval = 1 if interval.nil?
 
     years = nil
 
