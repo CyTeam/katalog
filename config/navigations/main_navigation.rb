@@ -5,7 +5,7 @@ SimpleNavigation::Configuration.run do |navigation|
     # doku zug navigations
     primary.item :nav_dossiers, t('katalog.main_navigation.dossiers'), dossiers_path, :highlights_on => /\/dossiers($|\/search)/ do |dossier|
       dossier.item :index, t('katalog.main_navigation.dossier_index'), dossiers_path
-      dossier.item :search, t('katalog.main_navigation.search'), search_dossiers_path
+      dossier.item :search, t('katalog.main_navigation.search'), search_dossiers_path, :highlights_on => /\/dossiers(\/\d*$|\/search|$)/
     end
     primary.item :key_words, t('controllers.index.keyword'), keywords_path
 
