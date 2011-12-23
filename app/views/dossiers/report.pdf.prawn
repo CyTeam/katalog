@@ -5,10 +5,13 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
     pdf.make_cell(:content => show_header_for_report(column))
   end
 
-  year_count_headers = Dossier.years(@report[:collect_year_count], @report[:name]).collect do |year|
-    pdf.make_cell(:content => year)
+  year_count_headers = []
+
+  if @report.years_visible?
+    year_count_headers = Dossier.years(@report[:collect_year_count], @report[:name]).collect do |year|
+      pdf.make_cell(:content => year)
+    end
   end
-  year_count_headers = [] unless @report.years_visible?
 
   default_table_width = 95
   table_width = default_table_width
