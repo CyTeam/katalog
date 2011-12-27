@@ -14,6 +14,6 @@
     %h3
       = t('messages.spelling_suggestion')
       - @spelling_suggestion.each_pair do |key, suggestion|
-        = link_to suggestion, spelling_suggestion_link(key, suggestion)
+        = spelling_suggestion_link(key, suggestion)
 
 = search_tips

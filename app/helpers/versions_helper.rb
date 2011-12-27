@@ -12,6 +12,8 @@ module VersionsHelper
   end
   
   def version_title(version = nil)
+    return version.reify.to_s if version.event.eql?('destroy')
+
     version.active_item.to_s
   end
 
@@ -35,10 +37,8 @@ module VersionsHelper
   end
   
   def dossier?(version)
-    item = version.active_item
-    
-    case item.class.name
-    when 'DossierNumber', 'Container', 'Keyword'
+    case version.item_type
+    when 'DossierNumber', 'Container', 'Keyword', 'Dossier'
       true
     else
       false

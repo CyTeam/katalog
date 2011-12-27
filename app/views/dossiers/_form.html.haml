@@ -1,4 +1,4 @@
-- cache [@dossier.cache_key, 'form'] do
+- cache [@dossier.cache_key, @dossier.tags, 'form'] do
   = javascript_include_tag :ckeditor
   = semantic_form_for(@dossier) do |f|
     = f.inputs do

@@ -256,7 +256,7 @@ class Dossier < ActiveRecord::Base
 
   # Report helpers
   def self.years(interval = 1, custom = nil)
-    return [] if interval.nil?
+    interval = 1 if interval.nil?
 
     years = nil
 
@@ -589,7 +589,7 @@ class Dossier < ActiveRecord::Base
   # Creates the link to winmedio.net
   def books_link
     if alphabetic?
-      "http://www.winmedio.net/doku-zug/default.aspx?q=#{title}"
+      "http://www.winmedio.net/doku-zug/default.aspx?q=#{alphabetic_book_link}"
     else
       "http://www.winmedio.net/doku-zug/default.aspx?q=erw:0%7C34%7C#{signature}"
     end
@@ -604,4 +604,41 @@ class Dossier < ActiveRecord::Base
 
   # Sphinx Freetext Search
   include Dossiers::Sphinx
+
+  private
+
+  def alphabetic_book_link
+    apply_semantic_rules(title)
+  end
+
+  def remove_unpleasant_chars(string)
+    string = remove_bracket(string)
+    string = remove_short_cuts(string)
+    string = remove_special_chars(string)
+
+    replace_comma(string)
+  end
+
+  def remove_special_chars(string)
+    (string.gsub(/[^[[:alphanum]] \-\.]/, '')).gsub(/\s/, '')
+  end
+
+  def remove_short_cuts(string)
+    string.gsub(/(AG|SA)/, "")
+  end
+
+  def remove_bracket(string)
+    string.gsub(/\(.*\)/, "")
+  end
+
+  def replace_comma(string)
+    string.gsub(',', ' ')
+  end
+
+  def apply_semantic_rules(query)
+    query = remove_unpleasant_chars(query)
+    return query unless query.include?('.')
+
+    'erw:0%7C1%7C' + query.gsub(/(\s*\.\s*)/, "%241%7C1%7C")
+  end
 end

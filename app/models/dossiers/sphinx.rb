@@ -35,19 +35,21 @@ module Dossiers
       def by_text(value, options = {})
         attributes = {:type => 'Dossier'}
         attributes[:internal] = false if (options.delete(:internal) == false)
-        
+        request_format = options[:format]
+        options.delete(:format) if options[:format]
+
         params = {:match_mode => :extended, :rank_mode => :match_any, :with => attributes}
         params.merge!(options)
         
-        query = build_query(value)
+        query = build_query(value, request_format)
         search(query, params)
       end
 
-      def split_search_words(query)
+      def split_search_words(query, format = 'html')
         sentences = []
-
+        signature_range = signature_range(query) if format.eql?('html')
         # Need a clone or slice! will do some harm
-        value = remove_unpleasant_chars(query.clone)
+        value = query.clone
         while sentence = value.slice!(/\".[^\"]*\"/)
           sentences << sentence.delete('"');
         end
@@ -59,10 +61,10 @@ module Dossiers
           if /^[0-9]*\.$/.match(string)
             # is an ordinal
             words << string
-          elsif /^[0-9]{2}(\.[0-9A-Za-z])?$/.match(string)
+          elsif is_ordinal_signature?(string)
             # signature is as ordinal by index
             signatures << string + "."
-          elsif /^[0-9.]{1,8}$/.match(string)
+          elsif is_signature?(string)
             if (string.include?'.') || string.length == 1
               signatures << string
             else
@@ -75,12 +77,48 @@ module Dossiers
 
         words = words.flatten
 
-        return signatures, words, sentences
+        return signatures, words, sentences, signature_range
+      end
+
+      def signature_range(query)
+        signature_range = []
+
+        if query.include?('-')
+          range = query.split('-')
+
+          is_range = range.inject([]) do |out, signature|
+            out << is_ordinal_signature?(signature) || is_signature?(signature)
+
+            out
+          end
+
+          unless is_range.include?(false)
+            topics = Topic.by_range(range[0], range[1])
+
+            signature_range = topics.inject([]) {|out, topic| out << topic.signature; out }
+          end
+        end
+
+        signature_range
+      end
+
+      def is_ordinal_signature?(string)
+        /^[0-9]{2}(\.[0-9A-Za-z])?$/.match(string)
+      end
+
+      def is_signature?(string)
+        /^[0-9.]{1,8}$/.match(string)
       end
 
       # Build sphinx query from freetext
-      def build_query(value)
-        signatures, words, sentences = split_search_words(value)
+      def build_query(value, format = 'html')
+        signatures, words, sentences, signature_range = split_search_words(value, format)
+
+        if signature_range.present?
+          quoted_signatures = signature_range.map{|signature| '@signature (^' + signature + '$)'}
+
+          return quoted_signatures.join(' | ')
+        end
 
         if signatures.present?
           quoted_signatures = signatures.map{|signature| '"' + signature + '*"'}
@@ -106,33 +144,8 @@ module Dossiers
         end
 
         query = [signature_query, sentence_query, word_query].join(' ')
-        query = apply_semantic_rules(query)
 
         return query.strip
-      end
-      
-      def remove_unpleasant_chars(string)
-        string = remove_bracket(string)
-        string = remove_short_cuts(string)
-        string = remove_special_chars(string)
-        
-        string
-      end
-      
-      def remove_special_chars(string)
-        string #.gsub(/\W/, "") # TODO: implement
-      end
-      
-      def remove_short_cuts(string)
-        string.gsub(/(AG|SA)/, "")
-      end
-      
-      def remove_bracket(string)
-        string.gsub(/\(.*\)/, "")
-      end
-      
-      def apply_semantic_rules(query)
-        query.gsub(/(\.)/, "|")
       end
     end
   end

@@ -8,4 +8,10 @@ class Report < ActiveRecord::Base
   validates :name,    :presence => true, :uniqueness => true
   validates :columns, :presence => true
   validates :title,   :presence => true
+
+  before_save :default_collect_year_count
+
+  def default_collect_year_count
+    self.collect_year_count = 1 if (collect_year_count.blank? and years_visible?)
+  end
 end

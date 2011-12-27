@@ -121,3 +121,6 @@ gem 'raspell'
 
 # Error notifier
 gem 'airbrake'
+
+# MetaWhere
+gem 'meta_where'
