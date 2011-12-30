@@ -36,7 +36,7 @@ class Ability
   
   # The abilities of the editor role.
   def editor
-    can :manage, [Container, ContainerType, Dossier, DossierNumber, Keyword, Location, Topic, VisitorLog, Report]
+    can :manage, [Container, ContainerType, Dossier, DossierNumber, Keyword, Location, Topic, QueryTopic, VisitorLog, Report]
   end
   
   # The abilities for everyone.
