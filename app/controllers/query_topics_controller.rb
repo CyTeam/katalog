@@ -4,4 +4,22 @@ class QueryTopicsController < AuthorizedController
 
     index!
   end
+
+  def show
+    dossiers
+
+    show!
+  end
+
+  def edit
+    dossiers
+
+    edit!
+  end
+
+  private
+
+  def dossiers
+    @dossiers = resource.dossiers
+  end
 end
