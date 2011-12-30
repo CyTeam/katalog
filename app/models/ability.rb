@@ -46,6 +46,6 @@ class Ability
     can [:index, :show, :search], [Container, ContainerType, DossierNumber, Keyword, Location]
     can [:index, :show], Report, :public => true
     can :report, Dossier
-    can [:new, :create], Reservation 
+    can [:new, :create], Reservation
   end
 end
