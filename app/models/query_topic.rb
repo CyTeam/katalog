@@ -2,7 +2,7 @@ class QueryTopic < Topic
   def dossiers
     dossiers = Dossier.by_text(self.query) if self.query.present?
 
-    dossiers.compact.empty? ? nil : dossiers
+    dossiers.compact
   end
 
   def document_count
