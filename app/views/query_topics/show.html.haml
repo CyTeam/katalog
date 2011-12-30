@@ -11,5 +11,6 @@
     %ul.dossier_topic_breadcrumb
       - for parent in @query_topic.parents
         %li= link_to_topic(parent)
-- @dossiers = @query_topic.dossiers
-= render 'dossiers/list'
+
+- if @dossiers
+  = render 'dossiers/list'
