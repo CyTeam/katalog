@@ -20,6 +20,6 @@ class QueryTopicsController < AuthorizedController
   private
 
   def dossiers
-    @dossiers = resource.dossiers
+    @dossiers = resource.dossiers unless resource.dossiers.empty?
   end
 end
