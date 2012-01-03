@@ -13,9 +13,9 @@ class Dossier < ActiveRecord::Base
   before_save :update_tags
 
   # Save the keywords for Papertrail
-  before_destroy :save_tags
+  before_destroy :save_temp_tags
   attr_accessor :temp_keyword_text
-  def save_tags
+  def save_temp_tags
     self.temp_keyword_text = self.keyword_text
   end
 
