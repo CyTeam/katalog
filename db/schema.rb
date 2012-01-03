@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111209122822) do
+ActiveRecord::Schema.define(:version => 20120103084323) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(:version => 20111209122822) do
     t.text     "object"
     t.datetime "created_at"
     t.boolean  "nested_model", :default => false
+    t.integer  "dossier_id"
   end
 
   add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
