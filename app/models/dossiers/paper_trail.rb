@@ -12,10 +12,10 @@ module Dossiers
           sub_original = ('destroy'.eql?sub_version.event ? nil : sub_version.item_type.constantize.find(sub_version.item_id))
           if sub_original
             sub_original = sub_object
-            sub_original.dossier_id = id
+            sub_original.dossier_id = version.item_id
             sub_original.save
           else
-            sub_object.dossier_id = id
+            sub_object.dossier_id = version.item_id
             sub_object.save
           end
         end
