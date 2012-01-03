@@ -39,7 +39,7 @@ class VersionsController < AuthorizedController
     @version.revert
 
     if dossier?@version
-      Dossier.restore_relations(@version.item_id)
+      Dossier.restore_relations(@version)
     end
     redirect_to :back
 
