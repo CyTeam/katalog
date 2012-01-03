@@ -26,6 +26,7 @@ PaperTrail::Model::InstanceMethods.module_eval do
                                                     :whodunnit => PaperTrail.whodunnit)
       version.update_attribute('nested_model', true) if is_a_nested_model?(class_name)
     end
+
     send(self.class.versions_association_name).send :load_target
   end
 
