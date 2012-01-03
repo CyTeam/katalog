@@ -2,7 +2,7 @@
 class DossierNumber < ActiveRecord::Base
 
   # PaperTrails: change log
-  has_paper_trail :ignore => [:created_at, :updated_at]
+  has_paper_trail :ignore => [:created_at, :updated_at], :meta => {:dossier_id => Proc.new { |number| number.dossier_id }}
 
   # Associations
   belongs_to :dossier, :touch => true, :inverse_of => :numbers

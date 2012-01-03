@@ -1,6 +1,6 @@
 class Container < ActiveRecord::Base
   # change log
-  has_paper_trail :ignore => [:created_at, :updated_at]
+  has_paper_trail :ignore => [:created_at, :updated_at], :meta => {:dossier_id => Proc.new { |container| container.dossier_id }}
 
   # Associations
   belongs_to :dossier, :touch => true, :inverse_of => :containers
