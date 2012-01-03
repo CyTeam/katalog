@@ -6,10 +6,18 @@ class Dossier < ActiveRecord::Base
   # PaperTrail: change log
   has_paper_trail :ignore => [:created_at, :updated_at, :delta], 
                   :meta   => {:container_ids => Proc.new {|dossier| dossier.container_ids.join(',') },
-                              :number_ids    => Proc.new {|dossier| dossier.number_ids.join(',') }}
+                              :number_ids    => Proc.new {|dossier| dossier.number_ids.join(',') },
+                              :keywords      => Proc.new {|dossier| dossier.temp_keyword_text }}
 
   # Hooks
   before_save :update_tags
+
+  # Save the keywords for Papertrail
+  before_destroy :save_tags
+  attr_accessor :temp_keyword_text
+  def save_tags
+    self.temp_keyword_text = self.keyword_text
+  end
 
   # Simulate default value '' for description as MySQL doesn't support it
   before_save lambda { self.description ||= '' }
