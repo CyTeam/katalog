@@ -3,10 +3,11 @@ module Dossiers
     extend ActiveSupport::Concern
 
     module ClassMethods
-      def restore_relations(id)
-        related_objects = Version.where(((:item_type >> DossierNumber.to_s) | (:item_type >> Container.to_s)) & (:event >> "destroy")).find(:all, :order => "created_at desc").each {|v| v.reify.dossier_id = id if v.reify }
+      def restore_relations(version)
+        related_object_ids = version.container_ids.split(',').map(&:to_i) + version.number_ids.split(',').map(&:to_i)
 
-        related_objects.each do |sub_version|
+        related_object_ids.each do |id|
+          sub_version = Version.find_by_item_id(id)
           sub_object = sub_version.reify
           sub_original = ('destroy'.eql?sub_version.event ? nil : sub_version.item_type.constantize.find(sub_version.item_id))
           if sub_original
