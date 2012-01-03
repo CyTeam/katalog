@@ -605,6 +605,9 @@ class Dossier < ActiveRecord::Base
   # Sphinx Freetext Search
   include Dossiers::Sphinx
 
+  # Paper Trail
+  include Dossiers::PaperTrail
+
   private
 
   def alphabetic_book_link
