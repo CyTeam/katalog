@@ -7,5 +7,5 @@ ActiveRecord::Base.class_eval do
 end
 
 Version.class_eval do
-  attr_accessible :dossier_id
+  attr_accessible :dossier_id, :number_ids, :container_ids
 end
