@@ -4,7 +4,7 @@ module Dossiers
 
     module ClassMethods
       def restore_relations(id)
-        related_objects = Version.where((:item_type >> DossierNumber.to_s) | (:item_type >> Container.to_s)).find_all {|v| v.reify.dossier_id = id if v.reify }
+        related_objects = Version.where(((:item_type >> DossierNumber.to_s) | (:item_type >> Container.to_s)) & (:event >> "destroy")).find(:all, :order => "created_at desc").each {|v| v.reify.dossier_id = id if v.reify }
 
         related_objects.each do |sub_version|
           sub_object = sub_version.reify
