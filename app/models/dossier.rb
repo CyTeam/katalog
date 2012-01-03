@@ -180,7 +180,7 @@ class Dossier < ActiveRecord::Base
     values.reject!{|value| value.match /^[0-9.']*$/}
     values.reject!{|value| value.match /^(Jan|Feb|März|Apr|Mai|Juni|Juli|Aug|Sep|Sept|Okt|Nov|Dez)$/}
 
-    return values
+    values
   end
 
   def self.split_words(value)
