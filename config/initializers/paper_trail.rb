@@ -5,3 +5,7 @@ ActiveRecord::Base.class_eval do
     attributes.select {|a, b| a.end_with?'id' and not a.eql?'id' }
   end
 end
+
+Version.class_eval do
+  attr_accessible :dossier_id
+end
