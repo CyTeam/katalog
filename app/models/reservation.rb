@@ -11,4 +11,8 @@ class Reservation < ActiveRecord::Base
   def year_selection=(inputs)
     self.dossier_years = inputs.reject{|input| input.blank? }.join(', ')
   end
+
+  def to_s
+    dossier.to_s
+  end
 end
