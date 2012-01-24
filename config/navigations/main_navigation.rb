@@ -7,7 +7,7 @@ SimpleNavigation::Configuration.run do |navigation|
       dossier.item :index, t('katalog.main_navigation.dossier_index'), dossiers_path
       dossier.item :search, t('katalog.main_navigation.search'), search_dossiers_path, :highlights_on => /\/dossiers(\/\d*$|\/search|$)/
     end
-    primary.item :key_words, t('controllers.index.keyword'), keywords_path
+    primary.item :key_words, t('controllers.index.keyword'), keywords_path, :if => lambda { user_signed_in? }
 
     if current_user and (current_user.role?(:editor) or current_user.role?(:admin))
       primary.item :edit, t('katalog.main_navigation.edit'), versions_path do |edit|
