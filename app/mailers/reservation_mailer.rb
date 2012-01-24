@@ -1,13 +1,14 @@
 class ReservationMailer < ActionMailer::Base
-  default :from => 'info@doku-zug.ch'
+  default :from => RESERVATION_EMAIL_RECIPIENT # This constant is definied in mail initializer.
 
   def user_email(reservation)
     @reservation = reservation
     
     mail(
-      :to       => 'info@doku-zug.ch',
+      :to       => RESERVATION_EMAIL_RECIPIENT,
       :reply_to => reservation.email,
-      :subject  => "#{I18n.t('activerecord.models.reservation')}: #{@reservation.dossier}"
+      :subject  => "#{I18n.t('activerecord.attributes.reservation.title')}: #{@reservation.dossier}",
+      :cc      => reservation.email
     )
   end
 end

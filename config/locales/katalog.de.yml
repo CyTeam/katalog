@@ -240,6 +240,7 @@ de:
         email: "E-Mail-Adresse"
         pickup: "Abholdatum/-zeit"
         year_selection: Jahre
+        title: "doku-zug.ch Vorbestellung"
       sphinx_admin:
         type: Konverterart
         from: Konvertiert von

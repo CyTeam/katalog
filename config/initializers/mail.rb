@@ -1,0 +1,1 @@
+RESERVATION_EMAIL_RECIPIENT = 'info@cyt.ch'
