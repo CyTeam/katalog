@@ -87,6 +87,7 @@ de:
     total_count:   "Total Dokumente %{count}"
     show_all:      "Alles anzeigen"
     created:       "%{signature} %{title} wurde gespeichert."
+    reservation_send: "Ihre Vorbestellung wurde erfolgreich übermittelt."
     search_replace: 
       title: "Suchen und Ersetzen"
       done: "Suchen und ersetzen wurde erfolgreich durchgeführt.<br/>%{amount} Dossier/s wurde/n geändert."
