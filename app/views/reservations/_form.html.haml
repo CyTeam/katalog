@@ -8,6 +8,7 @@
     
   = f.inputs t_attr(:reservation) do
     = f.input :year_selection, :as => :check_boxes, :collection => @reservation.dossier.waiting_list, :required => true
+    = f.semantic_errors :dossier_years
     = f.input :pickup, :hint => 'Unsere Öffnungszeiten sind: Mo, Di, Mi, Fr 10-18 Uhr, Donnerstag 10-20 Uhr'
     = f.input :dossier_id, :as => :hidden
 
