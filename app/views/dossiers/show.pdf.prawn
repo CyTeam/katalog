@@ -12,7 +12,6 @@ prawn_document(:page_size => 'A4', :filename => "#{@dossier.to_s}.pdf", :rendere
   pdf.move_down(10)
 
   if @dossier.description.present?
-    pdf.text t_attr(:description), :size => 12
     pdf.indent(10) do
       description = sanitize(auto_link(pdf.list(@dossier.description)), :tags => %w(i u b strong a sub sup), :attributes => %w(href))
       pdf.text description, :inline_format => true
