@@ -34,6 +34,7 @@ Katalog::Application.routes.draw do
     
     collection do
       get :search, :overview, :report, :edit_report
+      get :welcome
     end
 
     resources :containers
@@ -76,5 +77,5 @@ Katalog::Application.routes.draw do
   
   match "/user_session" => "application#update_session"
 
-  root :to => "dossiers#index"
+  root :to => "dossiers#welcome"
 end
