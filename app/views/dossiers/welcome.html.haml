@@ -5,7 +5,7 @@
       %h1
         = link_to dossier_path(group) do
           = group
-      %h2= t(:count, :scope => :katalog) + ": " + group.document_count.to_s
+      %h2= t(:count, :scope => :katalog) + ": " + number_with_delimiter(group.document_count)
       - group.random_children.each do |dossier|
         = link_to dossier, dossier_path(dossier), :class => 'dossiers'
 
