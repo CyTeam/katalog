@@ -1,0 +1,11 @@
+%ul#welcome-overview
+  - @groups.each do |group|
+    %li
+      = image_tag "/images/dossiers/#{group.signature}.png", :alt => group.to_s
+      %h1
+        = link_to dossier_path(group) do
+          = group
+      %h2= t(:count, :scope => :katalog) + ": " + group.document_count.to_s
+      - group.random_children.each do |dossier|
+        = link_to dossier, dossier_path(dossier), :class => 'dossiers'
+
