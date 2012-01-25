@@ -34,3 +34,4 @@ db/sphinx
 config/*.sphinx.conf
 config/sphinx/
 config/initializers/airbrake.rb
+config/initializers/mail.rb
