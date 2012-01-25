@@ -23,6 +23,12 @@ class DossiersController < AuthorizedController
   # Ordering
   has_scope :order_by, :default => 'signature'
 
+  def welcome
+    @groups = Dossier.group
+
+    redirect_to :action => 'index' if user_signed_in?
+  end
+
   def show
     if user_signed_in?
       @dossier = Dossier.find(params[:id], :include => {:containers => [:location, :container_type]})
