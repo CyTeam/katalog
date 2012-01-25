@@ -1,5 +1,5 @@
 - cache [:list, dossier.cache_key, current_user.try(:roles), session[:hide_keywords]] do
-  %tr[dossier]{:class => cycle('odd', 'even')}
+  %tr[dossier]{:class => cycle('odd', 'even'), :title => dossier.tooltip}
     - cache dossier do
       %td= dossier.signature
       %td
