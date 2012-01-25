@@ -609,6 +609,15 @@ class Dossier < ActiveRecord::Base
     Topic.alphabetic?(signature)
   end
 
+  def tooltip
+    html_output = "<h1>#{I18n::translate('katalog.dossier_count_per_year')}</h1>"  unless self.numbers.present.empty?
+    self.numbers.present.each do |number|
+      html_output += "<p style='#{cycle('odd', 'even')}'><label>#{number.period}:</label> #{number.amount}</p>"
+    end
+
+    html_output
+  end
+
   # Excel Export
   include Dossiers::ExportToXls
 
@@ -617,6 +626,9 @@ class Dossier < ActiveRecord::Base
 
   # Paper Trail
   include Dossiers::PaperTrail
+
+  # Text helper
+  include ActionView::Helpers::TextHelper
 
   private
 
