@@ -3,7 +3,7 @@ require 'raspell'
 
 class DossiersController < AuthorizedController
   # Authentication
-  before_filter :authenticate_user!, :except => [:index, :search, :show, :report, :preview]
+  before_filter :authenticate_user!, :except => [:index, :search, :show, :report, :preview, :welcome]
 
   # Responders
   respond_to :html, :js, :json, :xls, :pdf
