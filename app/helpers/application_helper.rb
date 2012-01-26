@@ -53,6 +53,10 @@ addContainerSuggestionBehaviour();
     output << link_to(t_action(action), url, options)
   end
 
+  def contextual_pdf_link(length = 0)
+    contextual_link('print', url_for(params.merge(:format => :pdf)), :title => t('tooltips.dossiers.show_pdf'), :target => '_blank', :onclick => "javascript:return informUserAboutBigPDF(#{length});")
+  end
+
   def contextual_function(action, function, options = {})
     output = ActiveSupport::SafeBuffer.new
     options.merge!(:class => "icon icon-#{action}")
