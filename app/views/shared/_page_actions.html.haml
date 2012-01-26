@@ -10,7 +10,7 @@
           - for report in available_reports
             %li= link_to(report.title, report_dossiers_path(:report_name => report.name, :search => params[:search]))
 
-    = contextual_link('print', url_for(params.merge(:format => :pdf)), :title => t('tooltips.dossiers.show_pdf'), :target => '_blank', :onclick => "javascript:return informUserAboutBigPDF(#{@dossiers.length});")
+    = contextual_pdf_link(@dossiers.length)
     = render 'shared/hide_keywords'
     - if (user_signed_in? and not @is_a_report)
       %span#excel_actions
