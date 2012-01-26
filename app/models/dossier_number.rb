@@ -23,7 +23,11 @@ class DossierNumber < ActiveRecord::Base
   scope :between, lambda {|value|
     from, to = from_s(value)
     
-    where("(`from` IS NULL AND `to` >= :to) OR (`from` >= :from AND `to` <= :to) OR (`from` <= :from AND `to` IS NULL)", {:from => from, :to => to})
+    if from.present?
+      where("(`from` IS NULL AND `to` >= :to) OR (`from` >= :from AND `to` <= :to) OR (`from` <= :from AND `to` IS NULL)", {:from => from, :to => to})
+    else
+      where("`to` <= :to", :to => to)
+    end
   }
 
   # Returns period for a string.

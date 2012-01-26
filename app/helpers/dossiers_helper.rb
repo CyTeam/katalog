@@ -113,6 +113,17 @@ module DossiersHelper
     'edit_report'.eql?action_name
   end
 
+  def split_decades(numbers)
+    splitted_numbers = []
+    decades = (199..(DateTime.now.year.to_s[0..2].to_i))
+
+    decades.each do |decade|
+      splitted_numbers << numbers.find_all {|n| n.period.include?(decade.to_s) }
+    end
+    
+    splitted_numbers
+  end
+
   private
 
   def availabilities(dossier)
