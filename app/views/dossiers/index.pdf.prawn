@@ -25,6 +25,7 @@ prawn_document(:page_size => 'A4', :renderer => PrawnLayout) do |pdf|
     # General cell styling
     cells.valign = :top
     cells.border_width = 0
+    cells.padding = [2, 5, 2, 5]
 
     # Headings styling
     row(0).font_style = :bold
