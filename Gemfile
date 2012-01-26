@@ -4,7 +4,7 @@ source 'http://rubygems.org'
 
 # Rails
 # =====
-gem 'rails'
+gem 'rails', '~> 3.0.11'
 
 # Database
 gem 'mysql2', '~> 0.2.6'
