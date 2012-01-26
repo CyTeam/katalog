@@ -68,6 +68,7 @@ prawn_document(:page_size => 'A4', :filename => "#{@dossier.to_s}.pdf", :rendere
       pdf.text " "
       pdf.text t('katalog.total') + ": " + @dossier.document_count.to_s
     end
+
     pdf.move_down(10)
   end
 
