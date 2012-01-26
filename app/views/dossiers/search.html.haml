@@ -5,7 +5,8 @@
 - if @dossiers.present?
   %h1= search_title
   = paginated_section :renderer => PaginationListLinkRenderer, :show_always => @paginated_scope.present? do
-    = render 'list'
+    .search{:class => params[:search][:signature].present? ? "signature" : "text"}
+      = render 'list'
 - elsif @query
   %h1= t('katalog.nothing_found.title')
   %p= t('katalog.nothing_found.text')

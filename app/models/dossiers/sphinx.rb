@@ -18,27 +18,31 @@ module Dossiers
         # Use _taggings relation to fix thinking sphinx issue #167
         indexes keyword_taggings.tag.name, :as => :keywords
 
+        indexes direct_parents.title, :as => :parent_title
+
         # Weights
         set_property :field_weights => {
           :title    => 500,
-          :keywords => 2
+          :parent_title => 5,
+          :keywords => 10
         }
 
         # Attributes
         has created_at, updated_at
         has type
         has internal
+        has "signature LIKE '17%'", :type => :boolean, :as => :is_local
       end
     end
 
     module ClassMethods
       def by_text(value, options = {})
-        attributes = {:type => 'Dossier'}
+        attributes = {}
         attributes[:internal] = false if (options.delete(:internal) == false)
         request_format = options[:format]
         options.delete(:format) if options[:format]
 
-        params = {:match_mode => :extended, :rank_mode => :match_any, :with => attributes}
+        params = {:match_mode => :extended, :with => attributes, :sort_mode => :expr, :order => "@weight * (1.5 - is_local)"}
         params.merge!(options)
         
         query = build_query(value, request_format)

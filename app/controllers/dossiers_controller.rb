@@ -162,7 +162,6 @@ class DossiersController < AuthorizedController
     if params[:search][:text].present?
       @query = params[:search][:text]
       @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?, :include => [:location, :containers])
-      @dossiers.sort! { |a,b| a.signature <=> b.signature }
     else
       @query = params[:search][:signature]
       @dossiers = apply_scopes(Dossier, params[:search]).includes(:containers => :location).order('signature').accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
