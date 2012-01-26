@@ -469,6 +469,8 @@ class Dossier < ActiveRecord::Base
     document_counts.sum(:amount).to_i
   end
 
+  has_one :direct_parent, :class_name => 'Topic', :foreign_key => 'signature', :primary_key => 'signature'
+
   # Returns the last entry of the parents.
   def parent
     parents.last

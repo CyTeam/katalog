@@ -18,10 +18,13 @@ module Dossiers
         # Use _taggings relation to fix thinking sphinx issue #167
         indexes keyword_taggings.tag.name, :as => :keywords
 
+        indexes direct_parents.title, :as => :parent_title
+
         # Weights
         set_property :field_weights => {
           :title    => 500,
-          :keywords => 2
+          :parent_title => 5,
+          :keywords => 10
         }
 
         # Attributes
