@@ -31,6 +31,7 @@ module Dossiers
         has created_at, updated_at
         has type
         has internal
+        has "signature LIKE '17%'", :type => :boolean, :as => :is_local
       end
     end
 
@@ -41,7 +42,7 @@ module Dossiers
         request_format = options[:format]
         options.delete(:format) if options[:format]
 
-        params = {:match_mode => :extended, :with => attributes}
+        params = {:match_mode => :extended, :with => attributes, :sort_mode => :expr, :order => "@weight * (1.5 - is_local)"}
         params.merge!(options)
         
         query = build_query(value, request_format)
