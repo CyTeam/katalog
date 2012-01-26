@@ -41,20 +41,27 @@ prawn_document(:page_size => 'A4', :filename => "#{@dossier.to_s}.pdf", :rendere
     pdf.text t_attr(:dossier_number_list), :size => 12
 
     years = @dossier.years_counts(1)
-    header = years.inject([]) do |out, year|
-      out << year[:period].to_s
+    split_decades(@dossier.numbers.present).each do |decade|
+      header = decade.inject([]) do |out, year|
+        out << year.period.to_s
 
-      out
-    end
+        out
+      end
 
-    row = years.inject([]) do |out, year|
-      out << year[:count].to_s
+      header << t('katalog.total')
 
-      out
-    end
+      row = decade.inject([]) do |out, year|
+        out << year.amount.to_s
 
-    pdf.table [header] + [row] do
-      row(0).size = 5
+        out
+      end
+
+      row << number_with_delimiter(@dossier.document_count(decade.first.to.year..decade.last.to.year))
+
+      pdf.table [header] + [row] do
+        row(0).size = 5
+      end
+      pdf.text " "
     end
 
     pdf.indent(10) do
