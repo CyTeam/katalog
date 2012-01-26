@@ -38,7 +38,7 @@ module Dossiers
         request_format = options[:format]
         options.delete(:format) if options[:format]
 
-        params = {:match_mode => :extended, :rank_mode => :match_any, :with => attributes}
+        params = {:match_mode => :extended, :with => attributes}
         params.merge!(options)
         
         query = build_query(value, request_format)
