@@ -30,15 +30,16 @@
       %li= link_to t_attr(:books_link), @dossier.books_link, :target => '_blank'
       
   %h3= t('katalog.title.document_count_html', :document_count => number_with_delimiter(@dossier.document_count), :first_document => @dossier.first_document_on.try(:strftime, '%Y'))
-  #document_counts.ce_table
-    %table.document_counts
-      %tr
-        = render :partial => 'dossier_numbers/head', :collection => @dossier.numbers.present
-        %th= t('katalog.total')
-      %tr.odd
-        = render :partial => 'dossier_numbers/amount', :collection => @dossier.numbers.present
-        %td
-          %strong= number_with_delimiter(@dossier.document_count)
+  - split_decades(@dossier.numbers.present).each do |decade|
+    #document_counts.ce_table
+      %table.document_counts
+        %tr
+          = render :partial => 'dossier_numbers/head', :collection => decade
+          %th= t('katalog.total')
+        %tr.odd
+          = render :partial => 'dossier_numbers/amount', :collection => decade
+          %td
+            %strong= number_with_delimiter(@dossier.document_count(decade.first.to.year..decade.last.to.year))
 
   - unless (user_signed_in? || @dossier.waiting_list.empty?)
     .waiting-time
