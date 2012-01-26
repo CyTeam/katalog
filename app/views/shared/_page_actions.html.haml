@@ -1,4 +1,6 @@
 #page_actions.contextual
+  - if controller_name.eql?('dossiers') and action_name.eql?('index')
+    = contextual_pdf_link(@dossiers.length)
   - if @query
     - available_reports = Report.accessible_by(current_ability, :index)
     - unless available_reports.empty? or @report
