@@ -39,7 +39,7 @@
         %tr.odd
           = render :partial => 'dossier_numbers/amount', :collection => decade
           %td
-            %strong= number_with_delimiter(@dossier.document_count(decade.first.to.year..decade.last.to.year))
+            %strong= number_with_delimiter(@dossier.document_count("#{decade.first.from.present? ? decade.first.from.year : ''}-#{decade.last.to.year}"))
 
   - unless (user_signed_in? || @dossier.waiting_list.empty?)
     .waiting-time
