@@ -126,9 +126,11 @@ module DossiersHelper
 
   def default_periods_collection
     DossierNumber.default_periods.collect do |d|
-      from = d[:from].present? ? d[:from].year : ""
-      
-      [ "#{from} - #{d[:to].year}", d[:to].year ] if d[:to]
+      from = d[:from].present? ? d[:from].strftime("%y") : ""
+      to = d[:to].strftime("%y")
+      label = from.eql?(to) ? "#{d[:to].year}" : "#{from}-#{to}"
+
+      [label, d[:to].year ] if d[:to]
     end
   end
 
