@@ -28,7 +28,7 @@ class Topic < Dossier
   end
 
   def self.by_range(from_signature, to_signature)
-    topics = self.where("signature BETWEEN ? AND ?", clean_signature(from_signature), clean_signature(to_signature))
+    topics = self.where("signature BETWEEN ? AND ?", clean_signature(from_signature), clean_signature(to_signature || ""))
 
     clean_parents(topics)
   end
