@@ -6,7 +6,7 @@
 %h1= t('katalog.main_navigation.edit_year')
 
 = paginated_section :renderer => PaginationListLinkRenderer do
-  #dossiers.ce_table.block
+  #edit_report.ce_table.block
     %table
       = render 'batch_edit_last_year/list_header'
       - @tabindex = 1
