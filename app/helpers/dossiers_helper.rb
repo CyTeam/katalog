@@ -125,7 +125,11 @@ module DossiersHelper
   end
 
   def default_periods_collection
-    DossierNumber.default_periods.collect {|d| [ "#{d[:from].year} - #{d[:to].year}", d[:from].year ] if d[:from] }
+    DossierNumber.default_periods.collect do |d|
+      from = d[:from].present? ? d[:from].year : ""
+      
+      [ "#{from} - #{d[:to].year}", d[:to].year ] if d[:to]
+    end
   end
 
   private
