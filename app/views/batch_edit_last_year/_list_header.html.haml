@@ -5,4 +5,4 @@
   %th.title= t_attr(:title, Dossier)
   - @years.each do |year|
     %th.year
-      = select 'dossier_numbers_year', year, DossierNumber.default_periods.collect {|d| [ "#{d[:from].year} - #{d[:to].year}", d[:from].year ] if d[:from] }, {:selected => year, :include_blank => false}, :class => 'dossier_numbers_year'
+      = select 'dossier_numbers_year', year, default_periods_collection, {:selected => year, :include_blank => false}, :class => 'dossier_numbers_year'

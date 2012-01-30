@@ -124,6 +124,10 @@ module DossiersHelper
     splitted_numbers
   end
 
+  def default_periods_collection
+    DossierNumber.default_periods.collect {|d| [ "#{d[:from].year} - #{d[:to].year}", d[:from].year ] if d[:from] }
+  end
+
   private
 
   def availabilities(dossier)
