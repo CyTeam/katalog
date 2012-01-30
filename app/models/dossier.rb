@@ -434,8 +434,8 @@ class Dossier < ActiveRecord::Base
   end
 
   # Returns the dossier number of a year.
-  def dossier_number_from_year(from = Time.now.year)
-    numbers.where(:from => "#{from}-01-01").first
+  def dossier_number_from_year(to = Time.now.year)
+    numbers.where(:to => "#{to}-12-31").first
   end
 
   # Returns the keywords as text separated throw new lines.
