@@ -120,8 +120,8 @@ module DossiersHelper
     decades.each do |decade|
       splitted_numbers << numbers.find_all {|n| n.period.include?(decade.to_s) }
     end
-    
-    splitted_numbers
+
+    splitted_numbers.reject { |a| a.join.strip.length == 0 }
   end
 
   def default_periods_collection
