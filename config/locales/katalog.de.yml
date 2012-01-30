@@ -4,6 +4,7 @@ de:
     visitor_logs:
       create_by_on: "Erstellt durch %{user} am %{date}."
     main_navigation:
+      root:               "Übersicht"
       dossiers:           "Dossiers"
       dossier_index:      "Themenübersicht"
       search:             "Dossier suchen"

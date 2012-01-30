@@ -3,6 +3,7 @@ SimpleNavigation::Configuration.run do |navigation|
   # Define the primary navigations
   navigation.items do |primary|
     # doku zug navigations
+    primary.item :root, t('katalog.main_navigation.root'), root_path, :unless => lambda { user_signed_in? }
     primary.item :nav_dossiers, t('katalog.main_navigation.dossiers'), dossiers_path, :highlights_on => /\/dossiers($|\/search)/ do |dossier|
       dossier.item :index, t('katalog.main_navigation.dossier_index'), dossiers_path
       dossier.item :search, t('katalog.main_navigation.search'), search_dossiers_path, :highlights_on => /\/dossiers(\/\d*$|\/search|$)/
