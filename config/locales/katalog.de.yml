@@ -85,6 +85,7 @@ de:
     hide_keywords: "Keywords ausblenden"
     delete:        "Löschen"
     overview:      "Themenübersicht"
+    overview_text: "Erhalten Sie hier eine Übersicht."
     total:         "Total Dokumente"
     total_count:   "Total Dokumente %{count}"
     show_all:      "Alles anzeigen"
