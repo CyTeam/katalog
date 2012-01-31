@@ -82,6 +82,7 @@ class Dossier < ActiveRecord::Base
     includes(:numbers).sum(:amount).to_i
   end
 
+  # Random from all children dossiers
   def random_children(count = 3)
     Dossier.by_signature(self.signature).sample(count)
   end
