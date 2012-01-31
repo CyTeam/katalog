@@ -1,0 +1,90 @@
+- cache :public_footer do
+  #such
+    %h1 Suchen
+    .mod_search.block
+      %form{:action => "http://www.doku-zug.ch/suchergebnis.html", :method => "get"}
+        .formbody
+          %label.invisible{:for => "ctrl_keywords_27"} Suchbegriffe
+          %input#ctrl_keywords_27.text{:name => "keywords", :type => "text", :value => ""}
+          %input#ctrl_submit_27.submit{:type => "submit", :value => "Suchen"}
+
+  #seitenkarte.mod_customnav.block
+    %h1 Sitemap
+    %a.invisible{:href => "#skipNavigation20"} Navigation überspringen
+    %ul.level_1
+      %li.first
+        %a.first{:href => "http://www.doku-zug.ch/team.html", :title => "doku-zug.ch Dokumentationszentrum und Bibliothek in Zug"} Über uns
+      %li
+        %a{:href => "http://www.doku-zug.ch/team.html", :title => "doku-zug.ch: Daniel Brunner (Gr\303\274nder und Inhaber), Sybilla Schmid (Gesch\303\244ftsf\303\274hrerin)"} Team
+      %li
+        %a{:href => "http://www.doku-zug.ch/leitbild.html", :title => "doku-zug.ch: Leitbild"} Leitbild
+      %li
+        %a{:href => "http://www.doku-zug.ch/geschichte.html", :title => "doku-zug.ch: Entstehung und Geschichte"} Geschichte
+      %li
+        %a{:href => "http://www.doku-zug.ch/archiv-bibliothek.html", :title => "doku-zug.ch Angebot"} Unser Angebot
+      %li
+        %a{:href => "http://www.doku-zug.ch/archiv-bibliothek.html", :title => "doku-zug.ch Archiv und Bibliothek"} Archiv, Bibliothek
+      %li
+        %a{:href => "http://www.doku-zug.ch/publikationen.html", :title => "doku-zug.ch Jahresberichte"} Publikationen
+      %li
+        %a{:href => "http://www.doku-zug.ch/kataloge.html", :title => "doku-zug.ch Kataloge"} Kataloge
+      %li
+        %a{:href => "http://www.doku-zug.ch/aktuell.html", :title => "doku-zug.ch Dokumentationszentrum und Bibliothek in Zug"} News
+      %li
+        %a{:href => "http://www.doku-zug.ch/aktuell.html", :title => "doku-zug.ch Aktuell"} Aktuell
+      %li
+        %a{:href => "http://www.doku-zug.ch/recherche-der-woche.html", :title => "doku-zug.ch Recherche der Woche"} Recherche der Woche
+      %li
+        %a{:href => "http://www.doku-zug.ch/neue-buecher.html", :title => "doku-zug.ch Neuanschaffungen und Buchtipps"} Neue Bücher
+      %li
+        %a{:href => "http://www.doku-zug.ch/kontakt.html", :title => "doku-zug.ch Adresse, Kontakt, Anfahrtsweg, \303\226ffnungszeiten"} Kontakt
+      %li
+        %a{:href => "http://www.doku-zug.ch/links.html", :title => "doku-zug.ch Weiterf\303\274hrende Links"} Links
+      %li.last
+        %a.last{:href => "http://www.doku-zug.ch/newsletter.html", :title => "doku-zug.ch Newsletter abonnieren oder abbestellen"} Newsletter
+    %a#skipNavigation20.invisible{:name => "skipNavigation20"} &nbsp;
+
+  #schnelllinks
+    %h1 quicklinks
+    .ce_text.block
+      %p
+        %strong> Archive und Bibliotheken
+        \:
+      %p
+        %a{:href => "http://www.afz.ethz.ch/", :title => "Archiv f\303\274r Zeitgeschichte (ETH Z\303\274rich)"} Archiv für Zeitgeschichte
+      %p
+        %a{:href => "http://www.bis.info/", :onclick => "window.open(this.href); return false;", :title => "BIS"} Bibliothek Information Schweiz BIS
+        %a{:href => "http://www.alliancesud.ch/de/dokumentation", :title => "Dokumentationszentrum von Alliance Sud"}
+      %p
+        %a{:href => "http://www.alliancesud.ch/de/dokumentation", :title => "Dokumentationszentrum von Alliance Sud"} Dokumentationszentrum Alliance Sud
+        %a{:href => "http://www.gosteli-foundation.ch/", :onclick => "window.open(this.href); return false;", :title => "Gosteli-Stiftung - Archiv zur Geschichte der schweizerischen Frauenbewegung"}
+      %p
+        %a{:href => "http://www.gosteli-foundation.ch/", :onclick => "window.open(this.href); return false;", :title => "Gosteli-Stiftung - Archiv zur Geschichte der schweizerischen Frauenbewegung"} Gosteli-Stiftung
+      %p
+        %a{:href => "http://www.sozialarchiv.ch/", :onclick => "window.open(this.href); return false;", :title => "Schweizerisches Sozialarchiv"} Schweizerisches Sozialarchiv
+      %p
+        %a{:href => "http://www.ub.unibas.ch/wwz-bibliothek-swa/schweiz-wirtschaftsarchiv/allgemeines/", :onclick => "window.open(this.href); return false;", :title => "Schweizerisches Wirtschaftsarchiv"} Schweizerisches Wirtschaftsarchiv
+      %p
+        %a{:href => "http://retro.seals.ch/digbib/home", :onclick => "window.open(this.href); return false;", :title => "Server f\303\274r digitalisierte Zeitschriften"} SEALS - Server für digitalisierte Zeitschriften
+      %p
+        %a{:href => "http://www.zug.ch/staatsarchiv", :title => "Staatsarchiv Kanton Zug"} Staatsarchiv des Kantons Zug
+        %a{:href => "http://www.bibliothekenzug.ch/", :onclick => "window.open(this.href); return false;", :title => "Stadt- und Kantonsbibliothek Zug"}
+      %p
+        %a{:href => "http://www.bibliothekenzug.ch/", :onclick => "window.open(this.href); return false;", :title => "Stadt- und Kantonsbibliothek Zug"} Stadt- und Kantonsbibliothek Zug
+        %a{:href => "http://www.vsa-aas.org/", :onclick => "window.open(this.href); return false;", :title => "Verband Schweizerischer Archivarinnen und Archivare"}
+      %p
+        %a{:href => "http://www.vsa-aas.org/de/", :onclick => "window.open(this.href); return false;", :title => "VSA"} Verein Schweizerischer Archivarinnen und Archivare
+      %p
+        %strong
+          %br
+          Weitere nützliche Links für Ihre Recherchen:
+      %p
+        %a{:href => "http://www.sbbhistoric.ch/", :onclick => "window.open(this.href); return false;", :title => "Stiftung Historisches Erbe der SBB"} SBB Historic
+      %p
+        %a{:href => "http://www.hls-dhs-dss.ch/", :onclick => "window.open(this.href); return false;", :title => "Historisches Lexikon der Schweiz"} Historisches Lexikon der Schweiz
+      %p
+        %a{:href => "http://www.admin.ch/", :onclick => "window.open(this.href); return false;", :title => "Admin"} Schweizerische Eidgenossenschaft
+      %p
+        %a{:href => "http://www.zug.ch/behoerden/baudirektion/statistikfachstelle", :onclick => "window.open(this.href); return false;", :title => "Statistikfachstelle Zug"} Statistikfachstelle Kanton Zug
+      %p
+        %a{:href => "http://www.halle44-zg.ch/zuger-chroniken/?no_cache=1", :onclick => "window.open(this.href); return false;", :title => "Zuger Chronik"} Zuger Chronik
