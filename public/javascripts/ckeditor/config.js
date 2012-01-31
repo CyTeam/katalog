@@ -24,6 +24,12 @@ CKEDITOR.editorConfig = function( config )
   
   // works only with en, ru, uk languages
   // config.extraPlugins = "embed,attachment";
+
+  // Force past as plain text
+  config.ForcePasteAsPlainText = true;
+
+  // Default link target
+  config.DefaultLinkTarget = '_blank' ;
   
   config.entities = false;
   
