@@ -10,7 +10,7 @@
 
 
 %h3= t_attr(:description)
-#description= raw(auto_link(params['html_data'].html_safe, :html => {:target => '_blank'}))
+#description= raw(target_blank(params['html_data'].html_safe))
 
 %h3= t_attr(:keyword_text)
 #keywords.section

@@ -14,7 +14,7 @@
 
   %h3= @dossier.signature
 
-  #description= raw(auto_link(@dossier.description, :html => {:target => '_blank'}))
+  #description= raw(target_blank(@dossier.description))
 
   %h3= t_attr(:keyword_text)
   #keywords.section
