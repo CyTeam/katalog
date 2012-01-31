@@ -123,6 +123,11 @@ class Topic < Dossier
     self
   end
 
+  # Title which is constructed from the next childrens
+  def overview_title
+    "#{self.signature}: " + direct_children.collect {|c| c.title.split(".").first }.join('. ')
+  end
+
   private
 
   def self.clean_signature(signature)
