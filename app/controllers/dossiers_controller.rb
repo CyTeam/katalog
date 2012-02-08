@@ -186,7 +186,7 @@ class DossiersController < AuthorizedController
         spell_checker.set_option("ignore-case", "true")
         spell_checker.suggestion_mode = Aspell::NORMAL
 
-        german_spell_checker = Aspell.new1('lang' => 'de_CH')
+        german_spell_checker = Aspell.new1({'lang' => 'de_CH', "encoding"=>"UTF-8"})
         german_spell_checker.set_option("ignore-case", "true")
         german_spell_checker.suggestion_mode = Aspell::NORMAL
 
