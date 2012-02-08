@@ -81,7 +81,7 @@ module Dossiers
 
         words = words.flatten
 
-        return signatures, words, sentences, signature_range
+        return signatures, clean(words), sentences, signature_range
       end
 
       def signature_range(query)
@@ -150,6 +150,13 @@ module Dossiers
         query = [signature_query, sentence_query, word_query].join(' ')
 
         return query.strip
+      end
+
+      private
+
+      # Removes the apostrophe from the words.
+      def clean(words)
+        words.collect! {|word| word.delete('"') }
       end
     end
   end
