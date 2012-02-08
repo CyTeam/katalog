@@ -55,7 +55,7 @@ module Dossiers
         # Need a clone or slice! will do some harm
         value = query.clone
         while sentence = value.slice!(/\".[^\"]*\"/)
-          sentences << sentence.delete('"');
+          sentences << sentence.delete('"')
         end
 
         strings = value.split(/[ %();,:-]/).uniq.select{|t| t.present?}
