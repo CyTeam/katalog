@@ -45,8 +45,9 @@ module Dossiers
 
         params = {:match_mode => :extended, :with => attributes, :sort_mode => :expr, :order => "@weight * (1.5 - is_local)"}
         params.merge!(options)
-        
         query = build_query(value, request_format)
+        params.merge!({:sort_mode => :extended, :order => 'signature ASC'}) if query.include?('@signature')
+
         search(query, params)
       end
 
