@@ -32,6 +32,7 @@ module Dossiers
         has type
         has internal
         has "signature LIKE '17%'", :type => :boolean, :as => :is_local
+        has signature, :type => :string, :as => :signature_sort
       end
     end
 
