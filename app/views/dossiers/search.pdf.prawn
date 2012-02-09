@@ -14,6 +14,11 @@ prawn_document(:page_size => 'A4', :filename => search_title, :renderer => Prawn
     pdf.row_styling(item, row)
   end
 
+  if items.empty?
+    items << ['', t('katalog.nothing_found.title'), '', '']
+    items << ['', t('katalog.nothing_found.text'), '', '']
+  end
+
   # Table header creation.
   headers = [[t_attr(:signature), t_attr(:title), "", t_attr(:document_count)]]
 
