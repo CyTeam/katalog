@@ -211,7 +211,7 @@ class DossiersController < AuthorizedController
               suggestion = german_spell_checker.suggest(word).first
             end
 
-            @spelling_suggestion[word] = suggestion unless (suggestion =~ %r[#{word}] or suggestion == nil)
+            @spelling_suggestion[word] = suggestion if (!Dossier.by_text(suggestion).empty? && !(suggestion =~ %r[#{word}] or suggestion == nil))
           end
         end
       else
