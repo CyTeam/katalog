@@ -32,6 +32,7 @@ module Dossiers
         has type
         has internal
         has "signature LIKE '17%'", :type => :boolean, :as => :is_local
+        has signature, :type => :string, :as => :signature_sort
       end
     end
 
@@ -44,8 +45,9 @@ module Dossiers
 
         params = {:match_mode => :extended, :with => attributes, :sort_mode => :expr, :order => "@weight * (1.5 - is_local)"}
         params.merge!(options)
-        
         query = build_query(value, request_format)
+        params.merge!({:sort_mode => :extended, :order => 'signature ASC'}) if query.include?('@signature')
+
         search(query, params)
       end
 
@@ -55,7 +57,7 @@ module Dossiers
         # Need a clone or slice! will do some harm
         value = query.clone
         while sentence = value.slice!(/\".[^\"]*\"/)
-          sentences << sentence.delete('"');
+          sentences << sentence.delete('"')
         end
 
         strings = value.split(/[ %();,:-]/).uniq.select{|t| t.present?}
@@ -81,7 +83,7 @@ module Dossiers
 
         words = words.flatten
 
-        return signatures, words, sentences, signature_range
+        return signatures, clean(words), sentences, signature_range
       end
 
       def signature_range(query)
@@ -150,6 +152,13 @@ module Dossiers
         query = [signature_query, sentence_query, word_query].join(' ')
 
         return query.strip
+      end
+
+      private
+
+      # Removes the apostrophe from the words.
+      def clean(words)
+        words.collect! {|word| word.delete('"') }
       end
     end
   end

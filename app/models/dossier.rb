@@ -36,12 +36,12 @@ class Dossier < ActiveRecord::Base
   scope :detail, topic.where("char_length(signature) = 8")
 
   # Scopes
-  scope :by_level, lambda {|level| where("char_length(signature) <= ?", self.level_to_prefix_length(level))}
-  scope :by_signature, lambda {|value| where("signature LIKE CONCAT(?, '%')", value)}
-  scope :by_title, lambda {|value| where("title LIKE CONCAT('%', ?, '%')", value)}
+  scope :by_level, lambda {|level| where("char_length(dossiers.signature) <= ?", self.level_to_prefix_length(level))}
+  scope :by_signature, lambda {|value| where("dossiers.signature LIKE CONCAT(?, '%')", value)}
+  scope :by_title, lambda {|value| where("dossiers.title LIKE CONCAT('%', ?, '%')", value)}
   scope :by_location, lambda {|value| where(:id => Container.where('location_id = ?', Location.find_by_code(value)).map{|c| c.dossier_id}.uniq)} # TODO: check if arel provides nicer code
   scope :by_kind, lambda {|value| where(:id => Container.where('container_type_id = ?', ContainerType.find_by_code(value)).map{|c| c.dossier_id}.uniq)}
-  scope :by_character, lambda {|value| where("title LIKE CONCAT(?, '%')", value)}
+  scope :by_character, lambda {|value| where("dossiers.title LIKE CONCAT(?, '%')", value)}
 
   # Pagination scope
   scope :characters, select("DISTINCT substring(upper(title), 1, 1) AS letter").having("letter BETWEEN 'A' AND 'Z'")

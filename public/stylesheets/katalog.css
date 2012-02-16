@@ -16,14 +16,6 @@ tr.topic.main td { background-color: #E1E6EC; }
 tr.topic.geo td { background-color: #C8B7B7; }
 tr.topic.detail td { background-color: #E9DDAF; }
 
-/* Search lists */
-.search.text .topic .title {font-weight: normal;}
-.search.text .title {font-size: 130%;}
-.search.text .topic.group td { background-color: inherit;}
-.search.text .topic.main td { background-color: inherit;}
-.search.text .topic.geo td { background-color: inherit;}
-.search.text .topic.detail td { background-color: inherit;}
-
 
 td.action-links {
 }

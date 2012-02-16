@@ -75,7 +75,7 @@ de:
           archivist: "Verein Schweizerischer ArchivarInnen"
           library_information: "Bibliothek Information Schweiz"
     search:        "Suchen"
-    search_for:    "Suche nach %{query}"
+    search_for:    "Suche nach: %{query}"
     the_search:    "Suche"
     count:         "Anzahl"
     edit:          "Ändern"

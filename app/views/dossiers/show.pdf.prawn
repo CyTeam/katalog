@@ -48,15 +48,11 @@ prawn_document(:page_size => 'A4', :filename => "#{@dossier.to_s}.pdf", :rendere
         out
       end
 
-      header << t('katalog.total')
-
       row = decade.inject([]) do |out, year|
         out << year.amount.to_s
 
         out
       end
-
-      row << number_with_delimiter(@dossier.document_count("#{decade.first.from.present? ? decade.first.from.year : ''}-#{decade.last.to.year}"))
 
       pdf.table [header] + [row] do
         row(0).size = 5
