@@ -11,7 +11,7 @@
       = link_to url_for_topic(group) do
         = image_tag "/images/dossiers/#{group.signature}.png", :alt => group.to_s
         %h1= group.overview_title
-        %h2= t(:count, :scope => :katalog) + ": " + number_with_delimiter(group.document_count)
+        %h2= t_attr(:document_count) + ": " + number_with_delimiter(group.document_count)
         -# group.random_children.each do |dossier|
           =# link_to dossier, dossier_path(dossier), :class => 'dossiers'
 
