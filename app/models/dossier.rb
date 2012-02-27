@@ -564,10 +564,10 @@ class Dossier < ActiveRecord::Base
   end
 
   def import_numbers(row)
-    # < 1990, 1990-1993, 1994 - 2010
-    periods = DossierNumber.default_periods(2010)
+    # < 1990, 1990-1993, 1994 - 2011
+    periods = DossierNumber.default_periods(2011)
     first_column = 10
-    for i in 0..18
+    for i in 0..19
       amount = row[first_column + i]
       amount = amount.nil? ? nil : amount.delete("',").to_i
 
