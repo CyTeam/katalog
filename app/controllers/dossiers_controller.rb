@@ -122,7 +122,7 @@ class DossiersController < AuthorizedController
       @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page])
     elsif params[:search][:signature].present?
       @query = params[:search][:signature]
-      order_attribute = (@query && Topic.alphabetic?(@query)) ? 'title' : 'signature' # Sort with title when query is within an alphabetic topic.
+      order_attribute = (@query && Topic.alphabetic?(@query)) ? 'signature, title' : 'signature' # Sort with title when query is within an alphabetic topic.
       @dossiers = Dossier.by_signature(params[:search][:signature]).dossier.order(order_attribute).paginate :page => params[:page], :per_page => params[:per_page]
     else
       # Show index
