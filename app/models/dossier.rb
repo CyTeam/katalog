@@ -82,11 +82,6 @@ class Dossier < ActiveRecord::Base
     includes(:numbers).sum(:amount).to_i
   end
 
-  # Random from all children dossiers
-  def random_children(count = 3)
-    Dossier.by_signature(self.signature).sample(count)
-  end
-
   # Importer
   def self.import_all(rows)
     new_dossier = true
@@ -564,10 +559,10 @@ class Dossier < ActiveRecord::Base
   end
 
   def import_numbers(row)
-    # < 1990, 1990-1993, 1994 - 2010
-    periods = DossierNumber.default_periods(2010)
+    # < 1990, 1990-1993, 1994 - 2011
+    periods = DossierNumber.default_periods(2011)
     first_column = 10
-    for i in 0..18
+    for i in 0..19
       amount = row[first_column + i]
       amount = amount.nil? ? nil : amount.delete("',").to_i
 
@@ -652,7 +647,7 @@ class Dossier < ActiveRecord::Base
   end
 
   def remove_special_chars(string)
-    (string.gsub(/[^[[:alphanum]] \-\.]/, '')).gsub(/\s/, '')
+    (string.gsub(/[^[[:alphanum:]] \-\.]/, '')).gsub(/\s/, '')
   end
 
   def remove_short_cuts(string)
