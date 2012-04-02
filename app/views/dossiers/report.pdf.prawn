@@ -1,4 +1,7 @@
-prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => PrawnLayout, :page_layout => @report[:orientation].to_sym) do |pdf|
+prawn_document(:page_size => 'A4',
+               :filename => @report.title,
+               :renderer => PrawnLayout,
+               :page_layout => @report[:orientation].to_sym) do |pdf|
 
   # Creates the table header.
   column_headers = @report[:columns].collect do |column|
