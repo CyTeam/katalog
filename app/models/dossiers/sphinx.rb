@@ -57,7 +57,7 @@ module Dossiers
         # Need a clone or slice! will do some harm
         value = query.clone
         while sentence = value.slice!(/\".[^\"]*\"/)
-          sentences << sentence.delete('"')
+          sentences << sentence
         end
 
         strings = value.split(/[ %();,:-]/).uniq.select{|t| t.present?}
@@ -83,7 +83,7 @@ module Dossiers
 
         words = words.flatten
 
-        return signatures, clean(words), sentences, signature_range
+        return signatures, clean(words), clean(sentences), signature_range
       end
 
       def signature_range(query)
@@ -158,7 +158,7 @@ module Dossiers
 
       # Removes the apostrophe from the words.
       def clean(words)
-        words.collect! {|word| word.delete('"') }
+        words.collect! {|word| Riddle.escape(word.delete('"')) }
       end
     end
   end
