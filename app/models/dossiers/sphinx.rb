@@ -1,7 +1,7 @@
 module Dossiers
   module Sphinx
     extend ActiveSupport::Concern
-    
+
     included do
       # Sphinx configuration:
       # Free text search
@@ -130,7 +130,7 @@ module Dossiers
           quoted_signatures = signatures.map{|signature| '"' + signature + '*"'}
           signature_query = "@signature (#{quoted_signatures.join('|')})"
         end
-        
+
         if sentences.present?
           quoted_sentences = sentences.map{|sentence| '"' + sentence + '"'}
           sentence_query = "@* (#{quoted_sentences.join('|')})"
