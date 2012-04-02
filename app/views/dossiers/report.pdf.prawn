@@ -68,7 +68,7 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
 
   headers.each do |header|
     last_count = count[headers.index(header)]
-    last_count = items.first.count unless last_count
+    last_count = items.first.count if !last_count.presence && items.first
 
     rows = items.inject([]) do |out, item|
       unless headers.first.eql?(header)
@@ -80,7 +80,7 @@ prawn_document(:page_size => 'A4', :filename => @report.title, :renderer => Praw
       out
     end
 
-    first_count = last_count + 1
+    first_count = last_count + 1 if last_count
 
 
     # Draw the title
