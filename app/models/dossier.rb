@@ -27,6 +27,7 @@ class Dossier < ActiveRecord::Base
   validates :title, :presence => true, :allow_blank => false
   validates_format_of :first_document_year, :with => /[12][0-9]{3}/, :allow_blank => true
 
+  default_scope :order => 'signature ASC, title ASC'
   # Type Scopes
   scope :dossier, where(:type => nil)
   scope :topic, where("type IS NOT NULL")
