@@ -4,7 +4,7 @@ prawn_document(:page_size => 'A4',
                :page_layout => @report[:orientation].to_sym) do |pdf|
 
   # Create the table headers
-  headers = pdf.headers(@report)
+  headers, count = pdf.headers(@report)
   # Gets the table data.
   items = @dossiers.map do |item|
     columns = @report[:columns].collect do |column|
