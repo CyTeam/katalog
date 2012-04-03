@@ -41,7 +41,7 @@ class ReportLayout < PrawnLayout
     end
 
     if report.years_visible?
-      year_header = year_count_headers[last_added_header..year_count_headers.count]
+      year_header = year_count_headers[(last_added_header + 1)..year_count_headers.count]
       prepared_headers << [column_headers.first(2).flatten + year_header] if year_header.count > 0
     else
       prepared_headers << [column_headers.flatten]

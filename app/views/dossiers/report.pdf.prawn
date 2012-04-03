@@ -5,6 +5,7 @@ prawn_document(:page_size => 'A4',
 
   # Create the table headers
   headers, count = pdf.headers(@report)
+
   # Gets the table data.
   items = @dossiers.map do |item|
     columns = @report[:columns].collect do |column|
@@ -25,7 +26,6 @@ prawn_document(:page_size => 'A4',
 
   # Use local variable as instance vars aren't accessible
   columns = @report[:columns]
-
   first_count = 0
 
   headers.each do |header|
@@ -48,9 +48,7 @@ prawn_document(:page_size => 'A4',
     # Draw the title
     pdf.h1 @report[:title]
 
-    table = header + rows
-
-    pdf.table table, :header => true, :cell_style => { :overflow => :shrink_to_fit, :min_font_size => 8} do
+    pdf.table header + rows, :header => true, :cell_style => { :overflow => :shrink_to_fit, :min_font_size => 8} do
       # General cell styling
       cells.padding      = [1, 5, 1, 5]
       cells.valign       = :top
