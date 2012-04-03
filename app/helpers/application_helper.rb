@@ -49,7 +49,7 @@ addContainerSuggestionBehaviour();
   def contextual_link(action, url, options = {})
     output = ActiveSupport::SafeBuffer.new
     options.merge!(:class => "icon icon-#{action}-text", :title => t_action(action))
-    
+
     output << link_to(t_action(action), url, options)
   end
 
@@ -60,7 +60,7 @@ addContainerSuggestionBehaviour();
   def contextual_function(action, function, options = {})
     output = ActiveSupport::SafeBuffer.new
     options.merge!(:class => "icon icon-#{action}")
-    
+
     output << link_to_function(t_action(action), function, options)
   end
 
@@ -89,13 +89,13 @@ EOF
       @query_topic.signature.starts_with?(topic.signature)
     elsif params[:action] == 'navigation'
       current_topic = Topic.find(params[:id])
-      
+
       current_topic.signature.starts_with?(topic.signature)
     else
       params[:search] && params[:search][:signature] && params[:search][:signature].start_with?(topic.signature)
     end
   end
-  
+
   def spelling_suggestion_link(inserted, suggested)
     search_text = params[:search][:text] if params[:search]
     if search_text
