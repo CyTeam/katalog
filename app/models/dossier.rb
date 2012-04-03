@@ -419,7 +419,7 @@ class Dossier < ActiveRecord::Base
       # Parse string
       from, to, amount = DossierNumber.from_s(number_string)
       # Remember updated/created number
-      new_numbers << update_or_create_number(amount, {:from => from, :to => to}, false) if (amount and amount > 0)
+      new_numbers << update_or_create_number(amount, {:from => from, :to => to}, false) if amount
     }
 
     removed_numbers = old_numbers - new_numbers
