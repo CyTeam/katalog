@@ -35,9 +35,9 @@ class DossiersController < AuthorizedController
     else
       @dossier = Dossier.find(params[:id])
     end
-    
+
     authorize! :show, @dossier
-    
+
     show! do |format|
       format.xls {
         send_data(@dossier.to_xls,
@@ -145,7 +145,7 @@ class DossiersController < AuthorizedController
   end
 
   def preview
-    show!   
+    show!
   end
 
   private
