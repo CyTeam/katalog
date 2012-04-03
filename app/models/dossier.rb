@@ -4,7 +4,7 @@
 class Dossier < ActiveRecord::Base
 
   # PaperTrail: change log
-  has_paper_trail :ignore => [:created_at, :updated_at, :delta], 
+  has_paper_trail :ignore => [:created_at, :updated_at, :delta],
                   :meta   => {:container_ids => Proc.new {|dossier| dossier.container_ids.join(',') },
                               :number_ids    => Proc.new {|dossier| dossier.number_ids.join(',') },
                               :keywords      => Proc.new {|dossier| dossier.temp_keyword_text }}
@@ -58,7 +58,7 @@ class Dossier < ActiveRecord::Base
   accepts_nested_attributes_for :numbers
   has_many :containers, :dependent => :destroy, :validate => true, :autosave => true, :inverse_of => :dossier
   accepts_nested_attributes_for :containers, :allow_destroy => true, :reject_if => :all_blank
-    
+
   # Tags
   acts_as_taggable
   acts_as_taggable_on :keywords
@@ -178,7 +178,7 @@ class Dossier < ActiveRecord::Base
 
     # Drop alphabetic subtitles
     self.finish_import
-    
+
     # Reset PaperTrail state
     PaperTrail.enabled = paper_trail_enabled
   end
@@ -377,7 +377,7 @@ class Dossier < ActiveRecord::Base
   # Returns the titles of the relations.
   def relation_titles
     stripped_relations = relations.map{|relation| relation.strip.presence}.compact
-    
+
     titles = stripped_relations.map{|relation| relation.gsub(/^[0-9.]{1,8}:[ ]*/, '')}
 
     titles
@@ -396,7 +396,7 @@ class Dossier < ActiveRecord::Base
   def signature=(value)
     value.strip!
     write_attribute(:signature, value)
-    
+
     group = value[0,1]
     topic, geo, dossier = value.split('.')
   end
@@ -409,7 +409,7 @@ class Dossier < ActiveRecord::Base
   # Saves the dossier numbers from a list.
   def dossier_number_list=(value)
     dossier_number_strings = value.split("\n")
-    
+
     # Remember number objects
     old_numbers = numbers.clone
     new_numbers = []
@@ -495,7 +495,7 @@ class Dossier < ActiveRecord::Base
     else
       date = Date.new(value.to_i, 1, 1)
     end
-    
+
     self.first_document_on = date
   end
 
@@ -518,7 +518,7 @@ class Dossier < ActiveRecord::Base
     number = numbers.select{|n|
       from = n.from.nil? ? '' : n.from.to_s(:db)
       to   = n.to.nil? ? '' : n.to.to_s(:db)
-       
+
       if range[:from]
         range_from = range[:from].is_a?(String) ? range[:from] : range[:from].to_s(:db)
       else
@@ -542,7 +542,7 @@ class Dossier < ActiveRecord::Base
     end
 
     number.amount = amount
-    
+
     number
   end
 
@@ -554,7 +554,7 @@ class Dossier < ActiveRecord::Base
   # Builds the default dossier numbers.
   def build_default_numbers
     periods = DossierNumber.default_periods
-    
+
     periods.each {|period| numbers.build(period)}
   end
 
@@ -589,7 +589,7 @@ class Dossier < ActiveRecord::Base
   def import(row)
     # containers
     containers << Container.import(row, self)
-    
+
     self.related_to = row[6] || ''
 
     # tags and keywords
