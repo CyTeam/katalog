@@ -6,7 +6,15 @@
   - @years.each do |year|
     %td.edit_dossiers_td
       - if number = dossier.dossier_number_from_year(year)
-        %input.dossier-last-container-title{:tabindex => @tabindex, 'data-dossier' => dossier.id, 'data-number' => number.id, :type => 'text', :value => number.amount, :size => 3}
+        %input.dossier-last-container-title{:tabindex => @tabindex,
+                                            'data-dossier' => dossier.id,
+                                            'data-number' => number.id,
+                                            :type => 'text',
+                                            :value => number.amount, :size => 3}
       - else
-        %input.dossier-last-container-title{:tabindex => @tabindex, 'data-dossier' => dossier.id, 'data-number-year' => year, :type => 'text', :value => 0, :size => 3}
+        %input.dossier-last-container-title{:tabindex => @tabindex,
+                                            'data-dossier' => dossier.id,
+                                            'data-number-year' => year,
+                                            :type => 'text',
+                                            :size => 3}
       - @tabindex += 1
