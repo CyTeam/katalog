@@ -1,3 +1,5 @@
+require 'prawn/measurement_extensions'
+
 class ReportLayout < PrawnLayout
   include DossiersHelper
   include I18nRailsHelpers
@@ -5,14 +7,16 @@ class ReportLayout < PrawnLayout
   # Creates the table headers for a report.
   def headers(report)
     column_headers = report[:columns].collect do |column|
-      make_cell(:content => show_header_for_report(column))
+      make_cell(head_cell(column))
     end
 
     year_count_headers = []
 
     if report.years_visible?
-      year_count_headers = Dossier.years(report[:collect_year_count], report[:name]).collect do |year|
-        make_cell(:content => year)
+      years = Dossier.years(report[:collect_year_count], report[:name])
+
+      year_count_headers = years.collect do |year|
+        make_cell(year_head_cell(year))
       end
     end
 
@@ -48,5 +52,40 @@ class ReportLayout < PrawnLayout
     end
 
     [(count.empty? ? [[headers]] : prepared_headers), count]
+  end
+
+  def head_cell(value)
+    options = {:content => show_header_for_report(value)}
+
+    case value
+    when 'signature'
+      options.merge!(:width => 1.6.cm)
+    when 'first_document_year'
+      options.merge!(:width => 2.5.cm)
+    when 'keyword_text'
+      options.merge!(:width => 3.cm)
+    when 'container_type'
+      options.merge!(:width => 0.75.cm)
+    when 'location'
+      options.merge!(:width => 1.6.cm)
+    when 'document_count'
+      options.merge!(:width => 1.cm, :content => 'Total')
+    end
+
+    options
+  end
+
+  def year_head_cell(value)
+    options = {:content => value}
+
+    if value.include?('-')
+      options.merge!(:width => 1.83.cm)
+    elsif value.include?('vor')
+      options.merge!(:width => 1.47.cm)
+    elsif value.length == 4
+      options.merge!(:width => 1.cm)
+    end
+
+    options
   end
 end
