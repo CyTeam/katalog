@@ -105,4 +105,11 @@ EOF
       link_to(suggested, params.merge({:search => search}))
     end
   end
+
+  def user_cache_key
+    cache_key = [(user_signed_in? ? :signed_in : :signed_out)]
+    cache_key = current_user.roles.map{|role| role.to_s.downcase } if current_user
+
+    cache_key.join('/')
+  end
 end

@@ -1,4 +1,4 @@
-- cache [:tag_cloud, @query, @dossier, @dossiers] do
+- cache [:tag_cloud, @query, @dossier, (@dossiers.map{|d| d.cache_key } if @dossiers)] do
   .ce_text
     %p.tag_cloud
       - unless @tags
