@@ -14,7 +14,7 @@ prawn_document(:page_size => 'A4',
 
     if @report.years_visible?
       years = item.years_counts(@report[:collect_year_count], @report[:name]).collect do |year|
-        pdf.make_cell(:content => number_with_delimiter(year[:count]))
+        pdf.make_cell(:content => number_with_delimiter(year[:count]), :align => :right)
       end
       row = columns + years
     else

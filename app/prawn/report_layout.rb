@@ -76,7 +76,7 @@ class ReportLayout < PrawnLayout
   end
 
   def year_head_cell(value)
-    options = {:content => value}
+    options = {:content => value, :align => :right}
 
     if value.include?('-')
       options.merge!(:width => 1.83.cm)
