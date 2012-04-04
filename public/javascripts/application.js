@@ -38,9 +38,9 @@ function updateNumberAmount(e){
       data: {
         amount: amount
       }
-    });    
+    });
   }
-  
+
   if(year != null){
     $.ajax({
       url: '/dossier_numbers.json',
@@ -131,7 +131,7 @@ function addRelationAutoCompletionBehaviour() {
         select: function(event, ui) {
           var value = ui.item.value;
           var text = text_area.val();
-          
+
           input.remove();
           link.show();
           text_area.val(text + "\n" + value);
@@ -207,7 +207,7 @@ function addSearchSuggestionBehaviour() {
   }
 
   input.attr('autocomplete', 'false');
-  
+
   input.autocomplete({
     source: function( request, response ) {
       $.ajax({
@@ -264,7 +264,7 @@ function addReportColumnMultiselectBehaviour() {
     removeAll:'Alle entfernen',
     itemsCount:'Spalten ausgewählt'
   });
-  
+
   $('#report_columns').multiselect();
 }
 
@@ -291,9 +291,9 @@ function getEditReportLink() {
   var requested_amount = $('#dossier_numbers_year_amount').val();
   var inserted_amount = 0;
   var last_year_link = '';
-  
+
   link += '?search[signature]=' + $.query.get('search[signature]').toString();
-  
+
   $('select.dossier_numbers_year').each(function(){
     if(inserted_amount < requested_amount) {
       last_year_link = '&dossier_numbers[year][]=' + $(this).val();
@@ -301,11 +301,11 @@ function getEditReportLink() {
       inserted_amount++;
     }
   });
-  
+
   for(var i = inserted_amount; i < requested_amount; i++){
     link += last_year_link;
   }
-  
+
   return link ;
 }
 
@@ -340,12 +340,12 @@ function hideKeyWords() {
 // Adds the CSRF token to all ajax calls.
 function addCsrfTokenToAjaxCalls(){
   var csrf_token = $('meta[name=csrf-token]').attr('content');
-  
+
   $("body").bind("ajaxSend", function(elm, xhr, s){
      if (s.type == "POST") {
         xhr.setRequestHeader('X-CSRF-Token', csrf_token);
      }
-  });  
+  });
 }
 
 // Adds the js behaviour to the main navigation for a faster navigation trough the menu.
