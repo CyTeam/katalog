@@ -1,0 +1,10 @@
+#page_actions.contextual
+  = contextual_link('index', dossiers_path)
+%h1= t_title
+= render 'form'
+
+- content_for :javascript do
+  :javascript
+    $(document).ready(function() {
+      AddNewDossierContainerBehaviour();
+    });
