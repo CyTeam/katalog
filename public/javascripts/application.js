@@ -69,11 +69,11 @@ function showVersionsBehaviour(){
 
 function addAutoAddNewContainer() {
   var container = $('.container:last');
-  var first_input = 'td.container_title input[type=text]';
-  var second_input = 'td.type_code input[type=text]';
-  var last_input = 'td.location_code input[type=text]';
+  var title_input = 'td.container_title input[type=text]';
+  var code_input = 'td.type_code input[type=text]';
+  var location_input = 'td.location_code input[type=text]';
 
-  container.find(first_input).keyup(function(){
+  container.find(title_input).keyup(function(){
     var text = $(this).val();
 
     if(text.match(/\d{4}\s?-\s?\d{4}/)){
@@ -83,10 +83,11 @@ function addAutoAddNewContainer() {
       yearRegex.exec(text);
       var year = parseInt(RegExp.$1) + 1;
 
-      new_container.find(first_input).val(year + ' -');
-      container.find(second_input).val('DA');
-      new_container.find(second_input).val('DH');
-      new_container.find(last_input).val(container.find(last_input).val());
+      new_container.find(title_input).val(year + ' -');
+      container.find(code_input).val('DA');
+      new_container.find(code_input).val('DH');
+      new_container.find(location_input).val(container.find(location_input).val());
+      container.find(location_input).val('UG')
       $(this).unbind('keyup', addAutoAddNewContainer());
       addContainerSuggestionBehaviour();
     }
