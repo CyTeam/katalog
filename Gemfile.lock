@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/ambethia/rack-google_analytics.git
+  revision: d02ea1f94c65393bc70d7c21a9241385698cdf27
+  specs:
+    rack-google_analytics (1.0.2)
+      rack
+
+GIT
   remote: http://github.com/huerlisi/will_paginate.git
   revision: 05fbcb82299a449fc37fb9198346703740cb39cd
   branch: rails3
@@ -254,6 +261,7 @@ DEPENDENCIES
   prawn
   prawn_rails
   query_reviewer
+  rack-google_analytics!
   rails (~> 3.0.11)
   rails-erd
   raspell
