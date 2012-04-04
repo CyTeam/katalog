@@ -32,3 +32,27 @@
     = f.buttons do
       = f.commit_button
 
+    - if action_name.eql?('new')
+      - content_for :javascript do
+        :javascript
+          $(document).ready(function() {
+            $('#dossier_first_document_year').keyup(function(){
+              var field = $(this)
+              var value = field.val();
+              var disabled = field.data('disabled')
+
+              if(!disabled && value.match(/\d{4}/)){
+                var content = "#{escape_javascript(render('containers/new_form', :form => f))}";
+                console.log(content)
+                var new_record_id = new Date().getTime();
+                content = content.replace('dossier_containers_attributes_1_period"',
+                                          'dossier_containers_attributes_1_period" value="' + value + ' -"');
+                content = content.replace('dossier_containers_attributes_1_container_type_code"',
+                                          'dossier_containers_attributes_1_container_type_code" value="DH"');
+                content = content.replace(/\\[\\d+\\]/g, "[" + new_record_id + "]");
+                content = content.replace(/_\\d+_/g, "_" + new_record_id + "_");
+                $('#container-list').append(content);
+                field.data('disabled', true)
+              }
+            });
+          });
