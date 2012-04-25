@@ -9,3 +9,4 @@ Disallow: /dossiers/search
 Disallow: /users/sign_in
 Disallow: /dossiers/report
 Disallow: /reservations/
+Disallow: /dossiers/*/reservations/
