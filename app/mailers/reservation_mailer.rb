@@ -1,5 +1,5 @@
 class ReservationMailer < ActionMailer::Base
-  default :from => RESERVATION_EMAIL_RECIPIENT # This constant is definied in mail initializer.
+  default :from => RESERVATION_EMAIL_SENDER # This constant is definied in mail initializer.
 
   def user_email(reservation)
     @reservation = reservation
