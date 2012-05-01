@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/ambethia/rack-google_analytics.git
-  revision: d02ea1f94c65393bc70d7c21a9241385698cdf27
-  specs:
-    rack-google_analytics (1.0.2)
-      rack
-
-GIT
   remote: http://github.com/huerlisi/will_paginate.git
   revision: 05fbcb82299a449fc37fb9198346703740cb39cd
   branch: rails3
@@ -162,6 +155,8 @@ GEM
       rails (>= 3.0.0)
     query_reviewer (0.1.3)
     rack (1.2.5)
+    rack-google_analytics (1.0.2)
+      rack
     rack-mount (0.6.14)
       rack (>= 1.0.0)
     rack-test (0.5.7)
@@ -204,6 +199,7 @@ GEM
       ffi (~> 1.0.9)
       multi_json (~> 1.0.4)
       rubyzip
+    settingslogic (2.0.8)
     shoulda (2.11.3)
     show_for (0.2.4)
     simple-navigation (3.6.0)
@@ -261,12 +257,13 @@ DEPENDENCIES
   prawn
   prawn_rails
   query_reviewer
-  rack-google_analytics!
+  rack-google_analytics
   rails (~> 3.0.11)
   rails-erd
   raspell
   rdoc
   revertible_paper_trail
+  settingslogic
   shoulda
   show_for
   simple-navigation

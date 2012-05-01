@@ -53,10 +53,5 @@ module Katalog
 
     # Allow target in links, used in description
     config.action_view.sanitized_allowed_attributes = 'target'
-
-    # Google analytics configuration
-    if Rails.env.production?
-      config.middleware.use "Rack::GoogleAnalytics", :web_property_id => 'UA-30593577-1' # id is for the domain doku-zug.cyt.ch
-    end
   end
 end
