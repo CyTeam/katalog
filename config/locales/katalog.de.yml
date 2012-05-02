@@ -113,15 +113,7 @@ de:
         wait:      "Wartezeit 1 Tag"
         intern:    "Interne Dokumente"
         warning:   "Achtung Wartezeit"
-    search:
-      tips:
-        title: Suchtips
-        hints: [
-                  'Mit " " schränken Sie die Suche auf genaue Treffer ein. z.B. Burg Zug gibt viele Resultate und "Burg Zug" genau eines.',
-                  'Wenn Sie eine Teilsignatur zusammen mit einem Suchbegriff eingeben, werden alle Treffer angezeigt, die sowohl die Teilsignatur als auch das Suchwort beinhalten.',
-                  'Wenn Sie zwei Teilsignaturen eingeben, werden alle Treffer angezeigt, die entweder die eine ODER die andere Teilsignatur beinhalten.',
-                  'Wenn Sie zwei Teilsignaturen zusammen mit einem Suchbegriff eingeben, erhalten Sie sämtliche Treffer, welche die eine ODER die andere Teilsignatur UND das Suchwort beinhalten.'
-               ]
+
     insert_relation: "Querverweis hinzufügen"
 
     versions:
