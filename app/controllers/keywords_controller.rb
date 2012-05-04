@@ -65,8 +65,9 @@ class KeywordsController < InheritedResources::Base
       keywords = (previous_words + [keyword.name]).join(" ")
       query = Dossier.build_query(keywords)
 
-      # TODO: respect internal attribute
+      # Only count internal dossiers if user is logged in
       attributes = {}
+      attributes[:internal] = false unless current_user.present?
 
       params = {:match_mode => :extended, :rank_mode => :match_any, :with => attributes}
       count = Dossier.search_count query, params

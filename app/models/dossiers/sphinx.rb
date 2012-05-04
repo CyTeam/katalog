@@ -38,8 +38,10 @@ module Dossiers
 
     module ClassMethods
       def by_text(value, options = {})
+        # Only include internal dossiers if user is logged in
         attributes = {}
         attributes[:internal] = false if (options.delete(:internal) == false)
+
         request_format = options[:format]
         options.delete(:format) if options[:format]
 
