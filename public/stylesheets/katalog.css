@@ -143,3 +143,8 @@ td.availability {
 .inline-hints {
   font-style: italic;
 }
+
+/** jQuery UI **/
+.ui-autocomplete.ui-widget-content .ui-state-hover {
+  background-color: #e4e4e4;
+}

@@ -98,17 +98,6 @@ module DossiersHelper
     content
   end
 
-  def search_tips
-    hints = t('katalog.search.tips.hints')
-    content_tag :div, :id => 'search_tips' do
-      content_tag :div, :id => 'search_tips_border' do
-        content_tag :div, :id => 'search_tip' do
-          hints[rand(hints.length)]
-        end
-      end
-    end
-  end
-
   def is_edit_report?
     'edit_report'.eql?action_name
   end

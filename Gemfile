@@ -121,13 +121,19 @@ gem 'spreadsheet'
 # Spellchecking
 gem 'raspell'
 
-# Error notifier
-gem 'airbrake'
-
 # MetaWhere
 gem 'meta_where'
 
 # Monitoring
-group :production do
-  gem 'rack-google_analytics', :require => "rack/google_analytics", :git => 'git://github.com/ambethia/rack-google_analytics.git'
+# ==========
+gem 'settingslogic'
+group :staging, :production do
+  # Traffic
+  gem 'rack-google_analytics'
+
+  # Performance
+  #gem 'newrelic_rpm'
+
+  # Exceptions
+  gem 'airbrake'
 end
