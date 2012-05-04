@@ -154,9 +154,13 @@ class Dossier < ActiveRecord::Base
   end
 
   def self.finish_import
+    # Drop alphabetic subtitles
     Topic.alphabetic_sub_topics.each do |topics|
       topics.destroy_all
     end
+
+    # Mark as internal
+    self.by_text('"auf Anfrage"', :per_page => 100000).map{|dossier| dossier.internal = true; d.save}
   end
 
   # Imports the data from a csv file.
@@ -177,7 +181,7 @@ class Dossier < ActiveRecord::Base
 
     import_all(import_filter(rows))
 
-    # Drop alphabetic subtitles
+    # Do some housekeeping to finish up the import
     self.finish_import
 
     # Reset PaperTrail state
