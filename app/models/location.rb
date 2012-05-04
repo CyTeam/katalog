@@ -1,5 +1,8 @@
 # This class represents the different locations where a container can be stored.
 class Location < ActiveRecord::Base
+  # Associations
+  has_many :containers
+  has_many :dossiers, :through => :containers
 
   # PaperTrail: change log
   has_paper_trail :ignore => [:created_at, :updated_at]
