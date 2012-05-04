@@ -79,6 +79,9 @@ class KeywordsController < InheritedResources::Base
       }
     }
 
+    # Drop suggestions with count = 0
+    suggestions.reject! {|suggestion| suggestion["keyword"]["count"] == 0}
+
     render :json => suggestions
   end
 end
