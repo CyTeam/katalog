@@ -54,9 +54,12 @@ prawn_document(:page_size => 'A4', :filename => "#{@dossier.to_s}.pdf", :rendere
         out
       end
 
-      pdf.table [header] + [row] do
-        row(0).size = 5
+      pdf.indent(10) do
+        pdf.table [header] + [row] do
+          row(0).size = 5
+        end
       end
+
       pdf.text " "
     end
 
