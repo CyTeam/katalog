@@ -3,13 +3,13 @@ module DossiersHelper
     link_to(keyword, search_dossiers_path(:search => {:text => keyword}), options)
   end
 
-  def availability_text(availability, partially, js_popup = true)
+  def availability_text(availability, partially)
     title = t(availability, :scope => 'katalog.availability.title')
     if partially
       title = t('katalog.availability.partially') + " " + title
     end
 
-    text = content_tag 'span', :class => "availability icon-availability_#{availability}-text", :title => (js_popup ? title : '') do
+    text = content_tag 'span', :class => "availability icon-availability_#{availability}-text", :title => title do
       title
     end
 
