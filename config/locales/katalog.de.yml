@@ -107,7 +107,6 @@ de:
       title:       "Kein Treffer"
       text:        "Für den gewünschten Suchbegriff wurde leider kein Dokument gefunden."
     availability:
-      partially:   "Teilweise"
       title:
         ready:     "Sofort verfügbar"
         wait:      "Wartezeit 1 Tag"
