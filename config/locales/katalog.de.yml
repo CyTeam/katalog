@@ -111,7 +111,7 @@ de:
         ready:     "Sofort verfügbar"
         wait:      "Wartezeit 1 Tag"
         intern:    "Interne Dokumente"
-        warning:   "Achtung Wartezeit"
+        warning:   "Für einen Teil der Dokumente besteht eine Wartezeit."
 
     insert_relation: "Querverweis hinzufügen"
 
