@@ -181,7 +181,7 @@ de:
         containers:           ""
         books:                "Bücher"
         books_link:           "Suche in unserem Bücherkatalog"
-        preorder:             "Die Dokumente aus den Zeiträumen %{years} sind im Magazin. Wir empfehlen Ihnen hier die Dokument gleich vorzubestellen."
+        preorder:             "Die Dokumente aus den Zeiträumen %{years} sind im Magazin und können vorbestellt werden."
         preorder_link:        "Zur Vorbestellung gehts hier lang."
       container:
         period:            "Zeitraum"
