@@ -2,8 +2,6 @@ prawn_document(:page_size => 'A4', :filename => search_title, :renderer => Prawn
 
   # Table content creation.
   items = @dossiers.map do |item|
-    img_file = waiting_for?(item) ? File.new("#{Rails.root}/public/images/16x16/availability_wait.png") : nil
-        
     row = [
       pdf.make_cell(:content => item.signature.to_s),
       pdf.make_cell(:content => link_to(item.title, polymorphic_url(item)).to_s, :inline_format => true),
