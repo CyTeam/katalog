@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120103105522) do
+ActiveRecord::Schema.define(:version => 20120522103226) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20120103105522) do
     t.integer  "location_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "title"
+    t.string   "period"
   end
 
   add_index "containers", ["location_id"], :name => "index_containers_on_location_id"
