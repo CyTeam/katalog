@@ -67,6 +67,8 @@ class DossiersController < AuthorizedController
     @dossier = Dossier.new(params[:dossier])
     @dossier.build_default_numbers
 
+    @dossier.containers.build(:container_type_code => 'DH')
+
     new!
   end
 

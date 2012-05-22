@@ -69,11 +69,11 @@ function showVersionsBehaviour(){
 
 function addAutoAddNewContainer() {
   var container = $('.container:last');
-  var title_input = 'td.container_title input[type=text]';
+  var period_input = 'td.container_period input[type=text]';
   var code_input = 'td.type_code input[type=text]';
   var location_input = 'td.location_code input[type=text]';
 
-  container.find(title_input).keyup(function(){
+  container.find(period_input).keyup(function(){
     var text = $(this).val();
 
     if(text.match(/\d{4}\s?-\s?\d{4}/)){
@@ -83,13 +83,26 @@ function addAutoAddNewContainer() {
       yearRegex.exec(text);
       var year = parseInt(RegExp.$1) + 1;
 
-      new_container.find(title_input).val(year + ' -');
+      new_container.find(period_input).val(year + ' -');
       container.find(code_input).val('DA');
       new_container.find(code_input).val('DH');
       new_container.find(location_input).val(container.find(location_input).val());
       container.find(location_input).val('UG')
       $(this).unbind('keyup', addAutoAddNewContainer());
       addContainerSuggestionBehaviour();
+    }
+  });
+}
+
+function addSyncFirstContainerYear() {
+  var year = $('#dossier_first_document_year');
+
+  year.live('blur', function() {
+    var first_container = $('#container-list .container:first');
+    var period = first_container.find('.container_period input');
+
+    if (period.val() == '') {
+      period.val(year.val() + ' -');
     }
   });
 }
@@ -148,7 +161,7 @@ function addRelationAutoCompletionBehaviour() {
 }
 
 function hideUnlessNewRecord(container) {
- container.find('.container_title').hide();
+ container.find('.container_period').hide();
  container.find('.type_code').hide();
  container.find('.location_code').hide();
  container.prepend('<td class="flash" colspan="3"><input value="Dieser Eintrag wird beim Speicher gelöscht." style="border:solid white;color:red;font-weight:bold;width:100%;" /></td>');
@@ -156,7 +169,7 @@ function hideUnlessNewRecord(container) {
 }
 
 function showUnlessNewRecord(container) {
- container.find('.container_title').show();
+ container.find('.container_period').show();
  container.find('.type_code').show();
  container.find('.location_code').show();
  container.find('.flash').remove();
@@ -364,6 +377,7 @@ $(document).ready(function() {
   addLinkifyContainersBehaviour();
   addAutogrowBehaviour();
   addAutoAddNewContainer();
+  addSyncFirstContainerYear();
   addRelationAutoCompletionBehaviour();
   addEditToolTipBehaviour();
   addSearchSuggestionBehaviour();
