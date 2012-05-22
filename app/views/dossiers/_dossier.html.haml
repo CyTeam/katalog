@@ -9,7 +9,7 @@
           - dossier.keywords.each do |keyword|
             %span~ keyword.to_s
 
-      %td.document_count.availability
+      %td.document_count
         = number_with_delimiter(dossier.document_count)
         = availability_notes(dossier)
       %td.action-links
