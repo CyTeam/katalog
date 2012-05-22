@@ -388,6 +388,26 @@ class Dossier < ActiveRecord::Base
     titles
   end
 
+  def dangling_relations
+    relations.select do |relation|
+      Dossier.search(relation).count < 1
+    end
+  end
+
+  def has_dangling_relations?
+    dangling_relations.present?
+  end
+
+  def self.with_dangling_relations
+    dangling = []
+
+    Dossier.dossier.where('related_to IS NOT NULL').find_each do |dossier|
+      dangling << dossier if dossier.has_dangling_relations?
+    end
+
+    dangling
+  end
+
   # Sets the location.
   def location=(value)
     if value.is_a?(String)

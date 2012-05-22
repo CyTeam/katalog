@@ -320,4 +320,9 @@ de:
   cancan:
     roles:
       admin:  "Administrator"
-      editor: "Editor
+      editor: "Editor"
+
+  # View specific
+  dossiers:
+    dangling_relations:
+      title: Fehlerhafte Querverweise

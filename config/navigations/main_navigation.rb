@@ -29,6 +29,7 @@ SimpleNavigation::Configuration.run do |navigation|
         administration.item :locations, t('katalog.main_navigation.locations'), locations_path, :highlights_on => /\/locations($|\/new|\/\d*)/
         administration.item :container_types, t('katalog.main_navigation.container_types'), container_types_path, :highlights_on => /\/container_types/
         administration.item :reports, t('katalog.main_navigation.reports'), reports_path, :highlights_on => /\/reports/
+        administration.item :dangling_relations, t('dossiers.dangling_relations.title'), dangling_relations_dossiers_path
         administration.item :sphinx, t('katalog.main_navigation.search_admin'), exceptions_sphinx_admins_path do |sphinx|
           sphinx.item :exceptions, t('katalog.main_navigation.search_exceptions'), exceptions_sphinx_admins_path
           sphinx.item :word_forms, t('katalog.main_navigation.search_word_forms'), word_forms_sphinx_admins_path

@@ -1,0 +1,3 @@
+%tr
+  %td= link_to dangling_dossier.title, dangling_dossier, "data-href-container" => "tr"
+  %td= dangling_dossier.dangling_relations.join("<br/>").html_safe

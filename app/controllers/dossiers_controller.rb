@@ -150,6 +150,11 @@ class DossiersController < AuthorizedController
     show!
   end
 
+  # Dangling relates_to list
+  def dangling_relations
+    @dossiers = Dossier.with_dangling_relations
+  end
+
   private
   def dossier_search
     params[:per_page] ||= 25
@@ -268,4 +273,5 @@ class DossiersController < AuthorizedController
       }
     end
   end
+
 end

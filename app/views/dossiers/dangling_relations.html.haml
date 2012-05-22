@@ -1,0 +1,7 @@
+%h1= t('.title')
+
+%table.ce_table
+  %tr
+    %th= t_attr(:title)
+    %th= t_attr(:related_to)
+  = render :partial => 'dangling_dossier', :collection => @dossiers

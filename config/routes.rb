@@ -35,6 +35,7 @@ Katalog::Application.routes.draw do
     collection do
       get :search, :overview, :report, :edit_report
       get :welcome
+      get :dangling_relations
     end
 
     resources :containers
