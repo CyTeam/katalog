@@ -24,11 +24,11 @@
         overflow-x: hidden;
       }
 
-    .ce_table
-      %table#container-list.ce_table{:style => "width: 100%"}
-        = render 'containers/list_header', :form_helper => f
-        = f.semantic_fields_for :containers do |container|
-          = render 'containers/form', :container => container
+    %table#container-list.ce_table{:style => "width: 100%"}
+      = render 'containers/list_header', :form_helper => f
+      = f.semantic_fields_for :containers do |container|
+        = render 'containers/form', :container => container
+
     = f.buttons do
       = f.commit_button
 
