@@ -83,111 +83,6 @@ class Dossier < ActiveRecord::Base
     includes(:numbers).sum(:amount).to_i
   end
 
-  # Importer
-  def self.import_all(rows)
-    new_dossier = true
-    title = nil
-    dossier = nil
-    rows.each do |row|
-      transaction do
-      begin
-        # Skip empty rows
-        next if row.select{|column| column.present?}.empty?
-
-        # Only import keywords if row has no reference
-        if row[0].blank? && (row[7].present? || row[8].present? || row[9].present?)
-          dossier.import_keywords(row)
-          dossier.save!
-          next
-        end
-
-        old_title = title
-        title = Dossier.truncate_title(row[1])
-        new_dossier = (old_title != title)
-
-        if new_dossier
-          dossier = self.create(
-            :signature         => row[0],
-            :title             => title
-          )
-          puts dossier unless Rails.env.test?
-        end
-
-        dossier.import(row)
-
-        dossier.save!
-      rescue Exception => e
-        puts e.message
-        puts e.backtrace
-      end
-
-      puts "  #{dossier.containers.last.period}" unless Rails.env.test?
-      end
-    end
-  end
-
-  # Defines the import filter.
-  def self.import_filter(rows)
-    signature_filter = /^[ ]*[0-9]{2}\.[0-9]\.[0-9]{3}[ ]*$/
-
-    rows.select{|row| (signature_filter.match(row[0]) && row[3].present?) || (row[0].blank? && (row[7].present? || row[8].present? || row[9].present?))}
-  end
-
-  # Prepares the database for a new import.
-  # It will delete all entries of the classes:
-  #
-  # * Container
-  # * Dossier
-  # * DossierNumber
-  # * ActsAsTaggableOn::Tag
-  # * ActsAsTaggableOn::Tagging
-  # * Version
-  def self.prepare_db_for_import
-    Container.delete_all
-    Dossier.delete_all
-    DossierNumber.delete_all
-
-    ActsAsTaggableOn::Tag.delete_all
-    ActsAsTaggableOn::Tagging.delete_all
-
-    Version.delete_all
-  end
-
-  def self.finish_import
-    # Drop alphabetic subtitles
-    Topic.alphabetic_sub_topics.each do |topics|
-      topics.destroy_all
-    end
-
-    # Mark as internal
-    self.by_text('"auf Anfrage"', :per_page => 100000).map{|dossier| dossier.internal = true; d.save}
-  end
-
-  # Imports the data from a csv file.
-  def self.import_from_csv(path)
-    # Disable PaperTrail for speedup
-    paper_trail_enabled = PaperTrail.enabled?
-    PaperTrail.enabled = false
-
-    # Load file at path using ; as delimiter
-    rows = FasterCSV.read(path, :col_sep => ';')
-
-    # Drop all entries
-    self.prepare_db_for_import
-
-    # Select rows containing topics
-    topic_rows = rows.select{|row| Topic.import_filter.match(row[0]) && row[3].blank? && row[1].present?}
-    topic_rows.map{|row| Topic.import(row).save!}
-
-    import_all(import_filter(rows))
-
-    # Do some housekeeping to finish up the import
-    self.finish_import
-
-    # Reset PaperTrail state
-    PaperTrail.enabled = paper_trail_enabled
-  end
-
   def self.filter_tags(values)
     boring = ["in", "und", "für"]
     values -= boring
@@ -205,57 +100,6 @@ class Dossier < ActiveRecord::Base
   def self.extract_tags(values)
     values = values.join(',') if values.is_a? Array
     filter_tags(split_words(values)).compact
-  end
-
-  def self.extract_keywords(values)
-    value_list = values.join('. ')
-
-    # Build quotation substitutes
-    abbrs = ["HK.H.", "Evang.", "jun.", "P.G.Z.", "Inh.", " Ltd.", "progr.", "z.", "...", "Änd.", "Ex.", "P.M.", "P.S.", "C.E.D.R.I.", "betr.", "Kt.", "Präs.", "St.", "EXPO.02", "Abst.", "Lib.", "gest.", "ex.", "Hrsg.", "S.o.S", "S.O.S.", "S.o.S.", "s.a.", "SA.", "S.A.", "A.O.M.", "Dr.", "jur.", "etc.", "ca.", "schweiz.", "Dir.", "Hist.", "Chr.", "ev.-ref.", "Kand.", "ev.", "ref.", "ehem.", "str."]
-    quoted_abbrs = {}
-    for abbr in abbrs
-      quoted_abbrs[abbr] = abbr.gsub('.', '|')
-    end
-
-    # Quote abbreviations
-    quoted_abbrs.each{|abbr, quoted_abbr| value_list.gsub!(abbr, quoted_abbr)}
-
-    # Quote dates
-    # TODO: Check if this could be done much simpler using gsub and block
-    list = value_list
-    quoted = ""
-    while match = /#{date_range}/.match(list)
-      quoted += match.pre_match
-
-      date = list.slice(match.begin(0)..match.end(0)-1)
-      quoted += date.gsub('.', '|')
-
-      list = match.post_match
-    end
-    value_list = quoted + list
-
-    # Quote initials
-    value_list.gsub!(/((^|[ ])[A-Z])\./, '\1|')
-
-    # Quote bracketed terms
-    # Need a clone or slice! will do some harm
-#    value_term = value_list.clone
-#    value_brackets = value_term.slice!(/^[^(]*/)
-#    while bracket_term = value_term.slice!(/\([^(]*\)/)
-#      value_brackets << bracket_term.gsub('.', '|');
-#    end
-#    value_brackets << value_term
-#    value_list = value_brackets
-
-    # Split and unquote
-    keywords = value_list.split('.')
-    keywords.map!{|keyword| keyword.gsub('|', '.')}
-
-    # Cleanup
-    keywords.compact!
-    keywords.map!{|value| value.strip.presence}
-
-    return keywords
   end
 
   def self.date_range
@@ -533,10 +377,6 @@ class Dossier < ActiveRecord::Base
     end
   end
 
-  def self.truncate_title(value)
-    value.gsub(/ #{date_range}$/, '')
-  end
-
   # Updates or creates dossier numbers.
   def update_or_create_number(amount, range, accumulate = true)
     # We can't use .count or .where until the Dossier is guaranteed to be saved
@@ -583,18 +423,6 @@ class Dossier < ActiveRecord::Base
     periods.each {|period| numbers.build(period)}
   end
 
-  def import_numbers(row)
-    # < 1990, 1990-1993, 1994 - 2011
-    periods = DossierNumber.default_periods(2011)
-    first_column = 10
-    for i in 0..19
-      amount = row[first_column + i]
-      amount = amount.nil? ? nil : amount.delete("',").to_i
-
-      update_or_create_number(amount, periods[i]) unless amount == 0
-    end
-  end
-
   # Updates the dossier tags.
   def update_tags
     # Take all (multi-word) keywords and the title as input
@@ -602,25 +430,6 @@ class Dossier < ActiveRecord::Base
 
     # Extract single word tags
     self.tag_list = self.class.extract_tags(tag_string)
-  end
-
-  # Imports the key words.
-  def import_keywords(row)
-    keys = self.class.extract_keywords(row[7..9])
-    self.keyword_list.add(keys)
-  end
-
-  # Imports the dossier.
-  def import(row)
-    # containers
-    containers << Container.import(row, self)
-
-    self.related_to = row[6] || ''
-
-    # tags and keywords
-    import_keywords(row)
-    update_tags
-    import_numbers(row)
   end
 
   # Creates the link to winmedio.net
