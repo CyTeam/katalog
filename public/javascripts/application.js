@@ -188,6 +188,9 @@ function addEditToolTipBehaviour() {
     }
 
     target.qtip({
+      show: {
+        solo: true
+      },
       style: {
         name: 'blue',
         tip: true,
