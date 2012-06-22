@@ -150,7 +150,7 @@ de:
       sphinx_admin_word_form: "Wortformen"
       report:  "Report"
       version: "Version"
-      visitor_log: "Logeintrag"
+      visitor_log: "Logbuch Eintrag"
 
     attributes:
       dossier:
