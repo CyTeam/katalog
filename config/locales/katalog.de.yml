@@ -2,7 +2,7 @@ de:
   katalog:
     dossier_count_per_year: "Dokumente pro Jahr"
     visitor_logs:
-      create_by_on: "Erstellt durch %{user} am %{date}."
+      create_by_on: "%{user} - %{date}"
     main_navigation:
       root:               "Übersicht"
       dossiers:           "Dossiers"
