@@ -155,6 +155,10 @@ class DossiersController < AuthorizedController
     @dossiers = Dossier.with_dangling_relations
   end
 
+  def multi_relations
+    @dossiers = Dossier.with_multi_relations
+  end
+
   private
   def dossier_search
     params[:per_page] ||= 25

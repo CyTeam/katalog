@@ -1,0 +1,3 @@
+%tr
+  %td= link_to multi_relation_dossier.title, multi_relation_dossier, "data-href-container" => "tr"
+  %td= multi_relation_dossier.multi_relations.join("<br/>").html_safe

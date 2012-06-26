@@ -326,3 +326,5 @@ de:
   dossiers:
     dangling_relations:
       title: Fehlerhafte Querverweise
+    multi_relations:
+      title: Mehrere Querverweise
