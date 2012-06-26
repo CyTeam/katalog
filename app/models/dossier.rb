@@ -672,7 +672,7 @@ class Dossier < ActiveRecord::Base
   end
 
   def remove_special_chars(string)
-    (string.gsub(/[^[:alnum:] \-\.]/, '')).gsub(/\s/, '')
+    string.gsub(/[^[:alnum:] \-\.]/, '')
   end
 
   def remove_short_cuts(string)
