@@ -47,7 +47,7 @@ class Dossier < ActiveRecord::Base
   # Pagination scope
   scope :characters, select("DISTINCT substring(upper(title), 1, 1) AS letter").having("letter BETWEEN 'A' AND 'Z'")
   def self.character_list
-    characters.order('title').map{|t| I18n.transliterate(t.letter) }
+    characters.map{|t| t.letter}
   end
 
   # Ordering

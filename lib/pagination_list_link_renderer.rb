@@ -15,6 +15,9 @@ class PaginationListLinkRenderer < WillPaginate::ViewHelpers::LinkRenderer
     return "" unless paginated_scope
 
     characters = paginated_scope.character_list
+    # transliterate matches non ASCII chars with ASCII chars (Ü => U)
+    characters = characters.map{ |t| I18n.transliterate(t) }
+    characters.sort!{ |a,b| a <=> b }
     page_links = characters.map{|character| alphabetic_page_link(character)}
     all_links = Array.new
     all_links << alphabetic_page_link(I18n.t('katalog.show_all'), :link_keyword => '')
