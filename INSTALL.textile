@@ -46,7 +46,7 @@ katalog is developed and tested using Rails 3.0.11 and Ruby 1.8.7 or 1.9.2
 Install packages to support installing rails:
 
 <pre>
-sudo apt-get install irb ruby libruby-extras libmysqlclient-dev libxml2-dev libxslt-dev libaspell-dev ruby-dev build-essential
+sudo apt-get install irb ruby libruby-extras libmysqlclient-dev libxml2-dev libxslt-dev libaspell-dev aspell-de ruby-dev build-essential
 </pre>
 
 Install rails using gem:
