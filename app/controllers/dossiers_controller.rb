@@ -171,7 +171,16 @@ class DossiersController < AuthorizedController
       # Simple hack to simulate all
       params[:per_page] = 1000000
     end
-    if params[:search][:text].present?
+
+    is_signature_search = params[:search][:signature].present?
+    if /^[0-9.]{1,8}$/.match(params[:search][:text])
+      is_signature_search = true
+      params[:search][:signature] = params[:search][:text]
+      # Ensure we don't call the by_text scope
+      params[:search][:text] = nil
+    end
+
+    if !is_signature_search
       @query = params[:search][:text]
       @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?, :include => [:location, :containers])
     else
