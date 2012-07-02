@@ -9,11 +9,6 @@ class ContainerTest < ActiveSupport::TestCase
     assert_equal dossiers(:city_counsil), containers(:city_counsil).dossier
   end
   
-  test "title" do
-    assert_equal containers(:city_counsil).dossier.title, Dossier.truncate_title(containers(:city_counsil).title)
-    assert_equal containers(:city_history_1900_1999).dossier.title, Dossier.truncate_title(containers(:city_history_1900_1999).title)
-  end
-  
   test "to_s" do
     assert_equal "City counsil (DH@EG)", containers(:city_counsil).to_s
   end
@@ -59,19 +54,6 @@ class ContainerTest < ActiveSupport::TestCase
     assert_equal container_types(:DA), container.container_type
   end
 
-  test "import" do
-    dossier = dossiers(:city_history)
-    container_row = ['77.0.100', 'City history 2000 -', '2001', 'DH', 'EG']
-
-    container = Container.import(container_row, dossier)
-    
-    assert_equal dossier, container.dossier
-    assert_equal "City history 2000 -", container.title
-    assert_equal Date.parse('1910-01-01'), dossier.first_document_on
-    assert_equal container_types(:DH), container.container_type
-    assert_equal locations(:EG), container.location
-  end
-
   # .period
   test ".period is empty if no dossier assigned" do
     container = Container.new(:dossier => nil)
@@ -79,18 +61,6 @@ class ContainerTest < ActiveSupport::TestCase
     assert_equal '', container.period
   end
   
-  test ".period is empty if no period assigned and no first_document_year set" do
-    container = Factory.build(:container, :title => '')
-    
-    assert_equal '', container.period
-  end
-  
-  test ".period" do
-    container = Factory(:container, :title => '1989 -')
-    
-    assert_equal '1989 -', container.period
-  end
-
   test ".period without period" do
     container = Factory.build(:container, :dossier => Factory.build(:dossier_since_1990))
     
@@ -130,7 +100,6 @@ class ContainerTest < ActiveSupport::TestCase
     
     sleep(1)
     container = dossier.containers.last
-    container.title = "1990 - 1998"
     container.save
     dossier.reload
     

@@ -27,37 +27,6 @@ class DossierTest < ActiveSupport::TestCase
     end
   end
   
-  context ".truncate_title" do
-    should "Drop date ranges" do
-      for title in ["City counsil notes 2000 - 2001", "City counsil notes Jan. - Feb. 2002", "City counsil notes März 2002 - Feb. 2003", "City counsil notes 1. Apr. - 15. Mai 2003", "City counsil notes 16. Mai 2003 - 1. Apr. 2004", "City counsil notes 2005 -"]
-        assert_equal "City counsil notes", Dossier.truncate_title(title)
-      end
-    end
-
-    should "leave dates in titles intact" do
-      for title in ["Olympic Games 2001 Preparations 1999 - 2000", "Olympic Games 2001 Preparations 2001"]
-        assert_equal "Olympic Games 2001 Preparations", Dossier.truncate_title(title)
-      end
-    end
-    
-    should "leave date ranges in titles intact" do
-      assert_equal "Deiss, Josef (BR CVP 1999 - 2006)", Dossier.truncate_title("Deiss, Josef (BR CVP 1999 - 2006) 1989 - 2006")
-      assert_equal "Hess, Peter (NR CVP 1983 - 2003)", Dossier.truncate_title("Hess, Peter (NR CVP 1983 - 2003) 2001")
-      assert_equal "Hess, Peter (NR CVP 1983 - 2003)", Dossier.truncate_title("Hess, Peter (NR CVP 1983 - 2003) 2002 - ")
-
-      assert_equal "Referenden gegen Teilrevision des Militärgesetzes (Abstimmung 2001)", Dossier.truncate_title("Referenden gegen Teilrevision des Militärgesetzes (Abstimmung 2001) 2000 - 2001")
-    end
-    
-    should "leave non-last dates intact" do
-      assert_equal "Terroranschlag, USA: 11. September 2001.", Dossier.truncate_title("Terroranschlag, USA: 11. September 2001. Okt. 2001")
-      assert_equal "Terroranschlag, USA: 11. September 2001.", Dossier.truncate_title("Terroranschlag, USA: 11. September 2001. Nov. - Dez. 2001")
-    end
-
-    should "detect ordinal month names with spaces" do
-      assert_equal "Terroranschlag, USA: 11. September 2001.", Dossier.truncate_title("Terroranschlag, USA: 11. September 2001. 12. 9. - 16. 9. 2001")
-    end
-  end
-
   context "#first_document_on" do
     should "take first document from table" do
       assert_equal Date.parse('1910-01-01'), FactoryGirl.build(:dossier, :first_document_on => '1910-01-01').first_document_on
@@ -104,63 +73,6 @@ class DossierTest < ActiveSupport::TestCase
     assert_equal ["Gewinn"], Dossier.extract_tags(tags)
   end
   
-  test "keywords are split only on dot" do
-    keyword_list = ["Chomsky, Noam USA (1928 -)", "One. after. the other."]
-    keywords = Dossier.extract_keywords(keyword_list)
-    
-    assert_equal 4, keywords.count
-    assert keywords.include?("Chomsky, Noam USA (1928 -)")
-    assert keywords.include?("the other")
-  end
-  
-  test "keyword extraction respects common abbreviations" do
-    keyword_list = ["betr. x", "x Kt. y", "Präs. (1900)"]
-    
-    for keyword in keyword_list
-      assert Dossier.extract_keywords(keyword_list).include?(keyword)
-    end
-  end
-  
-  test "keyword extraction respects dates" do
-    keyword_list = ["(Aug. 2000 - 2010)", "9. 9. 1997"]
-    
-    for keyword in keyword_list
-      assert Dossier.extract_keywords(keyword_list).include?(keyword), "Expected %s to include %s" % [Dossier.extract_keywords(keyword_list).inspect, keyword]
-    end
-  end
-  
-  test "keyword extraction respects (middle) name initials" do
-    keyword_list = ["Jan H. Rosenbaum", "K. Huber (1941-2000)"]
-    
-    for keyword in keyword_list
-      assert Dossier.extract_keywords(keyword_list).include?(keyword), "Expected %s to include %s" % [Dossier.extract_keywords(keyword_list).inspect, keyword]
-    end
-  end
-  
-#  test "keyword extraction respects brackets" do
-#    keyword_list = ["One (et. al. and so on!) keyword", "(One. Two), (3. 4.5)", "And (Then. (We get bigger. Yes) Really.)"]
-#
-#    for keyword in keyword_list
-#      assert Dossier.extract_keywords(keyword_list).include?(keyword), "Expected %s to include %s" % [Dossier.extract_keywords(keyword_list).inspect, keyword]
-#    end
-#  end
-  
-  test "keyword extraction only allows dot after single capital letter" do
-    keyword_list = ["Fahnenbranche CH. Europa"]
-    
-    keywords = Dossier.extract_keywords(keyword_list)
-    assert_equal 2, keywords.count
-    assert keywords.include?('Fahnenbranche CH')
-    assert keywords.include?('Europa')
-  end
-  
-  test "import keywords adds to keyword and tag list" do
-    keyword_row = []; keyword_row[7] = "Counsil"; keyword_row[8] = "Corruption"; keyword_row[9] = "Conflict";
-
-    @dossier.import_keywords(keyword_row)
-    assert_superset @dossier.keyword_list, ["Counsil", "Corruption", "Conflict"]
-  end
-
   test "assigning keyword_list adds to global tag list" do
     # Add 2 keywords and 1 tag
     assert_difference('ActsAsTaggableOn::Tag.count', 2 + 1) do
@@ -382,7 +294,7 @@ class DossierTest < ActiveSupport::TestCase
   context "containers association" do
     should "should accept attributes" do
       attributes = Factory.attributes_for(:dossier,
-        :containers_attributes => { 1 => {:title => 'neu 2000', :container_type => ContainerType.first, :location => Location.first} }
+        :containers_attributes => { 1 => {:container_type => ContainerType.first, :location => Location.first} }
       )
       assert_difference('Container.count', 1) do
         dossier = Dossier.create(attributes)
