@@ -39,9 +39,3 @@ production:
   database: katalog_production
   username: katalog
   password:
-
-import:
-  <<: *mysql
-  database: katalog_import
-  username: katalog
-  password:
