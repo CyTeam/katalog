@@ -6,4 +6,4 @@
   = javascript_include_tag :ckeditor
 
 #visitor_log_list
-  = render collection
+  = render @visitor_logs.order("created_at DESC")

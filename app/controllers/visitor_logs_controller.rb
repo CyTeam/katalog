@@ -12,4 +12,8 @@ class VisitorLogsController < AuthorizedController
     
     create! {visitor_logs_path}
   end
+
+  def index
+    @visitor_logs = VisitorLog.order("created_at DESC")
+  end
 end
