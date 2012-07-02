@@ -9,8 +9,8 @@ module Dossiers
         # Needed for tag/keyword search
         set_property :group_concat_max_len => 1048576
 
-        # Disable delta update in import as it slows down too much and otherwise do it delayed.
-        set_property :delta => true unless Rails.env.import? or Rails.env.fallback?
+        # Disable delta update in Fallback environment, as we use it read-only
+        set_property :delta => true unless Rails.env.fallback?
 
         # Indexed Fields
         indexes title

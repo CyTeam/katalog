@@ -104,25 +104,6 @@ class Topic < Dossier
     save
   end
   
-  # Customized import filter for a Topic.
-  def self.import_filter
-    /^[0-9][.0-9]*$/
-  end
-
-  # Customized row import for a Topic.
-  def self.import(row)
-    self.new.import(row)
-  end
-
-  # Customized row import for the current Topic.
-  def import(row)
-    self.signature = row[0]
-    self.title     = row[1]
-    puts self unless Rails.env.test?
-
-    self
-  end
-
   # Title which is constructed from the next childrens
   def overview_title
     "#{self.signature}: " + direct_children.collect {|c| c.title.split(".").first }.join('. ')

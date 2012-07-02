@@ -56,30 +56,4 @@ class Container < ActiveRecord::Base
   def first_document_on=(value)
     dossier.first_document_on = value unless dossier.first_document_on && (value >= dossier.first_document_on)
   end
-  
-  # Import
-  def self.import(row, dossier)
-    container = self.create(
-      :dossier           => dossier,
-      :container_type    => row[3],
-      :location          => row[4]
-    )
-
-    container.period = extract_period(row[2])
-    return container
-  end
-
-  def extract_period(title)
-    # Try extracting from title by dropping dossier title
-    result = title.gsub(/^#{Regexp.escape(dossier.title)}/, '').strip
-    return result unless result.blank?
-
-    # Deduce from dossier otherwise
-    first_document_year = dossier.first_document_year
-
-    # Guard against some internal dossiers
-    return nil if first_document_year.blank?
-
-    return "#{first_document_year} -"
-  end
 end

@@ -2,48 +2,40 @@
 # ==========
 city_counsil:
   dossier: city_counsil
-  title: City counsil
   container_type: DH
   location: EG
 
 city_parties:
   dossier: city_parties
-  title: City parties
   container_type: DH
   location: EG
 
 city_history_1900_1999:
   dossier: city_history
-  title: City history
   container_type: DA
   location: RI
 
 city_history_2000_2001:
   dossier: city_history
-  title: City history
   container_type: DH
   location: RI
 
 city_history_2002:
   dossier: city_history
-  title: City history
   container_type: DH
   location: EG
 
 city_lonely_dossier:
   dossier: city_lonely_dossier
-  title: Lonely dossier
   container_type: DH
   location: EG
 
 container_wait:
-  title: Wait dossier
   container_type: DH
   location: location_wait
   dossier: dossier_waiting
   
 container_avaible:
-  title: Avaible dossier
   container_type: DH
   location: CO
   dossier: dossier_available
