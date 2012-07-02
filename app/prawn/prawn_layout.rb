@@ -1,7 +1,7 @@
 class PrawnLayout < Prawn::Document
   def initialize(opts = {})
     super
-    
+
     # Default Font
     font  'Helvetica'
     font_size 8
@@ -62,7 +62,7 @@ class PrawnLayout < Prawn::Document
   # Footer
   # =====
   # Draws the line above the page number on each page.
-  def page_footer
+  def page_footer(user=nil)
     repeat :all do
       image Rails.root.join("public/images/doku-zug.ch/logo_white.png"), :at => [bounds.right - 70, bounds.top + 10], :width => 70
 
@@ -74,6 +74,14 @@ class PrawnLayout < Prawn::Document
           text "St. Oswaldsgasse 16, Postfach 1146, 6301 Zug"
           text "Telefon 041 726 81 81, Fax 041 726 81 88"
           text "info@doku-zug.ch, www.doku-zug.ch"
+        end
+      end
+
+      bounding_box [bounds.left + 400, 0], :width => 150, :height => 40 do
+        font_size 7 do
+          fill_color "000000"
+          text "gedruckt am: " + Date.today.to_s
+          text "gedruckt von: " + user.username if user
         end
       end
 

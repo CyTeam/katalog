@@ -70,7 +70,7 @@ prawn_document(:page_size => 'A4',
     end
 
     # Footer
-    pdf.page_footer
+    pdf.page_footer(current_user)
     unless headers.last.eql?header
       pdf.start_new_page
     end
