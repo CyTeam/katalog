@@ -226,10 +226,21 @@ class Dossier < ActiveRecord::Base
   # Returns the titles of the relations.
   def relation_titles
     stripped_relations = relations.map{|relation| relation.strip.presence}.compact
+    stripped_relations += back_relations
 
-    titles = stripped_relations.map{|relation| relation.gsub(/^[0-9.]{1,8}:[ ]*/, '')}
+    # Remove signatures from backlinks
+    titles = stripped_relations.uniq.sort.map{|relation| relation.gsub(/^[0-9.]{1,8}:[ ]*/, '')}
 
     titles
+  end
+
+  # Create an Array for backlinks
+  def back_relations
+    back_links = []
+    Dossier.where("related_to LIKE ?", "%#{self.title}%").each do |dossier|
+      back_links << dossier.title
+    end
+    back_links
   end
 
   def dangling_relations

@@ -20,10 +20,13 @@
   #keywords.section
     %ul#keyword-list.keywords= render :partial => 'keyword', :collection => @dossier.keywords.order('name')
 
-  - if @dossier.related_to.present?
+  - if @dossier.relation_titles.present?
     %h3= t_attr(:relation_list)
-    #relations.section= render 'relations/list'
-    
+    #relations.section
+      %ul#relation-list.relations
+      - for relation in @dossier.relation_titles
+        %li= link_to relation, search_dossiers_url(:search => {:text => relation})
+
   %h3= t_attr(:books)
   #books.section
     %ul
