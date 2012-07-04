@@ -174,7 +174,7 @@ class DossiersController < AuthorizedController
     end
 
     is_signature_search = params[:search][:signature].present?
-    if /^[0-9.]{1,8}$/.match(params[:search][:text].strip)
+    if /^[0-9.]{1,8}$/.match(params[:search][:text].try(:strip))
       is_signature_search = true
       params[:search][:signature] = params[:search][:text].strip
       # Ensure we don't call the by_text scope
