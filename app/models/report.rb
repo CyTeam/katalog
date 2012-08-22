@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 # This class defines different views on the dossiers.
 class Report < ActiveRecord::Base
 

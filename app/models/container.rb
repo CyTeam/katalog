@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class Container < ActiveRecord::Base
   # change log
   has_paper_trail :ignore => [:created_at, :updated_at], :meta => {:dossier_id => Proc.new { |container| container.dossier_id }}

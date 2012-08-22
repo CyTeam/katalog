@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 Katalog::Application.routes.draw do
 
   resources :reports do

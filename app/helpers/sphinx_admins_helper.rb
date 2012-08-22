@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module SphinxAdminsHelper
   def add_new_link
     link_to_function image_tag('icons/add.png', :title => t('crud.new', :model => '')), :id => 'add_record_link' do |page|

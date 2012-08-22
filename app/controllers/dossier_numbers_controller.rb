@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class DossierNumbersController < AuthorizedController
   
   respond_to :json, :only => :create

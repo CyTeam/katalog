@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 namespace :katalog do
   desc "Create sphinx wordform and exception lists."
   task :export_sphinx_lists, :roles => :app do

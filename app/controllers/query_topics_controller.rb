@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class QueryTopicsController < AuthorizedController
   def index
     @attributes = [:signature, :title, :query]

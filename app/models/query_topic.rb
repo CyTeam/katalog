@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class QueryTopic < Topic
   def dossiers
     return nil unless self.query.present?

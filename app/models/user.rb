@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 # This class holds all the user information's.
 class User < ActiveRecord::Base
   # PaperTrail: changencrypted_passworde log

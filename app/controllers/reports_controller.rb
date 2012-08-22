@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class ReportsController < AuthorizedController
   def attributes
     ['title', 'columns', 'public']

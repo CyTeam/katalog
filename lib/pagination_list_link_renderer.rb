@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class PaginationListLinkRenderer < WillPaginate::ViewHelpers::LinkRenderer
 
   def html_container(html)

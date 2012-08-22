@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 # This class is a simple log for authenticated users.
 class VisitorLog < ActiveRecord::Base
   # Associations of the visitor log.

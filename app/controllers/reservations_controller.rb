@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class ReservationsController < AuthorizedController
   
   def new

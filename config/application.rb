@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
@@ -52,6 +54,6 @@ module Katalog
     config.action_view.javascript_expansions[:defaults] += %w(jquery-elastic jquery-ui jquery-highlight jquery.qtip ui.multiselect jquery.query-2.1.7)
 
     # Allow target in links, used in description
-    config.action_view.sanitized_allowed_attributes = 'target'
+    config.action_view.sanitized_allowed_attributes = ['target']
   end
 end

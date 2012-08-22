@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AuthorizedController < InheritedResources::Base
   # Authorization
   authorize_resource

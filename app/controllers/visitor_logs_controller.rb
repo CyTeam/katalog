@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class VisitorLogsController < AuthorizedController
   # Authentication
   before_filter :authenticate_user!

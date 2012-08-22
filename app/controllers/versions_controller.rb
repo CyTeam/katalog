@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class VersionsController < AuthorizedController
 
   include VersionsHelper

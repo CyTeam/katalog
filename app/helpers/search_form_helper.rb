@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module SearchFormHelper
   def search_form_for(object_name, options={}, &block)
     options[:html] = {:method => :get}.update(options[:html] || {})

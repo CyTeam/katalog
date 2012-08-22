@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'paper_trail/version'
 
 ActiveRecord::Base.class_eval do

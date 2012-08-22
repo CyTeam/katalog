@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module DossiersHelper
   def link_to_keyword(keyword, options = {})
     link_to(keyword, search_dossiers_path(:search => {:text => keyword}), options)

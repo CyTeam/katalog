@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module ReportsHelper
   def level_for_select
     (1..4).map{|level| [t(level, :scope => 'katalog.reports.level'), level]}

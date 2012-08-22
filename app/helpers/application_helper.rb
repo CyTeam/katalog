@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module ApplicationHelper
   # Nested Form
   def remove_link_unless_new_record(fields)

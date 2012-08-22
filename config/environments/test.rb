@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 Katalog::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
@@ -32,4 +34,7 @@ Katalog::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Raise exception on mass assignment protection for Active Record models
+  config.active_record.mass_assignment_sanitizer = :strict
 end

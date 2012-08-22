@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class ReservationMailer < ActionMailer::Base
   default :from => RESERVATION_EMAIL_SENDER # This constant is definied in mail initializer.
 

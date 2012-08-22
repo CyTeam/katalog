@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'paper_trail'
 
 PaperTrail::Model::ClassMethods.module_eval do

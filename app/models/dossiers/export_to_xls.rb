@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 # Export to Excel
 # ===============
 require 'spreadsheet'

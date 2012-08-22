@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class PrawnLayout < Prawn::Document
   def initialize(opts = {})
     super

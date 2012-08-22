@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'i18n_rails_helpers'
 
 ContextualLinkHelpers.class_eval do

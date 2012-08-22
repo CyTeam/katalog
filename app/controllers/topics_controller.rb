@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class TopicsController < AuthorizedController 
   include DossiersHelper
   # Authentication

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 # This class holds the specific values for the sphinx exceptions config.
 class SphinxAdminException < SphinxAdmin
 

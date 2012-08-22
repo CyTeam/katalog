@@ -4,10 +4,10 @@ source 'http://rubygems.org'
 
 # Rails
 # =====
-gem 'rails', '~> 3.0.11'
+gem 'rails', '~> 3.2.8'
 
 # Database
-gem 'mysql2', '~> 0.2.6'
+gem 'mysql2'
 
 # Test
 # ===
@@ -64,7 +64,7 @@ gem 'compass'
 gem 'fancy-buttons'
 
 gem 'formtastic'
-gem 'will_paginate', :git => 'http://github.com/huerlisi/will_paginate.git', :branch => 'rails3'
+gem 'will_paginate'
 gem 'inherited_resources'
 gem 'has_scope'
 gem 'i18n_rails_helpers'
@@ -79,7 +79,7 @@ gem 'devise'
 gem 'cancan'
 
 # Tagging
-gem 'acts-as-taggable-on', '2.0.6'
+gem 'acts-as-taggable-on'
 
 # CRUD helpers
 gem 'inherited_resources_views'
@@ -110,7 +110,7 @@ gem 'hpricot'
 # Change log for model data
 gem 'paper_trail'
 
-gem 'revertible_paper_trail'
+gem 'revertible_paper_trail', :path => "../revertible_paper_trail"
 
 # Generate excel files
 gem 'spreadsheet'
@@ -118,8 +118,8 @@ gem 'spreadsheet'
 # Spellchecking
 gem 'raspell', :git => 'http://github.com/huerlisi/raspell.git'
 
-# MetaWhere
-gem 'meta_where'
+# Squeel
+gem "squeel"
 
 # Monitoring
 # ==========

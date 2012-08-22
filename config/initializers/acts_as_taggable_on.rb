@@ -1,2 +1,4 @@
+# encoding: UTF-8
+
 # Use newline as delimiter
-ActsAsTaggableOn::TagList.delimiter = "\n"
+ActsAsTaggableOn.delimiter = "\n"
