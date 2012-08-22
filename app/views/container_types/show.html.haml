@@ -1,0 +1,5 @@
+- cache @container_type.cache_key + '_show' do
+  = contextual_links
+  %h1= t_title
+  = show_for @container_type do |l|
+    = l.attributes :title, :code, :description

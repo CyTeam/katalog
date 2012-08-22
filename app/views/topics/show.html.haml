@@ -1,0 +1,15 @@
+= render '/dossiers/search_form'
+- cache [@topic.cache_key, current_user.try(:roles)] do
+  #page_actions.contextual
+    = contextual_link('edit', edit_topic_path(@topic), :title => t('tooltips.topics.edit'))
+  %h1#title
+    = @topic.signature
+    = @topic.title
+  %p.notice
+    = notice
+  #breadcrumb.section
+    %ul.dossier_topic_breadcrumb
+      - for parent in @topic.parents
+        %li= link_to_topic(parent)
+- @dossiers = @topic.direct_children
+= render 'dossiers/list'

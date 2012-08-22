@@ -1,0 +1,10 @@
+= semantic_form_for(@location) do |f|
+  = f.semantic_errors
+  = f.inputs do
+    = f.input :title
+    = f.input :code
+    = f.input :address
+    = f.input :availability, :as => :select, :collection => Location.availabilities_for_collection
+    = f.input :preorder
+  = f.buttons do
+    = f.commit_button

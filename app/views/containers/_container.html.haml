@@ -1,0 +1,8 @@
+%tr{:class => cycle('odd', 'even', :name => :container), :id => "container-#{container.id}", :title => container.preorder ? t_attr(:preorder, Container) : ''}
+  - cache container do
+    %td= container.period
+    %td= container.container_type.try(:code)
+    %td
+      = container.location.try(:code)
+      - if container.preorder
+        %img{:alt => t_attr(:preorder, Container), :src => "/images/16x16/availability_wait.png"}/

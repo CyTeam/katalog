@@ -1,0 +1,2 @@
+%ul#keyword-list.keywords
+  = render @dossier.keywords.order('name').map{|keyword| keyword.becomes(Keyword)}

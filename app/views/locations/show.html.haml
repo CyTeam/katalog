@@ -1,0 +1,4 @@
+= contextual_links
+%h1= t_title
+= show_for @location do |l|
+  = l.attributes :title, :code, :address, :availability, :preorder

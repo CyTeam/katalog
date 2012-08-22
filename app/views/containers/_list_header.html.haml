@@ -1,0 +1,6 @@
+%tr
+  %th= t_attr(:period, Container)
+  %th{:style => "width: 4em"}= t_attr(:container_type, Container)
+  %th{:style => "width: 2em"}= t_attr(:location, Container)
+  - if defined?(form_helper)
+    %th.action-links= add_record_link(form_helper, Container)
