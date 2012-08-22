@@ -9,6 +9,19 @@ gem 'rails', '~> 3.2.8'
 # Database
 gem 'mysql2'
 
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails'
+  gem 'sprockets'
+  gem 'coffee-rails'
+  gem 'therubyracer'
+  gem 'uglifier'
+  gem 'compass-rails'
+  gem 'fancy-buttons'
+end
+
+
 # Test
 # ===
 group :test do
@@ -60,8 +73,6 @@ gem 'jquery-rails'
 # Standard helpers
 # ================
 gem 'haml'
-gem 'compass'
-gem 'fancy-buttons'
 
 gem 'formtastic'
 gem 'will_paginate'
@@ -103,7 +114,8 @@ end
 gem 'show_for'
 
 # WYSIWYG Editor
-gem 'ckeditor', :git => 'http://github.com/pshoukry/ckeditor.git' # This repo has a pending pull request to ckeditor when integrated the git path could be removed.
+gem "ckeditor"
+
 # Link fixes
 gem 'hpricot'
 

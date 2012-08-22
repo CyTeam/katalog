@@ -1,0 +1,43 @@
+#mainmenu
+  margin-top: 72px
+  margin-right: 34px
+  ul
+    border-top: 1px dotted $link_color
+    li
+      border-bottom: 1px dotted $link_color
+      line-height: 1.5
+
+      list-style: image-url("doku-zug.ch/navbullet.gif") inside
+      a
+        display: inline
+        padding-left: 5px
+        font-weight: normal
+        text-decoration: none
+        font-size: 14px
+        color: #003d61
+        text-transform: uppercase
+        &.trail, &:hover
+          color: #9d6524
+        &.trail
+          font-weight: bold
+      &#versions_nav,
+      &#new_query_title
+        a
+          font-size: 13px
+          line-height: 20px
+      ul
+        display: none
+        margin-bottom: 3px
+        li
+          padding-left: 11px
+          color: #9d6524
+          &:last-child
+            border-bottom: 0px
+      &.selected ul
+        display: block
+        ul
+          display: none
+        li.selected ul
+          display: block
+  .trail, .selected
+    list-style: image-url("doku-zug.ch/navbullet_over.gif") inside

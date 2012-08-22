@@ -4,9 +4,12 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-# If you have a Gemfile, require the gems listed there, including any gems
-# you've limited to :test, :development, or :production.
-Bundler.require(:default, Rails.env) if defined?(Bundler)
+if defined?(Bundler)
+  # If you precompile assets before deploying to production, use this line
+  Bundler.require(*Rails.groups(:assets => %w(development test)))
+  # If you want your assets lazily compiled in production, use this line
+  # Bundler.require(:default, :assets, Rails.env)
+end
 
 module Katalog
   class Application < Rails::Application
@@ -45,13 +48,11 @@ module Katalog
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
-    # PDF generation
-    # config.middleware.use "PDFKit::Middleware", :footer_right => "[page]/[toPage]"
+    # Enable the asset pipeline
+    config.assets.enabled = true
 
-    # generic Cyt JS
-    config.action_view.javascript_expansions[:defaults] += %w(cyt)
-    # jQuery Plugins
-    config.action_view.javascript_expansions[:defaults] += %w(jquery-elastic jquery-ui jquery-highlight jquery.qtip ui.multiselect jquery.query-2.1.7)
+    # Version of your assets, change this if you want to expire all your assets
+    config.assets.version = '1.0'
 
     # Allow target in links, used in description
     config.action_view.sanitized_allowed_attributes = ['target']

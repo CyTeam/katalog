@@ -1,0 +1,43 @@
+/* Style sheet content */
+.ce_table,.ce_gallery,.ce_dfGallery{margin-top:1em;}
+.ce_table,.ce_image,.ce_download,.ce_downloads,.ce_code,.ce_dfGallery{margin-bottom:1em;}
+.ce_text p,.ce_text pre,.ce_hyperlink,.ce_list,.teaser,.comment{line-height:1.5;}
+.info,.time{font-size:11px;color:#999;}
+.pdf_link{right:0;position:absolute;margin-top:44px;font-size:11px;}
+.ce_text pre{padding:9px;background-color:#f9f9f9;border:1px solid #ddd;}
+.hyperlink_txt{padding-left:24px;background: image-url("doku-zug.ch/doku-zug.ch/link.gif") left center no-repeat;}
+.image_container img{padding:2px;background-color:#fff;border:1px solid #ddd;}
+.image_container .caption{margin-top:-2px;padding:2px 4px 3px;background-color:#ddd;font-size:10px;}
+*:first-child+html .image_container .caption{margin-top:1px;}
+.ce_gallery table{margin-bottom:0;}
+.ce_gallery td{padding-right:1.5em;padding-bottom:1em;}
+.ce_list ol{margin-left:3em;}
+.ce_list ol li{list-style:decimal outside;}
+.ce_list ul{margin-left:1.5em;}
+.ce_list ul li{padding-left:18px;background: image-url("doku-zug.ch/doku-zug.ch/arrow.jpg") left center no-repeat;}
+.ce_table{padding:1px;}
+.ce_table table{width:100%;border:1px solid #c8cbd0;}
+.ce_table th{padding:6px;background-color:#e1e6ec;border:1px solid #346599;}
+.ce_table td{padding:6px;border:1px solid #c8cbd0;}
+.ce_table tr.odd td{background-color:#f6f7f9;}
+#jahresbericht td.row_dateiname,#themenuebersicht td.row_dateiname{width:280px;}
+#neuebuecher tr td{background-color:#ebd3cd;}
+#themenuebersicht tr td{background-color:#ebdbcb;}
+#jahresbericht tr td{background-color:#f2f3f3;}
+#jahresbericht tr.odd td{background-color:#f2f3f3;}
+#jahresbericht tr.even td{background-color:#e5e7e8;}
+.ce_download img,.ce_downloads img{vertical-align:top;}
+.ce_downloads p{margin-bottom:3px;}
+.ce_comments .comment_default{margin-bottom:6px;padding:9px 9px 9px 7px;background-color:#f6f7f9;border-left:2px solid #346599;}
+.ce_comments .info{margin-bottom:1.5em;padding-bottom:3px;border-bottom:1px dotted #ddd;}
+.ce_comments .comment{font-size:11px;}
+.ce_comments .form{margin-top:1.5em;}
+.ce_comments .widget{margin-bottom:3px;}
+.ce_comments .text,.ce_comments .captcha{width:40%;margin-right:0;}
+.ce_comments span.captcha_text{font-weight:bold;color:#444;}
+.ce_accordion .toggler{padding:6px 9px;background: image-url("doku-zug.ch/doku-zug.ch/gradient.jpg") left bottom repeat-x;border-right:1px solid #c8cbd0;border-left:1px solid #c8cbd0;cursor:pointer;}
+.ce_accordion_first .toggler{border-top:1px solid #c8cbd0;}
+.ce_accordion .accordion div{padding:9px 9px 0;background-color:#fcfcfc;border:1px solid #c8cbd0;}
+.ce_code{margin-top:1.5;padding:0 2px 0 0;}
+.team{margin-top:11px;margin-bottom:11px;padding-top:5px;padding-bottom:5px;border-bottom:1px dotted #003D61;}
+.teamfirst{border-top:1px dotted #003D61;}

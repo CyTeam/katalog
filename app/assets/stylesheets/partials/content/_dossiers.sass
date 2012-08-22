@@ -1,0 +1,63 @@
+#insert_relation
+  padding-left: 20px
+  background: image-url("16x16/add.png") no-repeat top left
+
+#dossier_submit,
+#location_submit,
+#container_type_submit,
+#topic_submit
+  +fancy_button(#00669C)
+
+// CKEditor
+#cke_dossier_description,
+#cke_visitor_log_content
+  float: right
+
+span.cke_skin_kama
+  border: 0
+
+#description
+  width: 50%
+  ol
+    margin-left: 17px
+  li
+    list-style: none
+    background:
+      image: image-url("doku-zug.ch/navbullet_small.gif")
+      repeat: no-repeat
+      position: 0px 5px
+    padding:
+      left: 8px
+  p
+    margin:
+      bottom: 0.5em
+
+#waiting-list
+  margin:
+    bottom: 25px
+  float: left
+  li
+    width: 33%
+    list-style-image: none
+    float: left
+    display: block
+
+.waiting-time
+  color: red
+  float: left
+  display: block
+  width: 100%
+
+#dossier_relation_list,
+#relation_list_auto_completion
+  float: right
+  margin-right: 6px
+
+#books
+  margin:
+    left: 1.3em
+  ul
+    margin:
+      left: 1.5em
+  a
+    target-new: tab !important

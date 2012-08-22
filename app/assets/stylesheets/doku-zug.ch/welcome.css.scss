@@ -1,0 +1,20 @@
+/* Style sheet welcome */
+#printthis{width:463px;margin-bottom:11px;text-align:right;}
+#main{margin-bottom:0;}
+#aktuell.mod_newslist,#thema.mod_newslist,#buch.mod_newslist{width:465px;height:123px;float:left;margin-bottom:17px;padding-top:2px;padding-bottom:0;padding-left:1px;}
+.layout_latest{width:295px;}
+.otheraktuell,.otherthema,.otherbuch{margin-top:11px;}
+#aktuell.mod_newslist h1,#thema.mod_newslist h1,#buch.mod_newslist h1{margin-top:7px;margin-bottom:0;line-height:1;}
+#aktuell.mod_newslist{background: image-url("doku-zug.ch/doku-zug.ch/box-gruen.jpg") left top no-repeat;}
+#thema.mod_newslist{background: image-url("doku-zug.ch/doku-zug.ch/box-rot.jpg") left top no-repeat;}
+#buch.mod_newslist{background:  image-url("doku-zug.ch/doku-zug.ch/box-braun.jpg") left top no-repeat;}
+#container{background:none;}
+#main .inside{margin-right:0;}
+.ce_accordion{width:292px;float:right;clear:both;margin-left:36px;}
+.mod_rss_reader{margin-bottom:1em;}
+.mod_rss_reader div{padding:0;background:none !important;}
+.image_container img{padding:0;border:0px solid #ddd;}
+.themen img{float:left;}
+.otheraktuell.mod_newslist{left:170px;top:5px;position:absolute;}
+.otherthema.mod_newslist{left:170px;top:147px;position:absolute;}
+.otherbuch.mod_newslist{left:170px;top:289px;position:absolute;}
