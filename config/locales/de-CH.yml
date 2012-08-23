@@ -190,3 +190,8 @@ de-CH:
     next_label:     "Nächste Seite"
     page_gap:       "..."
 
+  tooltips:
+    dossiers:
+      search_input: "Hier können Sie ihre Suchbegriffe eingeben."
+      search:       "Hier können Sie nach ihren gewünschten Themen suchen."
+
