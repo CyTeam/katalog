@@ -80,7 +80,7 @@ class Dossier < ActiveRecord::Base
 
   # Grand total of documents
   def self.document_count
-    includes(:numbers).sum(:amount).to_i
+    DossierNumber.sum(:amount).to_i
   end
 
   def self.filter_tags(values)
