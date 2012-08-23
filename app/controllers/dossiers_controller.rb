@@ -185,6 +185,11 @@ class DossiersController < AuthorizedController
 
     if !is_signature_search
       @query = params[:search][:text]
+
+      if params[:search][:text] == nil
+        params[:search][:text] = ""
+      end
+
       @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?, :include => [:location, :containers])
     else
       @query = params[:search][:signature]
