@@ -184,3 +184,9 @@ de-CH:
   employees:
     Lohnvorlage:
       title:  "Lohnvorlagen"
+
+  will_paginate:
+    previous_label: "Vorherige Seite"
+    next_label:     "Nächste Seite"
+    page_gap:       "..."
+
