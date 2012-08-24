@@ -12,3 +12,4 @@ The following style may be *conditionally* included for improved support on olde
 form.formtastic fieldset ol li fieldset legend { margin-left: -6px;}
 
 --------------------------------------------------------------------------------------------------*/
+fieldset.actions ol button {margin-left: 25%;}
