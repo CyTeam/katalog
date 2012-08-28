@@ -22,7 +22,7 @@ de:
       search_exceptions:  "Ausnahmen"
       search_word_forms:  "Wortformen"
       reports:            "Reports"
-      search_replace:     "Suchen&Ersetzen"
+      search_replace:     "Suchen & Ersetzen"
       edit:               "Editieren"
       visitor_logs:       "Logbuch"
       visitor_logs_list:  "Einträge"
@@ -91,7 +91,7 @@ de:
     show_all:      "Alles anzeigen"
     created:       "%{signature} %{title} wurde gespeichert."
     reservation_send: "Ihre Vorbestellung wurde erfolgreich übermittelt."
-    search_replace: 
+    search_replace:
       title: "Suchen und Ersetzen"
       done: "Suchen und ersetzen wurde erfolgreich durchgeführt.<br/>%{amount} Dossier/s wurde/n geändert."
       failed: "Suchen und ersetzen ist leider fehlgeschlagen."
@@ -302,7 +302,7 @@ de:
     previous: "vorherige"
     next:     "nächste"
     preview: "Vorschau"
-    
+
     action:
       pdf:    "PDF anzeigen"
       print: "Für Druck aufbereiten (PDF)"
