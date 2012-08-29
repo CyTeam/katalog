@@ -13,6 +13,15 @@ namespace :katalog do
     end
   end
 
+  namespace :ts do
+    desc "Export word_form and exception lists"
+    task :export_lists => :environment do
+      sh "mkdir #{Rails.root.join('config', 'sphinx')}"
+      SphinxAdminWordForm.send(:export_file)
+      SphinxAdminException.send(:export_file)
+    end
+  end
+
   namespace :raspell do
     desc "Update the aspell wordlist"
     task :update => :environment do
