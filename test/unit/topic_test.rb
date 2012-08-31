@@ -2,19 +2,19 @@ require 'test_helper'
 
 class TopicTest < ActiveSupport::TestCase
   test "topic_type knows group" do
-    assert :group, dossiers(:group_7).topic_type
+    assert_equal :group, dossiers(:group_7).topic_type
   end
 
   test "topic_type knows main" do
-    assert :main, dossiers(:first_topic).topic_type
+    assert_equal :main, dossiers(:first_topic).topic_type
   end
 
   test "topic_type knows geo" do
-    assert :geo, dossiers(:topic_local).topic_type
+    assert_equal :geo, dossiers(:topic_local).topic_type
   end
 
   test "topic_type knows dossier" do
-    assert :dossier, dossiers(:important_zug_topic).topic_type
+    assert_equal :dossier, dossiers(:important_zug_topic).topic_type
   end
 
   test "children are collected recursivly" do
@@ -35,15 +35,15 @@ class TopicTest < ActiveSupport::TestCase
   end
 
   test "children no record on new topic" do
-    assert 0, Topic.new.children.size
+    assert_equal 0, Topic.new.children.size
   end
   
   test "direct_children no record on new topic" do
-    assert 0, Topic.new.direct_children.size
+    assert_equal 0, Topic.new.direct_children.size
   end
   
   test "document_count works" do
-    assert 0, dossiers(:group_empty).document_count
+    assert_equal 0, dossiers(:group_empty).document_count
   end
 
   test "document_count returns integer" do
