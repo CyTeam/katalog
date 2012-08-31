@@ -90,42 +90,42 @@ class DossiersControllerTest < ActionController::TestCase
   end
 
   test "should get named report" do
-    Factory(:report)
+    FactoryGirl.build(:report)
     get :report, :report_name => 'simple'
     assert_response :success
   end
   
   context "show" do
     should "include description if present" do
-      @dossier = Factory.create(:dossier, :description => 'Simple text')
+      @dossier = FactoryGirl.create(:dossier, :description => 'Simple text')
       get :show, :id => @dossier.to_param
 
       assert_select '#description', :text => 'Simple text'
     end
 
     should "hide description title if description is blank" do
-      @dossier = Factory.create(:dossier, :description => "")
+      @dossier = FactoryGirl.create(:dossier, :description => "")
       get :show, :id => @dossier.to_param
 
       assert_select '#description', false
     end
 
     should "hide description title description is nil" do
-      @dossier = Factory.create(:dossier, :description => nil)
+      @dossier = FactoryGirl.create(:dossier, :description => nil)
       get :show, :id => @dossier.to_param
 
       assert_select '#description', false
     end
 
     should "not quote description" do
-      @dossier = Factory.create(:dossier, :description => '<p>Single paragraph</p>')
+      @dossier = FactoryGirl.create(:dossier, :description => '<p>Single paragraph</p>')
       get :show, :id => @dossier.to_param
 
       assert_select '#description p', :text => 'Single paragraph'
     end
 
     should "create links for http and email " do
-      @dossier = Factory.create(:dossier, :description => '<p>Visit http://www.cyt.ch or mail info@cyt.ch</p>')
+      @dossier = FactoryGirl.create(:dossier, :description => '<p>Visit http://www.cyt.ch or mail info@cyt.ch</p>')
       get :show, :id => @dossier.to_param
 
       assert_select "#description a[href='http://www.cyt.ch'][target='_blank']", :text => 'http://www.cyt.ch'
@@ -135,20 +135,20 @@ class DossiersControllerTest < ActionController::TestCase
 
   context "create" do
     should "redirect to new dossier" do
-      post :create, :dossier => Factory.attributes_for(:dossier)
+      post :create, :dossier => FactoryGirl.attributes_for(:dossier)
 
       assert_redirected_to new_dossier_path
     end
 
     should "show form again on validation errors" do
-      post :create, :dossier => Factory.attributes_for(:dossier, :signature => '')
+      post :create, :dossier => FactoryGirl.attributes_for(:dossier, :signature => '')
 
       assert assigns(:dossier)
       assert_select "#dossier_signature_input.error"
     end
 
     should "create associated containers" do
-      attributes = Factory.attributes_for(:dossier,
+      attributes = FactoryGirl.attributes_for(:dossier,
         :containers_attributes => { 1 => {:title => 'neu 2000', :container_type => ContainerType.first, :location => Location.first} }
       )
 

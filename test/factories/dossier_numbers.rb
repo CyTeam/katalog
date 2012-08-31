@@ -8,7 +8,7 @@ FactoryGirl.define do
     from        Date.new(1900, 1, 1)
 
     factory :dossier_number_with_amount do
-      amount      {Factory.next :dossier_amount}
+      amount {generate(:dossier_amount)}
     end
   end
 end

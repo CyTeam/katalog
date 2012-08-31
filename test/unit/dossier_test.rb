@@ -220,7 +220,7 @@ class DossierTest < ActiveSupport::TestCase
   end
   
   test "#prepare_numbers add number for current year if not there yet" do
-    dossier = Factory(:dossier)
+    dossier = FactoryGirl.build(:dossier)
     dossier.prepare_numbers
 
     assert_equal Date.today.year.to_s, dossier.numbers.last.period
@@ -253,17 +253,17 @@ class DossierTest < ActiveSupport::TestCase
   end
 
   test 'returns year and the count of documents' do
-    dossier = Factory(:dossier)
+    dossier = FactoryGirl.build(:dossier)
   end
   
   test 'description column gets empty string on save' do
-    dossier = Factory.create(:dossier)
+    dossier = FactoryGirl.create(:dossier)
     
     assert_equal dossier.description, ''
   end
 
   test 'first_document_year handles blanks' do
-    dossier = Factory.create(:dossier)
+    dossier = FactoryGirl.create(:dossier)
     
     dossier.first_document_year = nil
     assert_equal nil, dossier.first_document_year
@@ -273,14 +273,14 @@ class DossierTest < ActiveSupport::TestCase
   end
 
   test 'first_document_year handles four digit years' do
-    dossier = Factory.create(:dossier)
+    dossier = FactoryGirl.create(:dossier)
     
     dossier.first_document_year = '2011'
     assert_equal 2011, dossier.first_document_year
   end
 
   test 'first_document_year handles two digit years' do
-    dossier = Factory.create(:dossier)
+    dossier = FactoryGirl.create(:dossier)
     
     dossier.first_document_year = '11'
     assert !(dossier.valid?)
@@ -293,7 +293,7 @@ class DossierTest < ActiveSupport::TestCase
 
   context "containers association" do
     should "should accept attributes" do
-      attributes = Factory.attributes_for(:dossier,
+      attributes = FactoryGirl.attributes_for(:dossier,
         :containers_attributes => { 1 => {:container_type => ContainerType.first, :location => Location.first} }
       )
       assert_difference('Container.count', 1) do

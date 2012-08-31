@@ -2,7 +2,7 @@ require 'test_helper'
 
 class DossierNumberTest < ActiveSupport::TestCase
   def setup
-    @new = Factory :dossier_number
+    @new = FactoryGirl.create :dossier_number
   end
   
   test "period for numbers with no from date" do
@@ -124,13 +124,13 @@ class DossierNumberTest < ActiveSupport::TestCase
   end
   
   test ".by_period doesn't return every dossier_number" do
-    5.times {Factory :dossier_number_with_amount}
+    5.times {FactoryGirl.create :dossier_number_with_amount}
     assert_equal [], DossierNumber.by_period('2009')
   end
   
   test ".by_period does return matching dossier_numbers" do
-    4.times {Factory :dossier_number_with_amount, :period => '2010'}
-    5.times {Factory :dossier_number_with_amount, :from => Date.new(2009, 1, 1), :to => Date.new(2009, 12, 31)}
+    4.times {FactoryGirl.create :dossier_number_with_amount, :period => '2010'}
+    5.times {FactoryGirl.create :dossier_number_with_amount, :from => Date.new(2009, 1, 1), :to => Date.new(2009, 12, 31)}
     assert_equal 5, DossierNumber.by_period('2009').count
   end
 
@@ -163,7 +163,7 @@ class DossierNumberTest < ActiveSupport::TestCase
 
   # Caching
   test "adding a number updates dossier timestamp" do
-    dossier = Factory(:dossier)
+    dossier = FactoryGirl.create(:dossier)
     updated_at = dossier.updated_at
     
     sleep(1)
@@ -174,7 +174,7 @@ class DossierNumberTest < ActiveSupport::TestCase
   end
 
   test "removing a number updates dossier timestamp" do
-    dossier = Factory(:dossier)
+    dossier = FactoryGirl.create(:dossier)
     dossier.numbers.create(:from => '1990-01-01', :amount => 10)
     dossier.numbers.create(:from => '1991-01-01', :amount => 12)
     updated_at = dossier.updated_at
@@ -187,7 +187,7 @@ class DossierNumberTest < ActiveSupport::TestCase
   end
 
   test "updating a number updates dossier timestamp" do
-    dossier = Factory(:dossier)
+    dossier = FactoryGirl.create(:dossier)
     dossier.numbers.create(:from => '1990-01-01', :amount => 10)
     dossier.numbers.create(:from => '1991-01-01', :amount => 12)
     updated_at = dossier.updated_at
