@@ -149,7 +149,7 @@ class DossiersControllerTest < ActionController::TestCase
 
     should "create associated containers" do
       attributes = FactoryGirl.attributes_for(:dossier,
-        :containers_attributes => { 1 => {:title => 'neu 2000', :container_type => ContainerType.first, :location => Location.first} }
+        :containers_attributes => { 1 => {:container_type => ContainerType.first, :location => Location.first} }
       )
 
       assert_difference('Dossier.count', 1) do
