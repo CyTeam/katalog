@@ -7,7 +7,7 @@
         %label{:for => "update_signature"}
           Auf alle anwenden
         = check_box_tag 'update_signature', 'Auf alle anwenden'
-    = f.buttons do
-      = f.commit_button
+    = f.actions do
+      = f.action(:submit)
 - @dossiers = @topic.direct_children
 = render 'dossiers/list'

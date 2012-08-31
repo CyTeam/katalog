@@ -29,5 +29,5 @@
       = f.semantic_fields_for :containers do |container|
         = render 'containers/form', :container => container
 
-    = f.buttons do
-      = f.commit_button
+    = f.actions do
+      = f.action(:submit)

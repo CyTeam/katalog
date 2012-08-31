@@ -10,8 +10,8 @@
     = f.input :collect_year_count, :hint => true
     = f.input :public
     
-  = f.buttons do
-    = f.commit_button
+  = f.actions do
+    = f.action(:submit)
 
 .contextual
   .icon.icon-update= link_to_function t_action('refresh'), 'previewReport()'
