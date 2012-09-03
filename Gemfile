@@ -92,9 +92,6 @@ gem 'cancan'
 # Tagging
 gem 'acts-as-taggable-on'
 
-# CRUD helpers
-gem 'inherited_resources_views'
-
 # Search
 gem 'thinking-sphinx'
 

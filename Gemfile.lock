@@ -131,8 +131,6 @@ GEM
     inherited_resources (1.3.1)
       has_scope (~> 0.5.0)
       responders (~> 0.6)
-    inherited_resources_views (0.4.1)
-      inherited_resources (>= 1.0)
     journey (1.0.4)
     jquery-rails (2.1.1)
       railties (>= 3.1.0, < 5.0)
@@ -294,7 +292,6 @@ DEPENDENCIES
   hpricot
   i18n_rails_helpers
   inherited_resources
-  inherited_resources_views
   jquery-rails
   mysql2
   paper_trail
