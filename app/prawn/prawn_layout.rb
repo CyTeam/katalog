@@ -66,7 +66,7 @@ class PrawnLayout < Prawn::Document
   # Draws the line above the page number on each page.
   def page_footer(user=nil)
     repeat :all do
-      image Rails.root.join("public/images/doku-zug.ch/logo_white.png"), :at => [bounds.right - 70, bounds.top + 10], :width => 70
+      image Rails.root.join("app/assets/images/doku-zug.ch/logo_white.png"), :at => [bounds.right - 70, bounds.top + 10], :width => 70
 
       stroke_line [bounds.right - 50, 0], [bounds.right, 0]
 
