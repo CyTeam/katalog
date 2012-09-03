@@ -15,7 +15,6 @@
         = stylesheet_link_tag 'ie6', :media => 'screen, projection'
     = csrf_meta_tag
   %body#top
-    = query_review_output if Rails.env.development?
     #wrapper
       - cache 'header_' + user_signed_in?.to_s do
         - unless user_signed_in?
