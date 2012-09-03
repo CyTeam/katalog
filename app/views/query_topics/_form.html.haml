@@ -1,12 +1,11 @@
-- cache @query_topic do
-  = semantic_form_for(@query_topic) do |f|
-    = f.inputs do
-      = f.input :signature
-      = f.input :title
-      = f.input :query
-      = f.input :internal
-    = f.actions do
-      = f.action(:submit)
+= semantic_form_for(@query_topic) do |f|
+  = f.inputs do
+    = f.input :signature
+    = f.input :title
+    = f.input :query
+    = f.input :internal
+  = f.actions do
+    = f.action(:submit)
 
 - if @dossiers
   = render 'dossiers/list'

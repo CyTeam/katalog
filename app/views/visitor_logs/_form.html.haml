@@ -1,11 +1,10 @@
-- cache resource do
-  = javascript_include_tag :ckeditor
-  = semantic_form_for resource do |f|
-    = f.semantic_errors
+= javascript_include_tag :ckeditor
+= semantic_form_for resource do |f|
+  = f.semantic_errors
 
-    = f.inputs do
-      = f.input :title
-      = f.input :content, :as => :ckeditor, :input_html => {:class => 'autogrow', :rows => 5, :width => '74%'}
+  = f.inputs do
+    = f.input :title
+    = f.input :content, :as => :ckeditor, :input_html => {:class => 'autogrow', :rows => 5, :width => '74%'}
 
-    = f.actions do
-      = f.action(:submit)
+  = f.actions do
+    = f.action(:submit)
