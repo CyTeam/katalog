@@ -14,5 +14,5 @@
         = availability_notes(dossier)
       %td.action-links
         - if user_signed_in?
-          = link_to image_tag('icons/edit.png', :title => t('tooltips.dossiers.edit')), edit_dossier_path(dossier)
-          = link_to image_tag('icons/delete.png', :title => t('tooltips.dossiers.edit')), dossier, :confirm => t_confirm_delete(dossier), :remote => true, :method => :delete
+          = link_to image_tag('icons/edit.png', :title => t_action(:edit)), edit_dossier_path(dossier)
+          = link_to image_tag('icons/delete.png', :title => t_action(:delete)), dossier, :confirm => t_confirm_delete(dossier), :remote => true, :method => :delete
