@@ -119,7 +119,7 @@ gem 'hpricot'
 # Change log for model data
 gem 'paper_trail'
 
-gem 'revertible_paper_trail', :path => "../revertible_paper_trail"
+gem 'revertible_paper_trail'
 
 # Generate excel files
 gem 'spreadsheet'
