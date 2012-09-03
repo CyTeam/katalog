@@ -6,5 +6,5 @@
         - @tags = @tags.by_signature(@query) if params[:search] && params[:search][:signature]
         - @tags = @tags.by_signature(@dossiers.first.signature) if params[:search] && params[:search][:text] && @dossiers.present?
         - @tags = @tags.where('dossiers.intern' => false) unless can?(:index, Dossier, :internal => true)
-      -# tag_cloud(@tags, %w(nube1 nube2 nube3 nube4 nube5 nube6)) do |tag, css_class|
-        =# link_to_keyword tag.name, :class => css_class
+      - tag_cloud(@tags, %w(nube1 nube2 nube3 nube4 nube5 nube6)) do |tag, css_class|
+        = link_to_keyword tag.name, :class => css_class
