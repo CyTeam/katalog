@@ -54,9 +54,6 @@ group :development do
 
   # Deployment
   gem 'capones_recipes'
-
-  # MySQL Query Analyzer
-  gem 'query_reviewer'
 end
 gem 'jquery-rails'
 
