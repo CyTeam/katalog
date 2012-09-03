@@ -25,10 +25,10 @@ class Ability
  
     alias_action :index, :to => :list
     
+    common
+
     # Load the abilities for all roles.
     @user.roles.each {|role| send(role.name) }
-
-    common
   end
   
   # The abilities of the admin role.
