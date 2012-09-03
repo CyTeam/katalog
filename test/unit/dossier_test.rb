@@ -231,7 +231,8 @@ class DossierTest < ActiveSupport::TestCase
   end
 
   test 'returns period of years with interval of 1 year' do
-    assert_equal Dossier.years.count, 23
+    # TODO: will change each year, make more robust
+    assert_equal Dossier.years.count, 24
   end
 
   test 'returns period of years with interval of 5 years' do

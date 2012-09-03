@@ -41,7 +41,7 @@ class DossiersControllerTest < ActionController::TestCase
   end
 
   test "should update dossier" do
-    put :update, :id => @dossier.to_param, :dossier => @dossier.attributes
+    put :update, :id => @dossier.to_param, :dossier => []
     assert_redirected_to dossier_path(assigns(:dossier))
   end
 

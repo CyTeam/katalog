@@ -13,8 +13,8 @@ class TopicTest < ActiveSupport::TestCase
     assert_equal :geo, dossiers(:topic_local).topic_type
   end
 
-  test "topic_type knows dossier" do
-    assert_equal :dossier, dossiers(:important_zug_topic).topic_type
+  test "topic_type knows detail" do
+    assert_equal :detail, dossiers(:important_zug_topic).topic_type
   end
 
   test "children are collected recursivly" do
