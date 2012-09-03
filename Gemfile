@@ -116,7 +116,7 @@ gem 'revertible_paper_trail'
 gem 'spreadsheet'
 
 # Spellchecking
-gem 'raspell', :git => 'git://github.com/huerlisi/raspell.git'
+gem 'raspell', :git => 'http://github.com/huerlisi/raspell.git'
 
 # MetaWhere
 gem 'meta_where'

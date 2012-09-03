@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/huerlisi/raspell.git
+  remote: http://github.com/huerlisi/raspell.git
   revision: 6dcf387d6bda27efc5e4a5738dc08dcf888e0693
   specs:
     raspell (1.3)
