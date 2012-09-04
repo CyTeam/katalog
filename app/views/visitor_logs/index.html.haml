@@ -3,7 +3,5 @@
 
   %h1= t_title
 
-  = javascript_include_tag :ckeditor
-
 #visitor_log_list
   = render @visitor_logs.order("created_at DESC")

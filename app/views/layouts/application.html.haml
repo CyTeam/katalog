@@ -13,6 +13,8 @@
       = stylesheet_link_tag 'print', :media => 'print'
       /[if lt IE 7]
         = stylesheet_link_tag 'ie6', :media => 'screen, projection'
+      = javascript_include_tag "application"
+
     = csrf_meta_tag
   %body#top
     #wrapper

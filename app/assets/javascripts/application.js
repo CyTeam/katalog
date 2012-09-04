@@ -7,6 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require ckeditor/init
 //= require_tree .
 
 function addContainerSuggestionBehaviour() {
