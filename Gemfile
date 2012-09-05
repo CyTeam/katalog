@@ -5,6 +5,7 @@ source 'http://rubygems.org'
 # Rails
 # =====
 gem 'rails', '~> 3.2.8'
+gem 'unicorn'
 
 # Database
 gem 'mysql2'

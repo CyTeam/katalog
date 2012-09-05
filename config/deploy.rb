@@ -9,6 +9,7 @@ require 'capones_recipes/tasks/settings_logic'
 require 'capones_recipes/tasks/thinking_sphinx'
 require 'capones_recipes/tasks/email'
 require 'capones_recipes/tasks/sync'
+require 'capistrano-unicorn'
 
 # Staging
 set :default_stage, "staging"
