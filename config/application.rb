@@ -55,7 +55,7 @@ module Katalog
     config.assets.version = '1.0'
 
     # List of assets to precompile
-    config.assets.precompile += %w( katalog_internal.css print.css)
+    config.assets.precompile += %w( ie6.css katalog_internal.css print.css)
     config.assets.precompile += Ckeditor.assets
 
     # Allow target in links, used in description
