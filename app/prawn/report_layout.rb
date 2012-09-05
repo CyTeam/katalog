@@ -4,7 +4,7 @@ require 'prawn/measurement_extensions'
 
 class ReportLayout < PrawnLayout
   include DossiersHelper
-  include I18nRailsHelpers
+  include I18nHelpers
 
   # Creates the table headers for a report.
   def headers(report)
