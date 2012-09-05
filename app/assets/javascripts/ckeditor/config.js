@@ -38,7 +38,7 @@ CKEDITOR.editorConfig = function( config )
   config.linkShowTargetTab = false;
   
   // Preview customization
-  config.extraPlugins = "embed,attachment,serverpreview";
+  config.extraPlugins = "embed,attachment";
   link = window.location.pathname;
   link_parts = link.split('/');
   link_parts.pop();
