@@ -11,6 +11,8 @@ require 'capones_recipes/tasks/email'
 require 'capones_recipes/tasks/sync'
 require 'capistrano-unicorn'
 
+load 'deploy/assets'
+
 # Staging
 set :default_stage, "staging"
 
