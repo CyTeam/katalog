@@ -1,18 +1,17 @@
-- cache [:list, dossier.cache_key, user_cache_key, session[:hide_keywords]] do
-  %tr[dossier]{:class => cycle('odd', 'even'), :title => dossier.tooltip}
-    - cache dossier do
-      %td= dossier.signature
-      %td
-        %span.title= link_to dossier.title, dossier, {'data-href-container' => 'tr'}
-        %br/
-        %span.keywords{:style => (session[:hide_keywords] == true ? 'display:none;' : '')}
-          - dossier.keywords.each do |keyword|
-            %span~ keyword.to_s
+%tr[dossier]{:class => cycle('odd', 'even'), :title => dossier.tooltip}
+  - cache dossier do
+    %td= dossier.signature
+    %td
+      %span.title= link_to dossier.title, dossier, {'data-href-container' => 'tr'}
+      %br/
+      %span.keywords{:style => (session[:hide_keywords] == true ? 'display:none;' : '')}
+        - dossier.keywords.each do |keyword|
+          %span~ keyword.to_s
 
-      %td.document_count
-        = number_with_delimiter(dossier.document_count)
-        = availability_notes(dossier)
-      %td.action-links
-        - if user_signed_in?
-          = link_to image_tag('icons/edit.png', :title => t_action(:edit)), edit_dossier_path(dossier)
-          = link_to image_tag('icons/delete.png', :title => t_action(:delete)), dossier, :confirm => t_confirm_delete(dossier), :remote => true, :method => :delete
+    %td.document_count
+      = number_with_delimiter(dossier.document_count)
+      = availability_notes(dossier)
+  %td.action-links
+    - if user_signed_in?
+      = link_to image_tag('icons/edit.png', :title => t_action(:edit)), edit_dossier_path(dossier)
+      = link_to image_tag('icons/delete.png', :title => t_action(:delete)), dossier, :confirm => t_confirm_delete(dossier), :remote => true, :method => :delete
