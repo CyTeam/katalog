@@ -54,6 +54,10 @@ module Katalog
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    # List of assets to precompile
+    config.assets.precompile += %w( katalog_internal.css print.css)
+    config.assets.precompile += Ckeditor.assets
+
     # Allow target in links, used in description
     config.action_view.sanitized_allowed_attributes = ['target']
   end
