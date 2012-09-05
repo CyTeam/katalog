@@ -1,5 +1,5 @@
 # Location
-app_path = File.expand_path("../../../../current", __FILE__)
+app_path = File.expand_path("../../../current", __FILE__)
 
 worker_processes 2
 working_directory app_path
