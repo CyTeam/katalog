@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/sosedoff/capistrano-unicorn.git
+  revision: bafc12cd8235307d30b5c85259914d17c5ece2d3
+  specs:
+    capistrano-unicorn (0.1.6)
+      capistrano
+
+GIT
   remote: http://github.com/huerlisi/raspell.git
   revision: 6dcf387d6bda27efc5e4a5738dc08dcf888e0693
   specs:
@@ -281,6 +288,7 @@ DEPENDENCIES
   autotest
   autotest-rails
   cancan
+  capistrano-unicorn!
   capones_recipes
   capybara
   ckeditor
