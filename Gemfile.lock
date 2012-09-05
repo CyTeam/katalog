@@ -84,7 +84,7 @@ GEM
       ffi (~> 1.0, >= 1.0.6)
     choice (0.1.6)
     chunky_png (1.2.6)
-    ckeditor (3.7.1)
+    ckeditor (3.7.2)
       mime-types
       orm_adapter
     coffee-rails (3.2.2)
