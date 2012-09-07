@@ -1,15 +1,15 @@
 - @search_path ||= search_dossiers_path
-- cache [@search_path, @query == nil ? '' : @query, params[:query], current_user.try(:id)] do
-  = form_tag(@search_path, :method => :get, :id => 'search_form') do
-    %label{:for => "search_text"}
-      = t('katalog.the_search') + ':'
-    = text_field :search, :text, :style => 'width: 30em', :title => t('tooltips.dossiers.search_input'), :autocomplete => 'off'
-    = image_submit_tag('doku-zug.ch/search2.png', :alt => t('katalog.search'), :title => t('tooltips.dossiers.search'))
-  - content_for :javascript do
-    = javascript_tag "$('#search_text').val('#{escape_javascript(@query || params[:query])}');"
-    = javascript_tag "$('#search_text').select().focus();"
+= form_tag(@search_path, :method => :get, :id => 'search_form') do
+  %label{:for => "search_text"}
+    = t('katalog.the_search') + ':'
+  = text_field :search, :text, :style => 'width: 30em', :title => t('tooltips.dossiers.search_input'), :autocomplete => 'off'
+  = image_submit_tag('doku-zug.ch/search2.png', :alt => t('katalog.search'), :title => t('tooltips.dossiers.search'))
 
-- if @spelling_suggestion and not @spelling_suggestion.empty?
+- content_for :javascript do
+  = javascript_tag "$('#search_text').val('#{escape_javascript(@query)}');"
+  = javascript_tag "$('#search_text').select().focus();"
+
+- if @spelling_suggestion.present?
   .spelling_suggestions
     %h3
       = t('messages.spelling_suggestion')
