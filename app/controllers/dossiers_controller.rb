@@ -12,10 +12,6 @@ class DossiersController < AuthorizedController
 
   # Search
   has_scope :by_character
-  has_scope :by_level, :as => :level
-
-  # Tags
-  has_scope :tagged_with, :as => :tag
 
   # CRUD Actions
   # ============
@@ -76,10 +72,7 @@ class DossiersController < AuthorizedController
   end
 
   def index
-    params[:dossier] ||= {}
-    params[:dossier][:level] ||= 2
-
-    @dossiers = apply_scopes(Dossier, params[:dossier]).accessible_by(current_ability, :index)
+    @dossiers = Dossier.by_level(2).accessible_by(current_ability, :index)
     @document_count = Dossier.document_count
 
     index_excel
