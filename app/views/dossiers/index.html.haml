@@ -1,6 +1,7 @@
 = render 'search_form'
 
-= render 'shared/page_actions'
+#page_actions.contextual
+  = contextual_pdf_link(@dossiers.length)
 
 %h1= t('katalog.overview')
 

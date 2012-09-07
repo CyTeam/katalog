@@ -1,20 +1,17 @@
 #page_actions.contextual
-  - if controller_name.eql?('dossiers') and action_name.eql?('index')
-    = contextual_pdf_link(@dossiers.length)
-  - if @query
-    - available_reports = Report.accessible_by(current_ability, :index)
-    - unless available_reports.empty? or @report
-      %span#report_actions
-        = contextual_link('reports', '#')
-        %ul
-          - for report in available_reports
-            %li= link_to(report.title, report_dossiers_path(:report_name => report.name, :search => params[:search]))
+  - available_reports = Report.accessible_by(current_ability, :index)
+  - unless available_reports.empty? or @report
+    %span#report_actions
+      = contextual_link('reports', '#')
+      %ul
+        - for report in available_reports
+          %li= link_to(report.title, report_dossiers_path(:report_name => report.name, :search => params[:search]))
 
-    = contextual_pdf_link(@dossiers.length)
-    - if (user_signed_in? and not @is_a_report)
-      %span#excel_actions
-        = contextual_link('excel', '#')
-        %ul
-          %li= link_to(t_action(:normal_excel), url_for(params.merge(:format => :xls, :per_page => 'all')))
-          %li= link_to(t_action(:container_excel), url_for(params.merge(:format => :xls, :per_page => 'all', :excel_format => 'containers')))
-    = render 'shared/hide_keywords'
+  = contextual_pdf_link(@dossiers.length)
+  - if (user_signed_in? and not @is_a_report)
+    %span#excel_actions
+      = contextual_link('excel', '#')
+      %ul
+        %li= link_to(t_action(:normal_excel), url_for(params.merge(:format => :xls, :per_page => 'all')))
+        %li= link_to(t_action(:container_excel), url_for(params.merge(:format => :xls, :per_page => 'all', :excel_format => 'containers')))
+  = render 'shared/hide_keywords'
