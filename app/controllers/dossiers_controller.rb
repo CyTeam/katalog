@@ -20,12 +20,8 @@ class DossiersController < AuthorizedController
   # Tags
   has_scope :tagged_with, :as => :tag
 
-  def welcome
-    @groups = Dossier.group
-
-    redirect_to :action => 'index' if user_signed_in?
-  end
-
+  # CRUD Actions
+  # ============
   def show
     if user_signed_in?
       @dossier = Dossier.find(params[:id], :include => {:containers => [:location, :container_type]})
@@ -42,22 +38,6 @@ class DossiersController < AuthorizedController
           :type => 'application/vnd.ms-excel')
       }
     end
-  end
-
-  # GET /dossiers
-  def index
-    params[:dossier] ||= {}
-    params[:dossier][:level] ||= 2
-
-    @dossiers = apply_scopes(Dossier, params[:dossier]).accessible_by(current_ability, :index)
-    @document_count = Dossier.document_count
-
-    index_excel
-  end
-
-  # GET /dossiers/search
-  def search
-    dossier_search
   end
 
   def new
@@ -77,6 +57,41 @@ class DossiersController < AuthorizedController
     edit!
   end
 
+  def create
+    create! do |success, failure|
+      success.html do
+        flash[:notice] = self.class.helpers.link_to(t('katalog.created', :signature => @dossier.signature, :title => @dossier.title), dossier_path(@dossier))
+        redirect_to new_resource_url
+      end
+    end
+  end
+
+
+  # Index Actions
+  # =============
+  def welcome
+    @groups = Dossier.group
+
+    redirect_to :action => 'index' if user_signed_in?
+  end
+
+  def index
+    params[:dossier] ||= {}
+    params[:dossier][:level] ||= 2
+
+    @dossiers = apply_scopes(Dossier, params[:dossier]).accessible_by(current_ability, :index)
+    @document_count = Dossier.document_count
+
+    index_excel
+  end
+
+  def search
+    dossier_search
+  end
+
+
+  # Report Actions
+  # ==============
   def report
     report_name = params[:report_name] || 'overview'
     @report = Report.find_by_name(report_name)
@@ -127,15 +142,6 @@ class DossiersController < AuthorizedController
 
     # Drop nil results by stray full text search matches
     @dossiers.compact!
-  end
-
-  def create
-    create! do |success, failure|
-      success.html do
-        flash[:notice] = self.class.helpers.link_to(t('katalog.created', :signature => @dossier.signature, :title => @dossier.title), dossier_path(@dossier))
-        redirect_to new_resource_url
-      end
-    end
   end
 
   def preview
