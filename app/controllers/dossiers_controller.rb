@@ -98,7 +98,7 @@ class DossiersController < AuthorizedController
     end
 
     # Set pagination parameter
-    params[:per_page] = @report[:per_page]
+    params[:per_page] = @report[:per_page] || 'all'
     @report[:title] ||= report_name
     @is_a_report = true
 
@@ -106,15 +106,10 @@ class DossiersController < AuthorizedController
   end
 
   def edit_report
+    setup_per_page
+
     # Stay on this action after search
     @search_path = edit_report_dossiers_path
-
-    # Pagination
-    params[:per_page] ||= 50
-    if params[:per_page] == 'all'
-      # Simple hack to simulate all
-      params[:per_page] = 1000000
-    end
 
     # Collection setup
     @years = DossierNumber.edit_years(params[:dossier_numbers]) if params[:dossier_numbers]
@@ -162,18 +157,22 @@ class DossiersController < AuthorizedController
   end
 
   private
-  def dossier_search
+  def setup_per_page
     params[:per_page] ||= 25
-
-    params[:search] ||= {}
-
-    params[:search][:text] ||= params[:search][:query]
-    params[:search][:text] ||= params[:query]
 
     if params[:per_page] == 'all'
       # Simple hack to simulate all
       params[:per_page] = 1000000
     end
+  end
+
+  def dossier_search
+    setup_per_page
+
+    params[:search] ||= {}
+
+    params[:search][:text] ||= params[:search][:query]
+    params[:search][:text] ||= params[:query]
 
     is_signature_search = params[:search][:signature].present?
     if /^[0-9.]{1,8}$/.match(params[:search][:text].try(:strip))
@@ -250,16 +249,12 @@ class DossiersController < AuthorizedController
   end
 
   def dossier_report
-    params[:per_page] ||= 'all'
+    setup_per_page
 
     params[:search] ||= {}
     params[:search][:text] ||= params[:search][:query]
     params[:search][:text] ||= params[:query]
 
-    if params[:per_page] == 'all'
-      # Simple hack to simulate all
-      params[:per_page] = 1000000
-    end
     if params[:search][:text].present?
       @query = params[:search][:text]
       @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?, :include => [:location, :containers, :keywords])
