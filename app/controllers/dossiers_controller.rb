@@ -139,9 +139,6 @@ class DossiersController < AuthorizedController
       order_attribute = (@query && Topic.alphabetic?(@query)) ? 'signature, title' : 'signature' # Sort with title when query is within an alphabetic topic.
       @dossiers = Dossier.by_signature(@query).dossier.order(order_attribute).paginate :page => params[:page], :per_page => params[:per_page]
     end
-
-    # Drop nil results by stray full text search matches
-    @dossiers.compact!
   end
 
   def preview
@@ -187,9 +184,6 @@ class DossiersController < AuthorizedController
         @paginated_scope = Dossier.accessible_by(current_ability, :index).by_signature(@query)
       end
     end
-
-    # Drop nil results by stray full text search matches
-    @dossiers.compact!
 
     # Handle zero and single matches for direct user requests
     if not request.format.json?
@@ -248,9 +242,6 @@ class DossiersController < AuthorizedController
       params[:search].merge!(:per_page => @report[:per_page], :level => @report[:level])
       @dossiers = apply_scopes(Dossier, params[:search]).by_signature(@query).includes(:containers => :location).order('signature').accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
     end
-
-    # Drop nil results by stray full text search matches
-    @dossiers.compact!
 
     index_excel
   end

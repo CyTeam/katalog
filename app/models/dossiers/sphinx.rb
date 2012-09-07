@@ -47,7 +47,7 @@ module Dossiers
         request_format = options[:format]
         options.delete(:format) if options[:format]
 
-        params = {:match_mode => :extended, :with => attributes, :sort_mode => :expr, :order => "@weight * (1.5 - is_local)"}
+        params = {:retry_stale => true, :match_mode => :extended, :with => attributes, :sort_mode => :expr, :order => "@weight * (1.5 - is_local)"}
         params.merge!(options)
         query = build_query(value, request_format)
         params.merge!({:sort_mode => :extended, :order => 'signature ASC'}) if query.include?('@signature')
