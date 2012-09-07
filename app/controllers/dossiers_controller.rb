@@ -180,8 +180,6 @@ class DossiersController < AuthorizedController
       params[:search].merge!(:per_page => @report[:per_page], :level => @report[:level])
       @dossiers = apply_scopes(Dossier, params[:search]).by_signature(@query).includes(:containers => :location).order('signature').accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
     end
-
-    index_excel
   end
 
   def edit_report
