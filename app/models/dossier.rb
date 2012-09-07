@@ -50,10 +50,6 @@ class Dossier < ActiveRecord::Base
     characters.map{|t| t.letter}
   end
 
-  # Ordering
-  # BUG: Beware of SQL Injection
-  scope :order_by, lambda {|value| order("CONCAT(#{value}, IF(type IS NULL, '.a', '')), title")}
-
   # Associations
   has_many :numbers, :class_name => 'DossierNumber', :dependent => :destroy, :validate => true, :autosave => true
   accepts_nested_attributes_for :numbers

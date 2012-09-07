@@ -22,9 +22,6 @@ class DossiersController < AuthorizedController
   # Tags
   has_scope :tagged_with, :as => :tag
 
-  # Ordering
-  has_scope :order_by, :default => 'signature'
-
   def welcome
     @groups = Dossier.group
 
