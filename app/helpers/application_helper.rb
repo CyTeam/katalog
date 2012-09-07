@@ -88,7 +88,8 @@ EOF
 
       current_topic.signature.starts_with?(topic.signature)
     else
-      params[:search] && params[:search][:signature] && params[:search][:signature].start_with?(topic.signature)
+      # active if searched for
+      params[:search] && params[:search][:text] && params[:search][:text].start_with?(topic.signature)
     end
   end
 

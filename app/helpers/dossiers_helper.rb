@@ -35,9 +35,9 @@ module DossiersHelper
     return query_topic_path(topic) if topic.kind_of?(QueryTopic)
 
     if 'edit_report'.eql?action_name
-      edit_report_dossiers_path(:search => {:signature => topic.signature})
+      edit_report_dossiers_path(:search => {:text => topic.signature})
     else
-      search_dossiers_path(:search => {:signature => topic.signature})
+      search_dossiers_path(:search => {:text => topic.signature})
     end
   end
 
@@ -46,7 +46,7 @@ module DossiersHelper
   end
 
   def search_title
-    if params[:search] and params[:search][:signature]
+    if @signature_search
       return @dossiers.first.to_s
     else
       return t('katalog.search_for', :query => @query)

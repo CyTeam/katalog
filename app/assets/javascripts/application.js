@@ -321,7 +321,7 @@ function getEditReportLink() {
   var inserted_amount = 0;
   var last_year_link = '';
 
-  link += '?search[signature]=' + $.query.get('search[signature]').toString();
+  link += '?search[text]=' + $.query.get('search[text]').toString();
 
   $('select.dossier_numbers_year').each(function(){
     if(inserted_amount < requested_amount) {

@@ -11,8 +11,6 @@ class DossiersController < AuthorizedController
   respond_to :html, :js, :json, :xls, :pdf
 
   # Search
-  has_scope :by_text, :as => :text
-  has_scope :by_signature, :as => :signature
   has_scope :by_title, :as => :title
   has_scope :by_character
   has_scope :by_level, :as => :level
@@ -120,27 +118,26 @@ class DossiersController < AuthorizedController
 
   def edit_report
     setup_per_page
+    setup_query
+
+    # Show index if called with no query
+    if @query.blank?
+      @dossiers = Topic.by_level(2)
+      render 'batch_edit_last_year/index' and return
+    end
 
     # Stay on this action after search
     @search_path = edit_report_dossiers_path
 
     # Collection setup
     @years = DossierNumber.edit_years(params[:dossier_numbers]) if params[:dossier_numbers]
-    @years ||= [Time.now.year - 1] if params[:search]
+    @years ||= [Time.now.year - 1]
 
-    params[:search] ||= {}
-    if params[:search][:text].present?
-      @query = params[:search][:text]
-      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page])
-    elsif params[:search][:signature].present?
-      @query = params[:search][:signature]
-      order_attribute = (@query && Topic.alphabetic?(@query)) ? 'signature, title' : 'signature' # Sort with title when query is within an alphabetic topic.
-      @dossiers = Dossier.by_signature(params[:search][:signature]).dossier.order(order_attribute).paginate :page => params[:page], :per_page => params[:per_page]
+    if !@signature_search
+      @dossiers = Dossier.by_text(@query, :page => params[:page], :per_page => params[:per_page])
     else
-      # Show index
-      @dossiers = Topic.by_level(2)
-      render 'batch_edit_last_year/index'
-      return
+      order_attribute = (@query && Topic.alphabetic?(@query)) ? 'signature, title' : 'signature' # Sort with title when query is within an alphabetic topic.
+      @dossiers = Dossier.by_signature(@query).dossier.order(order_attribute).paginate :page => params[:page], :per_page => params[:per_page]
     end
 
     # Drop nil results by stray full text search matches
@@ -170,28 +167,20 @@ class DossiersController < AuthorizedController
     end
   end
 
+  def setup_query
+    params[:search] ||= {}
+    @query = params[:search][:text].try(:strip) || ''
+    @signature_search = /^[0-9.]{1,8}$/.match(@query)
+  end
+
   def dossier_search
     setup_per_page
+    setup_query
 
-    params[:search] ||= {}
-
-    is_signature_search = params[:search][:signature].present?
-    if /^[0-9.]{1,8}$/.match(params[:search][:text].try(:strip))
-      is_signature_search = true
-      params[:search][:signature] = params[:search][:text].strip
-      # Ensure we don't call the by_text scope
-      params[:search][:text] = nil
-    end
-
-    if !is_signature_search
-      @query = params[:search][:text]
-
-      params[:search][:text] ||= ""
-
-      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?, :include => [:location, :containers])
+    if !@signature_search
+      @dossiers = Dossier.by_text(@query, :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?, :include => [:location, :containers])
     else
-      @query = params[:search][:signature]
-      @dossiers = apply_scopes(Dossier, params[:search]).includes(:containers => :location).order('signature').accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
+      @dossiers = apply_scopes(Dossier, params[:search]).by_signature(@query).includes(:containers => :location).order('signature').accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
 
       # Alphabetic pagination
       if Topic.alphabetic?(@query)
@@ -251,16 +240,13 @@ class DossiersController < AuthorizedController
 
   def dossier_report
     setup_per_page
+    setup_query
 
-    params[:search] ||= {}
-
-    if params[:search][:text].present?
-      @query = params[:search][:text]
-      @dossiers = Dossier.by_text(params[:search][:text], :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?, :include => [:location, :containers, :keywords])
+    if !@signature_search
+      @dossiers = Dossier.by_text(@query, :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?, :include => [:location, :containers, :keywords])
     else
-      @query = params[:search][:signature]
       params[:search].merge!(:per_page => @report[:per_page], :level => @report[:level])
-      @dossiers = apply_scopes(Dossier, params[:search]).includes(:containers => :location).order('signature').accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
+      @dossiers = apply_scopes(Dossier, params[:search]).by_signature(@query).includes(:containers => :location).order('signature').accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
     end
 
     # Drop nil results by stray full text search matches
@@ -272,7 +258,7 @@ class DossiersController < AuthorizedController
   def index_excel
     index! do |format|
       format.xls {
-        if params[:search] and params[:search][:signature]
+        if @signature_search
           filename = @dossiers.first.to_s
         else
           filename = t('katalog.search_for', :query => @query)
