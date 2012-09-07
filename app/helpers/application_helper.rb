@@ -41,12 +41,6 @@ addContainerSuggestionBehaviour();
     end
   end
 
-  def show_topic?(topic, search = nil, dossier = nil)
-    return false if controller_name == 'dossiers' && action_name == 'new'
-
-    (search && search[:signature] && search[:signature].starts_with?(topic.signature)) || (dossier && dossier.signature.starts_with?(topic.signature)) ? true : false
-  end
-
   # CRUD helpers
   def contextual_link(action, url, options = {})
     output = ActiveSupport::SafeBuffer.new
