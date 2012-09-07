@@ -23,6 +23,9 @@ class DossiersController < AuthorizedController
   # CRUD Actions
   # ============
   def show
+    # Set query for highlighting and search form prefill
+    @query = params[:search][:text]
+
     if user_signed_in?
       @dossier = Dossier.find(params[:id], :include => {:containers => [:location, :container_type]})
     else
@@ -172,9 +175,6 @@ class DossiersController < AuthorizedController
 
     params[:search] ||= {}
 
-    params[:search][:text] ||= params[:search][:query]
-    params[:search][:text] ||= params[:query]
-
     is_signature_search = params[:search][:signature].present?
     if /^[0-9.]{1,8}$/.match(params[:search][:text].try(:strip))
       is_signature_search = true
@@ -206,7 +206,7 @@ class DossiersController < AuthorizedController
     if not request.format.json?
       # Directly show single match
       if @dossiers.count == 1
-        redirect_to dossier_path(@dossiers.first, :query => @query)
+        redirect_to dossier_path(@dossiers.first, :search => {:text => @query})
       # Give spellchecking suggestions
       elsif @dossiers.count == 0
         spell_checker = Aspell.new1({"dict-dir" => Rails.root.join('db', 'aspell').to_s, "lang"=>"kt", "encoding"=>"UTF-8"})
@@ -253,8 +253,6 @@ class DossiersController < AuthorizedController
     setup_per_page
 
     params[:search] ||= {}
-    params[:search][:text] ||= params[:search][:query]
-    params[:search][:text] ||= params[:query]
 
     if params[:search][:text].present?
       @query = params[:search][:text]

@@ -55,4 +55,4 @@
         = render 'containers/list'
 
 - content_for :javascript do
-  = highlight_words(params['query'], 'keywords')
+  = highlight_words(@query, 'keywords')
