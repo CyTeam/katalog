@@ -17,7 +17,7 @@ class DossiersController < AuthorizedController
   # ============
   def show
     # Set query for highlighting and search form prefill
-    @query = params[:search][:text]
+    @query = params[:search][:text] if params[:search]
 
     if user_signed_in?
       @dossier = Dossier.find(params[:id], :include => {:containers => [:location, :container_type]})
