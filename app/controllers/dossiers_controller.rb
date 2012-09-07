@@ -11,7 +11,6 @@ class DossiersController < AuthorizedController
   respond_to :html, :js, :json, :xls, :pdf
 
   # Search
-  has_scope :by_title, :as => :title
   has_scope :by_character
   has_scope :by_level, :as => :level
 
