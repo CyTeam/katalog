@@ -66,9 +66,9 @@ class DossiersController < AuthorizedController
   # Index Actions
   # =============
   def welcome
-    @groups = Dossier.group
+    redirect_to dossiers_path if user_signed_in?
 
-    redirect_to :action => 'index' if user_signed_in?
+    @groups = Dossier.group
   end
 
   def index
