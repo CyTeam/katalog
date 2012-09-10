@@ -70,6 +70,24 @@ class Dossier < ActiveRecord::Base
     end
   end
 
+  def level
+    # Guard
+    return unless signature
+
+    return 5 if self.class == Dossier
+
+    case signature.length
+      when 1
+        1
+      when 2
+        2
+      when 4
+        3
+      when 8
+        4
+    end
+  end
+
   # Grand total of documents
   def self.document_count
     DossierNumber.sum(:amount).to_i

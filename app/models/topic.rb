@@ -31,23 +31,16 @@ class Topic < Dossier
   def topic_type
     return if signature.nil?
 
-    case topic_level
+    case level
       when 1
-        case signature.length
-          when 1
-            :group
-          when 2
-            :main
-        end
+        :group
       when 2
-        :geo
+        :main
       when 3
+        :geo
+      when 4
         :detail
     end
-  end
-
-  def topic_level
-    signature.split('.').length
   end
   
   # Associations
