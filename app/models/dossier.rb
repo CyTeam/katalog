@@ -4,7 +4,7 @@
 class Dossier < ActiveRecord::Base
 
   # PaperTrail: change log
-  has_paper_trail :ignore => [:created_at, :updated_at, :delta],
+  has_paper_trail :ignore => [:created_at, :updated_at, :search_key, :delta],
                   :meta   => {:container_ids => Proc.new {|dossier| dossier.container_ids.join(',') },
                               :number_ids    => Proc.new {|dossier| dossier.number_ids.join(',') },
                               :keywords      => Proc.new {|dossier| dossier.temp_keyword_text }}
