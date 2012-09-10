@@ -57,7 +57,6 @@ class Dossier < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :keywords
 
-  cattr_reader :level_to_prefix_length
   def self.level_to_prefix_length(level)
     case level.to_s
       when "1"
