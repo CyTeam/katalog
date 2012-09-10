@@ -44,20 +44,17 @@ module Dossiers
         attributes = {}
         attributes[:internal] = false if (options.delete(:internal) == false)
 
-        request_format = options[:format]
-        options.delete(:format) if options[:format]
-
         params = {:retry_stale => true, :match_mode => :extended, :with => attributes, :sort_mode => :expr, :order => "@weight * (1.5 - is_local)"}
         params.merge!(options)
-        query = build_query(value, request_format)
+        query = build_query(value)
         params.merge!({:sort_mode => :extended, :order => 'signature ASC'}) if query.include?('@signature')
 
         search(query, params)
       end
 
-      def split_search_words(query, format = 'html')
+      def split_search_words(query)
         sentences = []
-        signature_range = signature_range(query) if format.eql?('html')
+        signature_range = signature_range(query)
         # Need a clone or slice! will do some harm
         value = query.clone
         while sentence = value.slice!(/\".[^\"]*\"/)
@@ -121,8 +118,8 @@ module Dossiers
       end
 
       # Build sphinx query from freetext
-      def build_query(value, format = 'html')
-        signatures, words, sentences, signature_range = split_search_words(value, format)
+      def build_query(value)
+        signatures, words, sentences, signature_range = split_search_words(value)
 
         if signature_range.present?
           quoted_signatures = signature_range.map{|signature| '@signature (^' + signature + '$)'}
