@@ -40,10 +40,10 @@ class Dossier < ActiveRecord::Base
   # Scopes
   scope :by_level, lambda {|level| where("char_length(dossiers.signature) <= ?", self.level_to_prefix_length(level))}
   scope :by_signature, lambda {|value| where("dossiers.signature LIKE CONCAT(?, '%')", value)}
-  scope :by_character, lambda {|value| where("dossiers.title LIKE CONCAT(?, '%')", value)}
+  scope :by_character, lambda {|value| where("dossiers.sort_title LIKE CONCAT(?, '%')", value)}
 
   # Pagination scope
-  scope :characters, select("DISTINCT substring(upper(title), 1, 1) AS letter").having("letter BETWEEN 'A' AND 'Z'")
+  scope :characters, select("DISTINCT substring(upper(sort_title), 1, 1) AS letter").having("letter BETWEEN 'A' AND 'Z'")
   def self.character_list
     characters.map{|t| t.letter}
   end
