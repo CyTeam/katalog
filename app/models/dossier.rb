@@ -90,8 +90,12 @@ class Dossier < ActiveRecord::Base
   end
 
   # Sorting
+  def calculate_sort_title
+    title.gsub(/^[^[:alpha:]]*/, '')
+  end
+
   def calculate_sort_key
-    "#{signature.ljust(8)}/#{level} #{title}"
+    "#{signature.ljust(8)}/#{level} #{calculate_sort_title}"
   end
   before_save do
     self.sort_key = calculate_sort_key
