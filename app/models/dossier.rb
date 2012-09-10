@@ -394,7 +394,7 @@ class Dossier < ActiveRecord::Base
 
   # Returns all parent dossiers.
   def parents
-    Dossier.where("NOT(type = 'Dossier') AND ? LIKE CONCAT(signature, '%')", signature).order(:signature)
+    Dossier.where("NOT(type = 'Dossier') AND ? LIKE CONCAT(signature, '%')", signature)
   end
 
   # Cache invalidating
