@@ -315,9 +315,6 @@ class Dossier < ActiveRecord::Base
   def signature=(value)
     value.strip!
     write_attribute(:signature, value)
-
-    group = value[0,1]
-    topic, geo, dossier = value.split('.')
   end
 
   # Association attributes
