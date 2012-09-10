@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120910123554) do
+ActiveRecord::Schema.define(:version => 20120910140425) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20120910123554) do
     t.boolean  "internal",          :default => false
     t.string   "query"
     t.string   "sort_key"
+    t.string   "sort_title"
   end
 
   add_index "dossiers", ["id", "signature"], :name => "index_dossiers_on_id_and_signature", :unique => true
@@ -80,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20120910123554) do
   add_index "dossiers", ["internal"], :name => "index_dossiers_on_internal"
   add_index "dossiers", ["signature"], :name => "index_dossiers_on_signature", :length => {"signature"=>20}
   add_index "dossiers", ["sort_key"], :name => "index_dossiers_on_sort_key"
+  add_index "dossiers", ["sort_title"], :name => "index_dossiers_on_sort_title"
   add_index "dossiers", ["type"], :name => "index_dossiers_on_type"
 
   create_table "locations", :force => true do |t|

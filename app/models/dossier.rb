@@ -98,6 +98,7 @@ class Dossier < ActiveRecord::Base
     "#{signature.ljust(8)}/#{level} #{calculate_sort_title}"
   end
   before_save do
+    self.sort_title = calculate_sort_title
     self.sort_key = calculate_sort_key
   end
 
