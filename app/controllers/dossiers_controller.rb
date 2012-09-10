@@ -167,7 +167,7 @@ class DossiersController < AuthorizedController
       @dossiers = Dossier.by_text(@query, :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?, :include => [:location, :containers, :keywords])
     else
       params[:search].merge!(:per_page => @report[:per_page], :level => @report[:level])
-      @dossiers = apply_scopes(Dossier, params[:search]).by_signature(@query).includes(:containers => :location).order('signature').accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
+      @dossiers = apply_scopes(Dossier, params[:search]).by_signature(@query).includes(:containers => :location).accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
     end
   end
 
@@ -191,8 +191,7 @@ class DossiersController < AuthorizedController
     if !@signature_search
       @dossiers = Dossier.by_text(@query, :page => params[:page], :per_page => params[:per_page])
     else
-      order_attribute = (@query && Topic.alphabetic?(@query)) ? 'signature, title' : 'signature' # Sort with title when query is within an alphabetic topic.
-      @dossiers = Dossier.by_signature(@query).dossier.order(order_attribute).paginate :page => params[:page], :per_page => params[:per_page]
+      @dossiers = Dossier.by_signature(@query).dossier.paginate :page => params[:page], :per_page => params[:per_page]
     end
   end
 
