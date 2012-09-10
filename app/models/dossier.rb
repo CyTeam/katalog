@@ -393,13 +393,24 @@ class Dossier < ActiveRecord::Base
   end
 
   # Returns all parent dossiers.
-  def parents
+  def self.parent_dossiers(signature)
     Dossier.where("NOT(type = 'Dossier') AND ? LIKE CONCAT(signature, '%')", signature)
+  end
+
+  def parents
+    self.class.parent_dossiers(signature)
   end
 
   # Cache invalidating
   after_save :expire_parents
   def expire_parents
+    # Expire old parents if signature has changed
+    if changes[:signature]
+      old_signature = changes[:signature][0]
+      self.class.parent_dossiers(old_signature).map{|parent| parent.touch}
+    end
+
+    # New parents
     parents.map{|parent| parent.touch}
   end
 
