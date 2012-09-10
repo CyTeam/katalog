@@ -69,6 +69,14 @@ class Topic < Dossier
     Dossier.where("signature LIKE CONCAT(?, '%')", signature).where("dossiers.id != ?", id)
   end
   
+  # Returns the direct children of the current Topic.
+  def direct_children
+    result = children
+    result = result.send(children_topic_type) if children_topic_type
+
+    result
+  end
+
   # Grand total of documents
   def document_count(period = nil)
     topic_numbers = DossierNumber.joins(:dossier).where("signature LIKE CONCAT(?, '%')", signature)
@@ -77,14 +85,6 @@ class Topic < Dossier
     document_counts.sum(:amount).to_i
   end
   alias amount document_count
-
-  # Returns the direct children of the current Topic.
-  def direct_children
-    result = children
-    result = result.send(children_topic_type) if children_topic_type
-    
-    result
-  end
 
   # Attribute handlers
   def update_signature(value)
