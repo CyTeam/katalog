@@ -81,7 +81,7 @@ class DossiersController < AuthorizedController
     if !@signature_search
       @dossiers = Dossier.by_text(@query, :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?, :include => [:location, :containers])
     else
-      @dossiers = apply_scopes(Dossier, params[:search]).by_signature(@query).includes(:containers => :location).order('signature').accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
+      @dossiers = apply_scopes(Dossier, params[:search]).by_signature(@query).includes(:containers => :location).accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
 
       # Alphabetic pagination
       if Topic.alphabetic?(@query)
