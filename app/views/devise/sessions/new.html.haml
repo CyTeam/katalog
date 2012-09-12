@@ -1,7 +1,7 @@
 %h2= t('devise.sign_in')
 = semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
   = f.inputs do
-    = f.input :login, :required => true
+    = f.input :login, :required => true, :input_html => {'data-autofocus' => true}
     = f.input :password
     - if devise_mapping.rememberable?
       = f.input :remember_me, :as => :boolean
