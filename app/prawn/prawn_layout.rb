@@ -8,7 +8,7 @@ class PrawnLayout < Prawn::Document
     font  'Helvetica'
     font_size 8
   end
-  
+
   # Styles a html text so that a list is shown.
   def list(html_input)
     list = html_input.split(/<ul>(.*)<\/ul>/m)
@@ -79,9 +79,9 @@ class PrawnLayout < Prawn::Document
         end
       end
 
-      bounding_box [bounds.left + 400, 0], :width => 150, :height => 40 do
+      bounding_box [bounds.left + 325, 0], :width => 150, :height => 40 do
         font_size 7 do
-          fill_color "000000"
+          fill_color "96B1CD"
           text "gedruckt am: " + Date.today.to_s
           text "gedruckt von: " + user.username if user
         end
