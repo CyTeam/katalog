@@ -52,7 +52,7 @@ module Katalog
     config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.0'
+    config.assets.version = '1.1'
 
     # List of assets to precompile
     config.assets.precompile += %w( ie6.css katalog_internal.css print.css)
