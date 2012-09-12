@@ -230,12 +230,12 @@ class Dossier < ActiveRecord::Base
     self.related_to = value.join('; ')
   end
 
-  # Returns a relations list with the relations separated throw new lines.
+  # Returns a relations list with the relations separated by new lines.
   def relation_list
     relations.join("\n")
   end
 
-  # Sets the relations from a value which is separated throw new lines.
+  # Sets the relations from a value which is separated by new lines.
   def relation_list=(value)
     self.relations = value.split("\n")
   end
