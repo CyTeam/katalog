@@ -218,13 +218,6 @@ class Dossier < ActiveRecord::Base
     containers.where(:location_id => Location.find_by_code('RI')).map {|container| container.period unless container.period.blank? }
   end
 
-  # Returns if the current dossier should be preorder.
-  def preorder
-    containers.each do |c|
-      return true if c.preorder
-    end
-  end
-
   # Returns the relations as array.
   def relations
     return [] if related_to.blank?
