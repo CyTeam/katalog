@@ -218,6 +218,9 @@ class Dossier < ActiveRecord::Base
     containers.where(:location_id => Location.find_by_code('RI')).map {|container| container.period unless container.period.blank? }
   end
 
+  # Relations
+  # =========
+
   # Returns the relations as array.
   def relations
     return [] if related_to.blank?
@@ -242,22 +245,15 @@ class Dossier < ActiveRecord::Base
 
   # Returns the titles of the relations.
   def relation_titles
-    stripped_relations = relations.map{|relation| relation.strip.presence}.compact
-    stripped_relations += back_relations
+    all_relations = relations + back_relations
 
     # Remove signatures from backlinks
-    titles = stripped_relations.uniq.sort.map{|relation| relation.gsub(/^[0-9.]{1,8}:[ ]*/, '')}
-
-    titles
+    all_relations.uniq.sort.map{|relation| relation.gsub(/^[0-9.]{1,8}:[ ]*/, '')}
   end
 
   # Create an Array for backlinks
   def back_relations
-    back_links = []
-    Dossier.where("related_to LIKE ?", "%#{self.title}%").each do |dossier|
-      back_links << dossier.title
-    end
-    back_links
+    Dossier.where("related_to LIKE ?", "%#{self.title}%").pluck(:title)
   end
 
   def dangling_relations
