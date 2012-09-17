@@ -15,12 +15,6 @@
   :javascript
     var type_codes = #{ContainerType.all.map {|e| e.code }.to_json};
     var location_codes = #{Location.all.map {|e| e.code }.to_json};
-  :css
-    .ui-autocomplete {
-      max-height: 70px;
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
 
   %table#container-list.ce_table{:style => "width: 100%"}
     = render 'containers/list_header', :form_helper => f
