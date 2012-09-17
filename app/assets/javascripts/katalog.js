@@ -128,14 +128,19 @@ function addRelationAutoCompletionBehaviour() {
             data: {
               page:     1,
               per_page: 10,
-              query:    request.term
+              search: {
+                text:    request.term
+              }
             },
             success: function( data ) {
               response( $.map( data, function( object ) {
-                var item = object['dossier'];
-                return {
-                  label: item['title'],
-                  value: item['title']
+                // Accept both Topic and Dossier objects
+                var item = object['topic'] || object['dossier'];
+                if (item) {
+                  return {
+                    label: item['title'],
+                    value: item['title']
+                  }
                 }
               }));
             }
