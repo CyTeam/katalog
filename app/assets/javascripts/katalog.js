@@ -109,59 +109,45 @@ function addSyncFirstContainerYear() {
 
 function addRelationAutoCompletionBehaviour() {
   var text_area = $('#dossier_relation_list');
-  var insert_link = $('#insert_relation');
-  text_area.after(insert_link);
-  insert_link.click(function(e){
-    var id = 'relation_list_auto_completion';
-    var link = $('#insert_relation');
-    e.preventDefault();
-    text_area.after('<input type="text" placeholder="Um nach einem Querverweis zu suchen. Hier den Suchbegriff eingeben." size="50" id="' + id + '" style="margin-left:25%;width:74%;">');
-    link.hide();
-    $('#' + id).focusin(function(){
-      var input = $(this);
-      input.autocomplete({
-        source: function( request, response ) {
-          $.ajax({
-            url: '/dossiers/search.json',
-            dataType: 'json',
-            data: {
-              page:     1,
-              per_page: 10,
-              search: {
-                text:    request.term
-              }
-            },
-            success: function( data ) {
-              response( $.map( data, function( object ) {
-                // Accept both Topic and Dossier objects
-                var item = object['topic'] || object['dossier'];
-                if (item) {
-                  return {
-                    label: item['title'],
-                    value: item['title']
-                  }
-                }
-              }));
-            }
-          });
+  var add_relation_input = $('#dossier_add_relation');
+  add_relation_input.autocomplete({
+    source: function( request, response ) {
+      $.ajax({
+        url: '/dossiers/search.json',
+        dataType: 'json',
+        data: {
+          page:     1,
+          per_page: 10,
+          search: {
+            text:    request.term
+          }
         },
-        minLength: 2,
-        select: function(event, ui) {
-          var value = ui.item.value;
-          var text = text_area.val();
-
-          input.remove();
-          link.show();
-          text_area.val(text + "\n" + value);
-          text_area.elastic();
+        success: function( data ) {
+          response( $.map( data, function( object ) {
+            // Accept both Topic and Dossier objects
+            var item = object['topic'] || object['dossier'];
+            if (item) {
+              return {
+                label: item['title'],
+                value: item['title']
+              }
+            }
+          }));
         }
       });
-    });
-  });
+    },
+    minLength: 2,
+    select: function(event, ui) {
+      var value = ui.item.value;
+      var text = text_area.val();
 
-  if($('#dossier_relation_list').val() == ''){
-    $('#insert_relation').trigger('click');
-  }
+      text_area.val(text + "\n" + value);
+      text_area.elastic();
+    },
+    close: function() {
+      add_relation_input.val('').focus();
+    }
+  });
 }
 
 function hideUnlessNewRecord(container) {

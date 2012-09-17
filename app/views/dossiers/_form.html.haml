@@ -7,8 +7,7 @@
     = f.input :description, :as => :ckeditor, :input_html => {:class => 'autogrow', :rows => 5, :width => '74%'}
     ~ f.input :keyword_text, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.keyword_list.size + 1}
     ~ f.input :relation_list, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.relations.size + 1}
-    %a#insert_relation{:href => "#", :style => "margin-left:25%;"}
-      = t('katalog.insert_relation')
+    = f.input :add_relation, :placeholder => true, :input_html => {:style => 'width: 74%'}
     = f.input :first_document_year, :input_html => {:size => '6'}
     ~ f.input :dossier_number_list, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.numbers.size + 1}
 

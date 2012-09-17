@@ -256,6 +256,9 @@ class Dossier < ActiveRecord::Base
     Dossier.where("related_to LIKE ?", "%#{self.title}%").pluck(:title)
   end
 
+  # Form helper methods
+  attr_accessor :add_relation
+
   def dangling_relations
     relations.select do |relation|
       Dossier.search(relation).count < 1

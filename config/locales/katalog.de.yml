@@ -113,8 +113,6 @@ de:
         intern:    "Interne Dokumente"
         warning:   "Für einen Teil der Dokumente besteht eine Wartezeit."
 
-    insert_relation: "Querverweis hinzufügen"
-
     versions:
       description: "%{action} von %{user} um %{date_time}"
       changes_of:             "Änderungen von %{model}"
@@ -277,12 +275,17 @@ de:
         replace: Ersetzen mit
       visior_log:
         create: "Eintrag anlegen"
+      dossier:
+        add_relation: "Neuer Querverweis"
     hints:
       dossier:
         text: "\"Geschichte CH\", medizin zug 61.3"
       report:
         columns: "Um ein Spalte auswählen, mit dem Mauszeiger draufklicken, halten und nach links ziehen."
         collect_year_count: "Intervall der Jahre"
+    placeholders:
+      dossier:
+        add_relation: "Neuer Querverweis hinzufügen..."
     actions:
       search_replace:
         create: Alle ersetzen
