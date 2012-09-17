@@ -357,10 +357,10 @@ function addCsrfTokenToAjaxCalls(){
 
 // Adds the js behaviour to the main navigation for a faster navigation trough the menu.
 function addMainNavigationBehaviour() {
-  $('#mainmenu a').click(function(){
-    $(this).next('ul').show();
-    $('#mainmenu a, #mainmenu li').removeClass('selected');
-    $(this).addClass('selected');
-    $(this).parent('li').addClass('selected');
+  $('#mainmenu a').click(function(e){
+    // Unselect old item
+    $('#mainmenu .selected').removeClass('selected');
+    // Select new item
+    $(this).parents('li').addClass('selected');
   });
 }
