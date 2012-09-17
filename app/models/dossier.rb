@@ -221,6 +221,11 @@ class Dossier < ActiveRecord::Base
   # Relations
   # =========
 
+  # Cache expiring
+  after_save do
+    related_dossiers.each{|dossier| dossier.touch}
+  end
+
   # Returns the relations as array.
   def relations
     return [] if related_to.blank?
@@ -249,6 +254,10 @@ class Dossier < ActiveRecord::Base
 
     # Remove signatures from backlinks
     all_relations.uniq.sort.map{|relation| relation.gsub(/^[0-9.]{1,8}:[ ]*/, '')}
+  end
+
+  def related_dossiers
+    relation_titles.collect{ |relation_title| Dossier.by_text(relation_title).to_a }.flatten
   end
 
   # Create an Array for backlinks
