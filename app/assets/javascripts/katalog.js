@@ -115,11 +115,10 @@ function addRelationAutoCompletionBehaviour() {
     var id = 'relation_list_auto_completion';
     var link = $('#insert_relation');
     e.preventDefault();
-    text_area.after('<input type="text" value="Um nach einem Querverweis zu suchen. Hier den Suchbegriff eingeben." size="50" id="' + id + '" style="margin-left:25%;width:74%;">');
+    text_area.after('<input type="text" placeholder="Um nach einem Querverweis zu suchen. Hier den Suchbegriff eingeben." size="50" id="' + id + '" style="margin-left:25%;width:74%;">');
     link.hide();
     $('#' + id).focusin(function(){
       var input = $(this);
-      input.val('');
       input.autocomplete({
         source: function( request, response ) {
           $.ajax({
