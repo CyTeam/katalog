@@ -1,9 +1,8 @@
 %tr[dossier]{:class => cycle('odd', 'even')}
-  %td.edit_dossiers_td= dossier.signature
-  %td.edit_dossiers_td
-    %span.title= dossier.title
+  %td= dossier.signature
+  %td= dossier.title
   - @years.each do |year|
-    %td.edit_dossiers_td
+    %td
       - if number = dossier.dossier_number_from_year(year)
         %input.dossier-last-container-title{:tabindex => @tabindex,
                                             :type => 'text',
