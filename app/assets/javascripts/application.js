@@ -20,7 +20,7 @@ $(document).ready(function() {
   addEditToolTipBehaviour();
   addSearchSuggestionBehaviour();
   addContainerSuggestionBehaviour();
-  addUpdateLastContainerTitleOfDossier();
+  addUpdateDossierNumberBehaviour();
   showVersionsBehaviour();
   addReportColumnMultiselectBehaviour();
   addEditReportBehaviour();

@@ -4,15 +4,15 @@
   - @years.each do |year|
     %td
       - if number = dossier.dossier_number_from_year(year)
-        %input.dossier-last-container-title{:tabindex => @tabindex,
-                                            :type => 'text',
-                                            :value => number.amount,
-                                            :size => 3,
-                                            :data => {:number_id => number.id}}
+        %input.number{:tabindex => @tabindex,
+                      :type => 'text',
+                      :value => number.amount,
+                      :size => 3,
+                      :data => {:number_id => number.id}}
       - else
-        %input.dossier-last-container-title{:tabindex => @tabindex,
-                                            :type => 'text',
-                                            :size => 3,
-                                            :data => {:dossier_id => dossier.id,
-                                                      :year => year}}
+        %input.number{:tabindex => @tabindex,
+                      :type => 'text',
+                      :size => 3,
+                      :data => {:dossier_id => dossier.id,
+                                :year => year}}
       - @tabindex += 1

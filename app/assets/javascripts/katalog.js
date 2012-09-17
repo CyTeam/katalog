@@ -11,8 +11,8 @@ function addContainerSuggestionBehaviour() {
   }
 }
 
-function addUpdateLastContainerTitleOfDossier() {
-  var inputs = $('.dossier-last-container-title');
+function addUpdateDossierNumberBehaviour() {
+  var inputs = $('#edit_report input.number');
 
   inputs.focusout(function(){
     updateNumberAmount(this);
@@ -31,7 +31,7 @@ function updateNumberAmount(e){
   var year = $(e).data('year');
   var amount = $(e).val();
 
-  if(number_id != null){
+  if (number_id) {
     $.ajax({
       url: '/dossier_numbers/'+ number_id,
       type: 'PUT',
@@ -39,9 +39,7 @@ function updateNumberAmount(e){
         amount: amount
       }
     });
-  }
-
-  if(year != null){
+  } else if (year) {
     $.ajax({
       url: '/dossier_numbers.json',
       type: 'POST',
