@@ -1,12 +1,10 @@
 = render 'search_form'
 
-#page_actions.contextual
-  =# contextual_link 'pdf', url_for(params.merge(:format => :pdf, :per_page => 'all'))
+#edit_report_header
+  %h1= t('katalog.main_navigation.edit_year')
 
-%h1#edit_report_title= t('katalog.main_navigation.edit_year')
-
-%label#dossier_numbers_year_amount_label= t('katalog.years_amount')
-= select 'dossier_numbers', 'year_amount', 1..10, {:selected => @years.count}
+  %label= t('katalog.years_amount')
+  = select 'dossier_numbers', 'year_amount', 1..10, {:selected => @years.count}
 
 = paginated_section :renderer => PaginationListLinkRenderer do
   #edit_report.ce_table.block

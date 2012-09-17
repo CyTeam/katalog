@@ -1,7 +1,5 @@
 // Hide some elements
-#edit_report_title,
-#dossier_numbers_year_amount,
-#dossier_numbers_year_amount_label
+#edit_report_header
   display: none
 
 #edit_report table
@@ -12,14 +10,13 @@
     border-bottom: 1px solid black
     page-break-inside: avoid
     page-break-after: auto
-  input
-    border: none
-    background: none
   thead
     display: table-header-group
 
-  select.dossier_numbers_year
-    background: transparent
+  input, select
     border:     none
+    background: transparent
+
+  select.dossier_numbers_year
     font-size:  12px
     text-align: right
