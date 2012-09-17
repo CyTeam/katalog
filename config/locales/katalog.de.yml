@@ -304,6 +304,7 @@ de:
     preview: "Vorschau"
 
     action:
+      save:   "Speichern"
       pdf:    "PDF anzeigen"
       print: "Für Druck aufbereiten (PDF)"
       history:  "Änderungsverlauf"

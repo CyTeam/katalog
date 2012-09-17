@@ -1,5 +1,6 @@
-.contextual{:style => "margin-left: -1em;"}
-  %a.icon.icon-edit{:href => "#", :onclick => "javascript:submitDossierForm();"} Speichern
-= contextual_links
+.contextual
+  = contextual_links_for
+  %a.icon.icon-edit{:href => "#", :onclick => "javascript:submitDossierForm();"}= t_action(:save)
+
 %h1= t_title
 = render 'form'
