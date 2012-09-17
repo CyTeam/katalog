@@ -26,14 +26,14 @@ function addUpdateLastContainerTitleOfDossier() {
 }
 
 function updateNumberAmount(e){
-  var dossier_id = $(e).attr('data-dossier');
-  var number_id = $(e).attr('data-number');
-  var year = $(e).attr('data-number-year');
+  var number_id = $(e).data('number_id');
+  var dossier_id = $(e).data('dossier_id');
+  var year = $(e).data('year');
   var amount = $(e).val();
 
   if(number_id != null){
     $.ajax({
-      url: '/dossiers/' + dossier_id + '/dossier_numbers/'+ number_id,
+      url: '/dossier_numbers/'+ number_id,
       type: 'PUT',
       data: {
         amount: amount
@@ -55,7 +55,7 @@ function updateNumberAmount(e){
         }
       },
       success: function(id){
-        $(e).attr('data-number', id)
+        $(e).data('number_id', id)
       }
     });
   }
