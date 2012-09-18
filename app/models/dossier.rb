@@ -108,8 +108,10 @@ class Dossier < ActiveRecord::Base
   end
 
   def self.filter_tags(values)
-    boring = ["in", "und", "für"]
+    boring = ["in", "und", "für", "im", "auf", "der", "von", "die", "des", "bis", "über", "diverse", "allgemein", "gegen", "zur", "gelöscht", "&", "mit", "den", "ohne", "eine", "dank", "an"]
+    
     values -= boring
+    values -= boring.map(&:upcase)
 
     values.reject!{|value| value.match /^[0-9.']*$/}
     values.reject!{|value| value.match /^(Jan|Feb|März|Apr|Mai|Juni|Juli|Aug|Sep|Sept|Okt|Nov|Dez)$/}
