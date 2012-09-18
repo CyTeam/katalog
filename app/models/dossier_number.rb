@@ -111,7 +111,7 @@ class DossierNumber < ActiveRecord::Base
   end
   
   def self.edit_years(params)
-    if params[:year].is_a?Array
+    if params[:year].is_a? Array
       params[:year]
     else
       [params[:year]]
