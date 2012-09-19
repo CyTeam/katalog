@@ -20,5 +20,5 @@ class Tag < ActsAsTaggableOn::Tag
   scope :by_signature, lambda {|value| where("dossiers.signature LIKE CONCAT(?, '%')", value)}
 
   scope :filter_tags,
-    select("tags.*, COUNT(*) AS count").joins('JOIN dossiers ON dossiers.id = taggings.taggable_id').having("COUNT(*) >= 2").group("tags.id").order("COUNT(*)").limit(12)
+    select("tags.*, COUNT(*) AS count").joins('JOIN dossiers ON dossiers.id = taggings.taggable_id').group("tags.id").order("COUNT(*) DESC").limit(36)
 end

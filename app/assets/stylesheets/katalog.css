@@ -81,15 +81,19 @@ li.topic.main a {
 }
 
 /** Tag Cloud **/
-.tag_cloud {font-size: 80%; text-decoration: none;}
+.tag_cloud {
+  text-align: center;
+  font-size: 80%;
+  text-decoration: none;
+}
 .tag_cloud a {text-decoration: none;}
 
-.nube1 {font-size: 1.6em;}
-.nube2 {font-size: 1.7em;}
-.nube3 {font-size: 1.7em;}
-.nube4 {font-size: 1.8em;}
-.nube5 {font-size: 1.8em;}
-.nube6 {font-size: 1.9em;}
+.nube1 {font-size: 120%;}
+.nube2 {font-size: 160%;}
+.nube3 {font-size: 200%;}
+.nube4 {font-size: 230%;}
+.nube5 {font-size: 260%;}
+.nube6 {font-size: 280%;}
 
 /** Dossier View **/
 .section {
