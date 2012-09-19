@@ -14,34 +14,17 @@ function addContainerSuggestionBehaviour() {
 // Edit Reports
 // ============
 function addEditReportBehaviour() {
-  $('select.dossier_numbers_year, #dossier_numbers_year_amount').change(function(){
+  $('#edit_report :input').change(function(){
     var url = getEditReportLink()
     window.location.replace(url);
   });
 }
 
 function getEditReportLink() {
-  var link = 'http://' + window.location.host + window.location.pathname;
-  var present_amount = $('select.dossier_numbers_year').lenght;
-  var requested_amount = $('#dossier_numbers_year_amount').val();
-  var inserted_amount = 0;
-  var last_year_link = '';
+  var url = 'http://' + window.location.host + window.location.pathname;
+  var params = $.param($('#edit_report :input, #search_text').serializeArray());
 
-  link += '?search[text]=' + $.query.get('search[text]').toString();
-
-  $('select.dossier_numbers_year').each(function(){
-    if(inserted_amount < requested_amount) {
-      last_year_link = '&dossier_numbers[year][]=' + $(this).val();
-      link += last_year_link;
-      inserted_amount++;
-    }
-  });
-
-  for(var i = inserted_amount; i < requested_amount; i++){
-    link += last_year_link;
-  }
-
-  return link ;
+  return url + '?' + params;
 }
 
 function addUpdateDossierNumberBehaviour() {

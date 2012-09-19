@@ -1,7 +1,7 @@
 %thead
-  %tr.header
-    %th.signature= t_attr(:signature, Dossier)
-    %th.title= t_attr(:title, Dossier)
+  %tr
+    %th= t_attr(:signature, Dossier)
+    %th= t_attr(:title, Dossier)
     - @years.each do |year|
-      %th.year
-        = select 'dossier_numbers_year', year, default_periods_collection, {:selected => year, :include_blank => false, :size => 5}, :class => 'dossier_numbers_year'
+      %th.number
+        = select_tag 'edit_report[years][]', options_for_select(default_periods_collection, :selected => year), :class => 'dossier_numbers_year'

@@ -184,9 +184,18 @@ class DossiersController < AuthorizedController
     # Stay on this action after search
     @search_path = edit_report_dossiers_path
 
+    params[:edit_report] ||= {}
     # Collection setup
-    @years = DossierNumber.edit_years(params[:dossier_numbers]) if params[:dossier_numbers]
-    @years ||= [Time.now.year - 1]
+    @years = params[:edit_report][:years]
+    @years ||= []
+
+    year_amount = params[:edit_report][:year_amount].to_i
+    padding_years = year_amount - @years.length
+    if padding_years > 0
+      @years += [Time.now.year - 1] * padding_years
+    elsif padding_years < 0
+      @years = @years[0..(year_amount+1)]
+    end
 
     if !@signature_search
       @dossiers = Dossier.by_text(@query, :page => params[:page], :per_page => params[:per_page])
