@@ -14,17 +14,12 @@ function addContainerSuggestionBehaviour() {
 // Edit Reports
 // ============
 function addEditReportBehaviour() {
-  $('#edit_report :input').change(function(){
-    var url = getEditReportLink()
-    window.location.replace(url);
+  $('#edit_report_header :input, :input.dossier_numbers_year').change(function(){
+    var url = 'http://' + window.location.host + window.location.pathname;
+    var params = $.param($('#edit_report_header :input, :input.dossier_numbers_year, #search_text').serializeArray());
+
+    window.location.replace(url + '?' + params);
   });
-}
-
-function getEditReportLink() {
-  var url = 'http://' + window.location.host + window.location.pathname;
-  var params = $.param($('#edit_report :input, #search_text').serializeArray());
-
-  return url + '?' + params;
 }
 
 function addUpdateDossierNumberBehaviour() {
