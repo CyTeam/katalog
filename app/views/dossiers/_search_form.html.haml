@@ -1,5 +1,5 @@
-- @search_path ||= search_dossiers_path
-= form_tag(@search_path, :method => :get, :id => 'search_form') do
+- search_path = @search_path || search_dossiers_path
+= form_tag(search_path, :method => :get, :id => 'search_form') do
   %label{:for => "search_text"}
     = t('katalog.the_search') + ':'
   = text_field :search, :text, :style => 'width: 30em', :title => t('tooltips.dossiers.search_input'), :autocomplete => 'off'
