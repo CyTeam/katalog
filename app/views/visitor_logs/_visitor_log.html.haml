@@ -1,5 +1,6 @@
 %div[visitor_log]
-  %h1= visitor_log.title
+  %h1= link_to_unless_current visitor_log.title, visitor_log, 'data-href-container' => 'div'
+
   %p.info
     = t('katalog.visitor_logs.create_by_on', :user => visitor_log.user.username, :date => visitor_log.created_at)
 
