@@ -1,19 +1,18 @@
 !!!
 %html{:xmlns => "http://www.w3.org/1999/xhtml"}
   %head
-    - cache 'application_header_' + user_signed_in?.to_s  do
-      %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}/
-      %title
-        = t('katalog.application.title')
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}/
+    %title
+      = t('katalog.application.title')
 
-      %link{:rel => "shortcut icon", :href => image_path('favicon.ico')}/
+    %link{:rel => "shortcut icon", :href => image_path('favicon.ico')}/
 
-      = stylesheet_link_tag 'application', :media => 'all'
-      = stylesheet_link_tag 'katalog_internal' if user_signed_in?
-      = stylesheet_link_tag 'print', :media => 'print'
-      /[if lt IE 7]
-        = stylesheet_link_tag 'ie6', :media => 'screen, projection'
-      = javascript_include_tag "application"
+    = stylesheet_link_tag 'application', :media => 'all'
+    = stylesheet_link_tag 'katalog_internal' if user_signed_in?
+    = stylesheet_link_tag 'print', :media => 'print'
+    /[if lt IE 7]
+      = stylesheet_link_tag 'ie6', :media => 'screen, projection'
+    = javascript_include_tag "application"
 
     = csrf_meta_tag
   %body#top
