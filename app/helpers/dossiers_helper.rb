@@ -34,8 +34,8 @@ module DossiersHelper
   def url_for_topic(topic)
     return query_topic_path(topic) if topic.kind_of?(QueryTopic)
 
-    if 'edit_report'.eql?action_name
-      edit_report_dossiers_path(:search => {:text => topic.signature})
+    if is_edit_report?
+      edit_batch_edit_dossier_numbers_path(:search => {:text => topic.signature})
     else
       search_dossiers_path(:search => {:text => topic.signature})
     end
@@ -98,7 +98,7 @@ module DossiersHelper
   end
 
   def is_edit_report?
-    'edit_report'.eql?action_name
+    @search_path.present?
   end
 
   def split_decades(numbers)

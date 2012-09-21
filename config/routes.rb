@@ -35,7 +35,7 @@ Katalog::Application.routes.draw do
     end
     
     collection do
-      get :search, :overview, :report, :edit_report
+      get :search, :overview, :report
       get :welcome
       get :dangling_relations
       get :multi_relations
@@ -53,6 +53,9 @@ Katalog::Application.routes.draw do
     end
   end
   
+  get "batch_edit_dossier_numbers" => "batch_edit_dossier_numbers#index"
+  get "batch_edit_dossier_numbers/edit" => "batch_edit_dossier_numbers#edit", :as => :edit_batch_edit_dossier_numbers
+
   resources :keywords do
     collection do
       get :search, :suggestions

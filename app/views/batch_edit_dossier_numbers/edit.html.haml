@@ -1,4 +1,4 @@
-= render 'search_form'
+= render 'dossiers/search_form'
 
 #edit_report
   #edit_report_header
@@ -13,9 +13,9 @@
     %label= t_attr('location', Container)
     = select 'edit_report', 'location', Location.all, :include_blank => true
 
-  = paginated_section :renderer => PaginationListLinkRenderer do
+  = paginated_section @dossiers, :renderer => PaginationListLinkRenderer do
     .ce_table.block
       %table
-        = render 'batch_edit_last_year/list_header'
+        = render 'list_header'
         - @tabindex = 1
-        = render :partial => 'batch_edit_last_year/dossier', :collection => @dossiers
+        = render :partial => 'dossier', :collection => @dossiers
