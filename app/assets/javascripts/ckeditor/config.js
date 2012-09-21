@@ -37,14 +37,6 @@ CKEDITOR.editorConfig = function( config )
   config.linkShowAdvancedTab = false;
   config.linkShowTargetTab = false;
   
-  // Preview customization
-  config.extraPlugins = "embed,attachment";
-  link = window.location.pathname;
-  link_parts = link.split('/');
-  link_parts.pop();
-  link_parts.push('preview');
-  config.serverPreviewURL = window.location.origin + link_parts.join('/')
-  
   config.toolbar = 'Custom';
   
   config.toolbar_Easy =
@@ -74,7 +66,7 @@ CKEDITOR.editorConfig = function( config )
 
   config.toolbar_Custom =
     [
-        ['ServerPreview','-','Cut','Copy','PasteFromWord'],
+        ['Cut','Copy','PasteFromWord'],
         ['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
         ['Bold','Italic','Underline','-','Subscript','Superscript','-','BulletedList'],
         ['Link','Unlink']

@@ -5,7 +5,7 @@ require 'raspell'
 
 class DossiersController < AuthorizedController
   # Authentication
-  before_filter :authenticate_user!, :except => [:index, :search, :show, :report, :preview, :welcome]
+  before_filter :authenticate_user!, :except => [:index, :search, :show, :report, :welcome]
 
   # Responders
   respond_to :html, :js, :json, :xls, :pdf
@@ -169,10 +169,6 @@ class DossiersController < AuthorizedController
       params[:search].merge!(:per_page => @report[:per_page], :level => @report[:level])
       @dossiers = apply_scopes(Dossier, params[:search]).by_signature(@query).includes(:containers => :location).accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
     end
-  end
-
-  def preview
-    show!
   end
 
   # Dangling relates_to list

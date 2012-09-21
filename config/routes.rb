@@ -30,10 +30,6 @@ Katalog::Application.routes.draw do
   resources :query_topics
   
   resources :dossiers do
-    member do
-      post :preview
-    end
-    
     collection do
       get :search, :overview, :report
       get :welcome
