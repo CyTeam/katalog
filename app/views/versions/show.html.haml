@@ -1,5 +1,5 @@
 - cache [@version.cache_key, @previous_item == nil ? '' : @previous_item.cache_key, @current_item == nil ? '' : @current_item.cache_key] do
-  #page_actions.contextual
+  .contextual
     = contextual_link('revert', revert_version_path(@version), :method => :post)
     = contextual_link('current', active_main_item(@version))
 

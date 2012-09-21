@@ -1,6 +1,6 @@
 = render '/dossiers/search_form'
 - cache [@query_topic, current_user.try(:roles)] do
-  #page_actions.contextual
+  .contextual
     = contextual_link('edit', edit_query_topic_path(@query_topic), :title => t('tooltips.topics.edit'))
   %h1#title
     = @query_topic.signature
