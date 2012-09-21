@@ -1,7 +1,6 @@
-- cache :visitor_logs do
-  = contextual_links
+= contextual_links
 
-  %h1= t_title
+%h1= t_title
 
 #visitor_log_list
   = render @visitor_logs.order("created_at DESC")

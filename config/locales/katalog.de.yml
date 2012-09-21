@@ -2,7 +2,7 @@ de:
   katalog:
     dossier_count_per_year: "Dokumente pro Jahr"
     visitor_logs:
-      create_by_on: "%{user} - %{date}"
+      create_by_on: "%{date} - %{user}"
     main_navigation:
       root:               "Übersicht"
       dossiers:           "Dossiers"
@@ -124,6 +124,7 @@ de:
     welcome:
       title: Willkommen auf dem Katalog von Doku-Zug
       content: Hier ein Einleitungstext
+
   controllers:
     index:
       keyword: "Schlagwortindex"
@@ -332,3 +333,7 @@ de:
       title: Fehlerhafte Querverweise
     multi_relations:
       title: Mehrere Querverweise
+
+  visitor_logs:
+    index:
+      title: Logbuch
