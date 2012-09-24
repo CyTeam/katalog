@@ -8,6 +8,9 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require ckeditor/init
+//= require raphael
+//= require g.raphael
+//= require g.bar
 //= require_tree .
 
 $(document).ready(function() {
@@ -26,4 +29,6 @@ $(document).ready(function() {
   addEditReportBehaviour();
   addCsrfTokenToAjaxCalls();
   addMainNavigationBehaviour();
+
+  addDossierGraphs();
 });

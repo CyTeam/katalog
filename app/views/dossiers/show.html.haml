@@ -40,7 +40,7 @@
           = render :partial => 'dossier_numbers/head', :collection => decade
         %tr.odd
           = render :partial => 'dossier_numbers/amount', :collection => decade
-
+  #graph
   - unless (user_signed_in? || @dossier.waiting_list.empty?)
     .waiting-time
       - waiting_years = @dossier.waiting_list

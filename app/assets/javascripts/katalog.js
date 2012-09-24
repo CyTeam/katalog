@@ -344,3 +344,28 @@ function addMainNavigationBehaviour() {
     $(this).parents('li').addClass('selected');
   });
 }
+
+// Graphs
+
+
+function addDossierGraphs() {
+  var r=Raphael("graph"),
+  fin = function () {
+    fout();
+
+    this.hinting = r.popup(this.bar.x, this.bar.y, this.bar.value || "0").insertBefore(this);
+  },
+  fout = function () {
+    if (this.hinting) {
+      this.hinting.animate({opacity: 0}, 300, function () {this.remove();});
+    }
+  }
+
+  counts = $('table.document_counts td').map(function(index, element) {return parseInt($(element).text())});
+  counts_a = $.makeArray(counts);
+  years = $('table.document_counts th').map(function(index, element) {return $(element).text()});
+  years_a = $.makeArray(years);
+
+  Raphael.g.axis(25,100,400,null,null,years_a.length -1 ,null,years_a, r)
+  var chart = r.barchart(15, 15, 450, 100, [counts_a], {gutter: '1%'}).hover(fin, fout);
+}
