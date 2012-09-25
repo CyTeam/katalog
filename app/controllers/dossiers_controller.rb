@@ -125,6 +125,8 @@ class DossiersController < AuthorizedController
               suggestion = german_spell_checker.suggest(word).first
             end
 
+            # We get UTF-8 encoded answers from our spell checker
+            suggestion = suggestion.force_encoding('UTF-8')
             @spelling_suggestion[word] = suggestion if (suggestion.present? && !Dossier.by_text(suggestion).empty? && !(suggestion =~ %r[#{word}] or suggestion == nil))
           end
         end
