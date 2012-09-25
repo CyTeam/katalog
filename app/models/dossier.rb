@@ -275,7 +275,7 @@ class Dossier < ActiveRecord::Base
 
   def dangling_relations
     relations.select do |relation|
-      Dossier.search(relation).count < 1
+      Dossier.by_text('"' + relation + '"').count < 1
     end
   end
 
@@ -295,7 +295,7 @@ class Dossier < ActiveRecord::Base
 
   def multi_relations
     relations.select do |relation|
-      Dossier.search(relation).count > 1
+      Dossier.by_text('"' + relation + '"').count > 1
     end
   end
 

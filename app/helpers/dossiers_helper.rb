@@ -5,6 +5,10 @@ module DossiersHelper
     link_to(keyword, search_dossiers_path(:search => {:text => keyword}), options)
   end
 
+  def link_to_relation(relation)
+    link_to(relation, search_dossiers_url(:search => {:text => '"' + relation + '"'}))
+  end
+
   def availability_text(availability)
     title = t(availability, :scope => 'katalog.availability.title')
 

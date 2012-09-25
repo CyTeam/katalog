@@ -25,7 +25,7 @@
     #relations.section
       %ul#relation-list.relations
       - for relation in @dossier.relation_titles
-        %li= link_to relation, search_dossiers_url(:search => {:text => relation})
+        %li= link_to_relation relation
 
   %h3= t_attr(:books)
   #books.section
