@@ -1,6 +1,11 @@
 # encoding: UTF-8
 
 module DossiersHelper
+  def link_to_tag_filter(name, options = {})
+    query = [@query, name].compact.join(' ')
+    link_to(name, search_dossiers_path(:search => {:text => query}), options)
+  end
+
   def link_to_keyword(keyword, options = {})
     link_to(keyword, search_dossiers_path(:search => {:text => keyword}), options)
   end

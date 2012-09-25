@@ -6,4 +6,4 @@
       - @tags = @tags.where('dossiers.intern' => false) unless can?(:index, Dossier, :internal => true)
       - tags = @tags.sample(18)
     - tag_cloud(tags, %w(nube1 nube2 nube3 nube4 nube5 nube6)) do |tag, css_class|
-      = link_to_keyword tag.name, :class => css_class
+      = link_to_tag_filter tag.name, :class => css_class
