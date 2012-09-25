@@ -11,6 +11,13 @@ GIT
   specs:
     raspell (1.3)
 
+GIT
+  remote: https://github.com/huerlisi/will_paginate.git
+  revision: dca0b70fbaa44c4dffd2631a229ed304ef7f8d40
+  branch: show_always
+  specs:
+    will_paginate (3.0.3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -274,7 +281,6 @@ GEM
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
       rack-test (>= 0.5.3)
-    will_paginate (3.0.3)
     xpath (0.1.4)
       nokogiri (~> 1.3)
 
@@ -329,4 +335,4 @@ DEPENDENCIES
   uglifier
   unicorn
   webrat
-  will_paginate
+  will_paginate!
