@@ -51,7 +51,7 @@ module DossiersHelper
 
   def search_title
     if @signature_search
-      return @dossiers.first.to_s
+      return Dossier.by_signature(@query).first
     else
       return t('katalog.search_for', :query => @query)
     end
