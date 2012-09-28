@@ -111,7 +111,7 @@ class Dossier < ActiveRecord::Base
   end
 
   def self.filter_tags(values)
-    boring = ["in", "und", "für", "im", "auf", "der", "von", "die", "des", "bis", "über", "diverse", "allgemein", "gegen", "zur", "gelöscht", "&", "mit", "den", "ohne", "eine", "dank", "an"]
+    boring = ["à", "in", "und", "für", "im", "auf", "der", "von", "die", "des", "bis", "über", "diverse", "allgemein", "gegen", "zur", "gelöscht", "&", "mit", "den", "ohne", "eine", "dank", "an"]
     
     values -= boring
     values -= boring.map(&:upcase)
