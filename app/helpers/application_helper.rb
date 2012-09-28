@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def add_record_link(form, klass)
-    link_to_function image_tag('icons/add.png', :title => t('crud.new', :model => '')), :id => 'add_record_link' do |page|
+    link_to_function image_tag('icons/add.png'), :id => 'add_record_link' do |page|
       record = render('containers/new_form', :form => form)
       page << %{
 var new_record_id = new Date().getTime();
