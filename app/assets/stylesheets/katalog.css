@@ -116,6 +116,10 @@ li.topic.main a {
   margin-left: 1.4em;
 }
 
+#dossier_back_relations .content li {
+  list-style: none;
+}
+
 /** Keywords **/
 td .keywords li, .tags li{
   display: inline;
@@ -146,6 +150,10 @@ td.availability {
 /** Forms **/
 .inline-hints {
   font-style: italic;
+}
+
+form.formtastic fieldset > ol > li .content {
+  margin-left: 25%;
 }
 
 /** jQuery UI **/

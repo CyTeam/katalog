@@ -6,6 +6,12 @@
     = f.input :title, :input_html => {:style => 'width: 100%'}
     = f.input :description, :as => :ckeditor, :input_html => {:class => 'autogrow', :rows => 5, :width => '74%'}
     ~ f.input :keyword_text, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.keyword_list.size + 1}
+    %li#dossier_back_relations
+      %label= t_attr(:back_relations)
+      %ul.content
+        - @dossier.back_relations.each do |relation|
+          %li= link_to_relation relation
+
     ~ f.input :relation_list, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.relations.size + 1}
     = f.input :add_relation, :placeholder => true, :input_html => {:style => 'width: 74%'}
     = f.input :first_document_year, :input_html => {:size => '6'}

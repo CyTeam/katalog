@@ -166,6 +166,7 @@ de:
         first_document_year:  "Dokumente seit"
         related_to:           "Querverweise"
         relation_list:        "Querverweise"
+        back_relations:       "Verwiesen in"
         dossier_number_list:  "Anzahl Dokumente"
         availability:         "Verfügbar"
         description:          "Erschliessungstext"
