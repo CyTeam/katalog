@@ -78,10 +78,14 @@ class DossiersController < AuthorizedController
     setup_per_page
     setup_query
 
+    redirect_on_single_result = true
+
     if !@signature_search
       @dossiers = Dossier.by_text(@query, :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?, :include => [:location, :containers])
     else
       @dossiers = apply_scopes(Dossier, params[:search]).by_signature(@query).includes(:containers => :location).accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
+
+      redirect_on_single_result = false
 
       # Alphabetic pagination
       if Topic.alphabetic?(@query)
@@ -92,7 +96,7 @@ class DossiersController < AuthorizedController
     # Handle zero and single matches for direct user requests
     if not request.format.json?
       # Directly show single match
-      if @dossiers.count == 1
+      if redirect_on_single_result && @dossiers.count == 1
         redirect_to dossier_path(@dossiers.first, :search => {:text => @query})
       # Give spellchecking suggestions
       elsif @dossiers.count == 0
