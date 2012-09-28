@@ -23,6 +23,10 @@ class DossiersController < AuthorizedController
 
     authorize! :show, @dossier
 
+    # Tag cloud
+    tag_dossiers = @dossier.related_dossiers + [@dossier, @dossier.parent]
+    @tags = Tag.filter_tags.where('dossiers.id' => tag_dossiers)
+
     show! do |format|
       format.xls {
         send_data(@dossier.to_xls,
