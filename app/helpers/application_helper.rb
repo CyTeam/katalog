@@ -6,8 +6,8 @@ module ApplicationHelper
     unless fields.object.new_record?
       out = ''
       out << fields.hidden_field(:_destroy)
-      out << link_to_function(image_tag('icons/delete.png', :title => t('crud.delete', :model => '')), "$(this).parents('.#{fields.object.class.name.underscore}').hide();$(this).hide();$(this).prev().attr('value', '1');$(this).next().show();hideUnlessNewRecord($(this).parents('.#{fields.object.class.name.underscore}'));")
-      out << link_to_function(image_tag('icons/add.png', :title => t('crud.back', :model => '')), "$(this).parents('.#{fields.object.class.name.underscore}').hide();$(this).hide();$(this).prev().prev().attr('value', 'false');$(this).prev().show();showUnlessNewRecord($(this).parents('.#{fields.object.class.name.underscore}'));", :style => 'display:none;')
+      out << link_to_function(image_tag('icons/delete.png'), "$(this).parents('.#{fields.object.class.name.underscore}').hide();$(this).hide();$(this).prev().attr('value', '1');$(this).next().show();hideUnlessNewRecord($(this).parents('.#{fields.object.class.name.underscore}'));")
+      out << link_to_function(image_tag('icons/add.png'), "$(this).parents('.#{fields.object.class.name.underscore}').hide();$(this).hide();$(this).prev().prev().attr('value', 'false');$(this).prev().show();showUnlessNewRecord($(this).parents('.#{fields.object.class.name.underscore}'));", :style => 'display:none;')
       out.html_safe
     end
   end
