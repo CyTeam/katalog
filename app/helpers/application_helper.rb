@@ -13,17 +13,17 @@ module ApplicationHelper
   end
 
   def add_record_link(form, klass)
-    link_to_function image_tag('icons/add.png'), :id => 'add_record_link' do |page|
-      record = render('containers/new_form', :form => form)
-      page << %{
+    record = render('containers/new_form', :form => form)
+    function = "
 var new_record_id = new Date().getTime();
-var content = "#{ escape_javascript record }";
-content = content.replace(/\\[\\d+\\]/g, "[" + new_record_id + "]");
-content = content.replace(/_\\d+_/g, "_" + new_record_id + "_");
+var content = '#{ escape_javascript record }';
+content = content.replace(/\\[\\d+\\]/g, '[' + new_record_id + ']');
+content = content.replace(/_\\d+_/g, '_' + new_record_id + '_');
 $('#container-list').append(content);
 addContainerSuggestionBehaviour();
-}
-    end
+"
+
+    link_to_function image_tag('icons/add.png'), function, :id => 'add_record_link'
   end
 
   # Navigation
