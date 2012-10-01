@@ -47,15 +47,26 @@ function addAutoAddNewContainer() {
 
 function addSyncFirstContainerYear() {
   var year = $('#dossier_first_document_year');
+  var first_container = $('#container-list .container:first');
+  var period = first_container.find('.container_period input');
 
   year.live('blur', function() {
-    var first_container = $('#container-list .container:first');
-    var period = first_container.find('.container_period input');
-
     if (period.val() == '') {
+      // Add period starting at value
       period.val(year.val() + ' -');
     } else if (/^\d{4}(.*)/.exec(period.val())) {
+      // Update starting of period
       period.val(year.val() + RegExp.$1);
+    }
+  });
+
+  first_container.live('blur', function() {
+    if (!/^(\d{4})/.exec(period.val())) {
+      // Do nothing if we don't understand the format
+      return
+    } else {
+      // Update first_document_year
+      year.val(RegExp.$1);
     }
   });
 }
