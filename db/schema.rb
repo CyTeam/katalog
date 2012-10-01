@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120910140425) do
+ActiveRecord::Schema.define(:version => 20121001090418) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(:version => 20120910140425) do
     t.string   "title"
     t.text     "description"
   end
+
+  add_index "container_types", ["code"], :name => "index_container_types_on_code"
 
   create_table "containers", :force => true do |t|
     t.integer  "dossier_id"
@@ -30,6 +32,8 @@ ActiveRecord::Schema.define(:version => 20120910140425) do
     t.string   "period"
   end
 
+  add_index "containers", ["container_type_id"], :name => "index_containers_on_container_type_id"
+  add_index "containers", ["dossier_id"], :name => "index_containers_on_dossier_id"
   add_index "containers", ["location_id"], :name => "index_containers_on_location_id"
 
   create_table "delayed_jobs", :force => true do |t|
