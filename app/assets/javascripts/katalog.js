@@ -54,6 +54,8 @@ function addSyncFirstContainerYear() {
 
     if (period.val() == '') {
       period.val(year.val() + ' -');
+    } else if (/^\d{4}(.*)/.exec(period.val())) {
+      period.val(year.val() + RegExp.$1);
     }
   });
 }
