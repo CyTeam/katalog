@@ -14,7 +14,7 @@
 
     ~ f.input :relation_list, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.relations.size + 1}
     = f.input :add_relation, :placeholder => true, :input_html => {:style => 'width: 74%'}
-    = f.input :first_document_year, :input_html => {:size => '6'}
+    = f.input :first_document_year, :input_html => {:size => '6', :autocomplete => :off}
     ~ f.input :dossier_number_list, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.numbers.size + 1}
 
   :javascript
