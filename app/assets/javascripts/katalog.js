@@ -1,3 +1,9 @@
+// Dossier Form
+// ============
+function submitDossierForm() {
+  $('form.dossier').submit();
+}
+
 function addContainerSuggestionBehaviour() {
   if(typeof type_codes != 'undefined'){
     $('.container_type_code_auto_completion').autocomplete({
@@ -9,73 +15,6 @@ function addContainerSuggestionBehaviour() {
       source: location_codes
     });
   }
-}
-
-// Edit Reports
-// ============
-function addEditReportBehaviour() {
-  $('#edit_report_header :input, :input.dossier_numbers_year').change(function(){
-    var url = 'http://' + window.location.host + window.location.pathname;
-    var params = $.param($('#edit_report_header :input, :input.dossier_numbers_year, #search_text').serializeArray());
-
-    window.location.replace(url + '?' + params);
-  });
-}
-
-function addUpdateDossierNumberBehaviour() {
-  var inputs = $('#edit_report input.number');
-
-  inputs.focusout(function(){
-    updateNumberAmount(this);
-  });
-
-  inputs.keydown(function(event) {
-    if(event.keyCode == 13) {
-      updateNumberAmount(this);
-    }
-  });
-}
-
-function updateNumberAmount(e){
-  var number_id = $(e).data('number_id');
-  var dossier_id = $(e).data('dossier_id');
-  var year = $(e).data('year');
-  var amount = $(e).val();
-
-  if (number_id) {
-    $.ajax({
-      url: '/dossier_numbers/'+ number_id,
-      type: 'PUT',
-      data: {
-        amount: amount
-      }
-    });
-  } else if (year) {
-    $.ajax({
-      url: '/dossier_numbers.json',
-      type: 'POST',
-      dataType: 'json',
-      data: {
-        dossier_number: {
-          amount:     amount,
-          from_year:  year,
-          to_year:    year,
-          dossier_id: dossier_id
-        }
-      },
-      success: function(id){
-        $(e).data('number_id', id)
-      }
-    });
-  }
-}
-
-
-
-function showVersionsBehaviour(){
-  $('a#show-unchanged').click(function(){
-    $('.unchanged').toggle();
-  });
 }
 
 function addAutoAddNewContainer() {
@@ -176,6 +115,72 @@ function showUnlessNewRecord(container) {
  container.find('.flash').remove();
  container.show();
 }
+// Edit Reports
+// ============
+function addEditReportBehaviour() {
+  $('#edit_report_header :input, :input.dossier_numbers_year').change(function(){
+    var url = 'http://' + window.location.host + window.location.pathname;
+    var params = $.param($('#edit_report_header :input, :input.dossier_numbers_year, #search_text').serializeArray());
+
+    window.location.replace(url + '?' + params);
+  });
+}
+
+function addUpdateDossierNumberBehaviour() {
+  var inputs = $('#edit_report input.number');
+
+  inputs.focusout(function(){
+    updateNumberAmount(this);
+  });
+
+  inputs.keydown(function(event) {
+    if(event.keyCode == 13) {
+      updateNumberAmount(this);
+    }
+  });
+}
+
+function updateNumberAmount(e){
+  var number_id = $(e).data('number_id');
+  var dossier_id = $(e).data('dossier_id');
+  var year = $(e).data('year');
+  var amount = $(e).val();
+
+  if (number_id) {
+    $.ajax({
+      url: '/dossier_numbers/'+ number_id,
+      type: 'PUT',
+      data: {
+        amount: amount
+      }
+    });
+  } else if (year) {
+    $.ajax({
+      url: '/dossier_numbers.json',
+      type: 'POST',
+      dataType: 'json',
+      data: {
+        dossier_number: {
+          amount:     amount,
+          from_year:  year,
+          to_year:    year,
+          dossier_id: dossier_id
+        }
+      },
+      success: function(id){
+        $(e).data('number_id', id)
+      }
+    });
+  }
+}
+
+// Changelog
+function showVersionsBehaviour(){
+  $('a#show-unchanged').click(function(){
+    $('.unchanged').toggle();
+  });
+}
+
 
 function addEditToolTipBehaviour() {
   $('[title!=""]').each(function(){
@@ -212,6 +217,8 @@ function addEditToolTipBehaviour() {
   });
 }
 
+// Search
+// ======
 function addSearchSuggestionBehaviour() {
   var input = $('#search_text');
   // Drop out if no such input box
@@ -276,6 +283,9 @@ function addSearchSuggestionBehaviour() {
   })
 }
 
+
+// Reports
+// =======
 function addReportColumnMultiselectBehaviour() {
   $.extend($.ui.multiselect.locale, {
     addAll:'Alle hinzufügen',
@@ -302,10 +312,6 @@ function informUserAboutBigPDF(amount){
   }else{
     return confirm("Sie sind dran ein grosses PDF zugenerieren.\nDies wird einige Zeit in Anspruchen nehmen können.\nMöchten Sie dies wirklich tun?")
   }
-}
-
-function submitDossierForm() {
-  $('form.dossier').submit();
 }
 
 // Shows the key words in the dossier view.
