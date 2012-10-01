@@ -5,6 +5,7 @@ function submitDossierForm() {
 }
 
 function addContainerSuggestionBehaviour() {
+  // Expects type_codes and location_codes to be defined in view
   if(typeof type_codes != 'undefined'){
     $('.container_type_code_auto_completion').autocomplete({
       source: type_codes
