@@ -111,6 +111,7 @@ de:
         ready:     "Sofort verfügbar"
         wait:      "Wartezeit 1 Tag"
         intern:    "Interne Dokumente"
+        inactive:  "Abgeschlossen"
         warning:   "Für einen Teil der Dokumente besteht eine Wartezeit."
 
     versions:

@@ -29,6 +29,7 @@ module DossiersHelper
     availabilities = availabilities(dossier)
     notes = ""
     notes += availability_text('intern') if availabilities.include?('intern')
+    notes += availability_text('inactive') if availabilities.include?('inactive')
     notes += availability_text('warning') if waiting_for?(dossier)
 
     notes.html_safe

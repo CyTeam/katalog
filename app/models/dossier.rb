@@ -371,6 +371,7 @@ class Dossier < ActiveRecord::Base
   def availability
     availabilities = containers.collect{|c| c.location.availability}
     availabilities << 'intern' if self.internal?
+    availabilities << 'inactive' unless self.active?
 
     availabilities.uniq
   end
@@ -383,6 +384,11 @@ class Dossier < ActiveRecord::Base
   # Returns the container types unified.
   def container_types
     containers.collect{|c| c.container_type}.uniq
+  end
+
+  def active?
+    type_id = ContainerType.find_by_code('DH')
+    containers.where(:container_type_id => type_id).present?
   end
 
   # Returns the document count of a specified period.
