@@ -35,10 +35,6 @@ group :test do
   # Browser
   gem 'capybara'
   gem 'webrat'
-
-  # Autotest
-  gem 'autotest'
-  gem 'autotest-rails'
 end
 
 group :test, :development do
