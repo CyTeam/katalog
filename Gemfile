@@ -97,14 +97,6 @@ gem 'thinking-sphinx'
 gem 'prawn_rails'
 gem 'prawn'
 
-platforms :ruby_18 do
-  # Full text search engine
-  gem 'SystemTimer'
-
-  # Import
-  gem 'fastercsv'
-end
-
 # CRUD helpers
 gem 'show_for'
 

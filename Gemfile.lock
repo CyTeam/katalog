@@ -22,7 +22,6 @@ GEM
   remote: http://rubygems.org/
   specs:
     Ascii85 (1.0.1)
-    SystemTimer (1.2.3)
     actionmailer (3.2.8)
       actionpack (= 3.2.8)
       mail (~> 2.4.4)
@@ -117,7 +116,6 @@ GEM
       railties (>= 3.0.0)
     fancy-buttons (1.2.0)
       compass (>= 0.11)
-    fastercsv (1.5.5)
     ffi (1.1.5)
     formtastic (2.2.1)
       actionpack (>= 3.0)
@@ -283,7 +281,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  SystemTimer
   acts-as-taggable-on
   airbrake
   cancan
@@ -296,7 +293,6 @@ DEPENDENCIES
   devise
   factory_girl_rails
   fancy-buttons
-  fastercsv
   formtastic
   haml
   has_scope
