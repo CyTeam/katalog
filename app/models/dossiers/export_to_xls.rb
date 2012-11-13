@@ -4,7 +4,6 @@
 # ===============
 require 'spreadsheet'
 require 'stringio'
-require 'iconv'
 
 module Dossiers
   module ExportToXls
