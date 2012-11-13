@@ -267,6 +267,9 @@ class Dossier < ActiveRecord::Base
 
   # Create an Array for backlinks
   def back_relations
+    # Guard
+    return [] if self.title.blank?
+
     Dossier.where("related_to LIKE ?", "%#{self.title}%").pluck(:title)
   end
 
