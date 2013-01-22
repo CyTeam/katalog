@@ -31,9 +31,8 @@ Bluepill.application(application, :log_file => "#{shared_dir}/log/bluepill.log")
   app.process("#{application}: sphinx") do |process|
     process.pid_file = "#{shared_dir}/pids/searchd.#{environment}.pid"
 
-    process.start_command = "/usr/local/bin/bundle exec rake ts:rebuild"
-    process.stop_command = "kill -QUIT {{PID}}"
-    process.restart_command = "/usr/local/bin/bundle exec rake ts:rebuild"
+    process.start_command = "/usr/local/bin/bundle exec rake ts:start"
+    process.stop_command = "/usr/local/bin/bundle exec rake ts:stop"
 
     process.start_grace_time = 30.seconds
     process.stop_grace_time = 30.seconds
