@@ -6,7 +6,7 @@
       - if number = dossier.dossier_number_from_year(year)
         %input.number{:tabindex => @tabindex,
                       :type => 'text',
-                      :value => number.amount,
+                      :value => number.amount == 0 ? '' : number.amount,
                       :size => 3,
                       :data => {:number_id => number.id}}
       - else
