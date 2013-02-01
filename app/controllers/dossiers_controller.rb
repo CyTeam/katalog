@@ -187,10 +187,6 @@ class DossiersController < AuthorizedController
     @dossiers = Dossier.with_dangling_relations
   end
 
-  def multi_relations
-    @dossiers = Dossier.with_multi_relations
-  end
-
   private
   def setup_per_page
     params[:per_page] ||= 25
