@@ -306,7 +306,7 @@ DEPENDENCIES
   prawn
   prawn_rails
   rack-google_analytics
-  rails (~> 3.2.11)
+  rails
   rails-erd
   rails_autolink
   raspell!
