@@ -1,5 +1,5 @@
 %tr[dossier]{:class => [cycle('odd', 'even'), (dossier.topic_type if dossier.is_a?(Topic))]}
-  - @report[:columns].each do |attr|
+  - @report.columns.each do |attr|
     %td{:class => attr.to_s}= show_column_for_report(dossier, attr)
   - if @report.years_visible?
     - dossier.years_counts(@report[:collect_year_count], @report[:name]).each do |count|

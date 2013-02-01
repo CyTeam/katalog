@@ -17,6 +17,10 @@ class Report < ActiveRecord::Base
     self.collect_year_count = 1 if (collect_year_count.blank? and years_visible?)
   end
 
+  def columns
+    self[:columns].map(&:presence).compact
+  end
+
   def to_s
     "#{self.class}: #{name}"
   end
