@@ -18,7 +18,7 @@ Katalog::Application.routes.draw do
       get :current
     end
   end
-  
+
   resources :locations
 
   resources :topics do
@@ -27,8 +27,6 @@ Katalog::Application.routes.draw do
     end
   end
 
-  resources :query_topics
-  
   resources :dossiers do
     collection do
       get :search, :overview, :report
@@ -48,7 +46,7 @@ Katalog::Application.routes.draw do
       post :set_amount
     end
   end
-  
+
   get "batch_edit_dossier_numbers" => "batch_edit_dossier_numbers#index"
   get "batch_edit_dossier_numbers/edit" => "batch_edit_dossier_numbers#edit", :as => :edit_batch_edit_dossier_numbers
 
@@ -75,9 +73,9 @@ Katalog::Application.routes.draw do
   resources :search_replaces
 
   resources :visitor_logs
-  
+
   resources :reservations
-  
+
   match "/user_session" => "application#update_session"
 
   root :to => "dossiers#welcome"

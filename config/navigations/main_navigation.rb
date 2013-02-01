@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 # Configures your navigations
-SimpleNavigation::Configuration.run do |navigation|  
+SimpleNavigation::Configuration.run do |navigation|
   # Define the primary navigations
   navigation.items do |primary|
     # doku zug navigations
@@ -16,15 +16,13 @@ SimpleNavigation::Configuration.run do |navigation|
       primary.item :edit, t('katalog.main_navigation.edit'), '#' do |edit|
         edit.item :new_dossier, t('katalog.main_navigation.new_dossier'), new_dossier_path
         edit.item :new_title, t('katalog.main_navigation.new_title'), new_topic_path
-        edit.item :new_query_title, t('katalog.main_navigation.new_query_topic'), new_query_topic_path
-        edit.item :query_title_list, t('katalog.main_navigation.query_topic_list'), query_topics_path
         edit.item :edit_dossier_years, t('katalog.main_navigation.edit_year'), batch_edit_dossier_numbers_path, :highlights_on => /\/batch_edit_dossier_numbers($|\/)/
         edit.item :search_replace, t('katalog.main_navigation.search_replace'), search_replaces_path
         edit.item :versions_nav, t('katalog.main_navigation.changes'), versions_path, :highlights_on => /\/versions($|\/[0-9]*($|\/.*))/
       end
       primary.item :visitor_logs, t('katalog.main_navigation.visitor_logs'), visitor_logs_path, :highlights_on => /\/visitor_logs/
     end
-    
+
     if current_user and current_user.role?(:admin)
       primary.item :adminstration, t('katalog.main_navigation.administration'), '#' do |administration|
         administration.item :users, t('katalog.main_navigation.users'), users_path, :highlights_on => /\/users($|\/new|\/\d*)/
@@ -39,7 +37,7 @@ SimpleNavigation::Configuration.run do |navigation|
         end
       end
     end
-    
+
     if current_user
       primary.item :log_out, t('katalog.main_navigation.logout'), destroy_user_session_path
     else
