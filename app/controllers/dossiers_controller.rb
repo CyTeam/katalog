@@ -93,6 +93,7 @@ class DossiersController < AuthorizedController
 
       # Alphabetic pagination
       if Topic.alphabetic?(@query)
+        @dossiers = @dossiers.where('type IS NULL')
         @paginated_scope = Dossier.accessible_by(current_ability, :index).by_signature(@query)
       end
     end
