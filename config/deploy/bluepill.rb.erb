@@ -33,7 +33,7 @@ Bluepill.application(application, :log_file => "#{shared_dir}/log/bluepill.log")
 
     process.start_command = "/usr/local/bin/bundle exec rake ts:start"
 
-    process.start_grace_time = 30.seconds
+    process.start_grace_time = 60.seconds
     process.stop_grace_time = 30.seconds
     process.restart_grace_time = 30.seconds
   end
