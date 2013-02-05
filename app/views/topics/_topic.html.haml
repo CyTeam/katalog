@@ -4,7 +4,7 @@
     %td.title= link_to topic.title, url_for_topic(topic), {'data-href-container' => 'tr'}
     %td.document_count
       = number_with_delimiter(topic.document_count)
-    %td.action-links
-      - if user_signed_in? and not is_edit_report?
+    - if user_signed_in? and not is_edit_report?
+      %td.action-links
         = link_to image_tag('icons/edit.png'), edit_topic_path(topic)
         = link_to image_tag('icons/delete.png'), topic, :confirm => t_confirm_delete(topic), :remote => true, :method => :delete

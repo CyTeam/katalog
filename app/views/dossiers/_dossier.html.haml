@@ -11,7 +11,7 @@
     %td.document_count
       = number_with_delimiter(dossier.document_count)
       = availability_notes(dossier)
-  %td.action-links
-    - if user_signed_in?
+  - if user_signed_in?
+    %td.action-links
       = link_to image_tag('icons/edit.png'), edit_dossier_path(dossier)
       = link_to image_tag('icons/delete.png'), dossier, :confirm => t_confirm_delete(dossier), :remote => true, :method => :delete

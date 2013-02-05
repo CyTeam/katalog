@@ -7,4 +7,5 @@
     -@years.each do |year|
       %th.year= year
 
-  %th.action-links
+  - if user_signed_in?
+    %th.action-links
