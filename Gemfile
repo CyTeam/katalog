@@ -126,7 +126,7 @@ gem "squeel"
 gem 'settingslogic'
 group :staging, :production do
   # Traffic
-  gem 'rack-google_analytics'
+  gem 'rack-google-analytics'
 
   # Performance
   #gem 'newrelic_rpm'

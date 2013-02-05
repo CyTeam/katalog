@@ -9,7 +9,7 @@ require 'capones_recipes/tasks/settings_logic'
 require 'capones_recipes/tasks/thinking_sphinx'
 require 'capones_recipes/tasks/email'
 require 'capones_recipes/tasks/sync'
-require 'capistrano-unicorn'
+require 'capones_recipes/tasks/bluepill'
 
 load 'deploy/assets'
 
@@ -17,7 +17,6 @@ load 'deploy/assets'
 set :default_stage, "staging"
 
 # Deployment
-set :server, :passenger
 set :user, "deployer"                               # The server's user for deploys
 
 # Configuration
