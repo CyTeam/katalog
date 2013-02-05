@@ -1,4 +1,4 @@
-application = "<%= "#{client}.#{domain}" %>"
+application = "<%= instance %>"
 environment = "<%= rails_env %>"
 shared_dir  = "<%= shared_path %>"
 current_dir = "<%= current_path %>"
@@ -32,7 +32,6 @@ Bluepill.application(application, :log_file => "#{shared_dir}/log/bluepill.log")
     process.pid_file = "#{shared_dir}/pids/searchd.#{environment}.pid"
 
     process.start_command = "/usr/local/bin/bundle exec rake ts:start"
-    process.stop_command = "/usr/local/bin/bundle exec rake ts:stop"
 
     process.start_grace_time = 30.seconds
     process.stop_grace_time = 30.seconds
