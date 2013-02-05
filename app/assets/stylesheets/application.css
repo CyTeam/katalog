@@ -16,6 +16,7 @@
  *= require ./doku-zug.ch/navigation
  *= require ./doku-zug.ch/welcome
  *= require ./doku-zug.ch/application
+ *= require ./doku-zug.ch/footer
  *= require katalog
  *= require scaffold
  *= require formtastic
