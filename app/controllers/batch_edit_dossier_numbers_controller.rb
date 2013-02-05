@@ -31,7 +31,7 @@ class BatchEditDossierNumbersController < ApplicationController
     if padding_years > 0
       @years += [Time.now.year - 1] * padding_years
     elsif padding_years < 0
-      @years = @years[0..(year_amount+1)]
+      @years = @years[0..(year_amount-1)]
     end
 
     @dossiers = apply_scopes(Dossier, params[:edit_report]).by_signature(@query).dossier.paginate :page => params[:page], :per_page => params[:per_page]

@@ -1,6 +1,7 @@
 %tr.container
   %td.container_period
     = container.text_field :period, :style => 'width: 98%'
+    = container.semantic_errors :period
   %td.type_code
     = container.text_field :container_type_code, :size => '2', :class => 'container_type_code_auto_completion'
     = container.semantic_errors :container_type

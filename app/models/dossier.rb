@@ -112,7 +112,7 @@ class Dossier < ActiveRecord::Base
 
   def self.filter_tags(values)
     boring = ["à", "in", "und", "für", "im", "auf", "der", "von", "die", "des", "bis", "über", "diverse", "allgemein", "gegen", "zur", "gelöscht", "&", "mit", "den", "ohne", "eine", "dank", "an"]
-    
+
     values -= boring
     values -= boring.map(&:upcase)
 
@@ -294,26 +294,6 @@ class Dossier < ActiveRecord::Base
     end
 
     dangling
-  end
-
-  def multi_relations
-    relations.select do |relation|
-      Dossier.by_text('"' + relation + '"').count > 1
-    end
-  end
-
-  def has_multi_relations?
-    multi_relations.present?
-  end
-
-  def self.with_multi_relations
-    multi_relation = []
-
-    Dossier.dossier.where('related_to IS NOT NULL').find_each do |dossier|
-      multi_relation << dossier if dossier.has_multi_relations?
-    end
-
-    multi_relation
   end
 
   # Sets the location.

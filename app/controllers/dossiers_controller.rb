@@ -93,6 +93,7 @@ class DossiersController < AuthorizedController
 
       # Alphabetic pagination
       if Topic.alphabetic?(@query)
+        @dossiers = @dossiers.where('type IS NULL')
         @paginated_scope = Dossier.accessible_by(current_ability, :index).by_signature(@query)
       end
     end
@@ -185,10 +186,6 @@ class DossiersController < AuthorizedController
   # Dangling relates_to list
   def dangling_relations
     @dossiers = Dossier.with_dangling_relations
-  end
-
-  def multi_relations
-    @dossiers = Dossier.with_multi_relations
   end
 
   private

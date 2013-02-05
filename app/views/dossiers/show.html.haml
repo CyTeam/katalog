@@ -31,8 +31,15 @@
   #books.section
     %ul
       %li= link_to t_attr(:books_link), @dossier.books_link, :target => '_blank'
-      
+
   %h3= t('katalog.title.document_count_html', :document_count => number_with_delimiter(@dossier.document_count), :first_document => @dossier.first_document_on.try(:strftime, '%Y'))
+  - unless (user_signed_in? || @dossier.waiting_list.empty?)
+    .waiting-time
+      - waiting_years = @dossier.waiting_list
+      %h3= t('activerecord.attributes.dossier.preorder', :years => waiting_years.join(", "))
+      %ul
+        %li= link_to t_attr(:preorder_link), new_dossier_reservation_path(@dossier)
+
   - split_decades(@dossier.numbers.present).each do |decade|
     #document_counts.ce_table
       %table.document_counts
@@ -40,13 +47,6 @@
           = render :partial => 'dossier_numbers/head', :collection => decade
         %tr.odd
           = render :partial => 'dossier_numbers/amount', :collection => decade
-
-  - unless (user_signed_in? || @dossier.waiting_list.empty?)
-    .waiting-time
-      - waiting_years = @dossier.waiting_list
-      %h3= t('activerecord.attributes.dossier.preorder', :years => waiting_years.join(", "))
-      %ul
-        %li= link_to t_attr(:preorder_link), new_dossier_reservation_path(@dossier)
 
   - if user_signed_in?
     #containers.ce_table

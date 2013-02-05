@@ -10,7 +10,7 @@ class DossierNumber < ActiveRecord::Base
   belongs_to :dossier, :touch => true, :inverse_of => :numbers
 
   after_save lambda { dossier.touch }
-  
+
   # Validation
   validate :presence_of_from_or_to
 
@@ -19,12 +19,12 @@ class DossierNumber < ActiveRecord::Base
   scope :present, where("amount > 0")
   scope :by_period, lambda {|value|
     from, to = from_s(value)
-    
+
     where(:from => from, :to => to)
   }
   scope :between, lambda {|value|
     from, to = from_s(value)
-    
+
     if from.present?
       where("(`from` IS NULL AND `to` >= :to) OR (`from` >= :from AND `to` <= :to) OR (`from` <= :from AND `to` IS NULL)", {:from => from, :to => to})
     else
@@ -36,7 +36,7 @@ class DossierNumber < ActiveRecord::Base
   def self.from_s(value)
     # Convert integers to string
     value = value.to_s
-    
+
     period, amount_s = value.split(':')
     if period =~ /-/
       from, to = period.split('-').map{|year| year.present? ? year.to_i : nil}
@@ -99,7 +99,7 @@ class DossierNumber < ActiveRecord::Base
     return nil unless (from_year or to_year)
 
     return "vor %i" % (to_year.try(:year).to_i + 1) if format == :default && from_year.nil? && to_year
-    
+
     return from_year.try(:year) if from_year.try(:year) == to_year.try(:year)
 
     [from_year.try(:year) || '', to_year.try(:year) || ''].compact.join(' - ')
@@ -109,27 +109,31 @@ class DossierNumber < ActiveRecord::Base
   def self.as_string(from, to, amount, format = :default)
     "#{self.period(from, to, format)}: #{amount}"
   end
-  
+
   def to_s(format = :default)
     case format
     when :long
       "#{dossier}: #{period(format)}: #{amount}"
     else
-      "#{period(format)}: #{amount}"
+      if amount == 0
+        "#{period(format)}: "
+      else
+        "#{period(format)}: #{amount}"
+      end
     end
   end
 
   # Returns from which year the dossier number is.
   def from_year
     return nil unless from
-    
+
     from.try(:year).to_s
   end
 
   # Sets the from year of the dossier number.
   def from_year=(value)
     return self.from = nil if value.nil?
-    
+
     self.from = Date.new(value.to_i, 1, 1)
   end
 
@@ -143,18 +147,18 @@ class DossierNumber < ActiveRecord::Base
   # Sets the to year of the dossier number.
   def to_year=(value)
     return self.to = nil if value.nil?
-    
+
     self.to = Date.new(value.to_i, 12, 31)
   end
 
   # Returns the period of the dossier number.
   def period(format = :default)
     return nil unless (from_year or to_year)
-    
+
     return "vor %i" % (to_year.to_i + 1) if format == :default && from_year.nil? && to_year
-    
+
     return from_year if from_year == to_year
-    
+
     [from_year || '', to_year || ''].compact.join(' - ')
   end
 

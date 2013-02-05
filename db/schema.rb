@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121001090418) do
+ActiveRecord::Schema.define(:version => 20130201104515) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(:version => 20121001090418) do
     t.boolean  "delta",             :default => true,  :null => false
     t.text     "description"
     t.boolean  "internal",          :default => false
-    t.string   "query"
     t.string   "sort_key"
     t.string   "sort_title"
   end

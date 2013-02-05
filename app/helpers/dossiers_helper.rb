@@ -37,13 +37,11 @@ module DossiersHelper
 
   def waiting_for?(dossier)
     availabilities = availabilities(dossier)
-    
+
     availabilities.include?('wait') ? true : false
   end
 
   def url_for_topic(topic)
-    return query_topic_path(topic) if topic.kind_of?(QueryTopic)
-
     if is_edit_report?
       edit_batch_edit_dossier_numbers_path(:search => {:text => topic.signature})
     else
