@@ -148,7 +148,6 @@ class DossiersController < AuthorizedController
     end
   end
 
-
   # Report Actions
   # ==============
   def report
@@ -203,8 +202,12 @@ class DossiersController < AuthorizedController
     @query = params[:search][:text].try(:strip) || ''
 
     signatures, words, sentences = Dossier.split_search_words(@query)
+    sentences = sentences.map{ |s| s.delete('"') }
 
     @signature_search = signatures.present? && words.empty? && sentences.empty?
+    @mixed_search = signatures.present? && (words.present? || sentences.present?)
+    @query_signatures = signatures
+    @query_text = (words + sentences).compact.join(' ')
   end
 
   def index_excel

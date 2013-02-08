@@ -291,6 +291,7 @@ de:
   messages:
     confirm_delete: "%{record} löschen?"
     spelling_suggestion: "Meinten Sie: "
+    mixed_search_html: "Es wurde nach %{query_text} in der Signatur %{query_signature} gesucht. Möchten Sie nach %{string_search}"
 
   crud:
     edit:  "%{model} bearbeiten"

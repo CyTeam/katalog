@@ -101,6 +101,12 @@ EOF
     end
   end
 
+  def string_search(query)
+    query = '"' + query + '"'
+
+    link_to(query, :search => {:text => query})
+  end
+
   def user_cache_key
     cache_key = [(user_signed_in? ? :signed_in : :signed_out)]
     cache_key = current_user.roles.map{|role| role.to_s.downcase } if current_user

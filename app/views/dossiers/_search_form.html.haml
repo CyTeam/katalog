@@ -15,3 +15,10 @@
       = t('messages.spelling_suggestion')
       - @spelling_suggestion.each_pair do |key, suggestion|
         = spelling_suggestion_link(key, suggestion)
+
+- if @mixed_search.present?
+  %p
+    = t('messages.mixed_search_html',
+        :query_text => link_to(@query_text, :search => {:text => @query_text}),
+        :query_signature => link_to(@query_signatures.join(' '), :search => {:signatures => @query_signatures}),
+        :string_search => string_search(@query))
