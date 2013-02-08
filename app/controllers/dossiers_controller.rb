@@ -201,7 +201,10 @@ class DossiersController < AuthorizedController
   def setup_query
     params[:search] ||= {}
     @query = params[:search][:text].try(:strip) || ''
-    @signature_search = /^[0-9.]{1,8}$/.match(@query)
+
+    signatures, words, sentences = Dossier.split_search_words(@query)
+
+    @signature_search = signatures.present? && words.empty? && sentences.empty?
   end
 
   def index_excel
