@@ -31,6 +31,7 @@ module Dossiers
 
         # Attributes
         has created_at, updated_at
+        has "type = 'Topic'", :type => :boolean, :as => :is_topic
         has type
         has internal
         has "signature LIKE '17%'", :type => :boolean, :as => :is_local
@@ -43,6 +44,7 @@ module Dossiers
         # Only include internal dossiers if user is logged in
         attributes = {}
         attributes[:internal] = false if (options.delete(:internal) == false)
+        attributes[:is_topic] = false if options.delete(:skip_topics)
 
         params = {:retry_stale => true, :match_mode => :extended, :with => attributes, :sort_mode => :expr, :order => "@weight * (1.5 - is_local)"}
         params.merge!(options)
