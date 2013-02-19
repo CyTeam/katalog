@@ -5,7 +5,7 @@ require 'raspell'
 
 class DossiersController < AuthorizedController
   # Authentication
-  before_filter :authenticate_user!, :except => [:index, :search, :show, :report, :welcome]
+  before_filter :authenticate_user!, :except => [:index, :search, :show, :report, :welcome, :sitemap]
 
   # Responders
   respond_to :html, :js, :json, :xls, :pdf
@@ -15,6 +15,11 @@ class DossiersController < AuthorizedController
 
   # CRUD Actions
   # ============
+  skip_load_and_authorize_resource :only => :sitemap
+  def sitemap
+    @dossiers = Dossier.accessible_by(current_ability, :index)
+  end
+
   def show
     # Set query for highlighting and search form prefill
     @query = params[:search][:text] if params[:search]
