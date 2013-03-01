@@ -25,6 +25,7 @@ group :assets do
   gem 'fancy-buttons'
 end
 
+gem 'jquery-rails'
 
 # Test
 # ===
@@ -68,7 +69,6 @@ group :development do
   # Deployment
   gem 'capones_recipes'
 end
-gem 'jquery-rails'
 
 # Standard helpers
 # ================
