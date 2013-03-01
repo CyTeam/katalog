@@ -90,7 +90,7 @@ class DossiersController < AuthorizedController
     redirect_on_single_result = true
 
     if !@signature_search
-      @dossiers = Dossier.by_text(@query, :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?, :include => [:location, :containers])
+      @dossiers = Dossier.by_text(@query, :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?, :skip_topics => (params[:skip_topics] == "1"), :include => [:location, :containers])
     else
       @dossiers = apply_scopes(Dossier, params[:search]).by_signature(@query).includes(:containers => :location).accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
 

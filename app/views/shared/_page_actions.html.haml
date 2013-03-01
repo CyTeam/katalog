@@ -6,6 +6,10 @@
       %ul
         - for report in available_reports
           %li= link_to(report.title, report_dossiers_path(:report_name => report.name, :search => params[:search]))
+  - if params[:skip_topics].nil?
+    = link_to(image_tag('icons/hide_title.png'), search_dossiers_url(:search => {:text => @query}, :skip_topics => 1), :class => 'icon')
+  - else
+    = link_to(image_tag('icons/show_title.png'), search_dossiers_url(:search => {:text => @query}), :class => 'icon')
 
   = contextual_pdf_link(@dossiers.length)
   - if (user_signed_in? and not @is_a_report)
