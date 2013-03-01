@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/sosedoff/capistrano-unicorn.git
-  revision: bafc12cd8235307d30b5c85259914d17c5ece2d3
-  specs:
-    capistrano-unicorn (0.1.6)
-      capistrano
-
-GIT
   remote: http://github.com/huerlisi/rack-google-analytics
   revision: 00f117800dd2ad9163ab3c51faab2f5836f17d2b
   specs:
@@ -289,7 +282,6 @@ DEPENDENCIES
   acts-as-taggable-on
   airbrake
   cancan
-  capistrano-unicorn!
   capones_recipes
   capybara
   ckeditor

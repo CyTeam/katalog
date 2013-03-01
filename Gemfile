@@ -5,6 +5,9 @@ source 'http://rubygems.org'
 # Rails
 # =====
 gem 'rails'
+
+# Unicorn
+# =======
 gem 'unicorn'
 
 # Database
@@ -64,7 +67,6 @@ group :development do
 
   # Deployment
   gem 'capones_recipes'
-  gem 'capistrano-unicorn', :git => 'git://github.com/sosedoff/capistrano-unicorn.git', :require => false
 end
 gem 'jquery-rails'
 
