@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130201104515) do
+ActiveRecord::Schema.define(:version => 20130307091833) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(:version => 20130201104515) do
     t.integer  "dossier_id"
     t.string   "dossier_years"
     t.string   "email"
-    t.datetime "pickup"
+    t.date     "pickup"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
