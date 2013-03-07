@@ -1,0 +1,13 @@
+1.9.0
+=====
+
+* Search for number and text gives option to quote the search.
+* Add dossiers/sitemap.xml.
+* Relations don't link_to topics.
+* Add sitemap to robots.txt
+* Add links to show/hide titles in search results.
+* Add filter words for tag cloud (Zug, CH, Europa, international)
+* Add dependencies to deploy.rb.
+* Sync error page footer with other pages.
+* Add generic AJAX destroy handler from Hozr.
+* User Datepicker and only date for reservation pickup field.
