@@ -41,8 +41,8 @@ class Dossier < ActiveRecord::Base
   scope :by_level, lambda {|level| where("char_length(dossiers.signature) <= ?", self.level_to_prefix_length(level))}
   scope :by_signature, lambda {|value| where("dossiers.signature LIKE CONCAT(?, '%')", value)}
   scope :by_character, lambda {|value| where("dossiers.sort_title LIKE CONCAT(?, '%')", value)}
-  scope :by_location, lambda {|value| where(:id => Container.where('location_id = ?', Location.find_by_code(value)).map{|c| c.dossier_id}.uniq)} # TODO: check if arel provides nicer code
-  scope :by_container_type, lambda {|value| where(:id => Container.where('container_type_id = ?', ContainerType.find_by_code(value)).map{|c| c.dossier_id}.uniq)}
+  scope :by_location, lambda {|value| includes(:containers).where("containers.location_id" => Location.find_by_code(value).id)}
+  scope :by_container_type, lambda {|value| includes(:containers).where("containers.container_type_id" => ContainerType.find_by_code(value).id)}
 
 
   # Pagination scope

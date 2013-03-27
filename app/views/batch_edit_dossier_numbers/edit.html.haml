@@ -8,10 +8,10 @@
     = select 'edit_report', 'year_amount', 1..10, {:selected => @years.count}
 
     %label= t_attr('container_type', Container)
-    = select 'edit_report', 'container_type', ContainerType.all, :include_blank => true
+    = select 'edit_report', 'container_type', ContainerType.all.collect{|container| [container.to_s, container.code] }, :include_blank => true, :selected => (params[:edit_report] ? params[:edit_report][:container_type] : '')
 
     %label= t_attr('location', Container)
-    = select 'edit_report', 'location', Location.all, :include_blank => true
+    = select 'edit_report', 'location', Location.all.collect{|location| [location.to_s, location.code] }, :include_blank => true, :selected => (params[:edit_report] ? params[:edit_report][:location] : '')
 
   = paginated_section @dossiers, :renderer => PaginationListLinkRenderer do
     .ce_table.block
