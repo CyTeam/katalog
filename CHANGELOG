@@ -1,3 +1,7 @@
+1.9.2
+=====
+* Fix location and container type filter in batch edit.
+
 1.9.1
 =====
 This is a security update. Everyone is advised to update.
