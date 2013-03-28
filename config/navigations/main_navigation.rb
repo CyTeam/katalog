@@ -17,6 +17,7 @@ SimpleNavigation::Configuration.run do |navigation|
         edit.item :new_dossier, t('katalog.main_navigation.new_dossier'), new_dossier_path
         edit.item :new_title, t('katalog.main_navigation.new_title'), new_topic_path
         edit.item :edit_dossier_years, t('katalog.main_navigation.edit_year'), batch_edit_dossier_numbers_path, :highlights_on => /\/batch_edit_dossier_numbers($|\/)/
+        edit.item :container_counting, t('container_counting.index.title'), container_counting_path
         edit.item :search_replace, t('katalog.main_navigation.search_replace'), search_replaces_path
         edit.item :versions_nav, t('katalog.main_navigation.changes'), versions_path, :highlights_on => /\/versions($|\/[0-9]*($|\/.*))/
       end

@@ -333,3 +333,7 @@ de:
   visitor_logs:
     index:
       title: Logbuch
+
+  container_counting:
+    index:
+      title: Dossiers zählen

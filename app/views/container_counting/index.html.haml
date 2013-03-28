@@ -1,0 +1,22 @@
+%h1= t_title
+
+= form_tag nil, :class => 'formtastic' do
+  %fieldset.inputs
+    %ol
+      %li
+        %label= t_attr('container_type', Container)
+        = select '', 'container_type', ContainerType.all.collect{|container| [container.to_s, container.code] }, :include_blank => true, :selected => params[:container_type]
+
+    %ol
+      %li
+        %label= t_attr('location', Container)
+        = select '', 'location', Location.all.collect{|location| [location.to_s, location.code] }, :include_blank => true, :selected => params[:location]
+
+  %fieldset.actions
+    %ol
+      %li
+        = submit_tag 'Suchen'
+
+  .ce_table.block
+    %table
+      = render :partial => 'dossier', :collection => @dossiers

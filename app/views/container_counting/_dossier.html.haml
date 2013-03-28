@@ -1,0 +1,10 @@
+%tr[dossier]
+  %th= dossier.signature
+  %th= dossier.title
+
+- reset_cycle
+
+- dossier.containers.each do |container|
+  %tr[container]{:class => cycle('even', 'odd')}
+    %td= "%s@%s" % [container.container_type.code, container.location.code]
+    %td= container.period
