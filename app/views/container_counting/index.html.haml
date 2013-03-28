@@ -4,6 +4,10 @@
   %fieldset.inputs
     %ol
       %li
+        %label= t_attr('signature', Dossier)
+        = text_field '', 'signature', :value => params[:signature]
+    %ol
+      %li
         %label= t_attr('container_type', Container)
         = select '', 'container_type', ContainerType.all.collect{|container| [container.to_s, container.code] }, :include_blank => true, :selected => params[:container_type]
 
