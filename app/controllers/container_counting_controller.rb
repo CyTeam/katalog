@@ -10,7 +10,7 @@ class ContainerCountingController < ApplicationController
     if params[:container_type].present? || params[:location].present? || params[:signature].present?
       @dossiers = apply_scopes(Dossier, params).dossier
     else
-      @dossiers = nil
+      @dossiers = []
     end
   end
 end
