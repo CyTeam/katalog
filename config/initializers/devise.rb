@@ -41,13 +41,15 @@ Devise.setup do |config|
   # Setup a pepper to generate the encrypted password.
   config.pepper = "8a70a9054cc3496f8dc038f60442b91935c57ed4b62018f835649dc156313da65cb01d27cccabf4ec39183df55d44f2cc067ad993964873b123c68299707d5ac"
 
+  config.secret_key = 'b1c990981d991f801849fbdf90dcbd4e658442ab475f836e170fa870eb00ca6ba3cdc54ef968711984bf5ff109408ff49060091574893788e7addc773391f889'
+
   # ==> Configuration for :confirmable
   # The time you want to give your user to confirm his account. During this time
   # he will be able to access your application without confirming. Default is nil.
-  # When confirm_within is zero, the user won't be able to sign in without confirming. 
-  # You can use this to let your user access some features of your application 
-  # without confirming the account, but blocking it after a certain period 
-  # (ie 2 days). 
+  # When confirm_within is zero, the user won't be able to sign in without confirming.
+  # You can use this to let your user access some features of your application
+  # without confirming the account, but blocking it after a certain period
+  # (ie 2 days).
   # config.confirm_within = 2.days
 
   # ==> Configuration for :rememberable
