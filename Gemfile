@@ -52,6 +52,11 @@ group :test, :development do
   # Integration
   # gem 'cucumber-rails'
   # gem 'cucumber'
+
+  # Console
+  gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'pry-debugger'
 end
 
 # Development
