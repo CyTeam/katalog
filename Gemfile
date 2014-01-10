@@ -67,6 +67,7 @@ group :development do
   gem 'hpricot'
 
   # Deployment
+  gem 'capistrano', '~> 2.15.5'
   gem 'capones_recipes'
 end
 
@@ -93,7 +94,7 @@ gem 'cancan'
 gem 'acts-as-taggable-on'
 
 # Search
-gem 'thinking-sphinx'
+gem 'thinking-sphinx', '~> 2.1.0'
 
 # Reports
 gem 'prawn_rails'
