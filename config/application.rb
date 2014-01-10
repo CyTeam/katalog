@@ -31,6 +31,8 @@ module Katalog
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = 'Bern'
 
+    config.i18n.enforce_available_locales = true
+
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     config.i18n.fallbacks = [:'de-CH', :de]
     config.i18n.default_locale = 'de-CH'
