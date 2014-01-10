@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130307091833) do
+ActiveRecord::Schema.define(:version => 20140110142353) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -164,13 +164,13 @@ ActiveRecord::Schema.define(:version => 20130307091833) do
   add_index "tags", ["name"], :name => "index_tags_on_name", :length => {"name"=>10}
 
   create_table "users", :force => true do |t|
-    t.string   "email",                               :default => "", :null => false
-    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                       :default => "", :null => false
+    t.string   "email",                                 :default => "", :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.string   "password_salt",                         :default => "", :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                       :default => 0
+    t.integer  "sign_in_count",                         :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -178,6 +178,7 @@ ActiveRecord::Schema.define(:version => 20130307091833) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username"
+    t.datetime "reset_password_sent_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
