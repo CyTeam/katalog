@@ -1,9 +1,10 @@
-%h2 Forgot your password?
-= form_for(resource, :as => resource_name, :url => password_path(resource_name)) do |f|
+%h2= t('devise.forgot_your_password')
+
+= semantic_form_for(resource, :as => resource_name, :url => password_path(resource_name)) do |f|
   = devise_error_messages!
-  %p
-    = f.label :email
-    %br/
-    = f.text_field :email
-  %p= f.submit "Send me reset password instructions"
+  = f.inputs do
+    = f.input :email, :input_html => {'data-autofocus' => true}
+  = f.actions do
+    = f.button t('devise.send_reset_instructions')
+
 = render :partial => "devise/shared/links"
