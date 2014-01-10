@@ -1,47 +1,8 @@
-We currently support installing on Debian 5.0 Lenny and Ubuntu 11.04 Natty systems.
-
-h2. Install rubygems
-
-To get access to the binaries provided by rails and other gems you need to extend your PATH.
-
-<pre>
-export PATH=/var/lib/gems/1.8/bin:$PATH
-</pre>
-
-h3. Alternative Installation
-
-The second possibility to install ruby via RVM (Ruby version manager).
-Dependencies for RVM: see here http://rvm.beginrescueend.com/packages/
-
-Install RVM with and follow the instructions:
-
-<pre>
-bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )
-</pre>
-
-After the installation of RVM you can install the latest version of Ruby 1.8.7 or 1.9.2 (actually the export to an excel sheet doesn't works) with:
-
-<pre>
-rvm install ruby-1.8.7
-</pre>
-
-or
-
-<pre>
-rvm install ruby-1.9.2
-</pre>
-
-
-Install gems for use:
-<pre>
-gem install bundler
-</pre>
-
-After that you can jump directly to step "Install katalog".
+We currently support installing on Debian 5.0 and modern Ubunty systems.
 
 h2. Install Ruby'n'Rails
 
-katalog is developed and tested using Rails 3.0.11 and Ruby 1.8.7 or 1.9.2
+katalog is developed and tested using Rails 3.2 and Ruby 1.9
 
 Install packages to support installing rails:
 
@@ -90,7 +51,7 @@ cp config/database.yml.example config/database.yml
 Initialize the database:
 
 <pre>
-rake db:setup
+bundle exec rake db:setup
 </pre>
 
 Setup freetext search
@@ -102,7 +63,5 @@ sudo apt-get install sphinxsearch
 Initialize the search index:
 
 <pre>
-rake ts:rebuild
+bundle exec rake ts:rebuild katalog:raspell:update
 </pre>
-
-When the startup fails a possible error could be a false port, so change the port from 9312 to 9311.
