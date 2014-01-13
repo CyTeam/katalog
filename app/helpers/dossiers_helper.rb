@@ -53,12 +53,19 @@ module DossiersHelper
     link_to(topic, url_for_topic(topic), options)
   end
 
+  # Best title based on query
+  #
+  # @returns
+  #   * topic title if a single signature is searched for
+  #   * annotated query string otherwise
   def search_title
-    if @signature_search
-      return Dossier.by_signature(@query).first
-    else
-      return t('katalog.search_for', :query => @query)
+    if @signature_search && @query_signatures.count == 1
+      if topic = Topic.by_signature(@query_signatures.first).first
+        return topic
+      end
     end
+
+    return t('katalog.search_for', :query => @query)
   end
 
   # Reports
