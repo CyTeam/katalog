@@ -5,9 +5,9 @@
 class Topic < Dossier
   # Alphabetic topics
   ALPHABETIC = {
-    '15.0' => 'Personen',
-    '56.0' => 'Firmen',
-    '81.5.000' => 'Länder'
+    '15' => 'Personen',
+    '56' => 'Firmen',
+    '81.5' => 'Länder'
   }
 
   # Checks if a signature is alphabetic.
