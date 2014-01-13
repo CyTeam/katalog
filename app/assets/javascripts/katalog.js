@@ -272,7 +272,7 @@ function addSearchSuggestionBehaviour() {
       input.val( ui.item.label + " ");
       return false;
     }
-  }).data("autocomplete")._renderItem = function( ul, item) {
+  }).data("uiAutocomplete")._renderItem = function( ul, item) {
     return $( "<li></li>" )
         .data( "item.autocomplete", item )
         .append(
