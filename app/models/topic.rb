@@ -20,17 +20,21 @@ class Topic < Dossier
   end
 
   # Returns which type of Topic it is.
+  #
+  # :local is special in that we do not support it in #direct_children etc.
   def topic_type
     return if signature.nil?
 
-    case level
+    case signature.length
       when 1
         :group
       when 2
         :main
-      when 3
-        :geo
       when 4
+        :geo
+      when 7
+        :local
+      when 8
         :detail
     end
   end
