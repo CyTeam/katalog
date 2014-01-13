@@ -5,18 +5,17 @@
 class Topic < Dossier
   # Alphabetic topics
   ALPHABETIC = {
-    '15.0.100' => 'Personen',
-    '56.0.130' => 'Firmen',
-    '56.0.500' => 'Öko-ethische Geldanlagen. Ökoinvest-Firmen',
+    '15.0' => 'Personen',
+    '56.0' => 'Firmen',
     '81.5.000' => 'Länder'
   }
 
   # Checks if a signature is alphabetic.
   def self.alphabetic?(signature)
     for alphabetic in ALPHABETIC.keys
-      return true if alphabetic.starts_with?(signature)
+      return true if signature.starts_with?(alphabetic)
     end
-    
+
     return false
   end
 
@@ -42,7 +41,7 @@ class Topic < Dossier
         :detail
     end
   end
-  
+
   # Associations
   has_many :dossiers, :foreign_key => :parent_id
 
@@ -61,7 +60,7 @@ class Topic < Dossier
   def children
     Dossier.where("signature LIKE CONCAT(?, '%')", signature).where("dossiers.id != ?", id)
   end
-  
+
   # Returns the direct children of the current Topic.
   def direct_children
     result = children
@@ -85,12 +84,12 @@ class Topic < Dossier
       child.signature = child.signature.gsub(/^#{self.signature}/, value)
       child.save
     end
-    
+
     self.signature = value
 
     save
   end
-  
+
   # Title which is constructed from the next childrens
   def overview_title
     "#{self.signature}: " + direct_children.collect {|c| c.title.split(".").first }.join('. ')
