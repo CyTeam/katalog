@@ -16,6 +16,7 @@ module Dossiers
 
         # Indexed Fields
         indexes title
+        indexes description
         indexes signature
         # Use _taggings relation to fix thinking sphinx issue #167
         indexes keyword_taggings.tag.name, :as => :keywords
