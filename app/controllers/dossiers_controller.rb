@@ -106,7 +106,7 @@ class DossiersController < AuthorizedController
     if not request.format.json?
       # Directly show single match
       if redirect_on_single_result && @dossiers.count == 1
-        redirect_to dossier_path(@dossiers.first, :search => {:text => @query})
+        redirect_to polymorphic_path(@dossiers.first, :search => {:text => @query})
       # Give spellchecking suggestions
       elsif @dossiers.count == 0
         spell_checker = Aspell.new1({"dict-dir" => Rails.root.join('db', 'aspell').to_s, "lang"=>"kt", "encoding"=>"UTF-8"})

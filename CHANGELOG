@@ -10,6 +10,7 @@ Fixes
 * Better titles for searches by signatures.
 * Show topics in alphabetic topics.
 * Add topic type :local and use red-gray background.
+* Show single match topic as topic, not dossier.
 
 
 1.9.2
