@@ -19,13 +19,6 @@ class Topic < Dossier
     return false
   end
 
-  # Returns all sub topics alphabetical.
-  def self.alphabetic_sub_topics
-    ALPHABETIC.collect {|key, value|
-      self.by_signature(key).where(["title LIKE ?", "#{value} %"])
-    }
-  end
-
   # Returns which type of Topic it is.
   def topic_type
     return if signature.nil?
