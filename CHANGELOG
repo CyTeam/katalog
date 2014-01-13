@@ -1,3 +1,12 @@
+1.10.0
+======
+Fixes
+* Tooltips with number counts in search lists are not cut off when near the window border.
+* Change 'Suche' to 'Neue Suche'
+* Change 'Schlagworte' to 'Schlagwörter'
+* Include Dossier description to search index
+* Fix layout breaks for few results
+
 1.9.2
 =====
 * Fix location and container type filter in batch edit.
