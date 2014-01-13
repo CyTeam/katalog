@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-class TopicsController < AuthorizedController 
+class TopicsController < AuthorizedController
   include DossiersHelper
   # Authentication
   before_filter :authenticate_user!, :except => [:index, :show, :navigation]
@@ -23,16 +23,16 @@ class TopicsController < AuthorizedController
   def index
     redirect_to dossiers_path
   end
-  
+
   def create
     create! do |format|
       format.html do
-        flash[:notice] = t('katalog.created')
+        flash[:notice] = t('katalog.created', :signature => resource.signature, :title => resource.title)
         redirect_to new_resource_url
       end
     end
   end
-  
+
   def navigation
     show! do |format|
       format.html do
