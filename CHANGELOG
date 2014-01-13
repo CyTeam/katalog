@@ -2,10 +2,15 @@
 ======
 Fixes
 * Tooltips with number counts in search lists are not cut off when near the window border.
-* Change 'Suche' to 'Neue Suche'
-* Change 'Schlagworte' to 'Schlagwörter'
-* Include Dossier description to search index
-* Fix layout breaks for few results
+* Change 'Suche' to 'Neue Suche'.
+* Change 'Schlagworte' to 'Schlagwörter'.
+* Include Dossier description to search index.
+* Fix layout breaks for few results.
+* Fix flash message when creating a topic.
+* Better titles for searches by signatures.
+* Show topics in alphabetic topics.
+* Add topic type :local and use red-gray background.
+
 
 1.9.2
 =====
