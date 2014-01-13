@@ -50,7 +50,7 @@ function addSyncFirstContainerYear() {
   var first_container = $('#container-list .container:first');
   var period = first_container.find('.container_period input');
 
-  year.live('blur', function() {
+  year.on('blur', function() {
     if (period.val() == '') {
       // Add period starting at value
       period.val(year.val() + ' -');
@@ -60,7 +60,7 @@ function addSyncFirstContainerYear() {
     }
   });
 
-  first_container.live('blur', function() {
+  first_container.on('blur', function() {
     if (!/^(\d{4})/.exec(period.val())) {
       // Do nothing if we don't understand the format
       return
@@ -211,21 +211,11 @@ function addEditToolTipBehaviour() {
       show: {
         solo: true
       },
-      style: {
-        name: 'blue',
-        tip: true,
-        width: 200,
-        background: '#E5E8E9',
-        color: '#00669C',
-        border: {
-          color: '#00669C'
-        }
-      },
       position: {
-        corner: {
-          target: 'topRight',
-          tooltip: 'bottomLeft'
-        }
+        my: 'left center',
+        at: 'right center',
+        viewport: $(window)
+
       }
     });
   });
