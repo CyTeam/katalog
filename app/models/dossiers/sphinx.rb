@@ -72,7 +72,7 @@ module Dossiers
             words << string
           elsif is_ordinal_signature?(string)
             # signature is as ordinal by index
-            signatures << string + "."
+            signatures << string
           elsif is_signature?(string)
             if (string.include?'.') || string.length == 1
               signatures << string
