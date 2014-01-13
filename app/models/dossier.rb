@@ -2,6 +2,7 @@
 
 # This class represents a dossier with many containers.
 class Dossier < ActiveRecord::Base
+  attr_accessible :container_type_code, :location_code, :internal, :signature, :title, :description, :keyword_text, :relation_list, :add_relation, :first_document_year, :dossier_number_list, :containers_attributes
 
   # PaperTrail: change log
   has_paper_trail :ignore => [:created_at, :updated_at, :search_key, :delta],

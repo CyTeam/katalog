@@ -10,9 +10,9 @@ class Container < ActiveRecord::Base
   after_save lambda { dossier.touch }
 
   belongs_to :location
-  attr_accessible :location
+  attr_accessible :location, :location_code
   belongs_to :container_type
-  attr_accessible :container_type
+  attr_accessible :container_type, :container_type_code
 
   # Validations
   validates_presence_of :period, :dossier, :location, :container_type
