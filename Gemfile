@@ -44,15 +44,16 @@ end
 
 group :test, :development do
   # Framework
-  # gem "rspec"
-  # gem 'rspec-rails'
+  gem 'rspec-rails'
 
   # Fixtures
   gem 'factory_girl_rails'
+  gem 'database_cleaner'
 
-  # Integration
-  # gem 'cucumber-rails'
-  # gem 'cucumber'
+  # Browser
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'poltergeist'
 
   # Console
   gem 'pry-rails'
