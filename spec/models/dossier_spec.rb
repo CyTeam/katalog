@@ -79,31 +79,85 @@ describe Dossier do
     it "should return empty array when nil" do
       dossier = FactoryGirl.build(:dossier, :related_to => nil)
 
-      dossier.relations.should == []
+      dossier.relations.should be_empty
     end
 
     it "should return empty array when blank" do
       dossier = FactoryGirl.build(:dossier, :related_to => '  ')
 
-      dossier.relations.should == []
+      dossier.relations.should be_empty
     end
 
     it "should split at ;" do
       dossier = FactoryGirl.build(:dossier, :related_to => 'City counsil; City history')
 
-      dossier.relations.should == ['City counsil', 'City history']
+      dossier.relations.should =~ ['City counsil', 'City history']
     end
 
     it "should strip whitespaces" do
       dossier = FactoryGirl.build(:dossier, :related_to => ' City counsil; City history ')
 
-      dossier.relations.should == ['City counsil', 'City history']
+      dossier.relations.should =~ ['City counsil', 'City history']
     end
 
     it "should drop empty relations" do
       dossier = FactoryGirl.build(:dossier, :related_to => '; City counsil;; City history ')
 
-      dossier.relations.should == ['City counsil', 'City history']
+      dossier.relations.should =~ ['City counsil', 'City history']
+    end
+  end
+
+  describe "#related_dossiers" do
+    it "should return dossiers with exact matches" do
+      counsil = FactoryGirl.create(:dossier, :title => 'City counsil')
+      history = FactoryGirl.create(:dossier, :title => 'City history')
+      dossier = FactoryGirl.build(:dossier, :related_to => 'City counsil; City history')
+
+      dossier.related_dossiers.should =~ [counsil, history]
+    end
+
+    it "should not return dossiers with partial matches" do
+      counsil = FactoryGirl.create(:dossier, :title => 'City')
+      history = FactoryGirl.create(:dossier, :title => 'City history book')
+      dossier = FactoryGirl.build(:dossier, :related_to => 'City counsil; City history')
+
+      dossier.related_dossiers.should be_empty
+    end
+
+    it "should return dossiers linking back" do
+      counsil = FactoryGirl.create(:dossier, :title => 'City counsil')
+      history = FactoryGirl.create(:dossier, :title => 'City history')
+      dossier = FactoryGirl.create(:dossier, :related_to => 'City counsil; City history')
+
+      counsil.related_dossiers.should =~ [dossier]
+      history.related_dossiers.should =~ [dossier]
+    end
+  end
+
+  describe "#back_relations" do
+    it "should return empty list if title is blank" do
+      dossier = FactoryGirl.build(:dossier, :title => '')
+
+      dossier.back_relations.should be_empty
+    end
+
+    it "should return dossiers with exact matches" do
+      counsil = FactoryGirl.create(:dossier, :title => 'City counsil')
+      history = FactoryGirl.create(:dossier, :title => 'City history')
+      dossier = FactoryGirl.create(:dossier, :related_to => 'City counsil; City history')
+      second = FactoryGirl.create(:dossier, :related_to => 'City counsil')
+
+      history.back_relations.should =~ [dossier.title]
+      counsil.back_relations.should =~ [dossier.title, second.title]
+    end
+
+    it "should not return dossiers with partial matches" do
+      counsil = FactoryGirl.create(:dossier, :title => 'City')
+      history = FactoryGirl.create(:dossier, :title => 'City history book')
+      dossier = FactoryGirl.create(:dossier, :related_to => 'City counsil; City history')
+
+      counsil.back_relations.should be_empty
+      history.back_relations.should be_empty
     end
   end
 end

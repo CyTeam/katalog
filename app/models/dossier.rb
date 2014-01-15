@@ -263,7 +263,7 @@ class Dossier < ActiveRecord::Base
   end
 
   def related_dossiers
-    relation_titles.collect{ |relation_title| Dossier.by_text(relation_title).to_a }.flatten
+    relation_titles.collect{ |relation_title| Dossier.where(:title => relation_title).to_a }.flatten
   end
 
   # Create an Array for backlinks
@@ -271,7 +271,12 @@ class Dossier < ActiveRecord::Base
     # Guard
     return [] if self.title.blank?
 
-    Dossier.where("related_to LIKE ?", "%#{self.title}%").pluck(:title)
+    # We first use like as relation_to contains ; seperated strings
+    matching_dossiers = Dossier.where("related_to LIKE ?", "%#{self.title}%")
+    # Then we do exact matches
+    exact_dossiers = matching_dossiers.select{ |dossier| dossier.relations.include?(self.title) }
+
+    exact_dossiers.map(&:title)
   end
 
   # Form helper methods
