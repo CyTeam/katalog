@@ -59,6 +59,22 @@ describe Dossier do
 
   # Relations
   # =========
+  describe "after_save hook" do
+    it "should touch all related dossiers" do
+      counsil = FactoryGirl.create(:dossier, :title => 'City counsil')
+      history = FactoryGirl.create(:dossier, :title => 'City history')
+      dossier = FactoryGirl.build(:dossier, :related_to => 'City counsil; City history')
+
+      counsil_timestamp = counsil.updated_at
+      history_timestamp = counsil.updated_at
+
+      dossier.save!
+
+      history.reload.updated_at.should_not == history_timestamp
+      counsil.reload.updated_at.should_not == counsil_timestamp
+    end
+  end
+
   describe "#related_to" do
     it "should be text" do
       dossier = FactoryGirl.build(:dossier, :related_to => 'City counsil; City history')
