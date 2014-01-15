@@ -13,6 +13,7 @@ Fixes
 * Show single match topic as topic, not dossier.
 * Only show exact matches for dossier relations.
 * Include dossiers with partial matches in list with dangling relations.
+* Directly link to related dossier if there is an exact match.
 
 
 1.9.2

@@ -11,7 +11,12 @@ module DossiersHelper
   end
 
   def link_to_relation(relation)
-    link_to(relation, search_dossiers_url(:search => {:text => '"' + relation + '"'}, :skip_topics => 1))
+    dossier = Dossier.where(:title => relation).first
+    if dossier
+      link_to(relation, dossier)
+    else
+      link_to(relation, search_dossiers_url(:search => {:text => '"' + relation + '"'}))
+    end
   end
 
   def availability_text(availability)
