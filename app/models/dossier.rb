@@ -279,24 +279,20 @@ class Dossier < ActiveRecord::Base
     exact_dossiers.map(&:title)
   end
 
-  # Form helper methods
+  # Form helper method
   attr_accessor :add_relation
 
   def dangling_relations
     relations.select do |relation|
-      Dossier.by_text('"' + relation + '"').count < 1
+      Dossier.where(:title => relation).count < 1
     end
-  end
-
-  def has_dangling_relations?
-    dangling_relations.present?
   end
 
   def self.with_dangling_relations
     dangling = []
 
-    Dossier.dossier.where('related_to IS NOT NULL').find_each do |dossier|
-      dangling << dossier if dossier.has_dangling_relations?
+    Dossier.where('related_to IS NOT NULL').find_each do |dossier|
+      dangling << dossier if dossier.dangling_relations.present?
     end
 
     dangling

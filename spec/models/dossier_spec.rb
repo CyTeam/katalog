@@ -160,4 +160,22 @@ describe Dossier do
       history.back_relations.should be_empty
     end
   end
+
+  describe ".with_dangling_relations" do
+    it "should return dossiers with relation with no exact matches" do
+      counsil = FactoryGirl.create(:dossier, :title => 'City counsil')
+      history = FactoryGirl.create(:dossier, :title => 'City history book')
+      dossier = FactoryGirl.create(:dossier, :related_to => 'City counsil; City history')
+
+      Dossier.with_dangling_relations.should == [dossier]
+    end
+
+    it "should not return dossiers where all relations have matches" do
+      counsil = FactoryGirl.create(:dossier, :title => 'City counsil')
+      history = FactoryGirl.create(:dossier, :title => 'City history')
+      dossier = FactoryGirl.create(:dossier, :related_to => 'City counsil; City history')
+
+      Dossier.with_dangling_relations.should == []
+    end
+  end
 end

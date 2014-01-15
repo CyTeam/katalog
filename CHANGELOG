@@ -12,6 +12,7 @@ Fixes
 * Add topic type :local and use red-gray background.
 * Show single match topic as topic, not dossier.
 * Only show exact matches for dossier relations.
+* Include dossiers with partial matches in list with dangling relations.
 
 
 1.9.2
