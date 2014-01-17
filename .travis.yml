@@ -6,12 +6,13 @@ before_script:
   - DB=mysql bundle exec rake katalog:setup
   - DB=mysql bundle exec rake db:create db:schema:load
 
-script: "bundle exec rake test"
+script: "bundle exec rake spec"
 
 # whitelist
 branches:
   only:
     - master
+    - staging
     - stable
 
 # IRC notification
