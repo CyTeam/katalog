@@ -75,6 +75,18 @@ describe Dossier do
     end
   end
 
+  describe "before_save hook" do
+    it "should keep relations intact on renames" do
+      counsil = FactoryGirl.create(:dossier, :title => 'City counsil')
+      history = FactoryGirl.create(:dossier, :title => 'City history')
+      dossier = FactoryGirl.create(:dossier, :related_to => 'City counsil; City history')
+
+      related_dossiers = dossier.related_dossiers
+      counsil.update_attributes(:title => 'City counsil (new)')
+      dossier.reload.related_dossiers.should =~ related_dossiers
+    end
+  end
+
   describe "#related_to" do
     it "should be text" do
       dossier = FactoryGirl.build(:dossier, :related_to => 'City counsil; City history')
@@ -147,6 +159,33 @@ describe Dossier do
 
       counsil.related_dossiers.should =~ [dossier]
       history.related_dossiers.should =~ [dossier]
+    end
+  end
+
+  describe "#back_related_dossiers" do
+    it "should return empty list if title is blank" do
+      dossier = FactoryGirl.build(:dossier, :title => '')
+
+      dossier.back_related_dossiers.should be_empty
+    end
+
+    it "should return dossiers with exact matches" do
+      counsil = FactoryGirl.create(:dossier, :title => 'City counsil')
+      history = FactoryGirl.create(:dossier, :title => 'City history')
+      dossier = FactoryGirl.create(:dossier, :related_to => 'City counsil; City history')
+      second = FactoryGirl.create(:dossier, :related_to => 'City counsil')
+
+      history.back_related_dossiers.should =~ [dossier]
+      counsil.back_related_dossiers.should =~ [dossier, second]
+    end
+
+    it "should not return dossiers with partial matches" do
+      counsil = FactoryGirl.create(:dossier, :title => 'City')
+      history = FactoryGirl.create(:dossier, :title => 'City history book')
+      dossier = FactoryGirl.create(:dossier, :related_to => 'City counsil; City history')
+
+      counsil.back_related_dossiers.should be_empty
+      history.back_related_dossiers.should be_empty
     end
   end
 

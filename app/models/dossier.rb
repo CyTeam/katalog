@@ -232,6 +232,28 @@ class Dossier < ActiveRecord::Base
     related_dossiers.each{|dossier| dossier.touch}
   end
 
+  # Keep relations intact on renames
+  before_save do
+    # No action needed for new records
+    return if new_record?
+
+    if title_changes = self.changes["title"]
+      old_title = title_changes[0]
+      new_title = title_changes[1]
+
+      back_related_dossiers(old_title).each do |dossier|
+        dossier.relations = dossier.relations.map do |relation|
+          if relation == old_title
+            new_title
+          else
+            relation
+          end
+        end
+        dossier.save
+      end
+    end
+  end
+
   # Returns the relations as array.
   def relations
     return [] if related_to.blank?
@@ -266,17 +288,21 @@ class Dossier < ActiveRecord::Base
     relation_titles.collect{ |relation_title| Dossier.where(:title => relation_title).to_a }.flatten
   end
 
-  # Create an Array for backlinks
-  def back_relations
+  def back_related_dossiers(text = nil)
+    text ||= self.title
+
     # Guard
-    return [] if self.title.blank?
+    return [] if text.blank?
 
     # We first use like as relation_to contains ; seperated strings
-    matching_dossiers = Dossier.where("related_to LIKE ?", "%#{self.title}%")
+    matching_dossiers = Dossier.where("related_to LIKE ?", "%#{text}%")
     # Then we do exact matches
-    exact_dossiers = matching_dossiers.select{ |dossier| dossier.relations.include?(self.title) }
+    matching_dossiers.select{ |dossier| dossier.relations.include?(text)}
+  end
 
-    exact_dossiers.map(&:title)
+  # Create an Array for backlinks
+  def back_relations
+    back_related_dossiers.map(&:title)
   end
 
   # Form helper method
