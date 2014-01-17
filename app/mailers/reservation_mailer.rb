@@ -1,13 +1,13 @@
 # encoding: UTF-8
 
 class ReservationMailer < ActionMailer::Base
-  default :from => RESERVATION_EMAIL_SENDER # This constant is definied in mail initializer.
+  default :from => Settings.mail.reservation.sender
 
   def user_email(reservation)
     @reservation = reservation
-    
+
     mail(
-      :to       => RESERVATION_EMAIL_RECIPIENT,
+      :to       => Settings.mail.reservation.sender,
       :reply_to => reservation.email,
       :subject  => "#{I18n.t('activerecord.attributes.reservation.title')}: #{@reservation.dossier}",
       :cc      => reservation.email

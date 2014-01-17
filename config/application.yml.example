@@ -1,5 +1,17 @@
-staging:
+# Copy this file to config/application.yml and adapt for your needs.
+
+defaults: &defaults
   google_analytics:
     api_key: 
   airbrake:
     api_key:
+  mail:
+    reservation:
+      recipient: to@example.com
+      sender:    from@example.com
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
