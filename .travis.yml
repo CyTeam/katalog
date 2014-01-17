@@ -1,3 +1,6 @@
+language: ruby
+cache: bundler
+
 before_script:
   - sudo apt-get install aspell libaspell-dev aspell-en aspell-de
   - which aspell
