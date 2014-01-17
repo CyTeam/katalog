@@ -38,7 +38,6 @@ group :test do
   # gem 'mocha'
 
   # Browser
-  gem 'capybara'
   gem 'webrat'
 end
 
@@ -114,7 +113,6 @@ gem 'show_for'
 gem "ckeditor"
 
 # Link fixes
-gem 'hpricot'
 gem 'rails_autolink'
 
 # Change log for model data
