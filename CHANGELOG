@@ -15,6 +15,7 @@ Fixes
 * Include dossiers with partial matches in list with dangling relations.
 * Directly link to related dossier if there is an exact match.
 * Keep dossier relations intact on dossier renames.
+" Use & and + as aliases for "und".
 
 
 1.9.2
