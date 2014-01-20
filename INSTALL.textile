@@ -63,5 +63,5 @@ sudo apt-get install sphinxsearch
 Initialize the search index:
 
 <pre>
-bundle exec rake ts:rebuild katalog:raspell:update
+bundle exec rake katalog:ts:export_lists ts:rebuild katalog:raspell:update
 </pre>
