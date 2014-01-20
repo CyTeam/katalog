@@ -63,9 +63,12 @@ describe Dossier do
       assert_match '|', query
       assert_no_match /@signature ("77.0.999*")/, query
     end
+  end
 
-    pending "should quote &, +" do
-      Dossier.build_query("test &").should == ''
+  context ".by_text" do
+    it "should work with & and +" do
+      expect{ Dossier.by_text('&').count }.to_not raise_exception
+      expect{ Dossier.by_text('+').count }.to_not raise_exception
     end
   end
 end
