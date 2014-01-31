@@ -67,8 +67,12 @@ describe Dossier do
 
   context ".by_text" do
     it "should work with & and +" do
-      expect{ Dossier.by_text('&').count }.to_not raise_exception
-      expect{ Dossier.by_text('+').count }.to_not raise_exception
+      require 'thinking_sphinx/test'
+
+      ThinkingSphinx::Test.run do
+        expect{ Dossier.by_text('&').count }.to_not raise_exception
+        expect{ Dossier.by_text('+').count }.to_not raise_exception
+      end
     end
   end
 end
