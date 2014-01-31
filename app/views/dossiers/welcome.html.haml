@@ -5,7 +5,7 @@
     = link_to dossiers_path do
       = image_tag "dossiers/0.png"
       %h1= t('katalog.overview')
-      %h2= t('katalog.overview_text')
+      %h2= t('katalog.total_count', :count => number_with_delimiter(Dossier.document_count))
   - @groups.each do |group|
     %li
       = link_to url_for_topic(group) do
