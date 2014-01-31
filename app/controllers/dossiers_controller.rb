@@ -13,13 +13,9 @@ class DossiersController < AuthorizedController
   # Search
   has_scope :by_character
 
+
   # CRUD Actions
   # ============
-  skip_load_and_authorize_resource :only => :sitemap
-  def sitemap
-    @dossiers = Dossier.accessible_by(current_ability, :index)
-  end
-
   def show
     # Set query for highlighting and search form prefill
     @query = params[:search][:text] if params[:search]
@@ -83,6 +79,17 @@ class DossiersController < AuthorizedController
     index_excel
   end
 
+  # Sitemap action
+  #
+  # Provides a sitemap according to http://www.sitemaps.org/protocol.html
+  def sitemap
+    @dossiers = Dossier.accessible_by(current_ability, :index)
+  end
+  skip_load_and_authorize_resource :only => :sitemap
+
+
+  # Search
+  # ======
   def search
     setup_per_page
     setup_query
@@ -186,12 +193,20 @@ class DossiersController < AuthorizedController
     end
   end
 
+
+  # Admin actions
+  # =============
+
   # Dangling relates_to list
   def dangling_relations
     @dossiers = Dossier.with_dangling_relations
   end
 
+
   private
+
+  # Filters
+  # =======
   def setup_per_page
     params[:per_page] ||= 25
 
@@ -214,6 +229,9 @@ class DossiersController < AuthorizedController
     @query_text = (words + sentences).compact.join(' ')
   end
 
+
+  # Renderers
+  # =========
   def index_excel
     index! do |format|
       format.xls {
