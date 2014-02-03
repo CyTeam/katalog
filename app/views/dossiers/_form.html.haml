@@ -4,7 +4,7 @@
     = f.input :internal
     = f.input :signature, :input_html => {:size => '12'}
     = f.input :title, :input_html => {:style => 'width: 100%'}
-    = f.input :description, :as => :ckeditor, :input_html => {:class => 'autogrow', :rows => 5, :width => '74%'}
+    = f.input :description, :as => :ckeditor, :input_html => {:class => 'autogrow', :rows => 5, :ckeditor => { :width => '74%' }}
     ~ f.input :keyword_text, :as => :text, :input_html => {:class => 'autogrow', :rows => @dossier.keyword_list.size + 1}
     %li#dossier_back_relations
       %label= t_attr(:back_relations)
