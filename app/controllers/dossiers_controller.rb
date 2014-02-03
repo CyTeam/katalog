@@ -121,6 +121,9 @@ class DossiersController < AuthorizedController
       # Give spellchecking suggestions
     elsif @dossiers.count == 0
       @spelling_suggestion = SpellChecker.suggestions(@query)
+      if @mixed_search
+        redirect_to :search => {:text => '"' + @query + '"'}
+      end
     else
       index_excel
     end
