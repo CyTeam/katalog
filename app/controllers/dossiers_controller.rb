@@ -116,41 +116,7 @@ class DossiersController < AuthorizedController
         redirect_to polymorphic_path(@dossiers.first, :search => {:text => @query})
       # Give spellchecking suggestions
       elsif @dossiers.count == 0
-        spell_checker = Aspell.new1({"dict-dir" => Rails.root.join('db', 'aspell').to_s, "lang"=>"kt", "encoding"=>"UTF-8"})
-        spell_checker.set_option("ignore-case", "true")
-        spell_checker.suggestion_mode = Aspell::NORMAL
-
-        german_spell_checker = Aspell.new1({'lang' => 'de_CH', "encoding"=>"UTF-8"})
-        german_spell_checker.set_option("ignore-case", "true")
-        german_spell_checker.suggestion_mode = Aspell::NORMAL
-
-        @spelling_suggestion = {}
-        @query.gsub(/[\w\']+/) do |word|
-          if word =~ /[0-9]/
-            word
-          elsif spell_checker.check(word)
-            word
-          else
-            # word is wrong
-            suggestion = spell_checker.suggest(word).first
-            #if suggestion.blank?
-              # Try harder
-              #spell_checker.suggestion_mode = Aspell::BADSPELLER
-              #suggestion = spell_checker.suggest(word).first
-            #end
-
-            if suggestion
-              suggestion = german_spell_checker.suggest(suggestion).first
-            else
-              suggestion = german_spell_checker.suggest(word).first
-            end
-
-            # We get UTF-8 encoded answers from our spell checker
-            suggestion = suggestion.force_encoding('UTF-8') if suggestion
-
-            @spelling_suggestion[word] = suggestion if (suggestion.present? && !Dossier.by_text(suggestion).empty? && !(suggestion =~ %r[#{word}] or suggestion == nil))
-          end
-        end
+        @spelling_suggestion = SpellChecker.suggestions(@query)
       else
         index_excel
       end
