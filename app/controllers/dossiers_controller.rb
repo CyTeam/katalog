@@ -109,19 +109,20 @@ class DossiersController < AuthorizedController
       end
     end
 
-    # Handle zero and single matches for direct user requests
-    if not request.format.json?
-      # Directly show single match
-      if redirect_on_single_result && @dossiers.count == 1
-        redirect_to polymorphic_path(@dossiers.first, :search => {:text => @query})
-      # Give spellchecking suggestions
-      elsif @dossiers.count == 0
-        @spelling_suggestion = SpellChecker.suggestions(@query)
-      else
-        index_excel
-      end
-    else
+    # Do no special handling for single results etc. if JSON is requested
+    if request.format.json?
       render :json => @dossiers
+      return
+    end
+
+    # Directly show single match
+    if redirect_on_single_result && @dossiers.count == 1
+      redirect_to polymorphic_path(@dossiers.first, :search => {:text => @query})
+      # Give spellchecking suggestions
+    elsif @dossiers.count == 0
+      @spelling_suggestion = SpellChecker.suggestions(@query)
+    else
+      index_excel
     end
   end
 
