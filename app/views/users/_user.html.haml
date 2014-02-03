@@ -7,4 +7,4 @@
     = user.created_at.to_date
   %td
     = link_to image_tag('icons/edit.png', :title => t('tooltips.locations.edit')), edit_user_path(user)
-    = link_to image_tag('icons/delete.png', :title => t('tooltips.locations.delete')), user, :confirm => t_confirm_delete(user), :method => :delete
+    = link_to image_tag('icons/delete.png', :title => t('tooltips.locations.delete')), user, :data => {:confirm => t_confirm_delete(user)}, :method => :delete

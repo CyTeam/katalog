@@ -14,4 +14,4 @@
   - if user_signed_in?
     %td.action-links
       = link_to image_tag('icons/edit.png'), edit_dossier_path(dossier)
-      = link_to image_tag('icons/delete.png'), dossier, :confirm => t_confirm_delete(dossier), :remote => true, :method => :delete
+      = link_to image_tag('icons/delete.png'), dossier, :data => {:confirm => t_confirm_delete(dossier)}, :remote => true, :method => :delete
