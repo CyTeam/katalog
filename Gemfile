@@ -75,6 +75,10 @@ group :development do
   # Deployment
   gem 'capistrano', '~> 2.15.5'
   gem 'capones_recipes'
+
+  # Development Server
+  gem 'webrick'
+  gem 'quiet_assets'
 end
 
 # Standard helpers
