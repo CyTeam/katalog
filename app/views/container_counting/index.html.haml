@@ -1,6 +1,9 @@
+.contextual
+  = contextual_link('print', params.merge(:format => :pdf))
+
 %h1= t_title
 
-= form_tag nil, :class => 'formtastic' do
+= form_tag nil, :method => :get, :class => 'formtastic' do
   %fieldset.inputs
     %ol
       %li
