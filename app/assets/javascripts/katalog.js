@@ -155,8 +155,8 @@ function addUpdateDossierNumberBehaviour() {
 }
 
 function updateNumberAmount(e){
-  var number_id = $(e).data('number_id');
-  var dossier_id = $(e).data('dossier_id');
+  var number_id = $(e).data('number-id');
+  var dossier_id = $(e).data('dossier-id');
   var year = $(e).data('year');
   var amount = $(e).val();
 
