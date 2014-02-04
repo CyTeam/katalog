@@ -4,10 +4,6 @@ class BatchEditDossierNumbersController < ApplicationController
   # Responders
   respond_to :html, :js, :json
 
-  # Filter
-  has_scope :by_container_type, :as => :container_type
-  has_scope :by_location, :as => :location
-
   def index
     # Stay on this action after search
     @search_path = edit_batch_edit_dossier_numbers_path
