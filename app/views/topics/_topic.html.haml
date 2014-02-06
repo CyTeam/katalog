@@ -6,4 +6,4 @@
   - if user_signed_in? and not is_edit_report?
     %td.action-links
       = link_to image_tag('icons/edit.png'), edit_topic_path(topic)
-      = link_to image_tag('icons/delete.png'), topic, :confirm => t_confirm_delete(topic), :remote => true, :method => :delete
+      = link_to image_tag('icons/delete.png'), topic, :data => {:confirm => t_confirm_delete(topic)}, :remote => true, :method => :delete

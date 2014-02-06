@@ -69,9 +69,6 @@ group :development do
   # UML documentation
   gem 'rails-erd'
 
-  # Haml generators
-  gem 'hpricot'
-
   # Deployment
   gem 'capistrano', '~> 2.15.5'
   gem 'capones_recipes'
@@ -118,6 +115,7 @@ gem "ckeditor"
 
 # Link fixes
 gem 'rails_autolink'
+gem 'hpricot'
 
 # Change log for model data
 gem 'paper_trail'
