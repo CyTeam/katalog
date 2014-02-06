@@ -1,3 +1,0 @@
-- if controller_name == 'dossiers' && params[:search] && params[:search][:text]
-  = link_to_function t('katalog.show_keywords'), 'showKeyWords()', :id => 'show-key-words-link', :class => 'icon icon-plus-text', :title => t('katalog.show_keywords'), :style => (session[:hide_keywords] == true ? '' : 'display:none;')
-  = link_to_function t('katalog.hide_keywords'), 'hideKeyWords()', :id => 'hide-key-words-link', :class => 'icon icon-minus-text', :title => t('katalog.hide_keywords'), :style => (session[:hide_keywords] == true ? 'display:none;' : '')
