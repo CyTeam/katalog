@@ -4,14 +4,13 @@
 class Dossier < ActiveRecord::Base
   attr_accessible :container_type_code, :location_code, :internal, :signature, :title, :description, :keyword_text, :relation_list, :add_relation, :first_document_year, :dossier_number_list, :containers_attributes
 
-  # PaperTrail: change log
+  # PaperTrail
+  # ==========
+  # We're using papertrail to track changes
   has_paper_trail :ignore => [:created_at, :updated_at, :search_key, :delta],
                   :meta   => {:container_ids => Proc.new {|dossier| dossier.container_ids.join(',') },
                               :number_ids    => Proc.new {|dossier| dossier.number_ids.join(',') },
                               :keywords      => Proc.new {|dossier| dossier.temp_keyword_text }}
-
-  # Hooks
-  before_save :update_tags
 
   # Save the keywords for Papertrail
   before_destroy :save_temp_tags
@@ -59,8 +58,34 @@ class Dossier < ActiveRecord::Base
   accepts_nested_attributes_for :containers, :allow_destroy => true, :reject_if => :all_blank
 
   # Tags
+  # ====
   acts_as_taggable
   acts_as_taggable_on :keywords
+
+  # Hooks
+  before_save :update_tags
+
+  def self.filter_tags(values)
+    boring = ["à", "in", "und", "für", "im", "auf", "der", "von", "die", "des", "bis", "über", "diverse", "allgemein", "gegen", "zur", "gelöscht", "&", "mit", "den", "ohne", "eine", "dank", "an", "Zug", "CH", "Europa", "international"]
+
+    values -= boring
+    values -= boring.map(&:upcase)
+
+    values.reject!{|value| value.match /^[0-9.']*$/}
+    values.reject!{|value| value.match /^(Jan|Feb|März|Apr|Mai|Juni|Juli|Aug|Sep|Sept|Okt|Nov|Dez)$/}
+
+    values
+  end
+
+  def self.split_words(value)
+    value.split(/[ %.();,:-]/).uniq.select{|t| t.present?}
+  end
+
+  def self.extract_tags(values)
+    values = values.join(',') if values.is_a? Array
+    filter_tags(split_words(values)).compact
+  end
+
 
   def self.level_to_prefix_length(level)
     case level.to_s
@@ -111,26 +136,6 @@ class Dossier < ActiveRecord::Base
     DossierNumber.sum(:amount).to_i
   end
 
-  def self.filter_tags(values)
-    boring = ["à", "in", "und", "für", "im", "auf", "der", "von", "die", "des", "bis", "über", "diverse", "allgemein", "gegen", "zur", "gelöscht", "&", "mit", "den", "ohne", "eine", "dank", "an", "Zug", "CH", "Europa", "international"]
-
-    values -= boring
-    values -= boring.map(&:upcase)
-
-    values.reject!{|value| value.match /^[0-9.']*$/}
-    values.reject!{|value| value.match /^(Jan|Feb|März|Apr|Mai|Juni|Juli|Aug|Sep|Sept|Okt|Nov|Dez)$/}
-
-    values
-  end
-
-  def self.split_words(value)
-    value.split(/[ %.();,:-]/).uniq.select{|t| t.present?}
-  end
-
-  def self.extract_tags(values)
-    values = values.join(',') if values.is_a? Array
-    filter_tags(split_words(values)).compact
-  end
 
   def self.date_range
     month_abbrs = '(Jan\.|Feb\.|März|Apr\.|Mai|Juni|Juli|Aug\.|Sep\.|Sept\.|Okt\.|Nov\.|Dez\.)'
