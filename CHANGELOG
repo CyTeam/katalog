@@ -18,6 +18,9 @@ Fixes
 * Use & and + as aliases for "und".
 * Use socket for access to sphinx daemon.
 
+1.9.3
+=====
+* Do not cache topic list items.
 
 1.9.2
 =====
