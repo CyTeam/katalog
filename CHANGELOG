@@ -1,4 +1,4 @@
-1.10.0
+1.10.0 (unreleased)
 ======
 Fixes
 * Tooltips with number counts in search lists are not cut off when near the window border.
@@ -34,10 +34,8 @@ This fixes a few issues in the underlying framework Ruby on Rails. Malicious
 users may run attacks on other users, or a denial of service attach could be
 done from the internet.
 
-
 1.9.0
 =====
-
 * Search for number and text gives option to quote the search.
 * Add dossiers/sitemap.xml.
 * Relations don't link_to topics.
