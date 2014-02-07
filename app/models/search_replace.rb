@@ -15,7 +15,7 @@ class SearchReplace < FormtasticFauxModel
     ['signature', 'description', 'title', 'keywords', 'related_to']
   end
 
-  # Definies the attribute types of this model.
+  # Defines the attribute types of this model.
   self.types = {
     :search => :string,
     :replace => :string,
@@ -54,7 +54,7 @@ class SearchReplace < FormtasticFauxModel
         }
       end
     end
-    
+
     changed_objects
   end
 
@@ -62,7 +62,7 @@ class SearchReplace < FormtasticFauxModel
 
   def check_column(column)
     return false if column.empty?
-    
+
     SearchReplace.editable_attributes.include?column ? column : nil
   end
 end
