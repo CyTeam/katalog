@@ -287,6 +287,9 @@ GEM
       activemodel (~> 3.0)
     simple-navigation (3.11.0)
       activesupport (>= 2.3.2)
+    simple_form (2.1.0)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
     slop (3.4.7)
     spreadsheet (0.9.6)
       ruby-ole (>= 1.0)
@@ -384,6 +387,7 @@ DEPENDENCIES
   shoulda
   show_for
   simple-navigation
+  simple_form
   spreadsheet
   sprockets
   squeel

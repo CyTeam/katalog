@@ -83,6 +83,7 @@ end
 gem 'haml'
 
 gem 'formtastic'
+gem 'simple_form'
 gem 'will_paginate', :git => 'https://github.com/huerlisi/will_paginate.git', :branch => 'show_always'
 gem 'inherited_resources'
 gem 'has_scope'

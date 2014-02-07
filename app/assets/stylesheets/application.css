@@ -23,6 +23,7 @@
  *= require scaffold
  *= require formtastic
  *= require formtastic_changes
+ *= require simple_form
  *= require pagination
  *= require screen
  */
