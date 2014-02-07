@@ -152,18 +152,3 @@ de-CH:
         odd: "muss ungerade sein"
         even: "muss gerade sein"
         record_invalid: "Gültigkeitsprüfung ist fehlgeschlagen: %{errors}"
-
-  will_paginate:
-    previous_label: "Vorherige Seite"
-    next_label:     "Nächste Seite"
-    page_gap:       "..."
-
-  tooltips:
-    dossiers:
-      search_input: "Hier können Sie ihre Suchbegriffe eingeben."
-      search:       "Hier können Sie nach ihren gewünschten Themen suchen."
-    locations:
-      edit:         "Editieren"
-      delete:       "Löschen"
-    contextual:
-      new:          "Neu hinzufügen"
