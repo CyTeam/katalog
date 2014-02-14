@@ -1,22 +1,29 @@
-1.10.0 (unreleased)
+1.10.0
 ======
-Fixes
-* Tooltips with number counts in search lists are not cut off when near the window border.
+Changes
+* Only do case sensitive search and replace.
 * Change 'Suche' to 'Neue Suche'.
 * Change 'Schlagworte' to 'Schlagwörter'.
-* Include Dossier description to search index.
-* Fix layout breaks for few results.
-* Fix flash message when creating a topic.
-* Better titles for searches by signatures.
-* Show topics in alphabetic topics.
-* Add topic type :local and use red-gray background.
-* Show single match topic as topic, not dossier.
 * Only show exact matches for dossier relations.
 * Include dossiers with partial matches in list with dangling relations.
-* Directly link to related dossier if there is an exact match.
+
+Features
+* Do not include related_to in list of search&replace targets.
 * Keep dossier relations intact on dossier renames.
-* Use & and + as aliases for "und".
+* Refactor SphinxAdmin to allow multiple matching rows, allowing +, & and 'und' to be synonyms.
+* Better titles for searches by signatures.
+* Show topics in alphabetic topics.
+* Include Dossier description to search index.
+* Directly link to related dossier if there is an exact match.
 * Use socket for access to sphinx daemon.
+* Better info in case we found no matches for search replace.
+* Add topic type :local and use red-gray background.
+
+Fixes
+* Tooltips with number counts in search lists are not cut off when near the window border.
+* Fix layout breaks for few results.
+* Fix flash message when creating a topic.
+* Show single match topic as topic, not dossier.
 
 1.9.3
 =====
