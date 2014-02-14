@@ -86,7 +86,7 @@ module Dossiers
 
         words = words.flatten
 
-        return signatures, clean(apply_maps(words)), clean(apply_maps(sentences))
+        return signatures, clean(words), clean(sentences)
       end
 
       def is_ordinal_signature?(string)
@@ -134,18 +134,6 @@ module Dossiers
       # Removes the apostrophe from the words.
       def clean(words)
         words.collect! {|word| Riddle.escape(word.delete('"')) }
-      end
-
-      # Apply additional mappings.
-      def apply_maps(words)
-        words.collect! do |word|
-          case word
-          when '&', '+'
-            'und'
-          else
-            word
-          end
-        end
       end
     end
   end
