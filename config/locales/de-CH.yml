@@ -122,6 +122,8 @@ de-CH:
           one:    "Konnte %{model} nicht speichern: ein Fehler."
           other:  "Konnte %{model} nicht speichern: %{count} Fehler."
         body: "Bitte überprüfen Sie die folgenden Felder:"
+      messages:
+        blank: "muss ausgefüllt werden"
 
   activerecord:
     errors:
