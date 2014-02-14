@@ -9,7 +9,11 @@ class SearchReplacesController < AuthorizedController
     @search_replace = SearchReplace.new(params[:search_replace])
     if @search_replace.valid?
       @changed_objects = @search_replace.do
-      flash[:notice] = t('katalog.search_replace.done', :amount => @changed_objects.count).html_safe
+      if @changed_objects.present?
+        flash[:notice] = t('katalog.search_replace.done', :amount => @changed_objects.count).html_safe
+      else
+        flash[:notice] = t('katalog.search_replace.none')
+      end
     end
 
     render :index
