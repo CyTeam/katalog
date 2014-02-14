@@ -10,8 +10,6 @@ class SearchReplacesController < AuthorizedController
     if @search_replace.valid?
       @changed_objects = @search_replace.do
       flash[:notice] = t('katalog.search_replace.done', :amount => @changed_objects.count).html_safe
-    else
-      flash[:error] = t('katalog.search_replace.failed')
     end
 
     render :index
