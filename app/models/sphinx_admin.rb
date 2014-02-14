@@ -49,46 +49,34 @@ class SphinxAdmin < ActiveRecord::Base
 
   #
   def self.extend_words(words)
-    words.inject([]) do |out, word|
-      sphinx_admin = find_by_value(word)
-      if sphinx_admin
-        out << sphinx_admin.from
-        out << sphinx_admin.to
-      end
-      out << word
-    end.uniq
+    all_words = words.clone
+
+    words.map do |word|
+      all_words += self.where(:from => word).pluck(:to)
+      all_words += self.where(:to => word).pluck(:from)
+    end
+
+    all_words.uniq
   end
 
   # Saves the values as entries of SphinxAdmin.
   def self.list=(value)
-    # Delete removed line
-    if self.all.count > value.lines.count
-      deleted = self.list.split("\n") - value.split("\n")
+    # Delete removed lines
+    deleted = self.list.split("\n") - value.split("\n")
 
-      deleted.each do |line|
-        input = line.split(spacer)
-        entry = self.find_by_value(input[0].strip) or self.find_by_value(input[1].strip)
-        entry.delete
-      end
-    end
-
-    # Update the existing or create a new one.
-    value.each_line do |line|
+    deleted.each do |line|
       input = line.split(spacer)
-      entry = nil
-
-      input.each do |i|
-        entry = self.find_by_value(i.strip) unless entry
-      end
-
-      if entry
-        entry.value = line
-        entry.save
-      else
-        self.create(:value => line) unless line.blank?
-      end
+      entry = self.find_by_from_and_to(input[0].strip, input[1].strip)
+      entry.delete
     end
-    
+
+    # Create added lines
+    added = value.split("\n") - self.list.split("\n")
+
+    added.each do |line|
+      self.create(:value => line) unless line.blank?
+    end
+
     self.sync_sphinx
   end
 
@@ -96,12 +84,12 @@ class SphinxAdmin < ActiveRecord::Base
   def self.list
     self.all.join("\n")
   end
-  
+
   private # :nodoc
-  
+
   def self.import_file(file_name = nil)
     file_name ||= FOLDER.join(self.file_name)
-    
+
     self.list = File.read(file_name)
   end
 
@@ -112,7 +100,7 @@ class SphinxAdmin < ActiveRecord::Base
       file.puts self.list
     end
   end
-  
+
   # Runs rake tasks
   #
   # This runs a rake task and ensures the environment is correct and output
@@ -129,7 +117,7 @@ class SphinxAdmin < ActiveRecord::Base
   def self.sync_sphinx
     FOLDER.mkpath
     self.export_file
-    
+
     call_rake("thinking_sphinx:rebuild")
   end
 end
