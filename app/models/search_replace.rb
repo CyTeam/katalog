@@ -33,6 +33,12 @@ class SearchReplace < FormtasticFauxModel
       case column
       when 'keywords'
         dossiers = ActsAsTaggableOn::Tag.where("name LIKE ?", '%' + search + '%').joins(:taggings).collect{|tag| tag.taggings.collect{|tagging| tagging.taggable}}.flatten.uniq
+
+        # Filter out case insensitive matches
+        dossiers = dossiers.select do |dossier|
+          dossier.keyword_list.match(search) || dossier.tag_list.match(search)
+        end
+
         dossiers.map{|dossier|
           dossier.keyword_list = dossier.keyword_list.to_s.gsub(search, replace)
           dossier.tag_list = dossier.tag_list.to_s.gsub(search, replace)
@@ -43,7 +49,13 @@ class SearchReplace < FormtasticFauxModel
         }
       else
         dossiers = Dossier.where("`#{column}` LIKE ?", '%' + search + '%')
-        dossiers.all.map{|dossier|
+
+        # Filter out case insensitive matches
+        dossiers = dossiers.select do |dossier|
+          dossier[column].match(search)
+        end
+
+        dossiers.map{|dossier|
           if dossier[column]
             dossier[column] = dossier[column].gsub(search, replace)
 
