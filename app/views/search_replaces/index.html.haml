@@ -1,16 +1,15 @@
-- cache :search_replace do
-  %h1
-    = t('katalog.search_replace.title')
+%h1
+  = t('katalog.search_replace.title')
 
-  = semantic_form_for @search_replace do |f|
-    = f.semantic_errors
-    = f.inputs do
-      = f.input :search
-      = f.input :replace
-      = f.input :columns, :as => :check_boxes, :collection => SearchReplace.editable_attributes.collect {|a| [ t(a, :scope => 'activerecord.attributes.dossier'), a ] }
+= semantic_form_for @search_replace do |f|
+  = f.semantic_errors
+  = f.inputs do
+    = f.input :search
+    = f.input :replace
+    = f.input :columns, :as => :check_boxes, :collection => SearchReplace.editable_attributes.collect {|a| [ t(a, :scope => 'activerecord.attributes.dossier'), a ] }
 
-    = f.actions do
-      = f.action(:submit)
+  = f.actions do
+    = f.action(:submit)
 
 - if @changed_objects
   %h2
