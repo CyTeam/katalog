@@ -319,6 +319,16 @@ de:
     title:
       preview: "%{model} Vorschau"
 
+  tooltips:
+    dossiers:
+      search_input: "Hier können Sie ihre Suchbegriffe eingeben."
+      search:       "Hier können Sie nach ihren gewünschten Themen suchen."
+    locations:
+      edit:         "Editieren"
+      delete:       "Löschen"
+    contextual:
+      new:          "Neu hinzufügen"
+
   cancan:
     roles:
       admin:  "Administrator"
