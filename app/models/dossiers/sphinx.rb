@@ -102,7 +102,7 @@ module Dossiers
         signatures, words, sentences = split_search_words(value)
 
         if signatures.present?
-          quoted_signatures = signatures.map{|signature| '"' + signature + '*"'}
+          quoted_signatures = signatures.map{|signature| '"^' + signature + '*"'}
           signature_query = "@signature (#{quoted_signatures.join('|')})"
         end
 
