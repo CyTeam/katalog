@@ -97,7 +97,7 @@ class SphinxAdmin < ActiveRecord::Base
     file_name ||= FOLDER.join(self.file_name)
 
     File.open(file_name, "w+") do |file|
-      file.puts self.list
+      file.write self.list
     end
   end
 
