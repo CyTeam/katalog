@@ -1,3 +1,10 @@
+1.10.1
+======
+Fixes
+* Require a match at the start of the signature for signature filtering.
+* Use #write, not #puts so we do not introduce a EOL newline when writing wordforms/exception files for sphinx.
+* Directly run thinking sphinx reindexer after saving SphinxAdmin config.
+
 1.10.0
 ======
 Changes
