@@ -37,8 +37,8 @@ describe Dossier do
 
   context ".build_query" do
     it "should add * to signature searches" do
-      assert_equal '@signature ("7*")', Dossier.build_query("7")
-      assert_equal '@signature ("77.0.10*")', Dossier.build_query("77.0.10")
+      assert_equal '@signature ("^7*")', Dossier.build_query("7")
+      assert_equal '@signature ("^77.0.10*")', Dossier.build_query("77.0.10")
     end
 
     it "should add no * to short search words" do
@@ -59,9 +59,9 @@ describe Dossier do
 
     it "should build a signature range" do
       query = Dossier.build_query("7. - 77.0.200")
-      assert_match '@signature ("77.0.200*")', query
+      assert_match '@signature ("^77.0.200*")', query
       assert_match '|', query
-      assert_no_match /@signature ("77.0.999*")/, query
+      assert_no_match /@signature ("^77.0.999*")/, query
     end
   end
 
