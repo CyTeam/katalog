@@ -229,7 +229,7 @@ de:
         last_name: "Nachname"
         dossier_years: "Jahre"
         email: "E-Mail-Adresse"
-        pickup: "Abholdatum/-zeit"
+        pickup: "Abholdatum"
         year_selection: Jahre
         title: "doku-zug.ch Vorbestellung"
       sphinx_admin:
