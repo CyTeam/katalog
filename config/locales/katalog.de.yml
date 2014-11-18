@@ -87,7 +87,7 @@ de:
     total_count:   "Total Dokumente %{count}"
     show_all:      "Alles anzeigen"
     created:       "%{signature} %{title} wurde gespeichert."
-    reservation_send: "Ihre Vorbestellung wurde erfolgreich übermittelt."
+    reservation_send: "Ihre Reservierung wurde erfolgreich übermittelt."
     search_replace:
       title: "Suchen und Ersetzen"
       done: "Suchen und ersetzen wurde erfolgreich durchgeführt.<br/>%{amount} Dossier/s wurde/n geändert."
@@ -140,7 +140,7 @@ de:
       role:    "Rolle"
       keyword: "Schlagwort"
       topic:   "Titel"
-      reservation: "Vorbestellung"
+      reservation: "Reservation"
       sphinx_admin: Konvertor
       sphinx_admin_exception: "Ausnahmen"
       sphinx_admin_word_form: "Wortformen"
@@ -177,8 +177,8 @@ de:
         containers:           ""
         books:                "Bücher"
         books_link:           "Suche in unserem Bücherkatalog"
-        preorder:             "Die Dokumente aus den Zeiträumen %{years} sind im Magazin und können vorbestellt werden."
-        preorder_link:        "Zur Vorbestellung gehts hier lang."
+        preorder:             "Die Dokumente aus den Zeiträumen %{years} sind im Magazin und können reserviert werden."
+        preorder_link:        "Zur Reservation gehts hier lang."
       container:
         period:            "Zeitraum"
         title:             "Titel"
@@ -188,13 +188,13 @@ de:
         dossier_id:        "Dossier-ID"
         container_type_id: "Container-Typ-ID"
         location_id:       "Standort-ID"
-        preorder:          "Nur auf Vorbestellung"
+        preorder:          "Nur auf Reservation"
       location:
         title:        "Titel"
         code:         "Kürzel"
         address:      "Adresse"
         availability: "Verfügbarkeit"
-        preorder:     "Vorbestellung"
+        preorder:     "Reservation"
       container_type:
         title:       "Titel"
         code:        "Kürzel"
@@ -231,7 +231,7 @@ de:
         email: "E-Mail-Adresse"
         pickup: "Abholdatum"
         year_selection: Jahre
-        title: "doku-zug.ch Vorbestellung"
+        title: "doku-zug.ch Reservation"
       sphinx_admin:
         type: Konverterart
         from: Konvertiert von
