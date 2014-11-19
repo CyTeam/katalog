@@ -45,7 +45,7 @@ module Dossiers
         # Only include internal dossiers if user is logged in
         attributes = {}
         attributes[:internal] = false if (options.delete(:internal) == false)
-        attributes[:is_topic] = false if options.delete(:skip_topics)
+        attributes[:is_topic] = false
 
         params = {:retry_stale => true, :match_mode => :extended, :with => attributes, :sort_mode => :expr, :order => "@weight * (1.5 - is_local)"}
         params.merge!(options)
