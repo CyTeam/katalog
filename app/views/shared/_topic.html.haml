@@ -2,10 +2,10 @@
 %li{:class => "topic #{topic.topic_type} #{'active' if topic_activ}"}
   %span.signature= topic.signature
   - if topic_activ
-    = link_to(topic.title, url_for_topic(topic), :title => topic.title, :class => 'active')
+    = link_to(truncate(topic.title, length: 30), url_for_topic(topic), :title => topic.title, :class => 'active')
   - elsif topic.signature.split('.').count == 3
-    = link_to(topic.title, url_for_topic(topic), :title => topic.title)
+    = link_to(truncate(topic.title, length: 30), url_for_topic(topic), :title => topic.title)
   - else
-    = link_to(topic.title, navigation_topic_path(topic), :title => topic.title, :remote => true)
+    = link_to(truncate(topic.title, length: 30), navigation_topic_path(topic), :title => topic.title, :remote => true)
   - if topic_activ and topic.is_a?(Topic) and topic.topic_type != :detail
     %ul= render :partial => 'shared/topic', :collection => topic.direct_children
