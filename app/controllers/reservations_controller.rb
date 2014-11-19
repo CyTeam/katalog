@@ -1,14 +1,15 @@
 # encoding: UTF-8
 
 class ReservationsController < AuthorizedController
-  
+
   def new
     @dossier = Dossier.find(params[:dossier_id])
     @reservation = Reservation.new(:pickup => DateTime.tomorrow, :dossier => @dossier)
-    
+    @year = params[:year]
+
     new!
   end
-  
+
   def create
     create! do |success, failure|
       success.html do
