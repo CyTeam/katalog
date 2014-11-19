@@ -25,4 +25,5 @@
  *= require formtastic_changes
  *= require pagination
  *= require screen
+ *= require on_off
  */
