@@ -1,6 +1,6 @@
 = render 'search_form'
 %h1= t('controllers.index.keyword')
-= paginated_section :show_always => true do
+= paginated_section :renderer => PaginationListLinkRenderer, :show_always => @paginated_scope.present? do
   .ce_table.block
     %table
       - cache :key_words_header do
