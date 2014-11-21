@@ -144,7 +144,8 @@ module DossiersHelper
 
   # Adds to all links the attribute target with '_blank' as value.
   def target_blank(text)
-    html_content = Hpricot(text)
+    html_content = Nokogiri::HTML(text)
+
     (html_content/"a").each {|a| a.attributes['target'] = '_blank' }
 
     html_content

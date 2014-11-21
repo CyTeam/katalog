@@ -107,7 +107,6 @@ gem "ckeditor"
 
 # Link fixes
 gem 'rails_autolink'
-gem 'hpricot'
 
 # Change log for model data
 gem 'paper_trail'
