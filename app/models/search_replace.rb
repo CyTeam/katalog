@@ -3,7 +3,6 @@
 # This class is a sub class of FormtasticFauxModel.
 # It is used to do global search and replace actions.
 class SearchReplace < FormtasticFauxModel
-
   # The attributes of SearchReplace.
   attr_accessor :search, :replace, :columns
 
@@ -12,14 +11,14 @@ class SearchReplace < FormtasticFauxModel
 
   # Defines the search and replaceable attributes in the Dossier.
   def self.editable_attributes
-    ['signature', 'description', 'title', 'keywords']
+    %w(signature description title keywords)
   end
 
   # Defines the attribute types of this model.
   self.types = {
-    :search => :string,
-    :replace => :string,
-    :columns => :string
+    search: :string,
+    replace: :string,
+    columns: :string
   }
 
   # Does the search and replace action.
@@ -32,21 +31,21 @@ class SearchReplace < FormtasticFauxModel
 
       case column
       when 'keywords'
-        dossiers = ActsAsTaggableOn::Tag.where("name LIKE ?", '%' + search + '%').joins(:taggings).collect{|tag| tag.taggings.collect{|tagging| tagging.taggable}}.flatten.uniq
+        dossiers = ActsAsTaggableOn::Tag.where('name LIKE ?', '%' + search + '%').joins(:taggings).collect { |tag| tag.taggings.collect(&:taggable) }.flatten.uniq
 
         # Filter out case insensitive matches
         dossiers = dossiers.select do |dossier|
           dossier.keyword_list.match(search) || dossier.tag_list.match(search)
         end
 
-        dossiers.map{|dossier|
+        dossiers.map do|dossier|
           dossier.keyword_list = dossier.keyword_list.to_s.gsub(search, replace)
           dossier.tag_list = dossier.tag_list.to_s.gsub(search, replace)
 
           dossier.touch
           dossier.save
           changed_objects << dossier
-        }
+        end
       else
         dossiers = Dossier.where("`#{column}` LIKE ?", '%' + search + '%')
 
@@ -55,7 +54,7 @@ class SearchReplace < FormtasticFauxModel
           dossier[column].match(search)
         end
 
-        dossiers.map{|dossier|
+        dossiers.map do|dossier|
           if dossier[column]
             dossier[column] = dossier[column].gsub(search, replace)
 
@@ -63,7 +62,7 @@ class SearchReplace < FormtasticFauxModel
             dossier.save
             changed_objects << dossier
           end
-        }
+        end
       end
     end
 
@@ -75,6 +74,6 @@ class SearchReplace < FormtasticFauxModel
   def check_column(column)
     return false if column.empty?
 
-    SearchReplace.editable_attributes.include?column ? column : nil
+    SearchReplace.editable_attributes.include? column ? column : nil
   end
 end

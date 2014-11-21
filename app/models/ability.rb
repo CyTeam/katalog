@@ -10,12 +10,12 @@ class Ability
 
   # Available roles
   def self.roles
-    Role.all.map{|r| r.name }
+    Role.all.map(&:name)
   end
 
   # Prepare roles to show in select inputs etc.
   def self.roles_for_collection
-    self.roles.map{|role| [I18n.translate(role, :scope => 'cancan.roles'), role]}
+    roles.map { |role| [I18n.translate(role, scope: 'cancan.roles'), role] }
   end
 
   # Main role/ability definitions.
@@ -23,12 +23,12 @@ class Ability
     @user = user
     @user ||= User.new # guest user
 
-    alias_action :index, :to => :list
+    alias_action :index, to: :list
 
     common
 
     # Load the abilities for all roles.
-    @user.roles.each {|role| send(role.name) }
+    @user.roles.each { |role| send(role.name) }
   end
 
   # The abilities of the admin role.
@@ -43,10 +43,10 @@ class Ability
 
   # The abilities for everyone.
   def common
-    can [:index, :show, :search, :welcome], [Dossier, Topic], :internal => false
+    can [:index, :show, :search, :welcome], [Dossier, Topic], internal: false
     can :navigation, Topic
     can [:index, :show, :search], [Container, ContainerType, DossierNumber, Keyword, Location]
-    can [:index, :show], Report, :public => true
+    can [:index, :show], Report, public: true
     can :report, Dossier
     can [:new, :create], Reservation
   end

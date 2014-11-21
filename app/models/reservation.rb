@@ -1,20 +1,17 @@
 # encoding: UTF-8
 
 class Reservation < ActiveRecord::Base
-  
   belongs_to :dossier
-  
-  validates :email, :presence => true
-  validates :first_name, :presence => true
-  validates :last_name, :presence => true
-  validates :dossier_years, :presence => true
-  validates :pickup, :presence => true
-  
+
+  validates :email, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :dossier_years, presence: true
+  validates :pickup, presence: true
+
   def year_selection=(inputs)
-    self.dossier_years = inputs.reject{|input| input.blank? }.join(', ')
+    self.dossier_years = inputs.reject(&:blank?).join(', ')
   end
 
-  def to_s
-    dossier.to_s
-  end
+  delegate :to_s, to: :dossier
 end

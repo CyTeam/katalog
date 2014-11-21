@@ -5,7 +5,7 @@
 Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in DeviseMailer.
-  config.mailer_sender = "katalog@cyt.ch"
+  config.mailer_sender = 'katalog@cyt.ch'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
@@ -22,7 +22,7 @@ Devise.setup do |config|
   # parameters are used only when authenticating and not when retrieving from
   # session. If you need permissions, you should implement that in a before filter.
   # config.authentication_keys = [ :email ]
-  config.authentication_keys = [ :login ]
+  config.authentication_keys = [:login]
 
   # Tell if authentication through request.params is enabled. True by default.
   # config.params_authenticatable = true
@@ -31,7 +31,7 @@ Devise.setup do |config|
   # config.http_authenticatable = true
 
   # The realm used in Http Basic Authentication
-  config.http_authentication_realm = "doku-zug.ch Katalog"
+  config.http_authentication_realm = 'doku-zug.ch Katalog'
 
   # ==> Configuration for :database_authenticatable
   # For bcrypt, this is the cost for hashing the password and defaults to 10. If
@@ -39,7 +39,7 @@ Devise.setup do |config|
   config.stretches = 10
 
   # Setup a pepper to generate the encrypted password.
-  config.pepper = "8a70a9054cc3496f8dc038f60442b91935c57ed4b62018f835649dc156313da65cb01d27cccabf4ec39183df55d44f2cc067ad993964873b123c68299707d5ac"
+  config.pepper = '8a70a9054cc3496f8dc038f60442b91935c57ed4b62018f835649dc156313da65cb01d27cccabf4ec39183df55d44f2cc067ad993964873b123c68299707d5ac'
 
   config.secret_key = 'b1c990981d991f801849fbdf90dcbd4e658442ab475f836e170fa870eb00ca6ba3cdc54ef968711984bf5ff109408ff49060091574893788e7addc773391f889'
 

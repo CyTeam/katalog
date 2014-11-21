@@ -7,7 +7,7 @@ class VisitorLog < ActiveRecord::Base
   validates_presence_of :user
 
   # PaperTrail: change log
-  has_paper_trail :ignore => [:created_at, :updated_at]
+  has_paper_trail ignore: [:created_at, :updated_at]
 
   # Helper
   def to_s

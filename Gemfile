@@ -71,6 +71,9 @@ group :development do
   gem 'capones_recipes'
 
   gem 'quiet_assets'
+
+  # Code quality
+  gem 'rubocop', require: false
 end
 
 # Standard helpers
@@ -78,7 +81,7 @@ end
 gem 'haml-rails'
 
 gem 'formtastic'
-gem 'will_paginate', :git => 'https://github.com/huerlisi/will_paginate.git', :branch => 'show_always'
+gem 'will_paginate', git: 'https://github.com/huerlisi/will_paginate.git', branch: 'show_always'
 gem 'inherited_resources'
 gem 'has_scope'
 gem 'i18n_rails_helpers'
@@ -107,7 +110,7 @@ gem 'prawn'
 gem 'show_for'
 
 # WYSIWYG Editor
-gem "ckeditor"
+gem 'ckeditor'
 
 # Link fixes
 gem 'rails_autolink'
@@ -121,14 +124,14 @@ gem 'revertible_paper_trail'
 gem 'spreadsheet'
 
 # Spellchecking
-gem 'raspell', :git => 'http://github.com/huerlisi/raspell.git'
+gem 'raspell', git: 'http://github.com/huerlisi/raspell.git'
 
 # Monitoring
 # ==========
 gem 'settingslogic'
 group :staging, :production do
   # Traffic
-  gem 'rack-google-analytics', :git => 'http://github.com/huerlisi/rack-google-analytics'
+  gem 'rack-google-analytics', git: 'http://github.com/huerlisi/rack-google-analytics'
 
   # Exceptions
   gem 'airbrake'

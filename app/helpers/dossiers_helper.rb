@@ -3,26 +3,26 @@
 module DossiersHelper
   def link_to_tag_filter(name, options = {})
     query = [@query, name].compact.join(' ')
-    link_to(name, search_dossiers_path(:search => {:text => query}), options)
+    link_to(name, search_dossiers_path(search: { text: query }), options)
   end
 
   def link_to_keyword(keyword, options = {})
-    link_to(keyword, search_dossiers_path(:search => {:text => keyword}), options)
+    link_to(keyword, search_dossiers_path(search: { text: keyword }), options)
   end
 
   def link_to_relation(relation)
-    dossier = Dossier.where(:title => relation).first
+    dossier = Dossier.where(title: relation).first
     if dossier
       link_to(relation, dossier)
     else
-      link_to(relation, search_dossiers_url(:search => {:text => '"' + relation + '"'}))
+      link_to(relation, search_dossiers_url(search: { text: '"' + relation + '"' }))
     end
   end
 
   def availability_text(availability)
-    title = t(availability, :scope => 'katalog.availability.title')
+    title = t(availability, scope: 'katalog.availability.title')
 
-    text = content_tag 'span', :class => "availability icon-availability_#{availability}-text", :title => title do
+    text = content_tag 'span', class: "availability icon-availability_#{availability}-text", title: title do
       title
     end
 
@@ -32,7 +32,7 @@ module DossiersHelper
   def availability_notes(dossier)
     # Collect availabilities
     availabilities = availabilities(dossier)
-    notes = ""
+    notes = ''
     notes += availability_text('intern') if availabilities.include?('intern')
     notes += availability_text('inactive') if availabilities.include?('inactive')
     notes += availability_text('warning') if waiting_for?(dossier)
@@ -48,9 +48,9 @@ module DossiersHelper
 
   def url_for_topic(topic)
     if is_edit_report?
-      edit_batch_edit_dossier_numbers_path(:search => {:text => topic.signature})
+      edit_batch_edit_dossier_numbers_path(search: { text: topic.signature })
     else
-      search_dossiers_path(:search => {:text => topic.signature})
+      search_dossiers_path(search: { text: topic.signature })
     end
   end
 
@@ -70,7 +70,7 @@ module DossiersHelper
       end
     end
 
-    return t('katalog.search_for', :query => @query)
+    t('katalog.search_for', query: @query)
   end
 
   # Reports
@@ -78,7 +78,7 @@ module DossiersHelper
   def show_header_for_report(column)
     case column
       when :document_count
-        @document_count ? t('katalog.total_count', :count => number_with_delimiter(@document_count)) : t_attr(:document_count, Dossier)
+        @document_count ? t('katalog.total_count', count: number_with_delimiter(@document_count)) : t_attr(:document_count, Dossier)
       else
         t_attr(column.to_s, Dossier)
     end
@@ -87,11 +87,11 @@ module DossiersHelper
   def show_column_for_report(dossier, column, for_pdf = false)
     case column.to_s
       when 'title'
-        for_pdf == true ? link_to(dossier.title, polymorphic_url(dossier)) : link_to(dossier.title, dossier, {'data-href-container' => 'tr'})
+        for_pdf == true ? link_to(dossier.title, polymorphic_url(dossier)) : link_to(dossier.title, dossier, 'data-href-container' => 'tr')
       when 'container_type'
-        dossier.container_types.collect{|t| t.code}.join(', ')
+        dossier.container_types.collect(&:code).join(', ')
       when 'location'
-        dossier.locations.collect{|l| l.code}.join(', ')
+        dossier.locations.collect(&:code).join(', ')
       when 'document_count'
         number_with_delimiter(dossier.document_count)
       when 'keywords'
@@ -126,7 +126,7 @@ module DossiersHelper
     decades = (199..(DateTime.now.year.to_s[0..2].to_i))
 
     decades.each do |decade|
-      splitted_numbers << numbers.find_all {|n| n.period.include?(decade.to_s) }
+      splitted_numbers << numbers.find_all { |n| n.period.include?(decade.to_s) }
     end
 
     splitted_numbers.reject { |a| a.join.strip.length == 0 }
@@ -134,11 +134,11 @@ module DossiersHelper
 
   def default_periods_collection
     DossierNumber.default_periods.collect do |d|
-      from = d[:from].present? ? d[:from].strftime("%y") : ""
-      to = d[:to].strftime("%y")
+      from = d[:from].present? ? d[:from].strftime('%y') : ''
+      to = d[:to].strftime('%y')
       label = from.eql?(to) ? "#{d[:to].year}" : "#{from}-#{to}"
 
-      [label, d[:to].year ] if d[:to]
+      [label, d[:to].year] if d[:to]
     end
   end
 
@@ -146,7 +146,7 @@ module DossiersHelper
   def target_blank(text)
     html_content = Nokogiri::HTML(text)
 
-    (html_content/"a").each {|a| a.attributes['target'] = '_blank' }
+    (html_content / 'a').each { |a| a.attributes['target'] = '_blank' }
 
     html_content
   end

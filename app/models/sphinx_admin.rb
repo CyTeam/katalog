@@ -9,10 +9,9 @@
 # * Go to "Verwaltung > Volltextsuche"
 # * And open the two sub links to save the forms
 class SphinxAdmin < ActiveRecord::Base
+  has_paper_trail ignore: [:created_at, :updated_at]
 
-  has_paper_trail :ignore => [:created_at, :updated_at]
-
-  default_scope :order => "sphinx_admins.from ASC"
+  default_scope order: 'sphinx_admins.from ASC'
 
   # The default folder for the config files.
   FOLDER = Rails.root.join('config', 'sphinx')
@@ -24,8 +23,8 @@ class SphinxAdmin < ActiveRecord::Base
 
   # Imports entries from db seeds.
   def self.seed
-    self.import_file(Rails.root.join('db', 'seeds', 'sphinx', file_name))
-    self.export_file
+    import_file(Rails.root.join('db', 'seeds', 'sphinx', file_name))
+    export_file
   end
 
   def to_s
@@ -41,8 +40,8 @@ class SphinxAdmin < ActiveRecord::Base
 
   # Find by value searches in find_by_from and find_by_to.
   def self.find_by_value(value)
-    sphinx_admin = self.find_by_from(value)
-    sphinx_admin = self.find_by_to(value) unless sphinx_admin
+    sphinx_admin = find_by_from(value)
+    sphinx_admin = find_by_to(value) unless sphinx_admin
 
     sphinx_admin
   end
@@ -52,8 +51,8 @@ class SphinxAdmin < ActiveRecord::Base
     all_words = words.clone
 
     words.map do |word|
-      all_words += self.where(:from => word).pluck(:to)
-      all_words += self.where(:to => word).pluck(:from)
+      all_words += where(from: word).pluck(:to)
+      all_words += where(to: word).pluck(:from)
     end
 
     all_words.uniq
@@ -62,27 +61,27 @@ class SphinxAdmin < ActiveRecord::Base
   # Saves the values as entries of SphinxAdmin.
   def self.list=(value)
     # Delete removed lines
-    deleted = self.list.split("\n") - value.split("\n")
+    deleted = list.split("\n") - value.split("\n")
 
     deleted.each do |line|
       input = line.split(spacer)
-      entry = self.find_by_from_and_to(input[0].strip, input[1].strip)
+      entry = find_by_from_and_to(input[0].strip, input[1].strip)
       entry.delete
     end
 
     # Create added lines
-    added = value.split("\n") - self.list.split("\n")
+    added = value.split("\n") - list.split("\n")
 
     added.each do |line|
-      self.create(:value => line) unless line.blank?
+      create(value: line) unless line.blank?
     end
 
-    self.sync_sphinx
+    sync_sphinx
   end
 
   # Returns all entries of a type (SphinxAdminException or SphinxAdminWordForms).
   def self.list
-    self.all.join("\n")
+    all.join("\n")
   end
 
   private # :nodoc
@@ -96,13 +95,13 @@ class SphinxAdmin < ActiveRecord::Base
   def self.export_file(file_name = nil)
     file_name ||= FOLDER.join(self.file_name)
 
-    File.open(file_name, "w+") do |file|
-      file.write self.list
+    File.open(file_name, 'w+') do |file|
+      file.write list
     end
   end
 
   def self.sync_sphinx
-    self.export_file
+    export_file
 
     ThinkingSphinx::Configuration.instance.controller.index
   end

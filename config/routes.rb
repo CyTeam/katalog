@@ -47,10 +47,10 @@ Katalog::Application.routes.draw do
     end
   end
 
-  get "batch_edit_dossier_numbers" => "batch_edit_dossier_numbers#index"
-  get "batch_edit_dossier_numbers/edit" => "batch_edit_dossier_numbers#edit", :as => :edit_batch_edit_dossier_numbers
-  get "container_counting" => "container_counting#index"
-  post "container_counting" => "container_counting#index"
+  get 'batch_edit_dossier_numbers' => 'batch_edit_dossier_numbers#index'
+  get 'batch_edit_dossier_numbers/edit' => 'batch_edit_dossier_numbers#edit', :as => :edit_batch_edit_dossier_numbers
+  get 'container_counting' => 'container_counting#index'
+  post 'container_counting' => 'container_counting#index'
 
   resources :keywords do
     collection do
@@ -78,7 +78,7 @@ Katalog::Application.routes.draw do
 
   resources :reservations
 
-  match "/user_session" => "application#update_session"
+  match '/user_session' => 'application#update_session'
 
-  root :to => "dossiers#welcome"
+  root to: 'dossiers#welcome'
 end

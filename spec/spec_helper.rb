@@ -2,18 +2,18 @@
 
 require 'rubygems'
 
-ENV["RAILS_ENV"] = 'test'
+ENV['RAILS_ENV'] = 'test'
 
 if ENV['COVERAGE']
   require 'simplecov'
   SimpleCov.start 'rails'
 end
 
-require File.expand_path("../../config/environment", __FILE__)
+require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 
 # Capybara
-require "capybara/rails"
+require 'capybara/rails'
 
 Capybara.configure do |config|
   config.default_driver    = :rack_test
@@ -32,7 +32,7 @@ end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
-Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # TODO: not sure why this is needed, it's not using the default locale otherwise
 I18n.locale = 'de-CH'

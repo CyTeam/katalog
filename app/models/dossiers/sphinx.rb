@@ -9,34 +9,34 @@ module Dossiers
       # Free text search
       define_index do
         # Needed for tag/keyword search
-        set_property :group_concat_max_len => 1048576
+        set_property group_concat_max_len: 1_048_576
 
         # Disable delta update in Fallback environment, as we use it read-only
-        set_property :delta => true unless Rails.env.fallback?
+        set_property delta: true unless Rails.env.fallback?
 
         # Indexed Fields
         indexes title
         indexes description
         indexes signature
         # Use _taggings relation to fix thinking sphinx issue #167
-        indexes keyword_taggings.tag.name, :as => :keywords
+        indexes keyword_taggings.tag.name, as: :keywords
 
-        indexes direct_parents.title, :as => :parent_title
+        indexes direct_parents.title, as: :parent_title
 
         # Weights
-        set_property :field_weights => {
-          :title    => 500,
-          :parent_title => 5,
-          :keywords => 10
+        set_property field_weights: {
+          title: 500,
+          parent_title: 5,
+          keywords: 10
         }
 
         # Attributes
         has created_at, updated_at
-        has "type = 'Topic'", :type => :boolean, :as => :is_topic
+        has "type = 'Topic'", type: :boolean, as: :is_topic
         has type
         has internal
-        has "signature LIKE '17%'", :type => :boolean, :as => :is_local
-        has signature, :type => :string, :as => :signature_sort
+        has "signature LIKE '17%'", type: :boolean, as: :is_local
+        has signature, type: :string, as: :signature_sort
       end
     end
 
@@ -47,10 +47,10 @@ module Dossiers
         attributes[:internal] = false if (options.delete(:internal) == false)
         attributes[:is_topic] = false
 
-        params = {:retry_stale => true, :match_mode => :extended, :with => attributes, :sort_mode => :expr, :order => "@weight * (1.5 - is_local)"}
+        params = { retry_stale: true, match_mode: :extended, with: attributes, sort_mode: :expr, order: '@weight * (1.5 - is_local)' }
         params.merge!(options)
         query = build_query(value)
-        params.merge!({:sort_mode => :extended, :order => 'signature ASC'}) if query.include?('@signature')
+        params.merge!(sort_mode: :extended, order: 'signature ASC') if query.include?('@signature')
 
         search(query, params)
       end
@@ -63,7 +63,7 @@ module Dossiers
           sentences << sentence
         end
 
-        strings = value.split(/[ %();,:-]/).uniq.select{|t| t.present?}
+        strings = value.split(/[ %();,:-]/).uniq.select(&:present?)
         words = []
         signatures = []
         strings.each do |string|
@@ -74,7 +74,7 @@ module Dossiers
             # signature is as ordinal by index
             signatures << string
           elsif is_signature?(string)
-            if (string.include?'.') || string.length == 1
+            if (string.include? '.') || string.length == 1
               signatures << string
             else
               words << string
@@ -86,7 +86,7 @@ module Dossiers
 
         words = words.flatten
 
-        return signatures, clean(words), clean(sentences)
+        [signatures, clean(words), clean(sentences)]
       end
 
       def is_ordinal_signature?(string)
@@ -102,38 +102,38 @@ module Dossiers
         signatures, words, sentences = split_search_words(value)
 
         if signatures.present?
-          quoted_signatures = signatures.map{|signature| '"^' + signature + '*"'}
+          quoted_signatures = signatures.map { |signature| '"^' + signature + '*"' }
           signature_query = "@signature (#{quoted_signatures.join('|')})"
         end
 
         if sentences.present?
-          quoted_sentences = sentences.map{|sentence| '"' + sentence + '"'}
+          quoted_sentences = sentences.map { |sentence| '"' + sentence + '"' }
           sentence_query = "@* (#{quoted_sentences.join('|')})"
         end
 
         if words.present?
-          quoted_words = words.map {|word|
+          quoted_words = words.map do|word|
             if word.length < 2
               word
             elsif word.length == 2
-              word + "*"
+              word + '*'
             elsif word.length > 2
-              "+\"" + word + "*\"" + " | " + "\"*" + word + "*\""
+              "+\"" + word + "*\"" + ' | ' + "\"*" + word + "*\""
             end
-          }
+          end
           word_query = "@* (\"#{words.join(' ')}\" | (#{(quoted_words).join(' ')}))"
         end
 
         query = [signature_query, sentence_query, word_query].join(' ')
 
-        return query.strip
+        query.strip
       end
 
       private
 
       # Removes the apostrophe from the words.
       def clean(words)
-        words.collect! {|word| Riddle.escape(word.delete('"')) }
+        words.collect! { |word| Riddle.escape(word.delete('"')) }
       end
     end
   end

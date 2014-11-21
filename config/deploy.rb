@@ -18,10 +18,10 @@ set :rbenv_ruby_version, open(File.expand_path('../../.ruby-version', __FILE__))
 set :rbenv_setup_shell, false
 
 # Staging
-set :default_stage, "staging"
+set :default_stage, 'staging'
 
 # Deployment
-set :user, "deployer"                               # The server's user for deploys
+set :user, 'deployer'                               # The server's user for deploys
 
 # Configuration
 set :scm, :git
@@ -29,21 +29,21 @@ ssh_options[:forward_agent] = true
 set :use_sudo, false
 set :deploy_via, :remote_cache
 set :git_enable_submodules, 1
-set :copy_exclude, [".git", "spec"]
+set :copy_exclude, ['.git', 'spec']
 
 # Clean up the releases after deploy.
-after "deploy", "deploy:cleanup"
+after 'deploy', 'deploy:cleanup'
 
 # Dependencies
 depend :remote, :gem, 'bundler', '> 0'
 
 # Headers for gem compilation
-depend :remote, :deb, "build-essential", ''
-depend :remote, :deb, "ruby1.9.1-dev", ''
-depend :remote, :deb, "libmysqlclient-dev", ''
-depend :remote, :deb, "libxml2-dev", ''
-depend :remote, :deb, "libxslt1-dev", ''
-depend :remote, :deb, "sphinxsearch", ''
-depend :remote, :deb, "imagemagick", ''
-depend :remote, :deb, "libaspell-dev", ''
-depend :remote, :deb, "aspell-de", ''
+depend :remote, :deb, 'build-essential', ''
+depend :remote, :deb, 'ruby1.9.1-dev', ''
+depend :remote, :deb, 'libmysqlclient-dev', ''
+depend :remote, :deb, 'libxml2-dev', ''
+depend :remote, :deb, 'libxslt1-dev', ''
+depend :remote, :deb, 'sphinxsearch', ''
+depend :remote, :deb, 'imagemagick', ''
+depend :remote, :deb, 'libaspell-dev', ''
+depend :remote, :deb, 'aspell-de', ''

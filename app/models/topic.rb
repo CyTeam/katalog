@@ -16,7 +16,7 @@ class Topic < Dossier
       return true if signature.starts_with?(alphabetic)
     end
 
-    return false
+    false
   end
 
   # Returns which type of Topic it is.
@@ -40,7 +40,7 @@ class Topic < Dossier
   end
 
   # Associations
-  has_many :dossiers, :foreign_key => :parent_id
+  has_many :dossiers, foreign_key: :parent_id
 
   # Returns the topic type of the children.
   def children_topic_type
@@ -55,7 +55,7 @@ class Topic < Dossier
 
   # Returns the children of the current topic.
   def children
-    Dossier.where("signature LIKE CONCAT(?, '%')", signature).where("dossiers.id != ?", id)
+    Dossier.where("signature LIKE CONCAT(?, '%')", signature).where('dossiers.id != ?', id)
   end
 
   # Returns the direct children of the current Topic.
@@ -73,12 +73,12 @@ class Topic < Dossier
 
     document_counts.sum(:amount).to_i
   end
-  alias amount document_count
+  alias_method :amount, :document_count
 
   # Attribute handlers
   def update_signature(value)
     children.each do |child|
-      child.signature = child.signature.gsub(/^#{self.signature}/, value)
+      child.signature = child.signature.gsub(/^#{signature}/, value)
       child.save
     end
 
@@ -89,6 +89,6 @@ class Topic < Dossier
 
   # Title which is constructed from the next childrens
   def overview_title
-    "#{self.signature}: " + direct_children.collect {|c| c.title.split(".").first }.join('. ')
+    "#{signature}: " + direct_children.collect { |c| c.title.split('.').first }.join('. ')
   end
 end

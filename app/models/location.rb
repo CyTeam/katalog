@@ -4,10 +4,10 @@
 class Location < ActiveRecord::Base
   # Associations
   has_many :containers
-  has_many :dossiers, :through => :containers
+  has_many :dossiers, through: :containers
 
   # PaperTrail: change log
-  has_paper_trail :ignore => [:created_at, :updated_at]
+  has_paper_trail ignore: [:created_at, :updated_at]
 
   # Validations
   validates_presence_of :title, :code, :address, :availability
@@ -20,18 +20,18 @@ class Location < ActiveRecord::Base
   #
   # * The translations are under 'katalog.availability.title'
   def human_availability
-    I18n.translate(availability, :scope => 'katalog.availability.title')
+    I18n.translate(availability, scope: 'katalog.availability.title')
   end
 
   # Returns the states of the availability.
   def self.availabilities
-    ['ready', 'wait', 'intern']
+    %w(ready wait intern)
   end
 
   # Returns the availabilities as collection.
   #
   # * For use in forms
   def self.availabilities_for_collection
-    self.availabilities.map{|availability| [I18n.translate(availability, :scope => 'katalog.availability.title'), availability]}
+    availabilities.map { |availability| [I18n.translate(availability, scope: 'katalog.availability.title'), availability] }
   end
 end

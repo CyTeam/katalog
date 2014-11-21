@@ -22,7 +22,7 @@ class SphinxAdminsController < AuthorizedController
       SphinxAdminWordForm.list = params['SphinxAdminWordForm']['list']
       flash[:notice] = t('katalog.sphinx_admin.word_form.done')
     end
-    
+
     # User :back to redirect to list where we come from
     redirect_to :back
   end

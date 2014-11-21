@@ -2,11 +2,11 @@
 
 class ReportsController < AuthorizedController
   def attributes
-    ['title', 'columns', 'public']
+    %w(title columns public)
   end
 
   def edit
-    edit!{ report_path }
+    edit! { report_path }
   end
 
   def show
@@ -15,6 +15,6 @@ class ReportsController < AuthorizedController
 
   def preview
     @report = Report.new(params[:report])
-    render :partial => 'show'
+    render partial: 'show'
   end
 end

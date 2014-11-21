@@ -7,55 +7,54 @@ class Dossier < ActiveRecord::Base
   # PaperTrail
   # ==========
   # We're using papertrail to track changes
-  has_paper_trail :ignore => [:created_at, :updated_at, :search_key, :delta],
-                  :meta   => {:container_ids => Proc.new {|dossier| dossier.container_ids.join(',') },
-                              :number_ids    => Proc.new {|dossier| dossier.number_ids.join(',') },
-                              :keywords      => Proc.new {|dossier| dossier.temp_keyword_text }}
+  has_paper_trail ignore: [:created_at, :updated_at, :search_key, :delta],
+                  meta: { container_ids: proc { |dossier| dossier.container_ids.join(',') },
+                          number_ids: proc { |dossier| dossier.number_ids.join(',') },
+                          keywords: proc(&:temp_keyword_text) }
 
   # Save the keywords for Papertrail
   before_destroy :save_temp_tags
   attr_accessor :temp_keyword_text
   def save_temp_tags
-    self.temp_keyword_text = self.keyword_text
+    self.temp_keyword_text = keyword_text
   end
 
   # Simulate default value '' for description as MySQL doesn't support it
   before_save lambda { self.description ||= '' }
 
   # Validations
-  validates :signature, :presence => true, :allow_blank => false
-  validates :title, :presence => true, :allow_blank => false
-  validates_format_of :first_document_year, :with => /[12][0-9]{3}/, :allow_blank => true
+  validates :signature, presence: true, allow_blank: false
+  validates :title, presence: true, allow_blank: false
+  validates_format_of :first_document_year, with: /[12][0-9]{3}/, allow_blank: true
 
-  default_scope :order => 'sort_key ASC'
+  default_scope order: 'sort_key ASC'
 
   # Type Scopes
-  scope :dossier, where(:type => nil)
-  scope :topic, where("type IS NOT NULL")
-  scope :group, topic.where("char_length(signature) = 1")
-  scope :main, topic.where("char_length(signature) = 2")
-  scope :geo, topic.where("char_length(signature) = 4")
-  scope :detail, topic.where("char_length(signature) = 8")
+  scope :dossier, where(type: nil)
+  scope :topic, where('type IS NOT NULL')
+  scope :group, topic.where('char_length(signature) = 1')
+  scope :main, topic.where('char_length(signature) = 2')
+  scope :geo, topic.where('char_length(signature) = 4')
+  scope :detail, topic.where('char_length(signature) = 8')
 
   # Scopes
-  scope :by_level, lambda {|level| where("char_length(dossiers.signature) <= ?", self.level_to_prefix_length(level))}
-  scope :by_signature, lambda {|value| where("dossiers.signature LIKE CONCAT(?, '%')", value)}
-  scope :by_character, lambda {|value| where("dossiers.sort_title LIKE CONCAT(?, '%')", value)}
-  scope :by_location, lambda {|value| includes(:containers).where("containers.location_id" => Location.find_by_code(value).id)}
-  scope :by_container_type, lambda {|value| includes(:containers).where("containers.container_type_id" => ContainerType.find_by_code(value).id)}
-
+  scope :by_level, lambda { |level| where('char_length(dossiers.signature) <= ?', level_to_prefix_length(level)) }
+  scope :by_signature, lambda { |value| where("dossiers.signature LIKE CONCAT(?, '%')", value) }
+  scope :by_character, lambda { |value| where("dossiers.sort_title LIKE CONCAT(?, '%')", value) }
+  scope :by_location, lambda { |value| includes(:containers).where('containers.location_id' => Location.find_by_code(value).id) }
+  scope :by_container_type, lambda { |value| includes(:containers).where('containers.container_type_id' => ContainerType.find_by_code(value).id) }
 
   # Pagination scope
-  scope :characters, select("DISTINCT substring(upper(sort_title), 1, 1) AS letter").having("letter BETWEEN 'A' AND 'Z'")
+  scope :characters, select('DISTINCT substring(upper(sort_title), 1, 1) AS letter').having("letter BETWEEN 'A' AND 'Z'")
   def self.character_list
-    characters.map{|t| t.letter}
+    characters.map(&:letter)
   end
 
   # Associations
-  has_many :numbers, :class_name => 'DossierNumber', :dependent => :destroy, :validate => true, :autosave => true
+  has_many :numbers, class_name: 'DossierNumber', dependent: :destroy, validate: true, autosave: true
   accepts_nested_attributes_for :numbers
-  has_many :containers, :dependent => :destroy, :validate => true, :autosave => true, :inverse_of => :dossier
-  accepts_nested_attributes_for :containers, :allow_destroy => true, :reject_if => :all_blank
+  has_many :containers, dependent: :destroy, validate: true, autosave: true, inverse_of: :dossier
+  accepts_nested_attributes_for :containers, allow_destroy: true, reject_if: :all_blank
 
   # Tags
   # ====
@@ -66,19 +65,19 @@ class Dossier < ActiveRecord::Base
   before_save :update_tags
 
   def self.filter_tags(values)
-    boring = ["à", "in", "und", "für", "im", "auf", "der", "von", "die", "des", "bis", "über", "diverse", "allgemein", "gegen", "zur", "gelöscht", "&", "mit", "den", "ohne", "eine", "dank", "an", "Zug", "CH", "Europa", "international"]
+    boring = ['à', 'in', 'und', 'für', 'im', 'auf', 'der', 'von', 'die', 'des', 'bis', 'über', 'diverse', 'allgemein', 'gegen', 'zur', 'gelöscht', '&', 'mit', 'den', 'ohne', 'eine', 'dank', 'an', 'Zug', 'CH', 'Europa', 'international']
 
     values -= boring
     values -= boring.map(&:upcase)
 
-    values.reject!{|value| value.match /^[0-9.']*$/}
-    values.reject!{|value| value.match /^(Jan|Feb|März|Apr|Mai|Juni|Juli|Aug|Sep|Sept|Okt|Nov|Dez)$/}
+    values.reject! { |value| value.match /^[0-9.']*$/ }
+    values.reject! { |value| value.match /^(Jan|Feb|März|Apr|Mai|Juni|Juli|Aug|Sep|Sept|Okt|Nov|Dez)$/ }
 
     values
   end
 
   def self.split_words(value)
-    value.split(/[ %.();,:-]/).uniq.select{|t| t.present?}
+    value.split(/[ %.();,:-]/).uniq.select(&:present?)
   end
 
   def self.extract_tags(values)
@@ -86,16 +85,15 @@ class Dossier < ActiveRecord::Base
     filter_tags(split_words(values)).compact
   end
 
-
   def self.level_to_prefix_length(level)
     case level.to_s
-      when "1"
+      when '1'
         1
-      when "2"
+      when '2'
         2
-      when "3"
+      when '3'
         4
-      when "4"
+      when '4'
         8
     end
   end
@@ -136,7 +134,6 @@ class Dossier < ActiveRecord::Base
     DossierNumber.sum(:amount).to_i
   end
 
-
   def self.date_range
     month_abbrs = '(Jan\.|Feb\.|März|Apr\.|Mai|Juni|Juli|Aug\.|Sep\.|Sept\.|Okt\.|Nov\.|Dez\.)'
     month_ordinals = '([1-9]\.|1[0-2]\.)'
@@ -145,7 +142,7 @@ class Dossier < ActiveRecord::Base
     date = "([0-9]{1,2}\\.)?[ ]*((#{month_abbrs}|#{month_ordinals}|#{year})[ ]*){1,2}"
     date_range = "#{date}([ ]*-[ ]*(#{date})?)?"
 
-    return "[ ]*#{date_range}[ ]*"
+    "[ ]*#{date_range}[ ]*"
   end
 
   # Report helpers
@@ -162,61 +159,61 @@ class Dossier < ActiveRecord::Base
     end
 
     prepared_years = years.dup
-    if !(interval.to_s.include?(",")) && interval.to_i > 1
+    if !(interval.to_s.include?(',')) && interval.to_i > 1
       prepared_years.reject! do |item|
         years.index(item).modulo(interval.to_i) != 0
       end
 
-      prepared_years << {:from => prepared_years.last[:from] + 1, :to => years.last[:to]}
+      prepared_years << { from: prepared_years.last[:from] + 1, to: years.last[:to] }
 
       previous_item = nil
       prepared_years.each do |item|
         item[:from] = previous_item[:to] + 1 if previous_item
         previous_item = item
       end
-    elsif interval.to_s.include?(",")
-      prepared_years = Array.new
-      year_intervals = interval.to_s.split(",")
+    elsif interval.to_s.include?(',')
+      prepared_years = []
+      year_intervals = interval.to_s.split(',')
 
       year_intervals.each do |year_interval|
-        if year_interval.include?("-")
-          interval_years = year_interval.split("-")
-          cleaned_interval_years = interval_years.reject {|item| item == ""}
+        if year_interval.include?('-')
+          interval_years = year_interval.split('-')
+          cleaned_interval_years = interval_years.reject { |item| item == '' }
 
           if cleaned_interval_years.count > 1
             from_date_time = concat_year(cleaned_interval_years.first)
             to_date_time = concat_year(cleaned_interval_years.last)
-            prepared_years << {:from => DateTime.new(from_date_time), :to => DateTime.new(to_date_time)}
+            prepared_years << { from: DateTime.new(from_date_time), to: DateTime.new(to_date_time) }
           else
             date_time = concat_year(cleaned_interval_years.first)
-            prepared_years << {:from => nil, :to => DateTime.new(date_time)}
+            prepared_years << { from: nil, to: DateTime.new(date_time) }
           end
-        elsif year_interval.include?("*")
-          prepared_years << {:from => prepared_years.last[:to], :to => DateTime.current}
+        elsif year_interval.include?('*')
+          prepared_years << { from: prepared_years.last[:to], to: DateTime.current }
         else
           date_time = concat_year(year_interval)
-          prepared_years << {:from => DateTime.new(date_time), :to => DateTime.new(date_time, 12, 31)}
+          prepared_years << { from: DateTime.new(date_time), to: DateTime.new(date_time, 12, 31) }
         end
       end
     end
 
     prepared_years.inject([]) do |result, year|
-      if year.eql?years.first
+      if year.eql? years.first
         result << 'vor 1990'
-      elsif prepared_years.first.eql?year and (year_intervals && year_intervals.first.starts_with?("-"))
-        result << "vor #{year[:to].strftime("%Y")}"
-      elsif year[:from] && year[:from].strftime("%Y").eql?(year[:to].strftime("%Y"))
-        result << "#{year[:from].strftime("%Y")}"
+      elsif prepared_years.first.eql?(year) && (year_intervals && year_intervals.first.starts_with?('-'))
+        result << "vor #{year[:to].strftime('%Y')}"
+      elsif year[:from] && year[:from].strftime('%Y').eql?(year[:to].strftime('%Y'))
+        result << "#{year[:from].strftime('%Y')}"
       else
-        result << "#{year[:from] ? year[:from].strftime("%Y") : ''} - #{year[:to].strftime("%Y")}"
+        result << "#{year[:from] ? year[:from].strftime('%Y') : ''} - #{year[:to].strftime('%Y')}"
       end
     end
   end
 
   def self.concat_year(year)
-    prefix = "20"
-    prefix = "19" if year.starts_with?"9"
-    prefix = "19" if year.starts_with?"8"
+    prefix = '20'
+    prefix = '19' if year.starts_with? '9'
+    prefix = '19' if year.starts_with? '8'
 
     (prefix + year).to_i
   end
@@ -226,7 +223,7 @@ class Dossier < ActiveRecord::Base
   end
 
   def waiting_list
-    containers.where(:location_id => Location.find_by_code('RI')).map {|container| container.period unless container.period.blank? }
+    containers.where(location_id: Location.find_by_code('RI')).map { |container| container.period unless container.period.blank? }
   end
 
   # Relations
@@ -234,7 +231,7 @@ class Dossier < ActiveRecord::Base
 
   # Cache expiring
   after_save do
-    related_dossiers.each{|dossier| dossier.touch}
+    related_dossiers.each(&:touch)
   end
 
   # Keep relations intact on renames
@@ -242,7 +239,7 @@ class Dossier < ActiveRecord::Base
     # No action needed for new records
     return if new_record?
 
-    if title_changes = self.changes["title"]
+    if title_changes = changes['title']
       old_title = title_changes[0]
       new_title = title_changes[1]
 
@@ -263,7 +260,7 @@ class Dossier < ActiveRecord::Base
   def relations
     return [] if related_to.blank?
 
-    related_to.split(';').map{|relation| relation.strip.presence}.compact
+    related_to.split(';').map { |relation| relation.strip.presence }.compact
   end
 
   # Sets the relations from an array.
@@ -286,23 +283,23 @@ class Dossier < ActiveRecord::Base
     all_relations = relations + back_relations
 
     # Remove signatures from backlinks
-    all_relations.uniq.sort.map{|relation| relation.gsub(/^[0-9.]{1,8}:[ ]*/, '')}
+    all_relations.uniq.sort.map { |relation| relation.gsub(/^[0-9.]{1,8}:[ ]*/, '') }
   end
 
   def related_dossiers
-    relation_titles.collect{ |relation_title| Dossier.where(:title => relation_title).to_a }.flatten
+    relation_titles.collect { |relation_title| Dossier.where(title: relation_title).to_a }.flatten
   end
 
   def back_related_dossiers(text = nil)
-    text ||= self.title
+    text ||= title
 
     # Guard
     return [] if text.blank?
 
     # We first use like as relation_to contains ; seperated strings
-    matching_dossiers = Dossier.where("related_to LIKE ?", "%#{text}%")
+    matching_dossiers = Dossier.where('related_to LIKE ?', "%#{text}%")
     # Then we do exact matches
-    matching_dossiers.select{ |dossier| dossier.relations.include?(text)}
+    matching_dossiers.select { |dossier| dossier.relations.include?(text) }
   end
 
   # Create an Array for backlinks
@@ -315,7 +312,7 @@ class Dossier < ActiveRecord::Base
 
   def dangling_relations
     relations.select do |relation|
-      Dossier.where(:title => relation).count < 1
+      Dossier.where(title: relation).count < 1
     end
   end
 
@@ -346,7 +343,7 @@ class Dossier < ActiveRecord::Base
 
   # Association attributes
   def dossier_number_list
-    numbers.map{|number| number.to_s(:short)}.join("\n")
+    numbers.map { |number| number.to_s(:short) }.join("\n")
   end
 
   # Saves the dossier numbers from a list.
@@ -357,35 +354,35 @@ class Dossier < ActiveRecord::Base
     old_numbers = numbers.clone
     new_numbers = []
 
-    dossier_number_strings.map{|number_string|
+    dossier_number_strings.map do|number_string|
       # Parse string
       from, to, amount = DossierNumber.from_s(number_string)
       # Remember updated/created number
-      new_numbers << update_or_create_number(amount, {:from => from, :to => to}, false) if amount
-    }
+      new_numbers << update_or_create_number(amount, { from: from, to: to }, false) if amount
+    end
 
     removed_numbers = old_numbers - new_numbers
     # Remove now unused number from the association
-    self.numbers = self.numbers - removed_numbers
+    self.numbers = numbers - removed_numbers
 
     # Destroy the number object
-    removed_numbers.map{|number| number.destroy}
+    removed_numbers.map(&:destroy)
   end
 
   # Returns the dossier number of a year.
   def dossier_number_from_year(to = Time.now.year)
-    numbers.where(:to => "#{to}-12-31").first
+    numbers.where(to: "#{to}-12-31").first
   end
 
   # Returns the keywords as text separated throw new lines.
   def keyword_text
     keyword_list.sort.join("\n")
   end
-  alias keyword_text= keyword_list=
+  alias_method :keyword_text=, :keyword_list=
 
   # Calculations
   def availability
-    availabilities = containers.collect{|c| c.location.availability}
+    availabilities = containers.collect { |c| c.location.availability }
     availabilities << 'intern' if self.internal?
     availabilities << 'inactive' unless self.active?
 
@@ -394,17 +391,17 @@ class Dossier < ActiveRecord::Base
 
   # Returns the locations unified.
   def locations
-    containers.collect{|c| c.location}.uniq
+    containers.collect(&:location).uniq
   end
 
   # Returns the container types unified.
   def container_types
-    containers.collect{|c| c.container_type}.uniq
+    containers.collect(&:container_type).uniq
   end
 
   def active?
     type_id = ContainerType.find_by_code('DH')
-    containers.where(:container_type_id => type_id).present?
+    containers.where(container_type_id: type_id).present?
   end
 
   # Returns the document count of a specified period.
@@ -414,7 +411,7 @@ class Dossier < ActiveRecord::Base
     document_counts.sum(:amount).to_i
   end
 
-  has_one :direct_parent, :class_name => 'Topic', :foreign_key => 'signature', :primary_key => 'signature'
+  has_one :direct_parent, class_name: 'Topic', foreign_key: 'signature', primary_key: 'signature'
 
   # Returns the last entry of the parents.
   def parent
@@ -436,11 +433,11 @@ class Dossier < ActiveRecord::Base
     # Expire old parents if signature has changed
     if changes[:signature]
       old_signature = changes[:signature][0]
-      self.class.parent_dossiers(old_signature).map{|parent| parent.touch}
+      self.class.parent_dossiers(old_signature).map(&:touch)
     end
 
     # New parents
-    parents.map{|parent| parent.touch}
+    parents.map(&:touch)
   end
 
   # Returns the year of the first document.
@@ -464,14 +461,14 @@ class Dossier < ActiveRecord::Base
     periods = Dossier.years(interval, custom)
 
     periods.inject([]) do |result, period|
-      result << {:period => period, :count => document_count(period)}
+      result << { period: period, count: document_count(period) }
     end
   end
 
   # Updates or creates dossier numbers.
   def update_or_create_number(amount, range, accumulate = true)
     # We can't use .count or .where until the Dossier is guaranteed to be saved
-    number = numbers.select{|n|
+    number = numbers.select do|n|
       from = n.from.nil? ? '' : n.from.to_s(:db)
       to   = n.to.nil? ? '' : n.to.to_s(:db)
 
@@ -487,7 +484,7 @@ class Dossier < ActiveRecord::Base
       end
 
       from == range_from && to == range_to
-    }.first
+    end.first
 
     if number
       amount ||= 0
@@ -504,20 +501,20 @@ class Dossier < ActiveRecord::Base
 
   # Prepares a new dossier number.
   def prepare_numbers(year = Date.today.year)
-    update_or_create_number(0, :from => Date.new(year, 1, 1), :to => Date.new(year, 12, 31))
+    update_or_create_number(0, from: Date.new(year, 1, 1), to: Date.new(year, 12, 31))
   end
 
   # Builds the default dossier numbers.
   def build_default_numbers
     periods = DossierNumber.default_periods
 
-    periods.each {|period| numbers.build(period)}
+    periods.each { |period| numbers.build(period) }
   end
 
   # Updates the dossier tags.
   def update_tags
     # Take all (multi-word) keywords and the title as input
-    tag_string = self.keyword_list.join(',') + "," + self.title
+    tag_string = keyword_list.join(',') + ',' + title
 
     # Extract single word tags
     self.tag_list = self.class.extract_tags(tag_string)
@@ -537,8 +534,8 @@ class Dossier < ActiveRecord::Base
   end
 
   def tooltip
-    html_output = "<h1>#{I18n::translate('katalog.dossier_count_per_year')}</h1>"  unless self.numbers.present.empty?
-    self.numbers.present.each do |number|
+    html_output = "<h1>#{I18n.translate('katalog.dossier_count_per_year')}</h1>"  unless numbers.present.empty?
+    numbers.present.each do |number|
       html_output += "<p style='#{cycle('odd', 'even')}'><label>#{number.period}:</label> #{number.amount}</p>"
     end
 
@@ -576,11 +573,11 @@ class Dossier < ActiveRecord::Base
   end
 
   def remove_short_cuts(string)
-    string.gsub(/(AG|SA)/, "")
+    string.gsub(/(AG|SA)/, '')
   end
 
   def remove_bracket(string)
-    string.gsub(/\(.*\)/, "")
+    string.gsub(/\(.*\)/, '')
   end
 
   def replace_comma(string)
@@ -591,6 +588,6 @@ class Dossier < ActiveRecord::Base
     query = remove_unpleasant_chars(query)
     return query unless query.include?('.')
 
-    'erw:0%7C1%7C' + query.gsub(/(\s*\.\s*)/, "%241%7C1%7C")
+    'erw:0%7C1%7C' + query.gsub(/(\s*\.\s*)/, '%241%7C1%7C')
   end
 end
