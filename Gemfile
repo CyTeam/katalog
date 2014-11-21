@@ -105,6 +105,7 @@ gem 'thinking-sphinx', '~> 2.1.0'
 # Reports
 gem 'prawn_rails'
 gem 'prawn'
+gem 'prawn-table'
 
 # CRUD helpers
 gem 'show_for'
