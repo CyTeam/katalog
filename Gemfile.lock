@@ -5,12 +5,6 @@ GIT
     rack-google-analytics (0.11.0)
 
 GIT
-  remote: http://github.com/huerlisi/raspell.git
-  revision: 6dcf387d6bda27efc5e4a5738dc08dcf888e0693
-  specs:
-    raspell (1.3)
-
-GIT
   remote: https://github.com/huerlisi/will_paginate.git
   revision: dca0b70fbaa44c4dffd2631a229ed304ef7f8d40
   branch: show_always
@@ -139,6 +133,8 @@ GEM
     fancy-buttons (1.2.0)
       compass (>= 0.11)
     ffi (1.9.6)
+    ffi-aspell (1.0.2)
+      ffi
     formtastic (3.1.2)
       actionpack (>= 3.2.13)
     haml (4.0.5)
@@ -187,7 +183,7 @@ GEM
     paper_trail (2.7.2)
       activerecord (~> 3.0)
       railties (~> 3.0)
-    parser (2.2.0.pre.7)
+    parser (2.2.0.pre.8)
       ast (>= 1.1, < 3.0)
       slop (~> 3.4, >= 3.4.5)
     pdf-core (0.4.0)
@@ -366,6 +362,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   fancy-buttons
+  ffi-aspell
   formtastic
   haml-rails
   has_scope
@@ -385,7 +382,6 @@ DEPENDENCIES
   rack-google-analytics!
   rails
   rails_autolink
-  raspell!
   rdoc
   revertible_paper_trail
   rspec-rails

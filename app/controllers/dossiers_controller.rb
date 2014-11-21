@@ -1,8 +1,4 @@
 # encoding: UTF-8
-
-require 'ostruct'
-require 'raspell'
-
 class DossiersController < AuthorizedController
   # Authentication
   before_filter :authenticate_user!, except: [:index, :search, :show, :report, :welcome, :sitemap]

@@ -102,6 +102,9 @@ gem 'acts-as-taggable-on'
 # Search
 gem 'thinking-sphinx', '~> 2.1.0'
 
+# Spellchecking
+gem 'ffi-aspell'
+
 # Reports
 gem 'prawn_rails'
 gem 'prawn'
@@ -123,9 +126,6 @@ gem 'revertible_paper_trail'
 
 # Generate excel files
 gem 'spreadsheet'
-
-# Spellchecking
-gem 'raspell', git: 'http://github.com/huerlisi/raspell.git'
 
 # Monitoring
 # ==========

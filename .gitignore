@@ -39,4 +39,4 @@ config/sphinx/
 config/initializers/mail.rb
 
 # Aspell
-db/aspell/kt.rws
+db/aspell/aspell.de_CH.pws
