@@ -53,11 +53,6 @@ group :test, :development do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'poltergeist'
-
-  # Console
-  gem 'pry-rails'
-  gem 'pry-doc'
-  gem 'pry-debugger'
 end
 
 # Development
@@ -66,22 +61,17 @@ group :development do
   # RDoc
   gem 'rdoc'
 
-  # UML documentation
-  gem 'rails-erd'
-
   # Deployment
   gem 'capistrano', '~> 2.15.5'
   gem 'capistrano-rbenv', '~> 1.0'
   gem 'capones_recipes'
 
-  # Development Server
-  gem 'webrick'
   gem 'quiet_assets'
 end
 
 # Standard helpers
 # ================
-gem 'haml'
+gem 'haml-rails'
 
 gem 'formtastic'
 gem 'will_paginate', :git => 'https://github.com/huerlisi/will_paginate.git', :branch => 'show_always'
@@ -89,6 +79,7 @@ gem 'inherited_resources'
 gem 'has_scope'
 gem 'i18n_rails_helpers'
 gem 'simple-navigation'
+gem 'simple_form'
 
 # Katalog
 # =======
@@ -138,9 +129,6 @@ gem 'settingslogic'
 group :staging, :production do
   # Traffic
   gem 'rack-google-analytics', :git => 'http://github.com/huerlisi/rack-google-analytics'
-
-  # Performance
-  #gem 'newrelic_rpm'
 
   # Exceptions
   gem 'airbrake'
