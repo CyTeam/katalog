@@ -16,7 +16,7 @@ namespace :katalog do
   namespace :ts do
     desc "Export word_form and exception lists"
     task :export_lists => :environment do
-      sh "mkdir #{Rails.root.join('config', 'sphinx')}"
+      sh "mkdir -p #{Rails.root.join('config', 'sphinx')}"
       SphinxAdminWordForm.send(:export_file)
       SphinxAdminException.send(:export_file)
     end
