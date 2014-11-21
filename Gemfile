@@ -119,9 +119,6 @@ gem 'spreadsheet'
 # Spellchecking
 gem 'raspell', :git => 'http://github.com/huerlisi/raspell.git'
 
-# Squeel
-gem "squeel"
-
 # Monitoring
 # ==========
 gem 'settingslogic'
