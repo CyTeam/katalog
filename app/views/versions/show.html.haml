@@ -16,7 +16,7 @@
   #versions-bottom
     - item_class = @version.item_type.constantize
     - attributes = item_class.column_names
-    - attributes = attributes - item_class.ignore - [item_class.primary_key]
+    - #attributes = attributes - item_class.ignore - [item_class.primary_key]
 
     %table.ce_table
       %tr
