@@ -105,9 +105,6 @@ gem 'show_for'
 # WYSIWYG Editor
 gem 'ckeditor'
 
-# Link fixes
-gem 'rails_autolink'
-
 # Change log for model data
 gem 'paper_trail'
 
