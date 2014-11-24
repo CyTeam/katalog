@@ -1,10 +1,4 @@
 GIT
-  remote: http://github.com/huerlisi/rack-google-analytics
-  revision: 00f117800dd2ad9163ab3c51faab2f5836f17d2b
-  specs:
-    rack-google-analytics (0.11.0)
-
-GIT
   remote: https://github.com/huerlisi/will_paginate.git
   revision: dca0b70fbaa44c4dffd2631a229ed304ef7f8d40
   branch: show_always
@@ -201,6 +195,9 @@ GEM
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-google-analytics (1.2.0)
+      actionpack
+      activesupport
     rack-ssl (1.3.4)
       rack
     rack-test (0.6.2)
@@ -349,7 +346,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   quiet_assets
-  rack-google-analytics!
+  rack-google-analytics
   rails
   rdoc
   revertible_paper_trail

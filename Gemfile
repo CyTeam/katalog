@@ -118,7 +118,7 @@ gem 'spreadsheet'
 gem 'settingslogic'
 group :staging, :production do
   # Traffic
-  gem 'rack-google-analytics', git: 'http://github.com/huerlisi/rack-google-analytics'
+  gem 'rack-google-analytics'
 
   # Exceptions
   gem 'airbrake'
