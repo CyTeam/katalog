@@ -12,24 +12,6 @@ end
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 
-# Capybara
-require 'capybara/rails'
-
-Capybara.configure do |config|
-  config.default_driver    = :rack_test
-
-  # Evaluate javascript driver
-  js_driver = (ENV['JS_DRIVER'] || :poltergeist).to_sym
-
-  # Alias :phantomjs to :poltergeist
-  js_driver = :poltergeist if js_driver == :phantomjs
-
-  if js_driver == :poltergeist
-    require 'capybara/poltergeist'
-  end
-  config.javascript_driver = js_driver
-end
-
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }

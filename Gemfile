@@ -33,12 +33,6 @@ gem 'jquery-ui-rails'
 group :test do
   # Matchers/Helpers
   gem 'shoulda'
-
-  # Mocking
-  # gem 'mocha'
-
-  # Browser
-  gem 'webrat'
 end
 
 group :test, :development do
@@ -48,11 +42,6 @@ group :test, :development do
   # Fixtures
   gem 'factory_girl_rails'
   gem 'database_cleaner'
-
-  # Browser
-  gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'poltergeist'
 
   # Debugger
   gem 'pry-rails'
