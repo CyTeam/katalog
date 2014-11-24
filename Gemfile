@@ -75,7 +75,7 @@ gem 'has_scope'
 gem 'i18n_rails_helpers'
 gem 'simple-navigation'
 gem 'simple_form'
-
+gem 'nokogiri'
 # Katalog
 # =======
 # Authentication
