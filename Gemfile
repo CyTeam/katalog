@@ -21,7 +21,6 @@ group :assets do
   gem 'therubyracer'
   gem 'uglifier'
   gem 'compass-rails'
-  gem 'fancy-buttons'
 end
 
 gem 'jquery-rails'
