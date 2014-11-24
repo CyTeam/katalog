@@ -100,7 +100,7 @@ gem 'cancan'
 gem 'acts-as-taggable-on'
 
 # Search
-gem 'thinking-sphinx', '~> 2.1.0'
+gem 'thinking-sphinx'
 
 # Spellchecking
 gem 'ffi-aspell'

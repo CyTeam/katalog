@@ -3,43 +3,6 @@
 module Dossiers
   module Sphinx
     extend ActiveSupport::Concern
-
-    included do
-      # Sphinx configuration:
-      # Free text search
-      define_index do
-        # Needed for tag/keyword search
-        set_property group_concat_max_len: 1_048_576
-
-        # Disable delta update in Fallback environment, as we use it read-only
-        set_property delta: true unless Rails.env.fallback?
-
-        # Indexed Fields
-        indexes title
-        indexes description
-        indexes signature
-        # Use _taggings relation to fix thinking sphinx issue #167
-        indexes keyword_taggings.tag.name, as: :keywords
-
-        indexes direct_parents.title, as: :parent_title
-
-        # Weights
-        set_property field_weights: {
-          title: 500,
-          parent_title: 5,
-          keywords: 10
-        }
-
-        # Attributes
-        has created_at, updated_at
-        has "type = 'Topic'", type: :boolean, as: :is_topic
-        has type
-        has internal
-        has "signature LIKE '17%'", type: :boolean, as: :is_local
-        has signature, type: :string, as: :signature_sort
-      end
-    end
-
     module ClassMethods
       def by_text(value, options = {})
         # Only include internal dossiers if user is logged in
@@ -47,7 +10,15 @@ module Dossiers
         attributes[:internal] = false if (options.delete(:internal) == false)
         attributes[:is_topic] = false
 
-        params = { retry_stale: true, match_mode: :extended, with: attributes, sort_mode: :expr, order: '@weight * (1.5 - is_local)' }
+        params = {
+          retry_stale: true,
+          match_mode: :extended,
+          with: attributes,
+          sort_mode: :expr,
+          select: '*, weight() * (1.5 - is_local) AS custom_weight',
+          order: 'custom_weight DESC'
+        }
+
         params.merge!(options)
         query = build_query(value)
         params.merge!(sort_mode: :extended, order: 'signature ASC') if query.include?('@signature')

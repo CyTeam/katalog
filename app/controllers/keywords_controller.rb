@@ -70,7 +70,7 @@ class KeywordsController < InheritedResources::Base
       attributes = {}
       attributes[:internal] = false unless current_user.present?
 
-      params = { match_mode: :extended, rank_mode: :match_any, with: attributes }
+      params = { match_mode: :extended, ranker: :matchany, with: attributes }
       count = Dossier.search_count query, params
       {
         'keyword' => {
