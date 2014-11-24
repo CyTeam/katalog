@@ -17,7 +17,6 @@ gem 'mysql2'
 # in production environments by default.
 group :assets do
   gem 'sass-rails'
-  gem 'sprockets'
   gem 'coffee-rails'
   gem 'therubyracer'
   gem 'uglifier'

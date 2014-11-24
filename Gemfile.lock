@@ -359,7 +359,6 @@ DEPENDENCIES
   simple-navigation
   simple_form
   spreadsheet
-  sprockets
   therubyracer
   thinking-sphinx
   uglifier
