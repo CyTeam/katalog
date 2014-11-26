@@ -20,6 +20,8 @@ public/stylesheets/all.css
 # Local
 config/database.yml
 config/application.yml
+config/deploy/production.rb
+config/deploy/staging.rb
 
 # Plugins
 # =======

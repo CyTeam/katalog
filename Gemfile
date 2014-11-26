@@ -71,6 +71,7 @@ group :development do
 
   # Deployment
   gem 'capistrano', '~> 2.15.5'
+  gem 'capistrano-rbenv', '~> 1.0'
   gem 'capones_recipes'
 
   # Development Server

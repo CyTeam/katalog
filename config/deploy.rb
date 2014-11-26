@@ -9,9 +9,13 @@ require 'capones_recipes/tasks/settings_logic'
 require 'capones_recipes/tasks/thinking_sphinx'
 require 'capones_recipes/tasks/email'
 require 'capones_recipes/tasks/sync'
-require 'capones_recipes/tasks/bluepill'
 
 load 'deploy/assets'
+
+# Setup rbenv
+require 'capistrano-rbenv'
+set :rbenv_ruby_version, open(File.expand_path('../../.ruby-version', __FILE__)).read.strip
+set :rbenv_setup_shell, false
 
 # Staging
 set :default_stage, "staging"
@@ -32,7 +36,6 @@ after "deploy", "deploy:cleanup"
 
 # Dependencies
 depend :remote, :gem, 'bundler', '> 0'
-depend :remote, :gem, 'bluepill', ''
 
 # Headers for gem compilation
 depend :remote, :deb, "build-essential", ''
