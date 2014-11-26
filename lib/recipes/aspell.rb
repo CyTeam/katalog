@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 # Generate the aspell wordlist
 before 'deploy:restart', 'aspell:generate'
 namespace :aspell do

@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 class PaginationListLinkRenderer < WillPaginate::ActionView::LinkRenderer
   def html_container(html)
     @search_key = :search

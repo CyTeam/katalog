@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 # Code snippet from: http://dondoh.tumblr.com/post/4142258573/formtastic-without-activerecord
 
 # -------------------------------------------------------------------------------
