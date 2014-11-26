@@ -71,17 +71,12 @@ class KeywordsController < InheritedResources::Base
       attributes[:internal] = false unless current_user.present?
 
       params = { match_mode: :extended, ranker: :matchany, with: attributes }
-      count = Dossier.search_count query, params
       {
         'keyword' => {
-          'name'  => keywords,
-          'count' => count
+          'name'  => keywords
         }
       }
     end
-
-    # Drop suggestions with count = 0
-    suggestions.reject! { |suggestion| suggestion['keyword']['count'] == 0 }
 
     render json: suggestions
   end
