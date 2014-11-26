@@ -71,9 +71,8 @@ gem 'formtastic'
 gem 'will_paginate', git: 'https://github.com/huerlisi/will_paginate.git', branch: 'show_always'
 gem 'inherited_resources'
 gem 'has_scope'
-gem 'i18n_rails_helpers'
+gem 'i18n_rails_helpers', github: 'huerlisi/i18n_rails_helpers'
 gem 'simple-navigation'
-gem 'simple_form'
 gem 'nokogiri'
 # Katalog
 # =======

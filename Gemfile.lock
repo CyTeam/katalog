@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/huerlisi/i18n_rails_helpers.git
+  revision: 785636163d560153122ff44c7aae3f64d3d7656b
+  specs:
+    i18n_rails_helpers (2.0.0.beta1)
+      rails (> 3.0.0)
+
+GIT
   remote: https://github.com/huerlisi/will_paginate.git
   revision: dca0b70fbaa44c4dffd2631a229ed304ef7f8d40
   branch: show_always
@@ -135,7 +142,6 @@ GEM
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     i18n (0.6.11)
-    i18n_rails_helpers (1.4.12)
     inherited_resources (1.4.0)
       has_scope (~> 0.5.0)
       responders (~> 0.9)
@@ -291,9 +297,6 @@ GEM
       activemodel (>= 3.2, < 5)
     simple-navigation (3.13.0)
       activesupport (>= 2.3.2)
-    simple_form (2.1.2)
-      actionpack (~> 3.0)
-      activemodel (~> 3.0)
     slop (3.6.0)
     spreadsheet (1.0.0)
       ruby-ole (>= 1.0)
@@ -354,7 +357,7 @@ DEPENDENCIES
   formtastic
   haml-rails
   has_scope
-  i18n_rails_helpers
+  i18n_rails_helpers!
   inherited_resources
   jquery-rails
   jquery-ui-rails
@@ -379,7 +382,6 @@ DEPENDENCIES
   shoulda
   show_for
   simple-navigation
-  simple_form
   spreadsheet
   therubyracer
   thinking-sphinx
