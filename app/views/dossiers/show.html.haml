@@ -24,7 +24,7 @@
     %h3= t_attr(:relation_list)
     #relations.section
       %ul#relation-list.relations
-        - for relation in @dossier.relation_titles
+        - for relation in @dossier.relation_titles.uniq
           %li= link_to_relation relation
 
   %h3= t_attr(:books)
