@@ -16,6 +16,7 @@ load 'deploy/assets'
 require 'capistrano-rbenv'
 set :rbenv_ruby_version, open(File.expand_path('../../.ruby-version', __FILE__)).read.strip
 set :rbenv_setup_shell, false
+set :rbenv_install_dependencies, false
 
 # Staging
 set :default_stage, 'staging'
