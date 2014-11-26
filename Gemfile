@@ -111,6 +111,9 @@ gem 'revertible_paper_trail'
 # Generate excel files
 gem 'spreadsheet'
 
+# Load html content
+gem 'mechanize'
+
 # Monitoring
 # ==========
 gem 'settingslogic'

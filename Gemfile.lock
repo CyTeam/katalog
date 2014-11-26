@@ -108,6 +108,8 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    domain_name (0.5.22)
+      unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
     execjs (2.2.2)
     factory_girl (4.5.0)
@@ -130,6 +132,8 @@ GEM
     has_scope (0.5.1)
     highline (1.6.21)
     hike (1.2.3)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
     i18n (0.6.11)
     i18n_rails_helpers (1.4.12)
     inherited_resources (1.4.0)
@@ -150,12 +154,23 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mechanize (2.7.2)
+      domain_name (~> 0.5, >= 0.5.1)
+      http-cookie (~> 1.0.0)
+      mime-types (~> 1.17, >= 1.17.2)
+      net-http-digest_auth (~> 1.1, >= 1.1.1)
+      net-http-persistent (~> 2.5, >= 2.5.2)
+      nokogiri (~> 1.4)
+      ntlm-http (~> 0.1, >= 0.1.1)
+      webrobots (>= 0.0.9, < 0.2)
     method_source (0.8.2)
     middleware (0.1.0)
     mime-types (1.25.1)
     mini_portile (0.6.1)
     multi_json (1.10.1)
     mysql2 (0.3.17)
+    net-http-digest_auth (1.4)
+    net-http-persistent (2.9.4)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -165,6 +180,7 @@ GEM
       net-ssh (>= 2.6.5)
     nokogiri (1.6.4.1)
       mini_portile (~> 0.6.0)
+    ntlm-http (0.1.1)
     orm_adapter (0.5.0)
     paper_trail (2.7.2)
       activerecord (~> 3.0)
@@ -307,12 +323,16 @@ GEM
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.6)
     unicorn (4.8.3)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
     warden (1.2.3)
       rack (>= 1.0)
+    webrobots (0.1.1)
 
 PLATFORMS
   ruby
@@ -338,6 +358,7 @@ DEPENDENCIES
   inherited_resources
   jquery-rails
   jquery-ui-rails
+  mechanize
   mysql2
   nokogiri
   paper_trail
