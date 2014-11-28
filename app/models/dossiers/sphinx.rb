@@ -72,7 +72,7 @@ module Dossiers
       def build_query(value)
         signatures, words, sentences = split_search_words(value)
 
-        if signatures.present?
+        if signatures.present? && !(words.present? || sentences.present?)
           quoted_signatures = signatures.map { |signature| '"^' + signature + '*"' }
           signature_query = "@signature (#{quoted_signatures.join('|')})"
         end
