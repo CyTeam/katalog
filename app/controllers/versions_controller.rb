@@ -39,11 +39,6 @@ class VersionsController < AuthorizedController
     @version = Version.find(params[:id])
     @version.revert
 
-    if dossier? @version
-      # TODO: try reactivating this code
-      # Dossier.restore_relations(@version)
-    end
-
     redirect_to :back
   end
 end

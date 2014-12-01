@@ -12,7 +12,6 @@ gem 'mysql2'
 # Journaling
 # ==========
 gem 'paper_trail'
-#gem 'revertible_paper_trail', path: '../revertible_paper_trail', branch: 'master'
 
 # Asset Pipeline
 # ==============
