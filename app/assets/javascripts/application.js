@@ -27,4 +27,5 @@ $(document).ready(function() {
   addEditReportBehaviour();
   addCsrfTokenToAjaxCalls();
   addMainNavigationBehaviour();
+  markContainerForDeletion();
 });

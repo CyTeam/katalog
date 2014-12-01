@@ -41,7 +41,7 @@ prawn_document(:page_size => 'A4', :filename => "#{@dossier.to_s}.pdf", :rendere
     pdf.text t_attr(:dossier_number_list), :size => 12
 
     years = @dossier.years_counts(1)
-    split_decades(@dossier.numbers.present).each do |decade|
+    split_decades(@dossier.numbers.documents_present).each do |decade|
       header = decade.inject([]) do |out, year|
         out << year.period.to_s
 

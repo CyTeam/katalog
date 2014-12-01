@@ -11,6 +11,6 @@
             %th.year= year
 
       - if @report[:columns]
-        - default_topics = [Topic.group.first, Topic.main.first, Topic.geo.first, Topic.detail.first, Dossier.dossier.first]
+        - default_topics = [Topic.topic_group.first, Topic.main.first, Topic.geo.first, Topic.detail.first, Dossier.dossier.first]
         - topics = @report[:level] ? default_topics[0..@report[:level]-1] : default_topics
         = render :partial => 'reports/dossier', :collection => topics

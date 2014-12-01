@@ -11,7 +11,7 @@
   font-size: 90%;
 }
 
-tr.topic.group td { background-color: #96B1CD; }
+tr.topic.topic_group td { background-color: #96B1CD; }
 tr.topic.main td { background-color: #E1E6EC; }
 tr.topic.geo td { background-color: #C8B7B7; }
 tr.topic.detail td { background-color: #E9DDAF; }
@@ -40,7 +40,7 @@ th.action-links {
   border: 0;
   font-size: 85%;
 }
-.index tr.topic.group td {
+.index tr.topic.topic_group td {
   padding-top: 8px;
   padding-bottom: 8px;
   border: 0;
@@ -53,18 +53,18 @@ th.action-links {
 }
 
 /** Sidebar Topic Index **/
-li.topic.group {
+li.topic.topic_group {
   font-weight: bold;
   list-style-type: none;
   list-style-image: none;
 }
 
-li.topic.group .signature {
+li.topic.topic_group .signature {
   float: left;
   width: 1.2em;
 }
 
-li.topic.group a {
+li.topic.topic_group a {
   margin-left: 1.5em;
   display: block;
   text-decoration: none;

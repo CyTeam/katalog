@@ -27,7 +27,7 @@ class Topic < Dossier
 
     case signature.length
       when 1
-        :group
+        :topic_group
       when 2
         :main
       when 4
@@ -46,10 +46,10 @@ class Topic < Dossier
   def children_topic_type
     return if topic_type.nil?
     case topic_type
-      when :group  then :main
-      when :main   then :geo
-      when :geo    then :detail
-      when :detail then :dossier
+      when :topic_group  then :main
+      when :main         then :geo
+      when :geo          then :detail
+      when :detail       then :dossier
     end
   end
 

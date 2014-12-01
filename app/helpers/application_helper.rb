@@ -1,31 +1,4 @@
-# encoding: UTF-8
-
 module ApplicationHelper
-  # Nested Form
-  def remove_link_unless_new_record(fields)
-    unless fields.object.new_record?
-      out = ''
-      out << fields.hidden_field(:_destroy)
-      out << link_to_function(image_tag('icons/delete.png'), "$(this).parents('.#{fields.object.class.name.underscore}').hide();$(this).hide();$(this).prev().attr('value', '1');$(this).next().show();hideUnlessNewRecord($(this).parents('.#{fields.object.class.name.underscore}'));")
-      out << link_to_function(image_tag('icons/add.png'), "$(this).parents('.#{fields.object.class.name.underscore}').hide();$(this).hide();$(this).prev().prev().attr('value', 'false');$(this).prev().show();showUnlessNewRecord($(this).parents('.#{fields.object.class.name.underscore}'));", style: 'display:none;')
-      out.html_safe
-    end
-  end
-
-  def add_record_link(form, _klass)
-    record = render('containers/new_form', form: form)
-    function = "
-var new_record_id = new Date().getTime();
-var content = '#{ escape_javascript record }';
-content = content.replace(/\\[\\d+\\]/g, '[' + new_record_id + ']');
-content = content.replace(/_\\d+_/g, '_' + new_record_id + '_');
-$('#container-list').append(content);
-addContainerSuggestionBehaviour();
-"
-
-    link_to_function image_tag('icons/add.png'), function, id: 'add_record_link'
-  end
-
   # Navigation
   def navigation_item(title, *args)
     if current_page?(*args)

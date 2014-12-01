@@ -31,7 +31,7 @@ class PrawnLayout < Prawn::Document
 
     row.map do |cell|
       case item.topic_type
-        when :group
+        when :topic_group
           cell.background_color = '96B1CD'
           cell.padding_top      = 3
           cell.padding_bottom   = 3

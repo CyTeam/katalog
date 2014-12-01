@@ -1,12 +1,4 @@
-# encoding: utf-8
-
-# This class represents a dossier with many containers.
 class Dossier < ActiveRecord::Base
-  attr_accessible :container_type_code, :location_code, :internal, :signature, :title, :description, :keyword_text, :relation_list, :add_relation, :first_document_year, :dossier_number_list, :containers_attributes
-
-  # PaperTrail
-  # ==========
-  # We're using papertrail to track changes
   has_paper_trail ignore: [:created_at, :updated_at, :search_key, :delta],
                   meta: { container_ids: proc { |dossier| dossier.container_ids.join(',') },
                           number_ids: proc { |dossier| dossier.number_ids.join(',') },
@@ -27,15 +19,15 @@ class Dossier < ActiveRecord::Base
   validates :title, presence: true, allow_blank: false
   validates_format_of :first_document_year, with: /[12][0-9]{3}/, allow_blank: true
 
-  default_scope order: 'sort_key ASC'
+  default_scope -> { order(sort_key: :asc) }
 
   # Type Scopes
-  scope :dossier, where(type: nil)
-  scope :topic, where('type IS NOT NULL')
-  scope :group, topic.where('char_length(signature) = 1')
-  scope :main, topic.where('char_length(signature) = 2')
-  scope :geo, topic.where('char_length(signature) = 4')
-  scope :detail, topic.where('char_length(signature) = 8')
+  scope :dossier,     -> { where(type: nil) }
+  scope :topic,       -> { where(type: Topic) }
+  scope :topic_group, -> { topic.where('char_length(signature) = 1') }
+  scope :main,        -> { topic.where('char_length(signature) = 2') }
+  scope :geo,         -> { topic.where('char_length(signature) = 4') }
+  scope :detail,      -> { topic.where('char_length(signature) = 8') }
 
   # Scopes
   scope :by_level, lambda { |level| where('char_length(dossiers.signature) <= ?', level_to_prefix_length(level)) }
@@ -235,7 +227,9 @@ class Dossier < ActiveRecord::Base
   end
 
   # Keep relations intact on renames
-  before_save do
+  before_save :update_relations
+
+  def update_relations
     # No action needed for new records
     return if new_record?
 
@@ -534,8 +528,8 @@ class Dossier < ActiveRecord::Base
   end
 
   def tooltip
-    html_output = "<h1>#{I18n.translate('katalog.dossier_count_per_year')}</h1>"  unless numbers.present.empty?
-    numbers.present.each do |number|
+    html_output = "<h1>#{I18n.translate('katalog.dossier_count_per_year')}</h1>"  unless numbers.documents_present.empty?
+    numbers.documents_present.each do |number|
       html_output += "<p style='#{cycle('odd', 'even')}'><label>#{number.period}:</label> #{number.amount}</p>"
     end
 
@@ -547,9 +541,6 @@ class Dossier < ActiveRecord::Base
 
   # Sphinx Freetext Search
   include Dossiers::Sphinx
-
-  # Paper Trail
-  include Dossiers::PaperTrail
 
   # Text helper
   include ActionView::Helpers::TextHelper

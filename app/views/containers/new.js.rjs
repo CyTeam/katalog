@@ -1,1 +1,0 @@
-page['#container-list'].append(render(:partial => 'new'))

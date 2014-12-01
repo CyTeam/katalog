@@ -9,4 +9,6 @@
     = container.text_field :location_code, :size => '2', :class => 'container_location_code_auto_completion'
     = container.semantic_errors :location
   %td.remove_link
-    = remove_link_unless_new_record(container)
+    = link_to '#', class: 'destroy-container' do
+      = image_tag('icons/delete.png')
+      = container.hidden_field :_destroy

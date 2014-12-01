@@ -353,3 +353,12 @@ function addMainNavigationBehaviour() {
     $(this).parents('li').addClass('selected');
   });
 }
+
+// Marks a container for deletion
+function markContainerForDeletion() {
+  $('a.destroy-container').click(function(e){
+    e.preventDefault();
+    $(e.currentTarget).find('input:hidden').val('1');
+    $(e.currentTarget).closest('.container').hide();
+  })
+}

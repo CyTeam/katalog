@@ -1,21 +1,16 @@
 # encoding: UTF-8
 class DossiersController < AuthorizedController
-  # Authentication
   before_filter :authenticate_user!, except: [:index, :search, :show, :report, :welcome, :sitemap]
 
-  # Responders
   respond_to :html, :js, :json, :xls, :pdf
 
-  # Search
   has_scope :by_character
 
-  # CRUD Actions
-  # ============
   def show
     # Set query for highlighting and search form prefill
     @query = params[:search][:text] if params[:search]
 
-    @dossier = Dossier.find(params[:id], include: { containers: [:location, :container_type] })
+    @dossier = Dossier.find(params[:id])
 
     authorize! :show, @dossier
 
@@ -35,7 +30,6 @@ class DossiersController < AuthorizedController
   def new
     @dossier = Dossier.new(params[:dossier])
     @dossier.build_default_numbers
-
     @dossier.containers.build(container_type_code: 'DH')
 
     new!
@@ -43,6 +37,7 @@ class DossiersController < AuthorizedController
 
   def edit
     @dossier = Dossier.find(params[:id])
+    @dossier.containers.build(container_type_code: 'DH')
     @dossier.build_default_numbers if @dossier.numbers.empty?
     @dossier.prepare_numbers
 
