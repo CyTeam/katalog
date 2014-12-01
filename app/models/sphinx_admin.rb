@@ -11,7 +11,7 @@
 class SphinxAdmin < ActiveRecord::Base
   has_paper_trail ignore: [:created_at, :updated_at]
 
-  default_scope order: 'sphinx_admins.from ASC'
+  default_scope -> { order('sphinx_admins.from ASC') }
 
   # The default folder for the config files.
   FOLDER = Rails.root.join('config', 'sphinx')

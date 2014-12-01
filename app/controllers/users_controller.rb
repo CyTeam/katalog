@@ -1,13 +1,6 @@
-# encoding: UTF-8
-
-# Users Controller
-#
-# Provides a user/account management interface.
 class UsersController < AuthorizedController
-  # Scopes
   has_scope :tagged_with
 
-  # Actions
   def update
     # Preset role_texts to ensure it clears roles.
     params[:user][:role_texts] ||= []
@@ -31,5 +24,13 @@ class UsersController < AuthorizedController
 
   def current
     redirect_to current_user
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(
+      :username, :email, :password, :password_confirmation, :role_texts
+    )
   end
 end
