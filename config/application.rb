@@ -1,12 +1,12 @@
 require File.expand_path('../boot', __FILE__)
 
 # Pick the frameworks you want:
-require "active_model/railtie"
-require "active_record/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "action_view/railtie"
-require "sprockets/railtie"
+require 'active_model/railtie'
+require 'active_record/railtie'
+require 'action_controller/railtie'
+require 'action_mailer/railtie'
+require 'action_view/railtie'
+require 'sprockets/railtie'
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -29,7 +29,7 @@ module Katalog
     config.i18n.fallbacks = [:'de-CH', :de]
 
     # Custom directories with classes and modules you want to be autoloadable.
-    config.autoload_paths += %W[ #{config.root}/lib ]
+    config.autoload_paths += %W(#{config.root}/lib)
 
     # Add fonts folder to assets path
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')

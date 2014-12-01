@@ -1,5 +1,5 @@
 class VisitorLogsController < AuthorizedController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def create
     create! { visitor_logs_path }

@@ -1,5 +1,5 @@
 class DossiersController < AuthorizedController
-  before_filter :authenticate_user!, except: [:index, :search, :show, :report, :welcome, :sitemap]
+  before_action :authenticate_user!, except: [:index, :search, :show, :report, :welcome, :sitemap]
 
   respond_to :html, :js, :json, :xls, :pdf
 

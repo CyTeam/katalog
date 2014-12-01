@@ -1,6 +1,6 @@
 class TopicsController < AuthorizedController
   include DossiersHelper
-  before_filter :authenticate_user!, except: [:index, :show, :navigation]
+  before_action :authenticate_user!, except: [:index, :show, :navigation]
 
   def update
     @topic = Topic.find(params[:id])

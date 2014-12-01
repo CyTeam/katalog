@@ -1,5 +1,5 @@
 class SphinxAdminsController < AuthorizedController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def exceptions
     @model = SphinxAdminException

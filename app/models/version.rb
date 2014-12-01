@@ -3,15 +3,15 @@ class Version < ActiveRecord::Base
 
   def revert
     case event
-    when "create"
+    when 'create'
       # Do nothing if item already destroyed again
-      return unless self.item
+      return unless item
 
-      self.item.destroy
-    when "update"
-      self.reify.save
-    when "destroy"
-      self.reify.save
+      item.destroy
+    when 'update'
+      reify.save
+    when 'destroy'
+      reify.save
     end
   end
 
@@ -27,17 +27,17 @@ class Version < ActiveRecord::Base
       self.next.reify
     else
       # Use active item as it should exist
-      self.item
+      item
     end
   end
 
   def previous_item
     case event
-    when "create"
+    when 'create'
       nil
-    when "update"
+    when 'update'
       current_item.previous_version
-    when "destroy"
+    when 'destroy'
       reify
     end
   end
