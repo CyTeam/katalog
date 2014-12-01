@@ -27,5 +27,15 @@ module Katalog
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = 'de-CH'
     config.i18n.fallbacks = [:'de-CH', :de]
+
+    # Custom directories with classes and modules you want to be autoloadable.
+    config.autoload_paths += %W[ #{config.root}/lib ]
+
+    # Add fonts folder to assets path
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+    config.assets.paths << Rails.root.join('app', 'assets', 'icons')
+
+    # Use sass files for stylesheets
+    config.sass.preferred_syntax = :sass
   end
 end
