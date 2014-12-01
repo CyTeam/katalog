@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 # Application
 set :application, 'katalog'
 set :repository, 'https://github.com/CyTeam/katalog.git'

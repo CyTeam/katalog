@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 # This class is a parent class of SphinxAdminException and SphinxAdminWordForm.
 # It creates the sphinx config files in the directory config/sphinx.
 # Before sphinx search can be started these files should be created.

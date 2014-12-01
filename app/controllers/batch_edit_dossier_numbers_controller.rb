@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 class BatchEditDossierNumbersController < ApplicationController
   # Responders
   respond_to :html, :js, :json

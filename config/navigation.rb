@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 # Configures your navigations
 SimpleNavigation::Configuration.run do |navigation|
   # Define the primary navigations

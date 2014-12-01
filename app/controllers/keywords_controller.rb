@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 class KeywordsController < InheritedResources::Base
   # Association
   optional_belongs_to :dossier

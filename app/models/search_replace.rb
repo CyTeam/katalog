@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 # This class is a sub class of FormtasticFauxModel.
 # It is used to do global search and replace actions.
 class SearchReplace < FormtasticFauxModel

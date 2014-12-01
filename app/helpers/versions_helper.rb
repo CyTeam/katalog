@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module VersionsHelper
   def change_type(previous, current)
     if previous == current

@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 class ReservationMailer < ActionMailer::Base
   default from: Settings.mail.sender, reply_to: Settings.mail.recipient
 

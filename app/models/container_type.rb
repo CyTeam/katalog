@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 # This class represents the different container types.
 class ContainerType < ActiveRecord::Base
   # PaperTrail: change log

@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module DossiersHelper
   def link_to_tag_filter(name, options = {})
     query = [@query, name].compact.join(' ')

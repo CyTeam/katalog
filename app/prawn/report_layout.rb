@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 require 'prawn/measurement_extensions'
 
 class ReportLayout < PrawnLayout

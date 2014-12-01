@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 class SphinxAdminsController < AuthorizedController
   before_filter :authenticate_user!
 

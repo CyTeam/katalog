@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 # This class is a subclass of Dossier, which contains many dossiers.
 # It's a kind of parent for dossiers with a title and type.
 class Topic < Dossier

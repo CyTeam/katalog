@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 # This class holds the information form date to to date how much dossiers exists.
 class DossierNumber < ActiveRecord::Base
   # PaperTrails: change log

@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 # Defines abilities
 #
 # This class defines the abilities available to User Roles.

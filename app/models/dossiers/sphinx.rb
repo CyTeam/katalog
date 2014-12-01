@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module Dossiers
   module Sphinx
     extend ActiveSupport::Concern

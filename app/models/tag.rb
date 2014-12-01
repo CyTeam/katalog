@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 # This class is a sub class of ActAsTaggableOn and provides the information about the dossier keywords.
 class Tag < ActsAsTaggableOn::Tag
   # PaperTrail: change log
