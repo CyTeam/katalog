@@ -29,5 +29,6 @@ $(document).ready(function() {
   addMainNavigationBehaviour();
   showKeyWords();
   hideKeyWords();
+  previewReport();
   markContainerForDeletion();
 });

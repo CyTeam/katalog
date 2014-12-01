@@ -2,9 +2,10 @@
   %td
     = item.title
   %td
-    - item.columns.each do |column|
-      = t_attr(column, Dossier)
-      %br
+    - item.column_names.each do |column_name|
+      - if column_name.present?
+        = t_attr(column_name, Dossier)
+        %br
   %td
     - if item.public?
       = t_attr('public')

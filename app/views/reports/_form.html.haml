@@ -5,20 +5,20 @@
     = f.input :title
     = f.input :level, :as => :select, :collection => level_for_select
     = f.input :orientation, :as => :select, :collection => orientation_for_select, :include_blank => false
-    = f.input :columns, :as => :select, :collection => report_columns_for_select(@report), :multiple => :multiple, :include_blank => false, :hint => false
+    = f.input :column_names, :as => :select, :collection => report_column_names_for_select(@report), :multiple => :multiple, :include_blank => false, :hint => false
     = f.input :years_visible
     = f.input :collect_year_count, :hint => true
     = f.input :public
-    
+
   = f.actions do
     = f.action(:submit)
 
 .contextual
-  .icon.icon-update= link_to_function t_action('refresh'), 'previewReport()'
+  .icon.icon-update= link_to t_action('refresh'), '#', id: 'preview_report'
 
 %h3#report-preview-title
   = t('crud.preview')
-  
+
 #report-preview
-  - if @report.columns
+  - if @report.column_names
     = render 'reports/show'

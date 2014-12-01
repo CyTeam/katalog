@@ -296,16 +296,19 @@ function addReportColumnMultiselectBehaviour() {
     itemsCount:'Spalten ausgewählt'
   });
 
-  $('#report_columns').multiselect();
+  $('#report_column_names').multiselect();
 }
 
 function previewReport() {
-  var preview = $('#report-preview');
-  var form = $('form.report');
-  var action = '/reports/preview';
+  $('#preview_report').click(function(e){
+    e.preventDefault();
+    var preview = $('#report-preview');
+    var form = $('form.report');
+    var action = '/reports/preview';
 
-  $.get(action, form.serializeArray(), function(data){
-    preview.html(data);
+    $.get(action, form.serializeArray(), function(data){
+      preview.html(data);
+    });
   });
 }
 
