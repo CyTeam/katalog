@@ -27,5 +27,7 @@ $(document).ready(function() {
   addEditReportBehaviour();
   addCsrfTokenToAjaxCalls();
   addMainNavigationBehaviour();
+  showKeyWords();
+  hideKeyWords();
   markContainerForDeletion();
 });
