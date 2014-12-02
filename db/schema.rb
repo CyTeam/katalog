@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -147,13 +148,6 @@ ActiveRecord::Schema.define(version: 20141127165009) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", length: {"name"=>10}, using: :btree
-
-  create_table "topics", force: true do |t|
-    t.string   "signature"
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "users", force: true do |t|
     t.string   "email",                              default: "", null: false
