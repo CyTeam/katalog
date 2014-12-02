@@ -21,7 +21,7 @@ module Dossiers
 
         params.merge!(options)
         query = build_query(value)
-        params.merge!(sort_mode: :extended, order: 'signature ASC') if query.include?('@signature')
+        params.merge!(sort_mode: :extended, order: 'signature_sort ASC') if query.include?('@signature')
 
         search(query, params)
       end
@@ -72,7 +72,7 @@ module Dossiers
       def build_query(value)
         signatures, words, sentences = split_search_words(value)
 
-        if signatures.present? && !(words.present? || sentences.present?)
+        if signatures.present?
           quoted_signatures = signatures.map { |signature| '"^' + signature + '*"' }
           signature_query = "@signature (#{quoted_signatures.join('|')})"
         end
