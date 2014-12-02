@@ -15,6 +15,8 @@ gem 'paper_trail'
 
 # Asset Pipeline
 # ==============
+# Issue https://github.com/sstephenson/sprockets/issues/540
+gem 'sprockets', '~> 2.11.0'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
