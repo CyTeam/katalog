@@ -18,8 +18,10 @@
 
   %table#container-list.ce_table{:style => "width: 100%"}
     = render 'containers/list_header', :form_helper => f
-    = f.semantic_fields_for :containers do |container|
-      = render 'containers/form', :container => container
+    #containers
+      = f.semantic_fields_for :containers do |container|
+        #containers_list
+        = render 'container_fields', :f => container
 
   = f.actions do
     = f.action(:submit)

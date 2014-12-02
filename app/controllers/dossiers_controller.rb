@@ -36,7 +36,6 @@ class DossiersController < AuthorizedController
 
   def edit
     @dossier = Dossier.find(params[:id])
-    @dossier.containers.build(container_type_code: 'DH')
     @dossier.build_default_numbers if @dossier.numbers.empty?
     @dossier.prepare_numbers
 
@@ -201,5 +200,15 @@ class DossiersController < AuthorizedController
                   type: 'application/vnd.ms-excel')
       end
     end
+  end
+
+  private
+
+  def dossier_params
+    params.require(:dossier).permit(
+      :internal, :signature, :title, :description, :keyword_text,
+      :relation_list, :add_relation, :first_document_year, :dossier_number_list,
+      containers_attributes: [:id, :period, :container_type_code, :location_code, :_destroy]
+    )
   end
 end

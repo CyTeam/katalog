@@ -361,11 +361,9 @@ function addMainNavigationBehaviour() {
   });
 }
 
-// Marks a container for deletion
-function markContainerForDeletion() {
-  $('a.destroy-container').click(function(e){
-    e.preventDefault();
-    $(e.currentTarget).find('input:hidden').val('1');
-    $(e.currentTarget).closest('.container').hide();
-  })
+// Sets the insertion point for cocoon
+function initalizeCocoon() {
+  $("a#add_new_container").
+    data("association-insertion-method", 'append').
+    data("association-insertion-node", '#container-list');
 }

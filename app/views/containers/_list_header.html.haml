@@ -4,4 +4,4 @@
   %th{:style => "width: 2em"}= t_attr(:location, Container)
   - if defined?(form_helper)
     %th.action-links
-      = link_to image_tag('icons/add.png'), new_dossier_container_path(@dossier), id: 'add_record_link'
+      = link_to_add_association image_tag('icons/add.png'), form_helper, :containers, id: 'add_new_container'

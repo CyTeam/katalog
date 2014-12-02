@@ -44,6 +44,7 @@ gem 'simple-navigation'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'formtastic'
+gem 'cocoon'
 
 # WYSIWYG Editor
 # ==============
