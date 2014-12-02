@@ -13,6 +13,7 @@ class ReservationsController < AuthorizedController
     create! do |success, _failure|
       success.html do
         ReservationMailer.user_email(@reservation).deliver
+        ReservationMailer.editor_email(@reservation).deliver
         flash[:notice] = I18n.translate('katalog.reservation_send')
 
         redirect_to dossier_path(@reservation.dossier)

@@ -7,10 +7,17 @@ class ReservationMailer < ActionMailer::Base
     @reservation = reservation
 
     mail(
+      to: reservation.email,
+      subject: "#{I18n.t('activerecord.attributes.reservation.title')}: #{@reservation.dossier}"
+    )
+  end
+
+  def editor_email(reservation)
+    @reservation = reservation
+
+    mail(
       to: Settings.mail.reservation.sender,
-      reply_to: reservation.email,
-      subject: "#{I18n.t('activerecord.attributes.reservation.title')}: #{@reservation.dossier}",
-      cc: reservation.email
+      subject: "#{I18n.t('activerecord.attributes.reservation.title')}: #{@reservation.dossier}"
     )
   end
 end
