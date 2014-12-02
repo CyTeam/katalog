@@ -13,7 +13,7 @@ class ReportsController < AuthorizedController
 
   def preview
     @report = Report.new(report_params)
-    render 'show'
+    render partial: 'show'
   end
 
   private
