@@ -57,7 +57,7 @@ class DossiersController < AuthorizedController
   def welcome
     redirect_to dossiers_path if user_signed_in?
 
-    @groups = Dossier.group
+    @groups = Dossier.topic_group
   end
 
   def index
