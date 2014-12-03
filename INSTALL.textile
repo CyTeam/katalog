@@ -54,7 +54,9 @@ Initialize the database:
 bin/rake db:setup
 </pre>
 
-Setup freetext search
+Setup freetext search. You need a version >= 2.1.2. This is not available in
+Ubuntu up to Utopic. But you may install the version from Debian Sid directly
+from http://packages.debian.org
 
 <pre>
 sudo apt-get install sphinxsearch
