@@ -87,9 +87,7 @@ function addRelationAutoCompletionBehaviour() {
           }
         },
         success: function( data ) {
-          response( $.map( data, function( object ) {
-            // Accept both Topic and Dossier objects
-            var item = object['topic'] || object['dossier'];
+          response( $.map( data, function( item ) {
             if (item) {
               return {
                 label: item['title'],
