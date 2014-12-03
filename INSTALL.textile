@@ -28,7 +28,6 @@ Install current katalog from git repository. We'll use this checkout as working 
 <pre>
 git clone git@github.com:CyTeam/katalog.git
 cd katalog
-mkdir -p tmp log
 </pre>
 
 Install dependency gems:
