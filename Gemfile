@@ -140,4 +140,5 @@ group :development, :test do
 
   # Fixtures
   gem 'factory_girl_rails'
+  gem 'database_cleaner'
 end
