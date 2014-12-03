@@ -6,7 +6,7 @@ class ReportLayout < PrawnLayout
 
   # Creates the table headers for a report.
   def headers(report)
-    column_headers = report[:columns].collect do |column|
+    column_headers = report[:column_names].collect do |column|
       make_cell(head_cell(column))
     end
 
