@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Dossier do
+RSpec.describe Dossier, :type => :model do
   describe '#to_s' do
     it 'should include signature' do
       FactoryGirl.build(:dossier).to_s.should =~ /11\.1\.111/

@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe SphinxAdmin do
+RSpec.describe SphinxAdmin, :type => :model do
   before :each do
     # Stub spacer as it should be defined by subclasses
     SphinxAdmin.stub(spacer: '=>')

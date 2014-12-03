@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Dossier do
+RSpec.describe Dossier, :type => :model do
   describe '.split_search_words' do
     it 'should detect empty search' do
       Dossier.split_search_words('').should == [[], [], []]

@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Dossier do
+RSpec.describe Dossier, :type => :model do
   describe '#extract_tags' do
     it 'should split at most special characters' do
       tags = ['War. Peace', 'Ying and Yang', 'Mandela, Nelson', 'All (really) all; to say: every-thing.']
