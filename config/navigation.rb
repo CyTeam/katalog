@@ -37,7 +37,7 @@ SimpleNavigation::Configuration.run do |navigation|
     end
 
     if current_user
-      primary.item :log_out, t('katalog.main_navigation.logout'), destroy_user_session_path
+      primary.item :log_out, t('katalog.main_navigation.logout'), destroy_user_session_path, method: :delete
     else
       primary.item :log_in, t('katalog.main_navigation.login'), new_user_session_path
     end
