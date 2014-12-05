@@ -16,6 +16,7 @@ class ReservationMailer < ActionMailer::Base
     @reservation = reservation
 
     mail(
+      from: Settings.mail.reservation.internal_sender,
       to: Settings.mail.reservation.sender,
       subject: "#{I18n.t('activerecord.attributes.reservation.title')}: #{@reservation.dossier}"
     )
