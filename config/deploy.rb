@@ -2,7 +2,7 @@
 
 # Application
 set :application, 'katalog'
-set :repository,  'git@github.com:CyTeam/katalog.git'
+set :repository, 'https://github.com/CyTeam/katalog.git'
 
 require 'capones_recipes/cookbook/rails'
 require 'capones_recipes/tasks/settings_logic'
@@ -25,10 +25,9 @@ set :user, 'deployer'                               # The server's user for depl
 
 # Configuration
 set :scm, :git
-ssh_options[:forward_agent] = true
+set :ssh_options, {:forward_agent => true}
 set :use_sudo, false
 set :deploy_via, :remote_cache
-set :git_enable_submodules, 1
 set :copy_exclude, ['.git', 'spec']
 
 # Clean up the releases after deploy.
