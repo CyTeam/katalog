@@ -1,4 +1,4 @@
 Liebe/r #{@reservation.first_name} #{@reservation.last_name}
 Vielen Dank für Ihre Reservation. Sie können das Dossier #{@reservation.dossier}, #{@reservation.dossier_years} ab #{@reservation.pickup} 10.00 Uhr bei doku-zug.ch konsultieren.
 Mit freundlichen Grüssen
-<a href="http://www.doku-zug.ch/doku-zug.ch">doku-zug.ch</a>
+= link_to 'doku-zug.ch', 'http://www.doku-zug.ch/'
