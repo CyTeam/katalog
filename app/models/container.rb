@@ -2,10 +2,10 @@
 
 class Container < ActiveRecord::Base
   # change log
-  has_paper_trail :ignore => [:created_at, :updated_at], :meta => {:dossier_id => Proc.new { |container| container.dossier_id }}
+  has_paper_trail ignore: [:created_at, :updated_at], meta: { dossier_id: proc(&:dossier_id) }
 
   # Associations
-  belongs_to :dossier, :touch => true, :inverse_of => :containers
+  belongs_to :dossier, touch: true, inverse_of: :containers
 
   after_save lambda { dossier.touch }
 
@@ -20,12 +20,10 @@ class Container < ActiveRecord::Base
 
   # Helpers
   def to_s
-    "#{dossier.title if dossier.present?} #{period + " " unless period.blank?}(#{container_type.code}@#{location.code})"
+    "#{dossier.title if dossier.present?} #{period + ' ' unless period.blank?}(#{container_type.code}@#{location.code})"
   end
 
-  def preorder
-    location.preorder
-  end
+  delegate :preorder, to: :location
 
   def container_type=(value)
     value = ContainerType.find_by_code(value) if value.is_a?(String)
@@ -35,13 +33,13 @@ class Container < ActiveRecord::Base
     end
 
     self[:container_type_id] = value.id
-    self.container_type.reload
+    container_type.reload
   end
 
   def container_type_code
     container_type.try(:code)
   end
-  alias container_type_code= container_type=
+  alias_method :container_type_code=, :container_type=
 
   def location=(value)
     value = Location.find_by_code(value) if value.is_a?(String)
@@ -50,13 +48,13 @@ class Container < ActiveRecord::Base
     else
       self[:location_id] = value.id
     end
-    self.location.reload unless self.location.nil?
+    location.reload unless location.nil?
   end
 
   def location_code
     location.try(:code)
   end
-  alias location_code= location=
+  alias_method :location_code=, :location=
 
   def first_document_on=(value)
     dossier.first_document_on = value unless dossier.first_document_on && (value >= dossier.first_document_on)

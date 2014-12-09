@@ -5,10 +5,10 @@ FactoryGirl.define do
 
   factory :dossier_number do
     association :dossier
-    from        Date.new(1900, 1, 1)
+    from Date.new(1900, 1, 1)
 
     factory :dossier_number_with_amount do
-      amount {generate(:dossier_amount)}
+      amount { generate(:dossier_amount) }
     end
   end
 end

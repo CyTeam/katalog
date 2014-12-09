@@ -1,7 +1,7 @@
 prawn_document(:page_size => 'A4', :filename => "#{@dossier.to_s}.pdf", :renderer => PrawnLayout) do |pdf|
   # Heading
   pdf.h1 @dossier.title
-  
+
   # Body
   pdf.text @dossier.signature, :size => 12
   pdf.indent(10) do
@@ -13,7 +13,7 @@ prawn_document(:page_size => 'A4', :filename => "#{@dossier.to_s}.pdf", :rendere
 
   if @dossier.description.present?
     pdf.indent(10) do
-      description = sanitize(auto_link(pdf.list(@dossier.description)), :tags => %w(i u b strong a sub sup), :attributes => %w(href))
+      description = sanitize(pdf.list(@dossier.description), :tags => %w(i u b strong a sub sup), :attributes => %w(href))
       pdf.text description, :inline_format => true
     end
     pdf.move_down(10)
@@ -26,7 +26,7 @@ prawn_document(:page_size => 'A4', :filename => "#{@dossier.to_s}.pdf", :rendere
     end
   end
   pdf.move_down(10)
-  
+
   if @dossier.related_to.present?
     pdf.text t_attr(:relation_list), :size => 12
     pdf.indent(10) do

@@ -5,49 +5,49 @@ class ContainerTest < ActiveSupport::TestCase
     @container = Container.new
   end
 
-  test "dossier association" do
+  test 'dossier association' do
     assert_equal dossiers(:city_counsil), containers(:city_counsil).dossier
   end
 
-  test "to_s" do
-    assert_equal "City counsil (DH@EG)", containers(:city_counsil).to_s
+  test 'to_s' do
+    assert_equal 'City counsil (DH@EG)', containers(:city_counsil).to_s
   end
 
-  test "location assignment" do
+  test 'location assignment' do
     container = Container.new
 
     assert_nil container.location
 
-    container.location = "RI"
+    container.location = 'RI'
     assert_equal locations(:RI), container.location
 
-    container.location = "EG"
+    container.location = 'EG'
     assert_equal locations(:EG), container.location
 
     container.location = locations(:RI)
     assert_equal locations(:RI), container.location
   end
 
-  test "gracefully handle bad location assignment" do
-    @container.location = "Nowhere"
+  test 'gracefully handle bad location assignment' do
+    @container.location = 'Nowhere'
     assert_equal nil, @container.location
 
-    @container.location = "RI"
+    @container.location = 'RI'
     assert_equal locations(:RI), @container.location
 
-    @container.location = "Nowhere"
+    @container.location = 'Nowhere'
     assert_equal nil, @container.location
   end
 
-  test "container type assignment" do
+  test 'container type assignment' do
     container = Container.new
 
     assert_nil container.container_type
 
-    container.container_type = "DA"
+    container.container_type = 'DA'
     assert_equal container_types(:DA), container.container_type
 
-    container.container_type = "DH"
+    container.container_type = 'DH'
     assert_equal container_types(:DH), container.container_type
 
     container.container_type = container_types(:DA)
@@ -55,21 +55,21 @@ class ContainerTest < ActiveSupport::TestCase
   end
 
   # Caching
-  test "adding a container updates dossier timestamp" do
+  test 'adding a container updates dossier timestamp' do
     dossier = FactoryGirl.create(:dossier)
     updated_at = dossier.updated_at
 
     sleep(1)
-    dossier.containers.create!(:period => '1999 - ', :location => FactoryGirl.create(:location), :container_type => FactoryGirl.create(:container_type))
+    dossier.containers.create!(period: '1999 - ', location: FactoryGirl.create(:location), container_type: FactoryGirl.create(:container_type))
     dossier.reload
 
     assert dossier.updated_at > updated_at
   end
 
-  test "removing a container updates dossier timestamp" do
+  test 'removing a container updates dossier timestamp' do
     dossier = FactoryGirl.create(:dossier)
-    dossier.containers.create!(:period => '1999 - 2000', :location => FactoryGirl.create(:location), :container_type => FactoryGirl.create(:container_type))
-    dossier.containers.create!(:period => '2000 - ', :location => FactoryGirl.create(:location), :container_type => FactoryGirl.create(:container_type))
+    dossier.containers.create!(period: '1999 - 2000', location: FactoryGirl.create(:location), container_type: FactoryGirl.create(:container_type))
+    dossier.containers.create!(period: '2000 - ', location: FactoryGirl.create(:location), container_type: FactoryGirl.create(:container_type))
     updated_at = dossier.updated_at
 
     sleep(1)
@@ -79,10 +79,10 @@ class ContainerTest < ActiveSupport::TestCase
     assert dossier.updated_at > updated_at
   end
 
-  test "updating a container updates dossier timestamp" do
+  test 'updating a container updates dossier timestamp' do
     dossier = FactoryGirl.create(:dossier)
-    dossier.containers.create!(:period => '1999 - 2000', :location => FactoryGirl.create(:location), :container_type => FactoryGirl.create(:container_type))
-    dossier.containers.create!(:period => '2000 - ', :location => FactoryGirl.create(:location), :container_type => FactoryGirl.create(:container_type))
+    dossier.containers.create!(period: '1999 - 2000', location: FactoryGirl.create(:location), container_type: FactoryGirl.create(:container_type))
+    dossier.containers.create!(period: '2000 - ', location: FactoryGirl.create(:location), container_type: FactoryGirl.create(:container_type))
     updated_at = dossier.updated_at
 
     sleep(1)

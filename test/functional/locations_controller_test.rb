@@ -2,49 +2,49 @@ require 'test_helper'
 
 class LocationsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
-  
+
   setup do
     sign_in users(:editor)
     @location = locations(:EG)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get :index
     assert_response :success
     assert_not_nil assigns(:locations)
   end
 
-  test "should get new" do
+  test 'should get new' do
     get :new
     assert_response :success
   end
 
-  test "should create location" do
+  test 'should create location' do
     assert_difference('Location.count') do
-      post :create, :location => @location.attributes
+      post :create, location: @location.attributes
     end
 
     assert_redirected_to location_path(assigns(:location))
   end
 
-  test "should show location" do
-    get :show, :id => @location.to_param
+  test 'should show location' do
+    get :show, id: @location.to_param
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, :id => @location.to_param
+  test 'should get edit' do
+    get :edit, id: @location.to_param
     assert_response :success
   end
 
-  test "should update location" do
-    put :update, :id => @location.to_param, :location => @location.attributes
+  test 'should update location' do
+    put :update, id: @location.to_param, location: @location.attributes
     assert_redirected_to location_path(assigns(:location))
   end
 
-  test "should destroy location" do
+  test 'should destroy location' do
     assert_difference('Location.count', -1) do
-      delete :destroy, :id => @location.to_param
+      delete :destroy, id: @location.to_param
     end
 
     assert_redirected_to locations_path

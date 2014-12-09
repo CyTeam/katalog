@@ -14,3 +14,7 @@
 
   = f.actions do
     = f.action(:submit)
+
+:javascript
+  // Formtastic has no way to set the correct checkbox in a collection
+  $(":checkbox[value='#{@year}']").prop("checked","true")

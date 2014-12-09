@@ -12,10 +12,10 @@ module Dossiers
     # Exports the current dossier to an Excel file.
     def to_xls
       book = Spreadsheet::Workbook.new
-      sheet = book.create_worksheet(:name => "Katalog")
-      
+      sheet = book.create_worksheet(name: 'Katalog')
+
       label_columns = self.class.xls_columns.inject([]) do |out, column|
-        out << I18n.t(column, :scope => 'activerecord.attributes.dossier')
+        out << I18n.t(column, scope: 'activerecord.attributes.dossier')
       end
 
       numbers.each do |number|
@@ -31,14 +31,14 @@ module Dossiers
           when :location
             out << containers.last.location.code
           else
-            out << self.send(column)
+            out << send(column)
         end
       end
-      
+
       numbers.each do |number|
         value_columns << number.amount
       end
-      
+
       sheet.row(1).concat(value_columns)
 
       # Return as XLS String
@@ -51,12 +51,12 @@ module Dossiers
       # Exports some dossiers to an Excel file.
       def to_xls(dossiers)
         book = Spreadsheet::Workbook.new
-        sheet = book.create_worksheet(:name => "Katalog")
+        sheet = book.create_worksheet(name: 'Katalog')
         present_numbers = DossierNumber.default_periods_as_s
         row = 0
 
         label_columns = xls_columns.inject([]) do |out, column|
-          out << I18n.t(column, :scope => 'activerecord.attributes.dossier')
+          out << I18n.t(column, scope: 'activerecord.attributes.dossier')
         end
 
         present_numbers.each do |number|
@@ -88,12 +88,11 @@ module Dossiers
 
           dossier.numbers.each do |number|
             value_columns << number.amount
-          end unless dossier.kind_of?Topic
-
+          end unless dossier.is_a? Topic
 
           present_numbers.each do |number|
             value_columns << dossier.amount(number)
-          end if dossier.kind_of?Topic
+          end if dossier.is_a? Topic
 
           sheet.row(row).concat(value_columns)
           row += 1
@@ -107,11 +106,11 @@ module Dossiers
 
       def to_container_xls(dossiers)
         book = Spreadsheet::Workbook.new
-        sheet = book.create_worksheet(:name => "Katalog")
+        sheet = book.create_worksheet(name: 'Katalog')
         row = 0
-        
+
         dossiers.each do |dossier|
-          unless dossier.containers.empty?          
+          unless dossier.containers.empty?
             dossier.containers.each do |container|
               sheet.row(row).concat([dossier.to_s, container.period, container.container_type.code, container.location.code])
               row += 1
@@ -121,11 +120,11 @@ module Dossiers
             row += 1
           end
         end
-        
+
         # Return as XLS String
         xls = StringIO.new
         book.write xls
-        xls.string        
+        xls.string
       end
 
       def xls_columns

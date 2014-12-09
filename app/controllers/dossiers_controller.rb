@@ -1,11 +1,7 @@
 # encoding: UTF-8
-
-require 'ostruct'
-require 'raspell'
-
 class DossiersController < AuthorizedController
   # Authentication
-  before_filter :authenticate_user!, :except => [:index, :search, :show, :report, :welcome, :sitemap]
+  before_filter :authenticate_user!, except: [:index, :search, :show, :report, :welcome, :sitemap]
 
   # Responders
   respond_to :html, :js, :json, :xls, :pdf
@@ -13,14 +9,13 @@ class DossiersController < AuthorizedController
   # Search
   has_scope :by_character
 
-
   # CRUD Actions
   # ============
   def show
     # Set query for highlighting and search form prefill
     @query = params[:search][:text] if params[:search]
 
-    @dossier = Dossier.find(params[:id], :include => {:containers => [:location, :container_type]})
+    @dossier = Dossier.find(params[:id], include: { containers: [:location, :container_type] })
 
     authorize! :show, @dossier
 
@@ -29,11 +24,11 @@ class DossiersController < AuthorizedController
     @tags = Tag.filter_tags.where('dossiers.id' => tag_dossiers)
 
     show! do |format|
-      format.xls {
+      format.xls do
         send_data(@dossier.to_xls,
-          :filename => "#{@dossier}.xls",
-          :type => 'application/vnd.ms-excel')
-      }
+                  filename: "#{@dossier}.xls",
+                  type: 'application/vnd.ms-excel')
+      end
     end
   end
 
@@ -41,7 +36,7 @@ class DossiersController < AuthorizedController
     @dossier = Dossier.new(params[:dossier])
     @dossier.build_default_numbers
 
-    @dossier.containers.build(:container_type_code => 'DH')
+    @dossier.containers.build(container_type_code: 'DH')
 
     new!
   end
@@ -55,14 +50,13 @@ class DossiersController < AuthorizedController
   end
 
   def create
-    create! do |success, failure|
+    create! do |success, _failure|
       success.html do
-        flash[:notice] = self.class.helpers.link_to(t('katalog.created', :signature => @dossier.signature, :title => @dossier.title), dossier_path(@dossier))
+        flash[:notice] = self.class.helpers.link_to(t('katalog.created', signature: @dossier.signature, title: @dossier.title), dossier_path(@dossier))
         redirect_to new_resource_url
       end
     end
   end
-
 
   # Index Actions
   # =============
@@ -85,8 +79,7 @@ class DossiersController < AuthorizedController
   def sitemap
     @dossiers = Dossier.accessible_by(current_ability, :index)
   end
-  skip_load_and_authorize_resource :only => :sitemap
-
+  skip_load_and_authorize_resource only: :sitemap
 
   # Search
   # ======
@@ -97,9 +90,9 @@ class DossiersController < AuthorizedController
     redirect_on_single_result = true
 
     if !@signature_search
-      @dossiers = Dossier.by_text(@query, :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?, :skip_topics => (params[:skip_topics] == "1"), :include => [:location, :containers])
+      @dossiers = Dossier.by_text(@query, page: params[:page], per_page: params[:per_page], internal: current_user.present?, skip_topics: (params[:skip_topics] == '1'), include: [:location, :containers])
     else
-      @dossiers = apply_scopes(Dossier, params[:search]).by_signature(@query).includes(:containers => :location).accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
+      @dossiers = apply_scopes(Dossier, params[:search]).by_signature(@query).includes(containers: :location).accessible_by(current_ability, :index).paginate page: params[:page], per_page: params[:per_page]
 
       redirect_on_single_result = false
 
@@ -111,18 +104,18 @@ class DossiersController < AuthorizedController
 
     # Do no special handling for single results etc. if JSON is requested
     if request.format.json?
-      render :json => @dossiers
+      render json: @dossiers
       return
     end
 
     # Directly show single match
     if redirect_on_single_result && @dossiers.count == 1
-      redirect_to polymorphic_path(@dossiers.first, :search => {:text => @query})
+      redirect_to polymorphic_path(@dossiers.first, search: { text: @query })
       # Give spellchecking suggestions
     elsif @dossiers.count == 0
       @spelling_suggestion = SpellChecker.suggestions(@query)
       if @mixed_search
-        redirect_to :search => {:text => '"' + @query + '"'}
+        redirect_to search: { text: '"' + @query + '"' }
       end
     else
       index_excel
@@ -138,12 +131,12 @@ class DossiersController < AuthorizedController
     # Preset parameters
     case report_name
       when 'index'
-         @document_count = Dossier.document_count
+        @document_count = Dossier.document_count
     end
 
     # Sanitize and use columns parameter if present
     if params[:columns]
-      @report[:columns] = params[:columns].split(',').select{|column| Dossier.columns.include?(column)}
+      @report[:columns] = params[:columns].split(',').select { |column| Dossier.columns.include?(column) }
     end
 
     # Set pagination parameter
@@ -151,18 +144,16 @@ class DossiersController < AuthorizedController
     @report[:title] ||= report_name
     @is_a_report = true
 
-
     setup_per_page
     setup_query
 
     if !@signature_search
-      @dossiers = Dossier.by_text(@query, :page => params[:page], :per_page => params[:per_page], :internal => current_user.present?, :include => [:location, :containers, :keywords])
+      @dossiers = Dossier.by_text(@query, page: params[:page], per_page: params[:per_page], internal: current_user.present?, include: [:location, :containers, :keywords])
     else
-      params[:search].merge!(:per_page => @report[:per_page], :level => @report[:level])
-      @dossiers = apply_scopes(Dossier, params[:search]).by_signature(@query).includes(:containers => :location).accessible_by(current_ability, :index).paginate :page => params[:page], :per_page => params[:per_page]
+      params[:search].merge!(per_page: @report[:per_page], level: @report[:level])
+      @dossiers = apply_scopes(Dossier, params[:search]).by_signature(@query).includes(containers: :location).accessible_by(current_ability, :index).paginate page: params[:page], per_page: params[:per_page]
     end
   end
-
 
   # Admin actions
   # =============
@@ -171,7 +162,6 @@ class DossiersController < AuthorizedController
   def dangling_relations
     @dossiers = Dossier.with_dangling_relations
   end
-
 
   private
 
@@ -182,7 +172,7 @@ class DossiersController < AuthorizedController
 
     if params[:per_page] == 'all'
       # Simple hack to simulate all
-      params[:per_page] = 1000000
+      params[:per_page] = 1_000_000
     end
   end
 
@@ -191,7 +181,7 @@ class DossiersController < AuthorizedController
     @query = params[:search][:text].try(:strip) || ''
 
     signatures, words, sentences = Dossier.split_search_words(@query)
-    sentences = sentences.map{ |s| s.delete('"') }
+    sentences = sentences.map { |s| s.delete('"') }
 
     @signature_search = signatures.present? && words.empty? && sentences.empty?
     @mixed_search = signatures.present? && (words.present? || sentences.present?)
@@ -199,24 +189,23 @@ class DossiersController < AuthorizedController
     @query_text = (words + sentences).compact.join(' ')
   end
 
-
   # Renderers
   # =========
   def index_excel
     index! do |format|
-      format.xls {
+      format.xls do
         if @signature_search
           filename = @dossiers.first.to_s
         else
-          filename = t('katalog.search_for', :query => @query)
+          filename = t('katalog.search_for', query: @query)
         end
 
         excel = params[:excel_format] == 'containers' ? Dossier.to_container_xls(@dossiers) : Dossier.to_xls(@dossiers)
 
         send_data(excel,
-          :filename => "#{filename}.xls",
-          :type => 'application/vnd.ms-excel')
-      }
+                  filename: "#{filename}.xls",
+                  type: 'application/vnd.ms-excel')
+      end
     end
   end
 end

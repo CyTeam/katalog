@@ -17,12 +17,10 @@ gem 'mysql2'
 # in production environments by default.
 group :assets do
   gem 'sass-rails'
-  gem 'sprockets'
   gem 'coffee-rails'
   gem 'therubyracer'
   gem 'uglifier'
   gem 'compass-rails'
-  gem 'fancy-buttons'
 end
 
 gem 'jquery-rails'
@@ -33,12 +31,6 @@ gem 'jquery-ui-rails'
 group :test do
   # Matchers/Helpers
   gem 'shoulda'
-
-  # Mocking
-  # gem 'mocha'
-
-  # Browser
-  gem 'webrat'
 end
 
 group :test, :development do
@@ -49,15 +41,9 @@ group :test, :development do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
 
-  # Browser
-  gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'poltergeist'
-
-  # Console
+  # Debugger
   gem 'pry-rails'
-  gem 'pry-doc'
-  gem 'pry-debugger'
+  gem 'pry-byebug'
 end
 
 # Development
@@ -66,30 +52,28 @@ group :development do
   # RDoc
   gem 'rdoc'
 
-  # UML documentation
-  gem 'rails-erd'
-
   # Deployment
   gem 'capistrano', '~> 2.15.5'
   gem 'capistrano-rbenv', '~> 1.0'
   gem 'capones_recipes'
 
-  # Development Server
-  gem 'webrick'
   gem 'quiet_assets'
+
+  # Code quality
+  gem 'rubocop', require: false
 end
 
 # Standard helpers
 # ================
-gem 'haml'
+gem 'haml-rails'
 
 gem 'formtastic'
-gem 'will_paginate', :git => 'https://github.com/huerlisi/will_paginate.git', :branch => 'show_always'
+gem 'will_paginate', git: 'https://github.com/huerlisi/will_paginate.git', branch: 'show_always'
 gem 'inherited_resources'
 gem 'has_scope'
-gem 'i18n_rails_helpers'
+gem 'i18n_rails_helpers', github: 'huerlisi/i18n_rails_helpers'
 gem 'simple-navigation'
-
+gem 'nokogiri'
 # Katalog
 # =======
 # Authentication
@@ -102,21 +86,21 @@ gem 'cancan'
 gem 'acts-as-taggable-on'
 
 # Search
-gem 'thinking-sphinx', '~> 2.1.0'
+gem 'thinking-sphinx'
+
+# Spellchecking
+gem 'ffi-aspell'
 
 # Reports
 gem 'prawn_rails'
 gem 'prawn'
+gem 'prawn-table'
 
 # CRUD helpers
 gem 'show_for'
 
 # WYSIWYG Editor
-gem "ckeditor"
-
-# Link fixes
-gem 'rails_autolink'
-gem 'hpricot'
+gem 'ckeditor'
 
 # Change log for model data
 gem 'paper_trail'
@@ -126,21 +110,15 @@ gem 'revertible_paper_trail'
 # Generate excel files
 gem 'spreadsheet'
 
-# Spellchecking
-gem 'raspell', :git => 'http://github.com/huerlisi/raspell.git'
-
-# Squeel
-gem "squeel"
+# Load html content
+gem 'mechanize'
 
 # Monitoring
 # ==========
 gem 'settingslogic'
 group :staging, :production do
   # Traffic
-  gem 'rack-google-analytics', :git => 'http://github.com/huerlisi/rack-google-analytics'
-
-  # Performance
-  #gem 'newrelic_rpm'
+  gem 'rack-google-analytics'
 
   # Exceptions
   gem 'airbrake'

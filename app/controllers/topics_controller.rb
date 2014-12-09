@@ -3,15 +3,18 @@
 class TopicsController < AuthorizedController
   include DossiersHelper
   # Authentication
-  before_filter :authenticate_user!, :except => [:index, :show, :navigation]
+  before_filter :authenticate_user!, except: [:index, :show, :navigation]
 
   protected
+
   def collection
-    @topics ||= end_of_association_chain.paginate(:page => params[:page])
+    @topics ||= end_of_association_chain.paginate(page: params[:page])
   end
 
   # Actions
+
   public
+
   def update
     @topic = Topic.find(params[:id])
     if params[:update_signature]
@@ -27,7 +30,7 @@ class TopicsController < AuthorizedController
   def create
     create! do |format|
       format.html do
-        flash[:notice] = t('katalog.created', :signature => resource.signature, :title => resource.title)
+        flash[:notice] = t('katalog.created', signature: resource.signature, title: resource.title)
         redirect_to new_resource_url
       end
     end

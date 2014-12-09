@@ -4,7 +4,7 @@
 
 - reset_cycle
 
-- dossier.containers.each do |container|
-  %tr[container]{:class => cycle('even', 'odd')}
-    %td= "%s@%s" % [container.container_type.code, container.location.code]
-    %td= container.period
+- dossier.containers.group_by{|c| [c.container_type.code, c.location.code]}.each do |container|
+  %tr{:class => cycle('even', 'odd')}
+    %td= container.first.join('@')
+    %td= container.last.map(&:period).join(' | ')

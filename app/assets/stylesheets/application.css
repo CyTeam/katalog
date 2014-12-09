@@ -9,7 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require jquery.ui.all
+ *= require jquery-ui
  *= require jquery-qtip
  *= require ./doku-zug.ch/typolight
  *= require ./doku-zug.ch/basic
@@ -25,4 +25,5 @@
  *= require formtastic_changes
  *= require pagination
  *= require screen
+ *= require on_off
  */

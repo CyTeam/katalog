@@ -22,7 +22,7 @@ module Dossiers
             sub_object.save
           end
         end
-        
+
         dossier = Dossier.find(version.item_id)
         dossier.keyword_list = version.keywords
         dossier.save!

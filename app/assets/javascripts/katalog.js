@@ -250,7 +250,6 @@ function addSearchSuggestionBehaviour() {
             var item = object['keyword'];
             return {
               label: item['name'],
-              count: item['count']
             }
           }));
           $('.ui-autocomplete').highlight(extractLast(request.term), 'match');
@@ -276,7 +275,7 @@ function addSearchSuggestionBehaviour() {
     return $( "<li></li>" )
         .data( "item.autocomplete", item )
         .append(
-          "<a>" + item.label + "<i style='float: right'>(" + item.count + ")</i></a>"
+          "<a>" + item.label + "</a>"
         )
         .appendTo( ul );
   };

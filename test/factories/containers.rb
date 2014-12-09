@@ -9,7 +9,7 @@ FactoryGirl.define do
     association :dossier
 
     factory :container_without_period do
-      association :dossier, :factory => :dossier_since_1990
+      association :dossier, factory: :dossier_since_1990
     end
 
     factory :container_with_period do

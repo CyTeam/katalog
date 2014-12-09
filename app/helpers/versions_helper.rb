@@ -3,16 +3,16 @@
 module VersionsHelper
   def change_type(previous, current)
     if previous == current
-      return "unchanged"
+      return 'unchanged'
     elsif previous.nil?
-      return "added"
+      return 'added'
     elsif current.nil?
-      return "removed"
+      return 'removed'
     else
-      return "changed"
+      return 'changed'
     end
   end
-  
+
   def version_title(version = nil)
     return version.reify.to_s if version.event.eql?('destroy')
 
@@ -24,12 +24,12 @@ module VersionsHelper
   end
 
   def action(version)
-    t(version.event, :scope => "katalog.versions.actions")
+    t(version.event, scope: 'katalog.versions.actions')
   end
 
   def active_main_item(version)
     item = version.active_item
-    
+
     case item.class.name
     when 'DossierNumber', 'Container', 'Keyword'
       return item.dossier
@@ -37,7 +37,7 @@ module VersionsHelper
       return item
     end
   end
-  
+
   def dossier?(version)
     case version.item_type
     when 'DossierNumber', 'Container', 'Keyword', 'Dossier'

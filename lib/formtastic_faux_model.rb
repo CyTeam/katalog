@@ -8,8 +8,8 @@
 # -------------------------------------------------------------------------------
 class FormtasticFauxModel
   include ActiveModel::Validations
-  include ActiveModel::Conversion  
-  extend  ActiveModel::Naming
+  include ActiveModel::Conversion
+  extend ActiveModel::Naming
 
   # Subclass may provide a types hash.  Any attributes not listed will
   # default to string.
@@ -26,14 +26,16 @@ class FormtasticFauxModel
   self.types = {}
 
   # So the controller can say "@contact = Contact.new(params[:contact])"
-  def initialize(attributes = {})  
-    attributes.each do |name, value|  
-      send("#{name}=", value)  
+  def initialize(attributes = {})
+    attributes.each do |name, value|
+      send("#{name}=", value)
     end
-  end  
+  end
 
   # So form_for works correctly -- we only do "new" forms
-  def persisted?  ;   false  ;    end  
+  def persisted?
+    false
+  end
 
   # To provide the type information
   def column_for_attribute(attr)

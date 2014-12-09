@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140110142353) do
+ActiveRecord::Schema.define(:version => 20141121085933) do
 
   create_table "container_types", :force => true do |t|
     t.string   "code"
@@ -35,21 +35,6 @@ ActiveRecord::Schema.define(:version => 20140110142353) do
   add_index "containers", ["container_type_id"], :name => "index_containers_on_container_type_id"
   add_index "containers", ["dossier_id"], :name => "index_containers_on_dossier_id"
   add_index "containers", ["location_id"], :name => "index_containers_on_location_id"
-
-  create_table "delayed_jobs", :force => true do |t|
-    t.integer  "priority",   :default => 0
-    t.integer  "attempts",   :default => 0
-    t.text     "handler"
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "dossier_numbers", :force => true do |t|
     t.integer  "dossier_id"
@@ -153,12 +138,13 @@ ActiveRecord::Schema.define(:version => 20140110142353) do
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], :name => "taggings_idx", :unique => true
   add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
   add_index "taggings", ["tagger_id", "tagger_type"], :name => "index_taggings_on_tagger_id_and_tagger_type"
 
   create_table "tags", :force => true do |t|
-    t.string "name"
+    t.string  "name"
+    t.integer "taggings_count", :default => 0
   end
 
   add_index "tags", ["name"], :name => "index_tags_on_name", :length => {"name"=>10}

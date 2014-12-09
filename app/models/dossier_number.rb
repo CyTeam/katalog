@@ -2,12 +2,11 @@
 
 # This class holds the information form date to to date how much dossiers exists.
 class DossierNumber < ActiveRecord::Base
-
   # PaperTrails: change log
-  has_paper_trail :ignore => [:created_at, :updated_at], :meta => {:dossier_id => Proc.new { |number| number.dossier_id }}
+  has_paper_trail ignore: [:created_at, :updated_at], meta: { dossier_id: proc(&:dossier_id) }
 
   # Associations
-  belongs_to :dossier, :touch => true, :inverse_of => :numbers
+  belongs_to :dossier, touch: true, inverse_of: :numbers
 
   after_save lambda { dossier.touch }
 
@@ -15,20 +14,20 @@ class DossierNumber < ActiveRecord::Base
   validate :presence_of_from_or_to
 
   # Scopes
-  default_scope order("`to`")
-  scope :present, where("amount > 0")
+  default_scope order('`to`')
+  scope :present, where('amount > 0')
   scope :by_period, lambda {|value|
     from, to = from_s(value)
 
-    where(:from => from, :to => to)
+    where(from: from, to: to)
   }
   scope :between, lambda {|value|
     from, to = from_s(value)
 
     if from.present?
-      where("(`from` IS NULL AND `to` >= :to) OR (`from` >= :from AND `to` <= :to) OR (`from` <= :from AND `to` IS NULL)", {:from => from, :to => to})
+      where('(`from` IS NULL AND `to` >= :to) OR (`from` >= :from AND `to` <= :to) OR (`from` <= :from AND `to` IS NULL)', from: from, to: to)
     else
-      where("`to` <= :to", :to => to)
+      where('`to` <= :to', to: to)
     end
   }
 
@@ -39,7 +38,7 @@ class DossierNumber < ActiveRecord::Base
 
     period, amount_s = value.split(':')
     if period =~ /-/
-      from, to = period.split('-').map{|year| year.present? ? year.to_i : nil}
+      from, to = period.split('-').map { |year| year.present? ? year.to_i : nil }
     else
       from = to = (period.present? ? value.to_i : nil)
     end
@@ -47,7 +46,7 @@ class DossierNumber < ActiveRecord::Base
     # from and to should be begin/end of year if not nil
     from = Date.new(from, 1, 1) if from
     to = Date.new(to, 12, 31) if to
-    return [from, to, amount_s.to_i]
+    [from, to, amount_s.to_i]
   end
 
   # Returns the default periods.
@@ -56,13 +55,13 @@ class DossierNumber < ActiveRecord::Base
   def self.default_periods(up_to = Date.today.year, special = true)
     periods = []
     # before 1990
-    periods << {:from => nil, :to => Date.new(1989, 12, 31)}
+    periods << { from: nil, to: Date.new(1989, 12, 31) }
     # 1990-1993
-    periods << {:from => Date.new(1990, 1, 1), :to => Date.new(1993, 12, 31)} if special
+    periods << { from: Date.new(1990, 1, 1), to: Date.new(1993, 12, 31) } if special
     start_year = special ? 1994 : 1990
     # 1994-
     for year in start_year..up_to
-      periods << {:from => Date.new(year, 1, 1), :to => Date.new(year, 12, 31)}
+      periods << { from: Date.new(year, 1, 1), to: Date.new(year, 12, 31) }
     end
 
     periods
@@ -70,7 +69,7 @@ class DossierNumber < ActiveRecord::Base
 
   # Returns the default period as string.
   def self.default_periods_as_s
-    self.default_periods.inject([]) do |out, period|
+    default_periods.inject([]) do |out, period|
       out << self.period(period[:from], period[:to])
     end
   end
@@ -79,16 +78,16 @@ class DossierNumber < ActiveRecord::Base
   def self.main_report_periods
     periods = []
     # before 1990
-    periods << {:from => nil, :to => Date.new(1989, 12, 31)}
+    periods << { from: nil, to: Date.new(1989, 12, 31) }
     # 1990-2001
-    periods << {:from => Date.new(1990, 1, 1), :to => Date.new(2000, 12, 31)}
+    periods << { from: Date.new(1990, 1, 1), to: Date.new(2000, 12, 31) }
     # 2001-2005
-    periods << {:from => Date.new(2001, 1, 1), :to => Date.new(2005, 12, 31)}
+    periods << { from: Date.new(2001, 1, 1), to: Date.new(2005, 12, 31) }
     # 2006 -
     to_year = Date.today.year.to_i
     from_year = 2006
     for year in from_year..to_year
-      periods << {:from => Date.new(year, 1, 1), :to => Date.new(year, 12, 31)}
+      periods << { from: Date.new(year, 1, 1), to: Date.new(year, 12, 31) }
     end
 
     periods
@@ -96,9 +95,9 @@ class DossierNumber < ActiveRecord::Base
 
   # Creates a period array.
   def self.period(from_year, to_year, format = :default)
-    return nil unless (from_year or to_year)
+    return nil unless from_year || to_year
 
-    return "vor %i" % (to_year.try(:year).to_i + 1) if format == :default && from_year.nil? && to_year
+    return 'vor %i' % (to_year.try(:year).to_i + 1) if format == :default && from_year.nil? && to_year
 
     return from_year.try(:year) if from_year.try(:year) == to_year.try(:year)
 
@@ -107,7 +106,7 @@ class DossierNumber < ActiveRecord::Base
 
   # Returns a period formated as string.
   def self.as_string(from, to, amount, format = :default)
-    "#{self.period(from, to, format)}: #{amount}"
+    "#{period(from, to, format)}: #{amount}"
   end
 
   def to_s(format = :default)
@@ -153,9 +152,9 @@ class DossierNumber < ActiveRecord::Base
 
   # Returns the period of the dossier number.
   def period(format = :default)
-    return nil unless (from_year or to_year)
+    return nil unless from_year || to_year
 
-    return "vor %i" % (to_year.to_i + 1) if format == :default && from_year.nil? && to_year
+    return 'vor %i' % (to_year.to_i + 1) if format == :default && from_year.nil? && to_year
 
     return from_year if from_year == to_year
 
@@ -170,6 +169,6 @@ class DossierNumber < ActiveRecord::Base
   private # :nodoc
 
   def presence_of_from_or_to
-    errors.add(:base, "From, To or both need to be present") unless (from || to)
+    errors.add(:base, 'From, To or both need to be present') unless from || to
   end
 end

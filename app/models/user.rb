@@ -3,7 +3,7 @@
 # This class holds all the user information's.
 class User < ActiveRecord::Base
   # PaperTrail: changencrypted_passworde log
-  has_paper_trail :ignore => [
+  has_paper_trail ignore: [
     :created_at, :updated_at,
     :password_salt, :encrypted_password,
     :reset_password_token, :remember_token, :remember_created_at,
@@ -29,8 +29,8 @@ class User < ActiveRecord::Base
   attr_accessible :username, :login
 
   # Authorization roles
-  has_and_belongs_to_many :roles, :autosave => true
-  scope :by_role, lambda{|role| include(:roles).where(:name => role)}
+  has_and_belongs_to_many :roles, autosave: true
+  scope :by_role, lambda { |role| include(:roles).where(name: role) }
   validates_presence_of :role_texts
   attr_accessible :role_texts
 
@@ -46,17 +46,17 @@ class User < ActiveRecord::Base
 
   # Check if user has a role.
   def role?(role)
-    !!self.roles.find_by_name(role.to_s)
+    !!roles.find_by_name(role.to_s)
   end
 
   # Returns all roles of an user as text.
   def role_texts
-    roles.map{|role| role.name}
+    roles.map(&:name)
   end
 
   # Sets the roles to an user.
   def role_texts=(role_names)
-    self.roles = Role.where(:name => role_names)
+    self.roles = Role.where(name: role_names)
   end
 
   def to_s
@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
   #
   # * Code snippet from: https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign_in-using-their-username-or-email-address
   def self.find_for_database_authentication(conditions)
-   login = conditions.delete(:login)
-   where(conditions).where(["username = :value OR email = :value", { :value => login }]).first
+    login = conditions.delete(:login)
+    where(conditions).where(['username = :value OR email = :value', { value: login }]).first
   end
 end

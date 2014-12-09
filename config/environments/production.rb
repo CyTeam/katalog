@@ -62,6 +62,6 @@ Katalog::Application.configure do
   config.active_support.deprecation = :notify
 
   # Mail configuration
-  config.action_mailer.default_url_options = { :host => "doku-zug.cyt.ch" }
+  config.action_mailer.default_url_options = { host: 'doku-zug.cyt.ch' }
   config.action_mailer.delivery_method = :sendmail
 end

@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class VisitorLogTest < ActiveSupport::TestCase
-  should "validate " do
+  should 'validate ' do
     validate_presence_of(:user)
   end
 end

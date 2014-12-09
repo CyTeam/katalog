@@ -1,5 +1,5 @@
 # Location
-app_path = File.expand_path("../../../current", __FILE__)
+app_path = File.expand_path('../../../current', __FILE__)
 
 worker_processes 2
 working_directory app_path
@@ -14,7 +14,7 @@ timeout 120
 
 # This is where we specify the socket.
 # We will point the upstream Nginx module to this socket later on
-listen "#{app_path}/tmp/sockets/unicorn.sock", :backlog => 64
+listen "#{app_path}/tmp/sockets/unicorn.sock", backlog: 64
 
 pid "#{app_path}/tmp/pids/unicorn.pid"
 
@@ -22,11 +22,11 @@ pid "#{app_path}/tmp/pids/unicorn.pid"
 stderr_path "#{app_path}/log/unicorn.stderr.log"
 stdout_path "#{app_path}/log/unicorn.stdout.log"
 
-before_fork do |server, worker|
+before_fork do |server, _worker|
   # This option works in together with preload_app true setting
   # What is does is prevent the master process from holding
   # the database connection
-  defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
+  defined?(ActiveRecord::Base) && ActiveRecord::Base.connection.disconnect!
 
   ##
   # When sent a USR2, Unicorn will suffix its pidfile with .oldbin and
@@ -40,17 +40,17 @@ before_fork do |server, worker|
   # Using this method we get 0 downtime deploys.
 
   old_pid = "#{app_path}/tmp/pids/unicorn.pid.oldbin"
-  if File.exists?(old_pid) && server.pid != old_pid
+  if File.exist?(old_pid) && server.pid != old_pid
     begin
-      Process.kill("QUIT", File.read(old_pid).to_i)
+      Process.kill('QUIT', File.read(old_pid).to_i)
     rescue Errno::ENOENT, Errno::ESRCH
       # someone else did our job for us
     end
   end
 end
-  
-after_fork do |server, worker|
+
+after_fork do |_server, _worker|
   # Here we are establishing the connection after forking worker
   # processes
-  defined?(ActiveRecord::Base) and ActiveRecord::Base.establish_connection
+  defined?(ActiveRecord::Base) && ActiveRecord::Base.establish_connection
 end
