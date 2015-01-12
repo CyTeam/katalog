@@ -1,0 +1,260 @@
+@charset "UTF-8";
+/* CSS Document */
+
+
+
+@font-face {
+    font-family: 'ChunkFiveRegular';
+    src: url('font/Chunkfive-webfont.eot');
+    src: url('font/Chunkfive-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/Chunkfive-webfont.woff') format('woff'),
+         url('font/Chunkfive-webfont.ttf') format('truetype'),
+         url('font/Chunkfive-webfont.svg#ChunkFiveRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('font/BebasNeue-webfont.eot');
+    src: url('font/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/BebasNeue-webfont.woff') format('woff'),
+         url('font/BebasNeue-webfont.ttf') format('truetype'),
+         url('font/BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+* {
+    margin:0px;
+    padding:0px;
+    -webkit-text-size-adjust: none;
+} 
+
+body{
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	margin:0px;
+	padding:0px;
+	color:#58585a;
+	}
+
+#main{
+	height:auto;
+	}
+	
+#header{
+	background-image:url(style/head.png);
+	overflow:hidden;
+	height:151px;
+	font-size:12px;
+	position:fixed;
+	top:0px;
+	min-width:400px;
+	}
+	
+#browserwrap{
+	margin-top:160px;
+	 max-width: 250px;
+	 min-width:250px;
+	}
+	
+#browserwrap2{
+	margin-top:60px;
+	
+	 max-width: 300px;
+	 min-width:300px;
+	}
+
+
+
+.headline{
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	letter-spacing:1px;
+	font-size:12px;
+	color:#FFFFFF;
+	margin-top:114px;
+	margin-left:35px;
+	}
+	
+.headline2{
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	font-size:12px;
+	color:#FFFFFF;
+	margin-top:10px;
+	margin-left:35px;
+	}
+	
+.browser{
+	 font-family:Arial, Helvetica, sans-serif;
+	 text-rendering: optimizeLegibility;
+	font-weight:bold;
+	font-size:23px;
+	color:#58585a;
+	margin-top:15px;
+	font-weight:bold;
+	font-style:normal;
+	
+	 max-width: 250px;
+	 min-width:250px;
+	}
+
+.left{
+	width:100px;
+	height:auto;
+	float:left;
+	}
+	
+
+
+	
+.browserbox{
+	margin-left:35px;
+	margin-right:50px;
+	margin-top:20px;
+	 max-width: 250px;
+	 min-width:250px;
+	}
+	
+
+	
+.box_randundband{
+	background-color:#e74c1d;
+	width:40px;
+	height:40px;
+	border:none;
+	}
+	
+.box_patientsee{
+	background-color:#e6418d;
+	width:40px;
+	height:40px;
+	border:none;
+	}
+
+.box_schiffahoi{
+	background-color:#87cee0;
+	width:40px;
+	height:40px;
+	border:none;
+	}
+	
+.box_seeu{
+	background-color:#00b1e6;
+	width:40px;
+	height:40px;
+	border:none;
+	}
+
+
+.box_reglementiertersee{
+	background-color:#00b1e6;
+	width:40px;
+	height:40px;
+	border:none;
+	}
+	
+.box_petriheil{
+	background-color:#4db4a4;
+	width:40px;
+	height:40px;
+	border:none;
+	}
+	
+	
+.box_waswaerewenn{
+	background-color:#03537e;
+	width:40px;
+	height:40px;
+	border:none;
+	}
+	
+.box_schoenteuer{
+	background-color:#ebdd7e;
+	width:40px;
+	height:40px;
+	border:none;
+	}
+	
+	
+.box_amsee{
+	background-color:#e4bb91;
+	width:40px;
+	height:40px;
+	border:none;
+	}
+	
+.box_seefueralle{
+	background-color:#c3c300;
+	width:40px;
+	height:40px;
+	border:none;
+	}
+	
+a:link {text-decoration: none; color:#58585a; }
+a:visited {text-decoration: none; color:#0e65a0; font-style:italic; }
+a:active {text-decoration: none; color:#58585a; }
+a:hover {text-decoration: none; color:#0e65a0; }
+	
+	
+.number{
+	font-family: 'BebasNeueRegular';
+	text-rendering: optimizeLegibility;
+	width:50px;
+	height:auto;
+	font-size:45px;
+	font-weight:bold;
+	text-align:center;
+	margin-top:15px;
+	color:#0e65a0;
+	padding:0px;
+	margin-left:-7px;
+	}
+	
+.clear{
+	clear:both;
+	}
+	
+ul{
+	list-style-type:none;
+	margin:0px;
+	padding:0px;
+	padding-bottom:5px;
+	line-height:20px;
+	font-size:12px;
+	}
+	
+/*#footer{
+	background-image:url(style/footer.png);
+	height:133px;
+	margin-top:20px;
+	position:absolute;
+	overflow:hidden;
+	min-width:400px;
+	}*/
+	
+#footer{
+	height:25px;
+	margin-top:20px;
+	position:fixed;
+	bottom:0px;
+	overflow:hidden;
+	min-width:400px;
+	background-color:#0e65a0;
+	}
+	
+#footer a{
+	font-size:12px;
+	font-weight:bold;
+	color:#FFFFFF;
+	}
+	
+.footerlink{
+	margin-left:50px;
+	margin-top:3px;
+	}
