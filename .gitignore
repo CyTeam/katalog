@@ -28,10 +28,6 @@ config/deploy/staging.rb
 # compass
 public/stylesheets/compiled
 
-# Application
-# ===========
-data
-
 # Sphinx Freetext Search
 db/sphinx
 config/*.sphinx.conf
