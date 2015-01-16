@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class SpellChecker
   def self.speller(personal: true)
     speller = FFI::Aspell::Speller.new('de_CH')
