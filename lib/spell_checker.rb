@@ -1,7 +1,7 @@
 # encoding: UTF-8
 class SpellChecker
   def self.speller(personal: true)
-    speller = FFI::Aspell::Speller.new('de_CH')
+    speller = FFI::Aspell::Speller.new('de_CH', encoding: 'utf-8')
     speller.set('personal', 'db/aspell/aspell.de_CH.pws') if personal
     speller.suggestion_mode = 'normal'
 
