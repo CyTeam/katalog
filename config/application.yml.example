@@ -6,10 +6,7 @@ defaults: &defaults
   airbrake:
     api_key:
   mail:
-    reservation:
-      recipient:       to@example.com
-      sender:          from@example.com
-      internal_sender: internal_from@example.com
+    sender: info@example.com
 
 development:
   <<: *defaults
