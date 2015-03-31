@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 # This class holds all the user information's.
 class User < ActiveRecord::Base
   # PaperTrail: changencrypted_passworde log
@@ -20,19 +18,10 @@ class User < ActiveRecord::Base
   # * Code snippet from: https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign_in-using-their-username-or-email-address
   attr_accessor :login
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-
-  # Added username and login as accessible attributes for a login with username or email.
-  #
-  # * Code snippet from: https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign_in-using-their-username-or-email-address
-  attr_accessible :username, :login
-
   # Authorization roles
   has_and_belongs_to_many :roles, autosave: true
   scope :by_role, lambda { |role| include(:roles).where(name: role) }
   validates_presence_of :role_texts
-  attr_accessible :role_texts
 
   # Validate the presence and uniqueness of the username
   validates_presence_of :username

@@ -1,10 +1,11 @@
-# encoding: UTF-8
-
 class ContainerTypesController < AuthorizedController
-  # Authentication
-  before_filter :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
 
-  def attributes
-    %w(title code description)
+  private
+
+  def container_type_params
+    params.require(:container_type).permit(
+      :title, :code, :description
+    )
   end
 end

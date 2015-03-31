@@ -1,0 +1,14 @@
+%tr.nested-fields.container
+  %td.container_period
+    = f.text_field :period, :style => 'width: 98%'
+    = f.semantic_errors :period
+  %td.type_code
+    = f.text_field :container_type_code, :size => '2', :class => 'container_type_code_auto_completion'
+    = f.semantic_errors :container_type
+  %td.location_code
+    = f.text_field :location_code, :size => '2', :class => 'container_location_code_auto_completion'
+    = f.semantic_errors :location
+  %td.remove_link
+    = link_to_remove_association image_tag('icons/delete.png') , f
+  :javascript
+    addContainerSuggestionBehaviour()

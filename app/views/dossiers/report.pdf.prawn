@@ -8,7 +8,8 @@ prawn_document(:page_size => 'A4',
 
   # Gets the table data.
   items = @dossiers.map do |item|
-    columns = @report[:columns].collect do |column|
+
+    column_names = @report[:column_names].collect do |column|
       pdf.make_cell(:content => show_column_for_report(item, column, true), :inline_format => true)
     end
 
@@ -16,16 +17,16 @@ prawn_document(:page_size => 'A4',
       years = item.years_counts(@report[:collect_year_count], @report[:name]).collect do |year|
         pdf.make_cell(:content => number_with_delimiter(year[:count]), :align => :right)
       end
-      row = columns + years
+      row = column_names + years
     else
-      row = columns
+      row = column_names
     end
 
     pdf.row_styling(item, row)
   end
 
   # Use local variable as instance vars aren't accessible
-  columns = @report[:columns]
+  column_names = @report[:column_names]
   first_count = 0
 
   headers.each do |header|
@@ -60,13 +61,13 @@ prawn_document(:page_size => 'A4',
       columns(0..1).align = :left
       columns(0).align = :left
       # Right align document count
-      columns(columns.index(:document_count)).align = :right
+      columns(column_names.index('document_count')).align = :right if column_names.index('document_count').present?
       # Styles for year columns
-      year_columns = columns(columns.size..headers.first.size)
+      year_columns = columns(column_names.size..headers.first.size)
       year_columns.align = :right
-    #  year_columns.width = 45
+      # year_columns.width = 45
       # Columns width
-      #column(0).width = 50
+      # column(0).width = 50
     end
 
     # Footer

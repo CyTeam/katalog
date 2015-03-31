@@ -28,7 +28,6 @@ Install current katalog from git repository. We'll use this checkout as working 
 <pre>
 git clone git@github.com:CyTeam/katalog.git
 cd katalog
-mkdir -p tmp log
 </pre>
 
 Install dependency gems:
@@ -51,10 +50,12 @@ cp config/database.yml.example config/database.yml
 Initialize the database:
 
 <pre>
-bundle exec rake db:setup
+bin/rake db:setup
 </pre>
 
-Setup freetext search
+Setup freetext search. You need a version >= 2.1.2. This is not available in
+Ubuntu up to Utopic. But you may install the version from Debian Sid directly
+from http://packages.debian.org
 
 <pre>
 sudo apt-get install sphinxsearch
@@ -63,5 +64,5 @@ sudo apt-get install sphinxsearch
 Initialize the search index:
 
 <pre>
-bundle exec rake katalog:ts:export_lists ts:rebuild katalog:aspell:update
+bin/rake katalog:ts:export_lists ts:rebuild katalog:aspell:update
 </pre>

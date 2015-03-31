@@ -1,11 +1,9 @@
-# encoding: UTF-8
-
 class KeywordsController < InheritedResources::Base
   # Association
   optional_belongs_to :dossier
 
   # Authentication
-  before_filter :authenticate_user!, except: [:index, :suggestions, :search, :show]
+  before_action :authenticate_user!, except: [:index, :suggestions, :search, :show]
 
   # Responders
   respond_to :html, :js, :json

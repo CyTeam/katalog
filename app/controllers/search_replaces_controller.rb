@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 class SearchReplacesController < AuthorizedController
   def index
     @search_replace = SearchReplace.new

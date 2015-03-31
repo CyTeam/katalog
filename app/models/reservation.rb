@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 class Reservation < ActiveRecord::Base
   belongs_to :dossier
 

@@ -2,15 +2,15 @@
   #dossiers.ce_table.block{:class => @report[:orientation] }
     %table
       %tr.header
-        - if @report.columns
-          - @report.columns.each do |attr|
+        - if @report.column_names
+          - @report.column_names.each do |attr|
             %th{:class => attr.to_s}= show_header_for_report(attr)
         - years = Dossier.years(@report[:collect_year_count], @report[:name]) if @report.years_visible?
         - if years
           - years.each do |year|
             %th.year= year
 
-      - if @report[:columns]
-        - default_topics = [Topic.group.first, Topic.main.first, Topic.geo.first, Topic.detail.first, Dossier.dossier.first]
+      - if @report[:column_names]
+        - default_topics = [Topic.topic_group.first, Topic.main.first, Topic.geo.first, Topic.detail.first, Dossier.dossier.first]
         - topics = @report[:level] ? default_topics[0..@report[:level]-1] : default_topics
         = render :partial => 'reports/dossier', :collection => topics

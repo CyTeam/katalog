@@ -8,6 +8,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require ckeditor/init
+//= require cocoon
 //= require_tree .
 
 $(document).ready(function() {
@@ -27,4 +28,8 @@ $(document).ready(function() {
   addEditReportBehaviour();
   addCsrfTokenToAjaxCalls();
   addMainNavigationBehaviour();
+  showKeyWords();
+  hideKeyWords();
+  previewReport();
+  initalizeCocoon();
 });

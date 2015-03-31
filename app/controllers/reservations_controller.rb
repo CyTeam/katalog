@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 class ReservationsController < AuthorizedController
   def new
     @dossier = Dossier.find(params[:dossier_id])

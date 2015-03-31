@@ -1,7 +1,4 @@
-# encoding: UTF-8
-
-Katalog::Application.routes.draw do
-
+Rails.application.routes.draw do
   resources :reports do
     collection do
       get :preview
@@ -10,12 +7,10 @@ Katalog::Application.routes.draw do
   resources :container_types
 
   devise_for :users
+
   resources :users do
     member do
       post :unlock
-    end
-    collection do
-      get :current
     end
   end
 
@@ -78,7 +73,7 @@ Katalog::Application.routes.draw do
 
   resources :reservations
 
-  match '/user_session' => 'application#update_session'
+  post '/user_session' => 'application#update_session'
 
   root to: 'dossiers#welcome'
 end

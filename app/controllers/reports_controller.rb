@@ -1,8 +1,6 @@
-# encoding: UTF-8
-
 class ReportsController < AuthorizedController
   def attributes
-    %w(title columns public)
+    %w(title column_names public)
   end
 
   def edit
@@ -14,7 +12,16 @@ class ReportsController < AuthorizedController
   end
 
   def preview
-    @report = Report.new(params[:report])
+    @report = Report.new(report_params)
     render partial: 'show'
+  end
+
+  private
+
+  def report_params
+    params.require(:report).permit(
+      :name, :title, :level, :orientation, :years_visible,
+      :collect_year_count, :public, column_names: []
+    )
   end
 end

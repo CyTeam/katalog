@@ -1,13 +1,13 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Dossier do
+RSpec.describe Dossier, :type => :model do
   describe '#to_s' do
     it 'should include signature' do
-      FactoryGirl.build(:dossier).to_s.should =~ /11\.1\.111/
+      expect(FactoryGirl.build(:dossier).to_s).to match(/11\.1\.111/)
     end
 
     it 'should include title' do
-      FactoryGirl.build(:dossier).to_s.should =~ /Dossier 1/
+      expect(FactoryGirl.build(:dossier).to_s).to match(/Dossier 1/)
     end
   end
 
@@ -15,7 +15,7 @@ describe Dossier do
     let(:dossier) { FactoryGirl.build(:dossier) }
     it 'should strip spaces on assign' do
       dossier.signature = ' 66.7.888 '
-      dossier.signature.should == '66.7.888'
+      expect(dossier.signature).to eq('66.7.888')
     end
   end
 
@@ -36,12 +36,12 @@ describe Dossier do
   describe '#filter_tags' do
     it 'should drop month names' do
       tags = %w(Jannick Feb Mai)
-      Dossier.filter_tags(tags).should == ['Jannick']
+      expect(Dossier.filter_tags(tags)).to eq(['Jannick'])
     end
 
     it 'tag filter drops %' do
       tags = ['20% Gewinn']
-      Dossier.extract_tags(tags).should == ['Gewinn']
+      expect(Dossier.extract_tags(tags)).to eq(['Gewinn'])
     end
   end
 
@@ -58,8 +58,8 @@ describe Dossier do
 
       dossier.save!
 
-      history.reload.updated_at.should_not == history_timestamp
-      counsil.reload.updated_at.should_not == counsil_timestamp
+      expect(history.reload.updated_at).not_to eq(history_timestamp)
+      expect(counsil.reload.updated_at).not_to eq(counsil_timestamp)
     end
   end
 
@@ -71,7 +71,7 @@ describe Dossier do
 
       related_dossiers = dossier.related_dossiers
       counsil.update_attributes(title: 'City counsil (new)')
-      dossier.reload.related_dossiers.should =~ related_dossiers
+      expect(dossier.reload.related_dossiers).to match(related_dossiers)
     end
   end
 
@@ -79,7 +79,7 @@ describe Dossier do
     it 'should be text' do
       dossier = FactoryGirl.build(:dossier, related_to: 'City counsil; City history')
 
-      dossier.related_to.should == 'City counsil; City history'
+      expect(dossier.related_to).to eq('City counsil; City history')
     end
 
     it 'should persist more than 256 characters' do
@@ -87,7 +87,7 @@ describe Dossier do
       dossier = FactoryGirl.create(:dossier, related_to: long_text)
 
       dossier.reload
-      dossier.related_to.should == long_text
+      expect(dossier.related_to).to eq(long_text)
     end
   end
 
@@ -95,31 +95,31 @@ describe Dossier do
     it 'should return empty array when nil' do
       dossier = FactoryGirl.build(:dossier, related_to: nil)
 
-      dossier.relations.should be_empty
+      expect(dossier.relations).to be_empty
     end
 
     it 'should return empty array when blank' do
       dossier = FactoryGirl.build(:dossier, related_to: '  ')
 
-      dossier.relations.should be_empty
+      expect(dossier.relations).to be_empty
     end
 
     it 'should split at ;' do
       dossier = FactoryGirl.build(:dossier, related_to: 'City counsil; City history')
 
-      dossier.relations.should =~ ['City counsil', 'City history']
+      expect(dossier.relations).to match_array(['City counsil', 'City history'])
     end
 
     it 'should strip whitespaces' do
       dossier = FactoryGirl.build(:dossier, related_to: ' City counsil; City history ')
 
-      dossier.relations.should =~ ['City counsil', 'City history']
+      expect(dossier.relations).to match_array(['City counsil', 'City history'])
     end
 
     it 'should drop empty relations' do
       dossier = FactoryGirl.build(:dossier, related_to: '; City counsil;; City history ')
 
-      dossier.relations.should =~ ['City counsil', 'City history']
+      expect(dossier.relations).to match_array(['City counsil', 'City history'])
     end
   end
 
@@ -129,7 +129,7 @@ describe Dossier do
       history = FactoryGirl.create(:dossier, title: 'City history')
       dossier = FactoryGirl.build(:dossier, related_to: 'City counsil; City history')
 
-      dossier.related_dossiers.should =~ [counsil, history]
+      expect(dossier.related_dossiers).to match_array([counsil, history])
     end
 
     it 'should not return dossiers with partial matches' do
@@ -137,7 +137,7 @@ describe Dossier do
       history = FactoryGirl.create(:dossier, title: 'City history book')
       dossier = FactoryGirl.build(:dossier, related_to: 'City counsil; City history')
 
-      dossier.related_dossiers.should be_empty
+      expect(dossier.related_dossiers).to be_empty
     end
 
     it 'should return dossiers linking back' do
@@ -145,8 +145,8 @@ describe Dossier do
       history = FactoryGirl.create(:dossier, title: 'City history')
       dossier = FactoryGirl.create(:dossier, related_to: 'City counsil; City history')
 
-      counsil.related_dossiers.should =~ [dossier]
-      history.related_dossiers.should =~ [dossier]
+      expect(counsil.related_dossiers).to match_array([dossier])
+      expect(history.related_dossiers).to match_array([dossier])
     end
   end
 
@@ -154,7 +154,7 @@ describe Dossier do
     it 'should return empty list if title is blank' do
       dossier = FactoryGirl.build(:dossier, title: '')
 
-      dossier.back_related_dossiers.should be_empty
+      expect(dossier.back_related_dossiers).to be_empty
     end
 
     it 'should return dossiers with exact matches' do
@@ -163,8 +163,8 @@ describe Dossier do
       dossier = FactoryGirl.create(:dossier, related_to: 'City counsil; City history')
       second = FactoryGirl.create(:dossier, related_to: 'City counsil')
 
-      history.back_related_dossiers.should =~ [dossier]
-      counsil.back_related_dossiers.should =~ [dossier, second]
+      expect(history.back_related_dossiers).to match_array([dossier])
+      expect(counsil.back_related_dossiers).to match_array([dossier, second])
     end
 
     it 'should not return dossiers with partial matches' do
@@ -172,8 +172,8 @@ describe Dossier do
       history = FactoryGirl.create(:dossier, title: 'City history book')
       dossier = FactoryGirl.create(:dossier, related_to: 'City counsil; City history')
 
-      counsil.back_related_dossiers.should be_empty
-      history.back_related_dossiers.should be_empty
+      expect(counsil.back_related_dossiers).to be_empty
+      expect(history.back_related_dossiers).to be_empty
     end
   end
 
@@ -181,7 +181,7 @@ describe Dossier do
     it 'should return empty list if title is blank' do
       dossier = FactoryGirl.build(:dossier, title: '')
 
-      dossier.back_relations.should be_empty
+      expect(dossier.back_relations).to be_empty
     end
 
     it 'should return dossiers with exact matches' do
@@ -190,8 +190,8 @@ describe Dossier do
       dossier = FactoryGirl.create(:dossier, related_to: 'City counsil; City history')
       second = FactoryGirl.create(:dossier, related_to: 'City counsil')
 
-      history.back_relations.should =~ [dossier.title]
-      counsil.back_relations.should =~ [dossier.title, second.title]
+      expect(history.back_relations).to match_array([dossier.title])
+      expect(counsil.back_relations).to match_array([dossier.title, second.title])
     end
 
     it 'should not return dossiers with partial matches' do
@@ -199,8 +199,8 @@ describe Dossier do
       history = FactoryGirl.create(:dossier, title: 'City history book')
       dossier = FactoryGirl.create(:dossier, related_to: 'City counsil; City history')
 
-      counsil.back_relations.should be_empty
-      history.back_relations.should be_empty
+      expect(counsil.back_relations).to be_empty
+      expect(history.back_relations).to be_empty
     end
   end
 
@@ -210,7 +210,7 @@ describe Dossier do
       history = FactoryGirl.create(:dossier, title: 'City history book')
       dossier = FactoryGirl.create(:dossier, related_to: 'City counsil; City history')
 
-      Dossier.with_dangling_relations.should == [dossier]
+      expect(Dossier.with_dangling_relations).to eq([dossier])
     end
 
     it 'should not return dossiers where all relations have matches' do
@@ -218,7 +218,7 @@ describe Dossier do
       history = FactoryGirl.create(:dossier, title: 'City history')
       dossier = FactoryGirl.create(:dossier, related_to: 'City counsil; City history')
 
-      Dossier.with_dangling_relations.should == []
+      expect(Dossier.with_dangling_relations).to eq([])
     end
   end
 end

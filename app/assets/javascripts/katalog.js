@@ -87,9 +87,7 @@ function addRelationAutoCompletionBehaviour() {
           }
         },
         success: function( data ) {
-          response( $.map( data, function( object ) {
-            // Accept both Topic and Dossier objects
-            var item = object['topic'] || object['dossier'];
+          response( $.map( data, function( item ) {
             if (item) {
               return {
                 label: item['title'],
@@ -296,16 +294,19 @@ function addReportColumnMultiselectBehaviour() {
     itemsCount:'Spalten ausgewählt'
   });
 
-  $('#report_columns').multiselect();
+  $('#report_column_names').multiselect();
 }
 
 function previewReport() {
-  var preview = $('#report-preview');
-  var form = $('form.report');
-  var action = '/reports/preview';
+  $('#preview_report').click(function(e){
+    e.preventDefault();
+    var preview = $('#report-preview');
+    var form = $('form.report');
+    var action = '/reports/preview';
 
-  $.get(action, form.serializeArray(), function(data){
-    preview.html(data);
+    $.get(action, form.serializeArray(), function(data){
+      preview.html(data);
+    });
   });
 }
 
@@ -319,19 +320,23 @@ function informUserAboutBigPDF(amount){
 
 // Shows the key words in the dossier view.
 function showKeyWords() {
-  $('#show-key-words-link').hide();
-  $('#hide-key-words-link').show();
-  $('span.keywords').show();
-  $.post('/user_session.json');
-}
+  $('#show-key-words-link').click(function(){
+    $('#show-key-words-link').hide();
+    $('#hide-key-words-link').show();
+    $('span.keywords').show();
+    $.post('/user_session.json');
+  })
+};
 
 // Hides the key words in the dossier view.
 function hideKeyWords() {
-  $('#hide-key-words-link').hide();
-  $('#show-key-words-link').show();
-  $('span.keywords').hide();
-  $.post('/user_session.json?hide_keywords=true');
-}
+  $('#hide-key-words-link').click(function(){
+    $('#hide-key-words-link').hide();
+    $('#show-key-words-link').show();
+    $('span.keywords').hide();
+    $.post('/user_session.json?hide_keywords=true');
+  })
+};
 
 // Adds the CSRF token to all ajax calls.
 function addCsrfTokenToAjaxCalls(){
@@ -352,4 +357,11 @@ function addMainNavigationBehaviour() {
     // Select new item
     $(this).parents('li').addClass('selected');
   });
+}
+
+// Sets the insertion point for cocoon
+function initalizeCocoon() {
+  $("a#add_new_container").
+    data("association-insertion-method", 'append').
+    data("association-insertion-node", '#container-list');
 }

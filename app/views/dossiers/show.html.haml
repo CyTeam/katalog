@@ -46,7 +46,7 @@
       %ul
         %li= link_to t_attr(:preorder_link), new_dossier_reservation_path(@dossier)
 
-  - split_decades(@dossier.numbers.present).each do |decade|
+  - split_decades(@dossier.numbers.documents_present).each do |decade|
     #document_counts.ce_table
       %table.document_counts
         %tr

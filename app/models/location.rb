@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 # This class represents the different locations where a container can be stored.
 class Location < ActiveRecord::Base
   # Associations

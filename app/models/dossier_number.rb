@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 # This class holds the information form date to to date how much dossiers exists.
 class DossierNumber < ActiveRecord::Base
   # PaperTrails: change log
@@ -14,8 +12,8 @@ class DossierNumber < ActiveRecord::Base
   validate :presence_of_from_or_to
 
   # Scopes
-  default_scope order('`to`')
-  scope :present, where('amount > 0')
+  default_scope -> { order(:to) }
+  scope :documents_present, -> { where('amount > 0') }
   scope :by_period, lambda {|value|
     from, to = from_s(value)
 

@@ -1,19 +1,6 @@
-# encoding: UTF-8
-
 class TopicsController < AuthorizedController
   include DossiersHelper
-  # Authentication
-  before_filter :authenticate_user!, except: [:index, :show, :navigation]
-
-  protected
-
-  def collection
-    @topics ||= end_of_association_chain.paginate(page: params[:page])
-  end
-
-  # Actions
-
-  public
+  before_action :authenticate_user!, except: [:index, :show, :navigation]
 
   def update
     @topic = Topic.find(params[:id])
@@ -42,5 +29,13 @@ class TopicsController < AuthorizedController
         redirect_to url_for_topic(resource)
       end
     end
+  end
+
+  private
+
+  def topic_params
+    params.require(:topic).permit(
+      :signature, :title, :update_signature
+    )
   end
 end

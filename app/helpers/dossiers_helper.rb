@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module DossiersHelper
   def link_to_tag_filter(name, options = {})
     query = [@query, name].compact.join(' ')
@@ -76,12 +74,14 @@ module DossiersHelper
   # Reports
   # =======
   def show_header_for_report(column)
-    case column
-      when :document_count
-        @document_count ? t('katalog.total_count', count: number_with_delimiter(@document_count)) : t_attr(:document_count, Dossier)
-      else
-        t_attr(column.to_s, Dossier)
-    end
+    column_name =
+      case column
+        when :document_count
+          @document_count ? t('katalog.total_count', count: number_with_delimiter(@document_count)) : t_attr(:document_count, Dossier)
+        else
+          t_attr(column.to_s, Dossier)
+      end
+    column_name
   end
 
   def show_column_for_report(dossier, column, for_pdf = false)

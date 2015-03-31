@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 class Settings < Settingslogic
   namespace Rails.env
 

@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 class ContainerCountingController < ApplicationController
   # Filter
   has_scope :by_container_type, as: :container_type

@@ -1,23 +1,13 @@
-# encoding: UTF-8
-
-# This class defines different views on the dossiers.
 class Report < ActiveRecord::Base
-  # Serializes the column attribute.
-  serialize :columns
+  serialize :column_names
 
-  # Validations
-  validates :name,    presence: true, uniqueness: true
-  validates :columns, presence: true
-  validates :title,   presence: true
+  validates :name, :title, :column_names, presence: true
+  validates :name, uniqueness: true
 
   before_save :default_collect_year_count
 
   def default_collect_year_count
     self.collect_year_count = 1 if collect_year_count.blank? && years_visible?
-  end
-
-  def columns
-    self[:columns].map(&:presence).compact
   end
 
   def to_s

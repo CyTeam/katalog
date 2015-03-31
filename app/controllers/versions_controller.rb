@@ -1,9 +1,7 @@
-# encoding: UTF-8
-
 class VersionsController < AuthorizedController
   include VersionsHelper
   # Authentication
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def attributes
     %w(item_type object changed_from changed_at action)
@@ -38,11 +36,6 @@ class VersionsController < AuthorizedController
   def revert
     @version = Version.find(params[:id])
     @version.revert
-
-    if dossier? @version
-      # TODO: try reactivating this code
-      # Dossier.restore_relations(@version)
-    end
 
     redirect_to :back
   end

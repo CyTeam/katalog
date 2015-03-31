@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -40,7 +38,7 @@ Report.create(
   :name        => 'index',
   :title       => 'Themenübersicht',
   :orientation => 'portrait',
-  :columns     => [:signature, :title, :document_count],
+  :column_names     => [:signature, :title, :document_count],
   :level       => 2,
   :per_page    => 'all'
 )
@@ -48,20 +46,20 @@ Report.create(
   :name        => 'overview',
   :title       => 'Detailreport',
   :orientation => 'landscape',
-  :columns     => [:signature, :title, :first_document_year, :container_type, :location, :keyword_text]
+  :column_names     => [:signature, :title, :first_document_year, :container_type, :location, :keyword_text]
 )
 Report.create(
   :name        => 'year',
   :title       => 'Jahresreport',
   :orientation => 'landscape',
-  :columns     => [:signature, :title, :first_document_year],
+  :column_names     => [:signature, :title, :first_document_year],
   :collect_year_count => 1
 )
 Report.create(
   :name        => '5-year',
   :title       => '5-Jahresreport',
   :orientation => 'portrait',
-  :columns     => [:signature, :title, :document_count],
+  :column_names     => [:signature, :title, :document_count],
   :level       => 2,
   :per_page    => 'all',
   :collect_year_count => 5
