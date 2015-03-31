@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 class ReservationMailer < ActionMailer::Base
-  default from: Settings.mail.reservation.sender
+  default from: Settings.mail.sender
 
   def user_email(reservation)
     @reservation = reservation
@@ -16,8 +16,7 @@ class ReservationMailer < ActionMailer::Base
     @reservation = reservation
 
     mail(
-      from: Settings.mail.reservation.internal_sender,
-      to: Settings.mail.reservation.sender,
+      to: Settings.mail.sender,
       subject: "#{I18n.t('activerecord.attributes.reservation.title')}: #{@reservation.dossier}"
     )
   end
