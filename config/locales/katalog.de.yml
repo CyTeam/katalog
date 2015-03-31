@@ -264,6 +264,14 @@ de:
         user:       "Benutzer"
         created_at: "Erfasst am"
 
+    errors:
+      models:
+        reservation:
+          attributes:
+            pickup:
+              weekend: 'Datum ist an einem Wochenende (%{day})'
+              holiday: 'Datum ist an einem Feiertag (%{name})'
+
   formtastic:
     labels:
       search_replace:

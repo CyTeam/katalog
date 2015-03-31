@@ -143,6 +143,7 @@ GEM
     has_scope (0.5.1)
     highline (1.6.21)
     hike (1.2.3)
+    holidays (1.2.0)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     i18n (0.6.11)
@@ -361,6 +362,7 @@ DEPENDENCIES
   formtastic
   haml-rails
   has_scope
+  holidays
   i18n_rails_helpers!
   inherited_resources
   jquery-rails

@@ -113,6 +113,9 @@ gem 'spreadsheet'
 # Load html content
 gem 'mechanize'
 
+# Date handling
+gem 'holidays'
+
 # Monitoring
 # ==========
 gem 'settingslogic'
