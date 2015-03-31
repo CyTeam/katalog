@@ -16,7 +16,8 @@ module Dossiers
           with: attributes,
           sort_mode: :expr,
           select: '*, weight() * (1.5 - is_local) AS custom_weight',
-          order: 'custom_weight DESC'
+          order: 'custom_weight DESC',
+          max_matches: 1_000_000
         }
 
         params.merge!(options)
