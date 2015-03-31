@@ -45,8 +45,8 @@ describe Dossier do
       assert_match /[^*]a[^*]/, Dossier.build_query('nr a history')
     end
 
-    it 'should add trailing * to medium short search words' do
-      assert_match /[^*]nr\*/, Dossier.build_query('nr a history')
+    it 'should use literal and trailing * search for medium short search words' do
+      assert_match /"nr" \| "nr\*"/, Dossier.build_query('nr a history')
     end
 
     it 'should add surrounding * to non-short search words' do
