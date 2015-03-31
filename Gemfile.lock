@@ -79,9 +79,13 @@ GEM
       capistrano-ext
       capistrano_colors
     chunky_png (1.3.3)
-    ckeditor (4.1.0)
-      mime-types
+    ckeditor (4.1.1)
+      cocaine
       orm_adapter (~> 0.5.0)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.7)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
