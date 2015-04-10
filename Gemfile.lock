@@ -258,7 +258,6 @@ GEM
       railties (~> 3.1)
     revertible_paper_trail (0.3.3)
       paper_trail (~> 2.2)
-      paper_trail (~> 2.2)
       rails (~> 3.0)
     riddle (1.5.11)
     rspec-core (3.1.7)
