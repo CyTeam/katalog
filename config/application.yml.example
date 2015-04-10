@@ -6,7 +6,8 @@ defaults: &defaults
   airbrake:
     api_key:
   mail:
-    sender: info@example.com
+    sender: 'Info-Desk <noreply@example.com>'
+    recipient: 'Info-Desk <info@example.com>'
 
 development:
   <<: *defaults
