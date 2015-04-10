@@ -20,6 +20,11 @@ module Dossiers
           max_matches: 1_000_000
         }
 
+        # Order by signatures instead of weight if the query is empty
+        if value.blank?
+          params[:order] = 'signature_sort ASC'
+        end
+
         params.merge!(options)
         query = build_query(value)
         params.merge!(sort_mode: :extended, order: 'signature_sort ASC') if query.include?('@signature')
