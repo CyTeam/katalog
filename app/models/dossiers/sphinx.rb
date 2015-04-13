@@ -22,7 +22,7 @@ module Dossiers
 
         # Order by signatures instead of weight if the query is empty
         if value.blank?
-          params[:order] = 'signature_sort ASC, title ASC'
+          params[:order] = 'signature_sort ASC, title_sort ASC'
         end
 
         params.merge!(options)

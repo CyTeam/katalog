@@ -29,5 +29,5 @@ ThinkingSphinx::Index.define :dossier, with: :active_record, delta: true do
   has internal
   has "signature LIKE '17%'", type: :boolean, as: :is_local
   has signature, type: :string, as: :signature_sort
-  has title
+  has title, type: :string, as: :title_sort
 end
