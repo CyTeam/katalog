@@ -58,7 +58,12 @@ module Katalog
 
     # List of assets to precompile
     config.assets.precompile += %w( ie6.css katalog_internal.css print.css)
-    config.assets.precompile += Ckeditor.assets + [ 'ckeditor/lang/de.js' ]
+    config.assets.precompile += Ckeditor.assets + [
+      # Add additional assets not included in Ckeditor.assets
+      'ckeditor/config.js',
+      'ckeditor/styles.js',
+      'ckeditor/lang/de.js'
+    ]
 
     # Allow target in links, used in description
     config.action_view.sanitized_allowed_attributes = ['target']
