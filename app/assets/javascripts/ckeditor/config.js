@@ -35,7 +35,7 @@ CKEDITOR.editorConfig = function( config )
   
   // Link editor customization
   config.linkShowAdvancedTab = false;
-  config.linkShowTargetTab = false;
+  config.linkShowTargetTab = true;
   
   config.toolbar = 'Custom';
   
