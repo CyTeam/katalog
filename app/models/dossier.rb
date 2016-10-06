@@ -47,7 +47,7 @@ class Dossier < ActiveRecord::Base
   # Pagination scope
   scope :characters, select('DISTINCT substring(upper(sort_title), 1, 1) AS letter').having("letter BETWEEN 'A' AND 'Z'")
   def self.character_list
-    characters.map(&:letter)
+    unscoped.characters.map(&:letter)
   end
 
   # Associations
@@ -283,7 +283,12 @@ class Dossier < ActiveRecord::Base
     all_relations = relations + back_relations
 
     # Remove signatures from backlinks
-    all_relations.uniq.sort.map { |relation| relation.gsub(/^[0-9.]{1,8}:[ ]*/, '') }
+    all_relations.uniq.sort.map do |relation|
+      relation.gsub(/^[0-9.]{1,8}:[ ]*/, '')
+      relation.strip!
+    end
+
+    all_relations.uniq
   end
 
   def related_dossiers
