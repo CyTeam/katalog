@@ -8,9 +8,20 @@ prawn_document(:page_size => 'A4', :renderer => PrawnLayout) do |pdf|
     pdf.text dossier.to_s
 
     pdf.indent 40 do
+      container_type, container_location = ''
+      container_period = []
+
       dossier.containers.each do |container|
-        pdf.text "%s@%s %s" % [container.container_type.code, container.location.code, container.period]
+        if container_type == container.container_type.code && container_location == container.location.code
+          container_period << container.period
+        else
+          container_type = container.container_type.code
+          container_location = container.location.code
+          container_period << container.period
+        end
+
       end
+      pdf.text "%s@%s %s" % [container_type, container_location, container_period.join(', ')]
     end
   end
 
