@@ -54,7 +54,7 @@ class PrawnLayout < Prawn::Document
     if title
       # User multi byte handling for proper upcasing of umlaute
       # Draws the title of the report
-      text title.mb_chars.upcase, size: 16
+      text title.to_s.upcase, size: 16
 
       # Adds space after the title
       move_down(5)
