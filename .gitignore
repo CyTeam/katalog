@@ -36,3 +36,6 @@ config/initializers/mail.rb
 
 # Aspell
 db/aspell/aspell.de_CH.pws
+
+# OS X
+.DS_Store
