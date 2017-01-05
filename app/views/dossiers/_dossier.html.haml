@@ -1,16 +1,15 @@
 %tr[dossier]{:class => cycle('odd', 'even'), :title => dossier.tooltip}
-  - cache dossier do
-    %td= dossier.signature
-    %td
-      %span.title= link_to dossier.title, dossier, {'data-href-container' => 'tr'}
-      %br/
-      %span.keywords{:style => (session[:hide_keywords] == true ? 'display:none;' : '')}
-        - dossier.keywords.each do |keyword|
-          %span~ keyword.to_s
+  %td= dossier.signature
+  %td
+    %span.title= link_to dossier.title, dossier, {'data-href-container' => 'tr'}
+    %br/
+    %span.keywords{:style => (session[:hide_keywords] == true ? 'display:none;' : '')}
+      - dossier.keywords.each do |keyword|
+        %span~ keyword.to_s
 
-    %td.document_count
-      = number_with_delimiter(dossier.document_count)
-      = availability_notes(dossier)
+  %td.document_count
+    = number_with_delimiter(dossier.document_count)
+    = availability_notes(dossier)
   - if user_signed_in?
     %td.action-links
       = link_to image_tag('icons/edit.png'), edit_dossier_path(dossier)
