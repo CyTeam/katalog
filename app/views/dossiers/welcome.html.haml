@@ -9,6 +9,10 @@
   - @groups.each do |group|
     %li
       = link_to url_for_topic(group) do
-        = image_tag "dossiers/#{group.signature}.png", :alt => group.to_s
+        - image_url = "dossiers/#{group.signature}.png"
+        - if Rails.application.assets.find_asset image_url
+          = image_tag image_url, :alt => group.to_s
+        - else
+          = image_tag 'dossiers/placeholder.png', :alt => group.to_s
         %h1= group.overview_title
         %h2= t_attr(:document_count) + ": " + number_with_delimiter(group.document_count)
