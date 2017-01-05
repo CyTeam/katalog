@@ -161,7 +161,7 @@ GEM
       railties (>= 3.2.16)
     json (1.8.2)
     kgio (2.9.2)
-    libv8 (3.16.14.7)
+    libv8 (3.16.14.17)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -393,3 +393,6 @@ DEPENDENCIES
   uglifier
   unicorn
   will_paginate!
+
+BUNDLED WITH
+   1.13.3
