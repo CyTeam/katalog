@@ -1,64 +1,63 @@
 = render 'search_form'
 
-- cache [@dossier.cache_key, current_user.try(:roles)] do
-  .contextual
-    - if user_signed_in?
-      = contextual_link('edit', edit_dossier_path(@dossier))
-      - if current_user.role?'admin'
-        = contextual_link('history', dossier_versions_path(@dossier))
-    = contextual_link('print', url_for(:format => :pdf))
-    - if user_signed_in?
-      = contextual_link('excel', url_for(:format => :xls))
-
-  %h1#title= @dossier.title
-
-  %h3= @dossier.signature
-
-  #description= raw(target_blank(@dossier.description))
-
-  %h3= t_attr(:keyword_text)
-  #keywords.section
-    %ul#keyword-list.keywords= render :partial => 'keyword', :collection => @dossier.keywords.order('name')
-
-  - if @dossier.relation_titles.present?
-    %h3= t_attr(:relation_list)
-    #relations.section
-      %ul#relation-list.relations
-        - for relation in @dossier.relation_titles.uniq
-          %li= link_to_relation relation
-
-  %h3= t_attr(:books)
-  #books.section
-    %ul
-      %li= link_to t_attr(:books_link), @dossier.books_link, :target => '_blank'
-
-  %h3= t('katalog.title.document_count_html', :document_count => number_with_delimiter(@dossier.document_count), :first_document => @dossier.first_document_on.try(:strftime, '%Y'))
-  - unless (user_signed_in? || @dossier.waiting_list.empty?)
-    - waiting_years = @dossier.waiting_list
-    %h3= t('activerecord.attributes.dossier.preorder')
-    #waiting-time.section
-      - waiting_years.each_slice((waiting_years.size+3)/3) do |years|
-        %ul
-          - years.each do |year|
-            %li= link_to year, new_dossier_reservation_path(@dossier, year: year)
-    .clear
-    .section
-      %ul
-        %li= link_to t_attr(:preorder_link), new_dossier_reservation_path(@dossier)
-
-  - split_decades(@dossier.numbers.present).each do |decade|
-    #document_counts.ce_table
-      %table.document_counts
-        %tr
-          = render :partial => 'dossier_numbers/head', :collection => decade
-        %tr.odd
-          = render :partial => 'dossier_numbers/amount', :collection => decade
-
+.contextual
   - if user_signed_in?
-    #containers.ce_table
-      %table
-        - @containers = @dossier.containers
-        = render 'containers/list'
+    = contextual_link('edit', edit_dossier_path(@dossier))
+    - if current_user.role?'admin'
+      = contextual_link('history', dossier_versions_path(@dossier))
+  = contextual_link('print', url_for(:format => :pdf))
+  - if user_signed_in?
+    = contextual_link('excel', url_for(:format => :xls))
+
+%h1#title= @dossier.title
+
+%h3= @dossier.signature
+
+#description= raw(target_blank(@dossier.description))
+
+%h3= t_attr(:keyword_text)
+#keywords.section
+  %ul#keyword-list.keywords= render :partial => 'keyword', :collection => @dossier.keywords.order('name')
+
+- if @dossier.relation_titles.present?
+  %h3= t_attr(:relation_list)
+  #relations.section
+    %ul#relation-list.relations
+      - for relation in @dossier.relation_titles.uniq
+        %li= link_to_relation relation
+
+%h3= t_attr(:books)
+#books.section
+  %ul
+    %li= link_to t_attr(:books_link), @dossier.books_link, :target => '_blank'
+
+%h3= t('katalog.title.document_count_html', :document_count => number_with_delimiter(@dossier.document_count), :first_document => @dossier.first_document_on.try(:strftime, '%Y'))
+- unless (user_signed_in? || @dossier.waiting_list.empty?)
+  - waiting_years = @dossier.waiting_list
+  %h3= t('activerecord.attributes.dossier.preorder')
+  #waiting-time.section
+    - waiting_years.each_slice((waiting_years.size+3)/3) do |years|
+      %ul
+        - years.each do |year|
+          %li= link_to year, new_dossier_reservation_path(@dossier, year: year)
+  .clear
+  .section
+    %ul
+      %li= link_to t_attr(:preorder_link), new_dossier_reservation_path(@dossier)
+
+- split_decades(@dossier.numbers.present).each do |decade|
+  #document_counts.ce_table
+    %table.document_counts
+      %tr
+        = render :partial => 'dossier_numbers/head', :collection => decade
+      %tr.odd
+        = render :partial => 'dossier_numbers/amount', :collection => decade
+
+- if user_signed_in?
+  #containers.ce_table
+    %table
+      - @containers = @dossier.containers
+      = render 'containers/list'
 
 - content_for :javascript do
   = highlight_words(@query, 'keywords')
