@@ -1,32 +1,32 @@
 = render 'search_form'
 
+.contextual
+  - if user_signed_in?
+    = contextual_link('edit', edit_dossier_path(@dossier))
+    - if current_user.role?'admin'
+      = contextual_link('history', dossier_versions_path(@dossier))
+  = contextual_link('print', url_for(:format => :pdf))
+  - if user_signed_in?
+    = contextual_link('excel', url_for(:format => :xls))
+
+%h1#title= @dossier.title
+
+%h3= @dossier.signature
+
+#description= raw(target_blank(@dossier.description))
+
+%h3= t_attr(:keyword_text)
+#keywords.section
+  %ul#keyword-list.keywords= render :partial => 'keyword', :collection => @dossier.keywords.order('name')
+
+- if @dossier.relation_titles.present?
+  %h3= t_attr(:relation_list)
+  #relations.section
+    %ul#relation-list.relations
+      - for relation in @dossier.relation_titles.uniq
+        %li= link_to_relation relation
+
 - cache [@dossier.cache_key, current_user.try(:roles)] do
-  .contextual
-    - if user_signed_in?
-      = contextual_link('edit', edit_dossier_path(@dossier))
-      - if current_user.role?'admin'
-        = contextual_link('history', dossier_versions_path(@dossier))
-    = contextual_link('print', url_for(:format => :pdf))
-    - if user_signed_in?
-      = contextual_link('excel', url_for(:format => :xls))
-
-  %h1#title= @dossier.title
-
-  %h3= @dossier.signature
-
-  #description= raw(target_blank(@dossier.description))
-
-  %h3= t_attr(:keyword_text)
-  #keywords.section
-    %ul#keyword-list.keywords= render :partial => 'keyword', :collection => @dossier.keywords.order('name')
-
-  - if @dossier.relation_titles.present?
-    %h3= t_attr(:relation_list)
-    #relations.section
-      %ul#relation-list.relations
-        - for relation in @dossier.relation_titles.uniq
-          %li= link_to_relation relation
-
   %h3= t_attr(:books)
   #books.section
     %ul
@@ -60,5 +60,5 @@
         - @containers = @dossier.containers
         = render 'containers/list'
 
-- content_for :javascript do
+  - content_for :javascript do
   = highlight_words(@query, 'keywords')
