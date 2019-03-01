@@ -51,5 +51,5 @@
               = render :partial => 'shared/flash', :locals => {:flash => flash}
               = yield
           #clear
-      = parsed_footer
+      = render 'shared/public_footer'
     = yield :javascript
