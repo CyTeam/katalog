@@ -113,15 +113,4 @@ EOF
 
     cache_key.join('/')
   end
-
-  def parsed_footer
-    if Rails.env.production?
-      Rails.cache.fetch('parsed_footer_value', expires_in: 24.hours) do
-        mechanize = Mechanize.new
-        page = mechanize.get('http://www.doku-zug.ch')
-        footer = page.at('#footer').to_html
-        footer.html_safe
-      end
-    end
-  end
 end
