@@ -91,8 +91,7 @@ class PrawnLayout < Prawn::Document
         font_size 7 do
           fill_color '96B1CD'
           text 'Öffnungszeiten:'
-          text 'Mo / Di / Mi / Fr 10 - 18 Uhr'
-          text 'Do 10 - 20 Uhr'
+          text 'Mo-Fr 9-18 Uhr'
         end
       end
     end
