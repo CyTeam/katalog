@@ -15,7 +15,7 @@ module Dossiers
           match_mode: :extended,
           with: attributes,
           sort_mode: :expr,
-          select: '*, weight() * (1.5 - is_local) AS custom_weight',
+          select: '*, (weight() * (1.5 - is_local)) AS custom_weight',
           order: 'custom_weight DESC',
           max_matches: 1_000_000
         }
@@ -98,7 +98,7 @@ module Dossiers
               '+"' + word + '*"' + ' | ' + '"*' + word + '*"'
             end
           end
-          word_query = "@* (\"#{words.join(' ')}\" | (#{(quoted_words).join(' ')}))"
+          word_query = "@* (\"#{words.join(' ')}\" | (\"#{(quoted_words).join(' ')}\"))"
         end
 
         query = [signature_query, sentence_query, word_query].join(' ')
